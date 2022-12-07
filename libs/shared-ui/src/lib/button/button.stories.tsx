@@ -1,10 +1,11 @@
-import type { ComponentStory, ComponentMeta } from '@storybook/react';
+import type {ComponentMeta } from '@storybook/react';
 import { Button, ColorsButton } from './button';
 
 const Story: ComponentMeta<typeof Button> = {
   component: Button,
   title: 'Button',
 };
+
 export default Story;
 
 const styles = {
@@ -27,6 +28,22 @@ export const Colors = () => {
         <Button title='Secondary' color={ColorsButton.secondary}/>
       </div>
     </div>
+  )
+};
 
+export const Outline = () => {
+  return (
+    <div className="content">
+      <h3>Outline Buttons</h3>
+      <div style={styles}>
+        <Button title='White' color={ColorsButton.white} outline={true}/>
+        <br/>
+        <Button title='Accent' color={ColorsButton.accent} outline={true}/>
+        <br/>
+        <Button title='Primary' color={ColorsButton.primary} outline={true}/>
+        <br/>
+        <Button title='Secondary' color={ColorsButton.secondary} outline={true}/>
+      </div>
+    </div>
   )
 };

@@ -21,6 +21,7 @@ export interface ButtonProps {
   type?: TypeButton;
   title: string;
   disabled?: boolean;
+  outline?: boolean;
 }
 
 export function Button(props: ButtonProps) {
@@ -31,17 +32,20 @@ export function Button(props: ButtonProps) {
     type,
     title,
     disabled,
+    outline,
     ...other
   } = props;
 
   const selectedColor = color ? color : ColorsButton.white;
   const colorsClasses = {
-    white: `${css['btn']} ${css['btn-white']}`,
-    accent: `${css['btn']} ${css['btn-accent']}`,
-    primary: `${css['btn']} ${css['btn-primary']}`,
-    secondary: `${css['btn']} ${css['btn-secondary']}`
+    white: `${css['btn-white']}`,
+    accent: `${css['btn-accent']}`,
+    primary: `${css['btn-primary']}`,
+    secondary: `${css['btn-secondary']}`
   };
-  const btnClass = colorsClasses[selectedColor];
+  const outlineSelectorClass = outline ? `btn-${color}-outline` : '';
+  const btnClassOutline = outline ? `${css[outlineSelectorClass]}` : '';
+  const btnClass = outline ? `${css['btn']} ${btnClassOutline}` : `${css['btn']} ${colorsClasses[selectedColor]}`;
 
   return (
     <button className={btnClass}

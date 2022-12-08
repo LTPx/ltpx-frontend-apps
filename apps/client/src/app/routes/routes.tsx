@@ -7,11 +7,14 @@ import {
 } from "react-router-dom";
 
 import DashboardLayout from "../layouts/dashboard-layout/dashboard-layout";
+import Account from "../pages/account/account";
 import Courses from "../pages/courses/courses";
 import Dashboard from "../pages/dashboard/dashboard";
 import Home from "../pages/home/home";
 import Login from "../pages/login/login";
+import Payments from "../pages/payments/payments";
 import Register from "../pages/register/register";
+import Settings from "../pages/settings/settings";
 
 function ApplicationRoutes() {
   // const navigate = useNavigate();
@@ -41,12 +44,28 @@ function ApplicationRoutes() {
       element: <Home />,
     },
     {
-      path: 'app',
+      path: 'user',
       element: <DashboardLayout/>,
       children: [
         {
           path: 'dashboard',
           element: <Dashboard/>
+        },
+        {
+          path: 'courses',
+          element: <Courses/>
+        },
+        {
+          path: 'payments',
+          element: <Payments/>
+        },
+        {
+          path: 'settings',
+          element: <Settings/>
+        },
+        {
+          path: 'account',
+          element: <Account/>
         }
       ]
     },

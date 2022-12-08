@@ -14,7 +14,6 @@ const links = [
     icon: {
       icon: 'dashboard',
       size: 20,
-      color: '#8a94a6'
     }
   },
   {
@@ -23,7 +22,6 @@ const links = [
     icon: {
       icon: 'user-account',
       size: 20,
-      color: '#8a94a6'
     }
   },
   {
@@ -32,7 +30,6 @@ const links = [
     icon: {
       icon: 'wallet',
       size: 20,
-      color: '#8a94a6'
     }
   },
   {
@@ -41,7 +38,6 @@ const links = [
     icon: {
       icon: 'book-open',
       size: 20,
-      color: '#8a94a6'
     }
   }
 ]

@@ -9,24 +9,44 @@ export function DashboardLayout(props: DashboardLayoutProps) {
   const sidebarOptions = [
     {
       title: 'Dashboard',
-      url: '/new'
+      url: 'dashboard',
+      icon: {
+        icon: 'dashboard',
+        size: 20,
+      }
     },
     {
       title: 'My Courses',
-      url: '/my-courses',
+      url: 'courses',
+      icon: {
+        icon: 'book-open',
+        size: 20,
+      }
     },
     {
-      title: 'Resources',
-      url: '/resources'
+      title: 'Payments',
+      url: 'payments',
+      icon: {
+        icon: 'wallet',
+        size: 20,
+      }
     },
     {
-      title: 'Wallet',
-      url: '/wallet'
+      title: 'Settings',
+      url: 'settings',
+      icon: {
+        icon: 'wrench',
+        size: 20,
+      }
     },
     {
       title: 'My Account',
-      url: '/account'
-    },
+      url: 'account',
+      icon: {
+        icon: 'user',
+        size: 20,
+      }
+    }
   ];
   return (
     <div className={styles['container']}>
@@ -36,13 +56,6 @@ export function DashboardLayout(props: DashboardLayoutProps) {
       <div className="content">
         <Outlet />
       </div>
-      {/* <div className="h-screen flex">
-        <Sidebar options={sidebarOptions} />
-        <div className="flex-1 flex overflow-hidden">
-          <div className="flex-1 overflow-y-scroll py-6 px-16 antialiased bg-gray-200 mb-12">
-          </div>
-        </div>
-      </div> */}
     </div>
   );
 }

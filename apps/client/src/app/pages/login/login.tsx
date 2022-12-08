@@ -1,5 +1,6 @@
 import styles from './login.module.scss';
 import { Button, ColorsButton, Input, Navbar, TypeButton } from '@ltpx-frontend-apps/shared-ui';
+import { useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 
@@ -14,6 +15,8 @@ const links = [
 ];
 
 export function Login(props: LoginProps) {
+  const navigate = useNavigate();
+
   const formik = useFormik({
     initialValues: {
       email: '',
@@ -29,6 +32,8 @@ export function Login(props: LoginProps) {
     onSubmit: async data => {
       console.log(data);
       try{
+        navigate('/dashboard');
+        //TODO: integrate API
       }
       catch(error){
         console.log(error);

@@ -5,6 +5,7 @@ import Home from './pages/home/home';
 import Login from './pages/login/login';
 import Register from './pages/register/register';
 import Courses from './pages/courses/courses';
+import Dashboard from './pages/dashboard/dashboard';
 
 export function App() {
   return (
@@ -14,6 +15,7 @@ export function App() {
         <Route path="/login" element={<Login />}></Route>
         <Route path="/register" element={<Register />}></Route>
         <Route path="/courses" element={<Courses />}></Route>
+        <Route path="/dashboard" element={<Dashboard />}></Route>
       </Routes>
     </>
   );

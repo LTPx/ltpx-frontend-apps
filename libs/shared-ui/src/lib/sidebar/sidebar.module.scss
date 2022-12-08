@@ -1,7 +1,27 @@
-/*
- * Replace this with your own classes
- *
- * e.g.
- * .container {
- * }
-*/
+.container {
+  background-color: #f7f7f7;
+}
+
+.links-container {
+  // padding-left: 20px;
+}
+
+.link {
+  display: flex;
+  align-items: center;
+  border-radius: 0.25rem;
+  text-decoration: none;
+  color: #302e52;
+
+  svg {
+    margin: 0 20px;
+  }
+}
+
+.active-link {
+  background-color: #5b5992;
+
+  svg, h4 {
+    color: #fff;
+  }
+}

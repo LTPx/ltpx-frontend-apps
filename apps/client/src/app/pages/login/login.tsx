@@ -20,7 +20,7 @@ export function Login(props: LoginProps) {
         <div className={styles['content']}>
           <h1>Log in</h1>
           <span>
-            Discover a supportive community of online instructors.
+            Access a supportive community of online instructors.
             Get instant access to all creation courses resources
           </span>
           <div className="form">

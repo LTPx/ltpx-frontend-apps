@@ -1,7 +1,15 @@
-/*
- * Replace this with your own classes
- *
- * e.g.
- * .container {
- * }
-*/
+.container {
+  display: flex;
+}
+
+.illustration {
+  flex: 1;
+}
+
+.content {
+  flex: 1;
+}
+
+.btn-submit {
+  margin-top: 20px;
+}

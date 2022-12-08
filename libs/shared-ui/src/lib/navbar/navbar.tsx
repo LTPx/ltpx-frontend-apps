@@ -1,20 +1,19 @@
 import styles from './navbar.module.scss';
+import { NavLink } from "react-router-dom";
 
 /* eslint-disable-next-line */
+
+export interface Link {
+  title: string;
+  url: string;
+}
 export interface NavbarProps {
-  children?: any
+  children?: any;
+  links: Array<Link>;
 }
 
-const links = [
-  { title: 'Home', url: '/home'},
-  { title: 'Courses', url: '/courses'},
-  { title: 'Find a class', url: '/find'},
-  { title: 'Teach', url: '/teach'},
-  { title: 'Contact', url: '/contact'}
-]
-
 export function Navbar(props: NavbarProps) {
-  const { children } = props;
+  const { children, links } = props;
   return (
     <div className={styles['container']}>
       <div className={styles['main-action']}>
@@ -27,10 +26,14 @@ export function Navbar(props: NavbarProps) {
       </div>
       <div className={styles['information']}>
         <div className={styles['links']}>
-          { links.map((link, index)=>(
-            <div className={styles['link']} key={index}>
-              {link.title}
-            </div>
+          { links.map((link, index) => (
+              <NavLink
+                key={index}
+                className={styles['link']}
+                to={link.url}
+              >
+                <h4 className={styles['link']} >{link.title}</h4>
+              </NavLink>
           ))}
         </div>
         {children}

@@ -1,3 +1,4 @@
+import { Sidebar } from '@ltpx-frontend-apps/shared-ui';
 import { Outlet } from 'react-router-dom';
 import styles from './dashboard-layout.module.scss';
 
@@ -8,45 +9,29 @@ export function DashboardLayout(props: DashboardLayoutProps) {
   const sidebarOptions = [
     {
       title: 'Dashboard',
-      icon: {
-        name: 'MdApps'
-      },
-      link: '/orders/new'
+      url: '/new'
     },
     {
       title: 'My Courses',
-      icon: {
-        name: 'FaStore'
-      },
-      link: '/my-courses',
-      selected: true
+      url: '/my-courses',
     },
     {
       title: 'Resources',
-      icon: {
-        name: 'MdDashboard'
-      },
-      link: '/resources'
+      url: '/resources'
     },
     {
       title: 'Wallet',
-      icon: {
-        name: 'MdDashboard'
-      },
-      link: '/wallet'
+      url: '/wallet'
     },
     {
       title: 'My Account',
-      icon: {
-        name: 'MdDashboard'
-      },
-      link: '/account'
+      url: '/account'
     },
   ];
   return (
     <div className={styles['container']}>
       <div className="sidebar">
-
+        <Sidebar links={sidebarOptions} />
       </div>
       <div className="content">
         <Outlet />

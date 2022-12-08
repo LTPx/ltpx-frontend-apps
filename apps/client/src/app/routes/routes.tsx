@@ -14,8 +14,8 @@ import Login from "../pages/login/login";
 import Register from "../pages/register/register";
 
 function ApplicationRoutes() {
-  const navigate = useNavigate();
-  const location = useLocation();
+  // const navigate = useNavigate();
+  // const location = useLocation();
 
   // const [ loading, setLoading ] = useState(true);
   // const isUserAuthorized = useSelector(userAuthorized);

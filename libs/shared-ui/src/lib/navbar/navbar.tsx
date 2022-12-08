@@ -3,13 +3,13 @@ import { NavLink } from "react-router-dom";
 
 /* eslint-disable-next-line */
 
-export interface Link {
+export interface LinkNavbar {
   title: string;
   url: string;
 }
 export interface NavbarProps {
   children?: any;
-  links: Array<Link>;
+  links: Array<LinkNavbar>;
 }
 
 export function Navbar(props: NavbarProps) {

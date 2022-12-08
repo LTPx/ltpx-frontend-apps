@@ -12,21 +12,19 @@ export interface AddonSymbolInput {
   position?: Position;
 }
 export interface InputProps {
+  type?: string
+  id?: string
+  name?: string
+  value?: any
+  label?: string
+  placeholder?: string
+  disabled?: boolean
   className?: string,
   onKeyPress?: string,
   onEnter?: any,
   onChange?: any,
   onBlur?: any,
   addonInput?: AddonSymbolInput;
-  input?: string,
-  description?: string,
-  type?: string
-  placeholder?: string
-  id?: string
-  name?: string
-  value?: any
-  label?: string
-  disabled?: boolean
 }
 
 export function Input(props: InputProps) {
@@ -35,7 +33,6 @@ export function Input(props: InputProps) {
     onKeyPress,
     onEnter,
     onChange,
-    description,
     label,
     addonInput,
     ...other

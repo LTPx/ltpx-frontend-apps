@@ -6,7 +6,13 @@ export interface DashboardProps {}
 export function Dashboard(props: DashboardProps) {
   return (
     <div className={styles['container']}>
-      <h1>Welcome to Dashboard!</h1>
+      <div className={styles['sidebar']}>
+        <div className="brand">LTPX</div>
+        <div className="links">
+
+        </div>
+      </div>
+      <div className={styles['content']}></div>
     </div>
   );
 }

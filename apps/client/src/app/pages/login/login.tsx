@@ -32,7 +32,7 @@ export function Login(props: LoginProps) {
     onSubmit: async data => {
       console.log(data);
       try{
-        navigate('/dashboard');
+        navigate('/app/dashboard');
         //TODO: integrate API
       }
       catch(error){

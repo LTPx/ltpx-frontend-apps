@@ -1,17 +1,16 @@
 import css from './input.module.scss';
 
 /* eslint-disable-next-line */
-enum Direction {
-  left = 1,
-  right = 0,
+export enum Position {
+  left = 'left',
+  right = 'right',
 }
 
 export interface AddonSymbolInput {
   text?: string;
   icon?: string;
-  position?: Direction;
+  position?: Position;
 }
-
 export interface InputProps {
   className?: string,
   onKeyPress?: string,
@@ -40,15 +39,39 @@ export function Input(props: InputProps) {
     label,
     addonInput,
     ...other
-  } = props
+  } = props;
+
+  let inputClassesPosition = '';
+
+  if (addonInput) {
+    inputClassesPosition =  addonInput?.position === 'left' ? css['input-addon-left'] : css['input-addon-right'];
+  }
+
+  const AddonSymbol = ({text, position}: { text?: string; position?: string}) => {
+    const classPosition = position === Position.left ? css['addon-left'] : css['addon-right']
+    return (
+      <div className={`${css['addon']} ${classPosition}`}>
+        {text}
+      </div>
+    )
+  }
 
   return (
     <div className={css['container']}>
-      <input
-        className={`${className} ${css['input-box']}`}
-        {...other}
-        onChange={e => onChange && onChange(e)}
-      />
+      <label className={css['label']}>{label}</label>
+      <div className={`${css['input-container']}`}>
+        { addonInput && addonInput.position === 'left' && (
+          <AddonSymbol text={addonInput.text} position={Position.left}/>
+        )}
+        <input
+          className={`${css['input-box']} ${inputClassesPosition}`}
+          {...other}
+          onChange={e => onChange && onChange(e)}
+        />
+        { addonInput && addonInput.position === 'right' && (
+          <AddonSymbol text={addonInput.text} position={Position.right}/>
+        )}
+      </div>
     </div>
   );
 }

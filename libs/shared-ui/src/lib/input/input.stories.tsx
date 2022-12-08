@@ -1,5 +1,5 @@
 import type { ComponentMeta } from '@storybook/react';
-import { Input, InputProps } from './input';
+import { Input, InputProps, Position } from './input';
 
 const Story: ComponentMeta<typeof Input> = {
   component: Input,
@@ -22,9 +22,9 @@ export const Inputs = () => {
       <br/>
       <Input label = "I am a label" placeholder="placeholder"/>
       <br/>
-      <Input label = "Input left addon" placeholder="placeholder" addonInput={{text: '$', position: 1}}/>
+      <Input label = "Input left addon" placeholder="placeholder" addonInput={{text: '$', position: Position.left}}/>
       <br/>
-      <Input label = "Input right addon" placeholder="placeholder" addonInput={{text: '$', position: 0}}/>
+      <Input label = "Input right addon" placeholder="placeholder" addonInput={{text: '$', position: Position.right}}/>
     </div>
   )
 };

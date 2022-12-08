@@ -22,6 +22,7 @@ export interface ButtonProps {
   title: string;
   disabled?: boolean;
   outline?: boolean;
+  full?: boolean;
 }
 
 export function Button(props: ButtonProps) {
@@ -33,6 +34,7 @@ export function Button(props: ButtonProps) {
     title,
     disabled,
     outline,
+    full,
     ...other
   } = props;
 
@@ -45,10 +47,11 @@ export function Button(props: ButtonProps) {
   };
   const outlineSelectorClass = outline ? `btn-${color}-outline` : '';
   const btnClassOutline = outline ? `${css[outlineSelectorClass]}` : '';
-  const btnClass = outline ? `${css['btn']} ${btnClassOutline}` : `${css['btn']} ${colorsClasses[selectedColor]}`;
+  const btnClassFull = full ? css['btn-full'] : '';
+  const btnClass = outline ? `${css['btn']} ${btnClassOutline} ${btnClassFull}` : `${css['btn']} ${colorsClasses[selectedColor]} ${btnClassFull}`;
 
   return (
-    <button className={btnClass}
+    <button className={`${className} ${btnClass}`}
       type={type}
       onClick={onClick}
       disabled={disabled}

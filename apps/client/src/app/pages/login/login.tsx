@@ -1,5 +1,7 @@
 import styles from './login.module.scss';
-import { Button, ColorsButton, Input, Navbar } from '@ltpx-frontend-apps/shared-ui';
+import { Button, ColorsButton, Input, Navbar, TypeButton } from '@ltpx-frontend-apps/shared-ui';
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
 
 /* eslint-disable-next-line */
 export interface LoginProps {}
@@ -12,6 +14,28 @@ const links = [
 ];
 
 export function Login(props: LoginProps) {
+  const formik = useFormik({
+    initialValues: {
+      email: '',
+      password: ''
+    },
+    validationSchema: Yup.object({
+      email: Yup.string()
+                .email()
+                .required('Email is required'),
+      password: Yup.string()
+                    .required('Password is required')
+    }),
+    onSubmit: async data => {
+      console.log(data);
+      try{
+      }
+      catch(error){
+        console.log(error);
+      }
+    }
+  });
+
   return (
     <div className="main-container">
       <Navbar links={links}/>
@@ -23,16 +47,33 @@ export function Login(props: LoginProps) {
             Access a supportive community of online instructors.
             Get instant access to all creation courses resources
           </span>
-          <div className="form">
-            <Input label='Email' placeholder='myemail@example.com'></Input>
-            <Input label='Password' placeholder='********' type='password'></Input>
+          <form onSubmit={formik.handleSubmit}>
+            <Input
+              label='Email'
+              type="email"
+              name="email"
+              placeholder="myemail@example.com"
+              onChange={(e: any) => { formik.handleChange(e); }}
+              value={formik.values.email}
+              onBlur={formik.handleBlur}
+            />
+            <Input
+              label='Password'
+              type="password"
+              name="password"
+              placeholder='********'
+              onChange={(e: any) => { formik.handleChange(e); }}
+              value={formik.values.password}
+              onBlur={formik.handleBlur}
+            />
             <Button
               className={styles['btn-submit']}
               color={ColorsButton.primary}
               title="Sign In"
               full={true}
+              type={TypeButton.submit}
             />
-          </div>
+          </form>
         </div>
       </div>
     </div>

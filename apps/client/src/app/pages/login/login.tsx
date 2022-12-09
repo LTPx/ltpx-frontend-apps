@@ -1,5 +1,5 @@
 import styles from './login.module.scss';
-import { Button, ColorsButton, Input, Navbar, TypeButton } from '@ltpx-frontend-apps/shared-ui';
+import { Button, ColorsButton, Input, Header, TypeButton } from '@ltpx-frontend-apps/shared-ui';
 import { useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
@@ -43,7 +43,7 @@ export function Login(props: LoginProps) {
 
   return (
     <div className="main-container">
-      <Navbar links={links}/>
+      <Header links={links}/>
       <div className={styles['container']}>
         <div className={styles['illustration']}></div>
         <div className={styles['content']}>

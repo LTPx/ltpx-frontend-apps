@@ -1,4 +1,4 @@
-import { Navbar, Sidebar } from '@ltpx-frontend-apps/shared-ui';
+import { Header, Sidebar } from '@ltpx-frontend-apps/shared-ui';
 import { Outlet } from 'react-router-dom';
 import styles from './dashboard-layout.module.scss';
 
@@ -50,15 +50,15 @@ export function DashboardLayout(props: DashboardLayoutProps) {
   ];
   return (
     <div className={styles['container']}>
-      <Navbar links={[]}/>
+      <Header links={[]}/>
       <div className="sidebar">
         <Sidebar links={sidebarOptions} />
       </div>
       <div className={styles['content']}>
         <Outlet />
       </div>
-      <div></div>
-      <div></div>
+      <div className={styles['footer']}></div>
+      <div className={styles['footer']}>LTPX 2022</div>
     </div>
   );
 }

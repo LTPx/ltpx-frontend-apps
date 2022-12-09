@@ -1,8 +1,8 @@
 .container {
   display: grid;
-  grid-template-columns: 200px 1fr 200px;
+  grid-template-columns: 260px 1fr 200px;
   grid-template-rows: auto 1fr auto;
-  grid-gap: 12px;
+  // grid-gap: 12px;
   grid-template-areas:
     "header header header"
     "nav content side"
@@ -12,4 +12,12 @@
 
 .content {
   grid-area: content;
+  background-color: #f8f9fb;
+  padding: 20px 50px;
+}
+
+.navbar {
+  background-color: #f7f7f7;
+  padding: 30px;
+  border-right: 1px solid #c7c7c7;
 }

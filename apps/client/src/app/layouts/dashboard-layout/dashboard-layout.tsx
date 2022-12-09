@@ -1,4 +1,5 @@
-import { Header, Navbar } from '@ltpx-frontend-apps/shared-ui';
+import { Avatar, Header, Navbar } from '@ltpx-frontend-apps/shared-ui';
+import Icon from 'libs/shared-ui/src/lib/icon/icon';
 import { Outlet } from 'react-router-dom';
 import styles from './dashboard-layout.module.scss';
 
@@ -11,7 +12,7 @@ export function DashboardLayout(props: DashboardLayoutProps) {
       title: 'Dashboard',
       url: 'dashboard',
       icon: {
-        icon: 'dashboard',
+        icon: 'store',
         size: 20,
       }
     },
@@ -19,7 +20,7 @@ export function DashboardLayout(props: DashboardLayoutProps) {
       title: 'My Courses',
       url: 'courses',
       icon: {
-        icon: 'book-open',
+        icon: 'university',
         size: 20,
       }
     },
@@ -35,7 +36,7 @@ export function DashboardLayout(props: DashboardLayoutProps) {
       title: 'Settings',
       url: 'settings',
       icon: {
-        icon: 'wrench',
+        icon: 'cog',
         size: 20,
       }
     },
@@ -50,9 +51,15 @@ export function DashboardLayout(props: DashboardLayoutProps) {
   ];
   return (
     <div className={styles['container']}>
-      <Header links={[]}/>
+      <Header links={[]}>
+        <div className={styles['actions']}>
+          <Icon icon='star' size={22}></Icon>
+          <Icon icon='notification' size={22}></Icon>
+          <Avatar image='https://images.unsplash.com/photo-1669563306078-4c107b67d125?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=3387&q=80'/>
+        </div>
+      </Header>
       <div className={styles['navbar']}>
-        <Navbar links={sidebarOptions} />
+        <Navbar links={sidebarOptions}/>
       </div>
       <div className={styles['content']}>
         <Outlet />

@@ -1,9 +1,9 @@
 import type { ComponentMeta } from '@storybook/react';
-import { Sidebar } from './sidebar';
+import { Navbar } from './navbar';
 
-const Story: ComponentMeta<typeof Sidebar> = {
-  component: Sidebar,
-  title: 'Sidebar',
+const Story: ComponentMeta<typeof Navbar> = {
+  component: Navbar,
+  title: 'Navbar',
 };
 export default Story;
 
@@ -45,7 +45,7 @@ const links = [
 export const Default = () => {
   return (
     <div style={{width: '300px'}}>
-      <Sidebar links={links} />
+      <Navbar links={links} />
     </div>
   )
 };

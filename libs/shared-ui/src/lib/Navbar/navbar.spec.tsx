@@ -1,10 +1,10 @@
 import { render } from '@testing-library/react';
 
-import Sidebar from './sidebar';
+import Navbar from './navbar';
 
-describe('Sidebar', () => {
+describe('Navbar', () => {
   it('should render successfully', () => {
-    const { baseElement } = render(<Sidebar />);
+    const { baseElement } = render(<Navbar links={[]} />);
     expect(baseElement).toBeTruthy();
   });
 });

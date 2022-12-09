@@ -1,6 +1,6 @@
 import { NavLink } from 'react-router-dom';
 import Icon from '../icon/icon';
-import css from './sidebar.module.scss';
+import css from './navbar.module.scss';
 
 /* eslint-disable-next-line */
 export interface Link {
@@ -12,11 +12,11 @@ export interface Link {
   }
 }
 
-export interface SidebarProps {
+export interface NavbarProps {
   links: Array<Link>
 }
 
-export function Sidebar(props: SidebarProps) {
+export function Navbar(props: NavbarProps) {
   const { links } = props;
 
   return (
@@ -46,4 +46,4 @@ export function Sidebar(props: SidebarProps) {
   );
 }
 
-export default Sidebar;
+export default Navbar;

@@ -1,10 +1,10 @@
 import { render } from '@testing-library/react';
 
-import Courses from './courses';
+import ProgressBar from './progress-bar';
 
-describe('Courses', () => {
+describe('ProgressBar', () => {
   it('should render successfully', () => {
-    const { baseElement } = render(<Courses courses={[]} />);
+    const { baseElement } = render(<ProgressBar />);
     expect(baseElement).toBeTruthy();
   });
 });

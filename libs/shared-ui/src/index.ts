@@ -1,3 +1,5 @@
+export * from './lib/progress-bar/progress-bar';
+export * from './lib/user-course-card/user-course-card';
 export * from './lib/tabs/tabs';
 export * from './lib/avatar/avatar';
 export * from './lib/navbar/navbar';

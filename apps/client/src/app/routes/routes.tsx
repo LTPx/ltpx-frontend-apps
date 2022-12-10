@@ -53,7 +53,7 @@ function ApplicationRoutes() {
         },
         {
           path: 'courses',
-          element: <Courses/>
+          element: <Courses courses={[]}/>
         },
         {
           path: 'payments',
@@ -71,7 +71,7 @@ function ApplicationRoutes() {
     },
     {
       path: 'courses',
-      element: <Courses />,
+      element: <Courses courses={[]} />,
     },
     {
       path: 'login',

@@ -1,6 +1,6 @@
 import { NavLink } from 'react-router-dom';
 import Icon from '../icon/icon';
-import css from './navbar.module.scss';
+import css from './nav.module.scss';
 
 /* eslint-disable-next-line */
 export interface Link {
@@ -16,7 +16,7 @@ export interface NavbarProps {
   links: Array<Link>
 }
 
-export function Navbar(props: NavbarProps) {
+export function Nav(props: NavbarProps) {
   const { links } = props;
 
   return (
@@ -46,4 +46,4 @@ export function Navbar(props: NavbarProps) {
   );
 }
 
-export default Navbar;
+export default Nav;

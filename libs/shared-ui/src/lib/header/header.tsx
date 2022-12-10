@@ -1,4 +1,4 @@
-import styles from './Header.module.scss';
+import styles from './header.module.scss';
 import { NavLink } from "react-router-dom";
 
 /* eslint-disable-next-line */

@@ -1,0 +1,18 @@
+.container {
+  display: flex;
+}
+
+.tab {
+  padding: 5px 10px;
+  cursor: pointer;
+
+  &:hover{
+    font-weight: bold;
+  }
+}
+
+.tab-selected {
+  padding: 5px 10px;
+  cursor: pointer;
+  border-bottom: 2px solid #5b5992;
+}

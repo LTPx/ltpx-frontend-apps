@@ -1,18 +1,18 @@
-import styles from './navbar.module.scss';
+import styles from './header.module.scss';
 import { NavLink } from "react-router-dom";
 
 /* eslint-disable-next-line */
 
-export interface Link {
+export interface LinkHeader {
   title: string;
   url: string;
 }
-export interface NavbarProps {
+export interface HeaderProps {
   children?: any;
-  links: Array<Link>;
+  links: Array<LinkHeader>;
 }
 
-export function Navbar(props: NavbarProps) {
+export function Header(props: HeaderProps) {
   const { children, links } = props;
   return (
     <div className={styles['container']}>
@@ -42,4 +42,4 @@ export function Navbar(props: NavbarProps) {
   );
 }
 
-export default Navbar;
+export default Header;

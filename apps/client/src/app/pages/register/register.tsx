@@ -1,4 +1,4 @@
-import { Button, ColorsButton, Input, Navbar } from '@ltpx-frontend-apps/shared-ui';
+import { Button, ColorsButton, Input, Header } from '@ltpx-frontend-apps/shared-ui';
 import styles from './register.module.scss';
 
 /* eslint-disable-next-line */
@@ -14,7 +14,7 @@ export function Register(props: RegisterProps) {
 
   return (
     <div className="main-container">
-      <Navbar links={links}/>
+      <Header links={links}/>
       <div className={styles['container']}>
         <div className={styles['illustration']}></div>
         <div className={styles['content']}>

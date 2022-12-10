@@ -1,5 +1,5 @@
 import styles from './home.module.scss';
-import { Navbar } from '@ltpx-frontend-apps/shared-ui';
+import { Header } from '@ltpx-frontend-apps/shared-ui';
 
 /* eslint-disable-next-line */
 export interface HomeProps {}
@@ -15,7 +15,7 @@ export function Home(props: HomeProps) {
 
   return (
     <div className={styles['container']}>
-      <Navbar links={links}/>
+      <Header links={links}/>
       <h1>🚧 building app.....</h1>
     </div>
   );

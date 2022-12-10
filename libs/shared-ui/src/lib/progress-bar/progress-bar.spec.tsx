@@ -1,10 +1,10 @@
 import { render } from '@testing-library/react';
 
-import Navbar from './navbar';
+import ProgressBar from './progress-bar';
 
-describe('Navbar', () => {
+describe('ProgressBar', () => {
   it('should render successfully', () => {
-    const { baseElement } = render(<Navbar />);
+    const { baseElement } = render(<ProgressBar />);
     expect(baseElement).toBeTruthy();
   });
 });

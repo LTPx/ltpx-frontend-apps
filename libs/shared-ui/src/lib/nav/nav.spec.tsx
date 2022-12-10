@@ -1,10 +1,10 @@
 import { render } from '@testing-library/react';
 
-import SharedUi from './shared-ui';
+import Nav from './nav';
 
-describe('SharedUi', () => {
+describe('Nav', () => {
   it('should render successfully', () => {
-    const { baseElement } = render(<SharedUi />);
+    const { baseElement } = render(<Nav links={[]} />);
     expect(baseElement).toBeTruthy();
   });
 });

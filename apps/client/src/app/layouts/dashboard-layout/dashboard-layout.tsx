@@ -1,4 +1,4 @@
-import { Avatar, Header, Navbar } from '@ltpx-frontend-apps/shared-ui';
+import { Avatar, Header, Nav } from '@ltpx-frontend-apps/shared-ui';
 import Icon from 'libs/shared-ui/src/lib/icon/icon';
 import { Outlet } from 'react-router-dom';
 import styles from './dashboard-layout.module.scss';
@@ -59,7 +59,7 @@ export function DashboardLayout(props: DashboardLayoutProps) {
         </div>
       </Header>
       <div className={styles['navbar']}>
-        <Navbar links={sidebarOptions}/>
+        <Nav links={sidebarOptions}/>
       </div>
       <div className={styles['content']}>
         <Outlet />

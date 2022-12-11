@@ -3,6 +3,7 @@ import styles from './user-course-card.module.scss';
 
 /* eslint-disable-next-line */
 export interface UserCourseCardProps {
+  id?: string;
   image: string;
   startDate: string;
   title: string;

@@ -89,6 +89,10 @@ function ApplicationRoutes() {
       element: <Courses state={StateCourses.favorites}/>,
     },
     {
+      path: 'course/:courseId/details',
+      element: <CourseDetails id={""} />,
+    },
+    {
       path: 'login',
       element: <Login />,
     },

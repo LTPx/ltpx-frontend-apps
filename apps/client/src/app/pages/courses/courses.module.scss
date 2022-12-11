@@ -1,5 +1,4 @@
 .container {
-  background-color: #fff;
   padding: 20px;
 
   .tabs {
@@ -9,4 +8,10 @@
 
 .content {
   padding: 20px 0;
+  display: flex;
+  gap: 1rem;
+}
+
+.link {
+  max-width: 250px;
 }

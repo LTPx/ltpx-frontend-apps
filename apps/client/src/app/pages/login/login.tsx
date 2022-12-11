@@ -1,18 +1,11 @@
 import styles from './login.module.scss';
-import { Button, ColorsButton, Input, Header, TypeButton } from '@ltpx-frontend-apps/shared-ui';
+import { Button, ColorsButton, Input, TypeButton } from '@ltpx-frontend-apps/shared-ui';
 import { useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 
 /* eslint-disable-next-line */
 export interface LoginProps {}
-
-const links = [
-  { title: 'Home', url: '/'},
-  { title: 'Courses', url: '/courses'},
-  { title: 'Become a teacher', url: '/register'},
-  { title: 'Login', url: '/login'}
-];
 
 export function Login(props: LoginProps) {
   const navigate = useNavigate();
@@ -43,7 +36,6 @@ export function Login(props: LoginProps) {
 
   return (
     <div className="main-container">
-      <Header links={links}/>
       <div className={styles['container']}>
         <div className={styles['illustration']}></div>
         <div className={styles['content']}>

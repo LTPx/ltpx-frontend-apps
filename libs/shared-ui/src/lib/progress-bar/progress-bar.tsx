@@ -12,10 +12,10 @@ export function ProgressBar(props: ProgressBarProps) {
     <div className={styles['container-bar']}>
       <div className={styles['container-text']}>
         <div className={styles['text']}>{text}</div>
-        <div className={styles['percentage']}>%{percentage}</div>
+        <div className={styles['percentage']}>{percentage}%</div>
       </div>
       <div className={styles['container']}>
-        <div className={styles['bar']}></div>
+        <div className={styles['bar']} style={{width: `${percentage}%`}}></div>
       </div>
     </div>
   );

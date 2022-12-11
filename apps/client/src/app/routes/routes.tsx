@@ -5,10 +5,11 @@ import {
   useNavigate,
   useLocation,
 } from "react-router-dom";
-
+import CoursesLayout from "../layouts/courses-layout/courses-layout";
 import DashboardLayout from "../layouts/dashboard-layout/dashboard-layout";
 import Account from "../pages/account/account";
-import Courses from "../pages/courses/courses";
+import CourseDetails from "../pages/course-details/course-details";
+import Courses, { StateCourses } from "../pages/courses/courses";
 import Dashboard from "../pages/dashboard/dashboard";
 import Home from "../pages/home/home";
 import Login from "../pages/login/login";
@@ -52,8 +53,22 @@ function ApplicationRoutes() {
           element: <Dashboard/>
         },
         {
-          path: 'courses',
-          element: <Courses courses={[]}/>
+          path: 'my-courses',
+          element: <CoursesLayout/>,
+          children: [
+            {
+              path: 'learning',
+              element: <Courses state={StateCourses.learning}/>,
+            },
+            {
+              path: 'finished',
+              element: <Courses state={StateCourses.finished}/>,
+            },
+            {
+              path: 'favorites',
+              element: <Courses state={StateCourses.favorites}/>,
+            }
+          ]
         },
         {
           path: 'payments',
@@ -71,7 +86,7 @@ function ApplicationRoutes() {
     },
     {
       path: 'courses',
-      element: <Courses courses={[]} />,
+      element: <Courses state={StateCourses.favorites}/>,
     },
     {
       path: 'login',

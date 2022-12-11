@@ -5,6 +5,8 @@
 .tab {
   padding: 5px 10px;
   cursor: pointer;
+  text-decoration: none;
+  color: initial;
 
   &:hover{
     font-weight: bold;
@@ -14,5 +16,7 @@
 .tab-selected {
   padding: 5px 10px;
   cursor: pointer;
+  text-decoration: none;
+  color: initial;
   border-bottom: 2px solid #5b5992;
 }

@@ -38,7 +38,7 @@ export function Account(props: AccountProps) {
   });
 
   return (
-    <div className={styles['container']}>
+    <div className={`${styles['container']} card`}>
       <form onSubmit={formik.handleSubmit}>
         <div className={styles['general']}>
           <label >General</label>

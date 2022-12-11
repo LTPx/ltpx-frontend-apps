@@ -5,6 +5,7 @@ import {
   useNavigate,
   useLocation,
 } from "react-router-dom";
+import AppLayout from "../layouts/app-layout/app-layout";
 import CoursesLayout from "../layouts/courses-layout/courses-layout";
 import DashboardLayout from "../layouts/dashboard-layout/dashboard-layout";
 import Account from "../pages/account/account";
@@ -38,7 +39,29 @@ function ApplicationRoutes() {
   const routesAccess = [
     {
       path: '/',
-      element: <Home />,
+      element: <AppLayout/>,
+      children: [
+        {
+          path: 'home',
+          element: <Home />,
+        },
+        {
+          path: 'login',
+          element: <Login />,
+        },
+        {
+          path: 'Register',
+          element: <Register />,
+        },
+        {
+          path: 'courses',
+          element: <Courses state={StateCourses.favorites}/>,
+        },
+        {
+          path: 'course/:courseId/details',
+          element: <CourseDetails id={""} />,
+        },
+      ]
     },
     {
       path: 'home',
@@ -84,22 +107,6 @@ function ApplicationRoutes() {
         }
       ]
     },
-    {
-      path: 'courses',
-      element: <Courses state={StateCourses.favorites}/>,
-    },
-    {
-      path: 'course/:courseId/details',
-      element: <CourseDetails id={""} />,
-    },
-    {
-      path: 'login',
-      element: <Login />,
-    },
-    {
-      path: 'Register',
-      element: <Register />,
-    }
   ];
 
   let element = useRoutes(routesAccess);

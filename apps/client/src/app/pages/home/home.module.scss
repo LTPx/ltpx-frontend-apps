@@ -1,7 +1,52 @@
-/*
- * Replace this with your own classes
- *
- * e.g.
- * .container {
- * }
-*/
+.main-cover {
+  width: 100%;
+  height: 30rem;
+  justify-content: center;
+
+  .cover {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    padding: 2rem 10rem;
+
+    img {
+      max-width: 35rem;
+    }
+  }
+}
+
+.text {
+  margin-bottom: 20px;
+}
+
+.actions {
+  button {
+    margin-right: 10px;
+  }
+}
+
+.popular-courses-container {
+  padding: 5rem 14rem;
+  background-color: #f7f7f7;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+
+  h4 {
+    margin-top: 0px;
+    margin-bottom: 40px;
+  }
+}
+
+.popular-courses {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.link {
+  margin: 2rem 0 0 0;
+}

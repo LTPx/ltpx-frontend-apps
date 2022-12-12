@@ -6,7 +6,7 @@ import styles from './app-layout.module.scss';
 export interface AppLayoutProps {}
 
 const links = [
-  { title: 'Home', url: '/'},
+  { title: 'Home', url: '/home'},
   { title: 'Courses', url: '/courses'},
   { title: 'Become a teacher', url: '/register'},
   { title: 'Login', url: '/login'}

@@ -14,10 +14,19 @@
 
 .links {
   display: flex;
+  gap: 0.5rem;
 }
 
 .link {
   margin-right: 5px;
+  text-decoration: none;
+  color: initial;
+  padding: 0 10px;
+
+  &:hover {
+    font-weight: bold;
+    color: #7c3aed;
+  }
 }
 
 .actions {

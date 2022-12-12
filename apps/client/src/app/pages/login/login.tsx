@@ -37,7 +37,6 @@ export function Login(props: LoginProps) {
   return (
     <div className="main-container">
       <div className={styles['container']}>
-        <div className={styles['illustration']}></div>
         <div className={styles['content']}>
           <h1>Log in</h1>
           <span>

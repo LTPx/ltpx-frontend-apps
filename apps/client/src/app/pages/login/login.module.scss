@@ -1,13 +1,11 @@
 .container {
   display: flex;
-}
-
-.illustration {
-  flex: 1;
+  justify-content: center;
+  margin-top: 2rem;
 }
 
 .content {
-  flex: 1;
+  max-width: 30rem;
 }
 
 .btn-submit {

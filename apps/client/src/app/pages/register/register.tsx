@@ -8,7 +8,6 @@ export function Register(props: RegisterProps) {
   return (
     <div className="main-container">
       <div className={styles['container']}>
-        <div className={styles['illustration']}></div>
         <div className={styles['content']}>
           <h1>Become a E-Teacher</h1>
           <span>

@@ -1,4 +1,4 @@
-import { Button, ColorsButton } from '@ltpx-frontend-apps/shared-ui';
+import { Avatar, AvatarSize, Button, ColorsButton, Rating } from '@ltpx-frontend-apps/shared-ui';
 import Icon from 'libs/shared-ui/src/lib/icon/icon';
 import { useParams } from 'react-router-dom';
 import styles from './course-details.module.scss';
@@ -16,10 +16,33 @@ export function CourseDetails(props: CourseDetailsProps) {
       <div className={styles['course-details']}>
         <div className={styles['description-container']}>
           <div className={styles['description']}>
-            <h1>Learn Blockchain: Basic concepts and How to invest</h1>
-            <h4 className='muted'>
-              Looking how to increase your incomes and learn about new digital money
-            </h4>
+            <div className={styles['description-title']}>
+              <h1>Learn Blockchain: Basic concepts and How to invest</h1>
+              <h4 className='muted'>
+                Looking how to increase your incomes and learn about new digital money
+              </h4>
+            </div>
+            <div className={styles['description-course']}>
+              <Avatar
+                image='https://images.unsplash.com/photo-1544717305-2782549b5136?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80'
+                size={AvatarSize.medium}
+                outline={true}
+              />
+              <div className={styles['item']}>
+                <label htmlFor="creator">Instructor</label>
+                <h5>Michelle Wood</h5>
+              </div>
+              <div className={styles['item']}>
+                <label htmlFor="creator">Categories</label>
+                <h5>Blockchain</h5>
+              </div>
+              <div className={styles['item']}>
+                <label htmlFor="creator">Review</label>
+                <div className={styles['rating']}>
+                  <Rating stars={4} reviewers={456}/>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
         <div className={`${styles['buy-card']} card`}>

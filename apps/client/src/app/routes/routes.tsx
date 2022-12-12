@@ -9,6 +9,7 @@ import AppLayout from "../layouts/app-layout/app-layout";
 import CoursesLayout from "../layouts/courses-layout/courses-layout";
 import DashboardLayout from "../layouts/dashboard-layout/dashboard-layout";
 import Account from "../pages/account/account";
+import AllCourses from "../pages/all-courses/all-courses";
 import CourseDetails from "../pages/course-details/course-details";
 import Courses, { StateCourses } from "../pages/courses/courses";
 import Dashboard from "../pages/dashboard/dashboard";
@@ -55,7 +56,7 @@ function ApplicationRoutes() {
         },
         {
           path: 'courses',
-          element: <Courses state={StateCourses.favorites}/>,
+          element: <AllCourses/>,
         },
         {
           path: 'course/:courseId/details',

@@ -4,6 +4,11 @@ body {
 
 h1, h2, h3, h4, h5 {
   margin: 0.5rem 0;
+  color: #262730;
+}
+
+p {
+  color: #334255;
 }
 
 .card {
@@ -14,4 +19,8 @@ h1, h2, h3, h4, h5 {
 .link-wrapper {
   text-decoration: none;
   color: initial;
+}
+
+.muted {
+  color: #888888;
 }

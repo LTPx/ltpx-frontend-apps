@@ -27,6 +27,23 @@
   }
 }
 
+.summary-course {
+
+  section {
+     margin-top: 2rem;
+  }
+  .items {
+    .item {
+      display: flex;
+      align-items: center;
+
+      svg {
+        margin-right: 0.5rem;
+      }
+    }
+  }
+}
+
 .buy-card {
   padding: 10px;
 

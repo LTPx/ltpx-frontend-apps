@@ -1,4 +1,4 @@
-import { Header } from '@ltpx-frontend-apps/shared-ui';
+import { Cart, Header } from '@ltpx-frontend-apps/shared-ui';
 import { Outlet } from 'react-router-dom';
 import styles from './app-layout.module.scss';
 
@@ -15,7 +15,9 @@ const links = [
 export function AppLayout(props: AppLayoutProps) {
   return (
     <div className={styles['container']}>
-      <Header links={links}/>
+      <Header links={links}>
+        <Cart amount={1}/>
+      </Header>
       <div className="content">
         <Outlet />
       </div>

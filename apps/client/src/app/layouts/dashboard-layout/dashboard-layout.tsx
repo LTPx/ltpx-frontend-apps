@@ -18,7 +18,7 @@ export function DashboardLayout(props: DashboardLayoutProps) {
     },
     {
       title: 'My Courses',
-      url: 'courses',
+      url: 'my-courses/learning',
       icon: {
         icon: 'university',
         size: 20,

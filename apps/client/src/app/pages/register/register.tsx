@@ -5,18 +5,9 @@ import styles from './register.module.scss';
 export interface RegisterProps {}
 
 export function Register(props: RegisterProps) {
-  const links = [
-    { title: 'Home', url: '/'},
-    { title: 'Courses', url: '/courses'},
-    { title: 'Become a teacher', url: '/register'},
-    { title: 'Login', url: '/login'}
-  ];
-
   return (
     <div className="main-container">
-      <Header links={links}/>
       <div className={styles['container']}>
-        <div className={styles['illustration']}></div>
         <div className={styles['content']}>
           <h1>Become a E-Teacher</h1>
           <span>

@@ -3,6 +3,7 @@ import styles from './user-course-card.module.scss';
 
 /* eslint-disable-next-line */
 export interface UserCourseCardProps {
+  id?: string;
   image: string;
   startDate: string;
   title: string;
@@ -10,7 +11,7 @@ export interface UserCourseCardProps {
 }
 
 export function UserCourseCard(props: UserCourseCardProps) {
-  const {image, startDate, title, progress} = props;
+  const { image, startDate, title, progress } = props;
   return (
     <div className={styles['container']}>
       <img src={image} alt="" />
@@ -19,7 +20,7 @@ export function UserCourseCard(props: UserCourseCardProps) {
           Started {startDate}
         </span>
         <h3 className={styles['title']}>{title}</h3>
-        <ProgressBar text='Completed' percentage={40}/>
+        <ProgressBar text='Completed' percentage={progress}/>
       </div>
     </div>
   );

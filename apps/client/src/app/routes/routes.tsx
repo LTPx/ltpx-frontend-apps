@@ -5,10 +5,13 @@ import {
   useNavigate,
   useLocation,
 } from "react-router-dom";
-
+import AppLayout from "../layouts/app-layout/app-layout";
+import CoursesLayout from "../layouts/courses-layout/courses-layout";
 import DashboardLayout from "../layouts/dashboard-layout/dashboard-layout";
 import Account from "../pages/account/account";
-import Courses from "../pages/courses/courses";
+import AllCourses from "../pages/all-courses/all-courses";
+import CourseDetails from "../pages/course-details/course-details";
+import Courses, { StateCourses } from "../pages/courses/courses";
 import Dashboard from "../pages/dashboard/dashboard";
 import Home from "../pages/home/home";
 import Login from "../pages/login/login";
@@ -37,7 +40,29 @@ function ApplicationRoutes() {
   const routesAccess = [
     {
       path: '/',
-      element: <Home />,
+      element: <AppLayout/>,
+      children: [
+        {
+          path: 'home',
+          element: <Home />,
+        },
+        {
+          path: 'login',
+          element: <Login />,
+        },
+        {
+          path: 'Register',
+          element: <Register />,
+        },
+        {
+          path: 'courses',
+          element: <AllCourses/>,
+        },
+        {
+          path: 'course/:courseId/details',
+          element: <CourseDetails id={""} />,
+        },
+      ]
     },
     {
       path: 'home',
@@ -52,8 +77,22 @@ function ApplicationRoutes() {
           element: <Dashboard/>
         },
         {
-          path: 'courses',
-          element: <Courses courses={[]}/>
+          path: 'my-courses',
+          element: <CoursesLayout/>,
+          children: [
+            {
+              path: 'learning',
+              element: <Courses state={StateCourses.learning}/>,
+            },
+            {
+              path: 'finished',
+              element: <Courses state={StateCourses.finished}/>,
+            },
+            {
+              path: 'favorites',
+              element: <Courses state={StateCourses.favorites}/>,
+            }
+          ]
         },
         {
           path: 'payments',
@@ -69,18 +108,6 @@ function ApplicationRoutes() {
         }
       ]
     },
-    {
-      path: 'courses',
-      element: <Courses courses={[]} />,
-    },
-    {
-      path: 'login',
-      element: <Login />,
-    },
-    {
-      path: 'Register',
-      element: <Register />,
-    }
   ];
 
   let element = useRoutes(routesAccess);

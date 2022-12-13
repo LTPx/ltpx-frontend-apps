@@ -18,6 +18,7 @@ import Login from "../pages/login/login";
 import Payments from "../pages/payments/payments";
 import Register from "../pages/register/register";
 import Settings from "../pages/settings/settings";
+import ShoppingCart from "../pages/shopping-cart/shopping-cart";
 
 function ApplicationRoutes() {
   // const navigate = useNavigate();
@@ -62,11 +63,11 @@ function ApplicationRoutes() {
           path: 'course/:courseId/details',
           element: <CourseDetails id={""} />,
         },
+        {
+          path: 'cart',
+          element: <ShoppingCart/>,
+        }
       ]
-    },
-    {
-      path: 'home',
-      element: <Home />,
     },
     {
       path: 'user',

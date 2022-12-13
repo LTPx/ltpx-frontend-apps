@@ -1,0 +1,26 @@
+.container {
+  margin: 0 12rem;
+
+  h1 {
+    margin: 2rem 0;
+  }
+
+  .content {
+    display: flex;
+    justify-content: space-between;
+    gap: 10rem;
+
+    .products {
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+      gap: 1.5rem;
+    }
+
+    .checkout {
+      display: flex;
+      flex-direction: column;
+      min-width: 250px;
+    }
+  }
+}

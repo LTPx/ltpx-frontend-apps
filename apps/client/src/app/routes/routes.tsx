@@ -10,6 +10,7 @@ import CoursesLayout from "../layouts/courses-layout/courses-layout";
 import DashboardLayout from "../layouts/dashboard-layout/dashboard-layout";
 import Account from "../pages/account/account";
 import AllCourses from "../pages/all-courses/all-courses";
+import Checkout from "../pages/checkout/checkout";
 import CourseDetails from "../pages/course-details/course-details";
 import Courses, { StateCourses } from "../pages/courses/courses";
 import Dashboard from "../pages/dashboard/dashboard";
@@ -66,6 +67,11 @@ function ApplicationRoutes() {
         {
           path: 'cart',
           element: <ShoppingCart/>,
+
+        },
+        {
+          path: 'checkout',
+          element: <Checkout/>,
         }
       ]
     },

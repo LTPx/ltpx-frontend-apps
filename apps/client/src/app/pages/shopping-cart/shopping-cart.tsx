@@ -38,7 +38,12 @@ export function ShoppingCart(props: ShoppingCartProps) {
         <div className={styles['checkout']}>
           <h3>Subtotal</h3>
           <h2>${subtotal()}</h2>
-          <Button color={ColorsButton.primary} title='Checkout' full={true}/>
+          <Button
+            color={ColorsButton.primary}
+            title='Checkout'
+            full={true}
+            link='/checkout'
+          />
         </div>
       </div>
 

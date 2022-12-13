@@ -107,16 +107,16 @@ export function CourseDetails(props: CourseDetailsProps) {
               </div>
             </div>
             <div className={styles['actions']}>
-              <Button title='BUY NOW' color={ColorsButton.primary} full={true}/>
-              <Button title='ENROLL' color={ColorsButton.secondary} full={true}/>
+              <Button title='BUY NOW' color={ColorsButton.primary} full={true} link='/cart'/>
+              <Button title='ENROLL' color={ColorsButton.secondary} full={true} link='/login'/>
             </div>
             <div className={styles['details']}>
               <div className={styles['item']}>
                 <div className={styles['item-text']}>
-                  <Icon icon={'clock'} size={15} color='#888888'></Icon>
-                  <h4>Duration</h4>
+                  <Icon icon={'rocket'} size={15} color='#888888'></Icon>
+                  <h4>Achievement</h4>
                 </div>
-                <h4>5 weeks</h4>
+                <h4>5</h4>
               </div>
               <div className={styles['item']}>
                 <div className={styles['item-text']} >

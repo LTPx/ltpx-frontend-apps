@@ -24,10 +24,12 @@ export function Home(props: HomeProps) {
                 color={ColorsButton.primary}
                 title="GET STARTED"
                 outline={true}
+                link='/login'
               />
               <Button
                 color={ColorsButton.primary}
                 title="VIEW COURSES"
+                link='/courses'
               />
             </div>
           </div>

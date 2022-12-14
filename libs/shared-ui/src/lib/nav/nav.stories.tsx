@@ -12,7 +12,7 @@ const links = [
     title: 'Dashboard',
     url: '/',
     icon: {
-      icon: 'dashboard',
+      icon: 'list',
       size: 20,
     }
   },
@@ -20,7 +20,7 @@ const links = [
     title: 'My Account',
     url: '/account',
     icon: {
-      icon: 'user-account',
+      icon: 'user-circle',
       size: 20,
     }
   },
@@ -36,7 +36,7 @@ const links = [
     title: 'My Courses',
     url: '/courses',
     icon: {
-      icon: 'book-open',
+      icon: 'pencil',
       size: 20,
     }
   }

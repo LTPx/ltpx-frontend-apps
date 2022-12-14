@@ -8,7 +8,7 @@ export enum AvatarSize {
   large = 'large'
 }
 export interface AvatarProps {
-  image?: string;
+  image: string;
   size?: AvatarSize;
   outline?: boolean;
 }

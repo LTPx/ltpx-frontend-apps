@@ -1,4 +1,5 @@
-import { Button, ColorsButton } from '@ltpx-frontend-apps/shared-ui';
+import { Button, ColorsButton, Icon } from '@ltpx-frontend-apps/shared-ui';
+import { NavLink } from 'react-router-dom';
 import styles from './invoice.module.scss';
 
 /* eslint-disable-next-line */
@@ -8,7 +9,11 @@ export function Invoice(props: InvoiceProps) {
   return (
     <div className={styles['container']}>
       <div className={styles['print']}>
-        <h2>Invoice: #48484 </h2>
+        <h2>
+          <NavLink to={'/user/payments/purchases'}>
+            <Icon icon='chevron-left' size={18}/>
+          </NavLink> Invoice: #48484
+        </h2>
         <Button title='Print' color={ColorsButton.primary} />
       </div>
       <div className={styles['invoice']}>

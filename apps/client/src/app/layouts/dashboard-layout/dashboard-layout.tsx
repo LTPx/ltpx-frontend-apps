@@ -26,7 +26,7 @@ export function DashboardLayout(props: DashboardLayoutProps) {
     },
     {
       title: 'Payments',
-      url: 'payments',
+      url: 'payments/purchases',
       icon: {
         icon: 'wallet',
         size: 20,

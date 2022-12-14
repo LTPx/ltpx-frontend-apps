@@ -1,10 +1,10 @@
 import { render } from '@testing-library/react';
 
-import Payments from './payments';
+import PaymentsLayout from './payments-layout';
 
-describe('Payments', () => {
+describe('PaymentsLayout', () => {
   it('should render successfully', () => {
-    const { baseElement } = render(<Payments />);
+    const { baseElement } = render(<PaymentsLayout />);
     expect(baseElement).toBeTruthy();
   });
 });

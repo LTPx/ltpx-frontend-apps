@@ -1,9 +1,9 @@
-import styles from './payments.module.scss';
+import styles from './purchases.module.scss';
 
 /* eslint-disable-next-line */
-export interface PaymentsProps {}
+export interface PurchasesProps {}
 
-export function Payments(props: PaymentsProps) {
+export function Purchases(props: PurchasesProps) {
   return (
     <div className={`${styles['container']} card`}>
       <h2>My Purchases </h2>
@@ -46,4 +46,4 @@ export function Payments(props: PaymentsProps) {
   );
 }
 
-export default Payments;
+export default Purchases;

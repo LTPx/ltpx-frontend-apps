@@ -1,7 +1,32 @@
-/*
- * Replace this with your own classes
- *
- * e.g.
- * .container {
- * }
-*/
+.container {
+  padding: 2rem;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+thead {
+  background-color: #0a0861;
+  color: #fff;
+}
+
+tbody {
+  color:#858f9a;
+
+  tr {
+    &:hover {
+      background-color: #f7f7f7;
+    }
+  }
+}
+
+td, th {
+  text-align: left;
+  padding: 20px;
+}
+
+tr:nth-child(even) {
+  background-color: #f7f9fb;
+}

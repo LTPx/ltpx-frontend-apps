@@ -1,3 +1,5 @@
+export * from './lib/course-cart-item/course-cart-item';
+export * from './lib/cart/cart';
 export * from './lib/icon/icon';
 export * from './lib/rating/rating';
 export * from './lib/course-card/course-card';

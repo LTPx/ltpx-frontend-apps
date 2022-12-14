@@ -24,10 +24,12 @@ export function Home(props: HomeProps) {
                 color={ColorsButton.primary}
                 title="GET STARTED"
                 outline={true}
+                link='/login'
               />
               <Button
                 color={ColorsButton.primary}
                 title="VIEW COURSES"
+                link='/courses'
               />
             </div>
           </div>
@@ -41,12 +43,12 @@ export function Home(props: HomeProps) {
         </h4>
         <div className={styles['popular-courses']}>
           { popularCourses.map((course, index)=>(
-            <NavLink key={index}
+            <NavLink
+              key={index}
               to={`/course/${course.id}/details`}
               className={`${styles['link']} link-wrapper`}
             >
               <CourseCard
-                key={index}
                 image={course.image}
                 category={course.category}
                 title={course.title}

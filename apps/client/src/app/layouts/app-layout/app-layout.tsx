@@ -1,5 +1,5 @@
-import { Header } from '@ltpx-frontend-apps/shared-ui';
-import { Outlet } from 'react-router-dom';
+import { Cart, Header } from '@ltpx-frontend-apps/shared-ui';
+import { NavLink, Outlet } from 'react-router-dom';
 import styles from './app-layout.module.scss';
 
 /* eslint-disable-next-line */
@@ -15,7 +15,11 @@ const links = [
 export function AppLayout(props: AppLayoutProps) {
   return (
     <div className={styles['container']}>
-      <Header links={links}/>
+      <Header links={links}>
+        <NavLink to={'cart'}>
+          <Cart amount={1}/>
+        </NavLink>
+      </Header>
       <div className="content">
         <Outlet />
       </div>

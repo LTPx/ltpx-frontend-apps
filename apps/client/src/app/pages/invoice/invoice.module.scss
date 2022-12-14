@@ -1,0 +1,60 @@
+.container {
+  padding: 0 3rem;
+}
+
+.print {
+  display: flex;
+  justify-content: space-between;
+}
+
+.invoice {
+  border: 1px solid #f7f7f7;
+  padding: 2rem;
+  margin-top: 1rem;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+
+  .brand {
+    // background-color: #0a0861;
+    // border-radius: 10px;
+    // padding: 1rem 2rem;
+    // color: #fff;
+    font-size: 23px;
+  }
+}
+
+.dates {
+  display: flex;
+  justify-content: space-between;
+  padding: 2rem 0;
+
+  .date {
+    label {
+      color: #888888;
+    }
+  }
+}
+
+.customer {
+  display: flex;
+  justify-content: space-between;
+
+  .info {
+    h5 {
+      color: #888888;
+    }
+  }
+}
+
+.table-details {
+  margin-top: 2rem;
+}
+
+.text-right {
+  text-align: right;
+}
+
+

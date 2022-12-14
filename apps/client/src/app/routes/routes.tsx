@@ -8,16 +8,20 @@ import {
 import AppLayout from "../layouts/app-layout/app-layout";
 import CoursesLayout from "../layouts/courses-layout/courses-layout";
 import DashboardLayout from "../layouts/dashboard-layout/dashboard-layout";
+import PaymentsLayout from "../layouts/payments-layout/payments-layout";
 import Account from "../pages/account/account";
 import AllCourses from "../pages/all-courses/all-courses";
+import Checkout from "../pages/checkout/checkout";
 import CourseDetails from "../pages/course-details/course-details";
 import Courses, { StateCourses } from "../pages/courses/courses";
 import Dashboard from "../pages/dashboard/dashboard";
 import Home from "../pages/home/home";
+import Invoice from "../pages/invoice/invoice";
 import Login from "../pages/login/login";
-import Payments from "../pages/payments/payments";
+import Purchases from "../pages/purchases/purchases";
 import Register from "../pages/register/register";
 import Settings from "../pages/settings/settings";
+import ShoppingCart from "../pages/shopping-cart/shopping-cart";
 
 function ApplicationRoutes() {
   // const navigate = useNavigate();
@@ -62,11 +66,16 @@ function ApplicationRoutes() {
           path: 'course/:courseId/details',
           element: <CourseDetails id={""} />,
         },
+        {
+          path: 'cart',
+          element: <ShoppingCart/>,
+
+        },
+        {
+          path: 'checkout',
+          element: <Checkout/>,
+        }
       ]
-    },
-    {
-      path: 'home',
-      element: <Home />,
     },
     {
       path: 'user',
@@ -96,7 +105,17 @@ function ApplicationRoutes() {
         },
         {
           path: 'payments',
-          element: <Payments/>
+          element: <PaymentsLayout/>,
+          children: [
+            {
+              path: 'purchases',
+              element: <Purchases />,
+            },
+            {
+              path: 'invoice',
+              element: <Invoice />,
+            },
+          ]
         },
         {
           path: 'settings',

@@ -30,7 +30,7 @@ export function Checkout(props: CheckoutProps) {
               </div>
               <div className={styles['content']}>
                 <p>
-                In order to complete your transaction, we will transfer you over to PayPhone secure servers.
+                  Pay as PayPhone User
                 </p>
               </div>
             </div>
@@ -40,9 +40,9 @@ export function Checkout(props: CheckoutProps) {
                 <h3>Credit/Debit Card</h3>
               </div>
               <div className={styles['content']}>
-                <form action="">
-
-                </form>
+                <p>
+                  Pay with credit or debit card.
+                </p>
               </div>
             </div>
           </div>

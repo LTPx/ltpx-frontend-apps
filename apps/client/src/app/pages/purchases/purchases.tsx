@@ -1,3 +1,4 @@
+import { NavLink } from 'react-router-dom';
 import styles from './purchases.module.scss';
 
 /* eslint-disable-next-line */
@@ -5,7 +6,7 @@ export interface PurchasesProps {}
 
 export function Purchases(props: PurchasesProps) {
   return (
-    <div className={`${styles['container']} card`}>
+    <div className={`${styles['container']}`}>
       <h2>My Purchases </h2>
       <br />
       <table>
@@ -24,21 +25,33 @@ export function Purchases(props: PurchasesProps) {
             <td>3 November 2022</td>
             <td>PayPhone</td>
             <td>$39.99</td>
-            <td>See details</td>
+            <td>
+              <NavLink to='/user/payments/invoice'>
+                See details
+              </NavLink>
+            </td>
           </tr>
           <tr>
             <td>Backend Master design</td>
             <td>13 November 2022</td>
             <td>Credit Card</td>
             <td>$29.99</td>
-            <td>See details</td>
+            <td>
+              <NavLink to='/user/payments/invoice'>
+                See details
+              </NavLink>
+            </td>
           </tr>
           <tr>
             <td>UI/UX Master design</td>
             <td>13 December 2022</td>
             <td>Stripe</td>
             <td>$19.99</td>
-            <td>See details</td>
+            <td>
+              <NavLink to='/user/payments/invoice'>
+                See details
+              </NavLink>
+            </td>
           </tr>
         </tbody>
       </table>

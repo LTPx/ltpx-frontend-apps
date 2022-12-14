@@ -113,7 +113,7 @@ function ApplicationRoutes() {
             },
             {
               path: 'invoice',
-              element: <Invoice/>,
+              element: <Invoice />,
             },
           ]
         },

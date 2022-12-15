@@ -1,3 +1,5 @@
+export * from './lib/input-search/input-search';
+export * from './lib/select/select';
 export * from './lib/course-cart-item/course-cart-item';
 export * from './lib/cart/cart';
 export * from './lib/icon/icon';

@@ -1,0 +1,23 @@
+.container {
+  display: flex;
+  .search-container {
+    display: flex;
+    input {
+      border: 1px solid #888888;
+      height: 30px;
+      font-size: 14px;
+      border-right: none;
+      background-color: #fff;
+      text-align: center;
+      font-weight: bold;
+    }
+    button {
+      height: 34px;
+      border: 1px solid #888888;
+      cursor: pointer;
+      border-left: none;
+      background-color: #fff;
+      color: #545070;
+    }
+  }
+}

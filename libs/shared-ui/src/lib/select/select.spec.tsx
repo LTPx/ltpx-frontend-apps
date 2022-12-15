@@ -1,10 +1,10 @@
 import { render } from '@testing-library/react';
 
-import Tabs from './tabs';
+import Select from './select';
 
-describe('Tabs', () => {
+describe('Select', () => {
   it('should render successfully', () => {
-    const { baseElement } = render(<Tabs tabs={[]} />);
+    const { baseElement } = render(<Select />);
     expect(baseElement).toBeTruthy();
   });
 });

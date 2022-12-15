@@ -7,8 +7,9 @@
   justify-content: space-between;
   margin: 2rem 8rem;
 
-  select {
-    margin-left: 10px;
+  .filters {
+    display: flex;
+    gap: 1.5rem;
   }
 }
 

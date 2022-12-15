@@ -1,19 +1,32 @@
 .container {
-  display: flex;
+
   .search-container {
     display: flex;
-    input {
-      border: 1px solid #888888;
+
+    .input-container {
+      border: 1px solid #d4d4d4;
+      padding: 0.5rem 0.75rem;
       height: 30px;
+      width: 100%;
       font-size: 14px;
       border-right: none;
       background-color: #fff;
-      text-align: center;
-      font-weight: bold;
+      border-top-left-radius:4px;
+      border-bottom-left-radius: 4px;
+      color: #545070;
     }
+
+    .input-container::placeholder {
+      color: #949595;
+      opacity: 1
+    }
+
     button {
-      height: 34px;
-      border: 1px solid #888888;
+      border-top-right-radius:4px;
+      border-bottom-right-radius: 4px;
+      height: 48px;
+      width: 48px;
+      border: 1px solid #d4d4d4;
       cursor: pointer;
       border-left: none;
       background-color: #fff;

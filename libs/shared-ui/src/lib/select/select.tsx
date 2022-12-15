@@ -1,15 +1,27 @@
 import styles from './select.module.scss';
 
+export interface OptionSelect {
+  value: string;
+  text: string;
+}
+
 /* eslint-disable-next-line */
-export interface SelectProps {}
+export interface SelectProps {
+  options: Array<OptionSelect>
+}
 
 export function Select(props: SelectProps) {
+  const { options } = props;
+  
+  // [{value: '1', text: 'Numero 1'}, {value: '2', text: 'Numero 2'}]
   return (
     <div className={styles['container']}>
       <select className={styles['style-select']} name="select">
-        <option value="value1">Value 1</option>
-        <option value="value2" selected>Value 2</option>
-        <option value="value3">Value 3</option>
+        { options.map((option, index) => (
+          <option key={index} value={option.value}>
+            {option.text}
+          </option>
+        ))}
       </select>
     </div>
   );

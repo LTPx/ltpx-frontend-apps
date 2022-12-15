@@ -6,12 +6,17 @@ const Story: ComponentMeta<typeof Select> = {
   title: 'Select',
 };
 
+const sortByOptions = [
+  {value: 'price', text: 'Price'},
+  {value: 'level', text: 'level'},
+  {value: 'rating', text: 'Rating'},
+]
 export default Story;
 
 export const Default = () => {
   return (
     <div>
-      <Select/>
+      <Select options={sortByOptions}/>
     </div>
   )
 };

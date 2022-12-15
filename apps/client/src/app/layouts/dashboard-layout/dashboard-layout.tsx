@@ -26,7 +26,7 @@ export function DashboardLayout(props: DashboardLayoutProps) {
     },
     {
       title: 'My Classes',
-      url: 'classes/today',
+      url: 'classes/week',
       icon: {
         icon: 'desktop',
         size: 20,

@@ -1,7 +1,20 @@
-/*
- * Replace this with your own classes
- *
- * e.g.
- * .container {
- * }
-*/
+.container {
+  margin: 2rem 0;
+
+  .classes-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+
+    .actions {
+      display: flex;
+      justify-content: end;
+      margin-top: 1rem;
+      gap: 1rem;
+
+      .btn {
+        flex-grow: 1;
+      }
+    }
+  }
+}

@@ -1,4 +1,5 @@
 export * from './lib/api';
-export * from '../src/lib/fake/courses';
 
 //fake
+export * from '../src/lib/fake/courses';
+export * from '../src/lib/fake/classes';

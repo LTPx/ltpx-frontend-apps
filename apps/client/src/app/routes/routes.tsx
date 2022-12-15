@@ -20,6 +20,7 @@ import Courses, { StateCourses } from "../pages/courses/courses";
 import Dashboard from "../pages/dashboard/dashboard";
 import Home from "../pages/home/home";
 import Invoice from "../pages/invoice/invoice";
+import LiveClass from "../pages/live-class/live-class";
 import Login from "../pages/login/login";
 import Purchases from "../pages/purchases/purchases";
 import Register from "../pages/register/register";
@@ -111,7 +112,7 @@ function ApplicationRoutes() {
           element: <ClassesLayout/>,
           children: [
             {
-              path: 'today',
+              path: 'week',
               element: <Classes />,
             },
             {
@@ -119,12 +120,8 @@ function ApplicationRoutes() {
               element: <ClassesCalendar />,
             },
             {
-              path: 'live',
-              element: <Courses state={StateCourses.finished}/>,
-            },
-            {
-              path: 'favorites',
-              element: <Courses state={StateCourses.favorites}/>,
+              path: ':classId',
+              element: <LiveClass />,
             }
           ]
         },

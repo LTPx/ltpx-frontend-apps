@@ -6,7 +6,7 @@ import styles from './classes-layout.module.scss';
 export interface ClassesLayoutProps {}
 
 const tabs = [
-  { text: 'Today', url: 'today'},
+  { text: 'Week', url: 'week'},
   { text: 'Calendar', url: 'calendar'},
 ];
 

@@ -1,3 +1,4 @@
+export * from './lib/chat-messages/chat-messages';
 export * from './lib/class-card/class-card';
 export * from './lib/course-cart-item/course-cart-item';
 export * from './lib/cart/cart';

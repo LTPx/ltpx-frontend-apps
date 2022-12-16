@@ -1,3 +1,4 @@
+import Icon from '../icon/icon';
 import css from './input.module.scss';
 
 /* eslint-disable-next-line */
@@ -20,19 +21,17 @@ export interface InputProps {
   placeholder?: string
   disabled?: boolean
   className?: string,
-  onKeyPress?: string,
-  onEnter?: any,
   onChange?: any,
   onBlur?: any,
+  onKeyDown?: any,
   addonInput?: AddonSymbolInput;
 }
 
 export function Input(props: InputProps) {
   const {
     className,
-    onKeyPress,
-    onEnter,
     onChange,
+    onKeyDown,
     label,
     addonInput,
     ...other
@@ -44,10 +43,13 @@ export function Input(props: InputProps) {
     inputClassesPosition =  addonInput?.position === 'left' ? css['input-addon-left'] : css['input-addon-right'];
   }
 
-  const AddonSymbol = ({text, position}: { text?: string; position?: string}) => {
+  const AddonSymbol = ({text, position, icon}: { text?: string; position?: string, icon?: string}) => {
     const classPosition = position === Position.left ? css['addon-left'] : css['addon-right']
     return (
       <div className={`${css['addon']} ${classPosition}`}>
+        { icon && (
+          <Icon icon={icon} size={15}/>
+        )}
         {text}
       </div>
     )
@@ -64,9 +66,10 @@ export function Input(props: InputProps) {
           className={`${css['input-box']} ${inputClassesPosition}`}
           {...other}
           onChange={e => onChange && onChange(e)}
+          onKeyDown={e => onKeyDown && onKeyDown(e)}
         />
         { addonInput && addonInput.position === 'right' && (
-          <AddonSymbol text={addonInput.text} position={Position.right}/>
+          <AddonSymbol text={addonInput.text} position={Position.right} icon={addonInput.icon}/>
         )}
       </div>
     </div>

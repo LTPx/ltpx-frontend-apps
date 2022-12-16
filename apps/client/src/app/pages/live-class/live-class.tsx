@@ -1,8 +1,11 @@
+import { generateConversation } from '@ltpx-frontend-apps/api';
 import { ChatMessages } from '@ltpx-frontend-apps/shared-ui';
 import styles from './live-class.module.scss';
 
 /* eslint-disable-next-line */
 export interface LiveClassProps {}
+
+const conversation = generateConversation(10);
 
 export function LiveClass(props: LiveClassProps) {
   return (
@@ -16,7 +19,7 @@ export function LiveClass(props: LiveClassProps) {
         <div className={styles['live-chat-content']}>
           <h3>Chat Group</h3>
           <label className='muted'>Please be respectful</label>
-          <ChatMessages/>
+          <ChatMessages messages={conversation} userId={'13'}/>
         </div>
       </div>
     </div>

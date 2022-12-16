@@ -6,17 +6,21 @@ import {
   useLocation,
 } from "react-router-dom";
 import AppLayout from "../layouts/app-layout/app-layout";
+import ClassesLayout from "../layouts/classes-layout/classes-layout";
 import CoursesLayout from "../layouts/courses-layout/courses-layout";
 import DashboardLayout from "../layouts/dashboard-layout/dashboard-layout";
 import PaymentsLayout from "../layouts/payments-layout/payments-layout";
 import Account from "../pages/account/account";
 import AllCourses from "../pages/all-courses/all-courses";
 import Checkout from "../pages/checkout/checkout";
+import ClassesCalendar from "../pages/classes-calendar/classes-calendar";
+import Classes from "../pages/classes/classes";
 import CourseDetails from "../pages/course-details/course-details";
 import Courses, { StateCourses } from "../pages/courses/courses";
 import Dashboard from "../pages/dashboard/dashboard";
 import Home from "../pages/home/home";
 import Invoice from "../pages/invoice/invoice";
+import LiveClass from "../pages/live-class/live-class";
 import Login from "../pages/login/login";
 import Purchases from "../pages/purchases/purchases";
 import Register from "../pages/register/register";
@@ -86,7 +90,7 @@ function ApplicationRoutes() {
           element: <Dashboard/>
         },
         {
-          path: 'my-courses',
+          path: 'courses',
           element: <CoursesLayout/>,
           children: [
             {
@@ -100,6 +104,24 @@ function ApplicationRoutes() {
             {
               path: 'favorites',
               element: <Courses state={StateCourses.favorites}/>,
+            }
+          ]
+        },
+        {
+          path: 'classes',
+          element: <ClassesLayout/>,
+          children: [
+            {
+              path: 'week',
+              element: <Classes />,
+            },
+            {
+              path: 'calendar',
+              element: <ClassesCalendar />,
+            },
+            {
+              path: ':classId',
+              element: <LiveClass />,
             }
           ]
         },

@@ -18,9 +18,17 @@ export function DashboardLayout(props: DashboardLayoutProps) {
     },
     {
       title: 'My Courses',
-      url: 'my-courses/learning',
+      url: 'courses/learning',
       icon: {
         icon: 'university',
+        size: 20,
+      }
+    },
+    {
+      title: 'My Classes',
+      url: 'classes/week',
+      icon: {
+        icon: 'desktop',
         size: 20,
       }
     },
@@ -64,7 +72,6 @@ export function DashboardLayout(props: DashboardLayoutProps) {
       <div className={styles['content']}>
         <Outlet />
       </div>
-      <div className={styles['footer']}></div>
       <div className={styles['footer']}>LTPX 2022</div>
     </div>
   );

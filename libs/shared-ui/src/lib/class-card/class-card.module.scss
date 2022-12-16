@@ -1,0 +1,65 @@
+.container {
+  width: 300px;
+  border-radius: 10px;
+  border: 1px solid #c7c7c7;
+  padding: 1rem;
+
+  .header {
+    display: flex;
+    gap: 1rem;
+    align-items: start;
+    justify-content: space-between;
+
+    h5 {
+      background-color: #ef4444;
+      color: #fff;
+      padding: 0 10px;
+      border-radius: 3px;
+    }
+  }
+
+  .class {
+    padding: 1rem 0 0 0;
+
+    h5, h3 {
+      margin: 0;
+    }
+
+    h5 {
+      color: #888888;
+    }
+  }
+
+  .time-duration {
+    display: flex;
+    justify-content: space-between;
+
+    h5 {
+      color: #888888;
+    }
+  }
+
+}
+
+.status {
+  color: #fff;
+}
+
+.teacher {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+
+  .teacher-name {
+    display: flex;
+    flex-direction: column;
+
+    h4 {
+      margin: 0;
+    }
+
+    label {
+      color: #888888;
+    }
+  }
+}

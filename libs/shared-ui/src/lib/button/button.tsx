@@ -55,7 +55,7 @@ export function Button(props: ButtonProps) {
 
   const Button = () => {
     return (
-      <button className={`${className} ${btnClass}`}
+      <button className={`${btnClass}`}
         type={type}
         onClick={onClick}
         disabled={disabled}
@@ -67,7 +67,7 @@ export function Button(props: ButtonProps) {
   }
 
   return (
-    <div className="wrapper">
+    <div className={`${className}`}>
       { link ? (
         <NavLink to={link}>
           <Button></Button>

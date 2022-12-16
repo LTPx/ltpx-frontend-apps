@@ -3,6 +3,7 @@ import styles from './avatar.module.scss';
 /* eslint-disable-next-line */
 
 export enum AvatarSize {
+  tiny = 'tiny',
   small = 'small',
   medium = 'medium',
   large = 'large'

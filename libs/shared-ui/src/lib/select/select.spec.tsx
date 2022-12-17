@@ -4,7 +4,7 @@ import Select from './select';
 
 describe('Select', () => {
   it('should render successfully', () => {
-    const { baseElement } = render(<Select />);
+    const { baseElement } = render(<Select options={[]} />);
     expect(baseElement).toBeTruthy();
   });
 });

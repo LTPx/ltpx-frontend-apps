@@ -35,7 +35,7 @@ export function AppLayout(props: AppLayoutProps) {
           <Cart amount={2}/>
         </NavLink>
       </Header>
-      <div className="content">
+      <div className={styles['content']}>
         <Outlet />
       </div>
       <Footer companyLinks={companyLinks} supportLinks={supportLinks} />

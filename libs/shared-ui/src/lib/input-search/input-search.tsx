@@ -3,17 +3,17 @@ import styles from './input-search.module.scss';
 
 /* eslint-disable-next-line */
 export interface InputSearchProps {
-  type?: string
-  id?: string
-  name?: string
-  value?: any
-  label?: string
-  placeholder?: string
-  disabled?: boolean
-  className?: string,
-  onEnter?: any,
-  onChange?: any,
-  onBlur?: any,
+  type?: string;
+  id?: string;
+  name?: string;
+  value?: any;
+  label?: string;
+  placeholder?: string;
+  disabled?: boolean;
+  className?: string;
+  onEnter?: any;
+  onChange?: any;
+  onBlur?: any;
 }
 
 export function InputSearch(props: InputSearchProps) {
@@ -30,7 +30,7 @@ export function InputSearch(props: InputSearchProps) {
     <div className={styles['container']}>
       <div className={styles['search-container']}>
         <input
-          className={styles['input-container']} 
+          className={styles['input-container']}
           {...other}
           onChange={e => onChange && onChange(e)}
         />

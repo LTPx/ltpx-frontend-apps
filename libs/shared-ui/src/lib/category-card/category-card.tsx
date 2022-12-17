@@ -18,7 +18,7 @@ export function CategoryCard(props: CategoryCardProps) {
     <div className={styles['container']}>
       <Icon icon={icon} size={50} />
       <h1 className={styles['title']}>
-          {title}
+        {title}
       </h1>
       <h2 className={styles['description']}>
         {description}

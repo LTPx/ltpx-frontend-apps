@@ -12,8 +12,7 @@ export interface SelectProps {
 
 export function Select(props: SelectProps) {
   const { options } = props;
-  
-  // [{value: '1', text: 'Numero 1'}, {value: '2', text: 'Numero 2'}]
+
   return (
     <div className={styles['container']}>
       <select className={styles['style-select']} name="select">

@@ -10,7 +10,7 @@ export function Invoice(props: InvoiceProps) {
     <div className={styles['container']}>
       <div className={styles['print']}>
         <h2>
-          <NavLink to={'/user/payments/purchases'}>
+          <NavLink to={'/student/payments/purchases'}>
             <Icon icon='chevron-left' size={18}/>
           </NavLink> Invoice: #48484
         </h2>

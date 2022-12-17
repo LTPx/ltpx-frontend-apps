@@ -26,7 +26,7 @@ export function Purchases(props: PurchasesProps) {
             <td>PayPhone</td>
             <td>$39.99</td>
             <td>
-              <NavLink to='/user/payments/invoice'>
+              <NavLink to='/student/payments/invoice'>
                 See details
               </NavLink>
             </td>
@@ -37,7 +37,7 @@ export function Purchases(props: PurchasesProps) {
             <td>Credit Card</td>
             <td>$29.99</td>
             <td>
-              <NavLink to='/user/payments/invoice'>
+              <NavLink to='/student/payments/invoice'>
                 See details
               </NavLink>
             </td>
@@ -48,7 +48,7 @@ export function Purchases(props: PurchasesProps) {
             <td>Stripe</td>
             <td>$19.99</td>
             <td>
-              <NavLink to='/user/payments/invoice'>
+              <NavLink to='/student/payments/invoice'>
                 See details
               </NavLink>
             </td>

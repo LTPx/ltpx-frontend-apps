@@ -1,10 +1,12 @@
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-
-import ApplicationRoutes from './routes/routes';
+import { AppRouter } from './routes/app-router';
+import { BrowserRouter } from 'react-router-dom';
 
 export function App() {
   return (
-    <ApplicationRoutes />
+    <BrowserRouter>
+      <AppRouter />
+    </BrowserRouter>
   );
 }
 

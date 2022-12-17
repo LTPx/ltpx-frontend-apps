@@ -88,7 +88,7 @@ export function Checkout(props: CheckoutProps) {
             color={ColorsButton.primary}
             title='Pay'
             full={true}
-            link='/user/account'
+            link='/student/courses/learning'
           />
         </div>
       </div>

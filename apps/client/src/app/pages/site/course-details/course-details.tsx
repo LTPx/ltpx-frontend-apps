@@ -4,7 +4,6 @@ import styles from './course-details.module.scss';
 
 /* eslint-disable-next-line */
 export interface CourseDetailsProps {
-  id: string
 }
 
 export function CourseDetails(props: CourseDetailsProps) {

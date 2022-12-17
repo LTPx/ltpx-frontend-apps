@@ -6,6 +6,7 @@ import {
   AllCourses,
   ShoppingCart,
   Checkout,
+  CourseDetails
 } from "../pages/site/index";
 
 export const SiteRoutes = () => {
@@ -16,6 +17,7 @@ export const SiteRoutes = () => {
       <Route path="/login" element={<Login/>} />
       <Route path="/register" element={<Register/>} />
       <Route path="/courses" element={<AllCourses/>} />
+      <Route path="/course/:courseId/details" element={<CourseDetails/>} />
       <Route path="/cart" element={<ShoppingCart/>} />
       <Route path="/checkout" element={<Checkout/>} />
     </Routes>

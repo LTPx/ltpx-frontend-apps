@@ -1,7 +1,6 @@
 export * from './account/account';
 export * from './classes/classes';
 export * from './classes-calendar/classes-calendar';
-export * from './course-details/course-details';
 export * from './dashboard/dashboard';
 export * from './invoice/invoice';
 export * from './live-class/live-class';

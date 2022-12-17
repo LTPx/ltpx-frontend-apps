@@ -1,3 +1,5 @@
+export * from './lib/footer/footer';
+export * from './lib/category-card/category-card';
 export * from './lib/input-search/input-search';
 export * from './lib/select/select';
 export * from './lib/course-cart-item/course-cart-item';

@@ -39,11 +39,32 @@
   }
 }
 
+.categories-container {
+  padding: 5rem 14rem;
+  background-color: #fff;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+
+  h4 {
+    margin-top: 0px;
+    margin-bottom: 40px;
+  }
+}
+
 .popular-courses {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   gap: 1rem;
+}
+
+.category-content{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
 }
 
 .link {

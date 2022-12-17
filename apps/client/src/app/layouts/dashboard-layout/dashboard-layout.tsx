@@ -1,5 +1,4 @@
-import { Avatar, Header, Nav } from '@ltpx-frontend-apps/shared-ui';
-import Icon from 'libs/shared-ui/src/lib/icon/icon';
+import { Avatar, Header, Icon, Nav } from '@ltpx-frontend-apps/shared-ui';
 import { Outlet } from 'react-router-dom';
 import styles from './dashboard-layout.module.scss';
 
@@ -64,7 +63,6 @@ export function DashboardLayout(props: DashboardLayoutProps) {
       <div className={styles['content']}>
         <Outlet />
       </div>
-      <div className={styles['footer']}></div>
       <div className={styles['footer']}>LTPX 2022</div>
     </div>
   );

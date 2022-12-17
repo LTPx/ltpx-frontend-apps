@@ -1,4 +1,4 @@
-import { Cart, Header } from '@ltpx-frontend-apps/shared-ui';
+import { Cart, Footer, Header } from '@ltpx-frontend-apps/shared-ui';
 import { NavLink, Outlet } from 'react-router-dom';
 import styles from './app-layout.module.scss';
 
@@ -12,6 +12,21 @@ const links = [
   { title: 'Login', url: '/login'}
 ];
 
+const companyLinks = [
+  { text: 'Our Company', url: '/company'},
+  { text: 'About us', url: '/about'},
+  { text: 'Contact us', url: '/contact'},
+  { text: 'Community', url: '/community'},
+  { text: 'Blog', url: '/blog'},
+]
+
+const supportLinks = [
+  { text: 'Documentation', url: '/documentation'},
+  { text: 'Forums', url: '/forums'},
+  { text: 'Language Packs', url: '/languages'},
+  { text: 'Release', url: '/release'},
+]
+
 export function AppLayout(props: AppLayoutProps) {
   return (
     <div className={styles['container']}>
@@ -23,6 +38,7 @@ export function AppLayout(props: AppLayoutProps) {
       <div className="content">
         <Outlet />
       </div>
+      <Footer companyLinks={companyLinks} supportLinks={supportLinks} />
     </div>
   );
 }

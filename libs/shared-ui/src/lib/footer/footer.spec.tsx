@@ -1,10 +1,10 @@
 import { render } from '@testing-library/react';
 
-import Tabs from './tabs';
+import Footer from './footer';
 
-describe('Tabs', () => {
+describe('Footer', () => {
   it('should render successfully', () => {
-    const { baseElement } = render(<Tabs tabs={[]} />);
+    const { baseElement } = render(<Footer companyLinks={[]} supportLinks={[]}/>);
     expect(baseElement).toBeTruthy();
   });
 });

@@ -1,5 +1,5 @@
 import { buildCourses } from '@ltpx-frontend-apps/api';
-import { Button, ColorsButton, CourseCard } from '@ltpx-frontend-apps/shared-ui';
+import { Button, CategoryCard, CategoryCardProps, ColorsButton, CourseCard } from '@ltpx-frontend-apps/shared-ui';
 import { NavLink } from 'react-router-dom';
 import styles from './home.module.scss';
 
@@ -9,6 +9,16 @@ export interface HomeProps {}
 export function Home(props: HomeProps) {
 
   const popularCourses = buildCourses(8);
+  const categories = [
+    {icon: 'desktop', title: 'Design', description:'Over 960 courses'},
+    {icon: 'briefcase', title: 'Business', description:'Over 600 courses'},
+    {icon: 'browser', title: 'Software Development', description:'Over 320 courses'},
+    {icon: 'user', title: 'Personal Development', description:'Over 180 courses'},
+    {icon: 'picture', title: 'Photography', description:'Over 400 courses'},
+    {icon: 'guitar', title: 'Audio + Music', description:'Over 250 courses'},
+    {icon: 'marketing', title: 'Marketing', description:'Over 380 courses'},
+    {icon: 'wallet', title: 'Finance Accounting', description:'Over 100 courses'}
+  ]
 
   return (
     <div className={styles['container']}>
@@ -67,6 +77,22 @@ export function Home(props: HomeProps) {
           Browser All
         </NavLink>
       </div>
+      <div className={styles['categories-container']}>
+        <h2>Trending Categories</h2>
+        <h4 className='muted'>
+          Select your category and discover your perfect class 
+        </h4>
+        <div className={styles['category-content']}>
+          {categories.map((category, index)=>(
+            <CategoryCard 
+              icon={category.icon}
+              key={index}
+              title={category.title}
+              description={category.description}/>
+            ))}
+        </div>
+      </div>
+
     </div>
   );
 }

@@ -2,10 +2,28 @@ import { buildCourses } from '@ltpx-frontend-apps/api';
 import { CourseCard } from '@ltpx-frontend-apps/shared-ui';
 import { NavLink } from 'react-router-dom';
 import styles from './all-courses.module.scss';
+import { InputSearch } from '@ltpx-frontend-apps/shared-ui';
+import { Select } from '@ltpx-frontend-apps/shared-ui';
 
 /* eslint-disable-next-line */
 export interface AllCoursesProps {}
 const popularCourses = buildCourses(12);
+const categories = [
+  {value: 'design', text: 'Design'},
+  {value: 'business', text: 'Business'},
+  {value: 'software-development', text: 'Software Development'},
+  {value: 'personal-development', text: 'Personal Development'},
+  {value: 'photography', text: 'Photography'},
+  {value: 'audio', text: 'Audio + Music'},
+  {value: 'marketing', text: 'Marketing'},
+  {value: 'finance', text: 'Finance Accounting'},
+]
+
+const sortByOptions = [
+  {value: 'price', text: 'Price'},
+  {value: 'level', text: 'level'},
+  {value: 'rating', text: 'Rating'},
+]
 
 export function AllCourses(props: AllCoursesProps) {
   return (
@@ -19,17 +37,10 @@ export function AllCourses(props: AllCoursesProps) {
           <div className="text">
             We found 123 courses available for you
           </div>
-          <div className="filters">
-          <select name="categories">
-            <option value="value1">Art</option>
-            <option value="value2" selected>Education</option>
-            <option value="value3">Sports</option>
-          </select>
-          <select name="language">
-            <option value="value1">English</option>
-            <option value="value2" selected>Spanish</option>
-            <option value="value3">French</option>
-          </select>
+          <div className={styles['filters']}>
+            <InputSearch placeholder='Search Our Courses'/>
+            <Select options={categories} />
+            <Select options={sortByOptions} />
           </div>
         </div>
         <div className={styles['courses']}>

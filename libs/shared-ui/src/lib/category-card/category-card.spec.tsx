@@ -1,10 +1,10 @@
 import { render } from '@testing-library/react';
 
-import Tabs from './tabs';
+import CategoryCard from './category-card';
 
-describe('Tabs', () => {
+describe('CategoryCard', () => {
   it('should render successfully', () => {
-    const { baseElement } = render(<Tabs tabs={[]} />);
+    const { baseElement } = render(<CategoryCard />);
     expect(baseElement).toBeTruthy();
   });
 });

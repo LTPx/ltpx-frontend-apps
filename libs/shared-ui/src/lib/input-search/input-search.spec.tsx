@@ -1,10 +1,10 @@
 import { render } from '@testing-library/react';
 
-import Tabs from './tabs';
+import InputSearch from './input-search';
 
-describe('Tabs', () => {
+describe('InputSearch', () => {
   it('should render successfully', () => {
-    const { baseElement } = render(<Tabs tabs={[]} />);
+    const { baseElement } = render(<InputSearch />);
     expect(baseElement).toBeTruthy();
   });
 });

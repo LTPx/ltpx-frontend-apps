@@ -1,5 +1,4 @@
-import { Avatar, Header, Nav } from '@ltpx-frontend-apps/shared-ui';
-import Icon from 'libs/shared-ui/src/lib/icon/icon';
+import { Avatar, Header, Icon, Nav } from '@ltpx-frontend-apps/shared-ui';
 import { Outlet } from 'react-router-dom';
 import styles from './dashboard-layout.module.scss';
 

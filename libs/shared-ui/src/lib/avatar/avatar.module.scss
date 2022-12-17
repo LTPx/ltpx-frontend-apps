@@ -1,8 +1,17 @@
 .container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
   img {
     border-radius: 50%;
     object-fit: cover;
   }
+}
+
+.tiny {
+  width: 20px;
+  height: 20px;
 }
 
 .small {

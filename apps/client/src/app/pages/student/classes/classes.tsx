@@ -36,7 +36,7 @@ export function Classes(props: ClassesProps) {
                 title='Join Now'
                 color={ColorsButton.primary}
                 full={true}
-                link={`/user/classes/${classUser.id}`}
+                link={`/student/classes/${classUser.id}`}
               />
             </div>
           </ClassCard>

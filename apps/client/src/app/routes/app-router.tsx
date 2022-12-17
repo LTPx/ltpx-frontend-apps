@@ -6,16 +6,19 @@ import {
   DashboardLayout,
   PaymentsLayout
 } from "../layouts/index";
-import Account from "../pages/account/account";
-import ClassesCalendar from "../pages/classes-calendar/classes-calendar";
-import Classes from "../pages/classes/classes";
-import Courses, { StateCourses } from "../pages/courses/courses";
-import Dashboard from "../pages/dashboard/dashboard";
-import LiveClass from "../pages/live-class/live-class";
-import Settings from "../pages/settings/settings";
+import {
+  Account,
+  ClassesCalendar,
+  Classes,
+  Courses,
+  StateCourses,
+  Dashboard,
+  Invoice,
+  LiveClass,
+  Purchases,
+  Settings,
+} from "../pages/student/index";
 import { SiteRoutes } from "./site-routes";
-import { CoursesRoutes } from "./student/courses-routes";
-import { DashboardRoutes } from "./student/dashboard-routes";
 
 export const AppRouter = () => {
   return (
@@ -36,7 +39,8 @@ export const AppRouter = () => {
           <Route path=":classId" element={<LiveClass/>}/>
         </Route>
         <Route path="payments" element={<PaymentsLayout/>}>
-
+          <Route path="purchases" element={<Purchases/>}/>
+          <Route path="invoice" element={<Invoice/>}/>
         </Route>
         <Route path="settings" element={<Settings/>}/>
         <Route path="account" element={<Account/>}/>
@@ -44,17 +48,3 @@ export const AppRouter = () => {
     </Routes>
   )
 }
-
-
-// {
-//   path: 'week',
-//   element: <Classes />,
-// },
-// {
-//   path: 'calendar',
-//   element: <ClassesCalendar />,
-// },
-// {
-//   path: ':classId',
-//   element: <LiveClass />,
-// }

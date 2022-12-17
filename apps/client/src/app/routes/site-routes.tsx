@@ -1,10 +1,12 @@
 import { Route, Routes } from "react-router-dom";
-import AllCourses from "../pages/all-courses/all-courses";
-import Checkout from "../pages/checkout/checkout";
-import Home from "../pages/home/home";
-import Login from "../pages/login/login";
-import Register from "../pages/register/register";
-import ShoppingCart from "../pages/shopping-cart/shopping-cart";
+import {
+  Home,
+  Login,
+  Register,
+  AllCourses,
+  ShoppingCart,
+  Checkout,
+} from "../pages/site/index";
 
 export const SiteRoutes = () => {
   return (

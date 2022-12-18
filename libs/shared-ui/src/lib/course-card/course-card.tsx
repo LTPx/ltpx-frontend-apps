@@ -3,13 +3,13 @@ import styles from './course-card.module.scss';
 
 /* eslint-disable-next-line */
 export interface CourseCardProps {
-  image: string;
+  image?: string;
   category: string;
   title: string;
   price: number;
-  duration: number;
-  lessons: number;
-  stars: number;
+  duration?: number;
+  lessons?: number;
+  stars?: number;
 }
 
 export function CourseCard(props: CourseCardProps) {
@@ -35,7 +35,7 @@ export function CourseCard(props: CourseCardProps) {
           {Array.from(Array(stars).keys()).map((number, index)=>(
             <Icon key={index} icon={'star'} size={15} color='#eab308'/>
           ))}
-          {Array.from(Array(5 - stars).keys()).map((number, index)=>(
+          {Array.from(Array(5 - (stars || 0)).keys()).map((number, index)=>(
             <Icon icon={'star'} size={15} color='#888888'/>
           ))}
         </div>

@@ -1,3 +1,4 @@
+import { Course } from "@ltpx-frontend-apps/api";
 import { useReducer } from "react"
 import { User, UserState } from "../../interfaces/user"
 import { UserContext } from "./user-context"
@@ -12,6 +13,9 @@ const user = userIsAuthenticated ? userSession : { email: '', name: ''};
 const INITIAL_STATE: UserState = {
   user: user,
   isAuthenticated: userIsAuthenticated,
+  cart: {
+    courses: []
+  }
 }
 
 interface props {
@@ -29,11 +33,16 @@ export const UserProvider = ({children}: props) => {
     dispatch({type: 'logout', payload: false});
   }
 
+  const addCourseToCart = (course: Course) => {
+    dispatch({type: 'addToCart', payload: course});
+  }
+
   return (
     <UserContext.Provider value={{
       userState,
       setUser,
-      logoutApp
+      logoutApp,
+      addCourseToCart
     }}>
       {children}
     </UserContext.Provider>

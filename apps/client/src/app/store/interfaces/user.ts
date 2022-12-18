@@ -1,3 +1,4 @@
+import { Course } from "@ltpx-frontend-apps/api";
 export interface User {
   email: string;
   name: string;
@@ -5,5 +6,8 @@ export interface User {
 
 export interface UserState {
   user: User;
-  isAuthenticated: boolean
+  isAuthenticated: boolean;
+  cart: {
+    courses: Course[];
+  }
 }

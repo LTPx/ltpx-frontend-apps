@@ -22,7 +22,7 @@ const linksAccount = [
 export interface HeaderAppProps {}
 
 export function HeaderApp(props: HeaderAppProps) {
-  const { user, isAuthenticated } = useUser();
+  const { user, isAuthenticated, products } = useUser();
 
   const linksNotAccount = mainLinks.concat(authLinks);
   const linksWithAccount = mainLinks.concat(linksAccount);
@@ -49,7 +49,7 @@ export function HeaderApp(props: HeaderAppProps) {
         <Header links={linksNotAccount}>
           <div className={styles['actions']}>
             <NavLink to={'cart'}>
-              <Cart amount={2}/>
+              <Cart amount={products.length}/>
             </NavLink>
           </div>
         </Header>

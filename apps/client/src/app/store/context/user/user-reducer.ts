@@ -1,9 +1,12 @@
+import { Course } from "@ltpx-frontend-apps/api";
 import { User, UserState } from "../../interfaces/user";
 
 type UserAction =
   | { type: 'setUser', payload: User }
   | { type: 'login', payload: boolean }
   | { type: 'logout', payload: boolean }
+  | { type: 'addToCart', payload: Course }
+  | { type: 'removeFromCart', payload: Course }
 
 export const userReducer = (state: UserState, action: UserAction): UserState => {
 
@@ -20,6 +23,13 @@ export const userReducer = (state: UserState, action: UserAction): UserState => 
       return {
         ...state,
         isAuthenticated: false
+      }
+    case 'addToCart':
+      return {
+        ...state,
+        cart: {
+          courses: state.cart.courses.concat([action.payload])
+        }
       }
     default:
       return state;

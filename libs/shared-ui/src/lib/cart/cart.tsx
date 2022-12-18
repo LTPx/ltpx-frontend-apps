@@ -8,11 +8,12 @@ export interface CartProps {
 
 export function Cart(props: CartProps) {
   const { amount } = props;
+
   return (
     <div className={styles['container']}>
-      { amount && (amount > 0) && (
+      { amount ? (
         <div className={styles['badged']}>{amount}</div>
-      )}
+      ) : null}
       <Icon icon='shopping-cart' size={20}/>
     </div>
   );

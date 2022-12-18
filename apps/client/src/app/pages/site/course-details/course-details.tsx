@@ -1,5 +1,7 @@
+import { buildCourses, Course } from '@ltpx-frontend-apps/api';
 import { Avatar, AvatarSize, Button, ColorsButton, Rating, Tabs, Icon } from '@ltpx-frontend-apps/shared-ui';
 import { useParams } from 'react-router-dom';
+import { useUser } from '../../../hooks/useUser';
 import styles from './course-details.module.scss';
 
 /* eslint-disable-next-line */
@@ -8,6 +10,12 @@ export interface CourseDetailsProps {
 
 export function CourseDetails(props: CourseDetailsProps) {
   const { courseId } = useParams();
+  const { addCourseToCart } = useUser();
+  const course: Course = buildCourses(1)[0];
+
+  const addToCart = () => {
+    addCourseToCart(course);
+  }
 
   const tabs = [
     {
@@ -106,7 +114,7 @@ export function CourseDetails(props: CourseDetailsProps) {
               </div>
             </div>
             <div className={styles['actions']}>
-              <Button title='BUY NOW' color={ColorsButton.primary} full={true} link='/cart'/>
+              <Button title='BUY NOW' color={ColorsButton.primary} full={true} link='/cart' onClick={addToCart} />
               <Button title='ENROLL' color={ColorsButton.secondary} full={true} link='/login'/>
             </div>
             <div className={styles['details']}>

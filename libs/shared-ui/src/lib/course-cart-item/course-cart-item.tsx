@@ -3,13 +3,13 @@ import styles from './course-cart-item.module.scss';
 
 /* eslint-disable-next-line */
 export interface CourseCartItemProps {
-  image: string;
+  image?: string;
   category: string;
   title: string;
   price: number;
-  duration: number;
-  lessons: number;
-  stars: number;
+  duration?: number;
+  lessons?: number;
+  stars?: number;
   children?: any;
 }
 
@@ -38,7 +38,7 @@ export function CourseCartItem(props: CourseCartItemProps) {
             {Array.from(Array(stars).keys()).map((number, index)=>(
               <Icon key={index} icon={'star'} size={15} color='#eab308'/>
             ))}
-            {Array.from(Array(5 - stars).keys()).map((number, index)=>(
+            {Array.from(Array(5 - (stars || 0)).keys()).map((number, index)=>(
               <Icon icon={'star'} size={15} color='#888888'/>
             ))}
           </div>

@@ -6,7 +6,7 @@ export const useUser = () => {
 
   return {
     user: userState.user,
-    isLogged: userState.logged,
+    isAuthenticated: userState.isAuthenticated,
     setUser
   }
 }

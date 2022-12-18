@@ -27,11 +27,11 @@ export function Login(props: LoginProps) {
                     .required('Password is required')
     }),
     onSubmit: async data => {
-      console.log(data);
       const user = {
         email: data.email,
         name: 'Guest'
       }
+      localStorage.setItem('user', JSON.stringify(user));
       try{
         navigate('/student/dashboard');
         setUser(user);

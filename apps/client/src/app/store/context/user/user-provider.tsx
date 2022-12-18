@@ -3,12 +3,15 @@ import { User, UserState } from "../../interfaces/user"
 import { UserContext } from "./user-context"
 import { userReducer } from "./user-reducer"
 
+const userInSession = sessionStorage.getItem('user') || '';
+const isAuthenticatedSession = sessionStorage.getItem('isAuthenticated') || 'false';
+const userSession = JSON.parse(userInSession);
+const userIsAuthenticated = JSON.parse(isAuthenticatedSession);
+const user = userIsAuthenticated ? userSession : { email: '', name: ''};
+
 const INITIAL_STATE: UserState = {
-  user: {
-    email: '',
-    name: ''
-  },
-  logged: false,
+  user: user,
+  isAuthenticated: userIsAuthenticated,
 }
 
 interface props {

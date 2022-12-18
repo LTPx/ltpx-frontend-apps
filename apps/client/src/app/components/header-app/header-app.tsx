@@ -6,15 +6,16 @@ import styles from './header-app.module.scss';
 const links = [
   { title: 'Home', url: '/home'},
   { title: 'Courses', url: '/courses'},
-  { title: 'Become a teacher', url: '/register'},
-  { title: 'Login', url: '/login'}
+  { title: 'Become a teacher', url: '/register-teacher'},
+  { title: 'Login', url: '/login'},
+  { title: 'Register', url: '/register'},
 ];
 
 /* eslint-disable-next-line */
 export interface HeaderAppProps {}
 
 export function HeaderApp(props: HeaderAppProps) {
-  const { user, isLogged } = useUser();
+  const { user, isAuthenticated } = useUser();
 
   return (
     <Header links={links}>
@@ -22,7 +23,7 @@ export function HeaderApp(props: HeaderAppProps) {
         <NavLink to={'cart'}>
           <Cart amount={2}/>
         </NavLink>
-        { isLogged && (
+        { isAuthenticated && (
           <>
             <Icon icon='notification' size={22}></Icon>
             <h4>{user.name}</h4>

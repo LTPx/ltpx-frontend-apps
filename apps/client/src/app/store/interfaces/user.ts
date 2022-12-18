@@ -5,5 +5,5 @@ export interface User {
 
 export interface UserState {
   user: User;
-  logged: boolean
+  isAuthenticated: boolean
 }

@@ -6,7 +6,8 @@ import {
   AllCourses,
   ShoppingCart,
   Checkout,
-  CourseDetails
+  CourseDetails,
+  RegisterTeacher
 } from "../pages/site/index";
 
 export const SiteRoutes = () => {
@@ -16,6 +17,7 @@ export const SiteRoutes = () => {
       <Route path="/home" element={<Home/>} />
       <Route path="/login" element={<Login/>} />
       <Route path="/register" element={<Register/>} />
+      <Route path="/register-teacher" element={<RegisterTeacher/>} />
       <Route path="/courses" element={<AllCourses/>} />
       <Route path="/course/:courseId/details" element={<CourseDetails/>} />
       <Route path="/cart" element={<ShoppingCart/>} />

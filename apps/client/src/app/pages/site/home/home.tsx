@@ -34,7 +34,7 @@ export function Home(props: HomeProps) {
                 color={ColorsButton.primary}
                 title="GET STARTED"
                 outline={true}
-                link='/login'
+                link='/register'
               />
               <Button
                 color={ColorsButton.primary}
@@ -80,11 +80,11 @@ export function Home(props: HomeProps) {
       <div className={styles['categories-container']}>
         <h2>Trending Categories</h2>
         <h4 className='muted'>
-          Select your category and discover your perfect class 
+          Select your category and discover your perfect class
         </h4>
         <div className={styles['category-content']}>
           {categories.map((category, index)=>(
-            <CategoryCard 
+            <CategoryCard
               icon={category.icon}
               key={index}
               title={category.title}

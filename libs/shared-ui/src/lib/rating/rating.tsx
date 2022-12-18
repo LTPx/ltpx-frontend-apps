@@ -15,7 +15,7 @@ export function Rating(props: RatingProps) {
         <Icon key={index} icon={'star'} size={15} color='#eab308'/>
       ))}
       {Array.from(Array(5 - stars).keys()).map((number, index)=>(
-        <Icon icon={'star'} size={15} color='#888888'/>
+        <Icon key={index} icon={'star'} size={15} color='#888888'/>
       ))}
       <h5>({reviewers} reviewers)</h5>
   </div>

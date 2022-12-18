@@ -1,3 +1,4 @@
+import { NavLink } from 'react-router-dom';
 import css from './button.module.scss';
 
 export enum TypeButton {
@@ -23,6 +24,7 @@ export interface ButtonProps {
   disabled?: boolean;
   outline?: boolean;
   full?: boolean;
+  link?: string;
 }
 
 export function Button(props: ButtonProps) {
@@ -35,6 +37,7 @@ export function Button(props: ButtonProps) {
     disabled,
     outline,
     full,
+    link,
     ...other
   } = props;
 
@@ -50,15 +53,27 @@ export function Button(props: ButtonProps) {
   const btnClassFull = full ? css['btn-full'] : '';
   const btnClass = outline ? `${css['btn']} ${btnClassOutline} ${btnClassFull}` : `${css['btn']} ${colorsClasses[selectedColor]} ${btnClassFull}`;
 
+  const Button = () => {
+    return (
+      <button className={`${btnClass}`}
+        type={type}
+        onClick={onClick}
+        disabled={disabled}
+        {...other}
+      >
+        {title}
+      </button>
+    )
+  }
+
   return (
-    <button className={`${className} ${btnClass}`}
-      type={type}
-      onClick={onClick}
-      disabled={disabled}
-      {...other}
-    >
-      {title}
-    </button>
+    <div className={`${className}`}>
+      { link ? (
+        <NavLink to={link}>
+          <Button></Button>
+        </NavLink>
+      ) : <Button></Button>}
+    </div>
   );
 }
 

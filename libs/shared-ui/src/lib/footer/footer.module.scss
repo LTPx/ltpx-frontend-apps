@@ -1,0 +1,81 @@
+.container {
+  background-color: #0a0662;
+  color: white;
+
+  .footer-content{
+    display: flex;
+    justify-content: space-around;
+    border-bottom: 1px solid #d8d8d8;
+    padding: 4rem 0;
+
+    .company-information {
+      display: flex;
+      flex-direction: column;
+      
+      .icon-content {
+        font-size: 20px;
+        font-weight: bold;
+        padding-bottom: 10px;
+      }
+      
+      .information-one {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        color: #8887b2;
+        font-size: 14px;
+        max-width: 20rem;
+      }
+  
+      .social-networks {
+        display: flex;
+        gap: 1rem;
+        margin-top: 1.5rem;
+
+        .social {
+          cursor: pointer;
+          border-radius: 50%;
+          padding: 0.5rem;
+          border-width: 1px;
+          border-style: solid;
+          border-color: white;
+        }
+      }
+    }
+
+    .site-links {
+      display: flex;
+      gap: 4rem;
+      
+      .links {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+  
+        .title {
+          font-size: 16px;
+          font-weight: bold;
+        }
+  
+        .link {
+          font-size: 14px;
+          color: #8887b2;
+          text-decoration: none;
+        }
+      }
+    }
+  }
+
+  .footer-end {
+    color: #8887b2;
+    padding: 3rem 0;
+    display: flex;
+    justify-content: center;
+
+    .information-end-container {
+      display: flex;
+      gap: 2rem;
+    }
+  }
+}
+

@@ -1,11 +1,11 @@
 .container {
   display: grid;
-  grid-template-columns: 260px 1fr 200px;
+  grid-template-columns: 260px 1fr;
   grid-template-rows: auto 1fr auto;
   // grid-gap: 12px;
   grid-template-areas:
     "header header header"
-    "nav content side"
+    "nav content content"
     "footer footer footer";
   height: 100vh;
 }
@@ -20,11 +20,19 @@
   background-color: #f7f7f7;
   padding: 30px;
   border-right: 1px solid #ebecef;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
-.actions {
+.logout {
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 2rem;
+  background-color: #fff;
+  cursor: pointer;
+
+  svg {
+    margin: 0 20px;
+  }
 }
+

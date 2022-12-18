@@ -1,10 +1,12 @@
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-
-import ApplicationRoutes from './routes/routes';
+import { AppRouter } from './routes/app-router';
+import { UserProvider } from './store/context/user/user-provider';
 
 export function App() {
   return (
-    <ApplicationRoutes />
+    <UserProvider>
+      <AppRouter />
+    </UserProvider>
   );
 }
 

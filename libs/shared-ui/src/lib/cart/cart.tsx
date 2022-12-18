@@ -10,7 +10,9 @@ export function Cart(props: CartProps) {
   const { amount } = props;
   return (
     <div className={styles['container']}>
-      <div className={styles['badged']}>{amount}</div>
+      { amount && (amount > 0) && (
+        <div className={styles['badged']}>{amount}</div>
+      )}
       <Icon icon='shopping-cart' size={20}/>
     </div>
   );

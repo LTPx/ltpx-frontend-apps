@@ -1,7 +1,6 @@
 import { Avatar, Cart, Header, Icon } from '@ltpx-frontend-apps/shared-ui';
-import { useContext } from 'react';
 import { NavLink } from 'react-router-dom';
-import { UserContext } from '../../store/context/user/user-context';
+import { useUser } from '../../hooks/useUser';
 import styles from './header-app.module.scss';
 
 const links = [
@@ -15,8 +14,7 @@ const links = [
 export interface HeaderAppProps {}
 
 export function HeaderApp(props: HeaderAppProps) {
-  const { userState } = useContext(UserContext);
-  const { logged } = userState;
+  const { user, isLogged } = useUser();
 
   return (
     <Header links={links}>
@@ -24,9 +22,10 @@ export function HeaderApp(props: HeaderAppProps) {
         <NavLink to={'cart'}>
           <Cart amount={2}/>
         </NavLink>
-        { logged && (
+        { isLogged && (
           <>
             <Icon icon='notification' size={22}></Icon>
+            <h4>{user.name}</h4>
             <Avatar image='https://images.unsplash.com/photo-1669563306078-4c107b67d125?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=3387&q=80'/>
           </>
         )}

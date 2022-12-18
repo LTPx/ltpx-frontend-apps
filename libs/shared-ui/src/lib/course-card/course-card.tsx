@@ -36,7 +36,7 @@ export function CourseCard(props: CourseCardProps) {
             <Icon key={index} icon={'star'} size={15} color='#eab308'/>
           ))}
           {Array.from(Array(5 - (stars || 0)).keys()).map((number, index)=>(
-            <Icon icon={'star'} size={15} color='#888888'/>
+            <Icon key= {index} icon={'star'} size={15} color='#888888'/>
           ))}
         </div>
         <div className={styles['info']}>

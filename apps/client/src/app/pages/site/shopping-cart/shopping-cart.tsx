@@ -1,5 +1,6 @@
 import { buildCourses } from '@ltpx-frontend-apps/api';
 import { Button, ColorsButton, CourseCartItem } from '@ltpx-frontend-apps/shared-ui';
+import { useUser } from '../../../hooks/useUser';
 import styles from './shopping-cart.module.scss';
 
 /* eslint-disable-next-line */
@@ -7,7 +8,7 @@ export interface ShoppingCartProps {}
 
 export function ShoppingCart(props: ShoppingCartProps) {
 
-  const products = buildCourses(2);
+  const { products } = useUser();
 
   const subtotal = () => {
     let total = 0;
@@ -36,17 +37,23 @@ export function ShoppingCart(props: ShoppingCartProps) {
           ))}
         </div>
         <div className={styles['checkout']}>
-          <h3>Subtotal</h3>
-          <h2>${subtotal()}</h2>
-          <Button
-            color={ColorsButton.primary}
-            title='Checkout'
-            full={true}
-            link='/checkout'
-          />
+          { products.length ? (
+            <>
+              <h3>Subtotal</h3>
+              <h2>${subtotal()}</h2>
+              <Button
+                color={ColorsButton.primary}
+                title='Checkout'
+                full={true}
+                link='/checkout'
+              />
+            </>
+          ) : null}
         </div>
       </div>
-
+      { products.length === 0 && (
+        <h3>Your cart is empty</h3>
+      )}
     </div>
   );
 }

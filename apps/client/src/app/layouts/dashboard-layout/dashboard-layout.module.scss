@@ -20,5 +20,19 @@
   background-color: #f7f7f7;
   padding: 30px;
   border-right: 1px solid #ebecef;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.logout {
+  display: flex;
+  align-items: center;
+  background-color: #fff;
+  cursor: pointer;
+
+  svg {
+    margin: 0 20px;
+  }
 }
 

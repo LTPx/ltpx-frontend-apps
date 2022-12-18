@@ -16,6 +16,11 @@ export const userReducer = (state: UserState, action: UserAction): UserState => 
         user: action.payload,
         isAuthenticated: true
       }
+    case 'logout':
+      return {
+        ...state,
+        isAuthenticated: false
+      }
     default:
       return state;
   }

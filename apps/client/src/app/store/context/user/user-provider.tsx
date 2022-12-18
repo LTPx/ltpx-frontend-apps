@@ -25,10 +25,15 @@ export const UserProvider = ({children}: props) => {
     dispatch({type: 'setUser', payload: user});
   }
 
+  const logoutApp = () => {
+    dispatch({type: 'logout', payload: false});
+  }
+
   return (
     <UserContext.Provider value={{
       userState,
-      setUser
+      setUser,
+      logoutApp
     }}>
       {children}
     </UserContext.Provider>

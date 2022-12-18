@@ -3,11 +3,15 @@ import { Button, ColorsButton, Input, TypeButton } from '@ltpx-frontend-apps/sha
 import { useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
+import { useContext } from 'react';
+import { UserContext } from '../../../store/context/user/user-context';
 
 /* eslint-disable-next-line */
 export interface LoginProps {}
 
 export function Login(props: LoginProps) {
+  const { setUser } = useContext(UserContext);
+
   const navigate = useNavigate();
 
   const formik = useFormik({
@@ -24,8 +28,13 @@ export function Login(props: LoginProps) {
     }),
     onSubmit: async data => {
       console.log(data);
+      const user = {
+        email: data.email,
+        name: 'Guest'
+      }
       try{
-        navigate('/user/dashboard');
+        navigate('/student/dashboard');
+        setUser(user);
         //TODO: integrate API
       }
       catch(error){

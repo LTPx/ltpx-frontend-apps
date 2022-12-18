@@ -1,16 +1,10 @@
-import { Avatar, Header, Icon, Nav } from '@ltpx-frontend-apps/shared-ui';
+import { Nav } from '@ltpx-frontend-apps/shared-ui';
 import { Outlet } from 'react-router-dom';
+import HeaderApp from '../../components/header-app/header-app';
 import styles from './dashboard-layout.module.scss';
 
 /* eslint-disable-next-line */
 export interface DashboardLayoutProps {}
-
-const headerLinks = [
-  { title: 'Home', url: '/home'},
-  { title: 'Courses', url: '/courses'},
-  { title: 'Become a teacher', url: '/register'},
-  { title: 'Login', url: '/login'}
-];
 
 const sidebarOptions = [
   {
@@ -68,12 +62,7 @@ export function DashboardLayout(props: DashboardLayoutProps) {
 
   return (
     <div className={styles['container']}>
-      <Header links={headerLinks}>
-        <div className={styles['actions']}>
-          <Icon icon='notification' size={22}></Icon>
-          <Avatar image='https://images.unsplash.com/photo-1669563306078-4c107b67d125?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=3387&q=80'/>
-        </div>
-      </Header>
+      <HeaderApp/>
       <div className={styles['navbar']}>
         <Nav links={sidebarOptions}/>
       </div>

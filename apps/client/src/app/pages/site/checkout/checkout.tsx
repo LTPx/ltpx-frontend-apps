@@ -1,4 +1,5 @@
 import { Button, ColorsButton } from '@ltpx-frontend-apps/shared-ui';
+import { NavLink } from 'react-router-dom';
 import { useUser } from '../../../hooks/useUser';
 import styles from './checkout.module.scss';
 
@@ -83,7 +84,12 @@ export function Checkout(props: CheckoutProps) {
               <h4>${subtotal()}</h4>
             </div>
           </div>
-          <p>By completing your purchase you agree to these Terms of Service.</p>
+          <div className={styles['terms-conditions']}>
+            <input type="checkbox" id="accept" value="second_checkbox" />
+            <NavLink to='/terms-and-conditions' target={'blank'}>
+              <p>By completing your purchase you agree to these Terms of Service.</p>
+            </NavLink>
+          </div>
           <Button
             color={ColorsButton.primary}
             title='Pay'

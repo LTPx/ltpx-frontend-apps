@@ -1,4 +1,4 @@
-import { Button, ColorsButton, Icon } from '@ltpx-frontend-apps/shared-ui';
+import { Brand, Button, ColorsButton, Icon } from '@ltpx-frontend-apps/shared-ui';
 import { NavLink } from 'react-router-dom';
 import styles from './invoice.module.scss';
 
@@ -18,7 +18,7 @@ export function Invoice(props: InvoiceProps) {
       </div>
       <div className={styles['invoice']}>
         <div className={styles['header']}>
-          <div className={styles['brand']}>LTPX</div>
+          <Brand/>
           <div className={styles['invoice-number']}>Invoice# 48484</div>
         </div>
         <div className={styles['dates']}>

@@ -1,4 +1,5 @@
 export * from './lib/buy-course-card/buy-course-card';
+export * from './lib/brand/brand';
 export * from './lib/footer/footer';
 export * from './lib/category-card/category-card';
 export * from './lib/input-search/input-search';

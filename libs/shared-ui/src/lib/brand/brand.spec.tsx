@@ -1,10 +1,10 @@
 import { render } from '@testing-library/react';
 
-import AllCourses from './all-courses';
+import Brand from './brand';
 
-describe('AllCourses', () => {
+describe('Brand', () => {
   it('should render successfully', () => {
-    const { baseElement } = render(<AllCourses />);
+    const { baseElement } = render(<Brand />);
     expect(baseElement).toBeTruthy();
   });
 });

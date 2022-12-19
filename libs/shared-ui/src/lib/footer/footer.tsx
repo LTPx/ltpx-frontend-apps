@@ -1,4 +1,5 @@
 import { NavLink } from 'react-router-dom';
+import Brand from '../brand/brand';
 import Icon from '../icon/icon';
 import styles from './footer.module.scss';
 
@@ -18,7 +19,7 @@ export function Footer(props: FooterProps) {
       <div className={styles['footer-content']}>
         <div className={styles['company-information']}>
           <div className={styles['icon-content']}>
-            <label>LTPX</label>
+            <Brand negativeSpace={true}/>
           </div>
           <div className={styles['information-one']}>
             <label>

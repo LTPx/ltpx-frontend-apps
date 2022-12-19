@@ -1,5 +1,5 @@
 import { Course } from "@ltpx-frontend-apps/api";
-import { User, UserState } from "../../interfaces/user";
+import { User, UserRoles, UserState } from "../../interfaces/user";
 
 type UserAction =
   | { type: 'setUser', payload: User }
@@ -17,7 +17,7 @@ export const userReducer = (state: UserState, action: UserAction): UserState => 
       return {
         ...state,
         user: action.payload,
-        isAuthenticated: true
+        isAuthenticated: true,
       }
     case 'logout':
       return {

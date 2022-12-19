@@ -66,7 +66,6 @@ export function DashboardLayout(props: DashboardLayoutProps) {
   const logout = () => {
     sessionStorage.setItem('user', '');
     sessionStorage.setItem('isAuthenticated', 'false');
-    setUser({name:'', email:''});
     logoutApp();
     navigate('/home');
   }

@@ -1,9 +1,11 @@
+import Button from '../button/button';
 import Icon from '../icon/icon';
 import Rating from '../rating/rating';
 import styles from './course-cart-item.module.scss';
 
 /* eslint-disable-next-line */
 export interface CourseCartItemProps {
+  id: string;
   image?: string;
   category: string;
   title: string;
@@ -12,10 +14,12 @@ export interface CourseCartItemProps {
   lessons?: number;
   stars?: number;
   children?: any;
+  onClickRemove?: any;
 }
 
 export function CourseCartItem(props: CourseCartItemProps) {
   const {
+    id,
     image,
     category,
     title,
@@ -23,7 +27,8 @@ export function CourseCartItem(props: CourseCartItemProps) {
     duration,
     lessons,
     stars,
-    children
+    children,
+    onClickRemove
   } = props;
 
   const totalStarts = stars || 0;
@@ -38,15 +43,15 @@ export function CourseCartItem(props: CourseCartItemProps) {
           </span>
           <h3 className={styles['title']}>{title}</h3>
           <div className={styles['stars-rating']}>
-            <Rating stars={totalStarts}/>
+            <Rating stars={totalStarts} />
           </div>
           <div className={styles['info']}>
             <div className={styles['info-item']}>
-              <Icon icon={'university'} size={15}/>
+              <Icon icon={'university'} size={15} />
               {lessons} lessons
             </div>
             <div className={styles['info-item']}>
-              <Icon icon={'clock'} size={15}/>
+              <Icon icon={'clock'} size={15} />
               {duration} min
             </div>
           </div>
@@ -54,12 +59,20 @@ export function CourseCartItem(props: CourseCartItemProps) {
       </div>
       <div className={styles['price-actions']}>
         <div className={styles['actions']}>
-          <h4>Remove</h4>
-          <h4>Add to favorites</h4>
+          <Button
+            title='Remove'
+            onClick={() => {onClickRemove(id)}}
+            outline={true}
+          />
+          {/* <Button
+            title='♥ Add to Favorites'
+            onClick={onClickRemove}
+            outline={true}
+          /> */}
           {children}
         </div>
         <div className={styles['price']}>
-          <h4>${price}</h4>
+          <h3>${price}</h3>
         </div>
       </div>
     </div>

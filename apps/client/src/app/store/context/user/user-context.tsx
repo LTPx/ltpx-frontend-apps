@@ -7,6 +7,7 @@ export type UserContextProps = {
   setUser: (user: User) => void;
   logoutApp: () => void;
   addCourseToCart: (course: Course) => void;
+  removeCourseFromCart: (id: string) => void;
 }
 
 export const UserContext = createContext<UserContextProps>({} as UserContextProps);

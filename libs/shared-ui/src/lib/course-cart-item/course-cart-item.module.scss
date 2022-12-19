@@ -58,13 +58,9 @@
     align-items: center;
     gap: 3rem;
 
-    .price {
-      // color: blue;
-    }
-
     .actions {
-      color: blue;
-      text-align: end;
+      display: flex;
+      gap: 1rem
     }
   }
 }

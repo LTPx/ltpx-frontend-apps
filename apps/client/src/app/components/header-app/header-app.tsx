@@ -33,7 +33,7 @@ export function HeaderApp(props: HeaderAppProps) {
         <Header links={linksWithAccount}>
           <div className={styles['actions']}>
             <NavLink to={'cart'}>
-              <Cart/>
+              <Cart amount={products.length}/>
             </NavLink>
             { isAuthenticated && (
               <>

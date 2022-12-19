@@ -7,7 +7,7 @@ export interface ShoppingCartProps {}
 
 export function ShoppingCart(props: ShoppingCartProps) {
 
-  const { products, removeCourseFromCart } = useUser();
+  const { isAuthenticated, products, removeCourseFromCart } = useUser();
 
   const handleRemoveItem = (id: string) => {
     removeCourseFromCart(id);
@@ -50,7 +50,7 @@ export function ShoppingCart(props: ShoppingCartProps) {
                 color={ColorsButton.primary}
                 title='Checkout'
                 full={true}
-                link='/checkout'
+                link={isAuthenticated ? '/checkout' : '/register' }
               />
             </>
           ) : null}

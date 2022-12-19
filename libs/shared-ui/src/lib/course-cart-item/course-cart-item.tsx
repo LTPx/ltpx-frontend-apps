@@ -1,4 +1,5 @@
 import Icon from '../icon/icon';
+import Rating from '../rating/rating';
 import styles from './course-cart-item.module.scss';
 
 /* eslint-disable-next-line */
@@ -25,6 +26,8 @@ export function CourseCartItem(props: CourseCartItemProps) {
     children
   } = props;
 
+  const totalStarts = stars || 0;
+
   return (
     <div className={styles['container']}>
       <div className={styles['card-item']}>
@@ -34,13 +37,8 @@ export function CourseCartItem(props: CourseCartItemProps) {
             {category}
           </span>
           <h3 className={styles['title']}>{title}</h3>
-          <div className="stars">
-            {Array.from(Array(stars).keys()).map((number, index)=>(
-              <Icon key={index} icon={'star'} size={15} color='#eab308'/>
-            ))}
-            {Array.from(Array(5 - (stars || 0)).keys()).map((number, index)=>(
-              <Icon icon={'star'} size={15} color='#888888'/>
-            ))}
+          <div className={styles['stars-rating']}>
+            <Rating stars={totalStarts}/>
           </div>
           <div className={styles['info']}>
             <div className={styles['info-item']}>

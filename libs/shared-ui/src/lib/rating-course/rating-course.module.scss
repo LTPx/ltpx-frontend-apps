@@ -1,18 +1,39 @@
 .container {
   // background-color: red;
+  display: flex;
+  gap: 1rem;
 
   .total-rating {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 2rem 3rem;
+    border: 1px solid #d4d4d4;
 
+    .score {
+      font-size: 35px;
+      font-weight: bold;
+    }
+
+    label {
+      font-size: 14px;
+      color: #302e52;
+    }
   } 
   
-  .rating-bar {
-    display: flex;
-    flex-grow: 1;
-
-    .bar {
-      width: 250px;
-      padding-right: 1rem;
+  .rating-content {
+    padding: 1rem 1rem;
+    .rating-bar {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      padding-bottom: 1rem;
+  
+      .bar {
+        width: 250px;
+      } 
     }
-    
   }
+
 }

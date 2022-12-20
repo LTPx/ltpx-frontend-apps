@@ -11,7 +11,7 @@ export default Story;
 export const Default = () => {
   return (
     <div>
-      <Rating stars={3} reviewers={3}/>
+      <Rating stars={3}/>
     </div>
   )
 };

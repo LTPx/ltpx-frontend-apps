@@ -12,13 +12,15 @@ export interface Tab {
 export interface TabsProps {
   tabs: Array<Tab>;
   isNav?: boolean;
+  onClickTab?: (indexTab: number) => void;
 }
 
 export function Tabs(props: TabsProps) {
-  const { tabs, isNav } = props;
+  const { tabs, isNav, onClickTab } = props;
   const [indexSelected, setIndexSelected] = useState(0);
   const selectTab = (index: number) => {
-    setIndexSelected(index)
+    setIndexSelected(index);
+    onClickTab && onClickTab(index);
   }
 
   return (

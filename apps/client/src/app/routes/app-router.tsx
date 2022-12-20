@@ -1,4 +1,5 @@
 import { Routes, Route, BrowserRouter } from "react-router-dom";
+import { useTranslation } from 'react-i18next';
 import {
   AppLayout,
   ClassesLayout,
@@ -72,41 +73,43 @@ const linksDashboardStudent = [
   }
 ];
 
-const linksDashboardTeacher = [
-  {
-    title: 'Dashboard',
-    url: 'dashboard',
-    icon: {
-      icon: 'store',
-      size: 20,
-    }
-  },
-  {
-    title: 'Courses',
-    url: 'courses',
-    icon: {
-      icon: 'university',
-      size: 20,
-    }
-  },
-  {
-    title: 'Earnings',
-    url: 'earnings',
-    icon: {
-      icon: 'wallet',
-      size: 20,
-    }
-  },
-  {
-    title: 'My Account',
-    url: 'account',
-    icon: {
-      icon: 'user',
-      size: 20,
-    }
-  }
-];
 export const AppRouter = () => {
+  const { t } = useTranslation();
+  const linksDashboardTeacher = [
+    {
+      title: t('dashboard.dashboard'),
+      url: 'dashboard',
+      icon: {
+        icon: 'store',
+        size: 20,
+      }
+    },
+    {
+      title: t('dashboard.courses'),
+      url: 'courses',
+      icon: {
+        icon: 'university',
+        size: 20,
+      }
+    },
+    {
+      title: t('dashboard.earnings'),
+      url: 'earnings',
+      icon: {
+        icon: 'wallet',
+        size: 20,
+      }
+    },
+    {
+      title: t('dashboard.account'),
+      url: 'account',
+      icon: {
+        icon: 'user',
+        size: 20,
+      }
+    }
+  ];
+
   return (
     <BrowserRouter>
       <Routes>

@@ -26,9 +26,30 @@ export function RatingCourse(props: RatingCourseProps) {
     return result;
   };
 
+  const totalStars = () => {
+    let total = 0;
+    ratings.forEach((rating) => {
+      total = total + rating.reviewersNumber * rating.starsNumber;
+    });
+    return total;
+  };
+
   const roundStars = (starsNumber: number) => {
     return Math.round(starsNumber);
   };
+
+  const buildOptions = () => {
+    const stars = totalStars();
+    return ratings.map((rating) => {
+      return {
+        percentage: (rating.starsNumber * rating.reviewersNumber * 100) / stars,
+        starts: rating.starsNumber,
+        text: rating.reviewersNumber.toString(),
+      };
+    });
+  };
+
+  const options = buildOptions();
 
   return (
     <div className={styles['container']}>
@@ -38,17 +59,14 @@ export function RatingCourse(props: RatingCourseProps) {
         <Rating stars={roundStars(calculateScore())}></Rating>
       </div>
       <div className={styles['rating-content']}>
-        {ratings.map((rating, index) => (
+        {options.map((option, index) => (
           <div className={styles['rating-bar']} key={index}>
             <ProgressBar
-              percentage={100}
+              percentage={option.percentage}
               className={styles['bar']}
               withoutText={true}
             />
-            <Rating
-              stars={rating.starsNumber}
-              text={rating.reviewersNumber.toString()}
-            ></Rating>
+            <Rating stars={option.starts} text={option.text}></Rating>
           </div>
         ))}
       </div>

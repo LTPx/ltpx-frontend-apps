@@ -6,7 +6,7 @@ type UserAction =
   | { type: 'login', payload: boolean }
   | { type: 'logout', payload: boolean }
   | { type: 'addToCart', payload: Course }
-  | { type: 'removeFromCart', payload: Course }
+  | { type: 'removeFromCart', payload: string }
 
 export const userReducer = (state: UserState, action: UserAction): UserState => {
 
@@ -29,6 +29,13 @@ export const userReducer = (state: UserState, action: UserAction): UserState => 
         ...state,
         cart: {
           courses: state.cart.courses.concat([action.payload])
+        }
+      }
+    case 'removeFromCart':
+      return {
+        ...state,
+        cart: {
+          courses: state.cart.courses.filter((course) => course.id  !== action.payload)
         }
       }
     default:

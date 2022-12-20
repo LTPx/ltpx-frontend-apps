@@ -6,7 +6,8 @@ export const useUser = () => {
     userState,
     setUser,
     logoutApp,
-    addCourseToCart
+    addCourseToCart,
+    removeCourseFromCart
   } = useContext(UserContext);
 
   return {
@@ -15,6 +16,7 @@ export const useUser = () => {
     products: userState.cart.courses,
     setUser,
     logoutApp,
-    addCourseToCart
+    addCourseToCart,
+    removeCourseFromCart
   }
 }

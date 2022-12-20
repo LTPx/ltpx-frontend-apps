@@ -37,12 +37,17 @@ export const UserProvider = ({children}: props) => {
     dispatch({type: 'addToCart', payload: course});
   }
 
+  const removeCourseFromCart = (id: string) => {
+    dispatch({type: 'removeFromCart', payload: id});
+  }
+
   return (
     <UserContext.Provider value={{
       userState,
       setUser,
       logoutApp,
-      addCourseToCart
+      addCourseToCart,
+      removeCourseFromCart
     }}>
       {children}
     </UserContext.Provider>

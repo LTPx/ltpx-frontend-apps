@@ -32,8 +32,8 @@ export function HeaderApp(props: HeaderAppProps) {
       { isAuthenticated && (
         <Header links={linksWithAccount}>
           <div className={styles['actions']}>
-            <NavLink to={'cart'}>
-              <Cart/>
+            <NavLink to={'/cart'}>
+              <Cart amount={products.length}/>
             </NavLink>
             { isAuthenticated && (
               <>
@@ -48,7 +48,7 @@ export function HeaderApp(props: HeaderAppProps) {
       { !isAuthenticated && (
         <Header links={linksNotAccount}>
           <div className={styles['actions']}>
-            <NavLink to={'cart'}>
+            <NavLink to={'/cart'}>
               <Cart amount={products.length}/>
             </NavLink>
           </div>

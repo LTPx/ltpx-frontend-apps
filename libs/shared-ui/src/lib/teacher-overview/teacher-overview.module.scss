@@ -1,0 +1,65 @@
+.container {
+  max-width: 600px;
+  .title {
+    font-size: 20px;
+    font-weight: bold;
+    color: #302e52;
+  }
+
+  .teacher-photo-container {
+    padding-top: 1rem;
+    display: flex;
+    gap: 1.5rem;
+
+    img {
+      border: 6px solid #d7d6d6;
+      cursor: pointer;
+    }
+    
+    .information-photo-container {
+      display: flex;
+      flex-direction: column;
+      padding: 1.5rem 0;
+
+      .name-teacher {
+        font-size: 16px;
+        font-weight: bold;
+        padding-bottom: 0.5rem;
+        padding-top: 1rem;
+        color: #302e52;
+      }
+
+      .profession-teacher{
+        font-size: 14px;
+        color: #8d959e
+      }
+    }
+  }
+
+  .teacher-review-information {
+    display: flex;
+    color: #8d959e;
+    font-size: 14px;
+    gap: 1.5rem;
+    padding-top: 1rem;
+    cursor: pointer;
+    .review-information {
+      display: flex;
+      align-items:center;
+      .icon {
+        padding-right: 8px;
+      }
+
+      label {
+        padding-right: 4px;
+      }
+    }
+  }
+
+  .teacher-information-container {
+    display: flex;
+    font-size: 14px;
+    color: #8d959e;
+    padding-top: 1rem;
+  }
+}

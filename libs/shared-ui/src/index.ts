@@ -1,3 +1,5 @@
+export * from './lib/rating-course/rating-course';
+export * from './lib/teacher-overview/teacher-overview';
 export * from './lib/buy-course-card/buy-course-card';
 export * from './lib/brand/brand';
 export * from './lib/footer/footer';

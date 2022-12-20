@@ -4,12 +4,13 @@ import styles from './progress-bar.module.scss';
 export interface ProgressBarProps {
   percentage: number;
   text?: string;
+  className?: string;
 }
 
 export function ProgressBar(props: ProgressBarProps) {
-  const { percentage, text } = props;
+  const { percentage, text, className } = props;
   return (
-    <div className={styles['container-bar']}>
+    <div className={`${className}`}>
       <div className={styles['container-text']}>
         <div className={styles['text']}>{text}</div>
         <div className={styles['percentage']}>{percentage}%</div>

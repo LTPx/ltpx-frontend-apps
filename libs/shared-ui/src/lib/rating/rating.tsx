@@ -5,10 +5,12 @@ import styles from './rating.module.scss';
 export interface RatingProps {
   stars: number;
   reviewers?: number;
+  text?: string;
+  className?: string;
 }
 
 export function Rating(props: RatingProps) {
-  const { stars, reviewers} = props;
+  const { stars, reviewers, text, className} = props;
   return (
     <div className={styles['stars']}>
       {Array.from(Array(stars).keys()).map((number, index)=>(
@@ -17,7 +19,7 @@ export function Rating(props: RatingProps) {
       {Array.from(Array(5 - stars).keys()).map((number, index)=>(
         <Icon key={index} icon={'star'} size={15} color='#888888'/>
       ))}
-      <h5>({reviewers} reviewers)</h5>
+      <h5>{reviewers} {text}</h5>
   </div>
   );
 }

@@ -7,14 +7,18 @@ export interface OptionSelect {
 
 /* eslint-disable-next-line */
 export interface SelectProps {
-  options: Array<OptionSelect>
+  options: Array<OptionSelect>;
+  label?: string
 }
 
 export function Select(props: SelectProps) {
-  const { options } = props;
+  const { options, label } = props;
 
   return (
     <div className={styles['container']}>
+      { label && (
+        <label className={styles['label']}>{label}</label>
+      )}
       <select className={styles['style-select']} name="select">
         { options.map((option, index) => (
           <option key={index} value={option.value}>

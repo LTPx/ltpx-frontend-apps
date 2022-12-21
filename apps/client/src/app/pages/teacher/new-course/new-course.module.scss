@@ -3,7 +3,7 @@
   .header {
     display: flex;
     justify-content: space-between;
-    padding-bottom: 1rem;
+    padding: 1rem 2rem;
 
     .actions {
       display: flex;
@@ -13,8 +13,23 @@
   }
 
   .content {
+    display: flex;
     border-top: 1px solid #d4d4d4;
-    padding: 1rem 8rem;
+
+    .course-sections {
+      background-color: #f7f7f7;
+
+      section {
+        padding: 1rem 2.5rem;
+        border-bottom: 1px solid #d4d4d4;
+        cursor: pointer;
+      }
+    }
+
+    .course-section-content {
+      flex-grow: 1;
+      padding: 1rem 2rem;
+    }
 
     section {
       padding: 1rem 0 0 0;
@@ -26,18 +41,19 @@
       }
     }
 
-    .upload-media {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 20rem;
-      background-color: #f7f7f7;
-    }
-
     .selects-form {
       display: grid;
       gap: 2rem;
       grid-template-columns: repeat(3, minmax(0, 1fr));
+      margin-top: 1rem;
+    }
+
+    .media {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 5rem;
+      background-color: #f7f7f7;
       margin-top: 1rem;
     }
   }

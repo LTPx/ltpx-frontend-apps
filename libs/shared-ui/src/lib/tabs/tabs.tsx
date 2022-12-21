@@ -13,23 +13,26 @@ export interface TabsProps {
   tabs: Array<Tab>;
   isNav?: boolean;
   onClickTab?: (indexTab: number) => void;
+  vertical?: boolean;
 }
 
 export function Tabs(props: TabsProps) {
-  const { tabs, isNav, onClickTab } = props;
+  const { tabs, isNav, onClickTab, vertical } = props;
   const [indexSelected, setIndexSelected] = useState(0);
   const selectTab = (index: number) => {
     setIndexSelected(index);
     onClickTab && onClickTab(index);
   }
 
+  const classPosition = vertical ? `${styles['container']} ${styles['vertical']}` : styles['container'];
+
   return (
-    <div className={styles['container']}>
+    <div className={classPosition}>
       {isNav && tabs.map((tab, index)=>(
         <NavLink
           key={index}
           className={({ isActive }) =>
-            isActive ? `${styles['tab-selected']}` : `${styles['tab']}`
+            isActive ? `${styles['tab']} ${styles['selected']}` : `${styles['tab']}`
           }
           to={tab.url ? tab.url : ''}
         >
@@ -38,7 +41,9 @@ export function Tabs(props: TabsProps) {
       ))}
       {!isNav && tabs.map((tab, index)=>(
         <div key={index}
-          className={indexSelected === index ? `${styles['tab-selected']}` : `${styles['tab']}`}
+          className={
+            indexSelected === index ? `${styles['tab']} ${styles['selected']}` : `${styles['tab']}`
+          }
           onClick={()=>{selectTab(index)}}
         >
           {tab.text}

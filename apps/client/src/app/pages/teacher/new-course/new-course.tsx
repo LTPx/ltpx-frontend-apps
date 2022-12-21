@@ -1,5 +1,9 @@
-import { Button, ColorsButton, Input, Select } from '@ltpx-frontend-apps/shared-ui';
+import { Button, ColorsButton, Input, Select, Tabs } from '@ltpx-frontend-apps/shared-ui';
+import { useState } from 'react';
+import Achievement from '../achievement/achievement';
+import CourseContents from '../course/course-contents/course-contents';
 import CourseGeneralInformation from '../course/course-general-information/course-general-information';
+import Quiz from '../quiz/quiz';
 import styles from './new-course.module.scss';
 
 /* eslint-disable-next-line */
@@ -10,7 +14,16 @@ const optionsSave = [
   {value: 'public', text: 'Publicar'},
 ];
 
+const tabs = [
+  {text: 'Informacion General'},
+  {text: 'Contenidos'},
+  {text: 'Test'},
+  {text: 'Logros'},
+];
+
 export function NewCourse(props: NewCourseProps) {
+  const [indexViewSelected, setIndexViewSelected] = useState(0);
+
   return (
     <div className={styles['container']}>
       <div className={styles['header']}>
@@ -24,21 +37,27 @@ export function NewCourse(props: NewCourseProps) {
       </div>
       <div className={styles['content']}>
         <div className={styles['course-sections']}>
-          <section>
-            Informacion General
-          </section>
-          <section>
-            Contenidos
-          </section>
-          <section>
-            Tests
-          </section>
-          <section>
-            Logros
-          </section>
+          <Tabs
+            tabs={tabs}
+            vertical={true}
+            onClickTab={(index)=>{setIndexViewSelected(index)}}
+          />
         </div>
         <div className={styles['course-section-content']}>
-          <CourseGeneralInformation/>
+          <section>
+            { indexViewSelected === 0 && (
+              <CourseGeneralInformation/>
+            )}
+            { indexViewSelected === 1 && (
+              <CourseContents/>
+            )}
+            { indexViewSelected === 2 && (
+              <Quiz/>
+            )}
+            { indexViewSelected === 3 && (
+              <Achievement/>
+            )}
+          </section>
         </div>
       </div>
     </div>

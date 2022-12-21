@@ -1,0 +1,27 @@
+.form {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  grid-auto-rows: 1fr
+}
+
+.checker {
+  margin-top: 1.5rem;
+  padding: 0 1rem;
+  border: 1px solid;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.remove {
+  margin-top: 1.5rem;
+  padding: 0 0.5rem;
+  display: flex;
+  align-items: center;
+  border: 1px solid;
+}
+
+h5 {
+  margin: 1.5rem 0;
+  cursor: pointer;
+}

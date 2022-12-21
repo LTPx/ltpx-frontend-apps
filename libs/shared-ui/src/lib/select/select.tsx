@@ -21,7 +21,7 @@ export function Select(props: SelectProps) {
       )}
       <select className={styles['style-select']} name="select">
         { options.map((option, index) => (
-          <option key={index} value={option.value}>
+          <option key={index} value={option.value} >
             {option.text}
           </option>
         ))}

@@ -47,13 +47,6 @@ export function CourseContents(props: CourseContentsProps) {
       forms[index][name] = value;
     }
     setContentForms(forms);
-
-    // setContentForms((prevState) => (
-    //   {
-    //     ...prevState,
-    //     [e.target.name]: [e.target.value]
-    //   }
-    // ))
   };
 
   return (

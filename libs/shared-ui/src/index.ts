@@ -1,3 +1,4 @@
+export * from './lib/multiple-options-quiz/multiple-options-quiz';
 export * from './lib/file-upload/file-upload';
 export * from './lib/brand/brand';
 export * from './lib/footer/footer';

@@ -57,7 +57,9 @@ export function Input(props: InputProps) {
 
   return (
     <div className={css['container']}>
-      <label className={css['label']}>{label}</label>
+      {label && (
+        <label className={css['label']}>{label}</label>
+      )}
       <div className={`${css['input-container']}`}>
         { addonInput && addonInput.position === 'left' && (
           <AddonSymbol text={addonInput.text} position={Position.left}/>

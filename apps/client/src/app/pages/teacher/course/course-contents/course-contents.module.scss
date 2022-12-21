@@ -1,7 +1,36 @@
-/*
- * Replace this with your own classes
- *
- * e.g.
- * .container {
- * }
-*/
+.header-text {
+  margin-bottom: 2rem;
+
+  h2, h4 {
+    margin: 0;
+  }
+}
+
+.media {
+  height: 5rem;
+  margin-top: 1rem;
+  background-color: #f7f7f7;
+}
+
+
+.form-content {
+  margin-bottom: 1.5rem;
+  position: relative;
+  background-color: #f1f5f9;
+  padding: 1rem 1rem 2rem 1rem;
+
+  .remove-btn {
+    position: absolute;
+    right: -10px;
+    top: -10px;
+    width: 1.5rem;
+    height: 1.5rem;
+    background: #334155;
+    border-radius: 100%;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+}

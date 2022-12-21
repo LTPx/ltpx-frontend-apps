@@ -1,4 +1,4 @@
-import { Button, ColorsButton, Input, Select } from '@ltpx-frontend-apps/shared-ui';
+import { Button, ColorsButton, FileUpload, Input, Select } from '@ltpx-frontend-apps/shared-ui';
 import styles from './course-general-information.module.scss';
 
 
@@ -37,7 +37,7 @@ export function CourseGeneralInformation(props: CourseGeneralInformationProps) {
       <section className={styles['text']}>
         <h3>Portada del curso</h3>
         <div className={styles['upload-media']}>
-          Agregue aqui su imagen o video
+          <FileUpload text='Agregue una foto o video de portada'/>
         </div>
       </section>
       <div className={styles['text']}>

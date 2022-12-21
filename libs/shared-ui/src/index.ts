@@ -1,3 +1,4 @@
+export * from './lib/file-upload/file-upload';
 export * from './lib/brand/brand';
 export * from './lib/footer/footer';
 export * from './lib/category-card/category-card';

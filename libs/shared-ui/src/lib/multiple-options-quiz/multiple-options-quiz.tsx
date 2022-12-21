@@ -16,7 +16,15 @@ export function MultipleOptionsQuiz(props: MultipleOptionsQuizProps) {
     {
       question: '',
       correct: false,
-    }
+    },
+    {
+      question: '',
+      correct: false,
+    },
+    {
+      question: '',
+      correct: false,
+    },
   ];
 
   const [optionsForm, setOptionsForm] = useState(options);
@@ -34,13 +42,18 @@ export function MultipleOptionsQuiz(props: MultipleOptionsQuizProps) {
     setOptionsForm(forms);
   }
 
-
   const handleInputChange = (e: { target: HTMLInputElement; }, index: number) => {
     const { value } = e.target;
     let forms = [...optionsForm];
     forms[index].question = value;
     setOptionsForm(forms);
   };
+
+  const markAsCorrect = (index: number) => {
+    let forms = [...optionsForm];
+    forms[index].correct = !forms[index].correct;
+    setOptionsForm(forms);
+  }
 
   return (
     <div className={styles['container']}>
@@ -52,7 +65,9 @@ export function MultipleOptionsQuiz(props: MultipleOptionsQuizProps) {
             onChange={(e: { target: HTMLInputElement; }) => handleInputChange(e, index)}
             name='question'
           />
-          <div className={`${styles['checker']} ${ option.correct ? styles['check'] : ''}`}>
+          <div className={`${styles['checker']} ${ option.correct ? styles['check'] : ''}`}
+            onClick={() => markAsCorrect(index)}
+          >
             <Icon icon='check' size={15} />
             <h4>Marcar como correcta</h4>
           </div>

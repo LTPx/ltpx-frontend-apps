@@ -1,4 +1,4 @@
-import { Button, ColorsButton, Input, MultipleOptionsQuiz, Select } from '@ltpx-frontend-apps/shared-ui';
+import { Button, ColorsButton, ConditionalQuestionQuiz, Input, MultipleOptionsQuiz, Select } from '@ltpx-frontend-apps/shared-ui';
 import { useState } from 'react';
 import styles from './quiz.module.scss';
 
@@ -85,7 +85,8 @@ export function Quiz(props: QuizProps) {
             {/* <label>Agregar contenido multimedia</label> */}
           </div>
           <div className="gg">
-            <MultipleOptionsQuiz/>
+            <MultipleOptionsQuiz singleSelection={true}/>
+            <ConditionalQuestionQuiz />
           </div>
         </div>
       ))}

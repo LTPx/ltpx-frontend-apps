@@ -9,9 +9,12 @@ export interface MultipleOption {
   correct: boolean;
 }
 
-export interface MultipleOptionsQuizProps {}
+export interface MultipleOptionsQuizProps {
+  singleSelection?: boolean;
+}
 
 export function MultipleOptionsQuiz(props: MultipleOptionsQuizProps) {
+  const { singleSelection } = props;
   const options: MultipleOption[] = [
     {
       question: '',
@@ -28,6 +31,7 @@ export function MultipleOptionsQuiz(props: MultipleOptionsQuizProps) {
   ];
 
   const [optionsForm, setOptionsForm] = useState(options);
+  const [indexSelected, setIndexSelected] = useState(-1);
 
   const addNewForm = () => {
     setOptionsForm([...optionsForm,     {
@@ -49,10 +53,18 @@ export function MultipleOptionsQuiz(props: MultipleOptionsQuizProps) {
     setOptionsForm(forms);
   };
 
-  const markAsCorrect = (index: number) => {
-    let forms = [...optionsForm];
-    forms[index].correct = !forms[index].correct;
-    setOptionsForm(forms);
+  const markAsCorrect = (indexQuestion: number) => {
+    if (singleSelection) {
+      let forms = [...optionsForm];
+      let result = forms.filter((form, i)=> {
+        return Object.assign(form, { correct: indexQuestion == i})
+      })
+      setOptionsForm(result);
+    }else {
+      let forms = [...optionsForm];
+      forms[indexQuestion].correct = !forms[indexQuestion].correct;
+      setOptionsForm(forms);
+    };
   }
 
   return (

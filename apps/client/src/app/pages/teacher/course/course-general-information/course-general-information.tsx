@@ -30,7 +30,7 @@ export interface CourseGeneralInformationProps {}
 export function CourseGeneralInformation(props: CourseGeneralInformationProps) {
   return (
     <div className={styles['container']}>
-      <div className={styles['text']}>
+      <div className={styles['header-text']}>
         <h2>Informacion General</h2>
         <h4 className='muted'>Esta informacion atraera usuarios a tomar este curso</h4>
       </div>

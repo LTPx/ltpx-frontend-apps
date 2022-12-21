@@ -1,6 +1,11 @@
 .container {
-  h2 {
-    margin: 0;
+
+  .header-text {
+    margin-bottom: 2.5rem;
+
+    h2, h4 {
+      margin: 0;
+    }
   }
 
   .selects-form {

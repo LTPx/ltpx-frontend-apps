@@ -1,3 +1,4 @@
+export * from './lib/course-counter-card/course-counter-card';
 export * from './lib/text-area/text-area';
 export * from './lib/review-form/review-form';
 export * from './lib/comment-course/comment-course';

@@ -7,11 +7,11 @@ const Story: ComponentMeta<typeof RatingCourse> = {
 };
 
 const ratings = [
-  { starsNumber: 5, reviewersNumber: 10 },
-  { starsNumber: 4, reviewersNumber: 8 },
-  { starsNumber: 3, reviewersNumber: 6 },
-  { starsNumber: 2, reviewersNumber: 4 },
-  { starsNumber: 1, reviewersNumber: 2 },
+  { stars: 5, reviewers: 10 },
+  { stars: 4, reviewers: 8 },
+  { stars: 3, reviewers: 6 },
+  { stars: 2, reviewers: 4 },
+  { stars: 1, reviewers: 2 },
 ];
 
 export default Story;

@@ -1,4 +1,4 @@
-import { buildCourses, Course } from '@ltpx-frontend-apps/api';
+import { buildCourseDetails, buildCourses, Course } from '@ltpx-frontend-apps/api';
 import {
   Avatar,
   AvatarSize,
@@ -8,8 +8,13 @@ import {
   Tabs,
   Icon,
   BuyCourseCard,
+  TeacherOverview,
+  RatingCourse,
+  CommentCourse,
+  ReviewForm,
 } from '@ltpx-frontend-apps/shared-ui';
 import { useParams } from 'react-router-dom';
+import { date } from 'yup';
 import { useUser } from '../../../hooks/useUser';
 import styles from './course-details.module.scss';
 
@@ -20,6 +25,8 @@ export function CourseDetails(props: CourseDetailsProps) {
   const { courseId } = useParams();
   const { addCourseToCart } = useUser();
   const course: Course = buildCourses(1)[0];
+  const courseDetails = buildCourseDetails();
+
   const addToCart = () => {
     addCourseToCart(course);
   };
@@ -53,22 +60,22 @@ export function CourseDetails(props: CourseDetailsProps) {
             </div>
             <div className={styles['description-course']}>
               <Avatar
-                image="https://images.unsplash.com/photo-1544717305-2782549b5136?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"
+                image={courseDetails.instructor.image}
                 size={AvatarSize.medium}
                 outline={true}
               />
               <div className={styles['item']}>
                 <label htmlFor="creator">Instructor</label>
-                <h5>Michelle Wood</h5>
+                <h5>{courseDetails.instructor.name}</h5>
               </div>
               <div className={styles['item']}>
                 <label htmlFor="creator">Categories</label>
-                <h5>Blockchain</h5>
+                <h5>{courseDetails.course.category}</h5>
               </div>
               <div className={styles['item']}>
                 <label htmlFor="creator">Review</label>
                 <div className={styles['rating']}>
-                  <Rating stars={4} reviewers={456} />
+                  <Rating stars={courseDetails.course.stars}/>
                 </div>
               </div>
             </div>
@@ -78,46 +85,55 @@ export function CourseDetails(props: CourseDetailsProps) {
                 <section className={`${styles['course-description']}`}>
                   <h3>Course Description</h3>
                   <p>
-                    This effective guide will help you understand blockchain and
-                    Bitcoin, including more advanced topics such as smart
-                    contracts and digital tokens, and will set you well on your
-                    way to blockchain and Bitcoin mastery.
+                    {courseDetails.overview.description}
                   </p>
                 </section>
                 <section className={`${styles['achievements']}`}>
                   <h3>What you will Learn</h3>
                   <div className={styles['items']}>
-                    <div className={styles['item']}>
+                    { courseDetails.overview.goals.map((goal, index)=>(
+                    <div className={styles['item']} key={index}>
                       <Icon icon={'check-circle'} size={15} />
-                      <h5>You will able to create a btc wallet</h5>
+                      <h5>{goal}</h5>
                     </div>
-                    <div className={styles['item']}>
-                      <Icon icon={'check-circle'} size={15} />
-                      <h5>Send and withdraw btc</h5>
-                    </div>
-                    <div className={styles['item']}>
-                      <Icon icon={'check-circle'} size={15} />
-                      <h5>Open account in binance exchange</h5>
-                    </div>
+                  ))}
                   </div>
                 </section>
                 <section className="requirements">
                   <h3>Requirements</h3>
-                  <ul>
-                    <li>
-                      You don't need any previous experience or skills to take
-                      this course
-                    </li>
-                    <li>A computer with good internet</li>
-                    <li>
-                      Credit or debit card to buy a small amount money to buy
-                      btc
-                    </li>
-                  </ul>
+                  { courseDetails.overview.requirements.map((requirement, index)=>(
+                    <ul key={index}>
+                      <li>
+                        <h5>{requirement}</h5>
+                      </li>
+                    </ul>
+                  ))}
                 </section>
               </div>
             </div>
           </div>
+          <TeacherOverview 
+            name={courseDetails.instructor.name}
+            profession={courseDetails.instructor.profession}
+            rating={courseDetails.instructor.stars}
+            reviews={courseDetails.instructor.reviews}
+            students={courseDetails.instructor.students}
+            courses={courseDetails.instructor.courses}
+            bibliography={courseDetails.instructor.bibliography} 
+            image={courseDetails.instructor.image}         
+          />
+          <RatingCourse ratings={courseDetails.ratings}></RatingCourse>
+          { courseDetails.comments.map((comment, index)=>(
+            <CommentCourse 
+              reviewTitle={comment.title}
+              name={comment.name}
+              comment={comment.comment}
+              date={comment.date}
+              key={index} 
+              image={comment.image}            
+            />
+          ))}
+          <ReviewForm></ReviewForm>
         </div>
         <BuyCourseCard
           price={course.price || 10000}

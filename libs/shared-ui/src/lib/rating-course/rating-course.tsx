@@ -8,8 +8,8 @@ export interface RatingCourseProps {
 }
 
 export interface RatingOption {
-  starsNumber: number;
-  reviewersNumber: number;
+  stars: number;
+  reviewers: number;
 }
 
 export function RatingCourse(props: RatingCourseProps) {
@@ -19,8 +19,8 @@ export function RatingCourse(props: RatingCourseProps) {
     let totalStars = 0;
     let totalReviewers = 0;
     ratings.forEach((rating) => {
-      totalReviewers = totalReviewers + rating.reviewersNumber;
-      totalStars = totalStars + rating.reviewersNumber * rating.starsNumber;
+      totalReviewers = totalReviewers + rating.reviewers;
+      totalStars = totalStars + (rating.reviewers * rating.stars);
     });
     const result = totalStars / totalReviewers;
     return result;
@@ -29,22 +29,22 @@ export function RatingCourse(props: RatingCourseProps) {
   const totalStars = () => {
     let total = 0;
     ratings.forEach((rating) => {
-      total = total + rating.reviewersNumber * rating.starsNumber;
+      total = total + rating.reviewers * rating.stars;
     });
     return total;
   };
 
-  const roundStars = (starsNumber: number) => {
-    return Math.round(starsNumber);
+  const roundStars = (stars: number) => {
+    return Math.round(stars);
   };
 
   const buildOptions = () => {
-    const stars = totalStars();
+    const total = totalStars();
     return ratings.map((rating) => {
       return {
-        percentage: (rating.starsNumber * rating.reviewersNumber * 100) / stars,
-        starts: rating.starsNumber,
-        text: rating.reviewersNumber.toString(),
+        percentage: ((rating.stars * rating.reviewers) * 100) / total,
+        starts: rating.stars,
+        text: rating.reviewers.toString(),
       };
     });
   };

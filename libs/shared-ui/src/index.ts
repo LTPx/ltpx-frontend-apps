@@ -1,3 +1,7 @@
+export * from './lib/text-area/text-area';
+export * from './lib/review-form/review-form';
+export * from './lib/comment-course/comment-course';
+export * from './lib/comment-course/comment-course';
 export * from './lib/rating-course/rating-course';
 export * from './lib/teacher-overview/teacher-overview';
 export * from './lib/buy-course-card/buy-course-card';

@@ -5,11 +5,10 @@ import styles from './rating.module.scss';
 export interface RatingProps {
   stars: number;
   text?: string;
-  className?: string;
 }
 
 export function Rating(props: RatingProps) {
-  const { stars, text, className} = props;
+  const { stars, text } = props;
   return (
     <div className={styles['stars-container']}>
       <div className={styles['stars']}>
@@ -20,8 +19,9 @@ export function Rating(props: RatingProps) {
           <Icon key={index} icon={'star'} size={15} color='#888888'/>
         ))}
       </div>
-
-      <h5>{text}</h5>
+      { text && (
+        <h5>{text}</h5>
+      )}
     </div>
   );
 }

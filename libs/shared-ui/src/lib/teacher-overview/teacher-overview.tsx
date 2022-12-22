@@ -5,6 +5,7 @@ import styles from './teacher-overview.module.scss';
 /* eslint-disable-next-line */
 export interface TeacherOverviewProps {
   name: string;
+  image: string;
   profession: string;
   rating: number;
   reviews: number;
@@ -21,13 +22,14 @@ export function TeacherOverview(props: TeacherOverviewProps) {
     reviews,
     students,
     courses,
+    image,
     bibliography
   } = props;
   return (
     <div className={styles['container']}>
       <label className={styles['title']}>About the teacher</label>
       <div className={styles['teacher-photo-container']}>
-        <Avatar image={'https://images.unsplash.com/photo-1642792743923-3fc2adcd1b84?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NjN8fHRlYWNoZXJ8ZW58MHx8MHx8&auto=format&fit=crop&w=800&q=60'}
+        <Avatar image={image}
         size ={AvatarSize.large}></Avatar>
         <div className={styles['information-photo-container']}>
           <label className={styles['name-teacher']}>{name}</label>
@@ -57,7 +59,7 @@ export function TeacherOverview(props: TeacherOverviewProps) {
         </div>
       </div>
       <div className={styles['teacher-information-container']}>
-        <label>{bibliography}</label>
+        <p>{bibliography}</p>
       </div>
     </div>
   );

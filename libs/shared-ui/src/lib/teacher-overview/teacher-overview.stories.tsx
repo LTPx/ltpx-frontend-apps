@@ -12,6 +12,7 @@ export const Default = () => {
   return (
     <div>
       <TeacherOverview 
+      image='https://images.unsplash.com/photo-1642792743923-3fc2adcd1b84?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NjN8fHRlYWNoZXJ8ZW58MHx8MHx8&auto=format&fit=crop&w=800&q=60'
       name={'Daniel Handerson'} 
       profession={'IOS Developer & UI Designer'} 
       rating={4.87} 

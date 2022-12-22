@@ -8,6 +8,7 @@
 
   .description {
     margin-right: 10rem;
+    
 
     .description-course {
       display: flex;
@@ -20,7 +21,7 @@
 
         h5 {
           margin-top: 0;
-          color: #888888;
+          color: #8d959e;
         }
       }
     }
@@ -44,70 +45,3 @@
   }
 }
 
-.buy-card {
-  padding: 10px;
-
-  img {
-    width: 300px;
-  }
-
-  .summary {
-    padding: 15px;
-  }
-
-  .price-promo {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 5px 0;
-
-    .price {
-      h3 {
-        margin: 0;
-      }
-    }
-
-    .discount {
-      background-color: #c4b5fd;
-      padding: 1px 20px;
-      color: #fff;
-      border-radius: 5px;
-      font-size: 12px;
-    }
-  }
-
-  .actions {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    margin: 10px 0;
-  }
-
-  .details {
-     display: flex;
-     flex-direction: column;
-
-    .item {
-      display: flex;
-      justify-content: space-between;
-      border-bottom: 1px solid #c7c7c7;
-
-      .item-text {
-        display: flex;
-        align-items: center;
-
-        svg {
-          margin-right: 10px;
-        }
-
-        h4 {
-          color: black;
-        }
-      }
-
-      h4 {
-        color: #888888;
-      }
-    }
-  }
-}

@@ -4,11 +4,11 @@ import styles from './rating.module.scss';
 /* eslint-disable-next-line */
 export interface RatingProps {
   stars: number;
-  reviewers?: number;
+  text?: string;
 }
 
 export function Rating(props: RatingProps) {
-  const { stars, reviewers} = props;
+  const { stars, text } = props;
   return (
     <div className={styles['stars-container']}>
       <div className={styles['stars']}>
@@ -19,7 +19,9 @@ export function Rating(props: RatingProps) {
           <Icon key={index} icon={'star'} size={15} color='#888888'/>
         ))}
       </div>
-      <h5>({reviewers} reviewers)</h5>
+      { text && (
+        <h5>{text}</h5>
+      )}
     </div>
   );
 }

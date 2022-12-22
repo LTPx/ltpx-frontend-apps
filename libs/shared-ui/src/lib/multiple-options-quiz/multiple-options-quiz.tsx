@@ -13,6 +13,10 @@ export interface MultipleOptionsQuizProps {
   singleSelection?: boolean;
 }
 
+const generateAlphabet = (capital = true) => {
+  return [...Array(26)].map((_, i) => String.fromCharCode(i + (capital ? 65 : 97)));
+}
+
 export function MultipleOptionsQuiz(props: MultipleOptionsQuizProps) {
   const { singleSelection } = props;
   const options: MultipleOption[] = [
@@ -31,7 +35,7 @@ export function MultipleOptionsQuiz(props: MultipleOptionsQuizProps) {
   ];
 
   const [optionsForm, setOptionsForm] = useState(options);
-  const [indexSelected, setIndexSelected] = useState(-1);
+  const alphabetLetters = generateAlphabet();
 
   const addNewForm = () => {
     setOptionsForm([...optionsForm,     {
@@ -67,10 +71,17 @@ export function MultipleOptionsQuiz(props: MultipleOptionsQuizProps) {
     };
   }
 
+  const formClass = singleSelection ? `${styles['single']} ` : ''
+
   return (
     <div className={styles['container']}>
       { optionsForm.map((option, index) => (
-        <div className={styles['form']} key={index}>
+        <div className={`${styles['form']} ${formClass}`} key={index}>
+          { !singleSelection && (
+            <div className={styles['letter']}>
+              <h2>{alphabetLetters[index]}.</h2>
+            </div>
+          )}
           <Input
             placeholder='Ingresa la respuesta'
             value={option.question}
@@ -89,7 +100,7 @@ export function MultipleOptionsQuiz(props: MultipleOptionsQuizProps) {
         </div>
       ))}
       <h5 className='muted' onClick={addNewForm}>
-        + Agregar Nueva Respuesta
+        + Agregar otra respuesta
       </h5>
     </div>
   );

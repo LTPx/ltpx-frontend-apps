@@ -1,16 +1,19 @@
 .conditionals {
   display: flex;
   gap: 2rem;
+  margin-top: 1.5rem;
 }
 
 .conditional-container {
   display: flex;
   align-items: center;
   border: 1px solid #edf0f2;
+  background-color: #fff;
 
   .conditional {
     padding: 0 1rem;
     border-right: 1px solid #edf0f2;
+    background-color: #fff;
     height: 100%;
     display: flex;
     align-items: center;

@@ -1,4 +1,4 @@
-import { Button, ColorsButton, Input, Question, QuizQuestion } from '@ltpx-frontend-apps/shared-ui';
+import { Button, ColorsButton, Icon, Input, Question, QuizQuestion } from '@ltpx-frontend-apps/shared-ui';
 import { useState } from 'react';
 import styles from './quiz.module.scss';
 
@@ -30,6 +30,11 @@ export function Quiz(props: QuizProps) {
       kindQuestion: Question.answer
     }])
   }
+  const removeForm = (index: number) => {
+    const forms = [...quizForms];
+    forms.splice(index, 1);
+    setQuizForms(forms);
+  }
 
   const handleInputChange = (e: { target: HTMLInputElement; }, index: number) => {
     const { name, value } = e.target;
@@ -51,8 +56,11 @@ export function Quiz(props: QuizProps) {
       </div>
       { quizForms.map((form, index)=> (
         <div className={styles['quiz-form']} key={index}>
+          <div className={styles['remove-btn']} onClick={() => removeForm(index)}>
+            <Icon icon='close' size={15}/>
+          </div>
           <Input
-            label='Pregunta'
+            label={`${index + 1}. Pregunta`}
             placeholder='Formula tu pregunta'
             value={form.question}
             onChange={(e: { target: HTMLInputElement; }) => handleInputChange(e, index)}
@@ -71,7 +79,7 @@ export function Quiz(props: QuizProps) {
         </div>
       ))}
       <Button
-        title='+ Agregar otra seccion'
+        title='+ Agregar otra pregunta'
         onClick={addNewForm}
         color={ColorsButton.primary}
       />

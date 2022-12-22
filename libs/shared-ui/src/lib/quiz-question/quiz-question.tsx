@@ -32,11 +32,12 @@ export function QuizQuestion(props: QuizQuestionProps) {
     }
   }
   return (
-    <div className={styles['container']}>
+    <div className={styles['questions-container']}>
       <Select
         label='Seleccione tipo de respuesta'
         options={options}
         onChange={showQuestionForm}
+        selected={options[2]}
       />
       { selectedQuestion === Question.multiple && (
         <MultipleOptionsQuiz/>
@@ -48,7 +49,9 @@ export function QuizQuestion(props: QuizQuestionProps) {
         <ConditionalQuestionQuiz/>
       )}
       { selectedQuestion === Question.answer && (
-        <h5>Al estudiante le aparecera un campo de texto para responder esta pregunta </h5>
+        <h5 className={styles['text']}>
+          Al estudiante le aparecera un campo de texto para responder esta pregunta
+        </h5>
       )}
     </div>
   );

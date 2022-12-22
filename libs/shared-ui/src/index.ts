@@ -1,3 +1,4 @@
+export * from './lib/selected-items/selected-items';
 export * from './lib/quiz-question/quiz-question';
 export * from './lib/conditional-question-quiz/conditional-question-quiz';
 export * from './lib/multiple-options-quiz/multiple-options-quiz';

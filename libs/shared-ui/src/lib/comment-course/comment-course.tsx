@@ -12,18 +12,11 @@ export interface CommentCourseProps {
 }
 
 export function CommentCourse(props: CommentCourseProps) {
-  const {
-    reviewTitle,
-    name,
-    comment,
-    date,
-    image
-  } = props;
+  const { reviewTitle, name, comment, date, image } = props;
   return (
     <div className={styles['container']}>
       <div className={styles['avatar-content']}>
-        <Avatar image={image}
-        size ={AvatarSize.medium}></Avatar>
+        <Avatar image={image} size={AvatarSize.medium}></Avatar>
       </div>
       <div className={styles['comment-content']}>
         <div className={styles['head']}>

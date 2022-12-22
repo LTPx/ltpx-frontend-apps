@@ -22,6 +22,7 @@ const createRandomCourseDetail = () => (
       image: faker.image.people(640, 480, true),
       title: `Learn how to make a: ${faker.commerce.product()}`,
       description: `Learning: ${faker.commerce.productDescription()}`,
+      discount: faker.datatype.number({min: 5, max: 50}),
       category: faker.commerce.department(),
       price: faker.datatype.number({min: 1000, max: 5000}),
       duration: faker.datatype.number(60),
@@ -30,6 +31,7 @@ const createRandomCourseDetail = () => (
       achievements: faker.datatype.number(5),
       enrolled: faker.datatype.number(15),
       skillLevel: 'Expert',
+      language: 'English',
       certificate: true,
     },
     overview: {
@@ -46,7 +48,7 @@ const createRandomCourseDetail = () => (
       stars: faker.datatype.number(5),
       students: faker.datatype.number(15),
       reviews: faker.datatype.number(15),
-      bibliography: `I am: ${faker.commerce.productDescription()}`
+      biography: `I am: ${faker.commerce.productDescription()}`
     },
     ratings: [
       { stars: 5, reviewers: faker.datatype.number(5)},

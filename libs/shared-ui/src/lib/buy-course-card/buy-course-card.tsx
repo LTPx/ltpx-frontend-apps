@@ -4,6 +4,7 @@ import styles from './buy-course-card.module.scss';
 
 /* eslint-disable-next-line */
 export interface BuyCourseCardProps {
+  image: string;
   price: number;
   discount: number;
   achievements: number;
@@ -12,10 +13,13 @@ export interface BuyCourseCardProps {
   language: string;
   skillLevel: string;
   certificate: boolean;
+  onClickBuy: () => void;
+  onClickEnroll: () => void;
 }
 
 export function BuyCourseCard(props: BuyCourseCardProps) {
   const {
+    image,
     price,
     discount,
     achievements,
@@ -23,28 +27,37 @@ export function BuyCourseCard(props: BuyCourseCardProps) {
     enrolled,
     language,
     skillLevel,
-    certificate
+    certificate,
+    onClickBuy,
+    onClickEnroll,
   } = props;
 
   return (
     <div className={styles['container']}>
       <div className={`${styles['buy-card']} card`}>
-        <img
-          src="https://magazine.startus.cc/wp-content/uploads/2018/07/bitcoin-2643159_1920-e1533112613226.jpg"
-          alt=""
-        />
+        <img src={image} alt="" />
         <div className={`${styles['summary']}`}>
           <div className={styles['price-promo']}>
             <div className={styles['price']}>
-              <h3>${price/100}</h3>
+              <h3>${price / 100}</h3>
             </div>
             <div className={styles['discount']}>
               <span>{discount}% off</span>
             </div>
           </div>
           <div className={styles['actions']}>
-            <Button title="BUY NOW" color={ColorsButton.primary} full={true} />
-            <Button title="ENROLL" color={ColorsButton.secondary} full={true} />
+            <Button
+              title="BUY NOW"
+              color={ColorsButton.primary}
+              onClick={onClickBuy}
+              full={true}
+            />
+            <Button
+              title="ENROLL"
+              color={ColorsButton.secondary}
+              onClick={onClickEnroll}
+              full={true}
+            />
           </div>
           <div className={styles['details']}>
             <div className={styles['item']}>

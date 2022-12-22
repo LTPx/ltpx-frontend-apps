@@ -11,7 +11,7 @@ export interface TeacherOverviewProps {
   reviews: number;
   students: number;
   courses: number;
-  bibliography: string;
+  biography: string;
 }
 
 export function TeacherOverview(props: TeacherOverviewProps) {
@@ -23,14 +23,13 @@ export function TeacherOverview(props: TeacherOverviewProps) {
     students,
     courses,
     image,
-    bibliography
+    biography,
   } = props;
   return (
     <div className={styles['container']}>
       <label className={styles['title']}>About the teacher</label>
       <div className={styles['teacher-photo-container']}>
-        <Avatar image={image}
-        size ={AvatarSize.large}></Avatar>
+        <Avatar image={image} size={AvatarSize.large}></Avatar>
         <div className={styles['information-photo-container']}>
           <label className={styles['name-teacher']}>{name}</label>
           <label className={styles['profession-teacher']}>{profession}</label>
@@ -59,7 +58,7 @@ export function TeacherOverview(props: TeacherOverviewProps) {
         </div>
       </div>
       <div className={styles['teacher-information-container']}>
-        <p>{bibliography}</p>
+        <p>{biography}</p>
       </div>
     </div>
   );

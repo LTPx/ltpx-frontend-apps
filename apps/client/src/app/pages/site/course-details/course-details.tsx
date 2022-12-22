@@ -1,8 +1,4 @@
-import {
-  buildCourseDetails,
-  buildCourses,
-  Course,
-} from '@ltpx-frontend-apps/api';
+import { buildCourseDetails } from '@ltpx-frontend-apps/api';
 import {
   Avatar,
   AvatarSize,
@@ -18,7 +14,6 @@ import {
   ReviewForm,
 } from '@ltpx-frontend-apps/shared-ui';
 import { useParams } from 'react-router-dom';
-import { date } from 'yup';
 import { useUser } from '../../../hooks/useUser';
 import styles from './course-details.module.scss';
 
@@ -28,11 +23,14 @@ export interface CourseDetailsProps {}
 export function CourseDetails(props: CourseDetailsProps) {
   const { courseId } = useParams();
   const { addCourseToCart } = useUser();
-  const course: Course = buildCourses(1)[0];
   const courseDetails = buildCourseDetails();
 
   const addToCart = () => {
-    addCourseToCart(course);
+    addCourseToCart(courseDetails.course);
+  };
+
+  const enrolled = () => {
+    console.log('click enrolled');
   };
 
   const tabs = [
@@ -121,7 +119,7 @@ export function CourseDetails(props: CourseDetailsProps) {
                 reviews={courseDetails.instructor.reviews}
                 students={courseDetails.instructor.students}
                 courses={courseDetails.instructor.courses}
-                bibliography={courseDetails.instructor.bibliography}
+                biography={courseDetails.instructor.biography}
                 image={courseDetails.instructor.image}
               />
               <RatingCourse ratings={courseDetails.ratings}></RatingCourse>
@@ -140,15 +138,18 @@ export function CourseDetails(props: CourseDetailsProps) {
           </div>
         </div>
         <BuyCourseCard
-          price={course.price || 10000}
-          discount={20}
-          achievements={course.duration || 12}
-          lectures={course.lessons || 10}
-          enrolled={10}
-          language={'English'}
-          skillLevel={'Beginner'}
-          certificate={false}
-        ></BuyCourseCard>
+          price={courseDetails.course.price}
+          discount={courseDetails.course.discount}
+          achievements={courseDetails.course.achievements}
+          lectures={courseDetails.course.lessons}
+          enrolled={courseDetails.course.enrolled}
+          language={courseDetails.course.language}
+          skillLevel={courseDetails.course.skillLevel}
+          certificate={courseDetails.course.certificate}
+          image={courseDetails.course.image}
+          onClickBuy={addToCart}
+          onClickEnroll={enrolled}
+        />
       </div>
     </div>
   );

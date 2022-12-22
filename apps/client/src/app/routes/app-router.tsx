@@ -1,4 +1,4 @@
-import { Routes, Route, BrowserRouter } from "react-router-dom";
+import { Routes, Route, BrowserRouter, Navigate } from "react-router-dom";
 import { useTranslation } from 'react-i18next';
 import {
   AppLayout,
@@ -136,10 +136,11 @@ export const AppRouter = () => {
           <Route path="account" element={<Account/>}/>
         </Route>
         <Route path="teacher" element={<DashboardLayout  links={linksDashboardTeacher}/>}>
-          <Route index path="dashboard" element={<TeacherDashboard/>}/>
-          <Route index path="account" element={<TeacherAccount/>}/>
-          <Route index path="earnings" element={<Earnings/>}/>
+          <Route path="dashboard" element={<TeacherDashboard/>}/>
+          <Route path="account" element={<TeacherAccount/>}/>
+          <Route path="earnings" element={<Earnings/>}/>
           <Route path="courses" element={<ManageCourses/>}>
+            <Route path="/teacher/courses" element={<Navigate replace to="all" />} />
             <Route path="all" element={<TeacherCourses/>}/>
             <Route path="new" element={<NewCourse/>}/>
           </Route>

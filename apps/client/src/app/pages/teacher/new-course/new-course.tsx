@@ -3,6 +3,7 @@ import { useState } from 'react';
 import Achievement from '../achievement/achievement';
 import CourseContents from '../course/course-contents/course-contents';
 import CourseGeneralInformation from '../course/course-general-information/course-general-information';
+import CourseSettings from '../course/course-settings/course-settings';
 import Quiz from '../quiz/quiz';
 import styles from './new-course.module.scss';
 
@@ -19,6 +20,7 @@ const tabs = [
   {text: 'Contenidos'},
   {text: 'Test'},
   {text: 'Logros'},
+  {text: 'Settings'},
 ];
 
 export function NewCourse(props: NewCourseProps) {
@@ -56,6 +58,9 @@ export function NewCourse(props: NewCourseProps) {
             )}
             { indexViewSelected === 3 && (
               <Achievement/>
+            )}
+            { indexViewSelected === 4 && (
+              <CourseSettings/>
             )}
           </section>
         </div>

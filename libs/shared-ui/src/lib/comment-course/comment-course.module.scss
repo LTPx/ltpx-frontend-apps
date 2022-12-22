@@ -1,12 +1,13 @@
 .container {
   display: flex;
+  width: 100%;
+  padding-bottom: 1rem;
 
   .avatar-content {
     padding: 1rem 1rem;
   }
 
   .comment-content {
-    width: 520px;
     padding: 1rem 1rem;
     .head {
       display: flex;

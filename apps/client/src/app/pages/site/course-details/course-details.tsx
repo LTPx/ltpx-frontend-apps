@@ -1,4 +1,8 @@
-import { buildCourseDetails, buildCourses, Course } from '@ltpx-frontend-apps/api';
+import {
+  buildCourseDetails,
+  buildCourses,
+  Course,
+} from '@ltpx-frontend-apps/api';
 import {
   Avatar,
   AvatarSize,
@@ -75,7 +79,7 @@ export function CourseDetails(props: CourseDetailsProps) {
               <div className={styles['item']}>
                 <label htmlFor="creator">Review</label>
                 <div className={styles['rating']}>
-                  <Rating stars={courseDetails.course.stars}/>
+                  <Rating stars={courseDetails.course.stars} />
                 </div>
               </div>
             </div>
@@ -84,56 +88,56 @@ export function CourseDetails(props: CourseDetailsProps) {
               <div className={styles['overview']}>
                 <section className={`${styles['course-description']}`}>
                   <h3>Course Description</h3>
-                  <p>
-                    {courseDetails.overview.description}
-                  </p>
+                  <p>{courseDetails.overview.description}</p>
                 </section>
                 <section className={`${styles['achievements']}`}>
                   <h3>What you will Learn</h3>
                   <div className={styles['items']}>
-                    { courseDetails.overview.goals.map((goal, index)=>(
-                    <div className={styles['item']} key={index}>
-                      <Icon icon={'check-circle'} size={15} />
-                      <h5>{goal}</h5>
-                    </div>
-                  ))}
+                    {courseDetails.overview.goals.map((goal, index) => (
+                      <div className={styles['item']} key={index}>
+                        <Icon icon={'check-circle'} size={15} />
+                        <h5>{goal}</h5>
+                      </div>
+                    ))}
                   </div>
                 </section>
                 <section className="requirements">
                   <h3>Requirements</h3>
-                  { courseDetails.overview.requirements.map((requirement, index)=>(
-                    <ul key={index}>
-                      <li>
-                        <h5>{requirement}</h5>
-                      </li>
-                    </ul>
-                  ))}
+                  {courseDetails.overview.requirements.map(
+                    (requirement, index) => (
+                      <ul key={index}>
+                        <li>
+                          <h5>{requirement}</h5>
+                        </li>
+                      </ul>
+                    )
+                  )}
                 </section>
               </div>
+              <TeacherOverview
+                name={courseDetails.instructor.name}
+                profession={courseDetails.instructor.profession}
+                rating={courseDetails.instructor.stars}
+                reviews={courseDetails.instructor.reviews}
+                students={courseDetails.instructor.students}
+                courses={courseDetails.instructor.courses}
+                bibliography={courseDetails.instructor.bibliography}
+                image={courseDetails.instructor.image}
+              />
+              <RatingCourse ratings={courseDetails.ratings}></RatingCourse>
+              {courseDetails.comments.map((comment, index) => (
+                <CommentCourse
+                  reviewTitle={comment.title}
+                  name={comment.name}
+                  comment={comment.comment}
+                  date={comment.date}
+                  key={index}
+                  image={comment.image}
+                />
+              ))}
+              <ReviewForm></ReviewForm>
             </div>
           </div>
-          <TeacherOverview 
-            name={courseDetails.instructor.name}
-            profession={courseDetails.instructor.profession}
-            rating={courseDetails.instructor.stars}
-            reviews={courseDetails.instructor.reviews}
-            students={courseDetails.instructor.students}
-            courses={courseDetails.instructor.courses}
-            bibliography={courseDetails.instructor.bibliography} 
-            image={courseDetails.instructor.image}         
-          />
-          <RatingCourse ratings={courseDetails.ratings}></RatingCourse>
-          { courseDetails.comments.map((comment, index)=>(
-            <CommentCourse 
-              reviewTitle={comment.title}
-              name={comment.name}
-              comment={comment.comment}
-              date={comment.date}
-              key={index} 
-              image={comment.image}            
-            />
-          ))}
-          <ReviewForm></ReviewForm>
         </div>
         <BuyCourseCard
           price={course.price || 10000}

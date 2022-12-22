@@ -20,7 +20,7 @@ export function RatingCourse(props: RatingCourseProps) {
     let totalReviewers = 0;
     ratings.forEach((rating) => {
       totalReviewers = totalReviewers + rating.reviewers;
-      totalStars = totalStars + (rating.reviewers * rating.stars);
+      totalStars = totalStars + rating.reviewers * rating.stars;
     });
     const result = totalStars / totalReviewers;
     return result;
@@ -42,7 +42,7 @@ export function RatingCourse(props: RatingCourseProps) {
     const total = totalStars();
     return ratings.map((rating) => {
       return {
-        percentage: ((rating.stars * rating.reviewers) * 100) / total,
+        percentage: (rating.stars * rating.reviewers * 100) / total,
         starts: rating.stars,
         text: rating.reviewers.toString(),
       };
@@ -53,22 +53,27 @@ export function RatingCourse(props: RatingCourseProps) {
 
   return (
     <div className={styles['container']}>
-      <div className={styles['total-rating']}>
-        <label className={styles['score']}>{calculateScore().toFixed(2)}</label>
-        <label>Course rating</label>
-        <Rating stars={roundStars(calculateScore())}></Rating>
-      </div>
-      <div className={styles['rating-content']}>
-        {options.map((option, index) => (
-          <div className={styles['rating-bar']} key={index}>
-            <ProgressBar
-              percentage={option.percentage}
-              className={styles['bar']}
-              withoutText={true}
-            />
-            <Rating stars={option.starts} text={option.text}></Rating>
-          </div>
-        ))}
+      <label>Student feedback</label>
+      <div className={styles['content']}>
+        <div className={styles['total-rating']}>
+          <label className={styles['score']}>
+            {calculateScore().toFixed(2)}
+          </label>
+          <label>Course rating</label>
+          <Rating stars={roundStars(calculateScore())}></Rating>
+        </div>
+        <div className={styles['rating-content']}>
+          {options.map((option, index) => (
+            <div className={styles['rating-bar']} key={index}>
+              <ProgressBar
+                percentage={option.percentage}
+                className={styles['bar']}
+                withoutText={true}
+              />
+              <Rating stars={option.starts} text={option.text}></Rating>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );

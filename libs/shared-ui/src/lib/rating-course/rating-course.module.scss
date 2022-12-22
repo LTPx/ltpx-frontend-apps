@@ -1,8 +1,17 @@
-.container {
-  // background-color: red;
+.container{
+  width: 100%;
+  padding-bottom: 1rem;
+  label {
+    font-size: 20px;
+    font-weight: bold;
+    color: #302e52;
+  }
+}
+
+.content {
+  padding-top: 1.5rem;
   display: flex;
   gap: 1rem;
-
   .total-rating {
     display: flex;
     flex-direction: column;
@@ -32,7 +41,7 @@
       padding-bottom: 1rem;
   
       .bar {
-        width: 250px;
+        width: 300px;
       } 
     }
   }

@@ -1,3 +1,5 @@
+@import '../../styles/styles.module.scss';
+
 .container {
   .items-container {
     margin-top: 1.5rem;
@@ -6,9 +8,10 @@
       display: flex;
       align-items: center;
       gap: 1rem;
-      border: 1px solid #edf0f2;
-      background-color: #fff;
+      border: 1px solid $stroke-color;
+      background-color: $white-color;
       margin-bottom: 1rem;
+      padding: 1rem;
       cursor: pointer;
       color: #a3a3a3;
 

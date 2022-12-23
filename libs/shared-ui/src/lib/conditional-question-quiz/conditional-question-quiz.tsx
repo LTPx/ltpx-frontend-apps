@@ -32,15 +32,15 @@ export function ConditionalQuestionQuiz(props: ConditionalQuestionQuizProps) {
       <div className={styles['conditionals']}>
         { conditionals.map((conditional, index) => (
           <div className={styles['conditional-container']} key={index}>
-            <div className={styles['conditional']}>
+            <h4 className={styles['conditional']}>
               {conditional.text}
-            </div>
-            <div className={`${styles['checker']} ${ conditional.correct ? styles['check'] : ''}`}
+            </h4>
+            <h4 className={`${styles['checker']} ${ conditional.correct ? styles['check'] : ''}`}
               onClick={() => markAsCorrect(index)}
             >
               <Icon icon='check' size={15} />
               <h4>Marcar como correcta</h4>
-            </div>
+            </h4>
           </div>
         ))}
       </div>

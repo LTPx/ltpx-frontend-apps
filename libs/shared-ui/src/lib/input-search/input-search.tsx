@@ -1,9 +1,8 @@
-import Icon from '../icon/icon';
+import Input, { Position } from '../input/input';
 import styles from './input-search.module.scss';
 
 /* eslint-disable-next-line */
 export interface InputSearchProps {
-  type?: string;
   id?: string;
   name?: string;
   value?: any;
@@ -27,15 +26,18 @@ export function InputSearch(props: InputSearchProps) {
   } = props;
 
   return (
-    <div className={styles['container']}>
-      <div className={styles['search-container']}>
-        <input
-          className={styles['input-container']}
-          {...other}
-          onChange={e => onChange && onChange(e)}
-        />
-        <button><Icon icon='search' size={20}/></button>
-      </div>
+    <div className={styles['search-container']}>
+      <Input
+        addonInput={
+          {
+            icon: 'search',
+            position: Position.right
+          }
+        }
+        className={styles['input-lenin']}
+        {...other}
+        onChange={(e: any) => onChange && onChange(e)}
+      />
     </div>
   );
 }

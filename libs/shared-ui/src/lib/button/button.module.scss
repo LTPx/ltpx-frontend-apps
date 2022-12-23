@@ -1,6 +1,7 @@
+@import '../../styles/styles.module.scss';
+
 .btn {
   display: inline-block;
-  color: #272c33;
   vertical-align: middle;
   user-select: none;
   font-size: .8125rem;
@@ -9,7 +10,7 @@
   text-align: center;
   background-color: transparent;
   border: 1px solid transparent;
-  padding: .5rem 2rem;
+  padding: .8rem 1rem;
   border-radius: .25rem;
   cursor: pointer;
 }
@@ -72,28 +73,28 @@
 
 .btn-primary {
   color: #fff;
-  background-color: #5567ff;
-  border-color: #5567ff;
+  background-color: $primary-color-400;
+  border-color: $primary-color-400;
   box-shadow: inset 0 1px 0 hsla(0,0%,100%,.15),0 1px 1px rgba(39,44,51,.075);
 }
 
 .btn-primary:hover {
   color: #fff;
-  background-color: #2f45ff;
-  border-color: #2239ff;
+  background-color: $primary-color;
+  border-color: $primary-color;
 }
 
 .btn-primary.focus,.btn-primary:focus {
   color: #fff;
-  background-color: #2f45ff;
-  border-color: #2239ff;
+  background-color: $primary-color;
+  border-color: $primary-color;
   box-shadow: inset 0 1px 0 hsla(0,0%,100%,.15),0 1px 1px rgba(39,44,51,.075),0 0 0 1px rgba(111,126,255,.5);
 }
 
 .btn-primary.disabled,.btn-primary:disabled {
   color: #fff;
-  background-color: #5567ff;
-  border-color: #5567ff;
+  background-color: $primary-color-400;
+  border-color: $primary-color-400;
 }
 
 // secondary button
@@ -146,14 +147,14 @@
 }
 
 .btn-primary-outline {
-  border: 1px solid #824ee1;
-  color:#824ee1;
+  border: 1px solid $primary-color-400;
+  color: $primary-color-400;
 }
 
 .btn-primary-outline:hover {
   color: #fff;
-  background-color: #2f45ff;
-  border-color: #2239ff;
+  background-color: $primary-color;
+  border-color: $primary-color;
 }
 
 .btn-secondary-outline {

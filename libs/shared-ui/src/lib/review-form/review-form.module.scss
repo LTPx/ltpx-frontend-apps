@@ -1,0 +1,42 @@
+.container {
+  width: 100%;
+  border: 1px solid #d4d4d4;
+  .review {
+    padding: 3rem 3rem;
+
+    .review-form {
+      display: flex;
+      flex-direction: column;
+      padding-bottom: 1rem;
+      .title {
+        font-size: 20px;
+        color: #302e52;
+        font-weight: bold;
+        padding-bottom: 1rem;
+      }
+      label {
+        font-size: 14px;
+        color: #8d959e;
+        padding-bottom: 0.5rem;
+      }
+    }
+
+    .form {
+      
+      label{
+        font-size: 16px;
+        color: #302e52;
+        font-weight: bold;
+      }
+
+      .input {
+        padding-bottom: 1rem;
+      }
+
+      .textArea {
+        padding-bottom: 1rem;
+      }
+
+    }
+  }
+}

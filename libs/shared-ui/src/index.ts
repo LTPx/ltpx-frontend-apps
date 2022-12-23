@@ -3,6 +3,13 @@ export * from './lib/quiz-question/quiz-question';
 export * from './lib/conditional-question-quiz/conditional-question-quiz';
 export * from './lib/multiple-options-quiz/multiple-options-quiz';
 export * from './lib/file-upload/file-upload';
+export * from './lib/text-area/text-area';
+export * from './lib/review-form/review-form';
+export * from './lib/comment-course/comment-course';
+export * from './lib/comment-course/comment-course';
+export * from './lib/rating-course/rating-course';
+export * from './lib/teacher-overview/teacher-overview';
+export * from './lib/buy-course-card/buy-course-card';
 export * from './lib/brand/brand';
 export * from './lib/footer/footer';
 export * from './lib/category-card/category-card';
@@ -23,3 +30,4 @@ export * from './lib/nav/nav';
 export * from './lib/input/input';
 export * from './lib/button/button';
 export * from './lib/header/header';
+export * from '../src/styles/styles.module.scss'

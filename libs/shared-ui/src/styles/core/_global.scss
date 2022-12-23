@@ -1,0 +1,86 @@
+@import './_colors.scss';
+@import './_fonts.scss';
+
+html {
+  // -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  color: $text-color;
+  font-size: 1rem;
+  font-family: $system-font;
+  // -webkit-font-smoothing: antialiased;
+  // -moz-osx-font-smoothing: grayscale;
+}
+
+*,
+:after,
+:before {
+  border: 0 solid;
+  box-sizing: border-box;
+}
+
+blockquote,
+dd,
+dl,
+figure,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+hr,
+p,
+pre {
+  margin: 0;
+}
+
+
+h1 {
+  font-weight: 600;
+}
+
+h2,
+h3,
+h4,
+h5 {
+  font-weight: 400;
+}
+
+// h1 {
+//   font-size: 24px;
+// }
+
+// h2 {
+//   font-size: 20px;
+// }
+
+// h3 {
+//   font-size: 16px;
+// }
+
+ul,
+li {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+a:focus,
+span:focus,
+div:focus {
+  outline: none;
+}
+
+.label {
+  font-weight: 600;
+  font-size: 0.875rem;
+  line-height: 1.5;
+}

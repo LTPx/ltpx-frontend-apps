@@ -53,7 +53,7 @@ export function CourseContents(props: CourseContentsProps) {
     <div className="contents">
       <div className={styles['header-text']}>
         <h2>Contenidos</h2>
-        <h4 className='muted'>Los contenidos que se impartiran en el desarrollo del curso</h4>
+        <h4 className='muted'>Agrega los contenidos que se impartiran en el desarrollo del curso</h4>
       </div>
       { contentForms.map((form, index)=> (
         <div className={styles['form-content']} key={index}>
@@ -74,9 +74,6 @@ export function CourseContents(props: CourseContentsProps) {
             onChange={(e: { target: HTMLInputElement; }) => handleInputChange(e, index)}
             name='description'
           />
-          {/* <div className={styles['media']}>
-            <FileUpload text='Subir archivos' />
-          </div> */}
         </div>
       )) }
       <Button

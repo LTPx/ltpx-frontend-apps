@@ -5,6 +5,7 @@ import CourseContents from '../course/course-contents/course-contents';
 import CourseGeneralInformation from '../course/course-general-information/course-general-information';
 import CourseSettings from '../course/course-settings/course-settings';
 import Quiz from '../quiz/quiz';
+import TeacherClasses from '../teacher-classes/teacher-classes';
 import styles from './new-course.module.scss';
 
 /* eslint-disable-next-line */
@@ -18,6 +19,7 @@ const optionsSave = [
 const tabs = [
   {text: 'Informacion General'},
   {text: 'Contenidos'},
+  {text: 'Agendar Clases'},
   {text: 'Test'},
   {text: 'Logros'},
   {text: 'Settings'},
@@ -54,12 +56,15 @@ export function NewCourse(props: NewCourseProps) {
               <CourseContents/>
             )}
             { indexViewSelected === 2 && (
-              <Quiz/>
+              <TeacherClasses/>
             )}
             { indexViewSelected === 3 && (
-              <Achievement/>
+              <Quiz/>
             )}
             { indexViewSelected === 4 && (
+              <Achievement/>
+            )}
+            { indexViewSelected === 5 && (
               <CourseSettings/>
             )}
           </section>

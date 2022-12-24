@@ -19,7 +19,15 @@ import {
   Purchases,
   Settings,
 } from "../pages/student/index";
-import { Earnings, ManageCourses, NewCourse, TeacherAccount, TeacherCourses, TeacherDashboard } from "../pages/teacher";
+import {
+  Earnings,
+  ManageCourses,
+  NewCourse,
+  TeacherAccount,
+  TeacherCourseDetail,
+  TeacherCourses,
+  TeacherDashboard
+} from "../pages/teacher";
 import { SiteRoutes } from "./site-routes";
 
 const linksDashboardStudent = [
@@ -141,6 +149,7 @@ export const AppRouter = () => {
           <Route path="earnings" element={<Earnings/>}/>
           <Route path="courses" element={<ManageCourses/>}>
             <Route path="/teacher/courses" element={<Navigate replace to="all" />} />
+            <Route path=":courseId" element={<TeacherCourseDetail/>}/>
             <Route path="all" element={<TeacherCourses/>}/>
             <Route path="new" element={<NewCourse/>}/>
           </Route>

@@ -14,10 +14,11 @@ export interface TabsProps {
   isNav?: boolean;
   onClickTab?: (indexTab: number) => void;
   vertical?: boolean;
+  className?: string;
 }
 
 export function Tabs(props: TabsProps) {
-  const { tabs, isNav, onClickTab, vertical } = props;
+  const { tabs, isNav, onClickTab, vertical, className } = props;
   const [indexSelected, setIndexSelected] = useState(0);
   const selectTab = (index: number) => {
     setIndexSelected(index);
@@ -27,7 +28,7 @@ export function Tabs(props: TabsProps) {
   const classPosition = vertical ? `${styles['container']} ${styles['vertical']}` : styles['container'];
 
   return (
-    <div className={classPosition}>
+    <div className={`${classPosition} ${className || ''}` }>
       {isNav && tabs.map((tab, index)=>(
         <NavLink
           key={index}

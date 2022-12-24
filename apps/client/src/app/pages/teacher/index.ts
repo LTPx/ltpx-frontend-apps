@@ -4,3 +4,4 @@ export * from './teacher-account/teacher-account';
 export * from './teacher-dashboard/teacher-dashboard';
 export * from './new-course/new-course';
 export * from './teacher-courses/teacher-courses';
+export * from './teacher-course-detail/teacher-course-detail';

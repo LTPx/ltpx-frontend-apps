@@ -1,3 +1,5 @@
+@import '../../styles/styles.module.scss';
+
 .container {
   display: flex;
   border-bottom: 1px solid #c7c7c7;
@@ -12,9 +14,10 @@
       border-left: 2px solid #d4d4d4;
       cursor: pointer;
 
+
       &.selected {
-        border-left: 2px solid #5b5992;
-        color: #5b5992;
+        border-left: 2px solid $primary-color;
+        color: $primary-color;
       }
     }
   }
@@ -27,11 +30,12 @@
   cursor: pointer;
 
   &:hover{
-    font-weight: 500;
+    border-bottom: 1px solid $primary-color-400;
+
   }
 
   &.selected{
-    border-bottom: 2px solid #5b5992;
-    color: #5b5992;
+    border-bottom: 2px solid $primary-color;
+    color: $primary-color;
   }
 }

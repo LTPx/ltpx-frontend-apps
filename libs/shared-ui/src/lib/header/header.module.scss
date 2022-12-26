@@ -28,8 +28,11 @@
   &:hover {
     color: $primary-color;
   }
+
+  &.active-link {
+    h4 {
+      color: $primary-color;
+    }
+  }
 }
 
-.actions {
-
-}

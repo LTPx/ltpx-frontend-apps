@@ -93,13 +93,13 @@ export function CourseDetails(props: CourseDetailsProps) {
                   <div className={styles['items']}>
                     {courseDetails.overview.goals.map((goal, index) => (
                       <div className={styles['item']} key={index}>
-                        <Icon icon={'check-circle'} size={15} />
+                        <Icon icon={'check-circle'} size={12} />
                         <h5>{goal}</h5>
                       </div>
                     ))}
                   </div>
                 </section>
-                <section className="requirements">
+                <section className={`${styles['requirements']}`}>
                   <h3>Requirements</h3>
                   {courseDetails.overview.requirements.map(
                     (requirement, index) => (

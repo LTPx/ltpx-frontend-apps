@@ -1,7 +1,9 @@
+@import '../../styles/styles.module.scss';
+
 .container {
   display: flex;
   width: 100%;
-  padding-bottom: 1rem;
+  padding-bottom: $spacing-lg;
 
   .avatar-content {
     padding: 1rem 1rem;
@@ -16,22 +18,22 @@
       label {
         font-size: 20px;
         font-weight: bold;
-        color: #302e52;
+        color: $text-color;
       }
     }
-    
+
     .review-title {
       padding-bottom: 0.5rem;
       font-size: 12px;
       font-style: oblique;
-      color: #8d959e;
+      color: $text-gray-color;
       display: flex;
       justify-content: space-between;
       padding-right: 1rem;
     }
     .comment {
       font-size: 14px;
-      color: #8d959e;
+      color: $text-gray-color;
       text-align: justify;
     }
   }

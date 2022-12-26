@@ -4,7 +4,7 @@ import CategoryCard from './category-card';
 
 describe('CategoryCard', () => {
   it('should render successfully', () => {
-    const { baseElement } = render(<CategoryCard />);
+    const { baseElement } = render(<CategoryCard icon={''} />);
     expect(baseElement).toBeTruthy();
   });
 });

@@ -1,3 +1,5 @@
+@import "../../styles/styles.module.scss";
+
 .container {
   background-color: #f7f7f7;
   grid-area: nav;
@@ -9,16 +11,28 @@
   border-radius: 0.25rem;
   text-decoration: none;
   color: #302e52;
+  padding: 1rem;
 
   svg {
-    margin: 0 20px;
+    margin: 0 1rem 0 0.5rem;
+  }
+
+  &:hover {
+    background-color: $stroke-color;
+    color: $primary-color;
   }
 }
 
 .active-link {
-  background-color: #5b5992;
+  background-color: $primary-color;
+  cursor: initial;
 
   svg, h4 {
     color: #fff;
+  }
+
+  &:hover {
+    background-color: $primary-color;;
+    color: $white-color;
   }
 }

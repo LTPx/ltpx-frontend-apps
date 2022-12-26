@@ -1,0 +1,29 @@
+.container {
+
+  .header {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem 2rem;
+
+    .actions {
+      display: flex;
+      align-items: center;
+      gap: 1rem
+    }
+  }
+
+  .content {
+    display: flex;
+    border-top: 1px solid #d4d4d4;
+
+    .course-sections {
+      // background-color: #f7f7f7;
+      border-right: 1px solid #d4d4d4;
+    }
+
+    .course-section-content {
+      flex-grow: 1;
+      padding: 2rem 4rem;
+    }
+  }
+}

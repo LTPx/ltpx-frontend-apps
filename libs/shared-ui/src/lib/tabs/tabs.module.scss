@@ -1,25 +1,41 @@
+@import '../../styles/styles.module.scss';
+
 .container {
   display: flex;
   border-bottom: 1px solid #c7c7c7;
+
+  &.vertical {
+    flex-direction: column;
+    border-bottom: none;
+
+    .tab {
+      padding: 1rem 2.5rem;
+      border-bottom: 1px solid #d4d4d4;
+      border-left: 2px solid #d4d4d4;
+      cursor: pointer;
+
+
+      &.selected {
+        border-left: 2px solid $primary-color;
+        color: $primary-color;
+      }
+    }
+  }
 }
 
 .tab {
   padding: 5px 20px;
-  cursor: pointer;
   text-decoration: none;
   color: initial;
+  cursor: pointer;
 
   &:hover{
-    font-weight: bold;
-  }
-}
+    border-bottom: 1px solid $primary-color-400;
 
-.tab-selected {
-  padding: 5px 20px;
-  cursor: pointer;
-  text-decoration: none;
-  color: initial;
-  border-bottom: 2px solid #5b5992;
-  color: #5b5992;
-  // font-weight: bold;
+  }
+
+  &.selected{
+    border-bottom: 2px solid $primary-color;
+    color: $primary-color;
+  }
 }

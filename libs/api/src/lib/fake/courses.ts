@@ -76,6 +76,119 @@ const createRandomCourseDetail = () => (
   }
 )
 
+const createRandomTeacherCourseDetail = () => (
+  {
+    entity: {
+      id: faker.datatype.uuid(),
+      image: faker.image.people(640, 480, true),
+      title: `Learn how to make a: ${faker.commerce.product()}`,
+      description: `Learning: ${faker.commerce.productDescription()}`,
+      category: 'Science',
+      level: 'Advance',
+      language: 'English',
+      willLearn: faker.commerce.productDescription(),
+      requirements: faker.commerce.productDescription(),
+      status: 'published'
+    },
+    contents: [
+      {
+        title: faker.commerce.department(),
+        description: faker.commerce.productDescription(),
+      },
+      {
+        title: faker.commerce.department(),
+        description: faker.commerce.productDescription(),
+      },
+      {
+        title: faker.commerce.department(),
+        description: faker.commerce.productDescription(),
+      },
+      {
+        title: faker.commerce.department(),
+        description: faker.commerce.productDescription(),
+      },
+      {
+        title: faker.commerce.department(),
+        description: faker.commerce.productDescription(),
+      },
+    ],
+    quiz: [
+      {
+        question: 'Que es el universo?',
+        description: 'Utilice una definicion corta',
+        questionType: 'answer'
+      },
+      {
+        question: 'El planeta Tierra que contiene?',
+        description: 'Seleccione las respuestas correctas',
+        questionType: 'multiple',
+        answers: [
+          {
+            answer: 'Animales',
+            correct: true
+          },
+          {
+            answer: 'Galaxias',
+            correct: false
+          },
+          {
+            answer: 'Personas',
+            correct: true
+          },          {
+            answer: 'Sol',
+            correct: false
+          }
+        ]
+      },
+      {
+        question: 'Saturno esta a la distancia de',
+        description: 'Seleccione la respuesta correcta',
+        questionType: 'multiple',
+        answers: [
+          {
+            answer: '200 años luz',
+            correct: true
+          },
+          {
+            answer: '1200 años luz',
+            correct: false
+          },
+          {
+            answer: '300 años luz',
+            correct: false
+          },          {
+            answer: '100 años luz',
+            correct: false
+          }
+        ]
+      },
+      {
+        question: 'Es verdad que la luz del sol se apagara en 200 años',
+        description: '',
+        questionType: 'conditional',
+        answer: {
+          true: false,
+          false: true,
+        }
+      },
+    ],
+    achievements: [
+      {
+        title: 'Buen Inicio',
+        rule: 'by-quiz',
+        entity: 'quizzes',
+        selectedIds: ['1'],
+      },
+      {
+        title: 'Excelente Avance',
+        rule: 'by-content',
+        entity: 'contents',
+        selectedIds: ['5'],
+      }
+    ]
+  }
+)
+
 export const buildCourses = (amount: number):Course[] => {
   const mocks = Array.from(Array(amount).keys())
   return mocks.map(() => {
@@ -85,4 +198,8 @@ export const buildCourses = (amount: number):Course[] => {
 
 export const buildCourseDetails = () => {
   return createRandomCourseDetail();
+}
+
+export const buildRandomTeacherCourseDetail = () => {
+  return createRandomTeacherCourseDetail();
 }

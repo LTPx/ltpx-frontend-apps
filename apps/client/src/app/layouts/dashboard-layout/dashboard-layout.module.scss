@@ -1,3 +1,5 @@
+@import "../../../styles.scss";
+
 .container {
   display: grid;
   grid-template-columns: 260px 1fr;
@@ -20,19 +22,21 @@
   background-color: #f7f7f7;
   padding: 30px;
   border-right: 1px solid #ebecef;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
 }
 
 .logout {
   display: flex;
   align-items: center;
-  background-color: #fff;
+  padding: 1rem;
   cursor: pointer;
 
   svg {
     margin: 0 20px;
+  }
+
+  &:hover {
+    background-color: $stroke-color;
+    color: $primary-color;
   }
 }
 

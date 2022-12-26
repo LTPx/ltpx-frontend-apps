@@ -30,62 +30,13 @@ import {
 } from "../pages/teacher";
 import { SiteRoutes } from "./site-routes";
 
-const linksDashboardStudent = [
-  {
-    title: 'Dashboard',
-    url: 'dashboard',
-    icon: {
-      icon: 'store',
-      size: 20,
-    }
-  },
-  {
-    title: 'My Courses',
-    url: 'courses/learning',
-    icon: {
-      icon: 'university',
-      size: 20,
-    }
-  },
-  {
-    title: 'My Classes',
-    url: 'classes/week',
-    icon: {
-      icon: 'desktop',
-      size: 20,
-    }
-  },
-  {
-    title: 'Payments',
-    url: 'payments/purchases',
-    icon: {
-      icon: 'wallet',
-      size: 20,
-    }
-  },
-  {
-    title: 'Settings',
-    url: 'settings',
-    icon: {
-      icon: 'cog',
-      size: 20,
-    }
-  },
-  {
-    title: 'My Account',
-    url: 'account',
-    icon: {
-      icon: 'user',
-      size: 20,
-    }
-  }
-];
+
 
 export const AppRouter = () => {
   const { t } = useTranslation();
-  const linksDashboardTeacher = [
+  const linksDashboardStudent = [
     {
-      title: t('dashboard.dashboard'),
+      title: t('dashboards.student.dashboard'),
       url: 'dashboard',
       icon: {
         icon: 'store',
@@ -93,7 +44,7 @@ export const AppRouter = () => {
       }
     },
     {
-      title: t('dashboard.courses'),
+      title: t('dashboards.student.courses'),
       url: 'courses',
       icon: {
         icon: 'university',
@@ -101,7 +52,57 @@ export const AppRouter = () => {
       }
     },
     {
-      title: t('dashboard.earnings'),
+      title: t('dashboards.student.classes'),
+      url: 'classes',
+      icon: {
+        icon: 'desktop',
+        size: 20,
+      }
+    },
+    {
+      title: t('dashboards.student.payments'),
+      url: 'payments',
+      icon: {
+        icon: 'wallet',
+        size: 20,
+      }
+    },
+    {
+      title: t('dashboards.student.settings'),
+      url: 'settings',
+      icon: {
+        icon: 'cog',
+        size: 20,
+      }
+    },
+    {
+      title: t('dashboards.student.account'),
+      url: 'account',
+      icon: {
+        icon: 'user',
+        size: 20,
+      }
+    }
+  ];
+  const linksDashboardTeacher = [
+    {
+      title: t('dashboards.teacher.dashboard'),
+      url: 'dashboard',
+      icon: {
+        icon: 'store',
+        size: 20,
+      }
+    },
+    {
+      title: t('dashboards.teacher.courses'),
+      url: 'courses',
+      icon: {
+        icon: 'university',
+        size: 20,
+      }
+    },
+    {
+      title: t('dashboards.teacher.earnings'),
       url: 'earnings',
       icon: {
         icon: 'wallet',
@@ -109,7 +110,7 @@ export const AppRouter = () => {
       }
     },
     {
-      title: t('dashboard.account'),
+      title: t('dashboards.teacher.account'),
       url: 'account',
       icon: {
         icon: 'user',
@@ -127,16 +128,19 @@ export const AppRouter = () => {
         <Route path="student" element={<DashboardLayout links={linksDashboardStudent}/>}>
           <Route path="dashboard" element={<Dashboard/>}/>
           <Route path="courses" element={<CoursesLayout/>}>
+            <Route path="/student/courses" element={<Navigate replace to="learning" />} />
             <Route path="learning" element={<Courses state={StateCourses.learning}/>} />
             <Route path="finished" element={<Courses state={StateCourses.finished}/>} />
             <Route path="favorites" element={<Courses state={StateCourses.favorites}/>} />
           </Route>
           <Route path="classes" element={<ClassesLayout/>}>
+            <Route path="/student/classes" element={<Navigate replace to="week" />} />
             <Route path="week" element={<Classes/>}/>
             <Route path="calendar" element={<ClassesCalendar/>}/>
             <Route path=":classId" element={<LiveClass/>}/>
           </Route>
           <Route path="payments" element={<PaymentsLayout/>}>
+            <Route path="/student/payments" element={<Navigate replace to="purchases" />} />
             <Route path="purchases" element={<Purchases/>}/>
             <Route path="invoice" element={<Invoice/>}/>
           </Route>

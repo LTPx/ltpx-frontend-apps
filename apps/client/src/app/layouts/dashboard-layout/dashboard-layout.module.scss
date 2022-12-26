@@ -14,12 +14,12 @@
 
 .content {
   grid-area: content;
-  background-color: #f8f9fb;
-  padding: 20px 50px;
+  background-color: $background-gray-color;
+  padding: 3rem 4rem;
 }
 
 .navbar {
-  background-color: #f7f7f7;
+  background-color: $white-color;
   padding: 30px;
   border-right: 1px solid #ebecef;
 }
@@ -31,7 +31,7 @@
   cursor: pointer;
 
   svg {
-    margin: 0 20px;
+    margin: 0px 1rem 0px 0.5rem;
   }
 
   &:hover {

@@ -1,23 +1,27 @@
-.container{
+@import '../../styles/styles.module.scss';
+
+.container {
   width: 100%;
-  padding-bottom: 1rem;
+  padding-bottom: $spacing-xl;
+
   label {
     font-size: 20px;
     font-weight: bold;
-    color: #302e52;
+    color: $text-color;
   }
 }
 
 .content {
-  padding-top: 1.5rem;
+  padding-top: $spacing-md;
   display: flex;
-  gap: 1rem;
+  gap: $spacing-sm;
+
   .total-rating {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 0.5rem;
+    gap: $spacing-xs;
     padding: 2rem 3rem;
     border: 1px solid #d4d4d4;
 
@@ -28,22 +32,23 @@
 
     label {
       font-size: 14px;
-      color: #302e52;
-    }
-  } 
-  
-  .rating-content {
-    padding: 1rem 1rem;
-    .rating-bar {
-      display: flex;
-      align-items: center;
-      gap: 1.5rem;
-      padding-bottom: 1rem;
-  
-      .bar {
-        width: 300px;
-      } 
+      color: $text-color;
     }
   }
 
+  .rating-content {
+    padding: 1rem 1rem;
+
+    .rating-bar {
+      display: flex;
+      align-items: center;
+      gap: $spacing-md;
+      padding-bottom: $spacing-sm;
+
+      .bar {
+        width: 295px;
+        height: 10px;
+      }
+    }
+  }
 }

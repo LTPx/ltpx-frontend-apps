@@ -51,7 +51,7 @@ const createRandomCourseDetail = () => (
       biography: `I am: ${faker.commerce.productDescription()}`
     },
     ratings: [
-      { stars: 5, reviewers: faker.datatype.number(5)},
+      { stars: 5, reviewers: faker.datatype.number(10)},
       { stars: 4, reviewers: faker.datatype.number(10)},
       { stars: 3, reviewers: faker.datatype.number(5)},
       { stars: 2, reviewers: faker.datatype.number(2)},

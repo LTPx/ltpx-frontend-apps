@@ -56,7 +56,7 @@ export function Input(props: InputProps) {
   }
 
   return (
-    <div className={css['container']}>
+    <div className={`${css['container']} ${className}`}>
       {label && (
         <label className={css['label']}>{label}</label>
       )}

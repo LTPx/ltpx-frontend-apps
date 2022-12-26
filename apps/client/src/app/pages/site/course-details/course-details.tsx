@@ -93,7 +93,9 @@ export function CourseDetails(props: CourseDetailsProps) {
                   <div className={styles['items']}>
                     {courseDetails.overview.goals.map((goal, index) => (
                       <div className={styles['item']} key={index}>
-                        <Icon icon={'check-circle'} size={12} />
+                        <div>
+                          <Icon icon={'check-circle'} size={16} color='#4A8F9F'/>
+                        </div>
                         <h5>{goal}</h5>
                       </div>
                     ))}
@@ -103,7 +105,7 @@ export function CourseDetails(props: CourseDetailsProps) {
                   <h3>Requirements</h3>
                   {courseDetails.overview.requirements.map(
                     (requirement, index) => (
-                      <ul key={index}>
+                      <ul key={index} className={styles['list-requirements']}>
                         <li>
                           <h5>{requirement}</h5>
                         </li>

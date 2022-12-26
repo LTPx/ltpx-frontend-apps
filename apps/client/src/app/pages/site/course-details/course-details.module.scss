@@ -1,7 +1,7 @@
 @import '../../../../styles.scss';
 
 .container {
-  background-color: $background-gray-color;
+  background-color: $white-color;
 }
 
 .course-details {
@@ -60,7 +60,7 @@
     }
 
     .achievements {
-      
+
       h3 {
         color: $text-color;
         padding-bottom: $spacing-sm;
@@ -71,11 +71,6 @@
         display: flex;
         flex-direction: column;
         gap: $spacing-sm;
-
-        .item {
-          h5 {
-          }
-        }
       }
     }
 
@@ -85,7 +80,7 @@
       gap: $spacing-sm;
 
       h3 {
-        color: $text-color;        
+        color: $text-color;
       }
 
       ul {
@@ -94,10 +89,6 @@
 
         li {
           color: $text-gray-color;
-
-          h5 {
-            // padding-bottom: $spacing-sm;
-          }
         }
       }
     }
@@ -109,9 +100,10 @@
   .items {
     .item {
       display: flex;
-      align-items: center;
+      align-items: start;
 
       svg {
+        margin-top: 0.2rem;
         margin-right: 0.5rem;
       }
     }

@@ -34,7 +34,7 @@ export function BuyCourseCard(props: BuyCourseCardProps) {
 
   return (
     <div className={styles['container']}>
-      <div className={`${styles['buy-card']} card`}>
+      <div className={`${styles['buy-card']}`}>
         <img src={image} alt="" />
         <div className={`${styles['summary']}`}>
           <div className={styles['price-promo']}>

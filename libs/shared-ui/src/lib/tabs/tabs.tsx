@@ -18,30 +18,39 @@ export function Tabs(props: TabsProps) {
   const { tabs, isNav } = props;
   const [indexSelected, setIndexSelected] = useState(0);
   const selectTab = (index: number) => {
-    setIndexSelected(index)
-  }
+    setIndexSelected(index);
+  };
 
   return (
     <div className={styles['container']}>
-      {isNav && tabs.map((tab, index)=>(
-        <NavLink
-          key={index}
-          className={({ isActive }) =>
-            isActive ? `${styles['tab-selected']}` : `${styles['tab']}`
-          }
-          to={tab.url ? tab.url : ''}
-        >
-          {tab.text}
-        </NavLink>
-      ))}
-      {!isNav && tabs.map((tab, index)=>(
-        <div key={index}
-          className={indexSelected === index ? `${styles['tab-selected']}` : `${styles['tab']}`}
-          onClick={()=>{selectTab(index)}}
-        >
-          {tab.text}
-        </div>
-      ))}
+      {isNav &&
+        tabs.map((tab, index) => (
+          <NavLink
+            key={index}
+            className={({ isActive }) =>
+              isActive ? `${styles['tab-selected']}` : `${styles['tab']}`
+            }
+            to={tab.url ? tab.url : ''}
+          >
+            {tab.text}
+          </NavLink>
+        ))}
+      {!isNav &&
+        tabs.map((tab, index) => (
+          <div
+            key={index}
+            className={
+              indexSelected === index
+                ? `${styles['tab-selected']}`
+                : `${styles['tab']}`
+            }
+            onClick={() => {
+              selectTab(index);
+            }}
+          >
+            {tab.text}
+          </div>
+        ))}
     </div>
   );
 }

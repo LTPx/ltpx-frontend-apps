@@ -1,5 +1,7 @@
+@import '../../../../styles.scss';
+
 .container {
-  background-color: #f7f7f7;
+  background-color: $background-gray-color;
 }
 
 .course-details {
@@ -8,7 +10,18 @@
 
   .description {
     margin-right: 10rem;
-    
+
+    .description-title {
+      padding-bottom: $spacing-sm;
+      h1 {
+        color: $text-color;
+        padding-bottom: $spacing-sm;
+      }
+
+      h4 {
+        color: $text-gray-color;
+      }
+    }
 
     .description-course {
       display: flex;
@@ -18,10 +31,11 @@
       .item {
         display: flex;
         flex-direction: column;
+        color: $text-color;
 
         h5 {
           margin-top: 0;
-          color: #8d959e;
+          color: $text-gray-color;
         }
       }
     }
@@ -29,9 +43,68 @@
 }
 
 .summary-course {
+  padding-top: $spacing-sm;
+
+  .overview {
+    padding-top: $spacing-sm;
+
+    .course-description {
+      h3 {
+        color: $text-color;
+        padding-bottom: $spacing-sm;
+      }
+
+      p {
+        color: $text-gray-color;
+      }
+    }
+
+    .achievements {
+      
+      h3 {
+        color: $text-color;
+        padding-bottom: $spacing-sm;
+      }
+
+      .items {
+        color: $text-gray-color;
+        display: flex;
+        flex-direction: column;
+        gap: $spacing-sm;
+
+        .item {
+          h5 {
+          }
+        }
+      }
+    }
+
+    .requirements {
+      display: flex;
+      flex-direction: column;
+      gap: $spacing-sm;
+
+      h3 {
+        color: $text-color;        
+      }
+
+      ul {
+        padding-left: $spacing-sm;
+        color: $text-gray-color;
+
+        li {
+          color: $text-gray-color;
+
+          h5 {
+            // padding-bottom: $spacing-sm;
+          }
+        }
+      }
+    }
+  }
 
   section {
-     margin-top: 2rem;
+    margin-top: $spacing-md;
   }
   .items {
     .item {
@@ -44,4 +117,3 @@
     }
   }
 }
-

@@ -1,6 +1,9 @@
+@import '../../styles/styles.module.scss';
+
 .container {
   width: 100%;
   border: 1px solid #d4d4d4;
+  margin-top: $spacing-xl;
   .review {
     padding: 3rem 3rem;
 
@@ -10,22 +13,21 @@
       padding-bottom: 1rem;
       .title {
         font-size: 20px;
-        color: #302e52;
+        color: $text-color;
         font-weight: bold;
         padding-bottom: 1rem;
       }
       label {
         font-size: 14px;
-        color: #8d959e;
+        color: $text-gray-color;
         padding-bottom: 0.5rem;
       }
     }
 
     .form {
-      
-      label{
+      label {
         font-size: 16px;
-        color: #302e52;
+        color: $text-color;
         font-weight: bold;
       }
 
@@ -36,7 +38,6 @@
       .textArea {
         padding-bottom: 1rem;
       }
-
     }
   }
 }

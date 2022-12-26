@@ -1,3 +1,5 @@
+@import '../../styles/styles.module.scss';
+
 .container {
   display: flex;
   border-bottom: 1px solid #c7c7c7;
@@ -7,9 +9,9 @@
   padding: 5px 20px;
   cursor: pointer;
   text-decoration: none;
-  color: initial;
+  color: $text-color;
 
-  &:hover{
+  &:hover {
     font-weight: bold;
   }
 }
@@ -21,5 +23,4 @@
   color: initial;
   border-bottom: 2px solid #5b5992;
   color: #5b5992;
-  // font-weight: bold;
 }

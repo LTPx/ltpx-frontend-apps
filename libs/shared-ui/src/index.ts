@@ -1,3 +1,5 @@
+export * from './lib/list-user/list-user';
+export * from './lib/tags-card/tags-card';
 export * from './lib/achievement-card/achievement-card';
 export * from './lib/course-counter-card/course-counter-card';
 export * from './lib/selected-items/selected-items';

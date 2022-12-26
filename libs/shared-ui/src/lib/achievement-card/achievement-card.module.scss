@@ -1,3 +1,5 @@
+@import '../../styles/styles.module.scss';
+
 .container {
   box-sizing: border-box;
   width: 350px;
@@ -8,14 +10,16 @@
   border-radius: 4px;
 
   h3 {
-    padding-top: 23px;
+    padding-top: $spacing-md;
     padding-left: 29px;
+    color: $text-color;
   }
 
   .achievement {
     display: flex;
     padding-left: 29px;
-    padding-top: 22px;
+    padding-top: $spacing-md;
+    padding-bottom: $spacing-md;
 
     img {
       width: 65px;
@@ -28,8 +32,20 @@
       flex-direction: column;
 
       h4 {
+        color: $text-color;
+      }
 
+      p{
+        color: $text-gray-color;
       }
     }
+  }
+
+  .progress {
+    display: flex;
+    flex-direction: column;
+    padding-left: 27px;
+    padding-right: 26px;
+
   }
 }

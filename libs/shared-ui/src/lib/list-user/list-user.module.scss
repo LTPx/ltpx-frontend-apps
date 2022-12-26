@@ -1,0 +1,36 @@
+@import '../../styles/styles.module.scss';
+
+.container {
+  box-sizing: border-box;
+  width: 350px;
+  height: 265px;
+  background: #FFFFFF;
+  border: 1px solid #E7E7EC;
+  box-shadow: 0px 8px 15px rgba(140, 152, 164, 0.1);
+  border-radius: 4px;
+  padding-top: 1rem;
+  padding-left: 1rem;
+
+  h3 {
+    color: $text-color;
+    
+  }
+
+  h4 {
+    color: $text-gray-color;
+    padding-bottom: 1rem;
+  }
+
+  .user {
+  width: 290px;
+  height: 69px;
+  background: #F7F9FB;
+  border-radius: 4px;
+  display: flex;
+  padding-left: 1rem;
+
+    h4 {
+      color: $text-gray-color;
+    }
+  }
+}

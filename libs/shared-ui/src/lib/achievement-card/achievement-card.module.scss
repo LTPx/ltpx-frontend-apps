@@ -1,0 +1,35 @@
+.container {
+  box-sizing: border-box;
+  width: 350px;
+  height: 281px;
+  background: #FFFFFF;
+  border: 1px solid #E7E7EC;
+  box-shadow: 0px 8px 15px rgba(140, 152, 164, 0.1);
+  border-radius: 4px;
+
+  h3 {
+    padding-top: 23px;
+    padding-left: 29px;
+  }
+
+  .achievement {
+    display: flex;
+    padding-left: 29px;
+    padding-top: 22px;
+
+    img {
+      width: 65px;
+      height: 70px;
+      padding-right: 21px;
+    }
+
+    .describe {
+      display: flex;
+      flex-direction: column;
+
+      h4 {
+
+      }
+    }
+  }
+}

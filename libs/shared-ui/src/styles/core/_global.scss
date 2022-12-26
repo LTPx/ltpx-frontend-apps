@@ -14,13 +14,6 @@ body {
   // -moz-osx-font-smoothing: grayscale;
 }
 
-*,
-:after,
-:before {
-  border: 0 solid;
-  box-sizing: border-box;
-}
-
 blockquote,
 dd,
 dl,
@@ -80,7 +73,7 @@ div:focus {
 }
 
 .label {
-  font-weight: 600;
+  font-weight: 500;
   font-size: 0.875rem;
   line-height: 1.5;
 }

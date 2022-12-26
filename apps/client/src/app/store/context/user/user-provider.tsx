@@ -47,7 +47,7 @@ export const UserProvider = ({children}: props) => {
       setUser,
       logoutApp,
       addCourseToCart,
-      removeCourseFromCart
+      removeCourseFromCart,
     }}>
       {children}
     </UserContext.Provider>

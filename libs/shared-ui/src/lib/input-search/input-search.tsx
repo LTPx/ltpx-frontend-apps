@@ -34,7 +34,7 @@ export function InputSearch(props: InputSearchProps) {
             position: Position.right
           }
         }
-        className={styles['input-lenin']}
+        className={styles['input']}
         {...other}
         onChange={(e: any) => onChange && onChange(e)}
       />

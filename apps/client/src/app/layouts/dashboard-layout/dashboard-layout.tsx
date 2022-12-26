@@ -1,3 +1,4 @@
+import { logout } from '@ltpx-frontend-apps/api';
 import { Button, Icon, Nav } from '@ltpx-frontend-apps/shared-ui';
 import { Outlet, useNavigate } from 'react-router-dom';
 import HeaderApp from '../../components/header-app/header-app';
@@ -63,12 +64,14 @@ export function DashboardLayout(props: DashboardLayoutProps) {
   const { setUser, logoutApp } = useUser();
   const navigate = useNavigate();
 
-  const logout = () => {
+  const logoutSession = async () => {
     sessionStorage.setItem('user', '');
     sessionStorage.setItem('isAuthenticated', 'false');
+    await logout();
     setUser({name:'', email:''});
     logoutApp();
     navigate('/home');
+    // console.log('out: ', resp);
   }
 
   return (
@@ -76,7 +79,7 @@ export function DashboardLayout(props: DashboardLayoutProps) {
       <HeaderApp/>
       <div className={styles['navbar']}>
         <Nav links={sidebarOptions}/>
-        <div className={styles['logout']} onClick={logout}>
+        <div className={styles['logout']} onClick={logoutSession}>
           <Icon icon='log-out' size={20}/>
           <h4>Logout</h4>
         </div>

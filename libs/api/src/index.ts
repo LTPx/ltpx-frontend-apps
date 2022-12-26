@@ -5,3 +5,6 @@ export * from '../src/lib/interfaces/course';
 export * from '../src/lib/fake/courses';
 export * from '../src/lib/fake/classes';
 export * from '../src/lib/fake/chat-messages';
+
+//api
+export * from '../src/lib/api/auth';

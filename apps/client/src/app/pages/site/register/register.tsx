@@ -5,6 +5,7 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { useContext } from 'react';
 import { UserContext } from '../../../store/context/user/user-context';
+import { registerUser } from '@ltpx-frontend-apps/api';
 
 /* eslint-disable-next-line */
 export interface RegisterProps {}
@@ -21,8 +22,8 @@ export function Register(props: RegisterProps) {
       password: '',
     },
     validationSchema: Yup.object({
-      name: Yup.string()
-                .required('Name is required'),
+      // name: Yup.string()
+      //           .required('Name is required'),
       email: Yup.string()
                 .email()
                 .required('Email is required'),
@@ -34,9 +35,10 @@ export function Register(props: RegisterProps) {
         email: data.email,
         name: data.name
       };
-      sessionStorage.setItem('user', JSON.stringify(user));
-      sessionStorage.setItem('isAuthenticated', 'true');
-
+      // sessionStorage.setItem('user', JSON.stringify(user));
+      // sessionStorage.setItem('isAuthenticated', 'true');
+      const {resp} = await registerUser(data.email, data.password);
+      console.log(resp);
       try{
         navigate('/student/dashboard');
         setUser(user);

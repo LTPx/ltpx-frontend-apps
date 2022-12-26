@@ -5,6 +5,7 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { useContext } from 'react';
 import { UserContext } from '../../../store/context/user/user-context';
+import { loginUser } from '@ltpx-frontend-apps/api';
 
 /* eslint-disable-next-line */
 export interface LoginProps {}
@@ -29,16 +30,18 @@ export function Login(props: LoginProps) {
     onSubmit: async data => {
       const user = {
         email: data.email,
-        name: 'Guest'
+        password: data.password
       }
-      localStorage.setItem('user', JSON.stringify(user));
       try{
-        navigate('/student/dashboard');
-        setUser(user);
+        await loginUser(user.email, user.password);
+        // localStorage.setItem('user', JSON.stringify(user));
+        // console.log('resp: ', resp);
+        // navigate('/student/dashboard');
+        // setUser(user);
         //TODO: integrate API
       }
-      catch(error){
-        console.log(error);
+      catch(error: any){
+        console.log('error: ', error.response);
       }
     }
   });

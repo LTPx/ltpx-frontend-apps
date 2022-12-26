@@ -1,3 +1,2 @@
-export function api(): string {
-  return 'api';
-}
+export const LOCAL_API_URL = 'http://localhost:3000';
+export const STAGING_API_URL = 'https://ltpx-client.netlify.app';

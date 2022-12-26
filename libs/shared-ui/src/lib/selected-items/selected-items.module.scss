@@ -1,0 +1,44 @@
+@import '../../styles/styles.module.scss';
+
+.container {
+  .items-container {
+    margin-top: 1.5rem;
+
+    .item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      border: 1px solid $stroke-color;
+      background-color: $white-color;
+      margin-bottom: 1rem;
+      padding: 1rem;
+      cursor: pointer;
+      color: #a3a3a3;
+
+      &:hover {
+        color: #737373;
+
+        h4 {
+          color: #737373;
+        }
+      }
+
+      &.checked {
+        background-color: #ecfdf5;
+        color: #10b981;
+
+        h4 {
+          color: #10b981;
+        }
+      }
+
+      svg {
+        padding: 0 1rem;
+      }
+
+      h4 {
+        color: #a3a3a3;
+      }
+    }
+  }
+}

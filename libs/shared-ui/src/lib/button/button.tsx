@@ -48,7 +48,7 @@ export function Button(props: ButtonProps) {
     primary: `${css['btn-primary']}`,
     secondary: `${css['btn-secondary']}`,
   };
-  const outlineSelectorClass = outline ? `btn-${color}-outline` : '';
+  const outlineSelectorClass = outline ? `btn-${selectedColor}-outline` : '';
   const btnClassOutline = outline ? `${css[outlineSelectorClass]}` : '';
   const btnClassFull = full ? css['btn-full'] : '';
   const btnClass = outline

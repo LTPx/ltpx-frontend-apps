@@ -1,3 +1,4 @@
+export * from './lib/filters/filters';
 export * from './lib/quiz-progress-card/quiz-progress-card';
 export * from './lib/list-user/list-user';
 export * from './lib/tags-card/tags-card';

@@ -14,7 +14,7 @@ export function QuizProgressCard(props: QuizProgressCardProps) {
   } = props;
   return (
     <div className={styles['container']}>
-      <h3>Quiz Complate</h3>
+      <h3>Quiz Complete</h3>
       <div className={styles['progress']}>
         <ProgressBar percentage={percentage} text={text}></ProgressBar>
       </div>

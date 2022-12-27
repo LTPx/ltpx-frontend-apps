@@ -10,7 +10,7 @@
   text-align: center;
   background-color: transparent;
   border: 1px solid transparent;
-  padding: .5rem 1rem;
+  padding: .75rem 1rem;
   border-radius: .25rem;
   cursor: pointer;
 }
@@ -26,7 +26,7 @@
 
 .btn-white {
   color: #212529;
-  background-color: #fff;
+  background-color: $white-color;
   border-color: #f7f7f7;
   box-shadow: inset 0 1px 0 hsla(0,0%,100%,.15),0 1px 1px rgba(39,44,51,.075);
 }
@@ -44,27 +44,27 @@
 // accent button
 
 .btn-accent {
-  color: #fff;
+  color: $white-color;
   background-color: #ed0b4c;
   border-color: #ed0b4c;
   box-shadow: inset 0 1px 0 hsla(0,0%,100%,.15),0 1px 1px rgba(39,44,51,.075);
 }
 
 .btn-accent:hover {
-  color: #fff;
+  color: $white-color;
   background-color: #c80940;
   border-color: #bc093c;
 }
 
 .btn-accent.focus,.btn-accent:focus {
-  color: #fff;
+  color: $white-color;
   background-color: #c80940;
   border-color: #bc093c;
   box-shadow: inset 0 1px 0 hsla(0,0%,100%,.15),0 1px 1px rgba(39,44,51,.075),0 0 0 1px rgba(240,48,103,.5)
 }
 
 .btn-accent.disabled,.btn-accent:disabled {
-  color: #fff;
+  color: $white-color;
   background-color: #ed0b4c;
   border-color: #ed0b4c;
 }
@@ -72,27 +72,27 @@
 // primary button
 
 .btn-primary {
-  color: #fff;
+  color: $white-color;
   background-color: $primary-color-400;
   border-color: $primary-color-400;
   box-shadow: inset 0 1px 0 hsla(0,0%,100%,.15),0 1px 1px rgba(39,44,51,.075);
 }
 
 .btn-primary:hover {
-  color: #fff;
+  color: $white-color;
   background-color: $primary-color;
   border-color: $primary-color;
 }
 
 .btn-primary.focus,.btn-primary:focus {
-  color: #fff;
+  color: $white-color;
   background-color: $primary-color;
   border-color: $primary-color;
   box-shadow: inset 0 1px 0 hsla(0,0%,100%,.15),0 1px 1px rgba(39,44,51,.075),0 0 0 1px rgba(111,126,255,.5);
 }
 
 .btn-primary.disabled,.btn-primary:disabled {
-  color: #fff;
+  color: $white-color;
   background-color: $primary-color-400;
   border-color: $primary-color-400;
 }
@@ -100,29 +100,29 @@
 // secondary button
 
 .btn-secondary {
-  color: #fff;
-  background-color: #868e96;
-  border-color: #868e96;
+  color: $white-color;
+  background-color: $secondary-color-400;
+  border-color: $secondary-color-400;
   box-shadow: inset 0 1px 0 hsla(0,0%,100%,.15),0 1px 1px rgba(39,44,51,.075);
 }
 
 .btn-secondary:hover {
-  color: #fff;
-  background-color: #727b84;
+  color: $white-color;
+  background-color: $secondary-color;
   border-color: #6c757d;
 }
 
 .btn-secondary.focus,.btn-secondary:focus {
-  color: #fff;
+  color: $white-color;
   background-color: #727b84;
   border-color: #6c757d;
   box-shadow: inset 0 1px 0 hsla(0,0%,100%,.15),0 1px 1px rgba(39,44,51,.075),0 0 0 1px rgba(152,159,166,.5);
 }
 
 .btn-secondary.disabled,.btn-secondary:disabled {
-  color: #fff;
-  background-color: #868e96;
-  border-color: #868e96;
+  color: $white-color;
+  background-color: $secondary-color-400;
+  border-color: $secondary-color-400;
 }
 
 // outline
@@ -132,7 +132,7 @@
 }
 
 .btn-white-outline:hover {
-  border-color: #fff;
+  border-color: $white-color;
 }
 
 .btn-accent-outline {
@@ -141,7 +141,7 @@
 }
 
 .btn-accent-outline:hover {
-  color: #fff;
+  color: $white-color;
   background-color: #ed0b4c;
   border-color: #ed0b4c;
 }
@@ -152,20 +152,20 @@
 }
 
 .btn-primary-outline:hover {
-  color: #fff;
+  color: $white-color;
   background-color: $primary-color;
   border-color: $primary-color;
 }
 
 .btn-secondary-outline {
-  border: 1px solid #868e96;
-  color:#868e96;
+  border: 1px solid $secondary-color-400;
+  color:$secondary-color-400;
 }
 
 .btn-secondary-outline:hover {
-  color: #fff;
-  background-color: #727b84;
-  border-color: #6c757d;
+  color: $white-color;
+  background-color: $secondary-color;
+  border-color: $secondary-color;
 }
 
 .btn-full {

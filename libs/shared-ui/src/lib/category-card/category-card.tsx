@@ -17,12 +17,12 @@ export function CategoryCard(props: CategoryCardProps) {
   return (
     <div className={styles['container']}>
       <Icon icon={icon} size={50} />
-      <h1 className={styles['title']}>
+      <h4 className={styles['title']}>
         {title}
-      </h1>
-      <h2 className={styles['description']}>
+      </h4>
+      <h5 className={styles['description']}>
         {description}
-      </h2>
+      </h5>
     </div>
   );
 }

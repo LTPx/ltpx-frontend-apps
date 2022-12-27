@@ -25,9 +25,11 @@ export function ReviewForm(props: ReviewFormProps) {
             <label>Review Content</label>
             <TextArea rows={10} cols={62}></TextArea>
           </div>
-          <Button className={styles['button']}
-            title="SUBMIT REVIEW" 
-            color={ColorsButton.primary}></Button>
+          <Button
+            className={styles['button']}
+            title="SUBMIT REVIEW"
+            color={ColorsButton.primary}
+          ></Button>
         </div>
       </div>
     </div>

@@ -27,30 +27,30 @@
 
   .checker {
     padding: 0 1rem;
-    color: #a3a3a3;
+    color: $text-color;
     display: flex;
     align-items: center;
     gap: 1rem;
     cursor: pointer;
 
     &:hover {
-      color: #737373;
+      color: $text-gray-color;
       h4 {
-        color: #737373;
+        color: $text-gray-color;
       }
     }
 
     h4 {
-      color: #a3a3a3;
+      color: $text-color;
     }
 
     &.check {
-      color: #10b981;
-      background-color: #ecfdf5;
+      color: $green-color;
+      background-color: $green-color-100;
       border-radius: 0.25rem;
 
       h4 {
-        color: #10b981;
+        color: $green-color;
       }
     }
   }

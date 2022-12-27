@@ -1,9 +1,19 @@
 export const en = {
-  dashboard: {
-    dashboard: 'Dashboard',
-    courses: 'Courses',
-    earnings: 'Earnings',
-    account: 'Account',
+  dashboards: {
+    student: {
+      dashboard: 'Dashboard',
+      courses: 'My Courses',
+      classes: 'My Classes',
+      payments: 'Payments',
+      settings: 'Settings',
+      account: 'My Account',
+    },
+    teacher: {
+      dashboard: 'Dashboard',
+      courses: 'Courses',
+      earnings: 'Earnings',
+      account: 'Account',
+    }
   },
   header: {
     home: 'Home',

@@ -3,8 +3,10 @@
 
 /* Core */
 /* @import url('./core/_reset.scss'); */
-@import './core/_accessibility.scss';
-@import './core/_breakpoints.scss';
-@import './core/_colors.scss';
-@import './core/_fonts.scss';
-@import './core/_global.scss';
+@import './core/accessibility';
+@import './core/breakpoints';
+@import './core/colors';
+@import './core/fonts';
+@import './core/global';
+@import './core/spacing';
+@import './core/utils';

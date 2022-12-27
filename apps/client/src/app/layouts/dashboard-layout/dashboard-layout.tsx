@@ -42,7 +42,6 @@ export function DashboardLayout(props: DashboardLayoutProps) {
       <div className={styles['content']}>
         <Outlet />
       </div>
-      <div className={styles['footer']}>LTPX 2022</div>
     </div>
   );
 }

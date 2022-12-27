@@ -2,8 +2,8 @@
 
 .container {
   width: 100%;
-  padding-bottom: $spacing-xl;
-  margin-top: $spacing-xl;
+  padding-bottom: $size-lg-2;
+  margin-top: $size-lg-2;
 
   .title {
     font-size: 20px;
@@ -12,9 +12,9 @@
   }
 
   .teacher-photo-container {
-    padding-top: $spacing-sm;
+    padding-top: $size-md-1;
     display: flex;
-    gap: $spacing-md;
+    gap: $size-md-3;
 
     img {
       border: 6px solid #d7d6d6;
@@ -28,8 +28,8 @@
       .name-teacher {
         font-size: 16px;
         font-weight: bold;
-        padding-bottom: $spacing-xs;
-        padding-top: $spacing-sm;
+        padding-bottom: $size-sm-2;
+        padding-top: $size-md-1;
         color: $text-color;
       }
 
@@ -45,7 +45,7 @@
     color: $text-gray-color;
     font-size: 14px;
     gap: 1.5rem;
-    padding-top: $spacing-sm;
+    padding-top: $size-md-1;
     cursor: pointer;
     .review-information {
       display: flex;
@@ -64,6 +64,6 @@
     display: flex;
     font-size: 14px;
     color: $text-gray-color;
-    padding-top: $spacing-sm;
+    padding-top: $size-md-1;
   }
 }

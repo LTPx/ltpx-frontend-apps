@@ -1,7 +1,7 @@
 @import '../../../../styles.scss';
 
 .container {
-  background-color: $background-gray-color;
+  background-color: $white-color;
 }
 
 .course-details {
@@ -12,10 +12,10 @@
     margin-right: 10rem;
 
     .description-title {
-      padding-bottom: $spacing-sm;
+      padding-bottom: $size-md-1;
       h1 {
         color: $text-color;
-        padding-bottom: $spacing-sm;
+        padding-bottom: $size-md-1;
       }
 
       h4 {
@@ -43,15 +43,15 @@
 }
 
 .summary-course {
-  padding-top: $spacing-sm;
+  padding-top: $size-md-1;
 
   .overview {
-    padding-top: $spacing-sm;
+    padding-top: $size-md-1;
 
     .course-description {
       h3 {
         color: $text-color;
-        padding-bottom: $spacing-sm;
+        padding-bottom: $size-md-1;
       }
 
       p {
@@ -60,58 +60,50 @@
     }
 
     .achievements {
-      
+
       h3 {
         color: $text-color;
-        padding-bottom: $spacing-sm;
+        padding-bottom: $size-md-1;
       }
 
       .items {
         color: $text-gray-color;
         display: flex;
         flex-direction: column;
-        gap: $spacing-sm;
-
-        .item {
-          h5 {
-          }
-        }
+        gap: $size-md-1;
       }
     }
 
     .requirements {
       display: flex;
       flex-direction: column;
-      gap: $spacing-sm;
+      gap: $size-md-1;
 
       h3 {
-        color: $text-color;        
+        color: $text-color;
       }
 
       ul {
-        padding-left: $spacing-sm;
+        padding-left: $size-md-1;
         color: $text-gray-color;
 
         li {
           color: $text-gray-color;
-
-          h5 {
-            // padding-bottom: $spacing-sm;
-          }
         }
       }
     }
   }
 
   section {
-    margin-top: $spacing-md;
+    margin-top: $size-md-3;
   }
   .items {
     .item {
       display: flex;
-      align-items: center;
+      align-items: start;
 
       svg {
+        margin-top: 0.2rem;
         margin-right: 0.5rem;
       }
     }

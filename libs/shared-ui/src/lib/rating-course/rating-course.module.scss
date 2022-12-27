@@ -2,7 +2,7 @@
 
 .container {
   width: 100%;
-  padding-bottom: $spacing-xl;
+  padding-bottom: $size-lg-2;
 
   label {
     font-size: 20px;
@@ -12,16 +12,16 @@
 }
 
 .content {
-  padding-top: $spacing-md;
+  padding-top: $size-md-3;
   display: flex;
-  gap: $spacing-sm;
+  gap: $size-md-1;
 
   .total-rating {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: $spacing-xs;
+    gap: $size-sm-2;
     padding: 2rem 3rem;
     border: 1px solid #d4d4d4;
 
@@ -42,8 +42,8 @@
     .rating-bar {
       display: flex;
       align-items: center;
-      gap: $spacing-md;
-      padding-bottom: $spacing-sm;
+      gap: $size-md-3;
+      padding-bottom: $size-md-1;
 
       .bar {
         width: 295px;

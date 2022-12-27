@@ -1,8 +1,10 @@
+@import '../../styles/styles.module.scss';
+
 .container {
   h5 {
     margin: 1.5rem 0;
     cursor: pointer;
-    color: #10b981;
+    color: $green-color;
   }
 }
 
@@ -32,43 +34,41 @@
   margin-top: 1.5rem;
   padding: 0 1rem;
   border: 1px solid #edf0f2;
-  background-color: #fff;
-  color: #a3a3a3;
+  background-color: $white-color;
+  color: $gray-color;
   display: flex;
   align-items: center;
   gap: 1rem;
   cursor: pointer;
 
   &:hover {
-    color: #737373;
+    color: $text-color;
     h4 {
-      color: #737373;
+      color: $text-color;
     }
   }
 
   h4 {
-    color: #a3a3a3;
+    color: $gray-color;
   }
 
   &.check {
-    color: #10b981;
-    background-color: #ecfdf5;
+    color: $green-color;
+    background-color: $green-color-100;
 
     h4 {
-      color: #10b981;
+      color: $green-color;
     }
   }
 }
-
-
 
 .remove {
   margin-top: 1.5rem;
   padding: 0 1rem;
   display: flex;
   align-items: center;
-  border: 1px solid #edf0f2;
+  border: 1px solid $stroke-color;
   color: #ef4444;
-  background-color: #fff;
+  background-color: $white-color;
 }
 

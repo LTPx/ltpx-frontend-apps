@@ -1,38 +1,40 @@
+@import "../../../styles.scss";
+
 .container {
   display: grid;
   grid-template-columns: 260px 1fr;
   grid-template-rows: auto 1fr auto;
-  // grid-gap: 12px;
   grid-template-areas:
     "header header header"
-    "nav content content"
-    "footer footer footer";
+    "nav content content";
   height: 100vh;
 }
 
 .content {
   grid-area: content;
-  background-color: #f8f9fb;
-  padding: 20px 50px;
+  background-color: $background-gray-color;
+  padding: 3rem 4rem;
 }
 
 .navbar {
-  background-color: #f7f7f7;
+  background-color: $white-color;
   padding: 30px;
   border-right: 1px solid #ebecef;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
 }
 
 .logout {
   display: flex;
   align-items: center;
-  background-color: #fff;
+  padding: 1rem;
   cursor: pointer;
 
   svg {
-    margin: 0 20px;
+    margin: 0px 1rem 0px 0.5rem;
+  }
+
+  &:hover {
+    background-color: $stroke-color;
+    color: $primary-color;
   }
 }
 

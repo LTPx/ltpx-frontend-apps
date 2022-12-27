@@ -37,7 +37,7 @@ export function Tabs(props: TabsProps) {
           }
           to={tab.url ? tab.url : ''}
         >
-          {tab.text}
+          <h4>{tab.text}</h4>
         </NavLink>
       ))}
       {!isNav && tabs.map((tab, index)=>(
@@ -47,7 +47,7 @@ export function Tabs(props: TabsProps) {
           }
           onClick={()=>{selectTab(index)}}
         >
-          {tab.text}
+          <h4>{tab.text}</h4>
         </div>
       ))}
     </div>

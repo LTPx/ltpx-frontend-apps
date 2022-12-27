@@ -1,37 +1,37 @@
+@import '../../styles/styles.module.scss';
+
 .container {
   display: flex;
   width: 100%;
-  padding-bottom: 1rem;
+  padding-bottom: $size-lg-1;
 
   .avatar-content {
-    padding: 1rem 1rem;
+    padding: $size-md-1;
   }
 
   .comment-content {
-    padding: 1rem 1rem;
+    padding: $size-md-1;
     .head {
       display: flex;
       justify-content: space-between;
 
-      label {
-        font-size: 20px;
+      h3 {
         font-weight: bold;
-        color: #302e52;
+        color: $text-color;
       }
     }
-    
+
     .review-title {
-      padding-bottom: 0.5rem;
-      font-size: 12px;
+      padding-bottom: $size-sm-2;
       font-style: oblique;
-      color: #8d959e;
+      color: $text-gray-color;
       display: flex;
       justify-content: space-between;
-      padding-right: 1rem;
+      padding-right: $size-md-1;
     }
     .comment {
       font-size: 14px;
-      color: #8d959e;
+      color: $text-gray-color;
       text-align: justify;
     }
   }

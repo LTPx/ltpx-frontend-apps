@@ -1,7 +1,11 @@
-.container {
+@import '../../styles/styles.module.scss';
 
+.container {
   .buy-card {
     padding: 10px;
+    background-color: $white-color;
+    box-shadow: $card-shadow-strong;
+    border: 1px solid $stroke-color;
 
     img {
       width: 300px;
@@ -20,13 +24,14 @@
       .price {
         h3 {
           margin: 0;
+          color: $text-color;
         }
       }
 
       .discount {
         background-color: #c4b5fd;
         padding: 1px 20px;
-        color: #fff;
+        color: $white-color;
         border-radius: 5px;
         font-size: 12px;
       }
@@ -35,7 +40,7 @@
     .actions {
       display: flex;
       flex-direction: column;
-      gap: 0.5rem;
+      gap: $size-sm-2;
       margin: 10px 0;
     }
 
@@ -47,6 +52,7 @@
         display: flex;
         justify-content: space-between;
         border-bottom: 1px solid #c7c7c7;
+        padding: 0.75rem 0rem;
 
         .item-text {
           display: flex;
@@ -57,12 +63,12 @@
           }
 
           h4 {
-            color: black;
+            color: $text-color;
           }
         }
 
         h4 {
-          color: #888888;
+          color: $text-gray-color;
         }
       }
     }

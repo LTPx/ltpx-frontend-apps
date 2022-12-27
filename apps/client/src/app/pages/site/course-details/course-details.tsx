@@ -93,19 +93,21 @@ export function CourseDetails(props: CourseDetailsProps) {
                   <div className={styles['items']}>
                     {courseDetails.overview.goals.map((goal, index) => (
                       <div className={styles['item']} key={index}>
-                        <Icon icon={'check-circle'} size={15} />
-                        <h5>{goal}</h5>
+                        <div>
+                          <Icon icon={'check-circle'} size={16} color='#4A8F9F'/>
+                        </div>
+                        <h4>{goal}</h4>
                       </div>
                     ))}
                   </div>
                 </section>
-                <section className="requirements">
+                <section className={`${styles['requirements']}`}>
                   <h3>Requirements</h3>
                   {courseDetails.overview.requirements.map(
                     (requirement, index) => (
-                      <ul key={index}>
+                      <ul key={index} className={styles['list-requirements']}>
                         <li>
-                          <h5>{requirement}</h5>
+                          <h4>{requirement}</h4>
                         </li>
                       </ul>
                     )

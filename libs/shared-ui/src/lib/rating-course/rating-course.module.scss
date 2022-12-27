@@ -1,49 +1,52 @@
-.container{
+@import '../../styles/styles.module.scss';
+
+.container {
   width: 100%;
-  padding-bottom: 1rem;
-  label {
-    font-size: 20px;
+  padding-bottom: $size-lg-2;
+
+  h3 {
     font-weight: bold;
-    color: #302e52;
+    color: $text-color;
   }
 }
 
 .content {
-  padding-top: 1.5rem;
+  padding-top: $size-md-3;
   display: flex;
-  gap: 1rem;
+  gap: $size-md-1;
+
   .total-rating {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 0.5rem;
+    gap: $size-sm-2;
     padding: 2rem 3rem;
     border: 1px solid #d4d4d4;
 
-    .score {
-      font-size: 35px;
+    h1 {
       font-weight: bold;
+      color: $text-color;
     }
 
-    label {
-      font-size: 14px;
-      color: #302e52;
-    }
-  } 
-  
-  .rating-content {
-    padding: 1rem 1rem;
-    .rating-bar {
-      display: flex;
-      align-items: center;
-      gap: 1.5rem;
-      padding-bottom: 1rem;
-  
-      .bar {
-        width: 300px;
-      } 
+    h4 {
+      color: $text-color;
     }
   }
 
+  .rating-content {
+    padding: $size-md-1;
+
+    .rating-bar {
+      display: flex;
+      align-items: center;
+      gap: $size-md-3;
+      padding-bottom: $size-md-1;
+
+      .bar {
+        width: 295px;
+        height: 10px;
+      }
+    }
+  }
 }

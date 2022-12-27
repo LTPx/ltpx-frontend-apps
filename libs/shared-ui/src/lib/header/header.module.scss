@@ -1,9 +1,10 @@
+@import "../../styles/styles.module.scss";
+
 .container {
   display: flex;
-  background-color: #f7f7f7;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 50px;
+  padding: 1.5rem 8rem;
   grid-area: header;
   border-bottom: 1px solid #ebecef;
 }
@@ -21,15 +22,17 @@
 .link {
   margin-right: 5px;
   text-decoration: none;
-  color: initial;
+  color: $text-gray-color;
   padding: 0 10px;
 
   &:hover {
-    font-weight: bold;
-    color: #7c3aed;
+    color: $primary-color;
+  }
+
+  &.active-link {
+    h4 {
+      color: $primary-color;
+    }
   }
 }
 
-.actions {
-
-}

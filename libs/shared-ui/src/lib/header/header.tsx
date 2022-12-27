@@ -28,7 +28,9 @@ export function Header(props: HeaderProps) {
           { links.map((link, index) => (
               <NavLink
                 key={index}
-                className={styles['link']}
+                className={({ isActive }) =>
+                  isActive ? `${styles['active-link']} ${styles['link']}` : styles['link']
+                }
                 to={link.url}
               >
                 <h4 className={styles['link']} >{link.title}</h4>

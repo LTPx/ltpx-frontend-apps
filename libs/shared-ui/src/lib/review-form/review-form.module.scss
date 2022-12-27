@@ -1,42 +1,40 @@
+@import '../../styles/styles.module.scss';
+
 .container {
   width: 100%;
   border: 1px solid #d4d4d4;
+  margin-top: $size-lg-2;
   .review {
-    padding: 3rem 3rem;
+    padding: $size-lg-3;
 
     .review-form {
       display: flex;
       flex-direction: column;
-      padding-bottom: 1rem;
-      .title {
-        font-size: 20px;
-        color: #302e52;
+      padding-bottom: $size-md-1;
+      h3 {
+        color: $text-color;
         font-weight: bold;
-        padding-bottom: 1rem;
+        padding-bottom: $size-md-1;
       }
-      label {
-        font-size: 14px;
-        color: #8d959e;
-        padding-bottom: 0.5rem;
+      h4 {
+        color: $text-gray-color;
+        padding-bottom: $size-sm-2;
       }
     }
 
     .form {
-      
-      label{
-        font-size: 16px;
-        color: #302e52;
+      h4 {
+        color: $text-color;
         font-weight: bold;
       }
 
       .input {
-        padding-bottom: 1rem;
+        padding-bottom: $size-md-1;
       }
 
       .textArea {
-        padding-bottom: 1rem;
+        padding-bottom: $size-md-1;
       }
-
     }
   }
 }

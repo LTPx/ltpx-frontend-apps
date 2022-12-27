@@ -6,6 +6,7 @@ import * as Yup from 'yup';
 import { useContext } from 'react';
 import { UserContext } from '../../../store/context/user/user-context';
 import { loginUser } from '@ltpx-frontend-apps/api';
+import { UserRoles } from '../../../store/interfaces/user';
 
 /* eslint-disable-next-line */
 export interface LoginProps {}
@@ -30,7 +31,8 @@ export function Login(props: LoginProps) {
     onSubmit: async data => {
       const user = {
         email: data.email,
-        password: data.password
+        password: data.password,
+        role: UserRoles.student
       }
       try{
         await loginUser(user.email, user.password);

@@ -1,0 +1,17 @@
+.header-text {
+  margin-bottom: 2rem;
+}
+
+.field-form {
+  margin-top: 1.5rem;
+
+  .range {
+    margin-top: 0.5rem;
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    background-color: #f9fafb;
+    padding: 1rem 2rem;
+    border: 1px solid #d4d4d4;
+  }
+}

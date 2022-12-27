@@ -6,6 +6,7 @@ import * as Yup from 'yup';
 import { useContext } from 'react';
 import { UserContext } from '../../../store/context/user/user-context';
 import { registerUser } from '@ltpx-frontend-apps/api';
+import { UserRoles } from '../../../store/interfaces/user';
 
 /* eslint-disable-next-line */
 export interface RegisterProps {}
@@ -33,7 +34,8 @@ export function Register(props: RegisterProps) {
     onSubmit: async data => {
       const user = {
         email: data.email,
-        name: data.name
+        name: data.name,
+        role: UserRoles.student
       };
       // sessionStorage.setItem('user', JSON.stringify(user));
       // sessionStorage.setItem('isAuthenticated', 'true');

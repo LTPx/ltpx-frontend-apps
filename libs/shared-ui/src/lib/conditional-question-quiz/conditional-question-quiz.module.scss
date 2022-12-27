@@ -1,0 +1,57 @@
+@import '../../styles/styles.module.scss';
+
+.conditionals {
+  display: flex;
+  gap: 2rem;
+  margin-top: 1.5rem;
+}
+
+.conditional-container {
+  display: flex;
+  align-items: center;
+  border: 1px solid $stroke-color;
+  border-radius: 0.25rem;
+
+  h4 {
+    padding: 0.5rem;
+  }
+
+  .conditional {
+    padding: 0 1rem;
+    border-right: 1px solid $stroke-color;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .checker {
+    padding: 0 1rem;
+    color: $text-color;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    cursor: pointer;
+
+    &:hover {
+      color: $text-gray-color;
+      h4 {
+        color: $text-gray-color;
+      }
+    }
+
+    h4 {
+      color: $text-color;
+    }
+
+    &.check {
+      color: $green-color;
+      background-color: $green-color-100;
+      border-radius: 0.25rem;
+
+      h4 {
+        color: $green-color;
+      }
+    }
+  }
+}

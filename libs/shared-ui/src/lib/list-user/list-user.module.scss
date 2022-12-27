@@ -3,34 +3,36 @@
 .container {
   box-sizing: border-box;
   width: 350px;
-  height: 265px;
-  background: #FFFFFF;
-  border: 1px solid #E7E7EC;
+  height: 460px;
+  background: #ffffff;
+  border: 1px solid #e7e7ec;
   box-shadow: 0px 8px 15px rgba(140, 152, 164, 0.1);
   border-radius: 4px;
-  padding-top: 1rem;
-  padding-left: 1rem;
-
+  padding-top: $spacing-sm;
+  padding-left: $spacing-sm;
+  overflow: auto;
   h3 {
     color: $text-color;
-    
   }
 
   h4 {
     color: $text-gray-color;
-    padding-bottom: 1rem;
+    padding-bottom: $spacing-sm;
   }
 
   .user {
-  width: 290px;
-  height: 69px;
-  background: #F7F9FB;
-  border-radius: 4px;
-  display: flex;
-  padding-left: 1rem;
+    width: 290px;
+    height: 69px;
+    background: #f7f9fb;
+    border-radius: 4px;
+    padding: 0.5rem 0.5rem;
+    display: flex;
+    margin-bottom: $spacing-xs;
 
     h4 {
       color: $text-gray-color;
+      padding-left: $spacing-sm;
+      padding-top: $spacing-sm;
     }
   }
 }

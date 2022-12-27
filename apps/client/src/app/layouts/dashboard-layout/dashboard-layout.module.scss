@@ -4,11 +4,9 @@
   display: grid;
   grid-template-columns: 260px 1fr;
   grid-template-rows: auto 1fr auto;
-  // grid-gap: 12px;
   grid-template-areas:
     "header header header"
-    "nav content content"
-    "footer footer footer";
+    "nav content content";
   height: 100vh;
 }
 

@@ -12,10 +12,10 @@
     margin-right: 10rem;
 
     .description-title {
-      padding-bottom: $spacing-sm;
+      padding-bottom: $size-md-1;
       h1 {
         color: $text-color;
-        padding-bottom: $spacing-sm;
+        padding-bottom: $size-md-1;
       }
 
       h4 {
@@ -43,15 +43,15 @@
 }
 
 .summary-course {
-  padding-top: $spacing-sm;
+  padding-top: $size-md-1;
 
   .overview {
-    padding-top: $spacing-sm;
+    padding-top: $size-md-1;
 
     .course-description {
       h3 {
         color: $text-color;
-        padding-bottom: $spacing-sm;
+        padding-bottom: $size-md-1;
       }
 
       p {
@@ -63,28 +63,28 @@
 
       h3 {
         color: $text-color;
-        padding-bottom: $spacing-sm;
+        padding-bottom: $size-md-1;
       }
 
       .items {
         color: $text-gray-color;
         display: flex;
         flex-direction: column;
-        gap: $spacing-sm;
+        gap: $size-md-1;
       }
     }
 
     .requirements {
       display: flex;
       flex-direction: column;
-      gap: $spacing-sm;
+      gap: $size-md-1;
 
       h3 {
         color: $text-color;
       }
 
       ul {
-        padding-left: $spacing-sm;
+        padding-left: $size-md-1;
         color: $text-gray-color;
 
         li {
@@ -95,7 +95,7 @@
   }
 
   section {
-    margin-top: $spacing-md;
+    margin-top: $size-md-3;
   }
   .items {
     .item {

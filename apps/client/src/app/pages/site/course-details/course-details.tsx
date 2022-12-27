@@ -96,7 +96,7 @@ export function CourseDetails(props: CourseDetailsProps) {
                         <div>
                           <Icon icon={'check-circle'} size={16} color='#4A8F9F'/>
                         </div>
-                        <h5>{goal}</h5>
+                        <h4>{goal}</h4>
                       </div>
                     ))}
                   </div>
@@ -107,7 +107,7 @@ export function CourseDetails(props: CourseDetailsProps) {
                     (requirement, index) => (
                       <ul key={index} className={styles['list-requirements']}>
                         <li>
-                          <h5>{requirement}</h5>
+                          <h4>{requirement}</h4>
                         </li>
                       </ul>
                     )

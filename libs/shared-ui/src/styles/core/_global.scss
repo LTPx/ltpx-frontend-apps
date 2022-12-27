@@ -8,7 +8,7 @@ html {
 body {
   margin: 0;
   color: $text-color;
-  font-size: 1rem;
+  font-size: 16px;
   font-family: $system-font;
   // -webkit-font-smoothing: antialiased;
   // -moz-osx-font-smoothing: grayscale;
@@ -30,29 +30,42 @@ pre {
   margin: 0;
 }
 
-
-h1 {
-  font-weight: 600;
-}
-
+h1,
 h2,
 h3,
 h4,
-h5 {
+h5,
+h6 {
   font-weight: 400;
 }
 
-// h1 {
-//   font-size: 24px;
-// }
+h1 {
+  font-size: 2rem;
+}
 
-// h2 {
-//   font-size: 20px;
-// }
+h2 {
+  font-size: 1.5rem;
+}
 
-// h3 {
-//   font-size: 16px;
-// }
+h3 {
+  font-size: 1.25rem;
+}
+
+h4 {
+  font-size: 1rem;
+}
+
+h5 {
+  font-size: 0.75rem;
+}
+
+h6 {
+  font-size: 0.5rem;
+}
+
+p {
+  font-size: 1rem;
+}
 
 ul,
 li {
@@ -72,7 +85,7 @@ div:focus {
   outline: none;
 }
 
-.label {
+label {
   font-weight: 500;
   font-size: 0.875rem;
   line-height: 1.5;

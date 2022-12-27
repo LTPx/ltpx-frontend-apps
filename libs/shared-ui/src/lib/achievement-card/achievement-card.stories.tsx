@@ -12,7 +12,7 @@ export const Card = () => {
     <div>
       <AchievementCard 
         image={'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQbboFe4oVDFF3wOth6vRoc9ZHmcpJPXDqokA&usqp=CAU'} 
-        describe={'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'}/>
+        text={'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'}/>
     </div>
   )
 };

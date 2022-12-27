@@ -12,17 +12,17 @@
   flex-direction: column;
 
   h3 {
-    padding-top: $spacing-md;
-    padding-left: $spacing-md;
+    padding-top: $size-md-3;
+    padding-left: $size-md-3;
     color: $text-color;
-    padding-bottom: $spacing-sm;
+    padding-bottom: $size-md-1;
   }
 
   .tags-content {
-    padding-left: $spacing-md;
+    padding-left: $size-md-3;
     display: flex;
     flex-wrap: wrap;
-    gap: $spacing-sm;
+    gap: $size-md-1;
     width: 100%;
 
     .tag {

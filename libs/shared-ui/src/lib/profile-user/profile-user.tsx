@@ -21,7 +21,7 @@ export function ProfileUser(props: ProfileUserProps) {
   return (
     <div className={styles['container']}>
       <div className={styles['profile-content']}>
-        <label>Profile</label>
+        <h2>Profile</h2>
         <div className={styles['profile']}>
           <Avatar
             image={

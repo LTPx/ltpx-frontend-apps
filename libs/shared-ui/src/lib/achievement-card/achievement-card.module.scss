@@ -4,27 +4,27 @@
   box-sizing: border-box;
   width: 350px;
   height: 281px;
-  background: #FFFFFF;
-  border: 1px solid #E7E7EC;
+  background: $white-color;
+  border: 1px solid #e7e7ec;
   box-shadow: 0px 8px 15px rgba(140, 152, 164, 0.1);
   border-radius: 4px;
 
   h3 {
-    padding-top: $spacing-md;
-    padding-left: 29px;
+    padding-top: $size-md-3;
+    padding-left: $size-lg-1;
     color: $text-color;
   }
 
   .achievement {
     display: flex;
-    padding-left: 29px;
-    padding-top: $spacing-md;
-    padding-bottom: $spacing-md;
+    padding-left: $size-lg-1;
+    padding-top: $size-md-3;
+    padding-bottom: $size-md-3;
 
     img {
       width: 65px;
       height: 70px;
-      padding-right: 21px;
+      padding-right: $size-md-2;
     }
 
     .describe {
@@ -35,7 +35,7 @@
         color: $text-color;
       }
 
-      p{
+      p {
         color: $text-gray-color;
       }
     }
@@ -44,8 +44,7 @@
   .progress {
     display: flex;
     flex-direction: column;
-    padding-left: 27px;
-    padding-right: 26px;
-
+    padding-left: $size-lg-1;
+    padding-right: $size-lg-1;
   }
 }

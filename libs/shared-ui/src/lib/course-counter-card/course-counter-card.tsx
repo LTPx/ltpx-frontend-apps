@@ -14,10 +14,10 @@ export function CourseCounterCard(props: CourseCounterCardProps) {
   return (
     <div className={styles['container']}>
       <div className={styles['counter']}>
-        <label>{count}</label>
+        <h1>{count}</h1>
       </div>
       <div className={styles['description']}>
-        <label>{text}</label>
+        <h2>{text}</h2>
       </div>
     </div>
   );

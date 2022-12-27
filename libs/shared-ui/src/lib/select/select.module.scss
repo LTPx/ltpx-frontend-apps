@@ -1,4 +1,4 @@
-@import "../../styles/core/colors";
+@import '../../styles/core/colors';
 
 .container {
   display: flex;
@@ -7,7 +7,7 @@
   .style-select {
     border-radius: 4px;
     height: 3rem;
-		border: 1px solid #d4d4d4;
+    border: 1px solid #d4d4d4;
     padding: 0.5rem 2rem 0.5rem 1rem;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
@@ -16,17 +16,12 @@
   }
 
   select.style-select {
-    background-image:
-      linear-gradient(45deg, transparent 50%, $gray-color 50%),
+    background-image: linear-gradient(45deg, transparent 50%, $gray-color 50%),
       linear-gradient(135deg, $gray-color 50%, transparent 50%),
       linear-gradient(to right, $white-color, $white-color);
-    background-position:
-      calc(100% - 20px) calc(1.5em + 2px),
+    background-position: calc(100% - 20px) calc(1.5em + 2px),
       calc(100% - 15px) calc(1.5em + 2px);
-    background-size:
-      5px 5px,
-      5px 5px,
-      1px 4.5em;
+    background-size: 5px 5px, 5px 5px, 1px 4.5em;
     background-repeat: no-repeat;
   }
 }

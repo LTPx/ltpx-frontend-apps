@@ -5,13 +5,13 @@ import styles from './achievement-card.module.scss';
 /* eslint-disable-next-line */
 export interface AchievementCardProps {
   image : string;
-  describe : string;
+  text : string;
 }
 
 export function AchievementCard(props: AchievementCardProps) {
   const {
     image,
-    describe
+    text
   } = props;
   return (
     <div className={styles['container']}>
@@ -20,7 +20,7 @@ export function AchievementCard(props: AchievementCardProps) {
         <img src={image}></img>
         <div className={styles['describe']}>
           <h4>Level</h4>
-          <p>{describe}</p>
+          <p>{text}</p>
         </div>
       </div>
       <div className={styles['progress']}>

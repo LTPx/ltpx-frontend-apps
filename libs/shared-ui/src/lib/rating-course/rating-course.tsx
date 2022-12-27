@@ -53,13 +53,11 @@ export function RatingCourse(props: RatingCourseProps) {
 
   return (
     <div className={styles['container']}>
-      <label>Student feedback</label>
+      <h3>Student feedback</h3>
       <div className={styles['content']}>
         <div className={styles['total-rating']}>
-          <label className={styles['score']}>
-            {calculateScore().toFixed(2)}
-          </label>
-          <label>Course rating</label>
+          <h1>{calculateScore().toFixed(2)}</h1>
+          <h4>Course rating</h4>
           <Rating stars={roundStars(calculateScore())}></Rating>
         </div>
         <div className={styles['rating-content']}>

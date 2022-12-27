@@ -6,30 +6,28 @@
   padding-bottom: $size-lg-1;
 
   .avatar-content {
-    padding: 1rem 1rem;
+    padding: $size-md-1;
   }
 
   .comment-content {
-    padding: 1rem 1rem;
+    padding: $size-md-1;
     .head {
       display: flex;
       justify-content: space-between;
 
-      label {
-        font-size: 20px;
+      h3 {
         font-weight: bold;
         color: $text-color;
       }
     }
 
     .review-title {
-      padding-bottom: 0.5rem;
-      font-size: 12px;
+      padding-bottom: $size-sm-2;
       font-style: oblique;
       color: $text-gray-color;
       display: flex;
       justify-content: space-between;
-      padding-right: 1rem;
+      padding-right: $size-md-1;
     }
     .comment {
       font-size: 14px;

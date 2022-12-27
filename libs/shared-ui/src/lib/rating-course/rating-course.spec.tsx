@@ -4,7 +4,7 @@ import RatingCourse from './rating-course';
 
 describe('RatingCourse', () => {
   it('should render successfully', () => {
-    const { baseElement } = render(<RatingCourse />);
+    const { baseElement } = render(<RatingCourse ratings={[]} />);
     expect(baseElement).toBeTruthy();
   });
 });

@@ -1,9 +1,9 @@
 @import '../../styles/styles.module.scss';
 
 .container {
-  background-color: #fff;
+  background-color: $white-color;
   width: 14rem;
-  padding: 1.5rem;
+  padding: $size-md-3;
   border: 1px solid #d4d4d4;
   box-shadow: $card-shadow-medium;
   display: flex;

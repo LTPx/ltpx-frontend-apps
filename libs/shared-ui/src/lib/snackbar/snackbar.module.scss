@@ -1,0 +1,152 @@
+@import '../../styles/styles.module.scss';
+
+@mixin animation-top-toggle {
+  animation: fadeInTop 0.5s;
+
+  &.dismiss {
+    animation: fadeOutTop 0.5s 1s;
+  }
+}
+
+@mixin animation-bottom-toggle {
+  animation: fadeInBottom 0.5s;
+
+  &.dismiss {
+    animation: fadeOutBottom 0.5s 1s;
+  }
+}
+
+.snackbar {
+  visibility: hidden;
+  width: 400px;
+  position: fixed;
+  max-height: 300px;
+  z-index: 1;
+  background-color: $white-color;
+  box-shadow: $card-shadow-strong;
+  padding: 1.25rem;
+  border-radius: 8px;
+
+  .container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+
+    h4 {
+      color: $text-gray-color;
+    }
+
+    h2 {
+      color: $text-color;
+      font-weight: bold;
+    }
+    p {
+      color: $text-gray-color;
+      text-align: justify;
+    }
+  }
+
+  &.show {
+    visibility: visible;
+
+    &.top-snackbar {
+      top: 50px;
+      right: 10px;
+      @include animation-top-toggle;
+    }
+
+    &.center-top-snackbar {
+      top: 50px;
+      left: 35%;
+      @include animation-top-toggle;
+    }
+
+    &.bottom-snackbar {
+      bottom: 50px;
+      right: 10px;
+      @include animation-bottom-toggle;
+    }
+
+    &.center-bottom-snackbar {
+      bottom: 50px;
+      left: 35%;
+      @include animation-bottom-toggle;
+    }
+  }
+
+  &.message-snackbar {
+    .container {
+      h2 {
+        color: $secondary-color;
+      }
+    }
+  }
+
+  &.warning-snackbar {
+    .container {
+      h2 {
+        color: $orange-color;
+      }
+    }
+  }
+
+  &.error-snackbar {
+    .container {
+      h2 {
+        color: $red-color;
+      }
+    }
+  }
+
+  &.success-snackbar {
+    .container {
+      h2 {
+        color: $green-color;
+      }
+    }
+  }
+}
+
+@keyframes fadeInTop {
+  from {
+    top: 0;
+    opacity: 0;
+  }
+  to {
+    top: 50px;
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInBottom {
+  from {
+    bottom: 0;
+    opacity: 0;
+  }
+  to {
+    bottom: 50px;
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOutTop {
+  from {
+    top: 50px;
+    opacity: 1;
+  }
+  to {
+    top: 0;
+    opacity: 0;
+  }
+}
+
+@keyframes fadeOutBottom {
+  from {
+    bottom: 50px;
+    opacity: 1;
+  }
+  to {
+    bottom: 0;
+    opacity: 0;
+  }
+}

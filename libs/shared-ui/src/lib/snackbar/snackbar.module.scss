@@ -24,25 +24,49 @@
   z-index: 1;
   background-color: $white-color;
   box-shadow: $card-shadow-strong;
-  padding: 1.25rem;
+  padding: $size-md-2;
   border-radius: 8px;
 
   .container {
-    display: flex;
-    flex-direction: column;
-    gap: 0.25rem;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
 
-    h4 {
-      color: $text-gray-color;
+    .content-section {
+      display: flex;
+      flex-direction: column;
+      gap: $size-sm-1;
+
+      h4 {
+        color: $secondary-color;
+      }
+
+      h3 {
+        color: $text-color;
+        font-weight: 400;
+      }
+
+      p {
+        color: $text-gray-color;
+        text-align: justify;
+        margin-bottom: $size-md-2;
+      }
+
+      .date {
+        color: $text-gray-color-medium;
+      }
     }
 
-    h2 {
-      color: $text-color;
-      font-weight: bold;
+    .icon-section {
+      padding-top: $size-sm-2;
     }
-    p {
-      color: $text-gray-color;
-      text-align: justify;
+
+    .close-section {
+      padding-top: $size-sm-2;
+    }
+
+    .close-section svg {
+      cursor: pointer;
+      color: $text-gray-color-medium;
     }
   }
 
@@ -76,15 +100,24 @@
 
   &.message-snackbar {
     .container {
-      h2 {
-        color: $secondary-color;
+      h3 {
+        color: $text-color;
       }
     }
   }
 
   &.warning-snackbar {
     .container {
-      h2 {
+      h3 {
+        color: $orange-color;
+        padding-left: $size-md-1;
+      }
+
+      .date {
+        padding-left: $size-md-1;
+      }
+
+      .icon-section svg {
         color: $orange-color;
       }
     }
@@ -92,7 +125,15 @@
 
   &.error-snackbar {
     .container {
-      h2 {
+      h3 {
+        color: $red-color;
+        padding-left: $size-md-1;
+      }
+      .date {
+        padding-left: $size-md-1;
+      }
+
+      .icon-section svg {
         color: $red-color;
       }
     }
@@ -100,7 +141,14 @@
 
   &.success-snackbar {
     .container {
-      h2 {
+      h3 {
+        color: $green-color;
+        padding-left: $size-md-1;
+      }
+      .date {
+        padding-left: $size-md-1;
+      }
+      .icon-section svg {
         color: $green-color;
       }
     }

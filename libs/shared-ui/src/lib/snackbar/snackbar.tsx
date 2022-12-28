@@ -1,5 +1,6 @@
 import styles from './snackbar.module.scss';
 import React, { useEffect, useState } from 'react';
+import Icon from '../icon/icon';
 
 /* eslint-disable-next-line */
 export enum SnackbarPosition {
@@ -24,12 +25,22 @@ export interface SnackbarProps {
   duration?: number;
   typeSnackbar?: SnackbarType;
   title: string;
+  icon?: string;
   date: string;
 }
 
 export const Snackbar = (props: SnackbarProps) => {
-  const { text, tag, title, date, position, duration, open, typeSnackbar } =
-    props;
+  const {
+    text,
+    tag,
+    title,
+    date,
+    position,
+    duration,
+    icon,
+    open,
+    typeSnackbar,
+  } = props;
 
   useEffect(() => {
     if (duration && open) {
@@ -79,15 +90,19 @@ export const Snackbar = (props: SnackbarProps) => {
           `}
         >
           <div className={styles['container']}>
-            <h4>{tag}</h4>
-            <h2>{title}</h2>
-            <p>{text}</p>
-            <h4>{date}</h4>
+            <div className={styles['icon-section']}>
+              {icon && <Icon icon={icon} size={20}></Icon>}
+            </div>
+            <div className={styles['content-section']}>
+              <h4>{tag}</h4>
+              <h3>{title}</h3>
+              {text && <p>{text}</p>}
+              <h4 className={`${styles['date']}`}>{date}</h4>
+            </div>
+            <div className={styles['close-section']}>
+              <Icon onClick={handleClose} icon={'close'} size={15}></Icon>
+            </div>
           </div>
-          <div className={styles['']}></div>
-          {/* <div className={styles['']} onClick={handleClose}>
-            CLOSE
-          </div> */}
         </div>
       )}
     </div>

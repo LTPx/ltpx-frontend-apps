@@ -1,13 +1,9 @@
-import { Course } from "@ltpx-frontend-apps/api";
+import { Course, TypeAccounts } from "@ltpx-frontend-apps/api";
 
-export enum UserRoles {
-  teacher = 'teacher',
-  student = 'student'
-}
 export interface User {
   email: string;
-  name: string;
-  role: UserRoles;
+  fullname: string;
+  initial_register: TypeAccounts;
 }
 
 export interface UserState {

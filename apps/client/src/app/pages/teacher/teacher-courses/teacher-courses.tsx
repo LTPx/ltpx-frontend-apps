@@ -1,4 +1,4 @@
-import { buildCourses } from '@ltpx-frontend-apps/api';
+import { buildCourses, getTeacherCourses } from '@ltpx-frontend-apps/api';
 import { Button, ColorsButton, CourseCard, InputSearch, Select } from '@ltpx-frontend-apps/shared-ui';
 import { NavLink } from 'react-router-dom';
 import styles from './teacher-courses.module.scss';
@@ -7,6 +7,26 @@ import styles from './teacher-courses.module.scss';
 export interface TeacherCoursesProps {}
 
 export function TeacherCourses(props: TeacherCoursesProps) {
+  getTeacherCourses
+
+
+  const getCoursesData = async() => {
+    const resp = await getTeacherCourses();
+    console.log(resp);
+  }
+
+  // useEffect(() => {
+  //   try {
+  //   } catch (error) {
+
+  //   }
+
+  //   return () => {
+  //     second
+  //   }
+  // }, [third])
+
+
   const categories = [
     {value: 'all', text: 'Todos'},
     {value: 'draff', text: 'Borradores'},
@@ -76,7 +96,7 @@ export function TeacherCourses(props: TeacherCoursesProps) {
           <Button
             title={'+ Nuevo Curso'}
             color={ColorsButton.primary}
-            link={'/teacher/courses/new'}
+            onClick={getCoursesData}
           />
         </div>
       </div>

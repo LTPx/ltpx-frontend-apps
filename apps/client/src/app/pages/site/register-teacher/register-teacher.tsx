@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { UserContext } from '../../../store/context/user/user-context';
 import styles from './register-teacher.module.scss';
 import * as Yup from 'yup';
-import { UserRoles } from '../../../store/interfaces/user';
+import { registerTeacher } from '@ltpx-frontend-apps/api';
 
 /* eslint-disable-next-line */
 export interface RegisterTeacherProps {}
@@ -23,26 +23,26 @@ export function RegisterTeacher(props: RegisterTeacherProps) {
     },
     validationSchema: Yup.object({
       name: Yup.string()
-                .required('Name is required'),
+                .required('Nombre es obligatorio'),
       email: Yup.string()
                 .email()
-                .required('Email is required'),
+                .required('Email es obligatorio'),
       password: Yup.string()
-                    .required('Password is required')
+                    .required('Password es obligatorio')
     }),
     onSubmit: async data => {
-      const user = {
+      const userAccount = {
         email: data.email,
         name: data.name,
-        role: UserRoles.teacher
+        password: data.password
       };
-      sessionStorage.setItem('user', JSON.stringify(user));
-      sessionStorage.setItem('isAuthenticated', 'true');
-
       try{
-        navigate('/student/dashboard');
+        const response = await registerTeacher(userAccount);
+        const { user } = response;
         setUser(user);
-        //TODO: integrate API
+        sessionStorage.setItem('user', JSON.stringify(user));
+        sessionStorage.setItem('isAuthenticated', 'true');
+        navigate('/teacher/account');
       }
       catch(error){
         console.log(error);

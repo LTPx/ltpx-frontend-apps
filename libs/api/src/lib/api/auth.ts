@@ -1,6 +1,17 @@
 import { setTokenAxios, _http } from "../http";
-
+import { UserResponse } from "../interfaces/user";
 const http = _http;
+
+interface Account {
+  name: string;
+  email: string;
+  password: string;
+}
+
+interface AuthSuccessResponse {
+  user: UserResponse;
+  message: string;
+}
 
 export const loginUser = async(email: string, password: string) => {
   const response = await http.post('login', {
@@ -13,11 +24,27 @@ export const loginUser = async(email: string, password: string) => {
   return response.data;
 }
 
-export const registerUser = async(email: string, password: string) => {
+export const registerUser = async(account: Account):Promise<AuthSuccessResponse> => {
+  const { email, password, name } = account;
   const response = await http.post('register', {
     user: {
       email,
-      password
+      password,
+      fullname: name,
+    }
+  });
+  setTokenAxios(response.headers);
+  return response.data;
+}
+
+export const registerTeacher = async(account: Account):Promise<AuthSuccessResponse> => {
+  const { email, password, name } = account;
+  const response = await http.post('register', {
+    user: {
+      email,
+      password,
+      fullname: name,
+      initial_register: 'teacher'
     }
   });
   setTokenAxios(response.headers);

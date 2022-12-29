@@ -1,5 +1,5 @@
 import { Course } from "@ltpx-frontend-apps/api";
-import { User, UserRoles, UserState } from "../../interfaces/user";
+import { User, UserState } from "../../interfaces/user";
 
 type UserAction =
   | { type: 'setUser', payload: User }

@@ -6,7 +6,6 @@ import * as Yup from 'yup';
 import { useContext } from 'react';
 import { UserContext } from '../../../store/context/user/user-context';
 import { registerUser } from '@ltpx-frontend-apps/api';
-import { UserRoles } from '../../../store/interfaces/user';
 
 /* eslint-disable-next-line */
 export interface RegisterProps {}
@@ -23,8 +22,8 @@ export function Register(props: RegisterProps) {
       password: '',
     },
     validationSchema: Yup.object({
-      // name: Yup.string()
-      //           .required('Name is required'),
+      name: Yup.string()
+                .required('Name is required'),
       email: Yup.string()
                 .email()
                 .required('Email is required'),
@@ -32,18 +31,18 @@ export function Register(props: RegisterProps) {
                     .required('Password is required')
     }),
     onSubmit: async data => {
-      const user = {
+      const userAccount = {
         email: data.email,
         name: data.name,
-        role: UserRoles.student
+        password: data.password,
       };
       // sessionStorage.setItem('user', JSON.stringify(user));
       // sessionStorage.setItem('isAuthenticated', 'true');
-      const {resp} = await registerUser(data.email, data.password);
-      console.log(resp);
+      const { user } = await registerUser(userAccount);
+      console.log(user);
       try{
         navigate('/student/dashboard');
-        setUser(user);
+        // setUser(user);
         //TODO: integrate API
       }
       catch(error){

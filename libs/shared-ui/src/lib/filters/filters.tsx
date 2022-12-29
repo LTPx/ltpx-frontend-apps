@@ -3,7 +3,7 @@ import styles from './filters.module.scss';
 /* eslint-disable-next-line */
 export interface Filter {
   text: string;
-  count?: string;
+  count?: number;
 }
 
 export interface FiltersProps {
@@ -18,9 +18,12 @@ export function Filters(props: FiltersProps) {
       <h3>{title}</h3>
       <div className={styles['filters-content']}>
         {filters.map((filter, index) => (
-          <div className={styles['filter']}>
+          <div className={styles['filter']} key={index}>
             <input type="checkbox" value="first_checkbox"></input>
             <h4>{filter.text}</h4>
+            {filter.count && (
+              <h4 className={styles['number']}>({filter.count})</h4>
+            )}
           </div>
         ))}
       </div>

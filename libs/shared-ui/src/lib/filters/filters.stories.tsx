@@ -9,12 +9,12 @@ const Story: ComponentMeta<typeof Filters> = {
 export default Story;
 
 const filters = [
-  {text:'Art (8)'},
-  {text:'Exercise (8)'},
-  {text:'Material Design (7)'},
-  {text:'Software Development (6)'},
-  {text:'Music (6)'},
-  {text:'Photography (6)'}
+  {text:'Art' , count: 8},
+  {text:'Exercise' , count: 8},
+  {text:'Material Design' , count: 7},
+  {text:'Software Development' , count: 6},
+  {text:'Music', count: 6},
+  {text:'Photography'}
 ]
 
 export const Default = () => {

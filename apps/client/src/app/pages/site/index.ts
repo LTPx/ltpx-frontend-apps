@@ -7,3 +7,4 @@ export * from './checkout/checkout';
 export * from './all-courses/all-courses';
 export * from './course-details/course-details';
 export * from './register-teacher/register-teacher';
+export * from './forget-password/forget-password';

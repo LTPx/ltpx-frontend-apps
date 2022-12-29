@@ -1,3 +1,5 @@
+export * from './lib/notification-list/notification-list';
+export * from './lib/user-menu/user-menu';
 export * from './lib/snackbar/snackbar';
 export * from './lib/filters/filters';
 export * from './lib/quiz-progress-card/quiz-progress-card';

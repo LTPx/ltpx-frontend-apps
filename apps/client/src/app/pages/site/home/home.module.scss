@@ -28,14 +28,20 @@
 .popular-courses-container {
   padding: 5rem 14rem;
   background-color: #f7f7f7;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  align-items: center;
 
-  h4 {
-    margin-top: 0px;
-    margin-bottom: 40px;
+  .text {
+    text-align: center;
+  }
+
+  .popular-courses {
+    display: grid;
+    gap: 1rem;
+    grid-auto-rows: 22rem;
+    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  }
+
+  .link-browser {
+    text-align: center;
   }
 }
 
@@ -53,12 +59,6 @@
   }
 }
 
-.popular-courses {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 1rem;
-}
 
 .category-content{
   display: flex;

@@ -1,5 +1,6 @@
 import styles from './header.module.scss';
 import { NavLink } from "react-router-dom";
+import Brand from '../brand/brand';
 
 /* eslint-disable-next-line */
 
@@ -17,9 +18,7 @@ export function Header(props: HeaderProps) {
   return (
     <div className={styles['container']}>
       <div className={styles['main-action']}>
-        <div className={styles['brand']}>
-          LTPX
-        </div>
+        <Brand/>
         <div className={styles['search']}>
 
         </div>
@@ -29,7 +28,9 @@ export function Header(props: HeaderProps) {
           { links.map((link, index) => (
               <NavLink
                 key={index}
-                className={styles['link']}
+                className={({ isActive }) =>
+                  isActive ? `${styles['active-link']} ${styles['link']}` : styles['link']
+                }
                 to={link.url}
               >
                 <h4 className={styles['link']} >{link.title}</h4>

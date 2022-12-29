@@ -47,10 +47,12 @@ export function Home(props: HomeProps) {
           </div>
       </div>
       <div className={styles['popular-courses-container']}>
-        <h2>Popular Courses</h2>
-        <h4 className='muted'>
-          Discover you perfect program in our courses
-        </h4>
+        <div className={styles['text']}>
+          <h2>Popular Courses</h2>
+          <h4 className='muted'>
+            Discover you perfect program in our courses
+          </h4>
+        </div>
         <div className={styles['popular-courses']}>
           { popularCourses.map((course, index)=>(
             <NavLink
@@ -70,12 +72,11 @@ export function Home(props: HomeProps) {
             </NavLink>
           ))}
         </div>
-        <NavLink
-          className={styles['link']}
-          to='/courses'
-        >
-          Browser All
-        </NavLink>
+        <div className={styles['link-browser']}>
+          <NavLink to='/courses'>
+            Browser All
+          </NavLink>
+        </div>
       </div>
       <div className={styles['categories-container']}>
         <h2>Trending Categories</h2>

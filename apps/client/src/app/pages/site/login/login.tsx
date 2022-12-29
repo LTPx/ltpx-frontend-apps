@@ -5,6 +5,7 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { useContext } from 'react';
 import { UserContext } from '../../../store/context/user/user-context';
+import { UserRoles } from '../../../store/interfaces/user';
 
 /* eslint-disable-next-line */
 export interface LoginProps {}
@@ -29,7 +30,8 @@ export function Login(props: LoginProps) {
     onSubmit: async data => {
       const user = {
         email: data.email,
-        name: 'Guest'
+        name: 'Guest',
+        role: UserRoles.student
       }
       localStorage.setItem('user', JSON.stringify(user));
       try{

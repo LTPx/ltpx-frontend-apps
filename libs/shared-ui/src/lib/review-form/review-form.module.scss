@@ -1,0 +1,40 @@
+@import '../../styles/styles.module.scss';
+
+.container {
+  width: 100%;
+  border: 1px solid #d4d4d4;
+  margin-top: $size-lg-2;
+  .review {
+    padding: $size-lg-3;
+
+    .review-form {
+      display: flex;
+      flex-direction: column;
+      padding-bottom: $size-md-1;
+      h3 {
+        color: $text-color;
+        font-weight: bold;
+        padding-bottom: $size-md-1;
+      }
+      h4 {
+        color: $text-gray-color;
+        padding-bottom: $size-sm-2;
+      }
+    }
+
+    .form {
+      h4 {
+        color: $text-color;
+        font-weight: bold;
+      }
+
+      .input {
+        padding-bottom: $size-md-1;
+      }
+
+      .textArea {
+        padding-bottom: $size-md-1;
+      }
+    }
+  }
+}

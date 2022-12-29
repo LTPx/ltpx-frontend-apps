@@ -1,0 +1,68 @@
+@import '../../styles/styles.module.scss';
+
+.container {
+  width: 510px;
+  height: 534px;
+  background: $white-color;
+  border: 1px solid #e7e7ec;
+
+  .profile-content {
+    display: flex;
+    flex-direction: column;
+
+    h2 {
+      color: $text-color;
+      padding-left: $size-md-3;
+      padding-top: $size-md-3;
+    }
+
+    .profile {
+      display: flex;
+      padding-top: $size-md-1;
+      padding-left: $size-md-3;
+      padding-bottom: $size-md-2;
+      .information {
+        display: flex;
+        flex-direction: column;
+        padding-left: $size-md-3;
+
+        h3 {
+          color: $text-color;
+        }
+
+        h4 {
+          color: $text-gray-color;
+        }
+      }
+    }
+
+    .description-profile {
+      p {
+        font-size: 16px;
+        line-height: 30px;
+        color: $text-gray-color;
+        padding-left: $size-md-3;
+        padding-right: $size-md-3;
+        text-align: justify;
+        padding-bottom: $size-md-1;
+      }
+    }
+
+    .social-networks {
+      padding-left: $size-md-3;
+      display: flex;
+      gap: $size-sm-2;
+
+      .social {
+        box-sizing: border-box;
+        background: $white-color;
+        border: 1px solid #e7e7ec;
+        box-shadow: 0px 8px 15px rgba(140, 152, 164, 0.1);
+        border-radius: 50%;
+        border-width: 1px;
+        padding: $size-sm-2;
+        cursor: pointer;
+      }
+    }
+  }
+}

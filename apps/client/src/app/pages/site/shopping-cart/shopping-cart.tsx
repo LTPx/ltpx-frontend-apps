@@ -1,4 +1,3 @@
-import { buildCourses } from '@ltpx-frontend-apps/api';
 import { Button, ColorsButton, CourseCartItem } from '@ltpx-frontend-apps/shared-ui';
 import { useUser } from '../../../hooks/useUser';
 import styles from './shopping-cart.module.scss';
@@ -8,7 +7,11 @@ export interface ShoppingCartProps {}
 
 export function ShoppingCart(props: ShoppingCartProps) {
 
-  const { products } = useUser();
+  const { isAuthenticated, products, removeCourseFromCart } = useUser();
+
+  const handleRemoveItem = (id: string) => {
+    removeCourseFromCart(id);
+  }
 
   const subtotal = () => {
     let total = 0;
@@ -26,6 +29,7 @@ export function ShoppingCart(props: ShoppingCartProps) {
           { products.map((product, index) => (
             <CourseCartItem
               key={index}
+              id={product.id}
               image={product.image}
               category={product.category}
               title={product.title}
@@ -33,6 +37,7 @@ export function ShoppingCart(props: ShoppingCartProps) {
               duration={product.duration}
               lessons={product.lessons}
               stars={product.stars}
+              onClickRemove={handleRemoveItem}
             />
           ))}
         </div>
@@ -45,7 +50,7 @@ export function ShoppingCart(props: ShoppingCartProps) {
                 color={ColorsButton.primary}
                 title='Checkout'
                 full={true}
-                link='/checkout'
+                link={isAuthenticated ? '/checkout' : '/register' }
               />
             </>
           ) : null}

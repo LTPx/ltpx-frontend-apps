@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import styles from './select.module.scss';
 
 export interface OptionSelect {
@@ -7,17 +8,34 @@ export interface OptionSelect {
 
 /* eslint-disable-next-line */
 export interface SelectProps {
-  options: Array<OptionSelect>
+  options: Array<OptionSelect>;
+  label?: string;
+  onChange?: (selectedOption: OptionSelect) => void;
+  selected?: OptionSelect;
 }
 
 export function Select(props: SelectProps) {
-  const { options } = props;
+  const { options, label, onChange, selected} = props;
+  const initialSelectedOption = selected?.value || options[0].value;
+  const [selectedOption, setSelectedOption] = useState(initialSelectedOption)
 
+  const handleChange = (e:any) => {
+    const optionFound = options.find((option)=> option.value === e.target.value);
+    const option = optionFound || options[0];
+    setSelectedOption(option.value);
+    onChange && onChange(option);
+  }
   return (
     <div className={styles['container']}>
-      <select className={styles['style-select']} name="select">
+      { label && (
+        <label className={styles['label']}>{label}</label>
+      )}
+      <select className={styles['style-select']}
+        onChange={ (e: any) => { handleChange(e) }}
+        value={selectedOption}
+      >
         { options.map((option, index) => (
-          <option key={index} value={option.value}>
+          <option key={index} value={option.value} >
             {option.text}
           </option>
         ))}

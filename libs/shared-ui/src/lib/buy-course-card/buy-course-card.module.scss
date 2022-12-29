@@ -1,0 +1,76 @@
+@import '../../styles/styles.module.scss';
+
+.container {
+  .buy-card {
+    padding: 10px;
+    background-color: $white-color;
+    box-shadow: $card-shadow-strong;
+    border: 1px solid $stroke-color;
+
+    img {
+      width: 300px;
+    }
+
+    .summary {
+      padding: 15px;
+    }
+
+    .price-promo {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 5px 0;
+
+      .price {
+        h3 {
+          margin: 0;
+          color: $text-color;
+        }
+      }
+
+      .discount {
+        background-color: #c4b5fd;
+        padding: 1px 20px;
+        color: $white-color;
+        border-radius: 5px;
+        font-size: 12px;
+      }
+    }
+
+    .actions {
+      display: flex;
+      flex-direction: column;
+      gap: $size-sm-2;
+      margin: 10px 0;
+    }
+
+    .details {
+      display: flex;
+      flex-direction: column;
+
+      .item {
+        display: flex;
+        justify-content: space-between;
+        border-bottom: 1px solid #c7c7c7;
+        padding: 0.75rem 0rem;
+
+        .item-text {
+          display: flex;
+          align-items: center;
+
+          svg {
+            margin-right: 10px;
+          }
+
+          h4 {
+            color: $text-color;
+          }
+        }
+
+        h4 {
+          color: $text-gray-color;
+        }
+      }
+    }
+  }
+}

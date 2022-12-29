@@ -1,0 +1,38 @@
+@import '../../styles/styles.module.scss';
+
+.container {
+  display: flex;
+  width: 100%;
+  padding-bottom: $size-lg-1;
+
+  .avatar-content {
+    padding: $size-md-1;
+  }
+
+  .comment-content {
+    padding: $size-md-1;
+    .head {
+      display: flex;
+      justify-content: space-between;
+
+      h3 {
+        font-weight: bold;
+        color: $text-color;
+      }
+    }
+
+    .review-title {
+      padding-bottom: $size-sm-2;
+      font-style: oblique;
+      color: $text-gray-color;
+      display: flex;
+      justify-content: space-between;
+      padding-right: $size-md-1;
+    }
+    .comment {
+      font-size: 14px;
+      color: $text-gray-color;
+      text-align: justify;
+    }
+  }
+}

@@ -1,4 +1,5 @@
 import { NavLink } from 'react-router-dom';
+import Brand from '../brand/brand';
 import Icon from '../icon/icon';
 import styles from './footer.module.scss';
 
@@ -18,14 +19,12 @@ export function Footer(props: FooterProps) {
       <div className={styles['footer-content']}>
         <div className={styles['company-information']}>
           <div className={styles['icon-content']}>
-            <label>LTPX</label>
+            <Brand negativeSpace={true} />
           </div>
           <div className={styles['information-one']}>
-            <label>
-              Calle de Covarrubias y 142301 Ravenswood, Madrid - Spain.
-            </label>
-            <label>123 456 7890</label>
-            <label>support@ltpx.com</label>
+            <p>Calle de Covarrubias y 142301 Ravenswood, Madrid - Spain.</p>
+            <h4>123 456 7890</h4>
+            <h4>support@ltpx.com</h4>
           </div>
           <div className={styles['social-networks']}>
             <Icon
@@ -50,7 +49,7 @@ export function Footer(props: FooterProps) {
         </div>
         <div className={styles['site-links']}>
           <div className={styles['links']}>
-            <label className={styles['title']}>Our Company</label>
+            <h4 className={styles['title']}>Our Company</h4>
             {companyLinks.map((link, index) => (
               <NavLink className={styles['link']} to={link.url} key={index}>
                 {link.text}
@@ -58,7 +57,7 @@ export function Footer(props: FooterProps) {
             ))}
           </div>
           <div className={styles['links']}>
-            <label className={styles['title']}>Support</label>
+            <h4 className={styles['title']}>Support</h4>
             {supportLinks.map((link, index) => (
               <NavLink className={styles['link']} to={link.url} key={index}>
                 {link.text}
@@ -69,10 +68,10 @@ export function Footer(props: FooterProps) {
       </div>
       <div className={styles['footer-end']}>
         <div className={styles['information-end-container']}>
-          <label>Copyright © 2022 Creative Layers All Right Reserved</label>
-          <label>Terms & Conditions</label>
-          <label>Privacy policy</label>
-          <label>Sitemap</label>
+          <h5>Copyright © 2022 Creative Layers All Right Reserved</h5>
+          <h5>Terms & Conditions</h5>
+          <h5>Privacy policy</h5>
+          <h5>Sitemap</h5>
         </div>
       </div>
     </div>

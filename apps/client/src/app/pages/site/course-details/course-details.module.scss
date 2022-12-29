@@ -1,5 +1,7 @@
+@import '../../../../styles.scss';
+
 .container {
-  background-color: #f7f7f7;
+  background-color: $white-color;
 }
 
 .course-details {
@@ -9,6 +11,18 @@
   .description {
     margin-right: 10rem;
 
+    .description-title {
+      padding-bottom: $size-md-1;
+      h1 {
+        color: $text-color;
+        padding-bottom: $size-md-1;
+      }
+
+      h4 {
+        color: $text-gray-color;
+      }
+    }
+
     .description-course {
       display: flex;
       justify-content: space-between;
@@ -17,10 +31,11 @@
       .item {
         display: flex;
         flex-direction: column;
+        color: $text-color;
 
         h5 {
           margin-top: 0;
-          color: #888888;
+          color: $text-gray-color;
         }
       }
     }
@@ -28,85 +43,68 @@
 }
 
 .summary-course {
+  padding-top: $size-md-1;
+
+  .overview {
+    padding-top: $size-md-1;
+
+    .course-description {
+      h3 {
+        color: $text-color;
+        padding-bottom: $size-md-1;
+      }
+
+      p {
+        color: $text-gray-color;
+      }
+    }
+
+    .achievements {
+
+      h3 {
+        color: $text-color;
+        padding-bottom: $size-md-1;
+      }
+
+      .items {
+        color: $text-gray-color;
+        display: flex;
+        flex-direction: column;
+        gap: $size-md-1;
+      }
+    }
+
+    .requirements {
+      display: flex;
+      flex-direction: column;
+      gap: $size-md-1;
+
+      h3 {
+        color: $text-color;
+      }
+
+      ul {
+        padding-left: $size-md-1;
+        color: $text-gray-color;
+
+        li {
+          color: $text-gray-color;
+        }
+      }
+    }
+  }
 
   section {
-     margin-top: 2rem;
+    margin-top: $size-md-3;
   }
   .items {
     .item {
       display: flex;
-      align-items: center;
+      align-items: start;
 
       svg {
+        margin-top: 0.2rem;
         margin-right: 0.5rem;
-      }
-    }
-  }
-}
-
-.buy-card {
-  padding: 10px;
-
-  img {
-    width: 300px;
-  }
-
-  .summary {
-    padding: 15px;
-  }
-
-  .price-promo {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 5px 0;
-
-    .price {
-      h3 {
-        margin: 0;
-      }
-    }
-
-    .discount {
-      background-color: #c4b5fd;
-      padding: 1px 20px;
-      color: #fff;
-      border-radius: 5px;
-      font-size: 12px;
-    }
-  }
-
-  .actions {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    margin: 10px 0;
-  }
-
-  .details {
-     display: flex;
-     flex-direction: column;
-
-    .item {
-      display: flex;
-      justify-content: space-between;
-      border-bottom: 1px solid #c7c7c7;
-
-      .item-text {
-        display: flex;
-        align-items: center;
-
-        svg {
-          margin-right: 10px;
-        }
-
-        h4 {
-          color: black;
-        }
-      }
-
-      h4 {
-        color: #888888;
       }
     }
   }

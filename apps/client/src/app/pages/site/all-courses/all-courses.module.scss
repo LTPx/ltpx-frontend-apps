@@ -5,7 +5,7 @@
 .filters-container {
   display: flex;
   justify-content: space-between;
-  margin: 2rem 8rem;
+  margin: 2rem 2rem;
 
   .filters {
     display: flex;
@@ -19,12 +19,11 @@
   display: flex;
   justify-content: center;
   flex-direction: column;
-  // align-items: center;
 }
 
 .courses {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  display: grid;
   gap: 1rem;
+  grid-auto-rows: 22rem;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
 }

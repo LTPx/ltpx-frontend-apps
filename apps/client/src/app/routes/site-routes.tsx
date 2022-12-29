@@ -9,6 +9,7 @@ import {
   CourseDetails,
   RegisterTeacher
 } from "../pages/site/index";
+import TermsConditions from "../pages/site/terms-conditions/terms-conditions";
 
 export const SiteRoutes = () => {
   return (
@@ -22,6 +23,7 @@ export const SiteRoutes = () => {
       <Route path="/course/:courseId/details" element={<CourseDetails/>} />
       <Route path="/cart" element={<ShoppingCart/>} />
       <Route path="/checkout" element={<Checkout/>} />
+      <Route path="/terms-and-conditions" element={<TermsConditions/>} />
     </Routes>
   )
 }

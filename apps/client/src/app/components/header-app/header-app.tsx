@@ -2,27 +2,29 @@ import { Avatar, Cart, Header, Icon } from '@ltpx-frontend-apps/shared-ui';
 import { NavLink } from 'react-router-dom';
 import { useUser } from '../../hooks/useUser';
 import styles from './header-app.module.scss';
-
-const mainLinks = [
-  { title: 'Home', url: '/home'},
-  { title: 'Courses', url: '/courses'},
-  { title: 'Become a teacher', url: '/register-teacher'},
-];
-
-const authLinks = [
-  { title: 'Login', url: '/login'},
-  { title: 'Register', url: '/register'},
-];
-
-const linksAccount = [
-  { title: 'My Dashboard', url: '/student/dashboard'},
-];
+import { useTranslation } from 'react-i18next';
 
 /* eslint-disable-next-line */
 export interface HeaderAppProps {}
 
 export function HeaderApp(props: HeaderAppProps) {
   const { user, isAuthenticated, products } = useUser();
+  const { t } = useTranslation();
+
+  const mainLinks = [
+    { title: t('header.home'), url: '/home'},
+    { title: t('header.courses'), url: '/courses'},
+    { title: t('header.beTeacher'), url: '/register-teacher'},
+  ];
+
+  const authLinks = [
+    { title: t('header.login'), url: '/login'},
+    { title: t('header.register'), url: '/register'},
+  ];
+
+  const linksAccount = [
+    { title: 'My Dashboard', url: '/student/dashboard'},
+  ];
 
   const linksNotAccount = mainLinks.concat(authLinks);
   const linksWithAccount = mainLinks.concat(linksAccount);
@@ -32,8 +34,8 @@ export function HeaderApp(props: HeaderAppProps) {
       { isAuthenticated && (
         <Header links={linksWithAccount}>
           <div className={styles['actions']}>
-            <NavLink to={'cart'}>
-              <Cart/>
+            <NavLink to={'/cart'}>
+              <Cart amount={products.length}/>
             </NavLink>
             { isAuthenticated && (
               <>
@@ -48,7 +50,7 @@ export function HeaderApp(props: HeaderAppProps) {
       { !isAuthenticated && (
         <Header links={linksNotAccount}>
           <div className={styles['actions']}>
-            <NavLink to={'cart'}>
+            <NavLink to={'/cart'}>
               <Cart amount={products.length}/>
             </NavLink>
           </div>

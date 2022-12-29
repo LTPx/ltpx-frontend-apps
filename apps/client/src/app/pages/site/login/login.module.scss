@@ -1,3 +1,5 @@
+@import "../../../../styles.scss";
+
 .container {
   display: flex;
   justify-content: center;
@@ -10,4 +12,11 @@
 
 .btn-submit {
   margin-top: 20px;
+}
+
+.error {
+  background-color: #ef4444;
+  color: $white-color;
+  padding: 1rem;
+  margin: 0.5rem 0;
 }

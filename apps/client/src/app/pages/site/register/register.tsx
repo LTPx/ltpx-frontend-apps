@@ -5,7 +5,7 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { useContext } from 'react';
 import { UserContext } from '../../../store/context/user/user-context';
-import { registerUser } from '@ltpx-frontend-apps/api';
+import { registerUser, TypeAccounts } from '@ltpx-frontend-apps/api';
 
 /* eslint-disable-next-line */
 export interface RegisterProps {}
@@ -23,12 +23,12 @@ export function Register(props: RegisterProps) {
     },
     validationSchema: Yup.object({
       name: Yup.string()
-                .required('Name is required'),
+                .required('Nombre es obligatorio'),
       email: Yup.string()
                 .email()
-                .required('Email is required'),
+                .required('Email es obligatorio'),
       password: Yup.string()
-                    .required('Password is required')
+                    .required('Password es obligatorio')
     }),
     onSubmit: async data => {
       const userAccount = {
@@ -36,14 +36,13 @@ export function Register(props: RegisterProps) {
         name: data.name,
         password: data.password,
       };
-      // sessionStorage.setItem('user', JSON.stringify(user));
-      // sessionStorage.setItem('isAuthenticated', 'true');
-      const { user } = await registerUser(userAccount);
-      console.log(user);
       try{
-        navigate('/student/dashboard');
-        // setUser(user);
-        //TODO: integrate API
+        const { user } = await registerUser(userAccount);
+        setUser(user);
+        sessionStorage.setItem('user', JSON.stringify(user));
+        sessionStorage.setItem('isAuthenticated', 'true');
+        console.log(user);
+        navigate('/home');
       }
       catch(error){
         console.log(error);

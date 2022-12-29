@@ -3,15 +3,16 @@ import { Button, ColorsButton, Input, TypeButton } from '@ltpx-frontend-apps/sha
 import { useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { UserContext } from '../../../store/context/user/user-context';
-import { loginUser } from '@ltpx-frontend-apps/api';
+import { loginUser, TypeAccounts } from '@ltpx-frontend-apps/api';
 
 /* eslint-disable-next-line */
 export interface LoginProps {}
 
 export function Login(props: LoginProps) {
   const { setUser } = useContext(UserContext);
+  const [error, setError] = useState(false);
 
   const navigate = useNavigate();
 
@@ -28,20 +29,27 @@ export function Login(props: LoginProps) {
                     .required('Password is required')
     }),
     onSubmit: async data => {
-      const user = {
+      const userAccount = {
         email: data.email,
         password: data.password,
       }
       try{
-        await loginUser(user.email, user.password);
-        // localStorage.setItem('user', JSON.stringify(user));
-        // console.log('resp: ', resp);
-        // navigate('/student/dashboard');
-        // setUser(user);
-        //TODO: integrate API
+        const { user } = await loginUser(userAccount);
+        setError(false);
+        localStorage.setItem('user', JSON.stringify(user));
+        sessionStorage.setItem('isAuthenticated', 'true');
+        setUser(user);
+        if (user.initial_register === TypeAccounts.user) {
+          navigate('/student/dashboard');
+        }
+        if (user.initial_register === TypeAccounts.teacher) {
+          navigate('/teacher/account');
+        }
+        console.log('user: ', user);
       }
       catch(error: any){
         console.log('error: ', error.response);
+        setError(true);
       }
     }
   });
@@ -51,10 +59,15 @@ export function Login(props: LoginProps) {
       <div className={styles['container']}>
         <div className={styles['content']}>
           <h1>Log in</h1>
-          <span>
+          <p>
             Access a supportive community of online instructors.
             Get instant access to all creation courses resources
-          </span>
+          </p>
+          { error && (
+            <div className={styles['error']}>
+              <p>Lo sentimos no hemos encontrado una cuenta con ese usuario o contraseña, prueba recuperando contraseña</p>
+            </div>
+          )}
           <form onSubmit={formik.handleSubmit}>
             <Input
               label='Email'

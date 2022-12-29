@@ -1,6 +1,6 @@
 export enum TypeAccounts {
   teacher = 'teacher',
-  student = 'student',
+  user = 'user',
   admin = 'admin',
 }
 

@@ -8,12 +8,18 @@ interface Account {
   password: string;
 }
 
+interface Credentials {
+  email: string;
+  password: string;
+}
+
 interface AuthSuccessResponse {
   user: UserResponse;
   message: string;
 }
 
-export const loginUser = async(email: string, password: string) => {
+export const loginUser = async(credentials: Credentials):Promise<AuthSuccessResponse> => {
+  const { email, password } = credentials;
   const response = await http.post('login', {
     user: {
       email,
@@ -51,7 +57,7 @@ export const registerTeacher = async(account: Account):Promise<AuthSuccessRespon
   return response.data;
 }
 
-export const logout  = async() => {
+export const logout = async() => {
   const response = await http.delete('logout');
   localStorage.removeItem("auth_token");
   http.defaults.headers.common["Authorization"] = null;

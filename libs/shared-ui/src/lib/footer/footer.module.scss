@@ -13,13 +13,13 @@
     .company-information {
       display: flex;
       flex-direction: column;
-      
+
       .icon-content {
         font-size: 20px;
         font-weight: bold;
         padding-bottom: $size-sm-3;
       }
-      
+
       .information-one {
         display: flex;
         flex-direction: column;
@@ -27,7 +27,7 @@
         color: #8887b2;
         max-width: 20rem;
       }
-  
+
       .social-networks {
         display: flex;
         gap: $size-md-1;
@@ -47,18 +47,18 @@
     .site-links {
       display: flex;
       gap: $size-lg-4;
-      
+
       .links {
         display: flex;
         flex-direction: column;
         gap: $size-md-1;
-  
+
         .title {
           // font-size: 16px;
           font-weight: bold;
           margin: 0;
         }
-  
+
         .link {
           font-size: 14px;
           color: #8887b2;

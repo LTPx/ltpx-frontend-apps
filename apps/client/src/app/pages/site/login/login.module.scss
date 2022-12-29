@@ -1,3 +1,5 @@
+@import '../../../../styles.scss';
+
 .container {
   display: flex;
   justify-content: center;
@@ -6,6 +8,17 @@
 
 .content {
   max-width: 30rem;
+
+  span {
+    color: $text-gray-color;
+  }
+
+  .link {
+    color: $primary-color-400;
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+  }
 }
 
 .btn-submit {

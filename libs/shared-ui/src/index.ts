@@ -1,3 +1,4 @@
+export * from './lib/learners-table/learners-table';
 export * from './lib/notification-list/notification-list';
 export * from './lib/user-menu/user-menu';
 export * from './lib/snackbar/snackbar';

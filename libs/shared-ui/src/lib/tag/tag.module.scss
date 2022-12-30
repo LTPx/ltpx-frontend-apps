@@ -1,0 +1,23 @@
+@import '../../styles/styles.module.scss';
+
+.container {
+  .tag {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4px 12px;
+    width: 60px;
+    height: 30px;
+    border-radius: 4px;
+
+    &.tag-green {
+      background: $green-color-100;
+      color: $green-color;
+    }
+
+    &.tag-gray {
+      background: $gray-color-300;
+      color: $text-color;
+    }
+  }
+}

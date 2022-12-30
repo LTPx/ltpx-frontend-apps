@@ -1,0 +1,200 @@
+@import '../../styles/styles.module.scss';
+
+@mixin animation-top-toggle {
+  animation: fadeInTop 0.5s;
+
+  &.dismiss {
+    animation: fadeOutTop 0.5s 1s;
+  }
+}
+
+@mixin animation-bottom-toggle {
+  animation: fadeInBottom 0.5s;
+
+  &.dismiss {
+    animation: fadeOutBottom 0.5s 1s;
+  }
+}
+
+.snackbar {
+  visibility: hidden;
+  width: 400px;
+  position: fixed;
+  max-height: 300px;
+  z-index: 1;
+  background-color: $white-color;
+  box-shadow: $card-shadow-strong;
+  padding: $size-md-2;
+  border-radius: 8px;
+
+  .container {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+
+    .content-section {
+      display: flex;
+      flex-direction: column;
+      gap: $size-sm-1;
+
+      h4 {
+        color: $secondary-color;
+      }
+
+      h3 {
+        color: $text-color;
+        font-weight: 400;
+      }
+
+      p {
+        color: $text-gray-color;
+        text-align: justify;
+        margin-bottom: $size-md-2;
+      }
+
+      .date {
+        color: $text-gray-color-medium;
+      }
+    }
+
+    .icon-section {
+      padding-top: $size-sm-2;
+    }
+
+    .close-section {
+      padding-top: $size-sm-2;
+    }
+
+    .close-section svg {
+      cursor: pointer;
+      color: $text-gray-color-medium;
+    }
+  }
+
+  &.show {
+    visibility: visible;
+
+    &.top-snackbar {
+      top: 50px;
+      right: 10px;
+      @include animation-top-toggle;
+    }
+
+    &.center-top-snackbar {
+      top: 50px;
+      left: 35%;
+      @include animation-top-toggle;
+    }
+
+    &.bottom-snackbar {
+      bottom: 50px;
+      right: 10px;
+      @include animation-bottom-toggle;
+    }
+
+    &.center-bottom-snackbar {
+      bottom: 50px;
+      left: 35%;
+      @include animation-bottom-toggle;
+    }
+  }
+
+  &.message-snackbar {
+    .container {
+      h3 {
+        color: $text-color;
+      }
+    }
+  }
+
+  &.warning-snackbar {
+    .container {
+      h3 {
+        color: $orange-color;
+        padding-left: $size-md-1;
+      }
+
+      .date {
+        padding-left: $size-md-1;
+      }
+
+      .icon-section svg {
+        color: $orange-color;
+      }
+    }
+  }
+
+  &.error-snackbar {
+    .container {
+      h3 {
+        color: $red-color;
+        padding-left: $size-md-1;
+      }
+      .date {
+        padding-left: $size-md-1;
+      }
+
+      .icon-section svg {
+        color: $red-color;
+      }
+    }
+  }
+
+  &.success-snackbar {
+    .container {
+      h3 {
+        color: $green-color;
+        padding-left: $size-md-1;
+      }
+      .date {
+        padding-left: $size-md-1;
+      }
+      .icon-section svg {
+        color: $green-color;
+      }
+    }
+  }
+}
+
+@keyframes fadeInTop {
+  from {
+    top: 0;
+    opacity: 0;
+  }
+  to {
+    top: 50px;
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInBottom {
+  from {
+    bottom: 0;
+    opacity: 0;
+  }
+  to {
+    bottom: 50px;
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOutTop {
+  from {
+    top: 50px;
+    opacity: 1;
+  }
+  to {
+    top: 0;
+    opacity: 0;
+  }
+}
+
+@keyframes fadeOutBottom {
+  from {
+    bottom: 50px;
+    opacity: 1;
+  }
+  to {
+    bottom: 0;
+    opacity: 0;
+  }
+}

@@ -1,6 +1,11 @@
 import styles from './login.module.scss';
-import { Button, ColorsButton, Input, TypeButton } from '@ltpx-frontend-apps/shared-ui';
-import { useNavigate } from 'react-router-dom';
+import {
+  Button,
+  ColorsButton,
+  Input,
+  TypeButton,
+} from '@ltpx-frontend-apps/shared-ui';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { useContext } from 'react';
@@ -18,69 +23,72 @@ export function Login(props: LoginProps) {
   const formik = useFormik({
     initialValues: {
       email: '',
-      password: ''
+      password: '',
     },
     validationSchema: Yup.object({
-      email: Yup.string()
-                .email()
-                .required('Email is required'),
-      password: Yup.string()
-                    .required('Password is required')
+      email: Yup.string().email().required('Email is required'),
+      password: Yup.string().required('Password is required'),
     }),
-    onSubmit: async data => {
+    onSubmit: async (data) => {
       const user = {
         email: data.email,
         name: 'Guest',
-        role: UserRoles.student
-      }
+        role: UserRoles.student,
+      };
       localStorage.setItem('user', JSON.stringify(user));
-      try{
+      try {
         navigate('/student/dashboard');
         setUser(user);
         //TODO: integrate API
-      }
-      catch(error){
+      } catch (error) {
         console.log(error);
       }
-    }
+    },
   });
 
   return (
     <div className="main-container">
       <div className={styles['container']}>
         <div className={styles['content']}>
-          <h1>Log in</h1>
+          <h1>Iniciar Sesión</h1>
           <span>
-            Access a supportive community of online instructors.
-            Get instant access to all creation courses resources
+            Accede a una comunidad de apoyo de instructores en línea. obten acceso instantáneo
+            a todos nuestros cursos y clases.
           </span>
           <form onSubmit={formik.handleSubmit}>
             <Input
-              label='Email'
+              label="Email"
               type="email"
               name="email"
               placeholder="myemail@example.com"
-              onChange={(e: any) => { formik.handleChange(e); }}
+              onChange={(e: any) => {
+                formik.handleChange(e);
+              }}
               value={formik.values.email}
               onBlur={formik.handleBlur}
             />
             <Input
-              label='Password'
+              label="Password"
               type="password"
               name="password"
-              placeholder='********'
-              onChange={(e: any) => { formik.handleChange(e); }}
+              placeholder="********"
+              onChange={(e: any) => {
+                formik.handleChange(e);
+              }}
               value={formik.values.password}
               onBlur={formik.handleBlur}
             />
             <Button
               className={styles['btn-submit']}
               color={ColorsButton.primary}
-              title="Sign In"
+              title="Iniciar"
               full={true}
               type={TypeButton.submit}
             />
           </form>
+          <NavLink to={'/forget-password'} className={styles['link']}>
+            Olvidaste tu contraseña?
+          </NavLink>
         </div>
       </div>
     </div>

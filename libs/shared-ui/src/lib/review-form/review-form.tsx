@@ -12,17 +12,17 @@ export function ReviewForm(props: ReviewFormProps) {
     <div className={styles['container']}>
       <div className={styles['review']}>
         <div className={styles['review-form']}>
-          <label className={styles['title']}>Add Review and Rate</label>
-          <label>What is like to Course?</label>
+          <h3>Add Review and Rate</h3>
+          <h4>What is like to Course?</h4>
           <Rating stars={4}></Rating>
         </div>
         <div className={styles['form']}>
           <div className={styles['input']}>
-            <label>Review Title</label>
+            <h4>Review Title</h4>
             <Input></Input>
           </div>
           <div className={styles['textArea']}>
-            <label>Review Content</label>
+            <h4>Review Content</h4>
             <TextArea rows={10} cols={62}></TextArea>
           </div>
           <Button

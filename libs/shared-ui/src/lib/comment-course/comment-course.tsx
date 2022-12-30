@@ -20,12 +20,12 @@ export function CommentCourse(props: CommentCourseProps) {
       </div>
       <div className={styles['comment-content']}>
         <div className={styles['head']}>
-          <label>{name}</label>
+          <h3>{name}</h3>
           <Rating stars={5}></Rating>
         </div>
         <div className={styles['review-title']}>
-          <label>{reviewTitle}</label>
-          <label>{date}</label>
+          <h4>{reviewTitle}</h4>
+          <h4>{date}</h4>
         </div>
         <div className={styles['comment']}>
           <p>{comment}</p>

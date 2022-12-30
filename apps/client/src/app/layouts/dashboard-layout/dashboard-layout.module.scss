@@ -20,6 +20,9 @@
   background-color: $white-color;
   padding: 30px;
   border-right: 1px solid #ebecef;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .logout {

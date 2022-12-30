@@ -29,9 +29,9 @@ export function UserMenu(props: UserMenuProps) {
         </div>
       </div>
       {links.map((link, index) => (
-        <div className={styles['content']}>
+        <div className={styles['content']} key={index}>
           <Icon icon={link.icon} size={16}></Icon>
-          <NavLink key={index} to={link.url}>
+          <NavLink to={link.url}>
             <h4>{link.text}</h4>
           </NavLink>
         </div>

@@ -13,17 +13,19 @@ export interface LinkOption {
 export interface UserMenuProps {
   links: Array<LinkOption>;
   image: string;
+  name: string;
+  email: string;
 }
 
 export function UserMenu(props: UserMenuProps) {
-  const { links, image } = props;
+  const { links, image, name, email } = props;
   return (
     <div className={styles['container']}>
       <div className={styles['head-content']}>
         <Avatar image={image} size={AvatarSize.medium}></Avatar>
         <div className={styles['user']}>
-          <h4>Ali Tufan</h4>
-          <h5>ali@skola.com</h5>
+          <h4>{name}</h4>
+          <h5>{email}</h5>
         </div>
       </div>
       {links.map((link, index) => (

@@ -23,6 +23,8 @@ export const Default = () => {
           'https://images.unsplash.com/flagged/photo-1559475555-b26777ed3ab4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjZ8fHRlYWNoZXJ8ZW58MHx8MHx8&auto=format&fit=crop&w=800&q=60'
         }
         links={links}
+        name={'Ali Tufan'}
+        email={'ali@skola.com'}
       />
     </div>
   );

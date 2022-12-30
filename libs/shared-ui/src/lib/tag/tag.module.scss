@@ -5,10 +5,11 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 4px 12px;
-    width: 60px;
+    padding: 1px 16px;
+    max-width: 300px;
     height: 30px;
     border-radius: 4px;
+    gap: 0.5rem;
 
     &.tag-green {
       background: $green-color-100;
@@ -16,8 +17,8 @@
     }
 
     &.tag-gray {
-      background: $gray-color-300;
-      color: $text-color;
+      background: $gray-color-100;
+      color: $gray-color;
     }
   }
 }

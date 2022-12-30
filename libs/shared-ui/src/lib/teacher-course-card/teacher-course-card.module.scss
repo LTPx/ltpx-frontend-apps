@@ -2,21 +2,73 @@
 
 .container {
   background-color: #fff;
-  width: 30rem;
-  height: 30rem;
-  border: 1px solid #f7f7f7;
-  box-shadow: $card-shadow-strong;
-  padding: 10px;
+  max-width: 280px;
+  height: auto;
+  border: 1px solid $gray-color-200;
+  box-shadow: $card-shadow-medium;
 
   .head-content {
-
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: $size-sm-2;
   }
 
   .content {
+    border: 1px solid $gray-color-200;
+    display: flex;
+    flex-direction: column;
+    img {
+      width: 100%;
+      height: 120px;
+      object-fit: cover;
+    }
 
+    .information {
+      display: flex;
+      flex-direction: column;
+      padding: $size-md-1;
+      h4 {
+        padding-bottom: $size-sm-1;
+      }
+      .describe {
+        display: flex;
+        gap: $size-md-1;
+        h5 {
+          color: $gray-color-400;
+        }
+      }
+    }
   }
 
-  .end-content{
-    
+  .end-content {
+    display: flex;
+    justify-content: space-between;
+    .rate {
+      padding: $size-md-1;
+      border: 1px solid $gray-color-200;
+      width: 100%;
+      h5 {
+        color: $gray-color-400;
+        padding-bottom: $size-sm-1;
+      }
+      h4 {
+        display: flex;
+        align-items: center;
+        gap: $size-sm-1;
+      }
+    }
+
+    .course-no-yet {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: $gray-color-400;
+      width: 100%;
+      text-align: center;
+      border: 1px solid $gray-color-200;
+      padding: $size-lg-1;
+      gap: $size-sm-2;
+    }
   }
 }

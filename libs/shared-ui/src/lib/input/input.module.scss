@@ -10,6 +10,10 @@
   display: flex;
 }
 
+.description {
+  color: $text-gray-color-medium;
+}
+
 .addon {
   position: absolute;
   width: 50px;

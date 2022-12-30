@@ -41,7 +41,7 @@ export function Button(props: ButtonProps) {
     ...other
   } = props;
 
-  const selectedColor = color ? color : ColorsButton.white;
+  const selectedColor = color ? color : ColorsButton.primary;
   const colorsClasses = {
     white: `${css['btn-white']}`,
     accent: `${css['btn-accent']}`,

@@ -13,3 +13,10 @@ export interface UserState {
     courses: Course[];
   }
 }
+
+export interface TeacherState {
+  user: User;
+  isAuthenticated: boolean;
+  applied: boolean;
+  status_account: string;
+}

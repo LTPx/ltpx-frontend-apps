@@ -37,9 +37,8 @@ export function ApplyTeacherForm(props: ApplyTeacherFormProps) {
         national_id: nationalId,
       };
       try {
-        // const resp = await applyToTeach(teacherForm);
-        const resp = await getCurrentUser();
-        console.log(resp);
+        await applyToTeach(teacherForm);
+        sessionStorage.setItem('applied', 'true');
       } catch (error: any) {
         console.log('error: ', error.response);
       }

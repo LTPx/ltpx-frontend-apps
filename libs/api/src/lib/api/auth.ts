@@ -63,3 +63,8 @@ export const logout = async() => {
   http.defaults.headers.common["Authorization"] = null;
   return response.data;
 }
+
+export const getCurrentUser = async() => {
+  const response = await http.get('api/v1/current_user');
+  return response.data;
+}

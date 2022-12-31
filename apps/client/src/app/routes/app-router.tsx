@@ -150,7 +150,7 @@ export const AppRouter = () => {
         </Route>
         <Route path="teacher" element={<DashboardLayout  links={linksDashboardTeacher}/>}>
           <Route path="dashboard" element={<TeacherDashboard/>}/>
-          <Route path="account" element={<ApplyTeacherForm/>}/>
+          <Route path="account" element={<TeacherAccount/>}/>
           <Route path="earnings" element={<Earnings/>}/>
           <Route path="courses" element={<ManageCourses/>}>
             <Route path="/teacher/courses" element={<Navigate replace to="all" />} />

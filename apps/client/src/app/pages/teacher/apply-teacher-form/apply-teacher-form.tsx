@@ -2,6 +2,7 @@ import { Button, Input, TextArea, TypeButton } from '@ltpx-frontend-apps/shared-
 import styles from './apply-teacher-form.module.scss';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
+import { applyToTeach, getCurrentUser } from '@ltpx-frontend-apps/api';
 /* eslint-disable-next-line */
 export interface ApplyTeacherFormProps {}
 
@@ -10,7 +11,7 @@ export function ApplyTeacherForm(props: ApplyTeacherFormProps) {
     initialValues: {
       name: '',
       phone: '',
-      national_id: '',
+      nationalId: '',
       country: '',
       city: '',
       experience: '',
@@ -22,18 +23,23 @@ export function ApplyTeacherForm(props: ApplyTeacherFormProps) {
       phone: Yup.string().required('Telefono es required'),
       country: Yup.string().required('Pais es required'),
       city: Yup.string().required('Ciudad es required'),
-      national_id: Yup.string().required('Identificacion es required'),
+      nationalId: Yup.string().required('Identificacion es required'),
       experience: Yup.string().required('Experiencia es required'),
       degrees: Yup.string().required('Titulos es required'),
       record_police: Yup.string().required('Record Policial es required'),
     }),
     onSubmit: async (data) => {
-      // const userAccount = {
-      //   email: data.email,
-      //   password: data.password,
-      // };
-      console.log(data);
+      const { name, experience, degrees, nationalId } = data;
+      const teacherForm = {
+        teacher_name: name,
+        experience,
+        degrees,
+        national_id: nationalId,
+      };
       try {
+        // const resp = await applyToTeach(teacherForm);
+        const resp = await getCurrentUser();
+        console.log(resp);
       } catch (error: any) {
         console.log('error: ', error.response);
       }
@@ -74,13 +80,13 @@ export function ApplyTeacherForm(props: ApplyTeacherFormProps) {
             />
             <Input
               label="Identificacion"
-              name="national_id"
+              name="nationalId"
               placeholder="Ejm: 11000399093"
               description="Su numero de identificaion o pasaporte"
               onChange={(e: any) => {
                 formik.handleChange(e);
               }}
-              value={formik.values.name}
+              value={formik.values.nationalId}
               onBlur={formik.handleBlur}
             />
             <Input

@@ -8,7 +8,7 @@ interface Account {
   password: string;
 }
 
-interface Credentials {
+export interface Credentials {
   email: string;
   password: string;
 }

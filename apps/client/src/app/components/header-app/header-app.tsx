@@ -1,14 +1,14 @@
 import { Avatar, Cart, Header, Icon } from '@ltpx-frontend-apps/shared-ui';
 import { NavLink } from 'react-router-dom';
-import { useUser } from '../../hooks/useUser';
 import styles from './header-app.module.scss';
 import { useTranslation } from 'react-i18next';
+import { useUser } from '../../store';
 
 /* eslint-disable-next-line */
 export interface HeaderAppProps {}
 
 export function HeaderApp(props: HeaderAppProps) {
-  const { user, isAuthenticated, products } = useUser();
+  const { user, isAuthenticated, totalProducts } = useUser();
   const { t } = useTranslation();
 
   const mainLinks = [
@@ -35,7 +35,7 @@ export function HeaderApp(props: HeaderAppProps) {
         <Header links={linksWithAccount}>
           <div className={styles['actions']}>
             <NavLink to={'/cart'}>
-              <Cart amount={products.length}/>
+              <Cart amount={totalProducts}/>
             </NavLink>
             { isAuthenticated && (
               <>
@@ -51,7 +51,7 @@ export function HeaderApp(props: HeaderAppProps) {
         <Header links={linksNotAccount}>
           <div className={styles['actions']}>
             <NavLink to={'/cart'}>
-              <Cart amount={products.length}/>
+              <Cart amount={totalProducts}/>
             </NavLink>
           </div>
         </Header>

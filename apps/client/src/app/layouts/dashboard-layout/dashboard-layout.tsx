@@ -2,7 +2,7 @@ import { logout } from '@ltpx-frontend-apps/api';
 import { Icon, Nav } from '@ltpx-frontend-apps/shared-ui';
 import { Outlet, useNavigate } from 'react-router-dom';
 import HeaderApp from '../../components/header-app/header-app';
-import { useUser } from '../../hooks/useUser';
+import { useUser } from '../../store';
 import styles from './dashboard-layout.module.scss';
 
 export interface DashboardLink {

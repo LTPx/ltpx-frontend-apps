@@ -1,6 +1,6 @@
 import { Button, ColorsButton } from '@ltpx-frontend-apps/shared-ui';
 import { NavLink } from 'react-router-dom';
-import { useUser } from '../../../hooks/useUser';
+import { useUser } from '../../../store';
 import styles from './checkout.module.scss';
 
 /* eslint-disable-next-line */

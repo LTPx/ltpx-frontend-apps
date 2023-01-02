@@ -29,9 +29,7 @@ import {
   TeacherDashboard
 } from "../pages/teacher";
 import { SiteRoutes } from "./site-routes";
-import ApplyTeacherForm from "../pages/teacher/apply-teacher-form/apply-teacher-form";
-
-
+import { ProtectedRoutesTeacher } from "./guards/protected-routes-teacher/protected-routes-teacher";
 
 export const AppRouter = () => {
   const { t } = useTranslation();
@@ -148,7 +146,11 @@ export const AppRouter = () => {
           <Route path="settings" element={<Settings/>}/>
           <Route path="account" element={<Account/>}/>
         </Route>
-        <Route path="teacher" element={<DashboardLayout  links={linksDashboardTeacher}/>}>
+        <Route path="teacher" element={
+          <ProtectedRoutesTeacher>
+            <DashboardLayout  links={linksDashboardTeacher}/>
+          </ProtectedRoutesTeacher>
+        }>
           <Route path="dashboard" element={<TeacherDashboard/>}/>
           <Route path="account" element={<TeacherAccount/>}/>
           <Route path="earnings" element={<Earnings/>}/>

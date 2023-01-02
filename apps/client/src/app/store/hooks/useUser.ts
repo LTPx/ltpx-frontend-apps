@@ -15,6 +15,7 @@ export const useUser = () => {
   return {
     products: cart.courses,
     totalProducts: cart.courses.length,
+    isTeacher: user.initial_register === 'teacher',
     user,
     login,
     setUser,

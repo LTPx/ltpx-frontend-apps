@@ -2,7 +2,6 @@ import axios from 'axios';
 import { LOCAL_API_URL } from "./api";
 
 export const createInstance = ( api_url: string ) => {
-  console.log('calling');
   const auth_token = sessionStorage.getItem("auth_token");
   if (auth_token) {
     axios.defaults.headers.common["Authorization"] = auth_token;

@@ -1,4 +1,4 @@
-import { Course, Credentials, loginUser, UserResponse } from '@ltpx-frontend-apps/api';
+import { Course, Credentials, loginUser, logout, UserResponse } from '@ltpx-frontend-apps/api';
 import { StateCreator } from 'zustand';
 import { StoreState } from '../store';
 
@@ -21,7 +21,7 @@ export type UserSlice = {
   };
   login: (credentials: Credentials) => Promise<TResponseLogin>;
   setUser: (user: UserBasic) => void;
-  logoutApp: () => void;
+  logout: () => void;
   addCourseCart: (course: Course) => void;
   removeCourseCart: (id: string) => void;
 };
@@ -53,8 +53,14 @@ export const createUserSlice: StateCreator<
   setUser: () => set((state) => ({
     user: state.user, isAuthenticated: true
   })),
-  logoutApp: () =>
-    set((state) => ({ isAuthenticated: !state.isAuthenticated })),
+  logout: async () => {
+    try {
+      await logout();
+      set({ isAuthenticated: false });
+    } catch (error) {
+      console.log(error);
+    }
+  },
   addCourseCart: (course: Course) =>
     set((state) => ({
       cart: {

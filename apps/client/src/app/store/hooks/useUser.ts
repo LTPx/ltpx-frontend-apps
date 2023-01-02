@@ -8,7 +8,7 @@ export const useUser = () => {
     addCourseCart,
     removeCourseCart,
     cart,
-    logoutApp,
+    logout,
     login,
   } = useAppStore();
 
@@ -21,6 +21,6 @@ export const useUser = () => {
     isAuthenticated,
     addCourseCart,
     removeCourseCart,
-    logoutApp
+    logout
   }
 }

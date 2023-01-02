@@ -13,55 +13,90 @@ export interface Credentials {
   password: string;
 }
 
-interface AuthSuccessResponse {
+export interface IAuthSuccessResponse {
   user: UserResponse;
   message: string;
 }
 
-export const loginUser = async(credentials: Credentials):Promise<AuthSuccessResponse> => {
+export const loginUser = (credentials: Credentials) => {
   const { email, password } = credentials;
-  const response = await http.post('login', {
+  const payload = {
     user: {
       email,
       password
     }
+  };
+  return new Promise<IAuthSuccessResponse>((resolve, reject) => {
+    http
+    .post('login', payload)
+    .then((response) => {
+      setTokenAxios(response.headers);
+      resolve(response.data);
+    })
+    .catch((error) => {
+      reject(error);
+    });
   });
-  setTokenAxios(response.headers);
-  return response.data;
 }
 
-export const registerUser = async(account: Account):Promise<AuthSuccessResponse> => {
+export const registerUser = async(account: Account):Promise<IAuthSuccessResponse> => {
   const { email, password, name } = account;
-  const response = await http.post('register', {
+  const payload = {
     user: {
       email,
       password,
-      fullname: name,
+      fullname: name
     }
+  };
+  return new Promise<IAuthSuccessResponse>((resolve, reject) => {
+    http
+    .post('register', payload)
+    .then((response) => {
+      setTokenAxios(response.headers);
+      resolve(response.data);
+    })
+    .catch((error) => {
+      reject(error);
+    });
   });
-  setTokenAxios(response.headers);
-  return response.data;
 }
 
-export const registerTeacher = async(account: Account):Promise<AuthSuccessResponse> => {
+export const registerTeacher = async (account: Account) => {
   const { email, password, name } = account;
-  const response = await http.post('register', {
+  const payload = {
     user: {
       email,
       password,
       fullname: name,
       initial_register: 'teacher'
     }
+  };
+  return new Promise<IAuthSuccessResponse>((resolve, reject) => {
+    http
+    .post('register', payload)
+    .then((response) => {
+      setTokenAxios(response.headers);
+      resolve(response.data);
+    })
+    .catch((error) => {
+      reject(error);
+    });
   });
-  setTokenAxios(response.headers);
-  return response.data;
 }
 
 export const logout = async() => {
-  const response = await http.delete('logout');
-  localStorage.removeItem("auth_token");
-  http.defaults.headers.common["Authorization"] = null;
-  return response.data;
+  return new Promise((resolve, reject) => {
+    http
+    .delete('logout')
+    .then((response) => {
+      sessionStorage.removeItem("auth_token");
+      http.defaults.headers.common["Authorization"] = null;
+      resolve(response.data);
+    })
+    .catch((error) => {
+      reject(error);
+    });
+  });
 }
 
 export const getCurrentUser = async() => {

@@ -11,13 +11,15 @@ import * as Yup from 'yup';
 import { useContext, useState } from 'react';
 import { UserContext } from '../../../store/context/user/user-context';
 import { loginUser, TypeAccounts } from '@ltpx-frontend-apps/api';
+import { useUser } from '../../../store';
 
 /* eslint-disable-next-line */
 export interface LoginProps {}
 
 export function Login(props: LoginProps) {
   const { setUser } = useContext(UserContext);
-  const [error, setError] = useState(false);
+  const [ error, setError] = useState(false);
+  const { user, login, isAuthenticated } = useUser();
 
   const navigate = useNavigate();
 
@@ -30,27 +32,22 @@ export function Login(props: LoginProps) {
       email: Yup.string().email().required('Email is required'),
       password: Yup.string().required('Password is required'),
     }),
-    onSubmit: async data => {
+    onSubmit: async formData => {
       const userAccount = {
-        email: data.email,
-        password: data.password,
+        email: formData.email,
+        password: formData.password,
       }
-      try{
-        const { user } = await loginUser(userAccount);
-        setError(false);
-        localStorage.setItem('user', JSON.stringify(user));
-        sessionStorage.setItem('isAuthenticated', 'true');
-        setUser(user);
-        if (user.initial_register === TypeAccounts.user) {
+
+      const { isLogin, data } = await login(userAccount);
+
+      if (isLogin) {
+        if (data.initial_register === TypeAccounts.user) {
           navigate('/student/dashboard');
         }
-        if (user.initial_register === TypeAccounts.teacher) {
+        if (data.initial_register === TypeAccounts.teacher) {
           navigate('/teacher/account');
         }
-        console.log('user: ', user);
-      }
-      catch(error: any){
-        console.log('error: ', error.response);
+      } else {
         setError(true);
       }
     },

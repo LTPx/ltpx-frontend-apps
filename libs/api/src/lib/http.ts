@@ -14,7 +14,7 @@ export const setTokenAxios = (headers: any) => {
   if ( headers.authorization ){
     const { authorization } = headers;
     _http.defaults.headers.common["Authorization"] = authorization;
-    localStorage.setItem("auth_token", authorization);
+    sessionStorage.setItem("auth_token", authorization);
   }
 }
 

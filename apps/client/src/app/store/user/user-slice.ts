@@ -1,10 +1,16 @@
-import { Course, Credentials, loginUser } from '@ltpx-frontend-apps/api';
+import { Course, Credentials, loginUser, UserResponse } from '@ltpx-frontend-apps/api';
 import { StateCreator } from 'zustand';
 import { StoreState } from '../store';
 
 type UserBasic = {
   email: string;
   fullname: string;
+  initial_register: string;
+};
+
+type TResponseLogin = {
+  isLogin: boolean;
+  data: UserResponse | any;
 };
 
 export type UserSlice = {
@@ -13,6 +19,7 @@ export type UserSlice = {
   cart: {
     courses: Course[];
   };
+  login: (credentials: Credentials) => Promise<TResponseLogin>;
   setUser: (user: UserBasic) => void;
   logoutApp: () => void;
   addCourseCart: (course: Course) => void;
@@ -24,18 +31,24 @@ export const createUserSlice: StateCreator<
   [],
   [],
   UserSlice
-> = (set) => ({
+> = (set, get) => ({
   user: {
     fullname: '',
     email: '',
+    initial_register: ''
   },
   isAuthenticated: false,
   cart: {
     courses: [],
   },
-  login: async (credentials: Credentials) => {
-    const { user } = await loginUser(credentials);
-    set({ user: user });
+  login: async (credentials: Credentials):Promise<TResponseLogin> => {
+    try {
+      const { user } = await loginUser(credentials);
+      set({ user: user, isAuthenticated: true });
+      return { isLogin: true, data: user };
+    } catch (error) {
+      return { isLogin: false, data: error };
+    }
   },
   setUser: () => set((state) => ({
     user: state.user, isAuthenticated: true

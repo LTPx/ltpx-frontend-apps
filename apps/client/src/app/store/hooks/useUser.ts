@@ -8,13 +8,15 @@ export const useUser = () => {
     addCourseCart,
     removeCourseCart,
     cart,
-    logoutApp
+    logoutApp,
+    login,
   } = useAppStore();
 
   return {
     products: cart.courses,
     totalProducts: cart.courses.length,
     user,
+    login,
     setUser,
     isAuthenticated,
     addCourseCart,

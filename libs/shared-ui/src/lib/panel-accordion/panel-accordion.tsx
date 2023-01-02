@@ -16,7 +16,6 @@ export function PanelAccordion(props: PanelAccordionProps) {
 
   const handleClick = () => {
     setIsOpen(!isOpen);
-    console.log(isOpen);
   };
 
   return (

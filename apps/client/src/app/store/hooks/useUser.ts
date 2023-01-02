@@ -9,7 +9,8 @@ export const useUser = () => {
     cart,
     logout,
     login,
-    register
+    register,
+    registerTeacher
   } = useAppStore();
 
   return {
@@ -19,6 +20,7 @@ export const useUser = () => {
     user,
     login,
     register,
+    registerTeacher,
     isAuthenticated,
     addCourseCart,
     removeCourseCart,

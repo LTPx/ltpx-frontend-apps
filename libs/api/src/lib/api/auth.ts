@@ -61,13 +61,13 @@ export const registerUser = async(params: IRegisterUser):Promise<IAuthSuccessRes
   });
 }
 
-export const registerTeacher = async (account: Account) => {
-  const { email, password, name } = account;
+export const registerTeacher = async (account: IRegisterUser) => {
+  const { email, password, fullname } = account;
   const payload = {
     user: {
       email,
       password,
-      fullname: name,
+      fullname,
       initial_register: 'teacher'
     }
   };

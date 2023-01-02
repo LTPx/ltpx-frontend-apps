@@ -8,18 +8,16 @@ import {
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { useContext, useState } from 'react';
-import { UserContext } from '../../../store/context/user/user-context';
-import { loginUser, TypeAccounts } from '@ltpx-frontend-apps/api';
+import { useState } from 'react';
+import { TypeAccounts } from '@ltpx-frontend-apps/api';
 import { useUser } from '../../../store';
 
 /* eslint-disable-next-line */
 export interface LoginProps {}
 
 export function Login(props: LoginProps) {
-  const { setUser } = useContext(UserContext);
   const [ error, setError] = useState(false);
-  const { user, login, isAuthenticated } = useUser();
+  const { login } = useUser();
 
   const navigate = useNavigate();
 

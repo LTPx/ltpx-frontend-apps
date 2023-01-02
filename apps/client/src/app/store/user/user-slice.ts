@@ -6,6 +6,7 @@ import {
   IRegisterUser,
   loginUser,
   logout,
+  registerTeacher,
   registerUser,
   UserResponse
 } from '@ltpx-frontend-apps/api';
@@ -29,6 +30,7 @@ export type UserSlice = {
   };
   login: (credentials: ICredentials) => Promise<TResponseLogin>;
   register: (params: IRegisterUser) => Promise<TResponseLogin>;
+  registerTeacher: (params: IRegisterUser) => Promise<TResponseLogin>;
   logout: () => void;
   addCourseCart: (course: ICourse) => void;
   removeCourseCart: (id: string) => void;
@@ -67,9 +69,15 @@ export const createUserSlice: StateCreator<
       return { isLogin: false, data: error };
     }
   },
-  setUser: () => set((state) => ({
-    user: state.user, isAuthenticated: true
-  })),
+  registerTeacher: async (params: IRegisterUser):Promise<TResponseLogin> => {
+    try {
+      const { user } = await registerTeacher(params);
+      set({ user: user, isAuthenticated: true });
+      return { isLogin: true, data: user };
+    } catch (error) {
+      return { isLogin: false, data: error };
+    }
+  },
   logout: async () => {
     try {
       await logout();

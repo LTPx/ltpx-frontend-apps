@@ -1,3 +1,4 @@
+export * from './lib/question-one-option/question-one-option';
 export * from './lib/panel-accordion/panel-accordion';
 export * from './lib/tag/tag';
 export * from './lib/teacher-course-card/teacher-course-card';

@@ -1,12 +1,6 @@
 import { setTokenAxios, _http } from "../http";
-import { IRegisterUser, UserResponse } from "../interfaces/user";
+import { ICurrentUser, IRegisterUser, UserResponse } from "../interfaces/user";
 const http = _http;
-
-interface Account {
-  name: string;
-  email: string;
-  password: string;
-}
 
 export interface Credentials {
   email: string;
@@ -100,6 +94,14 @@ export const logout = async() => {
 }
 
 export const getCurrentUser = async() => {
-  const response = await http.get('api/v1/current_user');
-  return response.data;
+  return new Promise<ICurrentUser>((resolve, reject) => {
+    http
+    .get('api/v1/current_user')
+    .then((response) => {
+      resolve(response.data);
+    })
+    .catch((error) => {
+      reject(error);
+    });
+  });
 }

@@ -8,7 +8,9 @@ import {
   logout,
   registerTeacher,
   registerUser,
-  UserResponse
+  getCurrentUser,
+  UserResponse,
+  TypeViews
 } from '@ltpx-frontend-apps/api';
 
 type UserBasic = {
@@ -28,6 +30,8 @@ export type UserSlice = {
   cart: {
     courses: ICourse[];
   };
+  currentView: TypeViews,
+  getCurrentUser: () => Promise<TResponseLogin>;
   login: (credentials: ICredentials) => Promise<TResponseLogin>;
   register: (params: IRegisterUser) => Promise<TResponseLogin>;
   registerTeacher: (params: IRegisterUser) => Promise<TResponseLogin>;
@@ -35,6 +39,14 @@ export type UserSlice = {
   addCourseCart: (course: ICourse) => void;
   removeCourseCart: (id: string) => void;
 };
+
+const views = {
+  user: TypeViews.default,
+  teacher: TypeViews.teacher,
+  student: TypeViews.student,
+  admin: TypeViews.default,
+}
+
 
 export const createUserSlice: StateCreator<
   StoreState,
@@ -50,6 +62,21 @@ export const createUserSlice: StateCreator<
   isAuthenticated: false,
   cart: {
     courses: [],
+  },
+  currentView: TypeViews.default,
+  getCurrentUser: async ():Promise<TResponseLogin> => {
+    try {
+      const user = await getCurrentUser();
+      const { initial_register } =  user;
+      set({
+        user: user,
+        isAuthenticated: true,
+        currentView: views[initial_register]
+      });
+      return { isLogin: true, data: user };
+    } catch (error) {
+      return { isLogin: false, data: error };
+    }
   },
   login: async (credentials: ICredentials):Promise<TResponseLogin> => {
     try {

@@ -1,7 +1,17 @@
+import { StatusTeacherAccount } from './teacher';
+
 export enum TypeAccounts {
-  teacher = 'teacher',
   user = 'user',
+  teacher = 'teacher',
+  student = 'student',
   admin = 'admin',
+}
+
+export enum TypeViews {
+  default = 'default',
+  user = 'user',
+  teacher = 'teacher',
+  student = 'student',
 }
 
 export interface UserResponse {
@@ -19,4 +29,12 @@ export interface IRegisterUser {
 export interface ICredentials {
   email: string;
   password: string;
+}
+
+export interface ICurrentUser {
+  fullname: string;
+  email: string;
+  password: string;
+  initial_register: TypeAccounts;
+  teacher_account?: StatusTeacherAccount;
 }

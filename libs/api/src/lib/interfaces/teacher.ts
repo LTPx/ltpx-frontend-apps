@@ -5,3 +5,11 @@ export interface Teacher {
   national_id: string;
   biography?: string;
 }
+
+export enum StatusTeacherAccount {
+  review = "review",
+  active = "active",
+  disable = "disable",
+  deleted = "deleted",
+  unapplied = "unapplied",
+}

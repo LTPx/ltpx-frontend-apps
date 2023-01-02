@@ -3,6 +3,7 @@ import { useAppStore } from "../store";
 export const useUser = () => {
   const {
     user,
+    currentView,
     isAuthenticated,
     addCourseCart,
     removeCourseCart,
@@ -10,7 +11,8 @@ export const useUser = () => {
     logout,
     login,
     register,
-    registerTeacher
+    registerTeacher,
+    getCurrentUser,
   } = useAppStore();
 
   return {
@@ -18,9 +20,11 @@ export const useUser = () => {
     totalProducts: cart.courses.length,
     isTeacher: user.initial_register === 'teacher',
     user,
+    currentView,
     login,
     register,
     registerTeacher,
+    getCurrentUser,
     isAuthenticated,
     addCourseCart,
     removeCourseCart,

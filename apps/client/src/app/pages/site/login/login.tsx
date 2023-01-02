@@ -39,7 +39,7 @@ export function Login(props: LoginProps) {
       const { isLogin, data } = await login(userAccount);
 
       if (isLogin) {
-        if (data.initial_register === TypeAccounts.user) {
+        if (data.initial_register === TypeAccounts.student) {
           navigate('/student/dashboard');
         }
         if (data.initial_register === TypeAccounts.teacher) {

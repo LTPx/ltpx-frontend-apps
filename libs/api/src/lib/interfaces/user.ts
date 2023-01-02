@@ -9,3 +9,14 @@ export interface UserResponse {
   email: string;
   initial_register: TypeAccounts;
 }
+
+export interface IRegisterUser {
+  fullname: string;
+  email: string;
+  password: string;
+}
+
+export interface ICredentials {
+  email: string;
+  password: string;
+}

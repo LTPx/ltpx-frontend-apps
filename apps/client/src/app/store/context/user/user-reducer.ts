@@ -1,11 +1,11 @@
-import { Course } from "@ltpx-frontend-apps/api";
+import { ICourse } from "@ltpx-frontend-apps/api";
 import { User, UserState } from "../../interfaces/user";
 
 type UserAction =
   | { type: 'setUser', payload: User }
   | { type: 'login', payload: boolean }
   | { type: 'logout', payload: boolean }
-  | { type: 'addToCart', payload: Course }
+  | { type: 'addToCart', payload: ICourse }
   | { type: 'removeFromCart', payload: string }
 
 export const userReducer = (state: UserState, action: UserAction): UserState => {

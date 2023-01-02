@@ -1,5 +1,5 @@
 import { setTokenAxios, _http } from "../http";
-import { UserResponse } from "../interfaces/user";
+import { IRegisterUser, UserResponse } from "../interfaces/user";
 const http = _http;
 
 interface Account {
@@ -39,13 +39,13 @@ export const loginUser = (credentials: Credentials) => {
   });
 }
 
-export const registerUser = async(account: Account):Promise<IAuthSuccessResponse> => {
-  const { email, password, name } = account;
+export const registerUser = async(params: IRegisterUser):Promise<IAuthSuccessResponse> => {
+  const { email, password, fullname } = params;
   const payload = {
     user: {
       email,
       password,
-      fullname: name
+      fullname
     }
   };
   return new Promise<IAuthSuccessResponse>((resolve, reject) => {

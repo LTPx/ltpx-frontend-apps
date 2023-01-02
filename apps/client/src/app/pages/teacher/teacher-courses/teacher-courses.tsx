@@ -1,4 +1,4 @@
-import { Course, getTeacherCourses } from '@ltpx-frontend-apps/api';
+import { ICourse, getTeacherCourses } from '@ltpx-frontend-apps/api';
 import { Button, ColorsButton, CourseCard, InputSearch, Select } from '@ltpx-frontend-apps/shared-ui';
 import { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
@@ -8,7 +8,7 @@ import styles from './teacher-courses.module.scss';
 export interface TeacherCoursesProps {}
 
 export function TeacherCourses(props: TeacherCoursesProps) {
-  const [courses, setCourses] = useState<Course[]>([]);
+  const [courses, setCourses] = useState<ICourse[]>([]);
   console.log('print');
 
   useEffect(() => {

@@ -1,6 +1,14 @@
-import { Course, Credentials, loginUser, logout, UserResponse } from '@ltpx-frontend-apps/api';
 import { StateCreator } from 'zustand';
 import { StoreState } from '../store';
+import {
+  ICourse,
+  ICredentials,
+  IRegisterUser,
+  loginUser,
+  logout,
+  registerUser,
+  UserResponse
+} from '@ltpx-frontend-apps/api';
 
 type UserBasic = {
   email: string;
@@ -17,12 +25,12 @@ export type UserSlice = {
   user: UserBasic;
   isAuthenticated: boolean;
   cart: {
-    courses: Course[];
+    courses: ICourse[];
   };
-  login: (credentials: Credentials) => Promise<TResponseLogin>;
-  setUser: (user: UserBasic) => void;
+  login: (credentials: ICredentials) => Promise<TResponseLogin>;
+  register: (params: IRegisterUser) => Promise<TResponseLogin>;
   logout: () => void;
-  addCourseCart: (course: Course) => void;
+  addCourseCart: (course: ICourse) => void;
   removeCourseCart: (id: string) => void;
 };
 
@@ -41,9 +49,18 @@ export const createUserSlice: StateCreator<
   cart: {
     courses: [],
   },
-  login: async (credentials: Credentials):Promise<TResponseLogin> => {
+  login: async (credentials: ICredentials):Promise<TResponseLogin> => {
     try {
       const { user } = await loginUser(credentials);
+      set({ user: user, isAuthenticated: true });
+      return { isLogin: true, data: user };
+    } catch (error) {
+      return { isLogin: false, data: error };
+    }
+  },
+  register: async (params: IRegisterUser):Promise<TResponseLogin> => {
+    try {
+      const { user } = await registerUser(params);
       set({ user: user, isAuthenticated: true });
       return { isLogin: true, data: user };
     } catch (error) {
@@ -61,7 +78,7 @@ export const createUserSlice: StateCreator<
       console.log(error);
     }
   },
-  addCourseCart: (course: Course) =>
+  addCourseCart: (course: ICourse) =>
     set((state) => ({
       cart: {
         courses: state.cart.courses.concat([course]),

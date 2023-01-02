@@ -1,4 +1,4 @@
-import { Course, TypeAccounts } from "@ltpx-frontend-apps/api";
+import { ICourse, TypeAccounts } from "@ltpx-frontend-apps/api";
 
 export interface User {
   email: string;
@@ -10,6 +10,6 @@ export interface UserState {
   user: User;
   isAuthenticated: boolean;
   cart: {
-    courses: Course[];
+    courses: ICourse[];
   }
 }

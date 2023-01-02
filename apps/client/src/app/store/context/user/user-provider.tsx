@@ -1,4 +1,4 @@
-import { Course } from "@ltpx-frontend-apps/api";
+import { ICourse } from "@ltpx-frontend-apps/api";
 import { useReducer } from "react"
 import { User, UserState } from "../../interfaces/user"
 import { UserContext } from "./user-context"
@@ -33,7 +33,7 @@ export const UserProvider = ({children}: props) => {
     dispatch({type: 'logout', payload: false});
   }
 
-  const addCourseToCart = (course: Course) => {
+  const addCourseToCart = (course: ICourse) => {
     dispatch({type: 'addToCart', payload: course});
   }
 

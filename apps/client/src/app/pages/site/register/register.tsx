@@ -2,27 +2,24 @@ import styles from './register.module.scss';
 import { Button, ColorsButton, Input, TypeButton } from '@ltpx-frontend-apps/shared-ui';
 import { useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
+import { useUser } from '../../../store';
 import * as Yup from 'yup';
-import { useContext } from 'react';
-import { UserContext } from '../../../store/context/user/user-context';
-import { registerUser, TypeAccounts } from '@ltpx-frontend-apps/api';
 
 /* eslint-disable-next-line */
 export interface RegisterProps {}
 
 export function Register(props: RegisterProps) {
-  const { setUser } = useContext(UserContext);
-
+  const { register } = useUser();
   const navigate = useNavigate();
 
   const formik = useFormik({
     initialValues: {
-      name: '',
+      fullname: '',
       email: '',
       password: '',
     },
     validationSchema: Yup.object({
-      name: Yup.string()
+      fullname: Yup.string()
                 .required('Nombre es obligatorio'),
       email: Yup.string()
                 .email()
@@ -30,22 +27,12 @@ export function Register(props: RegisterProps) {
       password: Yup.string()
                     .required('Password es obligatorio')
     }),
-    onSubmit: async data => {
-      const userAccount = {
-        email: data.email,
-        name: data.name,
-        password: data.password,
-      };
-      try{
-        const { user } = await registerUser(userAccount);
-        setUser(user);
-        sessionStorage.setItem('user', JSON.stringify(user));
-        sessionStorage.setItem('isAuthenticated', 'true');
-        console.log(user);
-        navigate('/home');
-      }
-      catch(error){
-        console.log(error);
+    onSubmit: async formData => {
+      const { isLogin, data } = await register(formData);
+      if (isLogin) {
+        navigate('/student/dashboard');
+      } else {
+        // setError(true);
       }
     }
   });
@@ -63,10 +50,10 @@ export function Register(props: RegisterProps) {
             <Input
               label='Name'
               type="text"
-              name="name"
+              name="fullname"
               placeholder="John Doe"
               onChange={(e: any) => { formik.handleChange(e); }}
-              value={formik.values.name}
+              value={formik.values.fullname}
               onBlur={formik.handleBlur}
             />
             <Input

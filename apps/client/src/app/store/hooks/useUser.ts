@@ -4,12 +4,12 @@ export const useUser = () => {
   const {
     user,
     isAuthenticated,
-    setUser,
     addCourseCart,
     removeCourseCart,
     cart,
     logout,
     login,
+    register
   } = useAppStore();
 
   return {
@@ -18,7 +18,7 @@ export const useUser = () => {
     isTeacher: user.initial_register === 'teacher',
     user,
     login,
-    setUser,
+    register,
     isAuthenticated,
     addCourseCart,
     removeCourseCart,

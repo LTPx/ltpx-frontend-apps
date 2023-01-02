@@ -2,7 +2,7 @@
 
 .container {
   box-sizing: border-box;
-  width: 350px;
+  max-width: 400px;
   height: 195px;
   background: #ffffff;
   border: 1px solid #e7e7ec;
@@ -32,7 +32,6 @@
       justify-content: center;
       padding: 4px 12px;
       gap: 10px;
-      width: 60px;
       height: 30px;
       background: #f7f9fb;
       border-radius: 4px;

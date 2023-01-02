@@ -18,8 +18,8 @@ export function ListUser(props: ListUserProps) {
       <h3>Online users</h3>
       <h4>2 online user (last 12 minutes)</h4>
       {users.map((user, index) => (
-        <div className={styles['user']}>
-          <Avatar image={user.image} size={AvatarSize.medium} key={index} />
+        <div className={styles['user']} key={index}>
+          <Avatar image={user.image} size={AvatarSize.medium}/>
           <h4>{user.name}</h4>
         </div>
       ))}

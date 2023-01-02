@@ -1,3 +1,7 @@
+export * from './lib/panel-accordion/panel-accordion';
+export * from './lib/tag/tag';
+export * from './lib/teacher-course-card/teacher-course-card';
+export * from './lib/learners-table/learners-table';
 export * from './lib/notification-list/notification-list';
 export * from './lib/user-menu/user-menu';
 export * from './lib/snackbar/snackbar';

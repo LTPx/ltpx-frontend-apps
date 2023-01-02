@@ -1,3 +1,4 @@
+import Tag from '../tag/tag';
 import styles from './tags-card.module.scss';
 
 /* eslint-disable-next-line */
@@ -16,8 +17,8 @@ export function TagsCard(props: TagsCardProps) {
       <h3>Tags</h3>
       <div className={styles['tags-content']}>
         {tags.map((tag, index) => (
-          <div className={styles['tag']}>
-            <h4>{tag.text}</h4>
+          <div className={styles['tag']} key={index}>
+            <Tag text={tag.text}></Tag>
           </div>
         ))}
       </div>

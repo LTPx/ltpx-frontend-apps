@@ -1,4 +1,4 @@
-import { applyToTeach, IApplyTeachFields, IRegisterUser, ITeacher, registerTeacher, StatusTeacherAccount, TypeViews, UserResponse } from "@ltpx-frontend-apps/api";
+import { applyToTeach, createCourse, IApplyTeachFields, INewCourse, IRegisterUser, ITeacher, registerTeacher, StatusTeacherAccount, TypeViews, UserResponse } from "@ltpx-frontend-apps/api";
 import { StateCreator } from "zustand";
 import { StoreState } from "../store";
 
@@ -12,10 +12,15 @@ type TResponseLogin = {
   data: UserResponse | any;
 };
 
+type TResponseCreateCourse = {
+  data: INewCourse | any;
+};
+
 export type TeacherSlice = {
   teacher_account: StatusTeacherAccount | null;
-  registerTeacher: (params: IRegisterUser) => Promise<TResponseLogin>;
   applyTeach: (params: IApplyTeachFields) => Promise<any>;
+  registerTeacher: (params: IRegisterUser) => Promise<TResponseLogin>;
+  createCourse: (params: INewCourse) => Promise<TResponseCreateCourse>;
 }
 
 export const createTeacherSlice:
@@ -45,6 +50,15 @@ export const createTeacherSlice:
         return { isLogin: true, data: user };
       } catch (error) {
         return { isLogin: false, data: error };
+      }
+    },
+    createCourse: async (params: INewCourse):Promise<TResponseCreateCourse> => {
+      debugger
+      try {
+        const course = await createCourse(params);
+        return { data: course };
+      } catch (error) {
+        return { data: error };
       }
     },
   })

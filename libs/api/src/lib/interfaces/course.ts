@@ -9,3 +9,13 @@ export interface ICourse {
   lessons?: number;
   stars?: number;
 }
+
+export interface INewCourse {
+  cover?: string;
+  title: string;
+  description: string;
+  category: string;
+  language: string;
+  learn_goals: string;
+  requirements: string;
+}

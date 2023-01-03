@@ -2,14 +2,16 @@ import { useAppStore } from "../store";
 
 export const useTeacher = () => {
   const {
+    teacher_account,
     registerTeacher,
     applyTeach,
-    teacher_account
+    createCourse,
   } = useAppStore();
 
   return {
-    registerTeacher,
     teacher_account,
-    applyTeach
+    registerTeacher,
+    applyTeach,
+    createCourse,
   }
 }

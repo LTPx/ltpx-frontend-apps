@@ -1,4 +1,4 @@
-import { Button, ColorsButton, Input, Select, Tabs, TypeButton } from '@ltpx-frontend-apps/shared-ui';
+import { Button, ColorsButton, Select, Tabs, TypeButton } from '@ltpx-frontend-apps/shared-ui';
 import { useFormik } from 'formik';
 import { useState } from 'react';
 import Achievement from '../achievement/achievement';
@@ -9,6 +9,7 @@ import Quiz from '../quiz/quiz';
 import TeacherClasses from '../teacher-classes/teacher-classes';
 import styles from './new-course.module.scss';
 import * as Yup from 'yup';
+import { useTeacher } from '../../../store';
 
 /* eslint-disable-next-line */
 export interface NewCourseProps {}
@@ -29,6 +30,7 @@ const tabs = [
 
 export function NewCourse(props: NewCourseProps) {
   const [indexViewSelected, setIndexViewSelected] = useState(0);
+  const { createCourse } = useTeacher();
 
   const formik = useFormik({
     initialValues: {
@@ -50,7 +52,9 @@ export function NewCourse(props: NewCourseProps) {
       requirements: Yup.string().required('es obligatorio'),
     }),
     onSubmit: async formData => {
-      console.log(formData);
+      const courseData = {...formData, ...{ learn_goals: formData.goals}}
+      const resp = await createCourse(courseData);
+      console.log(resp);
     }
   });
 

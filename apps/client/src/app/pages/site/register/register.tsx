@@ -31,6 +31,7 @@ export function Register(props: RegisterProps) {
       const { isLogin, data } = await register(formData);
       if (isLogin) {
         navigate('/student/dashboard');
+        window.location.reload();
       } else {
         // setError(true);
       }

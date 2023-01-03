@@ -32,6 +32,7 @@ export function RegisterTeacher(props: RegisterTeacherProps) {
       const { isLogin, data } = await registerTeacher(formData);
       if (isLogin) {
         navigate('/teacher/dashboard');
+        window.location.reload();
       } else {
         // setError(true);
       }

@@ -8,7 +8,7 @@ import { useUser } from '../../store';
 export interface HeaderAppProps {}
 
 export function HeaderApp(props: HeaderAppProps) {
-  const { user, isAuthenticated, totalProducts } = useUser();
+  const { user, isAuthenticated, totalProducts, currentView } = useUser();
   const { t } = useTranslation();
 
   const mainLinks = [
@@ -22,41 +22,40 @@ export function HeaderApp(props: HeaderAppProps) {
     { title: t('header.register'), url: '/register'},
   ];
 
-  const linksAccount = [
+  // const linksTeacher = [
+  //   { title: 'My Dashboard', url: '/teacher/dashboard'},
+  // ];
+
+  const linksStudent = [
     { title: 'My Dashboard', url: '/student/dashboard'},
   ];
 
   const linksNotAccount = mainLinks.concat(authLinks);
-  const linksWithAccount = mainLinks.concat(linksAccount);
+
+  const linksView = {
+    default: linksNotAccount,
+    user: linksStudent,
+    student: linksStudent,
+    teacher: []
+  }
+
+  const links = linksView[currentView];
 
   return (
-    <>
-      { isAuthenticated && (
-        <Header links={linksWithAccount}>
-          <div className={styles['actions']}>
-            <NavLink to={'/cart'}>
-              <Cart amount={totalProducts}/>
-            </NavLink>
-            { isAuthenticated && (
-              <>
-                <Icon icon='notification' size={22}></Icon>
-                <h4>{user.fullname}</h4>
-                <Avatar image='https://images.unsplash.com/photo-1669563306078-4c107b67d125?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=3387&q=80'/>
-              </>
-            )}
-          </div>
-        </Header>
-      )}
-      { !isAuthenticated && (
-        <Header links={linksNotAccount}>
-          <div className={styles['actions']}>
-            <NavLink to={'/cart'}>
-              <Cart amount={totalProducts}/>
-            </NavLink>
-          </div>
-        </Header>
-      )}
-    </>
+    <Header links={links}>
+      <div className={styles['actions']}>
+        <NavLink to={'/cart'}>
+          <Cart amount={totalProducts}/>
+        </NavLink>
+        { isAuthenticated && (
+          <>
+            <Icon icon='notification' size={22}></Icon>
+            <h4>{user.fullname}</h4>
+            <Avatar image='https://images.unsplash.com/photo-1669563306078-4c107b67d125?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=3387&q=80'/>
+          </>
+        )}
+      </div>
+    </Header>
   );
 }
 

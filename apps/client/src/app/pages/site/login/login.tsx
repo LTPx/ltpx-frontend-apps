@@ -43,8 +43,9 @@ export function Login(props: LoginProps) {
           navigate('/student/dashboard');
         }
         if (data.initial_register === TypeAccounts.teacher) {
-          navigate('/teacher/account');
+          navigate('/teacher/dashboard');
         }
+        window.location.reload();
       } else {
         setError(true);
       }

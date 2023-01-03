@@ -47,7 +47,6 @@ const views = {
   admin: TypeViews.default,
 }
 
-
 export const createUserSlice: StateCreator<
   StoreState,
   [],
@@ -81,7 +80,11 @@ export const createUserSlice: StateCreator<
   login: async (credentials: ICredentials):Promise<TResponseLogin> => {
     try {
       const { user } = await loginUser(credentials);
-      set({ user: user, isAuthenticated: true });
+      set({
+        user: user,
+        isAuthenticated: true,
+        currentView: views[user.initial_register]
+      });
       return { isLogin: true, data: user };
     } catch (error) {
       return { isLogin: false, data: error };
@@ -90,7 +93,11 @@ export const createUserSlice: StateCreator<
   register: async (params: IRegisterUser):Promise<TResponseLogin> => {
     try {
       const { user } = await registerUser(params);
-      set({ user: user, isAuthenticated: true });
+      set({
+        user: user,
+        isAuthenticated: true,
+        currentView: TypeViews.user
+      });
       return { isLogin: true, data: user };
     } catch (error) {
       return { isLogin: false, data: error };
@@ -99,7 +106,11 @@ export const createUserSlice: StateCreator<
   registerTeacher: async (params: IRegisterUser):Promise<TResponseLogin> => {
     try {
       const { user } = await registerTeacher(params);
-      set({ user: user, isAuthenticated: true });
+      set({
+        user: user,
+        isAuthenticated: true,
+        currentView: TypeViews.teacher
+      });
       return { isLogin: true, data: user };
     } catch (error) {
       return { isLogin: false, data: error };

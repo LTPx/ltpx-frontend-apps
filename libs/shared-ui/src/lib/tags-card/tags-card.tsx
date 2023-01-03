@@ -1,13 +1,9 @@
-import Tag from '../tag/tag';
+import Tag, { TagProps } from '../tag/tag';
 import styles from './tags-card.module.scss';
 
 /* eslint-disable-next-line */
-export interface Tag {
-  text: string;
-}
-
 export interface TagsCardProps {
-  tags: Array<Tag>;
+  tags: Array<TagProps>;
 }
 
 export function TagsCard(props: TagsCardProps) {

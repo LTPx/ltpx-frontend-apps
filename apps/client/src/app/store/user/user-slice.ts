@@ -74,6 +74,11 @@ export const createUserSlice: StateCreator<
       });
       return { isLogin: true, data: user };
     } catch (error) {
+      set({
+        isAuthenticated: false,
+        currentView: views.user
+      });
+      sessionStorage.removeItem('auth_token');
       return { isLogin: false, data: error };
     }
   },

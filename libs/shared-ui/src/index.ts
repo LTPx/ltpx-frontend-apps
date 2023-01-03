@@ -1,3 +1,7 @@
+export * from './lib/info-count/info-count';
+export * from './lib/group-users/group-users';
+export * from './lib/quiz-score/quiz-score';
+export * from './lib/question-one-option/question-one-option';
 export * from './lib/panel-accordion/panel-accordion';
 export * from './lib/tag/tag';
 export * from './lib/tags-card/tags-card';

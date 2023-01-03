@@ -6,18 +6,13 @@ import {
   IRegisterUser,
   loginUser,
   logout,
-  registerTeacher,
   registerUser,
   getCurrentUser,
   UserResponse,
-  TypeViews
+  TypeViews,
+  UserStore,
+  TypeAccounts
 } from '@ltpx-frontend-apps/api';
-
-type UserBasic = {
-  email: string;
-  fullname: string;
-  initial_register: string;
-};
 
 type TResponseLogin = {
   isLogin: boolean;
@@ -25,7 +20,7 @@ type TResponseLogin = {
 };
 
 export type UserSlice = {
-  user: UserBasic;
+  user: UserStore;
   isAuthenticated: boolean;
   cart: {
     courses: ICourse[];
@@ -34,7 +29,6 @@ export type UserSlice = {
   getCurrentUser: () => Promise<TResponseLogin>;
   login: (credentials: ICredentials) => Promise<TResponseLogin>;
   register: (params: IRegisterUser) => Promise<TResponseLogin>;
-  registerTeacher: (params: IRegisterUser) => Promise<TResponseLogin>;
   logout: () => void;
   addCourseCart: (course: ICourse) => void;
   removeCourseCart: (id: string) => void;
@@ -56,7 +50,7 @@ export const createUserSlice: StateCreator<
   user: {
     fullname: '',
     email: '',
-    initial_register: ''
+    initial_register: TypeAccounts.user
   },
   isAuthenticated: false,
   cart: {
@@ -70,7 +64,8 @@ export const createUserSlice: StateCreator<
       set({
         user: user,
         isAuthenticated: true,
-        currentView: views[initial_register]
+        currentView: views[initial_register],
+        teacher_account: user.teacher_account
       });
       return { isLogin: true, data: user };
     } catch (error) {
@@ -102,19 +97,6 @@ export const createUserSlice: StateCreator<
         user: user,
         isAuthenticated: true,
         currentView: TypeViews.user
-      });
-      return { isLogin: true, data: user };
-    } catch (error) {
-      return { isLogin: false, data: error };
-    }
-  },
-  registerTeacher: async (params: IRegisterUser):Promise<TResponseLogin> => {
-    try {
-      const { user } = await registerTeacher(params);
-      set({
-        user: user,
-        isAuthenticated: true,
-        currentView: TypeViews.teacher
       });
       return { isLogin: true, data: user };
     } catch (error) {

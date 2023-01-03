@@ -8,6 +8,7 @@ import {
   ManageCourses,
   NewCourse,
   TeacherAccount,
+  TeacherApply,
   TeacherCourseDetail,
   TeacherCourses,
   TeacherDashboard
@@ -61,6 +62,7 @@ export const TeacherRoutes = () => {
           </ProtectedRoutesTeacher>
         }>
           <Route path="dashboard" element={<TeacherDashboard/>}/>
+          <Route path="apply-teach" element={<TeacherApply/>}/>
           <Route path="account" element={<TeacherAccount/>}/>
           <Route path="earnings" element={<Earnings/>}/>
           <Route path="courses" element={<ManageCourses/>}>

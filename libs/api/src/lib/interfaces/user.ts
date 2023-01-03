@@ -18,6 +18,14 @@ export interface UserResponse {
   fullname: string;
   email: string;
   initial_register: TypeAccounts;
+  teacher_account?: StatusTeacherAccount;
+}
+
+export interface UserStore {
+  fullname: string;
+  email: string;
+  initial_register: TypeAccounts;
+  teacher_account?: StatusTeacherAccount;
 }
 
 export interface IRegisterUser {

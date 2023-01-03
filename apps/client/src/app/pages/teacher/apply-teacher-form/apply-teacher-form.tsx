@@ -1,12 +1,15 @@
-import { Button, Input, TextArea, TypeButton } from '@ltpx-frontend-apps/shared-ui';
 import styles from './apply-teacher-form.module.scss';
+import { Button, Input, TextArea, TypeButton } from '@ltpx-frontend-apps/shared-ui';
+import { IApplyTeachFields } from '@ltpx-frontend-apps/api';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { applyToTeach, getCurrentUser } from '@ltpx-frontend-apps/api';
 /* eslint-disable-next-line */
-export interface ApplyTeacherFormProps {}
+export interface ApplyTeacherFormProps {
+  onSubmitForm: (data: IApplyTeachFields) => void
+}
 
 export function ApplyTeacherForm(props: ApplyTeacherFormProps) {
+  const { onSubmitForm } = props;
   const formik = useFormik({
     initialValues: {
       name: '',
@@ -28,31 +31,10 @@ export function ApplyTeacherForm(props: ApplyTeacherFormProps) {
       degrees: Yup.string().required('Titulos es required'),
       record_police: Yup.string().required('Record Policial es required'),
     }),
-    onSubmit: async (data) => {
-      const { name, experience, degrees, nationalId } = data;
-      const teacherForm = {
-        teacher_name: name,
-        experience,
-        degrees,
-        national_id: nationalId,
-      };
-      try {
-        await applyToTeach(teacherForm);
-        sessionStorage.setItem('applied', 'true');
-      } catch (error: any) {
-        console.log('error: ', error.response);
-      }
-    },
+    onSubmit: (data) => onSubmitForm(data)
   });
   return (
     <div className={`${styles['container']} card`}>
-      <div className={styles['banner-notification']}>
-        <p>
-          Tu solicitud ha sido enviada, validaremos tus datos en un periodo
-          maximo de 48h luego recibiras un correo con una respuesta de nuestro
-          equipo
-        </p>
-      </div>
       <div className={`${styles['content']}`}>
         <h1>Aplicar para maestro</h1>
         <h2>Paso 1: Aprende acerca de LTPX</h2>

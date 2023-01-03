@@ -3,13 +3,13 @@ import { useFormik } from 'formik';
 import { useNavigate } from 'react-router-dom';
 import styles from './register-teacher.module.scss';
 import * as Yup from 'yup';
-import { useUser } from '../../../store';
+import { useTeacher } from '../../../store';
 
 /* eslint-disable-next-line */
 export interface RegisterTeacherProps {}
 
 export function RegisterTeacher(props: RegisterTeacherProps) {
-  const { registerTeacher } = useUser();
+  const { registerTeacher } = useTeacher();
 
   const navigate = useNavigate();
 

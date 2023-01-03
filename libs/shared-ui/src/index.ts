@@ -1,3 +1,4 @@
+export * from './lib/banner-notification/banner-notification';
 export * from './lib/panel-accordion/panel-accordion';
 export * from './lib/tag/tag';
 export * from './lib/tags-card/tags-card';

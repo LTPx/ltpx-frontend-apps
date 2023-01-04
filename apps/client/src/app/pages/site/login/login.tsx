@@ -1,5 +1,7 @@
 import styles from './login.module.scss';
 import {
+  BannerNotification,
+  BannerType,
   Button,
   ColorsButton,
   Input,
@@ -57,10 +59,15 @@ export function Login(props: LoginProps) {
       <div className={styles['container']}>
         <div className={styles['content']}>
           <h1>Iniciar Sesión</h1>
-          <span>
+          <p>
             Accede a una comunidad de apoyo de instructores en línea. obten acceso instantáneo
             a todos nuestros cursos y clases.
-          </span>
+          </p>
+          { error && (
+            <BannerNotification type={BannerType.error} onClickClose={()=>(setError(false))}>
+              Tu email o password no coinciden, prueba recuperando contraseña
+            </BannerNotification>
+          )}
           <form>
             <Input
               label="Email"

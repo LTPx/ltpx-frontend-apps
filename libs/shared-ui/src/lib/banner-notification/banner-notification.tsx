@@ -1,3 +1,5 @@
+import { useState } from 'react';
+import Icon from '../icon/icon';
 import styles from './banner-notification.module.scss';
 
 /* eslint-disable-next-line */
@@ -11,20 +13,38 @@ export enum BannerType {
 export interface BannerNotificationProps {
   children: any;
   type?: BannerType;
+  onClickClose?: () => void;
 }
 
 export function BannerNotification(props: BannerNotificationProps) {
-  const { children, type } = props;
+  const [isHidden, setIsHidden] = useState(false)
+  const { children, type, onClickClose } = props;
   const colors = {
     success: styles['success'],
     error: styles['error'],
     info: styles['info'],
+  };
+
+  const closeBanner = () => {
+    setIsHidden(!isHidden);
+    onClickClose && onClickClose();
   }
+
   const selectedColor = colors[type || BannerType.success];
   return (
-    <div className={`${styles['banner-notification']} ${selectedColor}`}>
-      {children}
-    </div>
+    <>
+      {isHidden ? (
+        <></>
+      ) : (
+        <div className={`${styles['banner-notification']} ${selectedColor}`}>
+          <div className={`${styles['content']}`}>
+          {children}
+          </div>
+          <Icon icon='close' size={18} onClick={closeBanner}/>
+        </div>
+      )}
+    </>
+
   );
 }
 

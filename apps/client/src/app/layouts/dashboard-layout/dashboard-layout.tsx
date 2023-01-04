@@ -19,24 +19,12 @@ export interface DashboardLayoutProps {
 
 export function DashboardLayout(props: DashboardLayoutProps) {
   const { links } = props;
-  const { logout } = useUser();
-  const navigate = useNavigate();
-
-  const logoutSession = async () => {
-    await logout();
-    navigate('/');
-    window.location.reload();
-  }
 
   return (
     <div className={styles['container']}>
       <HeaderApp/>
       <div className={styles['navbar']}>
         <Nav links={links}/>
-        <div className={styles['logout']} onClick={logoutSession}>
-          <Icon icon='log-out' size={20}/>
-          <h4>Logout</h4>
-        </div>
       </div>
       <div className={styles['content']}>
         <Outlet />

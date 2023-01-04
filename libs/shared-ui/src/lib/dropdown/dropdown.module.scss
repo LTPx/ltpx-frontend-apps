@@ -1,3 +1,5 @@
+@import "../../styles/styles.module.scss";
+
 .container {
   position: relative;
 
@@ -8,9 +10,11 @@
   }
 
   .main-element {
+
   }
 
   .content {
+    box-shadow: $card-shadow-medium;
     position: absolute;
     visibility: hidden;
   }

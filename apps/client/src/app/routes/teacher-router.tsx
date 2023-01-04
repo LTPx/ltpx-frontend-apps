@@ -58,7 +58,7 @@ export const TeacherRoutes = () => {
       <Routes>
         <Route path="teacher" element={
           <ProtectedRoutesTeacher>
-            <DashboardLayout  links={linksDashboardTeacher}/>
+            <DashboardLayout links={linksDashboardTeacher}/>
           </ProtectedRoutesTeacher>
         }>
           <Route path="dashboard" element={<TeacherDashboard/>}/>

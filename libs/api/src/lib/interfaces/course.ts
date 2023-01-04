@@ -10,6 +10,11 @@ export interface ICourse {
   stars?: number;
 }
 
+export interface ICourseContent {
+  title: string;
+  description: string;
+}
+
 export interface INewCourse {
   cover?: string;
   title: string;
@@ -18,4 +23,5 @@ export interface INewCourse {
   language: string;
   learn_goals: string;
   requirements: string;
+  contents?: ICourseContent[];
 }

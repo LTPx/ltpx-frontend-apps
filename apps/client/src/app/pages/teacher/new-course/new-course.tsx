@@ -10,6 +10,7 @@ import TeacherClasses from '../teacher-classes/teacher-classes';
 import styles from './new-course.module.scss';
 import * as Yup from 'yup';
 import { useTeacher } from '../../../store';
+import { ICourseContent } from '@ltpx-frontend-apps/api';
 
 /* eslint-disable-next-line */
 export interface NewCourseProps {}
@@ -30,6 +31,7 @@ const tabs = [
 
 export function NewCourse(props: NewCourseProps) {
   const [indexViewSelected, setIndexViewSelected] = useState(0);
+  const [ contents, setContents] = useState<ICourseContent[]>([]);
   const { createCourse } = useTeacher();
 
   const formik = useFormik({
@@ -52,7 +54,8 @@ export function NewCourse(props: NewCourseProps) {
       requirements: Yup.string().required('es obligatorio'),
     }),
     onSubmit: async formData => {
-      const courseData = {...formData, ...{ learn_goals: formData.goals}}
+      const courseData = {...formData, ...{ learn_goals: formData.goals, contents: contents}}
+      console.log('courseData: ', courseData)
       const resp = await createCourse(courseData);
       console.log(resp);
     }
@@ -84,24 +87,24 @@ export function NewCourse(props: NewCourseProps) {
           </div>
           <div className={styles['course-section-content']}>
             <section>
-              { indexViewSelected === 0 && (
-                <CourseGeneralInformation formik={formik}/>
-              )}
-              { indexViewSelected === 1 && (
-                <CourseContents/>
-              )}
-              { indexViewSelected === 2 && (
-                <TeacherClasses/>
-              )}
-              { indexViewSelected === 3 && (
-                <Quiz/>
-              )}
-              { indexViewSelected === 4 && (
-                <Achievement/>
-              )}
-              { indexViewSelected === 5 && (
-                <CourseSettings/>
-              )}
+              <CourseGeneralInformation formik={formik}/>
+            </section>
+            <section>
+              <CourseContents onChange={(forms: any)=>{
+                setContents(forms);
+              }}/>
+            </section>
+            <section>
+              <TeacherClasses/>
+            </section>
+            <section>
+              <Quiz/>
+            </section>
+            <section>
+              <Achievement/>
+            </section>
+            <section>
+              <CourseSettings/>
             </section>
           </div>
         </div>

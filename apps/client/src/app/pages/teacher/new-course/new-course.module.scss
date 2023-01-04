@@ -24,6 +24,10 @@
     .course-section-content {
       flex-grow: 1;
       padding: 2rem 4rem;
+
+      section {
+        margin-bottom: 2rem;
+      }
     }
   }
 }

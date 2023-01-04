@@ -6,18 +6,19 @@ import styles from './course-contents.module.scss';
 export interface FormContent {
   title: string;
   description: string;
-  media?: any;
 }
 
-export interface CourseContentsProps {}
+export interface CourseContentsProps {
+  onChange: any;
+}
 
 export function CourseContents(props: CourseContentsProps) {
+  const { onChange } = props;
 
   const contents: FormContent[] = [
     {
       title: '',
       description: '',
-      media: null
     }
   ];
 
@@ -27,7 +28,6 @@ export function CourseContents(props: CourseContentsProps) {
     setContentForms([...contentForms,     {
       title: '',
       description: '',
-      media: null
     }])
   }
 
@@ -46,11 +46,12 @@ export function CourseContents(props: CourseContentsProps) {
     if ( name === 'description') {
       forms[index][name] = value;
     }
+    onChange && onChange(forms);
     setContentForms(forms);
   };
 
   return (
-    <div className="contents">
+    <div className={styles['contents']}>
       <div className={styles['header-text']}>
         <h2>Contenidos</h2>
         <h4 className='muted'>Agrega los contenidos que se impartiran en el desarrollo del curso</h4>

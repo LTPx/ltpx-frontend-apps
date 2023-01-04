@@ -24,7 +24,8 @@ export function DashboardLayout(props: DashboardLayoutProps) {
 
   const logoutSession = async () => {
     await logout();
-    navigate('/home');
+    navigate('/');
+    window.location.reload();
   }
 
   return (

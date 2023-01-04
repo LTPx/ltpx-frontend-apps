@@ -57,7 +57,6 @@ export function HeaderApp(props: HeaderAppProps) {
         { isAuthenticated && (
           <>
             <Icon icon='notification' size={22}></Icon>
-            <h4>{user.fullname}</h4>
             <Dropdown>
               <Avatar
                 image='https://images.unsplash.com/photo-1669563306078-4c107b67d125?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=3387&q=80'

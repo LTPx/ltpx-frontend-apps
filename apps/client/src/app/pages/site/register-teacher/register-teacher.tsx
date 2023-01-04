@@ -82,6 +82,7 @@ export function RegisterTeacher(props: RegisterTeacherProps) {
               title="Sign In"
               full={true}
               type={TypeButton.submit}
+              onClick={formik.handleSubmit}
             />
           </form>
         </div>

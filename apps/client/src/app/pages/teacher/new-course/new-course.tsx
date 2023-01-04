@@ -11,6 +11,7 @@ import styles from './new-course.module.scss';
 import * as Yup from 'yup';
 import { useTeacher } from '../../../store';
 import { ICourseContent } from '@ltpx-frontend-apps/api';
+import { useNavigate } from 'react-router-dom';
 
 /* eslint-disable-next-line */
 export interface NewCourseProps {}
@@ -33,6 +34,7 @@ export function NewCourse(props: NewCourseProps) {
   const [indexViewSelected, setIndexViewSelected] = useState(0);
   const [ contents, setContents] = useState<ICourseContent[]>([]);
   const { createCourse } = useTeacher();
+  const navigate = useNavigate();
 
   const formik = useFormik({
     initialValues: {
@@ -54,16 +56,20 @@ export function NewCourse(props: NewCourseProps) {
       requirements: Yup.string().required('es obligatorio'),
     }),
     onSubmit: async formData => {
+      debugger
       const courseData = {...formData, ...{ learn_goals: formData.goals, contents: contents}}
-      console.log('courseData: ', courseData)
-      const resp = await createCourse(courseData);
-      console.log(resp);
+      const { saved, data } = await createCourse(courseData);
+      if (saved) {
+        navigate('/teacher/courses/all');
+      } else {
+        console.log('error: ', data);
+      }
     }
   });
 
   return (
     <div className={styles['container']}>
-      <form onSubmit={formik.handleSubmit}>
+      <form>
         <div className={styles['header']}>
           <h3>Crear Curso</h3>
           <div className={styles['actions']}>
@@ -74,6 +80,7 @@ export function NewCourse(props: NewCourseProps) {
               title='Guardar'
               color={ColorsButton.primary}
               type={TypeButton.submit}
+              onClick={formik.submitForm}
             />
           </div>
         </div>

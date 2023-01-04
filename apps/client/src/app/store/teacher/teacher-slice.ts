@@ -13,6 +13,7 @@ type TResponseLogin = {
 };
 
 type TResponseCreateCourse = {
+  saved: boolean;
   data: INewCourse | any;
 };
 
@@ -53,12 +54,11 @@ export const createTeacherSlice:
       }
     },
     createCourse: async (params: INewCourse):Promise<TResponseCreateCourse> => {
-      debugger
       try {
         const course = await createCourse(params);
-        return { data: course };
+        return { saved: true, data: course };
       } catch (error) {
-        return { data: error };
+        return { saved: false, data: error };
       }
     },
   })

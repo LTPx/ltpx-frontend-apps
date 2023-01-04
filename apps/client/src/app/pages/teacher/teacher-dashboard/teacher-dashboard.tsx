@@ -11,13 +11,15 @@ export function TeacherDashboard(props: TeacherDashboardProps) {
   const { teacher_account } =useTeacher();
   return (
     <div className={`${styles['container']} card`}>
-      <BannerNotification>
-        <p>
-          Tu solicitud ha sido enviada, validaremos tus datos en un periodo
-          maximo de 48h luego recibiras un correo con una respuesta de nuestro
-          equipo
-        </p>
-      </BannerNotification>
+      { teacher_account === StatusTeacherAccount.review && (
+        <BannerNotification>
+          <p>
+            Tu solicitud ha sido enviada, validaremos tus datos en un periodo
+            maximo de 48h luego recibiras un correo con una respuesta de nuestro
+            equipo
+          </p>
+        </BannerNotification>
+      )}
       <h1>Bienvenido {user.fullname}</h1>
       <p>Estás a solo unos pasos de enseñar.
         ¡Siga nuestra guía paso a paso para comenzar!

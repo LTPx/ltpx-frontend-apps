@@ -61,7 +61,7 @@ export function Login(props: LoginProps) {
             Accede a una comunidad de apoyo de instructores en línea. obten acceso instantáneo
             a todos nuestros cursos y clases.
           </span>
-          <form onSubmit={formik.handleSubmit}>
+          <form>
             <Input
               label="Email"
               type="email"
@@ -90,6 +90,7 @@ export function Login(props: LoginProps) {
               title="Iniciar"
               full={true}
               type={TypeButton.submit}
+              onClick={formik.handleSubmit}
             />
           </form>
           <NavLink to={'/forget-password'} className={styles['link']}>

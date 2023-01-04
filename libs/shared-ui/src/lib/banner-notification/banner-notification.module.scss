@@ -3,4 +3,16 @@
 .banner-notification {
   background-color: $green-color-100;
   padding: 2rem;
+
+  &.success {
+    background-color: $green-color-100;
+  }
+
+  &.error {
+    background-color: $green-color-100;
+  }
+
+  &.info {
+    background-color: $green-color-100;
+  }
 }

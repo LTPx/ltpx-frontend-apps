@@ -47,7 +47,7 @@ export function Register(props: RegisterProps) {
             Access a supportive community of online instructors.
             Get instant access to all creation courses resources
           </span>
-          <form onSubmit={formik.handleSubmit}>
+          <form>
             <Input
               label='Name'
               type="text"
@@ -81,6 +81,7 @@ export function Register(props: RegisterProps) {
               title="Sign In"
               full={true}
               type={TypeButton.submit}
+              onClick={formik.handleSubmit}
             />
           </form>
         </div>

@@ -1,0 +1,31 @@
+@import '../../styles/styles.module.scss';
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: $size-md-1;
+
+  .options-content {
+    display: flex;
+    flex-direction: column;
+    gap: $size-md-1;
+
+    .options {
+      display: flex;
+      align-items: center;
+      gap: $size-sm-2;
+      box-sizing: border-box;
+      border: 1px solid $stroke-color;
+      border-radius: 4px;
+      padding: $size-sm-2;
+      color: $text-gray-color;
+      cursor: pointer;
+
+      &.selected {
+        background-color: $green-color-100;
+        border: 1px solid $green-color;
+        color: $text-color;
+      }
+    }
+  }
+}

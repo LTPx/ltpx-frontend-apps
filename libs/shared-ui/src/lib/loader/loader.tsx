@@ -12,16 +12,16 @@ export interface LoaderProps {
 export function Loader(props: LoaderProps) {
   const { typeLoader } = props;
 
-  const colorsClasses = {
+  const loaderClass = {
     default: styles['loader-default'],
     switch: styles['loader-switch'],
   };
 
-  const snackbarColorClass = colorsClasses[typeLoader || LoaderType.default];
+  const loadersType = loaderClass[typeLoader || LoaderType.default];
 
   return (
     <div className={styles['container']}>
-      <div className={`${styles['loaders']} ${snackbarColorClass}`}>
+      <div className={`${styles['loaders']} ${loadersType}`}>
         <span></span>
       </div>
     </div>

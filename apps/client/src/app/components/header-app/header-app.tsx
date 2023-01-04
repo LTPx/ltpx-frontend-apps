@@ -1,5 +1,5 @@
-import { Avatar, Cart, Header, Icon } from '@ltpx-frontend-apps/shared-ui';
-import { NavLink } from 'react-router-dom';
+import { Avatar, Cart, Dropdown, Header, Icon, UserMenu } from '@ltpx-frontend-apps/shared-ui';
+import { NavLink, useNavigate } from 'react-router-dom';
 import styles from './header-app.module.scss';
 import { useTranslation } from 'react-i18next';
 import { useUser } from '../../store';
@@ -8,8 +8,15 @@ import { useUser } from '../../store';
 export interface HeaderAppProps {}
 
 export function HeaderApp(props: HeaderAppProps) {
-  const { user, isAuthenticated, totalProducts, currentView } = useUser();
+  const { user, logout, isAuthenticated, totalProducts, currentView } = useUser();
   const { t } = useTranslation();
+  const navigate = useNavigate();
+
+  const logoutSession = async () => {
+    await logout();
+    navigate('/');
+    window.location.reload();
+  }
 
   const mainLinks = [
     { title: t('header.home'), url: '/home'},
@@ -51,7 +58,23 @@ export function HeaderApp(props: HeaderAppProps) {
           <>
             <Icon icon='notification' size={22}></Icon>
             <h4>{user.fullname}</h4>
-            <Avatar image='https://images.unsplash.com/photo-1669563306078-4c107b67d125?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=3387&q=80'/>
+            <Dropdown>
+              <Avatar
+                image='https://images.unsplash.com/photo-1669563306078-4c107b67d125?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=3387&q=80'
+                dropdown-id={'menu'}
+              />
+              <UserMenu
+                name={user.fullname}
+                email={user.email}
+                links={[
+                  {
+                    icon: 'log-out',
+                    text: 'Cerrar Session',
+                    onClick: () => {logoutSession()}
+                  }
+                ]}
+              />
+            </Dropdown>
           </>
         )}
       </div>

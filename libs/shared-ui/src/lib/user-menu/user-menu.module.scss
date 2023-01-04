@@ -2,18 +2,18 @@
 
 .container {
   box-sizing: border-box;
-  width: 266px;
-  height: 378px;
+  min-width: 2rem;
   background: $white-color;
   border: 1px solid #e7e7ec;
   box-shadow: $card-shadow-medium;
   border-radius: 4px;
-  padding: $size-lg-1;
+  padding: $size-md-3;
 
   .head-content {
     display: flex;
     align-items: center;
     padding-bottom: $size-md-3;
+
     .user {
       display: flex;
       gap: $size-sm-1;
@@ -26,11 +26,23 @@
     }
   }
 
-  .content {
+  .links {
     display: flex;
-    align-items: center;
+    flex-direction: column;
     gap: $size-md-1;
-    padding-bottom: $size-md-1;
-    color: $text-gray-color;
+
+    .link {
+      display: flex;
+      align-items: center;
+      gap: $size-md-1;
+      color: $text-gray-color;
+      cursor: pointer;
+      min-width: 10rem;
+
+      &:hover {
+        color: $text-color;
+      }
+    }
   }
+
 }

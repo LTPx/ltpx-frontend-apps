@@ -7,14 +7,15 @@ import styles from './user-menu.module.scss';
 export interface LinkOption {
   icon: string;
   text: string;
-  url: string;
+  url?: string;
+  onClick?: () => void;
 }
 
 export interface UserMenuProps {
   links: Array<LinkOption>;
-  image: string;
-  name: string;
-  email: string;
+  image?: string;
+  name?: string;
+  email?: string;
 }
 
 export function UserMenu(props: UserMenuProps) {
@@ -22,20 +23,28 @@ export function UserMenu(props: UserMenuProps) {
   return (
     <div className={styles['container']}>
       <div className={styles['head-content']}>
-        <Avatar image={image} size={AvatarSize.medium}></Avatar>
+        { image && (
+          <Avatar image={image} size={AvatarSize.medium}></Avatar>
+        )}
         <div className={styles['user']}>
           <h4>{name}</h4>
           <h5>{email}</h5>
         </div>
       </div>
-      {links.map((link, index) => (
-        <div className={styles['content']} key={index}>
-          <Icon icon={link.icon} size={16}></Icon>
-          <NavLink to={link.url}>
-            <h4>{link.text}</h4>
-          </NavLink>
-        </div>
-      ))}
+      <div className={styles['links']}>
+        {links.map((link, index) => (
+          <div className={styles['link']} key={index} onClick={()=>{link.onClick && link.onClick()}}>
+            <Icon icon={link.icon} size={16}></Icon>
+            {link.url ? (
+              <NavLink to={link.url}>
+                <h4>{link.text}</h4>
+              </NavLink>
+            ) : (
+              <h4>{link.text}</h4>
+            )}
+          </div>
+        ))}
+      </div>
     </div>
   );
 }

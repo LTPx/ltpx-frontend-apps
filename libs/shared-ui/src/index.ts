@@ -1,5 +1,7 @@
 export * from './lib/dropdown/dropdown';
 export * from './lib/banner-notification/banner-notification';
+export * from './lib/not-found/not-found';
+export * from './lib/loader/loader';
 export * from './lib/info-count/info-count';
 export * from './lib/group-users/group-users';
 export * from './lib/quiz-score/quiz-score';

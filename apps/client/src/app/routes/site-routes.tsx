@@ -8,7 +8,8 @@ import {
   Checkout,
   CourseDetails,
   RegisterTeacher,
-  ForgetPassword
+  ForgetPassword,
+  Page404
 } from "../pages/site/index";
 import TermsConditions from "../pages/site/terms-conditions/terms-conditions";
 
@@ -26,6 +27,7 @@ export const SiteRoutes = () => {
       <Route path="/checkout" element={<Checkout/>} />
       <Route path="/terms-and-conditions" element={<TermsConditions/>} />
       <Route path="/forget-password" element={<ForgetPassword/>} />
+      <Route path="/page-404" element={<Page404/>} />
     </Routes>
   )
 }

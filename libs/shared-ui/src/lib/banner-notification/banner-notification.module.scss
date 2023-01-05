@@ -1,0 +1,29 @@
+@import '../../styles/styles.module.scss';
+
+.banner-notification {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem 2rem;
+
+  svg {
+    cursor: pointer;
+
+    &:hover {
+      color: $text-color;
+    }
+  }
+
+  &.success {
+    background-color: $green-color-100;
+  }
+
+  &.error {
+    background-color: $red-color-400;
+    color: $white-color;
+  }
+
+  &.info {
+    background-color: $blue-color-100;
+  }
+}

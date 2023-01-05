@@ -1,51 +1,40 @@
 import { Button, ColorsButton, Input, TypeButton } from '@ltpx-frontend-apps/shared-ui';
 import { useFormik } from 'formik';
-import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { UserContext } from '../../../store/context/user/user-context';
 import styles from './register-teacher.module.scss';
 import * as Yup from 'yup';
-import { UserRoles } from '../../../store/interfaces/user';
+import { useTeacher } from '../../../store';
 
 /* eslint-disable-next-line */
 export interface RegisterTeacherProps {}
 
 export function RegisterTeacher(props: RegisterTeacherProps) {
-  const { setUser } = useContext(UserContext);
+  const { registerTeacher } = useTeacher();
 
   const navigate = useNavigate();
 
   const formik = useFormik({
     initialValues: {
-      name: '',
+      fullname: '',
       email: '',
       password: '',
     },
     validationSchema: Yup.object({
-      name: Yup.string()
-                .required('Name is required'),
+      fullname: Yup.string()
+                .required('Nombre es obligatorio'),
       email: Yup.string()
                 .email()
-                .required('Email is required'),
+                .required('Email es obligatorio'),
       password: Yup.string()
-                    .required('Password is required')
+                    .required('Password es obligatorio')
     }),
-    onSubmit: async data => {
-      const user = {
-        email: data.email,
-        name: data.name,
-        role: UserRoles.teacher
-      };
-      sessionStorage.setItem('user', JSON.stringify(user));
-      sessionStorage.setItem('isAuthenticated', 'true');
-
-      try{
-        navigate('/student/dashboard');
-        setUser(user);
-        //TODO: integrate API
-      }
-      catch(error){
-        console.log(error);
+    onSubmit: async formData => {
+      const { isLogin, data } = await registerTeacher(formData);
+      if (isLogin) {
+        navigate('/teacher/dashboard');
+        window.location.reload();
+      } else {
+        // setError(true);
       }
     }
   });
@@ -63,10 +52,10 @@ export function RegisterTeacher(props: RegisterTeacherProps) {
             <Input
               label='Name'
               type="text"
-              name="name"
+              name="fullname"
               placeholder="John Doe"
               onChange={(e: any) => { formik.handleChange(e); }}
-              value={formik.values.name}
+              value={formik.values.fullname}
               onBlur={formik.handleBlur}
             />
             <Input
@@ -93,6 +82,7 @@ export function RegisterTeacher(props: RegisterTeacherProps) {
               title="Sign In"
               full={true}
               type={TypeButton.submit}
+              onClick={formik.handleSubmit}
             />
           </form>
         </div>

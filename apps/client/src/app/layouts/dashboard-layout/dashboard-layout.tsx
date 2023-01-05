@@ -1,7 +1,7 @@
 import { Icon, Nav } from '@ltpx-frontend-apps/shared-ui';
 import { Outlet, useNavigate } from 'react-router-dom';
 import HeaderApp from '../../components/header-app/header-app';
-import { useUser } from '../../hooks/useUser';
+import { useUser } from '../../store';
 import styles from './dashboard-layout.module.scss';
 
 export interface DashboardLink {
@@ -19,14 +19,13 @@ export interface DashboardLayoutProps {
 
 export function DashboardLayout(props: DashboardLayoutProps) {
   const { links } = props;
-  const { logoutApp } = useUser();
+  const { logout } = useUser();
   const navigate = useNavigate();
 
-  const logout = () => {
-    sessionStorage.setItem('user', '');
-    sessionStorage.setItem('isAuthenticated', 'false');
-    logoutApp();
-    navigate('/home');
+  const logoutSession = async () => {
+    await logout();
+    navigate('/');
+    window.location.reload();
   }
 
   return (
@@ -34,7 +33,7 @@ export function DashboardLayout(props: DashboardLayoutProps) {
       <HeaderApp/>
       <div className={styles['navbar']}>
         <Nav links={links}/>
-        <div className={styles['logout']} onClick={logout}>
+        <div className={styles['logout']} onClick={logoutSession}>
           <Icon icon='log-out' size={20}/>
           <h4>Logout</h4>
         </div>

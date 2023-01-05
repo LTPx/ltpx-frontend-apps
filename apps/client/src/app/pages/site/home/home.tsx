@@ -93,7 +93,6 @@ export function Home(props: HomeProps) {
             ))}
         </div>
       </div>
-
     </div>
   );
 }

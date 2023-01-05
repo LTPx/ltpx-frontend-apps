@@ -1,8 +1,6 @@
-import { Cart, Footer, Header } from '@ltpx-frontend-apps/shared-ui';
-import { useContext } from 'react';
-import { NavLink, Outlet } from 'react-router-dom';
+import { Footer } from '@ltpx-frontend-apps/shared-ui';
+import { Outlet } from 'react-router-dom';
 import HeaderApp from '../../components/header-app/header-app';
-import { UserContext } from '../../store/context/user/user-context';
 import styles from './app-layout.module.scss';
 
 /* eslint-disable-next-line */

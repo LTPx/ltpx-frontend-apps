@@ -25,7 +25,6 @@ export function SelectedItems(props: SelectedItemsProps) {
       })
       setItemsOption(result);
     }else {
-      debugger
       let forms = [...itemsOption];
       forms[indexOption].selected = !(!!forms[indexOption].selected);
       setItemsOption(forms);

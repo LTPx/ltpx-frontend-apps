@@ -1,6 +1,6 @@
-import { Button, ColorsButton, FileUpload, Input, Select } from '@ltpx-frontend-apps/shared-ui';
+import { FileUpload, Input, Select } from '@ltpx-frontend-apps/shared-ui';
+import { FormikValues } from 'formik';
 import styles from './course-general-information.module.scss';
-
 
 const categories = [
   {value: 'design', text: 'Design'},
@@ -25,9 +25,12 @@ const languages = [
 ];
 
 /* eslint-disable-next-line */
-export interface CourseGeneralInformationProps {}
+export interface CourseGeneralInformationProps {
+  formik: FormikValues;
+}
 
 export function CourseGeneralInformation(props: CourseGeneralInformationProps) {
+  const { formik } = props;
   return (
     <div className={styles['container']}>
       <div className={styles['header-text']}>
@@ -41,17 +44,57 @@ export function CourseGeneralInformation(props: CourseGeneralInformationProps) {
         </div>
       </section>
       <div className={styles['text']}>
-        <Input placeholder='Evita nombres confusos' label='Nombre del curso'/>
-        <Input placeholder='Un breve resumen de lo que trata este curso' label='Descripcion del curso'/>
+        <Input
+          label='Nombre del curso'
+          placeholder='Evita nombres confusos'
+          name="title"
+          onChange={(e: any) => { formik.handleChange(e); }}
+          value={formik.values.title}
+          onBlur={formik.handleBlur}
+        />
+        <Input
+          label='Descripcion del curso'
+          placeholder='Un breve resumen de lo que trata este curso'
+          name="description"
+          onChange={(e: any) => { formik.handleChange(e); }}
+          value={formik.values.description}
+          onBlur={formik.handleBlur}
+        />
       </div>
       <div className={styles['selects-form']}>
-        <Select options={categories} label='Categoria'/>
-        <Select options={levels} label='Nivel'/>
-        <Select options={languages} label='Idioma'/>
+        <Select
+          label='Categoria'
+          options={categories}
+          onChange={option => formik.setFieldValue('category', option.value)}
+        />
+        <Select
+          label='Nivel'
+          options={levels}
+          onChange={option => formik.setFieldValue('level', option.value)}
+        />
+        <Select
+          label='Idioma'
+          options={languages}
+          onChange={option => formik.setFieldValue('language', option.value)}
+        />
       </div>
       <div className={styles['text']}>
-        <Input placeholder='Pueden se puntos claves del curso' label='Que aprenderan los estudiantes?'/>
-        <Input placeholder='Los estudiantes necesitan algun recurso antes de tomar este curso' label='Requerimietos'/>
+        <Input
+          placeholder='Pueden se puntos claves del curso'
+          label='Que aprenderan los estudiantes?'
+          name="goals"
+          onChange={(e: any) => { formik.handleChange(e); }}
+          value={formik.values.goals}
+          onBlur={formik.handleBlur}
+        />
+        <Input
+          label='Requerimietos'
+          placeholder='Los estudiantes necesitan algun recurso antes de tomar este curso'
+          name="requirements"
+          onChange={(e: any) => { formik.handleChange(e); }}
+          value={formik.values.requirements}
+          onBlur={formik.handleBlur}
+        />
       </div>
     </div>
   );

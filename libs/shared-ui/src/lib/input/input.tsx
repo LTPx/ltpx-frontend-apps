@@ -25,6 +25,7 @@ export interface InputProps {
   onBlur?: any,
   onKeyDown?: any,
   addonInput?: AddonSymbolInput;
+  description?: string;
 }
 
 export function Input(props: InputProps) {
@@ -34,6 +35,7 @@ export function Input(props: InputProps) {
     onKeyDown,
     label,
     addonInput,
+    description,
     ...other
   } = props;
 
@@ -59,6 +61,9 @@ export function Input(props: InputProps) {
     <div className={`${css['container']} ${className}`}>
       {label && (
         <label className={css['label']}>{label}</label>
+      )}
+      { description && (
+        <p className={css['description']}>{description}</p>
       )}
       <div className={`${css['input-container']}`}>
         { addonInput && addonInput.position === 'left' && (

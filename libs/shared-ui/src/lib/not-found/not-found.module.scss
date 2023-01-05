@@ -1,0 +1,31 @@
+@import "../../styles/styles.module.scss";
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: $size-lg-3;
+
+  .head {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    h1 {
+      font-weight: bold;
+      font-size: $size-lg-4;
+    }
+    h2 {
+      font-weight: bold;
+      font-size: $size-lg-4;
+    }
+  }
+
+  .content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    img {
+      width: 499.22px;
+      height: 456.82px;
+    }
+  }
+}

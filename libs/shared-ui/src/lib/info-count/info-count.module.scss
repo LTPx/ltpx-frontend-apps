@@ -1,0 +1,25 @@
+@import '../../styles/styles.module.scss';
+
+.container {
+  max-width: 10rem;
+  .content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: $size-sm-1;
+    padding: $size-md-1;
+
+    &.info-green {
+      background-color: $green-color-100;
+      color: $green-color;
+    }
+    &.info-gray {
+      background-color: $gray-color-200;
+      color: $gray-color;
+    }
+    &.info-orange {
+      background-color: $orange-color-100;
+      color: $orange-color;
+    }
+  }
+}

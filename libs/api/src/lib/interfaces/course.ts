@@ -1,4 +1,4 @@
-export interface Course {
+export interface ICourse {
   id: string;
   image?: string;
   title: string;
@@ -8,4 +8,20 @@ export interface Course {
   duration?: number;
   lessons?: number;
   stars?: number;
+}
+
+export interface ICourseContent {
+  title: string;
+  description: string;
+}
+
+export interface INewCourse {
+  cover?: string;
+  title: string;
+  description: string;
+  category: string;
+  language: string;
+  learn_goals: string;
+  requirements: string;
+  contents?: ICourseContent[];
 }

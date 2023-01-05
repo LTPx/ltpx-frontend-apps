@@ -2,8 +2,6 @@ import { buildCourseDetails } from '@ltpx-frontend-apps/api';
 import {
   Avatar,
   AvatarSize,
-  Button,
-  ColorsButton,
   Rating,
   Tabs,
   Icon,
@@ -14,7 +12,7 @@ import {
   ReviewForm,
 } from '@ltpx-frontend-apps/shared-ui';
 import { useParams } from 'react-router-dom';
-import { useUser } from '../../../hooks/useUser';
+import { useUser } from '../../../store';
 import styles from './course-details.module.scss';
 
 /* eslint-disable-next-line */
@@ -22,11 +20,12 @@ export interface CourseDetailsProps {}
 
 export function CourseDetails(props: CourseDetailsProps) {
   const { courseId } = useParams();
-  const { addCourseToCart } = useUser();
+  const { addCourseCart } = useUser();
   const courseDetails = buildCourseDetails();
 
   const addToCart = () => {
-    addCourseToCart(courseDetails.course);
+    // addCourseToCart(courseDetails.course);
+    addCourseCart(courseDetails.course);
   };
 
   const enrolled = () => {

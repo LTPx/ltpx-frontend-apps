@@ -1,15 +1,22 @@
-import { Avatar, Cart, Header, Icon } from '@ltpx-frontend-apps/shared-ui';
-import { NavLink } from 'react-router-dom';
-import { useUser } from '../../hooks/useUser';
+import { Avatar, Cart, Dropdown, Header, Icon, UserMenu } from '@ltpx-frontend-apps/shared-ui';
+import { NavLink, useNavigate } from 'react-router-dom';
 import styles from './header-app.module.scss';
 import { useTranslation } from 'react-i18next';
+import { useUser } from '../../store';
 
 /* eslint-disable-next-line */
 export interface HeaderAppProps {}
 
 export function HeaderApp(props: HeaderAppProps) {
-  const { user, isAuthenticated, products } = useUser();
+  const { user, logout, isAuthenticated, totalProducts, currentView } = useUser();
   const { t } = useTranslation();
+  const navigate = useNavigate();
+
+  const logoutSession = async () => {
+    await logout();
+    navigate('/');
+    window.location.reload();
+  }
 
   const mainLinks = [
     { title: t('header.home'), url: '/home'},
@@ -22,41 +29,55 @@ export function HeaderApp(props: HeaderAppProps) {
     { title: t('header.register'), url: '/register'},
   ];
 
-  const linksAccount = [
+  // const linksTeacher = [
+  //   { title: 'My Dashboard', url: '/teacher/dashboard'},
+  // ];
+
+  const linksStudent = [
     { title: 'My Dashboard', url: '/student/dashboard'},
   ];
 
   const linksNotAccount = mainLinks.concat(authLinks);
-  const linksWithAccount = mainLinks.concat(linksAccount);
+
+  const linksView = {
+    default: linksNotAccount,
+    user: linksStudent,
+    student: linksStudent,
+    teacher: []
+  }
+
+  const links = linksView[currentView];
 
   return (
-    <>
-      { isAuthenticated && (
-        <Header links={linksWithAccount}>
-          <div className={styles['actions']}>
-            <NavLink to={'/cart'}>
-              <Cart amount={products.length}/>
-            </NavLink>
-            { isAuthenticated && (
-              <>
-                <Icon icon='notification' size={22}></Icon>
-                <h4>{user.name}</h4>
-                <Avatar image='https://images.unsplash.com/photo-1669563306078-4c107b67d125?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=3387&q=80'/>
-              </>
-            )}
-          </div>
-        </Header>
-      )}
-      { !isAuthenticated && (
-        <Header links={linksNotAccount}>
-          <div className={styles['actions']}>
-            <NavLink to={'/cart'}>
-              <Cart amount={products.length}/>
-            </NavLink>
-          </div>
-        </Header>
-      )}
-    </>
+    <Header links={links}>
+      <div className={styles['actions']}>
+        <NavLink to={'/cart'}>
+          <Cart amount={totalProducts}/>
+        </NavLink>
+        { isAuthenticated && (
+          <>
+            <Icon icon='notification' size={22}></Icon>
+            <Dropdown>
+              <Avatar
+                image='https://images.unsplash.com/photo-1669563306078-4c107b67d125?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=3387&q=80'
+                dropdown-id={'menu'}
+              />
+              <UserMenu
+                name={user.fullname}
+                email={user.email}
+                links={[
+                  {
+                    icon: 'log-out',
+                    text: 'Cerrar Session',
+                    onClick: () => {logoutSession()}
+                  }
+                ]}
+              />
+            </Dropdown>
+          </>
+        )}
+      </div>
+    </Header>
   );
 }
 

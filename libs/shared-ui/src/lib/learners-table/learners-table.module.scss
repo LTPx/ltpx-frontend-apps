@@ -1,0 +1,44 @@
+@import '../../styles/styles.module.scss';
+
+.container {
+
+  .user-name {
+    display: flex;
+    align-items: center;
+    gap: $size-md-1;
+  }
+
+  .table- content {
+    display: flex;
+    align-items: center;
+  }
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+thead {
+  background-color: $primary-color;
+  color: $white-color;
+}
+
+tbody {
+  color: $text-gray-color;
+
+  tr {
+    &:hover {
+      background-color: #f7f7f7;;
+    }
+  }
+}
+
+td, th {
+  text-align: left;
+  padding: 20px;
+}
+
+tr:nth-child(even) {
+  background-color: $background-gray-color;
+}

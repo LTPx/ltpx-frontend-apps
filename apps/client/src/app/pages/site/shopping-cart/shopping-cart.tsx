@@ -1,5 +1,5 @@
 import { Button, ColorsButton, CourseCartItem } from '@ltpx-frontend-apps/shared-ui';
-import { useUser } from '../../../hooks/useUser';
+import { useUser } from '../../../store';
 import styles from './shopping-cart.module.scss';
 
 /* eslint-disable-next-line */
@@ -7,10 +7,10 @@ export interface ShoppingCartProps {}
 
 export function ShoppingCart(props: ShoppingCartProps) {
 
-  const { isAuthenticated, products, removeCourseFromCart } = useUser();
+  const { isAuthenticated, products, removeCourseCart } = useUser();
 
   const handleRemoveItem = (id: string) => {
-    removeCourseFromCart(id);
+    removeCourseCart(id);
   }
 
   const subtotal = () => {

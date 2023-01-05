@@ -1,0 +1,17 @@
+.container {
+  position: relative;
+
+  &:hover {
+    .content {
+      visibility: inherit;
+    }
+  }
+
+  .main-element {
+  }
+
+  .content {
+    position: absolute;
+    visibility: hidden;
+  }
+}

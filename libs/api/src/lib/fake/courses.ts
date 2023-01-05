@@ -1,7 +1,7 @@
 import { faker } from '@faker-js/faker';
-import { Course } from '../interfaces/course';
+import { ICourse } from '../interfaces/course';
 
-const createRandomCourse = ():Course => (
+const createRandomCourse = ():ICourse => (
   {
     id: faker.datatype.uuid(),
     image: faker.image.people(640, 480, true),
@@ -189,7 +189,7 @@ const createRandomTeacherCourseDetail = () => (
   }
 )
 
-export const buildCourses = (amount: number):Course[] => {
+export const buildCourses = (amount: number):ICourse[] => {
   const mocks = Array.from(Array(amount).keys())
   return mocks.map(() => {
     return createRandomCourse();

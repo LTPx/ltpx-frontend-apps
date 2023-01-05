@@ -17,13 +17,14 @@
     border-top: 1px solid #d4d4d4;
 
     .course-sections {
-      // background-color: #f7f7f7;
       border-right: 1px solid #d4d4d4;
     }
 
     .course-section-content {
       flex-grow: 1;
       padding: 2rem 4rem;
+      height: 100vh;
+      overflow-y: auto;
 
       section {
         margin-bottom: 2rem;

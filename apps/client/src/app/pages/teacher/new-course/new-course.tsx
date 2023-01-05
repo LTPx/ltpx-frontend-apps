@@ -25,9 +25,9 @@ const tabs = [
   {text: 'Informacion General'},
   {text: 'Contenidos'},
   {text: 'Agendar Clases'},
-  {text: 'Test'},
-  {text: 'Logros'},
-  {text: 'Settings'},
+  // {text: 'Test'},
+  // {text: 'Logros'},
+  // {text: 'Settings'},
 ];
 
 export function NewCourse(props: NewCourseProps) {
@@ -102,9 +102,11 @@ export function NewCourse(props: NewCourseProps) {
               }}/>
             </section>
             <section>
-              <TeacherClasses/>
+              <TeacherClasses onChange={()=>{
+
+              }}/>
             </section>
-            <section>
+            {/* <section>
               <Quiz/>
             </section>
             <section>
@@ -112,7 +114,7 @@ export function NewCourse(props: NewCourseProps) {
             </section>
             <section>
               <CourseSettings/>
-            </section>
+            </section> */}
           </div>
         </div>
       </form>

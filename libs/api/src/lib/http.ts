@@ -1,5 +1,7 @@
 import axios from 'axios';
-import { LOCAL_API_URL } from "./api";
+import { getApiUrl } from "./api";
+
+const API = getApiUrl();
 
 export const createInstance = ( api_url: string ) => {
   const auth_token = sessionStorage.getItem("auth_token");
@@ -17,6 +19,4 @@ export const setTokenAxios = (headers: any) => {
   }
 }
 
-export const _http = createInstance(LOCAL_API_URL);
-
-
+export const _http = createInstance(API);

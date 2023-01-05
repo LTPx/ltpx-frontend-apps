@@ -1,3 +1,5 @@
+export * from './lib/input-text-status/input-text-status';
+export * from './lib/change-password-form/change-password-form';
 export * from './lib/user-account-form/user-account-form';
 export * from './lib/dropdown/dropdown';
 export * from './lib/banner-notification/banner-notification';

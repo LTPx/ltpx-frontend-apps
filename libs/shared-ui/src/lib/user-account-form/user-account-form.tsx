@@ -4,6 +4,9 @@ import * as Yup from 'yup';
 import Input from '../input/input';
 import Button, { ColorsButton, TypeButton } from '../button/button';
 import { IUserAccount } from '@ltpx-frontend-apps/api';
+import InputTextStatus, {
+  StatusInputText,
+} from '../input-text-status/input-text-status';
 /* eslint-disable-next-line */
 
 export interface UserAccountFormProps {
@@ -25,7 +28,8 @@ export function UserAccountForm(props: UserAccountFormProps) {
       email: '',
     },
     validationSchema: Yup.object({
-      fullName: Yup.string().required('Nombre completo es obligatorio'),
+      fullName: Yup.string().required('Nombre completo obligatorio'),
+      email: Yup.string().required('Correo electrónico obligatorio'),
     }),
     onSubmit: (data) => {
       onSubmit(data);
@@ -39,16 +43,24 @@ export function UserAccountForm(props: UserAccountFormProps) {
           <label>Información General</label>
           <div className={styles['general-grid']}>
             <div className={styles['fields']}>
-              <Input
-                label="Nombre completo"
-                name="fullName"
-                placeholder="Carlos Huerta"
-                onChange={(e: any) => {
-                  formik.handleChange(e);
-                }}
-                value={formik.values.fullName}
-                onBlur={formik.handleBlur}
-              />
+              <div>
+                <Input
+                  label="Nombre completo"
+                  name="fullName"
+                  placeholder="Carlos Huerta"
+                  onChange={(e: any) => {
+                    formik.handleChange(e);
+                  }}
+                  value={formik.values.fullName}
+                  onBlur={formik.handleBlur}
+                />
+                {formik.touched.fullName && formik.errors.fullName ? (
+                  <InputTextStatus
+                    status={StatusInputText.error}
+                    text={formik.errors.fullName}
+                  />
+                ) : null}
+              </div>
               <Input
                 label="Nombre de usuario"
                 name="username"
@@ -59,17 +71,25 @@ export function UserAccountForm(props: UserAccountFormProps) {
                 value={formik.values.username}
                 onBlur={formik.handleBlur}
               />
-              <Input
-                label="Correo electrónico"
-                type="email"
-                name="email"
-                placeholder="myemail@example.com"
-                onChange={(e: any) => {
-                  formik.handleChange(e);
-                }}
-                value={formik.values.email}
-                onBlur={formik.handleBlur}
-              />
+              <div>
+                <Input
+                  label="Correo electrónico"
+                  type="email"
+                  name="email"
+                  placeholder="myemail@example.com"
+                  onChange={(e: any) => {
+                    formik.handleChange(e);
+                  }}
+                  value={formik.values.email}
+                  onBlur={formik.handleBlur}
+                />
+                {formik.touched.email && formik.errors.email ? (
+                  <InputTextStatus
+                    status={StatusInputText.error}
+                    text={formik.errors.email}
+                  />
+                ) : null}
+              </div>
               <Input
                 label="Teléfono"
                 name="phone"

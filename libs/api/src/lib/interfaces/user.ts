@@ -57,3 +57,9 @@ export interface IUserAccount {
   birth: string;
   email: string;
 }
+
+export interface INewPassword {
+  currentPassword: string;
+  newPassword: string;
+  confirmPassword: string;
+}

@@ -1,7 +1,5 @@
 import styles from './account.module.scss';
-import { useFormik } from 'formik';
-import * as Yup from 'yup';
-import { Button, ColorsButton, Input, TypeButton, UserAccountForm } from '@ltpx-frontend-apps/shared-ui';
+import { UserAccountForm } from '@ltpx-frontend-apps/shared-ui';
 import { IUserAccount } from '@ltpx-frontend-apps/api';
 
 /* eslint-disable-next-line */

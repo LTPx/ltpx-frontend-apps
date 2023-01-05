@@ -1,3 +1,4 @@
+export * from './lib/user-account-form/user-account-form';
 export * from './lib/dropdown/dropdown';
 export * from './lib/banner-notification/banner-notification';
 export * from './lib/not-found/not-found';

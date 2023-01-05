@@ -46,3 +46,14 @@ export interface ICurrentUser {
   initial_register: TypeAccounts;
   teacher_account?: StatusTeacherAccount;
 }
+
+export interface IUserAccount {
+  fullName: string;
+  username: string;
+  phone: string;
+  country: string;
+  city: string;
+  address: string;
+  birth: string;
+  email: string;
+}

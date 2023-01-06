@@ -13,7 +13,6 @@ export function Dropdown(props: DropdownProps) {
 
   useEffect(() => {
     if (mainElement.current?.offsetWidth) {
-      console.log('entro');
       setPosition();
     }
     return () => {

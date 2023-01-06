@@ -1,3 +1,4 @@
+export * from './lib/menu/menu';
 export * from './lib/day-time-picker/day-time-picker';
 export * from './lib/time-picker/time-picker';
 export * from './lib/dropdown/dropdown';

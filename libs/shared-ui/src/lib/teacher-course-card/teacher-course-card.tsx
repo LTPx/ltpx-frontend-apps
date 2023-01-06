@@ -1,6 +1,8 @@
 import { StatusCourse } from '@ltpx-frontend-apps/api';
 import { NavLink } from 'react-router-dom';
+import Dropdown from '../dropdown/dropdown';
 import Icon from '../icon/icon';
+import Menu from '../menu/menu';
 import Tag, { ColorsTag } from '../tag/tag';
 import styles from './teacher-course-card.module.scss';
 
@@ -26,7 +28,7 @@ export function TeacherCourseCard(props: TeacherCourseCardProps) {
     category,
     percentageRate,
     percentageLearner,
-    url
+    url,
   } = props;
   return (
     <div className={styles['container']}>
@@ -38,7 +40,13 @@ export function TeacherCourseCard(props: TeacherCourseCardProps) {
           }
           icon={status === StatusCourse.publish ? 'globe' : 'edit'}
         />
-        <Icon icon={'menu'} size={15} />
+        <Dropdown>
+          <Icon icon={'menu'} size={15} />
+          <Menu items={[
+            {text: 'Editar curso', icon:'pencil'},
+            {text: 'Ver curso', icon:'user-group'}
+          ]}/>
+        </Dropdown>
       </div>
       <NavLink to={url}>
         <div className={styles['content']}>

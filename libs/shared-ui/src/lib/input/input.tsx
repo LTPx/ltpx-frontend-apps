@@ -26,6 +26,8 @@ export interface InputProps {
   onKeyDown?: any,
   addonInput?: AddonSymbolInput;
   description?: string;
+  min?: any;
+  max?: any;
 }
 
 export function Input(props: InputProps) {
@@ -36,6 +38,8 @@ export function Input(props: InputProps) {
     label,
     addonInput,
     description,
+    min,
+    max,
     ...other
   } = props;
 
@@ -72,6 +76,7 @@ export function Input(props: InputProps) {
         <input
           className={`${css['input-box']} ${inputClassesPosition}`}
           {...other}
+          min={min}
           onChange={e => onChange && onChange(e)}
           onKeyDown={e => onKeyDown && onKeyDown(e)}
         />

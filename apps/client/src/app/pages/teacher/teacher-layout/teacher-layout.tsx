@@ -72,6 +72,11 @@ export function TeacherLayout(props: TeacherLayoutProps) {
               email={user.email}
               links={[
                 {
+                  icon: 'arrows-horizontal',
+                  text: 'Cambiar a Usuario',
+                  onClick: () => {console.log('switch to default view')}
+                },
+                {
                   icon: 'log-out',
                   text: 'Cerrar Session',
                   onClick: () => {logoutSession()}

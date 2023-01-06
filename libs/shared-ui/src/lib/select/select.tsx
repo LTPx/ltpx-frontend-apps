@@ -12,10 +12,11 @@ export interface SelectProps {
   label?: string;
   onChange?: (selectedOption: OptionSelect) => void;
   selected?: OptionSelect;
+  className?: string;
 }
 
 export function Select(props: SelectProps) {
-  const { options, label, onChange, selected} = props;
+  const { options, label, onChange, selected, className } = props;
   const initialSelectedOption = selected?.value || options[0].value;
   const [selectedOption, setSelectedOption] = useState(initialSelectedOption)
 
@@ -30,7 +31,7 @@ export function Select(props: SelectProps) {
       { label && (
         <label className={styles['label']}>{label}</label>
       )}
-      <select className={styles['style-select']}
+      <select className={`${styles['style-select']} ${className}`}
         onChange={ (e: any) => { handleChange(e) }}
         value={selectedOption}
       >

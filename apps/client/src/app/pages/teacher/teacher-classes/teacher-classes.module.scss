@@ -16,22 +16,13 @@
   }
 }
 
+.days-config {
+  margin-top: 1rem;
+}
+
 .days {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
   margin-top: 1rem;
-
-  .day {
-    background-color: #f7f7f7;
-    padding: 0.5rem 1rem;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-
-    &.selected {
-      // background-color: red;
-    }
-  }
 }

@@ -1,4 +1,4 @@
-import { Icon, Select } from '@ltpx-frontend-apps/shared-ui';
+import { DayTimePicker, Icon, Input, Select, TimePicker } from '@ltpx-frontend-apps/shared-ui';
 import { useState } from 'react';
 import styles from './teacher-classes.module.scss';
 
@@ -145,28 +145,18 @@ export function TeacherClasses(props: TeacherClassesProps) {
              </div>
              minutos
           </div>
-          <div className={styles['range']}>
-            Nos reuniremos
-            <div className="min">
-              <Select options={days}/>
+          {/* <div className={styles['days-config']}>
+            <label>Se reuniran los dias</label>
+            <div className={styles['days']}>
+              { daysConfig.map((day, index)=>(
+                <DayTimePicker name={day.name} key={index}/>
+              ))}
             </div>
-             dia(s) a la semana, por
-             <div className="max">
-              <Select options={numbers}/>
-             </div>
-             semanas
           </div>
-          <div className={styles['days']}>
-            { daysConfig.map((day, index)=>(
-              <div className={`${styles['day']} ${day.selected ? styles['selected'] : ''}`}
-                key={index}
-                onClick={()=>{selectDay(index)}}
-              >
-                <Icon icon={`${day.selected ? 'checkbox' : 'un-checkbox'}`} size={15}/>
-                {day.name}
-              </div>
-            ))}
-          </div>
+          <div className={styles['days-config']}>
+            <label>A partir de la fecha</label>
+             <Input type="date" name="party" min="2023-01-04"/>
+          </div> */}
         </div>
       </div>
     </div>
@@ -174,3 +164,20 @@ export function TeacherClasses(props: TeacherClassesProps) {
 }
 
 export default TeacherClasses;
+
+
+// [{
+//   condition: 'no mandatory',
+//   min: 3,
+//   max: 5,
+//   weeks: 2,
+//   timeMin: 45,
+//   meetings: [
+//     { date: 'Monday 9', hour: '9am'},
+//     { date: 'Wednesday 11', hour: '9am'},
+//     { date: 'Friday 13', hour: '9am'},
+//     { date: 'Monday 16', hour: '9am'},
+//     { date: 'Wednesday 17', hour: '9am'},
+//     { date: 'Friday 18', hour: '9am'},
+//   ]
+// }]

@@ -25,7 +25,7 @@ export function CourseDetails(props: CourseDetailsProps) {
 
   const addToCart = () => {
     // addCourseToCart(courseDetails.course);
-    addCourseCart(courseDetails.course);
+    // addCourseCart(courseDetails.course);
   };
 
   const enrolled = () => {

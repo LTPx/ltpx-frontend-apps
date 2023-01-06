@@ -1,6 +1,11 @@
 export enum StatusCourse {
-  publish = 'publish',
+  publish = 'published',
   draft = 'draft',
+}
+
+export interface IContentCourse {
+  title: string;
+  description: string;
 }
 export interface ICourse {
   id: string;
@@ -14,6 +19,9 @@ export interface ICourse {
   stars?: number;
   status?: StatusCourse;
   enrollments_count?: number;
+  language: string;
+  level: string;
+  contents: IContentCourse[];
 }
 
 export interface ICourseContent {
@@ -27,6 +35,7 @@ export interface INewCourse {
   description: string;
   category: string;
   language: string;
+  level: string;
   learn_goals: string;
   requirements: string;
   contents?: ICourseContent[];

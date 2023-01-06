@@ -1,7 +1,6 @@
 import { ICourse, getTeacherCourses, StatusCourse } from '@ltpx-frontend-apps/api';
 import { Button, ColorsButton, InputSearch, Select, TeacherCourseCard } from '@ltpx-frontend-apps/shared-ui';
 import { useEffect, useState } from 'react';
-import { NavLink } from 'react-router-dom';
 import styles from './teacher-courses.module.scss';
 
 /* eslint-disable-next-line */
@@ -42,21 +41,17 @@ export function TeacherCourses(props: TeacherCoursesProps) {
   const CoursesList = () => (
     <div className={styles['courses']}>
       { courses.map((course, index)=>(
-        <NavLink key={index}
-          to={`/teacher/courses/${course.id}`}
-          className={`${styles['link']} link-wrapper`}
-        >
-          <TeacherCourseCard
-            key={index}
-            status={course.status || StatusCourse.draft}
-            image={'https://designshack.net/wp-content/uploads/placeholder-image-368x246.png'}
-            title={course.title}
-            learners={course.enrollments_count || 0}
-            category={course.category}
-            percentageRate={0}
-            percentageLearner={0}
-          />
-        </NavLink>
+        <TeacherCourseCard
+          key={index}
+          status={course.status || StatusCourse.draft}
+          image={'https://designshack.net/wp-content/uploads/placeholder-image-368x246.png'}
+          title={course.title}
+          learners={course.enrollments_count || 0}
+          category={course.category}
+          percentageRate={0}
+          percentageLearner={0}
+          url={`/teacher/courses/${course.id}`}
+        />
       )) }
     </div>
   )

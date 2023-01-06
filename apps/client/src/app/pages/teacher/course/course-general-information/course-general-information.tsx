@@ -1,4 +1,4 @@
-import { FileUpload, Input, Select } from '@ltpx-frontend-apps/shared-ui';
+import { FileUpload, Input, Select, TextArea } from '@ltpx-frontend-apps/shared-ui';
 import { FormikValues } from 'formik';
 import styles from './course-general-information.module.scss';
 
@@ -52,13 +52,14 @@ export function CourseGeneralInformation(props: CourseGeneralInformationProps) {
           value={formik.values.title}
           onBlur={formik.handleBlur}
         />
-        <Input
+        <TextArea
           label='Descripcion del curso'
           placeholder='Un breve resumen de lo que trata este curso'
           name="description"
           onChange={(e: any) => { formik.handleChange(e); }}
           value={formik.values.description}
           onBlur={formik.handleBlur}
+          rows={8}
         />
       </div>
       <div className={styles['selects-form']}>
@@ -79,21 +80,23 @@ export function CourseGeneralInformation(props: CourseGeneralInformationProps) {
         />
       </div>
       <div className={styles['text']}>
-        <Input
+        <TextArea
           placeholder='Pueden se puntos claves del curso'
           label='Que aprenderan los estudiantes?'
           name="goals"
           onChange={(e: any) => { formik.handleChange(e); }}
           value={formik.values.goals}
           onBlur={formik.handleBlur}
+          rows={5}
         />
-        <Input
+        <TextArea
           label='Requerimietos'
           placeholder='Los estudiantes necesitan algun recurso antes de tomar este curso'
           name="requirements"
           onChange={(e: any) => { formik.handleChange(e); }}
           value={formik.values.requirements}
           onBlur={formik.handleBlur}
+          rows={5}
         />
       </div>
     </div>

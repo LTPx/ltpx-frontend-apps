@@ -47,16 +47,15 @@ export function NewCourse(props: NewCourseProps) {
       requirements: '',
     },
     validationSchema: Yup.object({
-      title: Yup.string().required('es obligatorio'),
-      description: Yup.string().required('es obligatorio'),
-      category: Yup.string().required('es obligatorio'),
-      language: Yup.string().required('es obligatorio'),
-      level: Yup.string().required('es obligatorio'),
-      goals: Yup.string().required('es obligatorio'),
-      requirements: Yup.string().required('es obligatorio'),
+      // title: Yup.string().required('es obligatorio'),
+      // description: Yup.string().required('es obligatorio'),
+      // category: Yup.string().required('es obligatorio'),
+      // language: Yup.string().required('es obligatorio'),
+      // level: Yup.string().required('es obligatorio'),
+      // goals: Yup.string().required('es obligatorio'),
+      // requirements: Yup.string().required('es obligatorio'),
     }),
     onSubmit: async formData => {
-      debugger
       const courseData = {...formData, ...{ learn_goals: formData.goals, contents: contents}}
       const { saved, data } = await createCourse(courseData);
       if (saved) {

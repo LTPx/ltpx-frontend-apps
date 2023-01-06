@@ -1,4 +1,5 @@
 import { StatusCourse } from '@ltpx-frontend-apps/api';
+import { NavLink } from 'react-router-dom';
 import Icon from '../icon/icon';
 import Tag, { ColorsTag } from '../tag/tag';
 import styles from './teacher-course-card.module.scss';
@@ -13,6 +14,7 @@ export interface TeacherCourseCardProps {
   category: string;
   percentageRate: number;
   percentageLearner: number;
+  url: string;
 }
 
 export function TeacherCourseCard(props: TeacherCourseCardProps) {
@@ -24,6 +26,7 @@ export function TeacherCourseCard(props: TeacherCourseCardProps) {
     category,
     percentageRate,
     percentageLearner,
+    url
   } = props;
   return (
     <div className={styles['container']}>
@@ -37,20 +40,22 @@ export function TeacherCourseCard(props: TeacherCourseCardProps) {
         />
         <Icon icon={'menu'} size={15} />
       </div>
-      <div className={styles['content']}>
-        <img src={image} alt="" />
-        <div className={styles['information']}>
-          <h4>{title}</h4>
-          <div className={styles['describe']}>
-            <h5>
-              <Icon icon={'user'} size={10}></Icon> {learners} estudiantes
-            </h5>
-            <h5>
-              <Icon icon={'box-unpacked'} size={10}></Icon> {category}
-            </h5>
+      <NavLink to={url}>
+        <div className={styles['content']}>
+          <img src={image} alt="" />
+          <div className={styles['information']}>
+            <h4>{title}</h4>
+            <div className={styles['describe']}>
+              <h5>
+                <Icon icon={'user'} size={10}></Icon> {learners} estudiantes
+              </h5>
+              <h5>
+                <Icon icon={'box-unpacked'} size={10}></Icon> {category}
+              </h5>
+            </div>
           </div>
         </div>
-      </div>
+      </NavLink>
       <div className={styles['end-content']}>
         {learners > 0 ? (
           <>
@@ -72,7 +77,7 @@ export function TeacherCourseCard(props: TeacherCourseCardProps) {
         ) : (
           <div className={styles['course-no-yet']}>
             <Icon icon="browser" size={15}></Icon>
-            <h5>This course have no stats yet</h5>
+            <h5>Este curso no tiene metricas aun</h5>
           </div>
         )}
       </div>

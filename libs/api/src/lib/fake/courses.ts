@@ -11,7 +11,10 @@ const createRandomCourse = ():ICourse => (
     price: faker.datatype.number({min: 1000, max: 5000}),
     duration: faker.datatype.number(60),
     lessons: faker.datatype.number(8),
-    stars: faker.datatype.number(5)
+    stars: faker.datatype.number(5),
+    level: 'begginer',
+    language: 'es',
+    contents: []
   }
 )
 

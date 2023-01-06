@@ -1,3 +1,4 @@
+export * from './lib/login-form/login-form';
 export * from './lib/input-text-status/input-text-status';
 export * from './lib/change-password-form/change-password-form';
 export * from './lib/user-account-form/user-account-form';

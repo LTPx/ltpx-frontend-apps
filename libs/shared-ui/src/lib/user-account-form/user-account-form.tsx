@@ -29,7 +29,9 @@ export function UserAccountForm(props: UserAccountFormProps) {
     },
     validationSchema: Yup.object({
       fullName: Yup.string().required('Nombre completo es obligatorio'),
-      email: Yup.string().required('Correo electrónico es obligatorio'),
+      email: Yup.string()
+        .email('Debe ser un correo electrónico válido')
+        .required('Correo electrónico es obligatorio'),
     }),
     onSubmit: (data) => {
       onSubmit(data);

@@ -12,7 +12,7 @@ const clickFunction = () => {
   console.log('click');
 };
 
-export const Card = () => {
+export const FormChangePassword = () => {
   return (
     <div>
       <ChangePasswordForm onSubmit={clickFunction}/>

@@ -23,8 +23,8 @@ export function ChangePasswordForm(props: ChangePasswordFormProps) {
       confirmPassword: '',
     },
     validationSchema: Yup.object({
-      currentPassword: Yup.string().required('Contraseña actual obligatoria'),
-      newPassword: Yup.string().required('Nueva contraseña requerida'),
+      currentPassword: Yup.string().required('Contraseña actual es obligatoria'),
+      newPassword: Yup.string().required('Nueva contraseña es requerida'),
       confirmPassword: Yup.string().test(
         'Las contraseñas coinciden',
         'Tu nueva contraseña no coincide',
@@ -43,7 +43,7 @@ export function ChangePasswordForm(props: ChangePasswordFormProps) {
       <form>
         <div className={styles['general']}>
           <Input
-            label="Ingresar contraseña actual"
+            label="Ingresa tu contraseña actual"
             name="currentPassword"
             type="password"
             placeholder="********"

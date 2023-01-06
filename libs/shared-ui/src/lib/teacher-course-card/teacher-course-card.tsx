@@ -1,20 +1,16 @@
+import { StatusCourse } from '@ltpx-frontend-apps/api';
 import Icon from '../icon/icon';
 import Tag, { ColorsTag } from '../tag/tag';
 import styles from './teacher-course-card.module.scss';
 
 /* eslint-disable-next-line */
-export enum StatusCourse {
-  publish = 'publish',
-  draft = 'draft',
-}
 
 export interface TeacherCourseCardProps {
   status: StatusCourse;
-  icon: string;
   image: string;
   title: string;
   learners: number;
-  design: string;
+  category: string;
   percentageRate: number;
   percentageLearner: number;
 }
@@ -22,11 +18,10 @@ export interface TeacherCourseCardProps {
 export function TeacherCourseCard(props: TeacherCourseCardProps) {
   const {
     status,
-    icon,
     image,
     title,
     learners,
-    design,
+    category,
     percentageRate,
     percentageLearner,
   } = props;
@@ -38,7 +33,7 @@ export function TeacherCourseCard(props: TeacherCourseCardProps) {
           color={
             status === StatusCourse.publish ? ColorsTag.green : ColorsTag.gray
           }
-          icon={icon}
+          icon={status === StatusCourse.publish ? 'globe' : 'edit'}
         />
         <Icon icon={'menu'} size={15} />
       </div>
@@ -48,10 +43,10 @@ export function TeacherCourseCard(props: TeacherCourseCardProps) {
           <h4>{title}</h4>
           <div className={styles['describe']}>
             <h5>
-              <Icon icon={'user'} size={10}></Icon> {learners} learner
+              <Icon icon={'user'} size={10}></Icon> {learners} estudiantes
             </h5>
             <h5>
-              <Icon icon={'box-unpacked'} size={10}></Icon> {design}
+              <Icon icon={'box-unpacked'} size={10}></Icon> {category}
             </h5>
           </div>
         </div>

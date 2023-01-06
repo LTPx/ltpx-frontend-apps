@@ -1,5 +1,5 @@
-import { ICourse, getTeacherCourses } from '@ltpx-frontend-apps/api';
-import { Button, ColorsButton, CourseCard, InputSearch, Select } from '@ltpx-frontend-apps/shared-ui';
+import { ICourse, getTeacherCourses, StatusCourse } from '@ltpx-frontend-apps/api';
+import { Button, ColorsButton, InputSearch, Select, TeacherCourseCard } from '@ltpx-frontend-apps/shared-ui';
 import { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import styles from './teacher-courses.module.scss';
@@ -9,14 +9,12 @@ export interface TeacherCoursesProps {}
 
 export function TeacherCourses(props: TeacherCoursesProps) {
   const [courses, setCourses] = useState<ICourse[]>([]);
-  console.log('print');
 
   useEffect(() => {
     let mounted = true;
     try {
       getTeacherCourses().then((courses)=> {
         if (mounted) {
-          console.log('loaded');
           setCourses(courses);
         }
       });
@@ -38,7 +36,6 @@ export function TeacherCourses(props: TeacherCoursesProps) {
     <div className={styles['empty-state']}>
       <h4>Aun no has creado ningun curso</h4>
       <h5>porque no empezamos creado uno</h5>
-      {/* <Button title={'Crear Curso'} color={ColorsButton.primary}/> */}
     </div>
   )
 
@@ -49,15 +46,15 @@ export function TeacherCourses(props: TeacherCoursesProps) {
           to={`/teacher/courses/${course.id}`}
           className={`${styles['link']} link-wrapper`}
         >
-          <CourseCard
+          <TeacherCourseCard
             key={index}
-            image={course.image}
-            category={course.category}
+            status={course.status || StatusCourse.draft}
+            image={'https://designshack.net/wp-content/uploads/placeholder-image-368x246.png'}
             title={course.title}
-            price={course.price}
-            duration={course.duration}
-            lessons={course.lessons}
-            stars={course.stars}
+            learners={course.enrollments_count || 0}
+            category={course.category}
+            percentageRate={0}
+            percentageLearner={0}
           />
         </NavLink>
       )) }

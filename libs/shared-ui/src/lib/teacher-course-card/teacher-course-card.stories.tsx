@@ -13,26 +13,24 @@ export const Default = () => {
     <div>
       <TeacherCourseCard
         status={StatusCourse.publish}
-        icon={'globe'}
         image={
           'https://images.unsplash.com/photo-1561089489-f13d5e730d72?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8ODh8fHRlYWNoZXJ8ZW58MHx8MHx8&auto=format&fit=crop&w=800&q=60'
         }
         title={'Master Digital Product Design'}
         learners={1}
-        design={'desing'}
+        category={'desing'}
         percentageRate={60}
         percentageLearner={40}
       />
       <br />
       <TeacherCourseCard
         status={StatusCourse.draft}
-        icon={'edit'}
         image={
           'https://images.unsplash.com/photo-1588075592446-265fd1e6e76f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OTR8fHRlYWNoZXJ8ZW58MHx8MHx8&auto=format&fit=crop&w=800&q=60'
         }
         title={'Master Digital Product Design'}
         learners={0}
-        design={'desing'}
+        category={'desing'}
         percentageRate={0}
         percentageLearner={0}
       />

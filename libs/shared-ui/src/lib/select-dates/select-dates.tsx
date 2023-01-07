@@ -53,7 +53,7 @@ export function SelectDates(props: SelectDatesProps) {
           <Icon icon='close' size={18} onClick={() => removeForm(index)}/>
         </div>
       ))}
-      <h4 onClick={addNewDate}> + Nueva Fecha</h4>
+      <h4 className={styles['add-date']} onClick={addNewDate}> + Nueva Fecha</h4>
     </div>
   );
 }

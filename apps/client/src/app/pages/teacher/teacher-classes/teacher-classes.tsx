@@ -1,4 +1,4 @@
-import { BannerNotification, BannerType, DayTimePicker, Icon, Input, Select, SelectDates, TimePicker } from '@ltpx-frontend-apps/shared-ui';
+import { BannerNotification, BannerType, Classroom, ClassroomForm, DayTimePicker, Icon, Input, Select, SelectDates, TimePicker } from '@ltpx-frontend-apps/shared-ui';
 import { useState } from 'react';
 import styles from './teacher-classes.module.scss';
 
@@ -101,9 +101,9 @@ export function TeacherClasses(props: TeacherClassesProps) {
   //   setDaysConfig(days);
   // }
 
-  // const filterSelectedDays = () => {
-  //   return daysConfig.filter((day)=> day.selected);
-  // }
+  const handleClasses = (data: Classroom) => {
+    console.log(data);
+  }
 
   return (
     <div className={styles['container']}>
@@ -115,7 +115,7 @@ export function TeacherClasses(props: TeacherClassesProps) {
         <Select
           label='Condiciones de aprobacion'
           options={classesTypeOptions}
-          onChange={(option)=>{setSelectedTypeClass(option.value)}}
+          onChange={(option)=>{setSelectedTypeClass(option.value.toString())}}
         />
         <div className={styles['render-content']}>
           { selectedTypeClass === TeacherClassType.none && (
@@ -130,39 +130,7 @@ export function TeacherClasses(props: TeacherClassesProps) {
           )}
           { selectedTypeClass === TeacherClassType.mandatory && (
             <>
-              <div className={styles['field-form']}>
-                <label>Tamaño de la clase</label>
-                <div className={styles['range']}>
-                  De
-                  <div className="min">
-                    <Select options={numbers}/>
-                   </div>
-                   a
-                   <div className="max">
-                    <Select options={numbers}/>
-                   </div>
-                   Estudiantes
-                </div>
-              </div>
-              <div className={styles['field-form']}>
-                <label>Duracion de la clases</label>
-                <div className={styles['range']}>
-                  Cada clase durara
-                   <div className="min">
-                    <Select options={hours}/>
-                   </div>
-                   hora(s), con
-                   <div className="max">
-                    <Select options={minutes}/>
-                   </div>
-                   minutos
-                </div>
-              </div>
-              <div className={styles['field-form']}>
-                <label>Las clases seran en estas fechas</label>
-                {/* <Input type="date" name="party" min="2023-01-04"/> */}
-                <SelectDates/>
-              </div>
+              <ClassroomForm onChange={(data)=>{handleClasses(data)}}/>
             </>
           )}
         </div>

@@ -1,30 +1,30 @@
-import { DayTimePicker, Icon, Input, Select, TimePicker } from '@ltpx-frontend-apps/shared-ui';
+import { BannerNotification, BannerType, DayTimePicker, Icon, Input, Select, SelectDates, TimePicker } from '@ltpx-frontend-apps/shared-ui';
 import { useState } from 'react';
 import styles from './teacher-classes.module.scss';
 
-export enum ClassesSchedule {
-  one = 'one-time',
-  multi = 'multi-day',
-  ongoing = 'ongoing',
+export enum TeacherClassType {
+  none = 'none',
+  mandatory = 'mandatory',
   flexible = 'flexible',
+  customize = 'customize',
 }
 
-const classesScheduleOptions = [
+const classesTypeOptions = [
   {
-    value: ClassesSchedule.one,
-    text: 'Una sola vez'
+    value: TeacherClassType.none,
+    text: 'Este curso no requiere de clases'
   },
   {
-    value: ClassesSchedule.multi,
-    text: 'Varios dias a la semana'
+    value: TeacherClassType.mandatory,
+    text: 'Este curso necesita clases y que los estudiantes asistan'
   },
   {
-    value: ClassesSchedule.ongoing,
-    text: 'Varios dias a la semana no obligatorio a asistir'
+    value: TeacherClassType.flexible,
+    text: 'Este curso necesita clases pero no es necesario que los estudiantes asista ah todas las clases'
   },
   {
-    value: ClassesSchedule.flexible,
-    text: 'Se acuerda con el estudiante los horarios'
+    value: TeacherClassType.customize,
+    text: 'Se acuerda con el estudiante las clases y horarios'
   }
 ];
 
@@ -53,24 +53,17 @@ const days = [
 
 const hours = [
   { value: '0', text: '0' },
-  { value: '1', text: '1' },
-  { value: '2', text: '2' },
-  { value: '3', text: '3' },
-  { value: '4', text: '4' },
+  { value: '60', text: '1' },
+  { value: '120', text: '2' },
+  { value: '180', text: '3' },
+  { value: '240', text: '4' },
 ];
 
 const minutes = [
   { value: '00', text: '00' },
-  { value: '05', text: '05' },
-  { value: '10', text: '10' },
   { value: '15', text: '15' },
-  { value: '20', text: '20' },
-  { value: '25', text: '25' },
   { value: '30', text: '30' },
-  { value: '35', text: '35' },
-  { value: '40', text: '40' },
-  { value: '50', text: '50' },
-  { value: '55', text: '55' },
+  { value: '45', text: '45' },
 ];
 
 const daysWeek = [
@@ -95,20 +88,22 @@ export interface TeacherClassesProps {
 }
 
 export function TeacherClasses(props: TeacherClassesProps) {
-  const [daysConfig, setDaysConfig] = useState(daysWeek);
-  const [daysSelected, setDaysSelected] = useState<DayConfig[]>([]);
+  const [selectedTypeClass, setSelectedTypeClass] = useState<string>(TeacherClassType.mandatory);
 
-  const selectDay = (index: number) => {
-    let days = [...daysConfig];
-    days[index].selected = !days[index].selected;
-    const myDays = filterSelectedDays();
-    setDaysSelected(myDays);
-    setDaysConfig(days);
-  }
+  // const [daysConfig, setDaysConfig] = useState(daysWeek);
+  // const [daysSelected, setDaysSelected] = useState<DayConfig[]>([]);
 
-  const filterSelectedDays = () => {
-    return daysConfig.filter((day)=> day.selected);
-  }
+  // const selectDay = (index: number) => {
+  //   let days = [...daysConfig];
+  //   days[index].selected = !days[index].selected;
+  //   const myDays = filterSelectedDays();
+  //   setDaysSelected(myDays);
+  //   setDaysConfig(days);
+  // }
+
+  // const filterSelectedDays = () => {
+  //   return daysConfig.filter((day)=> day.selected);
+  // }
 
   return (
     <div className={styles['container']}>
@@ -117,8 +112,71 @@ export function TeacherClasses(props: TeacherClassesProps) {
         <h4 className='muted'>Configura y agenda clases con tus estudiantes</h4>
       </div>
       <div className={styles['content-form']}>
-        <Select options={classesScheduleOptions}  label='Tipo de clase'/>
-        <div className={styles['field-form']}>
+        <Select
+          label='Condiciones de aprobacion'
+          options={classesTypeOptions}
+          onChange={(option)=>{setSelectedTypeClass(option.value)}}
+        />
+        <div className={styles['render-content']}>
+          { selectedTypeClass === TeacherClassType.none && (
+            <BannerNotification type={BannerType.info}>
+              <p>No se requiere de clases para que los estudiante apruebe este curso</p>
+            </BannerNotification>
+          )}
+          { selectedTypeClass === TeacherClassType.customize && (
+            <BannerNotification type={BannerType.info}>
+              <p>Este curso require de clases que se acordaran con los estudiante</p>
+            </BannerNotification>
+          )}
+          { selectedTypeClass === TeacherClassType.mandatory && (
+            <>
+              <div className={styles['field-form']}>
+                <label>Tamaño de la clase</label>
+                <div className={styles['range']}>
+                  De
+                  <div className="min">
+                    <Select options={numbers}/>
+                   </div>
+                   a
+                   <div className="max">
+                    <Select options={numbers}/>
+                   </div>
+                   Estudiantes
+                </div>
+              </div>
+              <div className={styles['field-form']}>
+                <label>Duracion de la clases</label>
+                <div className={styles['range']}>
+                  Cada clase durara
+                   <div className="min">
+                    <Select options={hours}/>
+                   </div>
+                   hora(s), con
+                   <div className="max">
+                    <Select options={minutes}/>
+                   </div>
+                   minutos
+                </div>
+              </div>
+              <div className={styles['field-form']}>
+                <label>Las clases seran en estas fechas</label>
+                {/* <Input type="date" name="party" min="2023-01-04"/> */}
+                <SelectDates/>
+              </div>
+            </>
+          )}
+        </div>
+
+
+
+
+
+
+
+
+
+
+        {/* <div className={styles['field-form']}>
           <label>Tamaño de la clase</label>
           <div className={styles['range']}>
             De
@@ -145,7 +203,7 @@ export function TeacherClasses(props: TeacherClassesProps) {
              </div>
              minutos
           </div>
-          {/* <div className={styles['days-config']}>
+          <div className={styles['days-config']}>
             <label>Se reuniran los dias</label>
             <div className={styles['days']}>
               { daysConfig.map((day, index)=>(
@@ -156,8 +214,8 @@ export function TeacherClasses(props: TeacherClassesProps) {
           <div className={styles['days-config']}>
             <label>A partir de la fecha</label>
              <Input type="date" name="party" min="2023-01-04"/>
-          </div> */}
-        </div>
+          </div>
+        </div> */}
       </div>
     </div>
   );

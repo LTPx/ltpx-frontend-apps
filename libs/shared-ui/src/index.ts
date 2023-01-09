@@ -1,3 +1,6 @@
+export * from './lib/group-select-option/group-select-option';
+export * from './lib/checkbox/checkbox';
+export * from './lib/review-course-form/review-course-form';
 export * from './lib/input-text-status/input-text-status';
 export * from './lib/change-password-form/change-password-form';
 export * from './lib/user-account-form/user-account-form';

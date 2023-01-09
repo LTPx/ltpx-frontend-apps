@@ -1,4 +1,4 @@
-import { IApplyTeachFields, StatusTeacherAccount } from '@ltpx-frontend-apps/api';
+import { ApplyTeachApiParams, StatusTeacherAccount } from '@ltpx-frontend-apps/api';
 import { useTeacher, useUser } from '../../../store';
 import ApplyTeacherForm from '../apply-teacher-form/apply-teacher-form';
 import styles from './teacher-apply.module.scss';
@@ -9,7 +9,7 @@ export interface TeacherApplyProps {}
 export function TeacherApply(props: TeacherApplyProps) {
   const { applyTeach, teacher_account } = useTeacher();
 
-  const handleSubmit = async (formData: IApplyTeachFields) => {
+  const handleSubmit = async (formData: ApplyTeachApiParams) => {
     const { accepted, data } = await applyTeach(formData);
     if ( accepted ) {
       console.log('teacher: ', data);
@@ -32,7 +32,7 @@ export function TeacherApply(props: TeacherApplyProps) {
     <div className={styles['container']}>
       { teacher_account === StatusTeacherAccount.review && <BannerNotification/> }
       { teacher_account === StatusTeacherAccount.unapplied && (
-        <ApplyTeacherForm onSubmitForm={(e: IApplyTeachFields)=>{handleSubmit(e)}}/>
+        <ApplyTeacherForm onSubmitForm={(e: ApplyTeachApiParams)=>{handleSubmit(e)}}/>
       )}
     </div>
   );

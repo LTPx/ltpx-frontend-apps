@@ -15,7 +15,7 @@ export interface ITeacher {
   status_account: StatusTeacherAccount;
 }
 
-export interface IApplyTeachFields {
+export interface ApplyTeachApiParams {
   name: string,
   phone: string,
   nationalId: string,

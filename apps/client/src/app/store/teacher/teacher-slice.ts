@@ -1,4 +1,4 @@
-import { applyToTeach, createCourse, IApplyTeachFields, INewCourse, IRegisterUser, ITeacher, registerTeacher, StatusTeacherAccount, TypeViews, UserResponse } from "@ltpx-frontend-apps/api";
+import { applyToTeach, createCourse, ApplyTeachApiParams, IRegisterUser, ITeacher, registerTeacher, StatusTeacherAccount, TypeViews, UserResponse, NewCourseApiParams } from "@ltpx-frontend-apps/api";
 import { StateCreator } from "zustand";
 import { StoreState } from "../store";
 
@@ -14,14 +14,14 @@ type TResponseLogin = {
 
 type TResponseCreateCourse = {
   saved: boolean;
-  data: INewCourse | any;
+  data: NewCourseApiParams | any;
 };
 
 export type TeacherSlice = {
   teacher_account: StatusTeacherAccount | null;
-  applyTeach: (params: IApplyTeachFields) => Promise<any>;
+  applyTeach: (params: ApplyTeachApiParams) => Promise<any>;
   registerTeacher: (params: IRegisterUser) => Promise<TResponseLogin>;
-  createCourse: (params: INewCourse) => Promise<TResponseCreateCourse>;
+  createCourse: (params: NewCourseApiParams) => Promise<TResponseCreateCourse>;
 }
 
 export const createTeacherSlice:
@@ -30,7 +30,7 @@ export const createTeacherSlice:
   [],
   TeacherSlice > = (set) => ({
     teacher_account: null,
-    applyTeach: async (params: IApplyTeachFields):Promise<TResponseApply> => {
+    applyTeach: async (params: ApplyTeachApiParams):Promise<TResponseApply> => {
       try {
         const teacher = await applyToTeach(params);
         const { status_account } = teacher;
@@ -53,7 +53,7 @@ export const createTeacherSlice:
         return { isLogin: false, data: error };
       }
     },
-    createCourse: async (params: INewCourse):Promise<TResponseCreateCourse> => {
+    createCourse: async (params: NewCourseApiParams):Promise<TResponseCreateCourse> => {
       try {
         const course = await createCourse(params);
         return { saved: true, data: course };

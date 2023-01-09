@@ -1,4 +1,4 @@
-import { getTeacherCourse, ICourse } from '@ltpx-frontend-apps/api';
+import { getTeacherCourse, TeacherCourse } from '@ltpx-frontend-apps/api';
 import { Tabs } from '@ltpx-frontend-apps/shared-ui';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
@@ -13,7 +13,7 @@ const tabs = [
 export interface TeacherCourseDetailProps {}
 
 export function TeacherCourseDetail(props: TeacherCourseDetailProps) {
-  const [course, setCourse] = useState<ICourse>();
+  const [course, setCourse] = useState<TeacherCourse>();
 
   const params = useParams();
   console.log(params)
@@ -52,7 +52,7 @@ export function TeacherCourseDetail(props: TeacherCourseDetailProps) {
       {course && (
         <>
           <div className={styles['cover']}>
-            <img src={course.image}></img>
+            <img src={course.cover}></img>
           </div>
           <h1>{course.title}</h1>
           <div className={styles['basic-info']}>

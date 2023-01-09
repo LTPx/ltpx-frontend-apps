@@ -1,4 +1,4 @@
-import { StatusCourse } from '@ltpx-frontend-apps/api';
+import { CourseStatus } from '@ltpx-frontend-apps/api';
 import { NavLink } from 'react-router-dom';
 import Dropdown from '../dropdown/dropdown';
 import Icon from '../icon/icon';
@@ -9,7 +9,7 @@ import styles from './teacher-course-card.module.scss';
 /* eslint-disable-next-line */
 
 export interface TeacherCourseCardProps {
-  status: StatusCourse;
+  status: CourseStatus;
   image: string;
   title: string;
   learners: number;
@@ -36,9 +36,9 @@ export function TeacherCourseCard(props: TeacherCourseCardProps) {
         <Tag
           text={status}
           color={
-            status === StatusCourse.publish ? ColorsTag.green : ColorsTag.gray
+            status === CourseStatus.publish ? ColorsTag.green : ColorsTag.gray
           }
-          icon={status === StatusCourse.publish ? 'globe' : 'edit'}
+          icon={status === CourseStatus.publish ? 'globe' : 'edit'}
         />
         <Dropdown>
           <Icon icon={'menu'} size={15} />

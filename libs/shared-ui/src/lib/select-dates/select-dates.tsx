@@ -16,8 +16,6 @@ export function SelectDates(props: SelectDatesProps) {
   const { name, min, onChange } = props;
   const today = currentDate.toISOString().split('T')[0] + 'T06:30';
   const [dates, setDates] = useState([today]);
-  // 2018-06-07T00:00
-  console.log('today: ', today);
 
   const addNewDate = () => {
     setDates([...dates, today]);

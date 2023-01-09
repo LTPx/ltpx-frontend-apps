@@ -1,3 +1,4 @@
+export * from './lib/modal/modal';
 export * from './lib/classroom-form/classroom-form';
 export * from './lib/select-dates/select-dates';
 export * from './lib/menu/menu';

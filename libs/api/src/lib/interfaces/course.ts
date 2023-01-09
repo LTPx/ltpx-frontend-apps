@@ -1,43 +1,74 @@
-export enum StatusCourse {
+import { PartialWithRequired } from './util';
+
+export enum CourseStatus {
   publish = 'published',
   draft = 'draft',
 }
 
-export interface IContentCourse {
-  title: string;
-  description: string;
-}
-export interface ICourse {
-  id: string;
-  image?: string;
-  title: string;
-  description?: string;
-  category: string;
-  price: number;
-  duration?: number;
-  lessons?: number;
-  stars?: number;
-  status?: StatusCourse;
-  enrollments_count?: number;
-  language: string;
-  level: string;
-  contents: IContentCourse[];
+export enum CourseLanguage {
+  es = 'Spanish',
+  en = 'English',
 }
 
-export interface ICourseContent {
+export enum CourseLevel {
+  begging = 'begging',
+  intermediate = 'intermediate',
+  advanced = 'advanced',
+}
+
+export enum TeacherClassType {
+  none = 'none',
+  mandatory = 'mandatory',
+  flexible = 'flexible',
+  customize = 'customize',
+}
+
+export interface ContentCourse {
   title: string;
   description: string;
 }
 
-export interface INewCourse {
-  cover?: string;
+export interface Classroom {
+  condition: TeacherClassType;
+  min: number;
+  max: number;
+  call_time_min: number;
+  meetings: string[];
+}
+
+export interface CourseModel {
+  id: number;
+  user_id: number;
+  cover: string;
   title: string;
   description: string;
-  category: string;
-  language: string;
-  level: string;
   learn_goals: string;
   requirements: string;
-  contents?: ICourseContent[];
-  classes?: any;
+  created_at: string;
+  updated_at: string;
+  category: string;
+  price_currency: string;
+  contents_count: number;
+  enrollments_count: number;
+  price_cents: number;
+  average_rating: number;
+  approved: boolean;
+  level: CourseLevel;
+  language: CourseLanguage;
+  status: CourseStatus;
+  contents: ContentCourse[];
+  classroom: Classroom;
 }
+
+export type PublicCourse = Omit<
+  CourseModel, "user_id" | "created_at" | "updated_at" | "approved" | "status"
+>
+
+export type TeacherCourse = Omit<
+  CourseModel, "user_id"
+>
+
+export type NewCourseApiParams = PartialWithRequired<
+  TeacherCourse,
+  'description' | 'title'
+>;

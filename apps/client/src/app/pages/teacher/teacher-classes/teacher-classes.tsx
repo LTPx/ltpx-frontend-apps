@@ -1,13 +1,8 @@
-import { BannerNotification, BannerType, Classroom, ClassroomForm, DayTimePicker, Icon, Input, Select, SelectDates, TimePicker } from '@ltpx-frontend-apps/shared-ui';
+import { TeacherClassType } from '@ltpx-frontend-apps/api';
+import { BannerNotification, BannerType, Classroom, ClassroomForm, DayTimePicker, Icon, Input, Modal, OptionSelect, Select, SelectDates, TimePicker } from '@ltpx-frontend-apps/shared-ui';
 import { useState } from 'react';
 import styles from './teacher-classes.module.scss';
 
-export enum TeacherClassType {
-  none = 'none',
-  mandatory = 'mandatory',
-  flexible = 'flexible',
-  customize = 'customize',
-}
 
 const classesTypeOptions = [
   {
@@ -24,85 +19,35 @@ const classesTypeOptions = [
   },
   {
     value: TeacherClassType.customize,
-    text: 'Se acuerda con el estudiante las clases y horarios'
+    text: 'Se acuerda con el estudiante'
   }
 ];
 
-const numbers = [
-  { value: '1', text: '1' },
-  { value: '2', text: '2' },
-  { value: '3', text: '3' },
-  { value: '4', text: '4' },
-  { value: '5', text: '5' },
-  { value: '6', text: '6' },
-  { value: '7', text: '7' },
-  { value: '8', text: '8' },
-  { value: '9', text: '9' },
-  { value: '10', text: '10' },
-];
-
-const days = [
-  { value: '1', text: '1' },
-  { value: '2', text: '2' },
-  { value: '3', text: '3' },
-  { value: '4', text: '4' },
-  { value: '5', text: '5' },
-  { value: '6', text: '6' },
-  { value: '7', text: '7' }
-];
-
-const hours = [
-  { value: '0', text: '0' },
-  { value: '60', text: '1' },
-  { value: '120', text: '2' },
-  { value: '180', text: '3' },
-  { value: '240', text: '4' },
-];
-
-const minutes = [
-  { value: '00', text: '00' },
-  { value: '15', text: '15' },
-  { value: '30', text: '30' },
-  { value: '45', text: '45' },
-];
-
-const daysWeek = [
-  { name: 'Lunes', hour: '10am', date: 'Monday 9', selected: false},
-  { name: 'Martes', hour: '10am', date: 'Monday 10', selected: false},
-  { name: 'Miercoles', hour: '10am', date: 'Monday 11', selected: false},
-  { name: 'Jueves', hour: '10am', date: 'Monday 12', selected: false},
-  { name: 'Viernes', hour: '10am', date: 'Monday 12', selected: false},
-  { name: 'Sabado', hour: '10am', date: 'Monday 13', selected: false},
-  { name: 'Domingo', hour: '10am', date: 'Monday 14', selected: false},
-];
-
-interface DayConfig {
-  name: string;
-  hour: string;
-  date: string;
-  selected: boolean;
-}
 /* eslint-disable-next-line */
 export interface TeacherClassesProps {
-  onChange: () => void;
+  onChange?: () => void;
 }
 
 export function TeacherClasses(props: TeacherClassesProps) {
+  const { onChange } = props;
+  const data = {
+    condition: TeacherClassType.none,
+    min: 3,
+    max: 5,
+    weeks: 2,
+    call_time_min: 45,
+    meetings: []
+  };
+
+  const [ dataForm, setDataForm] = useState(data);
   const [selectedTypeClass, setSelectedTypeClass] = useState<string>(TeacherClassType.mandatory);
-
-  // const [daysConfig, setDaysConfig] = useState(daysWeek);
-  // const [daysSelected, setDaysSelected] = useState<DayConfig[]>([]);
-
-  // const selectDay = (index: number) => {
-  //   let days = [...daysConfig];
-  //   days[index].selected = !days[index].selected;
-  //   const myDays = filterSelectedDays();
-  //   setDaysSelected(myDays);
-  //   setDaysConfig(days);
-  // }
 
   const handleClasses = (data: Classroom) => {
     console.log(data);
+  }
+
+  const handleCondition = (option: OptionSelect) => {
+    setSelectedTypeClass(option.value.toString());
   }
 
   return (
@@ -113,9 +58,9 @@ export function TeacherClasses(props: TeacherClassesProps) {
       </div>
       <div className={styles['content-form']}>
         <Select
-          label='Condiciones de aprobacion'
+          label='Condiciones de aprobación'
           options={classesTypeOptions}
-          onChange={(option)=>{setSelectedTypeClass(option.value.toString())}}
+          onChange={(option)=>{handleCondition(option)}}
         />
         <div className={styles['render-content']}>
           { selectedTypeClass === TeacherClassType.none && (
@@ -129,62 +74,36 @@ export function TeacherClasses(props: TeacherClassesProps) {
             </BannerNotification>
           )}
           { selectedTypeClass === TeacherClassType.mandatory && (
-            <>
-              <ClassroomForm onChange={(data)=>{handleClasses(data)}}/>
-            </>
+            <h1>Open</h1>
           )}
         </div>
-
-
-
-
-
-
-
-
-
-
-        {/* <div className={styles['field-form']}>
-          <label>Tamaño de la clase</label>
-          <div className={styles['range']}>
-            De
-            <div className="min">
-              <Select options={numbers}/>
-             </div>
-             a
-             <div className="max">
-              <Select options={numbers}/>
-             </div>
-             Estudiantes
+      </div>
+      <Modal>
+        <div className={styles['content-form']}>
+          <Select
+            label='Condiciones de aprobación'
+            options={classesTypeOptions}
+            onChange={(option)=>{handleCondition(option)}}
+          />
+          <div className={styles['render-content']}>
+            { selectedTypeClass === TeacherClassType.none && (
+              <BannerNotification type={BannerType.info}>
+                <p>No se requiere de clases para que los estudiante apruebe este curso</p>
+              </BannerNotification>
+            )}
+            { selectedTypeClass === TeacherClassType.customize && (
+              <BannerNotification type={BannerType.info}>
+                <p>Este curso require de clases que se acordaran con los estudiante</p>
+              </BannerNotification>
+            )}
+            { selectedTypeClass === TeacherClassType.mandatory && (
+              <>
+                <ClassroomForm onChange={(data)=>{handleClasses(data)}}/>
+              </>
+            )}
           </div>
         </div>
-        <div className={styles['field-form']}>
-          <label>Duracion de la clases</label>
-          <div className={styles['range']}>
-            Cada clase durara
-             <div className="min">
-              <Select options={hours}/>
-             </div>
-             hora(s), con
-             <div className="max">
-              <Select options={minutes}/>
-             </div>
-             minutos
-          </div>
-          <div className={styles['days-config']}>
-            <label>Se reuniran los dias</label>
-            <div className={styles['days']}>
-              { daysConfig.map((day, index)=>(
-                <DayTimePicker name={day.name} key={index}/>
-              ))}
-            </div>
-          </div>
-          <div className={styles['days-config']}>
-            <label>A partir de la fecha</label>
-             <Input type="date" name="party" min="2023-01-04"/>
-          </div>
-        </div> */}
-      </div>
+      </Modal>
     </div>
   );
 }

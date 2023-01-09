@@ -81,7 +81,6 @@ export function ClassroomForm(props: ClassroomFormProps) {
         min: parseInt(e.value)
       }
     }));
-    onChange && onChange(formData);
   }
 
   const updateMax = (e:any) => {
@@ -93,29 +92,26 @@ export function ClassroomForm(props: ClassroomFormProps) {
       }
     }));
     onChange && onChange(formData);
-    console.log('form: ', formData);
   }
 
-  let h = 0;
-  let min = 0;
+  let selectedHours = 0;
+  let selectedMin = 0;
 
   const handleDuration = (e:any, key: string) => {
     const minutes = parseInt(e.value);
     if (key === 'hours') {
-      h = h + minutes;
+      selectedHours = selectedHours + minutes;
     } else {
-      min = min + minutes;
+      selectedMin = selectedMin + minutes;
     }
-    // console.log('hours: ', h, ' minutes: ', min);
     setFormData(prevState => ({
       ...prevState,
       meetings: {
         ...prevState.meetings,
-        durationMin: h + min
+        durationMin: selectedHours + selectedMin
       }
     }));
     onChange && onChange(formData);
-    // console.log(formData);
   }
 
   return (

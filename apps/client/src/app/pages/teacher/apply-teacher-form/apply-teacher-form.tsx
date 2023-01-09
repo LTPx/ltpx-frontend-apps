@@ -1,11 +1,11 @@
 import styles from './apply-teacher-form.module.scss';
 import { Button, Input, TextArea, TypeButton } from '@ltpx-frontend-apps/shared-ui';
-import { IApplyTeachFields } from '@ltpx-frontend-apps/api';
+import { ApplyTeachApiParams } from '@ltpx-frontend-apps/api';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 /* eslint-disable-next-line */
 export interface ApplyTeacherFormProps {
-  onSubmitForm: (data: IApplyTeachFields) => void
+  onSubmitForm: (data: ApplyTeachApiParams) => void
 }
 
 export function ApplyTeacherForm(props: ApplyTeacherFormProps) {

@@ -1,7 +1,7 @@
 import { StateCreator } from 'zustand';
 import { StoreState } from '../store';
 import {
-  ICourse,
+  PublicCourse,
   ICredentials,
   IRegisterUser,
   loginUser,
@@ -23,15 +23,15 @@ export type UserSlice = {
   user: UserStore;
   isAuthenticated: boolean;
   cart: {
-    courses: ICourse[];
+    courses: PublicCourse[];
   };
   currentView: TypeViews,
   getCurrentUser: () => Promise<TResponseLogin>;
   login: (credentials: ICredentials) => Promise<TResponseLogin>;
   register: (params: IRegisterUser) => Promise<TResponseLogin>;
   logout: () => void;
-  addCourseCart: (course: ICourse) => void;
-  removeCourseCart: (id: string) => void;
+  addCourseCart: (course: PublicCourse) => void;
+  removeCourseCart: (id: number) => void;
 };
 
 const views = {
@@ -111,13 +111,13 @@ export const createUserSlice: StateCreator<
       console.log(error);
     }
   },
-  addCourseCart: (course: ICourse) =>
+  addCourseCart: (course: PublicCourse) =>
     set((state) => ({
       cart: {
         courses: state.cart.courses.concat([course]),
       },
     })),
-  removeCourseCart: (id: string) =>
+  removeCourseCart: (id: number) =>
     set((state) => ({
       cart: {
         courses: state.cart.courses.filter((course) => course.id !== id),

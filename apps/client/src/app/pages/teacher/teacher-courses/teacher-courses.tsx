@@ -1,4 +1,4 @@
-import { ICourse, getTeacherCourses, StatusCourse } from '@ltpx-frontend-apps/api';
+import { TeacherCourse, getTeacherCourses, CourseStatus } from '@ltpx-frontend-apps/api';
 import { Button, ColorsButton, InputSearch, Select, TeacherCourseCard } from '@ltpx-frontend-apps/shared-ui';
 import { useEffect, useState } from 'react';
 import styles from './teacher-courses.module.scss';
@@ -7,7 +7,7 @@ import styles from './teacher-courses.module.scss';
 export interface TeacherCoursesProps {}
 
 export function TeacherCourses(props: TeacherCoursesProps) {
-  const [courses, setCourses] = useState<ICourse[]>([]);
+  const [courses, setCourses] = useState<TeacherCourse[]>([]);
 
   useEffect(() => {
     let mounted = true;
@@ -43,7 +43,7 @@ export function TeacherCourses(props: TeacherCoursesProps) {
       { courses.map((course, index)=>(
         <TeacherCourseCard
           key={index}
-          status={course.status || StatusCourse.draft}
+          status={course.status || CourseStatus.draft}
           image={'https://designshack.net/wp-content/uploads/placeholder-image-368x246.png'}
           title={course.title}
           learners={course.enrollments_count || 0}

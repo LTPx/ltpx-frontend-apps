@@ -1,5 +1,5 @@
 import type { ComponentMeta } from '@storybook/react';
-import { StatusCourse, TeacherCourseCard } from './teacher-course-card';
+import { CourseStatus, TeacherCourseCard } from './teacher-course-card';
 
 const Story: ComponentMeta<typeof TeacherCourseCard> = {
   component: TeacherCourseCard,
@@ -12,7 +12,7 @@ export const Default = () => {
   return (
     <div>
       <TeacherCourseCard
-        status={StatusCourse.publish}
+        status={CourseStatus.publish}
         image={
           'https://images.unsplash.com/photo-1561089489-f13d5e730d72?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8ODh8fHRlYWNoZXJ8ZW58MHx8MHx8&auto=format&fit=crop&w=800&q=60'
         }
@@ -24,7 +24,7 @@ export const Default = () => {
       />
       <br />
       <TeacherCourseCard
-        status={StatusCourse.draft}
+        status={CourseStatus.draft}
         image={
           'https://images.unsplash.com/photo-1588075592446-265fd1e6e76f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OTR8fHRlYWNoZXJ8ZW58MHx8MHx8&auto=format&fit=crop&w=800&q=60'
         }

@@ -1,26 +1,52 @@
 import { TeacherClassType } from '@ltpx-frontend-apps/api';
-import { BannerNotification, BannerType, Classroom, ClassroomForm, DayTimePicker, Icon, Input, Modal, OptionSelect, Select, SelectDates, TimePicker } from '@ltpx-frontend-apps/shared-ui';
+import {
+  BannerNotification,
+  BannerType,
+  Classroom,
+  ClassroomForm,
+  DayTimePicker,
+  GroupSelectOptionCard,
+  Icon,
+  Input,
+  Modal,
+  OptionSelect,
+  Select,
+  SelectDates,
+  SelectOptionCardProps,
+  TimePicker,
+} from '@ltpx-frontend-apps/shared-ui';
 import { useState } from 'react';
 import styles from './teacher-classes.module.scss';
 
-
+// title: string;
+// text: string;
+// icon: string;
+// selected?: boolean;
 const classesTypeOptions = [
   {
     value: TeacherClassType.none,
-    text: 'Este curso no requiere de clases'
+    title: 'NO SE REQUIERE CLASES',
+    text: 'No se requiere de clases para que los estudiante apruebe este curso',
+    icon: 'close',
   },
   {
     value: TeacherClassType.mandatory,
-    text: 'Este curso necesita clases y que los estudiantes asistan'
+    title: 'CLASES OBLIGATORIAS',
+    text: 'Este curso necesita clases y que los estudiantes asistan a todas las clases',
+    icon: 'user',
   },
   {
     value: TeacherClassType.flexible,
-    text: 'Este curso necesita clases pero no es necesario que los estudiantes asista ah todas las clases'
+    title: 'CLASES FLEXIBLES',
+    text: 'Este curso necesita clases pero no es necesario que los estudiantes asista ah todas las clases',
+    icon: 'sliders',
   },
   {
     value: TeacherClassType.customize,
-    text: 'Se acuerda con el estudiante'
-  }
+    title: 'CLASES PERSONALIZADAS',
+    text: 'Se acuerda con el estudiante hora y días en las que se dictaran las clases',
+    icon: 'mate',
+  },
 ];
 
 /* eslint-disable-next-line */
@@ -36,72 +62,40 @@ export function TeacherClasses(props: TeacherClassesProps) {
     max: 5,
     weeks: 2,
     call_time_min: 45,
-    meetings: []
+    meetings: [],
   };
 
-  const [ dataForm, setDataForm] = useState(data);
-  const [selectedTypeClass, setSelectedTypeClass] = useState<string>(TeacherClassType.mandatory);
+  const [dataForm, setDataForm] = useState(data);
+  const [selectedTypeClass, setSelectedTypeClass] = useState<string>(
+    TeacherClassType.mandatory
+  );
 
   const handleClasses = (data: Classroom) => {
     console.log(data);
-  }
+  };
 
   const handleCondition = (option: OptionSelect) => {
     setSelectedTypeClass(option.value.toString());
-  }
+  };
 
   return (
     <div className={styles['container']}>
       <div className={styles['header-text']}>
         <h2>Sesiones</h2>
-        <h4 className='muted'>Configura y agenda clases con tus estudiantes</h4>
+        <h4 className="muted">Configura y agenda clases con tus estudiantes</h4>
       </div>
-      <div className={styles['content-form']}>
-        <Select
-          label='Condiciones de aprobación'
-          options={classesTypeOptions}
-          onChange={(option)=>{handleCondition(option)}}
-        />
-        <div className={styles['render-content']}>
-          { selectedTypeClass === TeacherClassType.none && (
-            <BannerNotification type={BannerType.info}>
-              <p>No se requiere de clases para que los estudiante apruebe este curso</p>
-            </BannerNotification>
-          )}
-          { selectedTypeClass === TeacherClassType.customize && (
-            <BannerNotification type={BannerType.info}>
-              <p>Este curso require de clases que se acordaran con los estudiante</p>
-            </BannerNotification>
-          )}
-          { selectedTypeClass === TeacherClassType.mandatory && (
-            <h1>Open</h1>
-          )}
-        </div>
-      </div>
-      <Modal>
+      <GroupSelectOptionCard
+        className={styles['classes-options']}
+        options={classesTypeOptions}
+        onChange={() => {}}
+      />
+      <Modal open={false}>
         <div className={styles['content-form']}>
-          <Select
-            label='Condiciones de aprobación'
-            options={classesTypeOptions}
-            onChange={(option)=>{handleCondition(option)}}
+          <ClassroomForm
+            onChange={(data) => {
+              handleClasses(data);
+            }}
           />
-          <div className={styles['render-content']}>
-            { selectedTypeClass === TeacherClassType.none && (
-              <BannerNotification type={BannerType.info}>
-                <p>No se requiere de clases para que los estudiante apruebe este curso</p>
-              </BannerNotification>
-            )}
-            { selectedTypeClass === TeacherClassType.customize && (
-              <BannerNotification type={BannerType.info}>
-                <p>Este curso require de clases que se acordaran con los estudiante</p>
-              </BannerNotification>
-            )}
-            { selectedTypeClass === TeacherClassType.mandatory && (
-              <>
-                <ClassroomForm onChange={(data)=>{handleClasses(data)}}/>
-              </>
-            )}
-          </div>
         </div>
       </Modal>
     </div>
@@ -109,7 +103,6 @@ export function TeacherClasses(props: TeacherClassesProps) {
 }
 
 export default TeacherClasses;
-
 
 // [{
 //   condition: 'no mandatory',

@@ -98,15 +98,6 @@ export function NewCourse(props: NewCourseProps) {
           </div>
         </div>
         <div className={styles['content']}>
-          <div className={styles['course-sections']}>
-            <Tabs
-              tabs={tabs}
-              vertical={true}
-              onClickTab={(index) => {
-                setIndexViewSelected(index);
-              }}
-            />
-          </div>
           <div className={styles['course-section-content']}>
             <section>
               <CourseGeneralInformation formik={formik} />

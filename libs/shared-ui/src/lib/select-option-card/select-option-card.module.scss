@@ -1,0 +1,43 @@
+@import '../../styles/styles.module.scss';
+
+.container {
+  border: 1px solid $gray-color-200;
+  cursor: pointer;
+
+  .content {
+    padding: $size-lg-1 $size-md-3;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+
+    .status-content {
+      display: flex;
+      align-items: flex-start;
+      gap: $size-md-3;
+
+      .information {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        h3 {
+          color: $text-color;
+        }
+        h4 {
+          color: $text-gray-color;
+        }
+      }
+    }
+    .status-content svg {
+      padding-top: 5px;
+      cursor: pointer;
+    }
+
+    .icon {
+      padding-right: $size-md-1;
+    }
+
+    .icon svg {
+      padding-top: 5px;
+    }
+  }
+}

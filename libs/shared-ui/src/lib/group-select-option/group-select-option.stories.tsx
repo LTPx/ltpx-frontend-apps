@@ -1,5 +1,5 @@
 import type {ComponentMeta } from '@storybook/react';
-import { GroupSelectOption, OptionSelectGroup } from './group-select-option';
+import { GroupSelectOption } from './group-select-option';
 
 const Story: ComponentMeta<typeof GroupSelectOption> = {
   component: GroupSelectOption,

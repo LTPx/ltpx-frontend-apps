@@ -10,8 +10,8 @@ export default Story;
 
 export const Files = () => {
   return (
-    <div>
-      <FileUpload text='Subir archivo'/>
+    <div style={{ width: '30rem', height: '20rem' }}>
+      <FileUpload />
     </div>
   );
 };

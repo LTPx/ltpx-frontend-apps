@@ -63,6 +63,7 @@ export function NewCourse(props: NewCourseProps) {
       // requirements: Yup.string().required('es obligatorio'),
     }),
     onSubmit: async (formData) => {
+      console.log(formData);
       // const courseData = {
       //   ...formData,
       //   ...{ learn_goals: formData.goals, contents: contents },
@@ -99,17 +100,17 @@ export function NewCourse(props: NewCourseProps) {
         </div>
         <div className={styles['content']}>
           <div className={styles['course-section-content']}>
-            <section>
+            <section className={styles['section']}>
               <CourseGeneralInformation formik={formik} />
             </section>
-            <section>
+            <section className={styles['section-gray']}>
               <CourseContents
                 onChange={(forms: any) => {
                   setContents(forms);
                 }}
               />
             </section>
-            <section>
+            <section className={styles['section']}>
               <TeacherClasses onChange={() => {}} />
             </section>
             {/* <section>

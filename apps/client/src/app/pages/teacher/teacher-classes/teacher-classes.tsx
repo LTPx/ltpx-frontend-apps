@@ -24,12 +24,6 @@ import styles from './teacher-classes.module.scss';
 // selected?: boolean;
 const classesTypeOptions = [
   {
-    value: TeacherClassType.none,
-    title: 'NO SE REQUIERE CLASES',
-    text: 'No se requiere de clases para que los estudiante apruebe este curso',
-    icon: 'close',
-  },
-  {
     value: TeacherClassType.mandatory,
     title: 'CLASES OBLIGATORIAS',
     text: 'Este curso necesita clases y que los estudiantes asistan a todas las clases',
@@ -46,6 +40,12 @@ const classesTypeOptions = [
     title: 'CLASES PERSONALIZADAS',
     text: 'Se acuerda con el estudiante hora y días en las que se dictaran las clases',
     icon: 'mate',
+  },
+  {
+    value: TeacherClassType.none,
+    title: 'NO SE REQUIERE CLASES',
+    text: 'No se requiere de clases para que los estudiante apruebe este curso',
+    icon: 'forbidden',
   },
 ];
 

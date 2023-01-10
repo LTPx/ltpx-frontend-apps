@@ -14,14 +14,13 @@ export interface GroupSelectOptionProps {
 }
 
 export function GroupSelectOption(props: GroupSelectOptionProps) {
+  const { options, onChange, className } = props;
   const [selectedIndex, setSelectedIndex] = useState(-1);
 
   const handleClick = (index: number) => {
     setSelectedIndex(index);
     selectedIndex !== index && onChange(options[index]);
   };
-
-  const { options, onChange, className } = props;
 
   return (
     <div className={`${styles['container']} ${className}`}>

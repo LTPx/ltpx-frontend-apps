@@ -1478,6 +1478,75 @@
         "width": 1024
       },
       "properties": { "name": "circle-outline" }
+    },
+    {
+      "icon": {
+        "paths": [
+          "M96 160L96 864 928 864 928 160 96 160",
+          "M672 352m-64 0a64 64 0 1 0 128 0 64 64 0 1 0-128 0",
+          "M608 671.6l-181.3-181a64 64 0 0 0-87.8-2.6L96 704m352 160l246.7-246.7a64 64 0 0 1 86.2-4L928 736"
+        ],
+        "attrs": [
+          {
+            "fill": "none",
+            "strokeLinejoin": "round",
+            "strokeWidth": 64,
+            "ry": "48"
+          },
+          { "fill": "none", "strokeMiterlimit": "10", "strokeWidth": 64 },
+          {
+            "fill": "none",
+            "strokeLinecap": "round",
+            "strokeLinejoin": "round",
+            "strokeWidth": 64
+          }
+        ],
+        "width": 1024
+      },
+      "properties": { "name": "image-outline" }
+    },
+    {
+      "icon": {
+        "paths": [
+          "M749.6 617.6L915 734a32 32 0 0 0 45-29.2V319.2A32 32 0 0 0 915 290l-165.4 116.4A32 32 0 0 0 736 432.6v158.8a32 32 0 0 0 13.6 26.2Z",
+          "M536 768H168a104.3 104.3 0 0 1-104-104V360a104.3 104.3 0 0 1 104-104h369A103.4 103.4 0 0 1 640 359V664a104.3 104.3 0 0 1-104 104Z"
+        ],
+        "attrs": [
+          {
+            "fill": "none",
+            "strokeLinecap": "round",
+            "strokeLinejoin": "round",
+            "strokeWidth": 64
+          },
+          { "fill": "none", "strokeMiterlimit": "10", "strokeWidth": 64 }
+        ],
+        "width": 1024
+      },
+      "properties": { "name": "videocam-outline" }
+    },
+    {
+      "icon": {
+        "paths": [
+          "M640 735.6h152c110 0 200-58.4 200-167.2s-106-162.9-192-167.2c-17.8-170.1-142-273.6-288-273.6-138 0-226.9 91.6-256 182.4-120 11.4-224 87.8-224 212.8s108 212.8 240 212.8h112",
+          "M640 511.6l-128-128-128 128m128 384.8V415.6"
+        ],
+        "attrs": [
+          {
+            "fill": "none",
+            "strokeLinecap": "round",
+            "strokeLinejoin": "round",
+            "strokeWidth": 64
+          },
+          {
+            "fill": "none",
+            "strokeLinecap": "round",
+            "strokeLinejoin": "round",
+            "strokeWidth": 64
+          }
+        ],
+        "width": 1024
+      },
+      "properties": { "name": "cloud-upload-outline" }
     }
   ]
 }

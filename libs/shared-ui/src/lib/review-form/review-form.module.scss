@@ -3,7 +3,6 @@
 .container {
   width: 100%;
   border: 1px solid #d4d4d4;
-  margin-top: $size-lg-2;
   .review {
     padding: $size-lg-3;
 
@@ -13,7 +12,6 @@
       padding-bottom: $size-md-1;
       h3 {
         color: $text-color;
-        font-weight: bold;
         padding-bottom: $size-md-1;
       }
       h4 {
@@ -25,7 +23,6 @@
     .form {
       h4 {
         color: $text-color;
-        font-weight: bold;
       }
 
       .input {

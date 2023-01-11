@@ -40,7 +40,7 @@ export function CourseGeneralInformation(props: CourseGeneralInformationProps) {
       <section className={styles['text']}>
         <h3>Portada del curso</h3>
         <div className={styles['upload-media']}>
-          <FileUpload text='Agregue una foto o video de portada'/>
+          <FileUpload/>
         </div>
       </section>
       <div className={styles['text']}>

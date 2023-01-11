@@ -21,12 +21,16 @@
 
     .course-section-content {
       flex-grow: 1;
-      padding: 2rem 4rem;
       height: 100vh;
       overflow-y: auto;
 
-      section {
-        margin-bottom: 2rem;
+      .section-gray {
+        padding: 2rem 8rem;
+        background-color: #f9fafb;
+      }
+
+      .section {
+        padding: 2rem 8rem;
       }
     }
   }

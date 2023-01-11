@@ -17,7 +17,7 @@ import TeacherClasses from '../teacher-classes/teacher-classes';
 import styles from './new-course.module.scss';
 import * as Yup from 'yup';
 import { useTeacher } from '../../../store';
-import { ContentCourse } from '@ltpx-frontend-apps/api';
+import { ContentCourse, CourseLanguage, CourseLevel } from '@ltpx-frontend-apps/api';
 import { useNavigate } from 'react-router-dom';
 
 /* eslint-disable-next-line */
@@ -45,34 +45,31 @@ export function NewCourse(props: NewCourseProps) {
 
   const formik = useFormik({
     initialValues: {
+      cover: null,
       title: '',
       description: '',
       category: '',
-      language: '',
-      level: '',
-      goals: '',
+      language: CourseLanguage.es,
+      level: CourseLevel.begging,
+      learn_goals: '',
       requirements: '',
     },
     validationSchema: Yup.object({
-      // title: Yup.string().required('es obligatorio'),
-      // description: Yup.string().required('es obligatorio'),
-      // category: Yup.string().required('es obligatorio'),
-      // language: Yup.string().required('es obligatorio'),
-      // level: Yup.string().required('es obligatorio'),
-      // goals: Yup.string().required('es obligatorio'),
-      // requirements: Yup.string().required('es obligatorio'),
+      title: Yup.string().required('es obligatorio'),
+      description: Yup.string().required('es obligatorio'),
     }),
     onSubmit: async (formData) => {
-      // const courseData = {
-      //   ...formData,
-      //   ...{ learn_goals: formData.goals, contents: contents },
-      // };
-      // const { saved, data } = await createCourse(courseData);
-      // if (saved) {
-      //   navigate('/teacher/courses/all');
-      // } else {
-      //   console.log('error: ', data);
-      // }
+      console.log('formData: ', formData);
+      const courseData = {
+        ...formData,
+        ...{ contents: contents },
+      };
+      const { saved, data } = await createCourse(courseData);
+      if (saved) {
+        navigate('/teacher/courses/all');
+      } else {
+        console.log('error: ', data);
+      }
     },
   });
 
@@ -98,34 +95,25 @@ export function NewCourse(props: NewCourseProps) {
           </div>
         </div>
         <div className={styles['content']}>
-          <div className={styles['course-sections']}>
-            <Tabs
-              tabs={tabs}
-              vertical={true}
-              onClickTab={(index) => {
-                setIndexViewSelected(index);
-              }}
-            />
-          </div>
           <div className={styles['course-section-content']}>
-            <section>
+            <section className={styles['section']}>
               <CourseGeneralInformation formik={formik} />
             </section>
-            <section>
+            <section className={styles['section-gray']}>
               <CourseContents
                 onChange={(forms: any) => {
                   setContents(forms);
                 }}
               />
             </section>
-            <section>
+            <section className={styles['section']}>
               <TeacherClasses onChange={() => {}} />
-            </section>
-            {/* <section>
-              <Quiz/>
             </section>
             <section>
               <Achievement/>
+            </section>
+            {/* <section>
+              <Quiz/>
             </section>
             <section>
               <CourseSettings/>

@@ -1,3 +1,4 @@
+
 import { Input, Select, SelectedItems } from '@ltpx-frontend-apps/shared-ui';
 import { useState } from 'react';
 import styles from './achievement.module.scss';
@@ -12,7 +13,7 @@ const achievementsRule = [
 
 const quizzes = [
   {text: 'Test: La Tierra y el Universo'},
-  {text: 'Test: Via Lactea'},
+  {text: 'Test: Via Láctea'},
   {text: 'Test: Las estrellas'},
 ];
 
@@ -25,7 +26,7 @@ const contents = [
   {text: 'Contenido: La Galaxia '},
   {text: 'Contenido: El Sol y sus principios'},
   {text: 'Contenido: La Luna y su influencia en el mar'},
-  {text: 'Contenido: El Espacio como conbustible'},
+  {text: 'Contenido: El Espacio como combustible'},
   {text: 'Contenido: Los agujeros negros y sus peligros'},
 ];
 

@@ -3,9 +3,13 @@ import Icon from '../icon/icon';
 import styles from './file-upload.module.scss';
 
 /* eslint-disable-next-line */
-export interface FileUploadProps {}
+export interface FileUploadProps {
+  onChange: (file: any) => void;
+  name?: string;
+}
 
 export function FileUpload(props: FileUploadProps) {
+  const { name, onChange } = props;
   const [file, setFile] = useState('');
   const elementRef = useRef<HTMLInputElement | null>(null);
 
@@ -14,6 +18,7 @@ export function FileUpload(props: FileUploadProps) {
     const { target } = e;
     if (target.files.length) {
       setFile(URL.createObjectURL(e.target.files[0]));
+      onChange(e.target.files[0]);
     }
   };
   const handleClick = () => {
@@ -29,7 +34,7 @@ export function FileUpload(props: FileUploadProps) {
         }`}
       >
         <Icon icon={'cloud-upload-outline'} size={80}></Icon>
-        <h3>Elegir Archivo</h3>
+        <h3>Subir Archivo</h3>
         <h4>Se debe seleccionar archivos de tipo imagen o video</h4>
         {file ? (
           <h4 className={styles['upload-files']} onClick={handleClick}>
@@ -41,7 +46,13 @@ export function FileUpload(props: FileUploadProps) {
           </h4>
         )}
       </div>
-      <input accept="image/png,image/jpeg,image/jpeg" type="file" ref={elementRef} onChange={handleChange} />
+      <input
+        type="file"
+        accept="image/png,image/jpeg,image/jpeg"
+        ref={elementRef}
+        onChange={handleChange}
+        name={name}
+      />
     </div>
   );
 }

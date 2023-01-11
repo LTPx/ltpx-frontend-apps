@@ -1,7 +1,10 @@
-/*
- * Replace this with your own classes
- *
- * e.g.
- * .container {
- * }
-*/
+.container {
+  padding: 4rem 6rem;
+
+  .header {
+    h1 {
+      margin-bottom: 0.5rem;
+    }
+    margin-bottom: 2rem;
+  }
+}

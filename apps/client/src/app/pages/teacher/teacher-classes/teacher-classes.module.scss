@@ -33,3 +33,8 @@
     margin-top: 1rem;
   }
 }
+
+.classes-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}

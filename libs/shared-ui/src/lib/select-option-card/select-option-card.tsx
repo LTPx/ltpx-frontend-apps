@@ -8,13 +8,17 @@ export interface SelectOptionCardProps {
   text: string;
   icon: string;
   selected?: boolean;
+  value?: string;
+  onClick?: () => void;
 }
 
 export function SelectOptionCard(props: SelectOptionCardProps) {
-  const { title, text, icon, selected } = props;
+  const { title, text, icon, selected, onClick } = props;
 
   return (
-    <div className={styles['container']}>
+    <div className={`${styles['container']} ${selected ? styles['selected'] : ''}`}
+      onClick={onClick}
+    >
       <div className={styles['content']}>
         <div className={styles['status-content']}>
           <Icon
@@ -24,11 +28,11 @@ export function SelectOptionCard(props: SelectOptionCardProps) {
           ></Icon>
           <div className={styles['information']}>
             <h3>{title}</h3>
-            <h4>{text}</h4>
+            <p>{text}</p>
           </div>
         </div>
         <div className={styles['icon']}>
-          <Icon icon={icon} size={35}></Icon>
+          <Icon icon={icon} size={30} color={selected ? '#10b981' : ''} />
         </div>
       </div>
     </div>

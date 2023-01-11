@@ -23,19 +23,16 @@ export function GroupSelectOptionCard(props: GroupSelectOptionCardProps) {
   return (
     <div className={`${styles['container']} ${className}`}>
       {options.map((option, index) => (
-        <div
+        <SelectOptionCard
           key={index}
+          title={option.title}
+          text={option.text}
+          icon={option.icon}
+          selected={selectedIndex === index}
           onClick={() => {
             handleClick(index);
           }}
-        >
-          <SelectOptionCard
-            title={option.title}
-            text={option.text}
-            icon={option.icon}
-            selected={selectedIndex === index}
-          />
-        </div>
+        />
       ))}
     </div>
   );

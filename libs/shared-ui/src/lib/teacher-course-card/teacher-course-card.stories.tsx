@@ -1,5 +1,6 @@
+import { CourseStatus } from '@ltpx-frontend-apps/api';
 import type { ComponentMeta } from '@storybook/react';
-import { CourseStatus, TeacherCourseCard } from './teacher-course-card';
+import { TeacherCourseCard } from './teacher-course-card';
 
 const Story: ComponentMeta<typeof TeacherCourseCard> = {
   component: TeacherCourseCard,
@@ -21,6 +22,7 @@ export const Default = () => {
         category={'desing'}
         percentageRate={60}
         percentageLearner={40}
+        url={''}
       />
       <br />
       <TeacherCourseCard
@@ -33,6 +35,7 @@ export const Default = () => {
         category={'desing'}
         percentageRate={0}
         percentageLearner={0}
+        url={''}
       />
     </div>
   );

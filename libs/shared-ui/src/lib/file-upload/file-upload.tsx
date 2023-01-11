@@ -3,11 +3,13 @@ import styles from './file-upload.module.scss';
 
 /* eslint-disable-next-line */
 export interface FileUploadProps {
-  text?: string
+  text?: string;
+  onChange: (file: any) => void;
+  name?: string;
 }
 
 export function FileUpload(props: FileUploadProps) {
-  const { text } = props;
+  const { text, name, onChange } = props;
   const [file, setFile] = useState('');
   const elementRef = useRef<HTMLInputElement | null>(null);
 
@@ -16,6 +18,7 @@ export function FileUpload(props: FileUploadProps) {
     const { target } =  e;
     if (target.files.length) {
       setFile(URL.createObjectURL(e.target.files[0]));
+      onChange(e.target.files[0]);
     }
   }
   const handleClick = () => {
@@ -29,7 +32,7 @@ export function FileUpload(props: FileUploadProps) {
         <h4>{text}</h4>
       </div>
       <div className={styles['backdrop']}></div>
-      <input type="file" ref={elementRef} onChange={handleChange}/>
+      <input type="file" ref={elementRef} onChange={handleChange} name={name}/>
     </div>
   );
 }

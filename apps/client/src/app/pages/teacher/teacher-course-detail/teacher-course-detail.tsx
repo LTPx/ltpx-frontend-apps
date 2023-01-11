@@ -52,7 +52,7 @@ export function TeacherCourseDetail(props: TeacherCourseDetailProps) {
       {course && (
         <>
           <div className={styles['cover']}>
-            <img src={course.cover}></img>
+            <img src={course.cover_url}></img>
           </div>
           <h1>{course.title}</h1>
           <div className={styles['basic-info']}>

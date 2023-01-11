@@ -39,7 +39,8 @@ export interface Classroom {
 export interface CourseModel {
   id: number;
   user_id: number;
-  cover: string;
+  cover: any;
+  cover_url: string;
   title: string;
   description: string;
   learn_goals: string;
@@ -61,11 +62,11 @@ export interface CourseModel {
 }
 
 export type PublicCourse = Omit<
-  CourseModel, "user_id" | "created_at" | "updated_at" | "approved" | "status"
+  CourseModel, "user_id" | "created_at" | "updated_at" | "approved" | "status" | "cover_url"
 >
 
 export type TeacherCourse = Omit<
-  CourseModel, "user_id"
+  CourseModel, "user_id" | "cover"
 >
 
 export type NewCourseApiParams = PartialWithRequired<

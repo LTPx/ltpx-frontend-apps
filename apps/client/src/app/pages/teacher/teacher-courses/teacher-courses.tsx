@@ -3,6 +3,7 @@ import { Button, ColorsButton, InputSearch, Select, TeacherCourseCard } from '@l
 import { useEffect, useState } from 'react';
 import styles from './teacher-courses.module.scss';
 
+const placeholderImage = 'https://designshack.net/wp-content/uploads/placeholder-image-368x246.png';
 /* eslint-disable-next-line */
 export interface TeacherCoursesProps {}
 
@@ -33,7 +34,7 @@ export function TeacherCourses(props: TeacherCoursesProps) {
 
   const EmptyState = () => (
     <div className={styles['empty-state']}>
-      <h4>Aun no has creado ningun curso</h4>
+      <h4>Aun no has creado ningún curso</h4>
       <h5>porque no empezamos creado uno</h5>
     </div>
   )
@@ -43,8 +44,8 @@ export function TeacherCourses(props: TeacherCoursesProps) {
       { courses.map((course, index)=>(
         <TeacherCourseCard
           key={index}
-          status={course.status || CourseStatus.draft}
-          image={'https://designshack.net/wp-content/uploads/placeholder-image-368x246.png'}
+          status={ course.status || CourseStatus.draft }
+          image={ course.cover_url || placeholderImage }
           title={course.title}
           learners={course.enrollments_count || 0}
           category={course.category}

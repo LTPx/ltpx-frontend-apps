@@ -1,6 +1,7 @@
 import { _http } from '../../http';
 import { NewCourseApiParams, TeacherCourse } from '../../interfaces/course';
 import { ApplyTeachApiParams, ITeacher } from '../../interfaces/teacher';
+import { moveToFormData } from '../../utils';
 
 const http = _http;
 
@@ -32,8 +33,9 @@ export const applyToTeach = async (teacher: ApplyTeachApiParams) => {
 
 export const createCourse = async (course: NewCourseApiParams) => {
   return new Promise<TeacherCourse>((resolve, reject) => {
+    const data = moveToFormData(course);
     http
-      .post('api/v1/teacher/courses', course)
+      .post('api/v1/teacher/courses', data)
       .then((response) => {
         resolve(response.data);
       })

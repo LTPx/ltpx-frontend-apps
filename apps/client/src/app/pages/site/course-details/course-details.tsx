@@ -81,7 +81,7 @@ export function CourseDetails(props: CourseDetailsProps) {
               </div>
             </div>
             <div className={styles['summary-course']}>
-              <Tabs tabs={tabs} isNav={false} />
+              <Tabs tabs={tabs} isNav={false} onClickTab={(tab)=>{console.log(tab)}}/>
               <div className={styles['overview']}>
                 <section className={`${styles['course-description']}`}>
                   <h3>Course Description</h3>

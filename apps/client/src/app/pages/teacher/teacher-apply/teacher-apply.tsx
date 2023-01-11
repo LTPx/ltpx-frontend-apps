@@ -1,5 +1,6 @@
-import { ApplyTeachApiParams, StatusTeacherAccount } from '@ltpx-frontend-apps/api';
+import { ApplicationTeach, ApplyTeachApiParams, StatusTeacherAccount } from '@ltpx-frontend-apps/api';
 import { ApplyTeacherForm } from '@ltpx-frontend-apps/shared-ui';
+import { useEffect, useState } from 'react';
 import { useTeacher } from '../../../store';
 import styles from './teacher-apply.module.scss';
 
@@ -7,7 +8,26 @@ import styles from './teacher-apply.module.scss';
 export interface TeacherApplyProps {}
 
 export function TeacherApply(props: TeacherApplyProps) {
-  const { applyTeach, teacher_account } = useTeacher();
+  const [form, setForm] = useState<ApplicationTeach>();
+
+  const { applyTeach, teacher_account, getApplicationTeach } = useTeacher();
+
+  useEffect(() => {
+    let mounted = true;
+    getApplicationTeach().then((resp)=> {
+      if (!mounted) {
+        if (resp.ok) {
+          setForm(resp.data);
+        } else {
+          console.log(resp.data);
+        }
+      }
+    });
+    return () => {
+      mounted = false;
+    }
+  }, [])
+
 
   const handleSubmit = async (formData: ApplyTeachApiParams) => {
     const { accepted, data } = await applyTeach(formData);
@@ -29,8 +49,17 @@ export function TeacherApply(props: TeacherApplyProps) {
   )
 
   return (
-    <div className={styles['container']}>
-      { teacher_account === StatusTeacherAccount.review && <BannerNotification/> }
+    <div className={`${styles['container']} card`}>
+      <div className={`${styles['header']}`}>
+        <h1>Aplicar para maestro en OpenMind</h1>
+        <p>Por favor llena esta solicitud de registro y en periodo de 24 a 48h te enviaremos un correo electrónico con la respuesta a tu petición, una vez enviada no se podra modificar</p>
+      </div>
+      { teacher_account === StatusTeacherAccount.review && (
+        <div>
+          <h5>Poner aqui la informacion</h5>
+          <p>{form?.name}</p>
+        </div>
+      ) }
       { teacher_account === StatusTeacherAccount.unapplied && (
         <ApplyTeacherForm onSubmitForm={(e: ApplyTeachApiParams)=>{handleSubmit(e)}}/>
       )}

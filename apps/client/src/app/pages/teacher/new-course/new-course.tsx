@@ -109,11 +109,11 @@ export function NewCourse(props: NewCourseProps) {
             <section className={styles['section']}>
               <TeacherClasses onChange={() => {}} />
             </section>
-            {/* <section>
-              <Quiz/>
-            </section>
             <section>
               <Achievement/>
+            </section>
+            {/* <section>
+              <Quiz/>
             </section>
             <section>
               <CourseSettings/>

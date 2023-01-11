@@ -34,7 +34,7 @@ export function FileUpload(props: FileUploadProps) {
         }`}
       >
         <Icon icon={'cloud-upload-outline'} size={80}></Icon>
-        <h3>Elegir Archivo</h3>
+        <h3>Subir Archivo</h3>
         <h4>Se debe seleccionar archivos de tipo imagen o video</h4>
         {file ? (
           <h4 className={styles['upload-files']} onClick={handleClick}>

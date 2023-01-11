@@ -1,3 +1,4 @@
+export * from './lib/application-view/application-view';
 export * from './lib/course-contents/course-contents';
 export * from './lib/overview-course/overview-course';
 export * from './lib/files-uploaded/files-uploaded';

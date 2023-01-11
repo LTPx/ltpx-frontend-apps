@@ -1,3 +1,5 @@
+export * from './lib/files-uploaded/files-uploaded';
+export * from './lib/apply-teacher-form/apply-teacher-form';
 export * from './lib/group-select-option-card/group-select-option-card';
 export * from './lib/select-option-card/select-option-card';
 export * from './lib/modal/modal';

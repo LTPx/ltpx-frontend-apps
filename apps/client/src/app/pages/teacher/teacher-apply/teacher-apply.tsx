@@ -1,6 +1,6 @@
 import { ApplyTeachApiParams, StatusTeacherAccount } from '@ltpx-frontend-apps/api';
-import { useTeacher, useUser } from '../../../store';
-import ApplyTeacherForm from '../apply-teacher-form/apply-teacher-form';
+import { ApplyTeacherForm } from '@ltpx-frontend-apps/shared-ui';
+import { useTeacher } from '../../../store';
 import styles from './teacher-apply.module.scss';
 
 /* eslint-disable-next-line */

@@ -1,15 +1,30 @@
+@import '../../styles/styles.module.scss';
+
 .container {
   display: flex;
-  height: 100%;
   position: relative;
-  cursor: pointer;
-
+  border-style: dashed;
+  border-width: 4px;
+  border-color: $gray-color-300;
+  height: 100%;
+  width: 100%;
   &:hover {
-    .backdrop {
-      visibility: visible;
+    .file-selected {
+      visibility: visible !important;
+      h3 {
+        visibility: hidden;
+      }
+      h4 {
+        visibility: hidden;
+      }
+      .upload-files {
+        visibility: visible;
+        color: $white-color;
+      }
     }
-    h4 {
-      color: #fff;
+
+    .file-selected svg {
+      visibility: hidden;
     }
   }
 
@@ -22,6 +37,25 @@
     width: 100%;
     height: 100%;
     z-index: 2;
+    gap: $size-sm-2;
+
+    &.file-selected {
+      visibility: hidden;
+    }
+
+    h4 {
+      color: $text-gray-color;
+    }
+
+    .upload-files {
+      cursor: pointer;
+      text-decoration: underline;
+      color: $primary-color;
+    }
+  }
+
+  .actions svg {
+    padding-bottom: $size-md-1;
   }
 
   input {
@@ -32,15 +66,5 @@
     object-fit: cover;
     width: 100%;
     z-index: 0;
-  }
-
-  .backdrop {
-    background-color: black;
-    opacity: 0.2;
-    width: 100%;
-    height: 100%;
-    z-index: 1;
-    position: absolute;
-    visibility: hidden;
   }
 }

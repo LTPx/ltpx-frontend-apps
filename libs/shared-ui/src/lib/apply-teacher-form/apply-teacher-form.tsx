@@ -1,11 +1,18 @@
 import styles from './apply-teacher-form.module.scss';
-import { Button, Input, TextArea, TypeButton } from '@ltpx-frontend-apps/shared-ui';
+import {
+  Button,
+  Input,
+  InputTextStatus,
+  StatusInputText,
+  TextArea,
+  TypeButton,
+} from '@ltpx-frontend-apps/shared-ui';
 import { ApplyTeachApiParams } from '@ltpx-frontend-apps/api';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 /* eslint-disable-next-line */
 export interface ApplyTeacherFormProps {
-  onSubmitForm: (data: ApplyTeachApiParams) => void
+  onSubmitForm: (data: ApplyTeachApiParams) => void;
 }
 
 export function ApplyTeacherForm(props: ApplyTeacherFormProps) {
@@ -23,18 +30,20 @@ export function ApplyTeacherForm(props: ApplyTeacherFormProps) {
     },
     validationSchema: Yup.object({
       name: Yup.string().required('Nombre es requerido'),
-      phone: Yup.string().required('Telefono es required'),
-      country: Yup.string().required('Pais es required'),
-      city: Yup.string().required('Ciudad es required'),
-      nationalId: Yup.string().required('Identificacion es required'),
-      experience: Yup.string().required('Experiencia es required'),
-      degrees: Yup.string().required('Titulos es required'),
-      record_police: Yup.string().required('Record Policial es required'),
+      phone: Yup.string().required('Teléfono es requerido'),
+      country: Yup.string().required('País es requerido'),
+      city: Yup.string().required('Ciudad es requerido'),
+      nationalId: Yup.string().required('Identificación es requerido'),
+      experience: Yup.string().required('Experiencia es requerido'),
+      degrees: Yup.string().required('Títulos es requerido'),
+      record_police: Yup.string().required('Record Policial es requerido'),
     }),
-    onSubmit: (data) => onSubmitForm(data)
+    onSubmit: (data) => {
+      onSubmitForm(data);
+    },
   });
   return (
-    <div className={`${styles['container']} card`}>
+    <div className={styles['container']}>
       <div className={`${styles['content']}`}>
         <h1>Aplicar para maestro</h1>
         <h2>Paso 1: Aprende acerca de LTPX</h2>
@@ -59,19 +68,31 @@ export function ApplyTeacherForm(props: ApplyTeacherFormProps) {
               value={formik.values.name}
               onBlur={formik.handleBlur}
             />
+            {formik.touched.name && formik.errors.name ? (
+              <InputTextStatus
+                status={StatusInputText.error}
+                text={formik.errors.name}
+              />
+            ) : null}
             <Input
-              label="Identificacion"
+              label="Identificación"
               name="nationalId"
               placeholder="Ejm: 11000399093"
-              description="Su numero de identificaion o pasaporte"
+              description="Su numero de identificación o pasaporte"
               onChange={(e: any) => {
                 formik.handleChange(e);
               }}
               value={formik.values.nationalId}
               onBlur={formik.handleBlur}
             />
+            {formik.touched.nationalId && formik.errors.nationalId ? (
+              <InputTextStatus
+                status={StatusInputText.error}
+                text={formik.errors.nationalId}
+              />
+            ) : null}
             <Input
-              label="Telefono"
+              label="Teléfono"
               name="phone"
               placeholder="Ejm: 0998473535"
               description="Este sera usando para contactarte en caso de ser necesario"
@@ -81,45 +102,79 @@ export function ApplyTeacherForm(props: ApplyTeacherFormProps) {
               value={formik.values.phone}
               onBlur={formik.handleBlur}
             />
+            {formik.touched.phone && formik.errors.phone ? (
+              <InputTextStatus
+                status={StatusInputText.error}
+                text={formik.errors.phone}
+              />
+            ) : null}
             <Input
-              label='Pais'
+              label="País"
               name="country"
               placeholder="Ecuador"
-              onChange={(e: any) => { formik.handleChange(e); }}
+              onChange={(e: any) => {
+                formik.handleChange(e);
+              }}
               value={formik.values.country}
               onBlur={formik.handleBlur}
             />
+            {formik.touched.country && formik.errors.country ? (
+              <InputTextStatus
+                status={StatusInputText.error}
+                text={formik.errors.country}
+              />
+            ) : null}
             <Input
-              label='Ciudad'
+              label="Ciudad"
               name="city"
               placeholder="Guayaquil"
-              onChange={(e: any) => { formik.handleChange(e); }}
+              onChange={(e: any) => {
+                formik.handleChange(e);
+              }}
               value={formik.values.city}
               onBlur={formik.handleBlur}
             />
+            {formik.touched.city && formik.errors.city ? (
+              <InputTextStatus
+                status={StatusInputText.error}
+                text={formik.errors.city}
+              />
+            ) : null}
             <TextArea
-              label='Experiencia Laboral'
-              name='experience'
+              label="Experiencia Laboral"
+              name="experience"
               rows={10}
-              description='Enumere toda la experiencia que tiene enseñando o trabajando con jóvenes, ya sea como profesional, voluntario o en su vida personal.'
+              description="Enumere toda la experiencia que tiene enseñando o trabajando con jóvenes, ya sea como profesional, voluntario o en su vida personal."
               onChange={(e: any) => {
                 formik.handleChange(e);
               }}
               value={formik.values.experience}
               onBlur={formik.handleBlur}
             />
+            {formik.touched.experience && formik.errors.experience ? (
+              <InputTextStatus
+                status={StatusInputText.error}
+                text={formik.errors.experience}
+              />
+            ) : null}
             <TextArea
-              label="Titutos academicos"
+              label="Títulos académicos"
               name="degrees"
-              placeholder="Psicologia: Universidad de Guayaquil, Mayo 12 2019"
+              placeholder="Psicología: Universidad de Guayaquil, Mayo 12 2019"
               description="Enumere los títulos académicos, la capacitación profesional u otras certificaciones profesionales relevantes que posea. No requerimos títulos para enseñar en ltpx; incluya cualquier cosa que nos ayude a aprender más sobre sus antecedentes."
               onChange={(e: any) => {
                 formik.handleChange(e);
               }}
-              value={formik.values.name}
+              value={formik.values.degrees}
               onBlur={formik.handleBlur}
               rows={10}
             />
+            {formik.touched.degrees && formik.errors.degrees ? (
+              <InputTextStatus
+                status={StatusInputText.error}
+                text={formik.errors.degrees}
+              />
+            ) : null}
             <Input
               label="Record Policial"
               name="record_police"
@@ -127,13 +182,16 @@ export function ApplyTeacherForm(props: ApplyTeacherFormProps) {
               onChange={(e: any) => {
                 formik.handleChange(e);
               }}
-              value={formik.values.name}
+              value={formik.values.record_police}
               onBlur={formik.handleBlur}
             />
-            <Button
-              title="Enviar Solicitud"
-              type={TypeButton.submit}
-            />
+            {formik.touched.record_police && formik.errors.record_police ? (
+              <InputTextStatus
+                status={StatusInputText.error}
+                text={formik.errors.record_police}
+              />
+            ) : null}
+            <Button title="Enviar Solicitud" type={TypeButton.submit} />
           </form>
         </div>
       </div>

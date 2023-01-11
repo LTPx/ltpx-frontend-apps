@@ -41,7 +41,6 @@ export function CourseGeneralInformation(props: CourseGeneralInformationProps) {
         <h3>Portada del curso</h3>
         <div className={styles['upload-media']}>
           <FileUpload
-            text='Agregue una foto o video de portada'
             onChange={(file)=>{ formik.setFieldValue('cover', file)}}
             name='cover'
           />

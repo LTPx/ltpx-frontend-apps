@@ -11,7 +11,7 @@ export default Story;
 export const Files = () => {
   return (
     <div style={{ width: '30rem', height: '20rem' }}>
-      <FileUpload />
+      <FileUpload onChange={(file)=>{console.log(file)}} />
     </div>
   );
 };

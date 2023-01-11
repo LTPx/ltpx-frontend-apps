@@ -1,3 +1,5 @@
+export * from './lib/course-contents/course-contents';
+export * from './lib/overview-course/overview-course';
 export * from './lib/files-uploaded/files-uploaded';
 export * from './lib/apply-teacher-form/apply-teacher-form';
 export * from './lib/group-select-option-card/group-select-option-card';

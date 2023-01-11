@@ -1,6 +1,9 @@
 @import '../../styles/styles.module.scss';
 
 .container {
+  width: 100%;
+  margin-bottom: $size-md-1;
+
   .accordion {
     background: $white-color;
     box-sizing: border-box;
@@ -21,7 +24,6 @@
   }
 
   .panel {
-    padding: 18px;
     background: $white-color;
     box-sizing: border-box;
     border: 1px solid $stroke-color;
@@ -32,13 +34,14 @@
     border-top: none;
     visibility: hidden;
     transition: max-height 0.2s ease-out;
+
     p {
       color: $text-gray-color;
     }
 
     &.open {
       visibility: visible;
-      max-height: 10rem;
+      max-height: 15rem;
     }
   }
 }

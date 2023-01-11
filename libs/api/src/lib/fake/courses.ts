@@ -85,7 +85,29 @@ const createRandomCourseDetail = () => (
         comment: `This course: ${faker.commerce.productDescription()}`,
         date: '3 days ago'
       }
-    ]
+    ],
+    contents: [
+      {
+        title: faker.commerce.department(),
+        description: faker.commerce.productDescription(),
+      },
+      {
+        title: faker.commerce.department(),
+        description: faker.commerce.productDescription(),
+      },
+      {
+        title: faker.commerce.department(),
+        description: faker.commerce.productDescription(),
+      },
+      {
+        title: faker.commerce.department(),
+        description: faker.commerce.productDescription(),
+      },
+      {
+        title: faker.commerce.department(),
+        description: faker.commerce.productDescription(),
+      },
+    ],
   }
 )
 

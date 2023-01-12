@@ -49,8 +49,8 @@ export function QuizCard(props: QuizCardProps) {
           <Icon icon={'ellipsis-horizontal-outline'} size={15} />
           <Menu
             items={[
-              { text: 'Editar curso', icon: 'pencil' },
-              { text: 'Ver curso', icon: 'user-group' },
+              { text: 'Editar test', icon: 'pencil' },
+              { text: 'Ver test', icon: 'ios-paper-outline' },
             ]}
           />
         </Dropdown>
@@ -74,7 +74,7 @@ export function QuizCard(props: QuizCardProps) {
       <div className={styles['end-content']}>
         {learners > 0 ? (
           <div className={styles['quiz-result']}>
-            <h5>Avg Correct Answers</h5>
+            <h5>Prom de Respuestas Correctas</h5>
             <div className={styles['result']}>
               {calculatePercentage() < 50 && (
                 <h4 className={styles['answers-red']}>{totalAnswers}</h4>
@@ -86,7 +86,7 @@ export function QuizCard(props: QuizCardProps) {
                 <h4 className={styles['answers-green']}>{totalAnswers}</h4>
               )}
               <h4> / {totalQuestions}</h4>
-              <h4> ( {calculatePercentage()}% correct answers rate )</h4>
+              <h4> ( {calculatePercentage()}% respuestas correctas)</h4>
             </div>
           </div>
         ) : (

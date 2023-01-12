@@ -1,0 +1,86 @@
+@import '../../styles/styles.module.scss';
+
+.container {
+  background-color: $white-color;
+  max-width: 18.4375rem;
+  height: auto;
+  border: 1px solid $gray-color-200;
+  box-shadow: $card-shadow-medium;
+
+  .head-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: $size-sm-2;
+  }
+
+  .content {
+    border: 1px solid $gray-color-200;
+    display: flex;
+    flex-direction: column;
+    img {
+      width: 100%;
+      height: 7.5rem;
+      object-fit: cover;
+    }
+
+    .information {
+      display: flex;
+      flex-direction: column;
+      padding: $size-md-1;
+      h4 {
+        padding-bottom: $size-sm-1;
+      }
+      .describe {
+        display: flex;
+        gap: $size-md-1;
+        h5 {
+          color: $gray-color-400;
+        }
+      }
+    }
+  }
+
+  .end-content {
+    display: flex;
+    justify-content: space-between;
+
+    .quiz-result {
+      padding: $size-md-1;
+      border: 1px solid $gray-color-200;
+      width: 100%;
+      h5 {
+        color: $gray-color-400;
+        padding-bottom: $size-sm-1;
+      }
+
+      .result {
+        display: flex;
+        gap: $size-sm-1;
+
+        .answers-red {
+          color: $red-color;
+        }
+        .answers-green {
+          color: $green-color;
+        }
+        .answers-blue {
+          color: $blue-color;
+        }
+      }
+    }
+
+    .course-no-yet {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: $gray-color-400;
+      width: 100%;
+      text-align: center;
+      border: 1px solid $gray-color-200;
+      padding: $size-lg-1;
+      gap: $size-sm-2;
+    }
+  }
+}
+

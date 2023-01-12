@@ -1547,6 +1547,36 @@
         "width": 1024
       },
       "properties": { "name": "cloud-upload-outline" }
+    },
+    {
+      "icon": {
+        "paths": [
+          "M512 512m-64 0a64 64 0 1 0 128 0 64 64 0 1 0-128 0",
+          "M832 512m-64 0a64 64 0 1 0 128 0 64 64 0 1 0-128 0",
+          "M192 512m-64 0a64 64 0 1 0 128 0 64 64 0 1 0-128 0"
+        ],
+        "attrs": [
+          { "fill": "none", "strokeMiterlimit": "10", "strokeWidth": 64 },
+          { "fill": "none", "strokeMiterlimit": "10", "strokeWidth": 64 },
+          { "fill": "none", "strokeMiterlimit": "10", "strokeWidth": 64 }
+        ],
+        "width": 1024
+      },
+      "properties": { "name": "ellipsis-horizontal-outline" }
+    },
+    {
+      "icon": {
+        "paths": [
+          "M224 128v672h32V160h608v674.3c0 16.4-13.3 29.7-29.7 29.7H189.7C173.3 864 160 850.7 160 834.3V256h32v-32H128v610.3C128 868.3 155.7 896 189.7 896h644.6C868.3 896 896 868.3 896 834.3V128H224z",
+          "M320 224h256v32H320z",
+          "M320 384h480v32H320z",
+          "M320 544h384v32H320z",
+          "M320 704h480v32H320z"
+        ],
+        "attrs": [{}, {}, {}, {}, {}],
+        "width": 1024
+      },
+      "properties": { "name": "paper-outline" }
     }
   ]
 }

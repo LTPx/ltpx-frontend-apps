@@ -27,7 +27,7 @@ export function FilesUploaded(props: FilesUploadedProps) {
           {type === TypeFile.video && (
             <Icon icon={'videocam-outline'} size={40}></Icon>
           )}
-          {type === TypeFile.pdf && <Icon icon={'file'} size={40}></Icon>}
+          {type === TypeFile.pdf && <Icon icon={'file-pdf'} size={40}></Icon>}
           <h4>{textFile}</h4>
         </div>
         <Button

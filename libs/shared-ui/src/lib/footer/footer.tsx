@@ -29,19 +29,19 @@ export function Footer(props: FooterProps) {
           <div className={styles['social-networks']}>
             <Icon
               className={styles['social']}
-              icon="link"
+              icon="facebook"
               size={20}
               color="white"
             />
             <Icon
               className={styles['social']}
-              icon="home"
+              icon="instagram"
               size={20}
               color="white"
             />
             <Icon
               className={styles['social']}
-              icon="heart"
+              icon="twitter"
               size={20}
               color="white"
             />

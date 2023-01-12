@@ -30,10 +30,7 @@ export function QuizCard(props: QuizCardProps) {
     totalAnswers,
   } = props;
 
-  const calculatePercentage = () => {
-    const total = (totalAnswers * 100) / totalQuestions;
-    return total;
-  };
+  const percentage = (totalAnswers * 100) / totalQuestions;
 
   return (
     <div className={styles['container']}>
@@ -50,7 +47,7 @@ export function QuizCard(props: QuizCardProps) {
           <Menu
             items={[
               { text: 'Editar test', icon: 'pencil' },
-              { text: 'Ver test', icon: 'ios-paper-outline' },
+              { text: 'Ver test', icon: 'paper-outline' },
             ]}
           />
         </Dropdown>
@@ -76,17 +73,17 @@ export function QuizCard(props: QuizCardProps) {
           <div className={styles['quiz-result']}>
             <h5>Prom de Respuestas Correctas</h5>
             <div className={styles['result']}>
-              {calculatePercentage() < 50 && (
+              {percentage < 50 && (
                 <h4 className={styles['answers-red']}>{totalAnswers}</h4>
               )}
-              {calculatePercentage() >= 50 && calculatePercentage() < 70 && (
+              {percentage >= 50 && percentage < 70 && (
                 <h4 className={styles['answers-blue']}>{totalAnswers}</h4>
               )}
-              {calculatePercentage() >= 70 && (
+              {percentage >= 70 && (
                 <h4 className={styles['answers-green']}>{totalAnswers}</h4>
               )}
               <h4> / {totalQuestions}</h4>
-              <h4> ( {calculatePercentage()}% respuestas correctas)</h4>
+              <h4> ( {percentage}% respuestas correctas)</h4>
             </div>
           </div>
         ) : (

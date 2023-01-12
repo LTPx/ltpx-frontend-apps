@@ -1576,7 +1576,7 @@
         "attrs": [{}, {}, {}, {}, {}],
         "width": 1024
       },
-      "properties": { "name": "ios-paper-outline" }
+      "properties": { "name": "paper-outline" }
     }
   ]
 }

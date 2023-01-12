@@ -1547,6 +1547,22 @@
         "width": 1024
       },
       "properties": { "name": "cloud-upload-outline" }
+    },
+    {
+      "icon": {
+        "paths": [
+          "M512 512m-64 0a64 64 0 1 0 128 0 64 64 0 1 0-128 0",
+          "M832 512m-64 0a64 64 0 1 0 128 0 64 64 0 1 0-128 0",
+          "M192 512m-64 0a64 64 0 1 0 128 0 64 64 0 1 0-128 0"
+        ],
+        "attrs": [
+          { "fill": "none", "strokeMiterlimit": "10", "strokeWidth": 64 },
+          { "fill": "none", "strokeMiterlimit": "10", "strokeWidth": 64 },
+          { "fill": "none", "strokeMiterlimit": "10", "strokeWidth": 64 }
+        ],
+        "width": 1024
+      },
+      "properties": { "name": "ellipsis-horizontal-outline" }
     }
   ]
 }

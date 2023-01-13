@@ -7,6 +7,12 @@ export enum TypeAccounts {
   admin = 'admin',
 }
 
+export enum StatusAccount {
+  active = 'active',
+  removed = 'removed',
+  blocked = 'blocked',
+}
+
 export enum TypeViews {
   default = 'default',
   user = 'user',

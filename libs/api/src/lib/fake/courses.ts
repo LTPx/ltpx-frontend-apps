@@ -5,7 +5,7 @@ const createRandomCourse = ():PublicCourse => (
   {
     id: faker.datatype.number(500),
     cover: faker.image.people(640, 480, true),
-    title: `Learning: ${faker.commerce.productDescription()}`,
+    title: `Learning how to: ${faker.commerce.product()}`,
     description: `Learning: ${faker.commerce.productDescription()}`,
     category: faker.commerce.department(),
     price_cents: faker.datatype.number({min: 1000, max: 5000}),

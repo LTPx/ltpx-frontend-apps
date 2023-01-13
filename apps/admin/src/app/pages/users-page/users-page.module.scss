@@ -1,0 +1,9 @@
+@import '../../../../../admin/src/styles.scss';
+
+.container {
+  .user-name {
+    display: flex;
+    align-items: center;
+    gap: $size-md-1;
+  }
+}

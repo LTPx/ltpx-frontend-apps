@@ -1,0 +1,25 @@
+@import '../../../../../admin/src/styles.scss';
+
+.container {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  grid-template-rows: auto 1fr auto;
+  grid-template-areas:
+    'header header header'
+    'nav content content';
+  height: 100vh;
+
+  .content {
+    grid-area: content;
+    background-color: $background-gray-color;
+    padding: $size-lg-3 $size-lg-4;
+  }
+  .navbar {
+    background-color: $white-color;
+    padding: 30px;
+    border-right: 1px solid #ebecef;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+}

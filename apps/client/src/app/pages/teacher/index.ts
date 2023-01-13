@@ -1,3 +1,4 @@
+export * from './teacher-layout/teacher-layout';
 export * from './earnings/earnings';
 export * from './manage-courses/manage-courses';
 export * from './teacher-account/teacher-account';

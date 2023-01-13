@@ -1,4 +1,4 @@
-import type {ComponentMeta } from '@storybook/react';
+import type { ComponentMeta } from '@storybook/react';
 import { TagsCard } from './tags-card';
 
 const Story: ComponentMeta<typeof TagsCard> = {
@@ -9,17 +9,17 @@ const Story: ComponentMeta<typeof TagsCard> = {
 export default Story;
 
 const tags = [
-  {text:'Course'},
-  {text:'Timeline'},
-  {text:'Moodle'},
-  {text:'Best'},
-  {text:'Info'}
-]
+  { text: 'Course' },
+  { text: 'Timeline' },
+  { text: 'Moodle' },
+  { text: 'Best' },
+  { text: 'Info' },
+];
 
 export const Default = () => {
   return (
     <div>
-      <TagsCard tags={tags}/>
+      <TagsCard tags={tags} />
     </div>
-  )
+  );
 };

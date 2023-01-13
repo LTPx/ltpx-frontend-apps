@@ -1,27 +1,75 @@
-export interface ICourse {
-  id: string;
-  image?: string;
-  title: string;
-  description?: string;
-  category: string;
-  price: number;
-  duration?: number;
-  lessons?: number;
-  stars?: number;
+import { PartialWithRequired } from './util';
+
+export enum CourseStatus {
+  publish = 'published',
+  draft = 'draft',
 }
 
-export interface ICourseContent {
+export enum CourseLanguage {
+  es = 'Spanish',
+  en = 'English',
+}
+
+export enum CourseLevel {
+  begging = 'begging',
+  intermediate = 'intermediate',
+  advanced = 'advanced',
+}
+
+export enum TeacherClassType {
+  none = 'none',
+  mandatory = 'mandatory',
+  flexible = 'flexible',
+  customize = 'customize',
+}
+
+export interface ContentCourse {
   title: string;
   description: string;
 }
 
-export interface INewCourse {
-  cover?: string;
+export interface Classroom {
+  condition: TeacherClassType;
+  min: number;
+  max: number;
+  call_time_min: number;
+  meetings: string[];
+}
+
+export interface CourseModel {
+  id: number;
+  user_id: number;
+  cover: any;
+  cover_url: string;
   title: string;
   description: string;
-  category: string;
-  language: string;
   learn_goals: string;
   requirements: string;
-  contents?: ICourseContent[];
+  created_at: string;
+  updated_at: string;
+  category: string;
+  price_currency: string;
+  contents_count: number;
+  enrollments_count: number;
+  price_cents: number;
+  average_rating: number;
+  approved: boolean;
+  level: CourseLevel;
+  language: CourseLanguage;
+  status: CourseStatus;
+  contents: ContentCourse[];
+  classroom: Classroom;
 }
+
+export type PublicCourse = Omit<
+  CourseModel, "user_id" | "created_at" | "updated_at" | "approved" | "status" | "cover_url"
+>
+
+export type TeacherCourse = Omit<
+  CourseModel, "user_id" | "cover"
+>
+
+export type NewCourseApiParams = PartialWithRequired<
+  TeacherCourse,
+  'description' | 'title'
+>;

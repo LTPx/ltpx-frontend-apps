@@ -1,34 +1,34 @@
+import { CourseStatus } from '@ltpx-frontend-apps/api';
+import { NavLink } from 'react-router-dom';
+import Dropdown from '../dropdown/dropdown';
 import Icon from '../icon/icon';
+import Menu from '../menu/menu';
 import Tag, { ColorsTag } from '../tag/tag';
 import styles from './teacher-course-card.module.scss';
 
 /* eslint-disable-next-line */
-export enum StatusCourse {
-  publish = 'publish',
-  draft = 'draft',
-}
 
 export interface TeacherCourseCardProps {
-  status: StatusCourse;
-  icon: string;
+  status: CourseStatus;
   image: string;
   title: string;
   learners: number;
-  design: string;
+  category: string;
   percentageRate: number;
   percentageLearner: number;
+  url: string;
 }
 
 export function TeacherCourseCard(props: TeacherCourseCardProps) {
   const {
     status,
-    icon,
     image,
     title,
     learners,
-    design,
+    category,
     percentageRate,
     percentageLearner,
+    url,
   } = props;
   return (
     <div className={styles['container']}>
@@ -36,26 +36,34 @@ export function TeacherCourseCard(props: TeacherCourseCardProps) {
         <Tag
           text={status}
           color={
-            status === StatusCourse.publish ? ColorsTag.green : ColorsTag.gray
+            status === CourseStatus.publish ? ColorsTag.green : ColorsTag.gray
           }
-          icon={icon}
+          icon={status === CourseStatus.publish ? 'globe' : 'edit'}
         />
-        <Icon icon={'menu'} size={15} />
+        <Dropdown>
+          <Icon icon={'menu'} size={15} />
+          <Menu items={[
+            {text: 'Editar curso', icon:'pencil'},
+            {text: 'Ver curso', icon:'user-group'}
+          ]}/>
+        </Dropdown>
       </div>
-      <div className={styles['content']}>
-        <img src={image} alt="" />
-        <div className={styles['information']}>
-          <h4>{title}</h4>
-          <div className={styles['describe']}>
-            <h5>
-              <Icon icon={'user'} size={10}></Icon> {learners} learner
-            </h5>
-            <h5>
-              <Icon icon={'box-unpacked'} size={10}></Icon> {design}
-            </h5>
+      <NavLink to={url}>
+        <div className={styles['content']}>
+          <img src={image} alt="" />
+          <div className={styles['information']}>
+            <h4>{title}</h4>
+            <div className={styles['describe']}>
+              <h5>
+                <Icon icon={'user'} size={10}></Icon> {learners} estudiantes
+              </h5>
+              <h5>
+                <Icon icon={'box-unpacked'} size={10}></Icon> {category}
+              </h5>
+            </div>
           </div>
         </div>
-      </div>
+      </NavLink>
       <div className={styles['end-content']}>
         {learners > 0 ? (
           <>
@@ -77,7 +85,7 @@ export function TeacherCourseCard(props: TeacherCourseCardProps) {
         ) : (
           <div className={styles['course-no-yet']}>
             <Icon icon="browser" size={15}></Icon>
-            <h5>This course have no stats yet</h5>
+            <h5>Este curso no tiene metricas aun</h5>
           </div>
         )}
       </div>

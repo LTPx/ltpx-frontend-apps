@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { SiteRoutes } from "./site-routes";
 import { StudentRoutes } from "./student-router";
 import { TeacherRoutes } from "./teacher-router";
+import { Loader } from "@ltpx-frontend-apps/shared-ui";
 
 export const AppRouter = () => {
   const [ isLoading, setIsLoading ] = useState(false);
@@ -28,6 +29,6 @@ export const AppRouter = () => {
   }, [])
 
   return (
-    isLoading ? <h1>loading...</h1> : routers[currentView]
+    isLoading ? <Loader/> : routers[currentView]
   )
 }

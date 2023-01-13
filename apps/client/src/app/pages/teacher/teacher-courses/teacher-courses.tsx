@@ -1,22 +1,20 @@
-import { ICourse, getTeacherCourses } from '@ltpx-frontend-apps/api';
-import { Button, ColorsButton, CourseCard, InputSearch, Select } from '@ltpx-frontend-apps/shared-ui';
+import { TeacherCourse, getTeacherCourses, CourseStatus } from '@ltpx-frontend-apps/api';
+import { Button, ColorsButton, InputSearch, Select, TeacherCourseCard } from '@ltpx-frontend-apps/shared-ui';
 import { useEffect, useState } from 'react';
-import { NavLink } from 'react-router-dom';
 import styles from './teacher-courses.module.scss';
 
+const placeholderImage = 'https://designshack.net/wp-content/uploads/placeholder-image-368x246.png';
 /* eslint-disable-next-line */
 export interface TeacherCoursesProps {}
 
 export function TeacherCourses(props: TeacherCoursesProps) {
-  const [courses, setCourses] = useState<ICourse[]>([]);
-  console.log('print');
+  const [courses, setCourses] = useState<TeacherCourse[]>([]);
 
   useEffect(() => {
     let mounted = true;
     try {
       getTeacherCourses().then((courses)=> {
         if (mounted) {
-          console.log('loaded');
           setCourses(courses);
         }
       });
@@ -36,30 +34,25 @@ export function TeacherCourses(props: TeacherCoursesProps) {
 
   const EmptyState = () => (
     <div className={styles['empty-state']}>
-      <h4>Aun no has creado ningun curso</h4>
+      <h4>Aun no has creado ningún curso</h4>
       <h5>porque no empezamos creado uno</h5>
-      {/* <Button title={'Crear Curso'} color={ColorsButton.primary}/> */}
     </div>
   )
 
   const CoursesList = () => (
     <div className={styles['courses']}>
       { courses.map((course, index)=>(
-        <NavLink key={index}
-          to={`/teacher/courses/${course.id}`}
-          className={`${styles['link']} link-wrapper`}
-        >
-          <CourseCard
-            key={index}
-            image={course.image}
-            category={course.category}
-            title={course.title}
-            price={course.price}
-            duration={course.duration}
-            lessons={course.lessons}
-            stars={course.stars}
-          />
-        </NavLink>
+        <TeacherCourseCard
+          key={index}
+          status={ course.status || CourseStatus.draft }
+          image={ course.cover_url || placeholderImage }
+          title={course.title}
+          learners={course.enrollments_count || 0}
+          category={course.category}
+          percentageRate={0}
+          percentageLearner={0}
+          url={`/teacher/courses/${course.id}`}
+        />
       )) }
     </div>
   )

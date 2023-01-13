@@ -5,8 +5,8 @@ import styles from './course-cart-item.module.scss';
 
 /* eslint-disable-next-line */
 export interface CourseCartItemProps {
-  id: string;
-  image?: string;
+  id: number;
+  cover?: string;
   category: string;
   title: string;
   price: number;
@@ -20,7 +20,7 @@ export interface CourseCartItemProps {
 export function CourseCartItem(props: CourseCartItemProps) {
   const {
     id,
-    image,
+    cover,
     category,
     title,
     price,
@@ -36,7 +36,7 @@ export function CourseCartItem(props: CourseCartItemProps) {
   return (
     <div className={styles['container']}>
       <div className={styles['card-item']}>
-        <img src={image} alt="course-item" />
+        <img src={cover} alt="course-item" />
         <div className={styles['content']}>
           <span className={styles['category']}>
             {category}

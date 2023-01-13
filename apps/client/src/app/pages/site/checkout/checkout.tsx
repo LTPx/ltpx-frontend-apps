@@ -12,7 +12,7 @@ export function Checkout(props: CheckoutProps) {
   const subtotal = () => {
     let total = 0;
     products.forEach((product)=>{
-      total = total + product.price;
+      total = total + product.price_cents;
     })
     return total;
   }

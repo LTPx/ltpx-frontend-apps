@@ -61,13 +61,13 @@ export function Home(props: HomeProps) {
               className={`${styles['link']} link-wrapper`}
             >
               <CourseCard
-                image={course.image}
+                image={course.cover}
                 category={course.category}
                 title={course.title}
-                price={course.price}
-                duration={course.duration}
-                lessons={course.lessons}
-                stars={course.stars}
+                price={course.price_cents}
+                duration={0}
+                lessons={0}
+                stars={course.average_rating}
               />
             </NavLink>
           ))}

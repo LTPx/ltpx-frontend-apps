@@ -1,116 +1,121 @@
-import { Select } from '@ltpx-frontend-apps/shared-ui';
+import { TeacherClassType } from '@ltpx-frontend-apps/api';
+import {
+  BannerNotification,
+  BannerType,
+  Classroom,
+  ClassroomForm,
+  DayTimePicker,
+  GroupSelectOptionCard,
+  Icon,
+  Input,
+  Modal,
+  OptionSelect,
+  Select,
+  SelectDates,
+  SelectOptionCardProps,
+  TimePicker,
+} from '@ltpx-frontend-apps/shared-ui';
+import { useState } from 'react';
 import styles from './teacher-classes.module.scss';
 
-export enum ClassesSchedule {
-  one = 'one-time',
-  multi = 'multi-day',
-  ongoing = 'ongoing',
-  flexible = 'flexible',
-}
-
-const classesScheduleOptions = [
+// title: string;
+// text: string;
+// icon: string;
+// selected?: boolean;
+const classesTypeOptions = [
   {
-    value: ClassesSchedule.one,
-    text: 'Una sola vez'
+    value: TeacherClassType.mandatory,
+    title: 'CLASES OBLIGATORIAS',
+    text: 'Este curso necesita clases y que los estudiantes asistan a todas las clases',
+    icon: 'user',
   },
   {
-    value: ClassesSchedule.multi,
-    text: 'Varios dias a la semana'
+    value: TeacherClassType.flexible,
+    title: 'CLASES FLEXIBLES',
+    text: 'Este curso necesita clases pero no es necesario que los estudiantes asista ah todas las clases',
+    icon: 'sliders',
   },
   {
-    value: ClassesSchedule.ongoing,
-    text: 'Varios dias a la semana no obligatorio a asistir'
+    value: TeacherClassType.customize,
+    title: 'CLASES PERSONALIZADAS',
+    text: 'Se acuerda con el estudiante hora y días en las que se dictaran las clases',
+    icon: 'mate',
   },
   {
-    value: ClassesSchedule.flexible,
-    text: 'Se acuerda con el estudiante los horarios'
-  }
+    value: TeacherClassType.none,
+    title: 'NO SE REQUIERE CLASES',
+    text: 'No se requiere de clases para que los estudiante apruebe este curso',
+    icon: 'forbidden',
+  },
 ];
 
-const numbers = [
-  { value: '1', text: '1' },
-  { value: '2', text: '2' },
-  { value: '3', text: '3' },
-  { value: '4', text: '4' },
-  { value: '5', text: '5' },
-  { value: '6', text: '6' }
-];
-
-const minutes = [
-  { value: '1', text: '00' },
-  { value: '2', text: '05' },
-  { value: '3', text: '10' },
-  { value: '4', text: '15' },
-  { value: '5', text: '20' },
-  { value: '6', text: '25' },
-  { value: '7', text: '30' },
-  { value: '8', text: '35' },
-  { value: '9', text: '40' },
-];
 /* eslint-disable-next-line */
 export interface TeacherClassesProps {
-
+  onChange?: () => void;
 }
 
 export function TeacherClasses(props: TeacherClassesProps) {
-  const minStudents = 1;
-  const maxStudents = 15;
-  const minAge = 6;
-  const maxAge = 12;
-  const durationClassMinutes = 60;
-  const daysClassPerWeek = 3;
-  const timesPerWeek = 2;
+  const { onChange } = props;
+  const data = {
+    condition: TeacherClassType.none,
+    min: 3,
+    max: 5,
+    weeks: 2,
+    call_time_min: 45,
+    meetings: [],
+  };
+
+  const [dataForm, setDataForm] = useState(data);
+  const [selectedTypeClass, setSelectedTypeClass] = useState<string>(
+    TeacherClassType.mandatory
+  );
+
+  const handleClasses = (data: Classroom) => {
+    console.log(data);
+  };
+
+  const handleCondition = (option: OptionSelect) => {
+    setSelectedTypeClass(option.value.toString());
+  };
 
   return (
     <div className={styles['container']}>
       <div className={styles['header-text']}>
-        <h2>Clases</h2>
-        <h4 className='muted'>Configura y agenda clases con tus estudiantes</h4>
+        <h2>Sesiones</h2>
+        <h4 className="muted">Configura y agenda clases con tus estudiantes</h4>
       </div>
-      <div className={styles['content-form']}>
-        <Select options={classesScheduleOptions}  label='Tipo de clase'/>
-        <div className={styles['field-form']}>
-          <label>Tamaño de la clase</label>
-          <div className={styles['range']}>
-            De
-            <div className="min">
-              <Select options={numbers}/>
-             </div>
-             a
-             <div className="max">
-              <Select options={numbers}/>
-             </div>
-             Estudiantes
-          </div>
+      <GroupSelectOptionCard
+        className={styles['classes-options']}
+        options={classesTypeOptions}
+        onChange={() => {}}
+      />
+      <Modal open={false}>
+        <div className={styles['content-form']}>
+          <ClassroomForm
+            onChange={(data) => {
+              handleClasses(data);
+            }}
+          />
         </div>
-        <div className={styles['field-form']}>
-          <label>Duracion de la clases</label>
-          <div className={styles['range']}>
-            Nos reuniremos
-            <div className="min">
-              <Select options={numbers}/>
-             </div>
-             dia(s) a la semana, por
-             <div className="max">
-              <Select options={numbers}/>
-             </div>
-             semanas
-          </div>
-          <div className={styles['range']}>
-            Cada clase durara
-             <div className="max">
-              <Select options={numbers}/>
-             </div>
-             hora(s), con
-             <div className="max">
-              <Select options={minutes}/>
-             </div>
-             minutos
-          </div>
-        </div>
-      </div>
+      </Modal>
     </div>
   );
 }
 
 export default TeacherClasses;
+
+// [{
+//   condition: 'no mandatory',
+//   min: 3,
+//   max: 5,
+//   weeks: 2,
+//   timeMin: 45,
+//   meetings: [
+//     { date: 'Monday 9', hour: '9am'},
+//     { date: 'Wednesday 11', hour: '9am'},
+//     { date: 'Friday 13', hour: '9am'},
+//     { date: 'Monday 16', hour: '9am'},
+//     { date: 'Wednesday 17', hour: '9am'},
+//     { date: 'Friday 18', hour: '9am'},
+//   ]
+// }]

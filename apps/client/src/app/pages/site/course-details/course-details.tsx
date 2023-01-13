@@ -4,13 +4,15 @@ import {
   AvatarSize,
   Rating,
   Tabs,
-  Icon,
   BuyCourseCard,
   TeacherOverview,
   RatingCourse,
   CommentCourse,
   ReviewForm,
+  OverviewCourse,
+  CourseContents,
 } from '@ltpx-frontend-apps/shared-ui';
+import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useUser } from '../../../store';
 import styles from './course-details.module.scss';
@@ -22,10 +24,15 @@ export function CourseDetails(props: CourseDetailsProps) {
   const { courseId } = useParams();
   const { addCourseCart } = useUser();
   const courseDetails = buildCourseDetails();
+  const [selectedTab, setSelectedTab] = useState(0);
+
+  const handleClick = (index: number) => {
+    setSelectedTab(index);
+  };
 
   const addToCart = () => {
     // addCourseToCart(courseDetails.course);
-    addCourseCart(courseDetails.course);
+    // addCourseCart(courseDetails.course);
   };
 
   const enrolled = () => {
@@ -34,16 +41,16 @@ export function CourseDetails(props: CourseDetailsProps) {
 
   const tabs = [
     {
-      text: 'Overview',
+      text: 'Descripción general',
     },
     {
-      text: 'Curriculum',
+      text: 'Contenidos',
     },
     {
-      text: 'Instructor',
+      text: 'Profesor',
     },
     {
-      text: 'Reviews',
+      text: 'Reseñas',
     },
   ];
 
@@ -81,60 +88,43 @@ export function CourseDetails(props: CourseDetailsProps) {
               </div>
             </div>
             <div className={styles['summary-course']}>
-              <Tabs tabs={tabs} isNav={false} />
-              <div className={styles['overview']}>
-                <section className={`${styles['course-description']}`}>
-                  <h3>Course Description</h3>
-                  <p>{courseDetails.overview.description}</p>
-                </section>
-                <section className={`${styles['achievements']}`}>
-                  <h3>What you will Learn</h3>
-                  <div className={styles['items']}>
-                    {courseDetails.overview.goals.map((goal, index) => (
-                      <div className={styles['item']} key={index}>
-                        <div>
-                          <Icon icon={'check-circle'} size={16} color='#4A8F9F'/>
-                        </div>
-                        <h4>{goal}</h4>
-                      </div>
-                    ))}
-                  </div>
-                </section>
-                <section className={`${styles['requirements']}`}>
-                  <h3>Requirements</h3>
-                  {courseDetails.overview.requirements.map(
-                    (requirement, index) => (
-                      <ul key={index} className={styles['list-requirements']}>
-                        <li>
-                          <h4>{requirement}</h4>
-                        </li>
-                      </ul>
-                    )
-                  )}
-                </section>
-              </div>
-              <TeacherOverview
-                name={courseDetails.instructor.name}
-                profession={courseDetails.instructor.profession}
-                rating={courseDetails.instructor.stars}
-                reviews={courseDetails.instructor.reviews}
-                students={courseDetails.instructor.students}
-                courses={courseDetails.instructor.courses}
-                biography={courseDetails.instructor.biography}
-                image={courseDetails.instructor.image}
+              <Tabs
+                tabs={tabs}
+                isNav={false}
+                onClickTab={(option) => handleClick(option)}
               />
-              <RatingCourse ratings={courseDetails.ratings}></RatingCourse>
-              {courseDetails.comments.map((comment, index) => (
-                <CommentCourse
-                  reviewTitle={comment.title}
-                  name={comment.name}
-                  comment={comment.comment}
-                  date={comment.date}
-                  key={index}
-                  image={comment.image}
+              {selectedTab === 0 && <OverviewCourse />}
+              {selectedTab === 1 && (
+                <CourseContents contents={courseDetails.contents} />
+              )}
+              {selectedTab === 2 && (
+                <TeacherOverview
+                  name={courseDetails.instructor.name}
+                  profession={courseDetails.instructor.profession}
+                  rating={courseDetails.instructor.stars}
+                  reviews={courseDetails.instructor.reviews}
+                  students={courseDetails.instructor.students}
+                  courses={courseDetails.instructor.courses}
+                  biography={courseDetails.instructor.biography}
+                  image={courseDetails.instructor.image}
                 />
-              ))}
-              <ReviewForm></ReviewForm>
+              )}
+              {selectedTab === 3 && (
+                <>
+                  <RatingCourse ratings={courseDetails.ratings}></RatingCourse>
+                  {courseDetails.comments.map((comment, index) => (
+                    <CommentCourse
+                      reviewTitle={comment.title}
+                      name={comment.name}
+                      comment={comment.comment}
+                      date={comment.date}
+                      key={index}
+                      image={comment.image}
+                    />
+                  ))}
+                  <ReviewForm />
+                </>
+              )}
             </div>
           </div>
         </div>

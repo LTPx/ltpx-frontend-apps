@@ -1,0 +1,17 @@
+@import '../../styles/styles.module.scss';
+
+.container {
+  .options-content {
+    display: flex;
+    flex-direction: column;
+    gap: $size-md-1;
+
+    .options {
+      display: flex;
+      align-items: center;
+      gap: $size-md-1;
+      color: $text-gray-color;
+      cursor: pointer;
+    }
+  }
+}

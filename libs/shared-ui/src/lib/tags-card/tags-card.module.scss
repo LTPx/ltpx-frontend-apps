@@ -3,42 +3,22 @@
 .container {
   box-sizing: border-box;
   max-width: 400px;
-  height: 195px;
-  background: #ffffff;
+  height: auto;
   border: 1px solid #e7e7ec;
-  box-shadow: 0px 8px 15px rgba(140, 152, 164, 0.1);
+  box-shadow: $card-shadow-medium;
   border-radius: 4px;
   display: flex;
   flex-direction: column;
+  padding: $size-md-3;
 
   h3 {
-    padding-top: $size-md-3;
-    padding-left: $size-md-3;
     color: $text-color;
-    padding-bottom: $size-md-1;
   }
 
   .tags-content {
-    padding-left: $size-md-3;
+    padding: $size-md-1;
     display: flex;
     flex-wrap: wrap;
     gap: $size-md-1;
-    width: 100%;
-
-    .tag {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      justify-content: center;
-      padding: 4px 12px;
-      gap: 10px;
-      height: 30px;
-      background: #f7f9fb;
-      border-radius: 4px;
-
-      h4 {
-        color: $text-gray-color;
-      }
-    }
   }
 }

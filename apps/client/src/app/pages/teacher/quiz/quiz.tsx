@@ -67,7 +67,7 @@ export function Quiz(props: QuizProps) {
             name='question'
           />
           <Input
-            label='Descripcion (opcional)'
+            label='Descripción (opcional)'
             placeholder='Alguna observacion antes de responder esta pregunta'
             value={form.description}
             onChange={(e: { target: HTMLInputElement; }) => handleInputChange(e, index)}

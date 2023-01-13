@@ -9,14 +9,14 @@ export function ShoppingCart(props: ShoppingCartProps) {
 
   const { isAuthenticated, products, removeCourseCart } = useUser();
 
-  const handleRemoveItem = (id: string) => {
+  const handleRemoveItem = (id: number) => {
     removeCourseCart(id);
   }
 
   const subtotal = () => {
     let total = 0;
     products.forEach((product)=>{
-      total = total + product.price;
+      total = total + product.price_cents;
     })
     return total;
   }
@@ -30,13 +30,13 @@ export function ShoppingCart(props: ShoppingCartProps) {
             <CourseCartItem
               key={index}
               id={product.id}
-              image={product.image}
+              cover={product.cover}
               category={product.category}
               title={product.title}
-              price={product.price}
-              duration={product.duration}
-              lessons={product.lessons}
-              stars={product.stars}
+              price={product.price_cents}
+              duration={0}
+              lessons={0}
+              stars={product.average_rating}
               onClickRemove={handleRemoveItem}
             />
           ))}

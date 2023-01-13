@@ -8,7 +8,7 @@
     display: flex;
     justify-content: space-around;
     border-bottom: 1px solid #d8d8d8;
-    padding: 4rem 0;
+    padding: $size-lg-4 0;
 
     .company-information {
       display: flex;
@@ -35,11 +35,7 @@
 
         .social {
           cursor: pointer;
-          border-radius: 50%;
           padding: $size-sm-2;
-          border-width: 1px;
-          border-style: solid;
-          border-color: white;
         }
       }
     }
@@ -54,7 +50,6 @@
         gap: $size-md-1;
 
         .title {
-          // font-size: 16px;
           font-weight: bold;
           margin: 0;
         }
@@ -70,7 +65,7 @@
 
   .footer-end {
     color: #8887b2;
-    padding: 3rem 0;
+    padding: $size-lg-3 0;
     display: flex;
     justify-content: center;
 

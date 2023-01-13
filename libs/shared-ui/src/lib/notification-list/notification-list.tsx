@@ -35,7 +35,7 @@ export function NotificationList(props: NotificationListProps) {
       {countNewNotification !== 0 && (
         <h3>You have {countNewNotification} new notification</h3>
       )}
-      {notifications.length === 0 && <h3>Nothing</h3>}
+      {notifications.length === 0 && <h4>🔔 No tienes notificaciones aun</h4>}
       {notifications.map((notification, index) => (
         <NotificationRow
           key={index}

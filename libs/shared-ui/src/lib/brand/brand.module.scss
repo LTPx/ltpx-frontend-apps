@@ -1,4 +1,18 @@
+@import '../../styles/styles.module.scss';
 .container {
+  border: 1px solid $text-gray-color;
+  padding: 0.25rem 0.5rem;
+  width: 2.5rem;
+  height: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  p {
+    font-size: $size-sm-3;
+  }
+
   &.negative {
     h3 {
       color: #fff;

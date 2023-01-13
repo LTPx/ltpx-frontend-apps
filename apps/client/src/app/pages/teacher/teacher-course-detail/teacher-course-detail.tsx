@@ -1,5 +1,4 @@
 import {
-  buildRandomTeacherCourseDetail,
   getTeacherCourse,
   TeacherCourse,
 } from '@ltpx-frontend-apps/api';
@@ -57,9 +56,8 @@ export function TeacherCourseDetail(props: TeacherCourseDetailProps) {
   const handleClick = (index: number) => {
     setSelectedTab(index);
   };
-
   const params = useParams();
-  console.log(params);
+
   useEffect(() => {
     let mounted = true;
     try {
@@ -80,22 +78,12 @@ export function TeacherCourseDetail(props: TeacherCourseDetailProps) {
     };
   }, []);
 
-  const courses = buildRandomTeacherCourseDetail();
-  // const { entity, contents } = course;
-
-  // const buildContentsTabs = () => {
-  //   return contents.map((content, index)=>(
-  //     {
-  //       text: `Seccion - ${index+1}`
-  //     }
-  //   ))
-  // }
   return (
     <div className={styles['container']}>
       {course && (
         <>
           <div className={styles['cover']}>
-            <img src={course.cover_url}></img>
+            <img src={course.cover_url || 'https://designshack.net/wp-content/uploads/placeholder-image-368x246.png'}></img>
           </div>
           <h1>{course.title}</h1>
           <div className={styles['basic-info']}>
@@ -117,7 +105,7 @@ export function TeacherCourseDetail(props: TeacherCourseDetailProps) {
               onClickTab={(option) => handleClick(option)}
             />
             {selectedTab === 0 && (
-              <CourseContents contents={courses.contents} />
+              <CourseContents contents={course.contents} />
             )}
             {selectedTab === 1 && <LearnersTable users={users} />}
             {selectedTab === 2 && <h1>Mostrar Estadísticas</h1>}

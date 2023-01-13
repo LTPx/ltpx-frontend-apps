@@ -6,11 +6,12 @@ import styles from './teacher-account.module.scss';
 export interface TeacherAccountProps {}
 
 export function TeacherAccount(props: TeacherAccountProps) {
+  const clickFunction = () => {
+    console.log('click');
+  };
   return (
     <div className={styles['container']}>
-     <UserAccountForm onSubmit={function (data: IUserAccount): void {
-        throw new Error('Function not implemented.');
-      } }/>
+      <UserAccountForm onSubmit={clickFunction} />
     </div>
   );
 }

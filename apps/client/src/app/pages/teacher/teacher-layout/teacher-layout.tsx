@@ -58,15 +58,18 @@ export function TeacherLayout(props: TeacherLayoutProps) {
       <Header links={[]}>
         <div className={styles['teacher-actions']}>
           <Dropdown>
-            <Icon icon='notification' size={22}/>
+            <Icon icon='notification' size={22} className={styles['notification']}/>
             <NotificationList notifications={[]} countNewNotification={0}/>
           </Dropdown>
-          <h4>{user.fullname}</h4>
           <Dropdown>
-            <Avatar
-              image='https://images.unsplash.com/photo-1669563306078-4c107b67d125?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=3387&q=80'
-              dropdown-id={'menu'}
-            />
+            <div className={styles['avatar']}>
+              <Avatar
+                image='https://images.unsplash.com/photo-1669563306078-4c107b67d125?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=3387&q=80'
+                dropdown-id={'menu'}
+              />
+              <h4>{user.fullname}</h4>
+              <Icon icon='caret-down' size={18}/>
+            </div>
             <UserMenu
               name={user.fullname}
               email={user.email}

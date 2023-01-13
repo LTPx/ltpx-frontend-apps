@@ -9,7 +9,7 @@ export const AppRouter = () => {
   const [ isLoading, setIsLoading ] = useState(false);
   const { currentView } = useUser();
   const { isAuthenticated, getCurrentUser } = useUser();
-  const token = sessionStorage.getItem('auth_token');
+  const token = localStorage.getItem('auth_token');
 
   const routers = {
     default: <SiteRoutes/>,
@@ -19,12 +19,12 @@ export const AppRouter = () => {
   };
 
   useEffect(() => {
-    if (token && !isAuthenticated && (isLoading === false)) {
+    if (token && !isAuthenticated && !isLoading) {
       setIsLoading(true);
       getCurrentUser().then(()=> {
         setTimeout(() => {
           setIsLoading(false)
-        }, 500);
+        }, 2500);
       });
     }
     return () => {

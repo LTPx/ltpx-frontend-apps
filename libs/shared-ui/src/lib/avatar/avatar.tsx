@@ -8,6 +8,7 @@ export enum AvatarSize {
   medium = 'medium',
   large = 'large'
 }
+
 export interface AvatarProps {
   image: string;
   size?: AvatarSize;

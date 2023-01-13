@@ -1639,6 +1639,16 @@
         "width": 1024
       },
       "properties": { "name": "close-circle-outline" }
+    },
+    {
+      "icon": {
+        "paths": [
+          "M463.8 713L156.9 362.1C120.6 320.8 150.1 256 205.1 256h613.8a64 64 0 0 1 48.2 106.2l-306.9 350.7a64 64 0 0 1-96.4 0z"
+        ],
+        "attrs": [{}],
+        "width": 1024
+      },
+      "properties": {"name": "caret-down"}
     }
   ]
 }

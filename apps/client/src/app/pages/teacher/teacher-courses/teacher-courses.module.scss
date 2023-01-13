@@ -22,11 +22,15 @@
   }
 
   .courses-container {
-    padding: 2rem 0;
+    padding: 2rem 1rem;
+    height: 60vh;
+    overflow-y: auto;
+
     .courses {
-      display: flex;
-      flex-wrap: wrap;
+      display: grid;
       gap: 1rem;
+      grid-auto-rows: 22rem;
+      grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
     }
   }
 }

@@ -1,0 +1,14 @@
+@import '../../styles/styles.module.scss';
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+
+  .content {
+    text-align: center;
+  }
+}

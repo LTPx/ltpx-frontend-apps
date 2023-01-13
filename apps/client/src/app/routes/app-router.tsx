@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { SiteRoutes } from "./site-routes";
 import { StudentRoutes } from "./student-router";
 import { TeacherRoutes } from "./teacher-router";
-import { Loader } from "@ltpx-frontend-apps/shared-ui";
+import { LoaderPage } from "@ltpx-frontend-apps/shared-ui";
 
 export const AppRouter = () => {
   const [ isLoading, setIsLoading ] = useState(false);
@@ -21,7 +21,11 @@ export const AppRouter = () => {
   useEffect(() => {
     if (token && !isAuthenticated && (isLoading === false)) {
       setIsLoading(true);
-      getCurrentUser().then(()=> setIsLoading(false));
+      getCurrentUser().then(()=> {
+        setTimeout(() => {
+          setIsLoading(false)
+        }, 500);
+      });
     }
     return () => {
 
@@ -29,6 +33,6 @@ export const AppRouter = () => {
   }, [])
 
   return (
-    isLoading ? <Loader/> : routers[currentView]
+    isLoading ? <LoaderPage/> : routers[currentView]
   )
 }

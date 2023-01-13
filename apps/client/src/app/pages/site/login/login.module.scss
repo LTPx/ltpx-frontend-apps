@@ -8,26 +8,10 @@
 
 .content {
   max-width: 30rem;
-
-  span {
-    color: $text-gray-color;
-  }
-
   .link {
     color: $primary-color-400;
     display: flex;
     justify-content: center;
     margin-top: $size-md-1;
   }
-}
-
-.btn-submit {
-  margin-top: 20px;
-}
-
-.error {
-  background-color: $red-color;
-  color: $white-color;
-  padding: $size-md-1;
-  margin: $size-sm-2 0;
 }

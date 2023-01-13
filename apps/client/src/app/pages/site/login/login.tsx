@@ -65,13 +65,3 @@ export function Login(props: LoginProps) {
 }
 
 export default Login;
-
-// {status === 1 ? (
-//   <BannerNotification>
-//     Se a enviado un correo de validación;
-//   </BannerNotification>
-// ) : (
-//   <BannerNotification type={BannerType.error}>
-//     correo de validación;
-//   </BannerNotification>
-// )}

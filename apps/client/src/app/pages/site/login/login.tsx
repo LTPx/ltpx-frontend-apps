@@ -5,6 +5,8 @@ import {
   Button,
   ColorsButton,
   Input,
+  InputTextStatus,
+  StatusInputText,
   TypeButton,
 } from '@ltpx-frontend-apps/shared-ui';
 import { NavLink, useNavigate } from 'react-router-dom';
@@ -18,8 +20,9 @@ import { useUser } from '../../../store';
 export interface LoginProps {}
 
 export function Login(props: LoginProps) {
-  const [ error, setError] = useState(false);
+  const [error, setError] = useState(false);
   const { login } = useUser();
+  const status = 1;
 
   const navigate = useNavigate();
 
@@ -28,16 +31,16 @@ export function Login(props: LoginProps) {
       email: '',
       password: '',
     },
-    validationSchema: Yup.object({
-      email: Yup.string().email().required('Email is required'),
+    validationSchema: Yup.object().shape({
+      email: Yup.string().email("Invalid email ").required('Email is required'),
       password: Yup.string().required('Password is required'),
     }),
-    onSubmit: async formData => {
+    onSubmit: async (formData) => {
       const userAccount = {
         email: formData.email,
         password: formData.password,
-      }
-
+      };
+      console.log('hola');
       const { isLogin, data } = await login(userAccount);
 
       if (isLogin) {
@@ -56,41 +59,62 @@ export function Login(props: LoginProps) {
 
   return (
     <div className="main-container">
+      {status === 1 ? (
+        <BannerNotification>
+          Se a enviado un correo de validación;
+        </BannerNotification>
+      ) : (
+        <BannerNotification type={BannerType.error}>
+          correo de validación;
+        </BannerNotification>
+      )}
+
       <div className={styles['container']}>
         <div className={styles['content']}>
           <h1>Iniciar Sesión</h1>
           <p>
-            Accede a una comunidad de apoyo de instructores en línea. obten acceso instantáneo
-            a todos nuestros cursos y clases.
+            Accede a una comunidad de apoyo de instructores en línea. obten
+            acceso instantáneo a todos nuestros cursos y clases.
           </p>
-          { error && (
-            <BannerNotification type={BannerType.error} onClickClose={()=>(setError(false))}>
+          {error && (
+            <BannerNotification
+              type={BannerType.error}
+              onClickClose={() => setError(false)}
+            >
               Tu email o password no coinciden, prueba recuperando contraseña
             </BannerNotification>
           )}
-          <form>
+          <form onSubmit={formik.handleSubmit}>
             <Input
               label="Email"
               type="email"
               name="email"
               placeholder="myemail@example.com"
-              onChange={(e: any) => {
-                formik.handleChange(e);
-              }}
+              onChange={formik.handleChange}
               value={formik.values.email}
               onBlur={formik.handleBlur}
             />
+            {formik.touched.email && formik.errors.email ? (
+              <InputTextStatus
+                status={StatusInputText.error}
+                text={formik.errors.email}
+              />
+            ) : null}
             <Input
               label="Password"
               type="password"
               name="password"
               placeholder="********"
-              onChange={(e: any) => {
-                formik.handleChange(e);
-              }}
+              onChange={formik.handleChange}
               value={formik.values.password}
               onBlur={formik.handleBlur}
             />
+            {formik.touched.password && formik.errors.password ? (
+              <InputTextStatus
+                status={StatusInputText.error}
+                text={formik.errors.password}
+              />
+            ) : null}
             <Button
               className={styles['btn-submit']}
               color={ColorsButton.primary}

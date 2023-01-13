@@ -1,9 +1,9 @@
-@import "../../../../styles.scss";
+@import '../../../../styles.scss';
 
 .container {
   display: flex;
   justify-content: center;
-  margin-top: 2rem;
+  margin-top: $size-lg-1;
 }
 
 .content {
@@ -17,7 +17,7 @@
     color: $primary-color-400;
     display: flex;
     justify-content: center;
-    margin-top: 1rem;
+    margin-top: $size-md-1;
   }
 }
 
@@ -26,8 +26,8 @@
 }
 
 .error {
-  background-color: #ef4444;
+  background-color: $red-color;
   color: $white-color;
-  padding: 1rem;
-  margin: 0.5rem 0;
+  padding: $size-md-1;
+  margin: $size-sm-2 0;
 }

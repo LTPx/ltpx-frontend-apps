@@ -1,6 +1,9 @@
 @import '../../styles/styles.module.scss';
 
 .container {
+  width: 100%;
+  padding-top: $size-lg-3;
+  padding-bottom: $size-lg-3;
 
   .user-name {
     display: flex;
@@ -29,12 +32,13 @@ tbody {
 
   tr {
     &:hover {
-      background-color: #f7f7f7;;
+      background-color: #f7f7f7;
     }
   }
 }
 
-td, th {
+td,
+th {
   text-align: left;
   padding: 20px;
 }

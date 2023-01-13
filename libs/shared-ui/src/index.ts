@@ -1,3 +1,4 @@
+export * from './lib/register-form/register-form';
 export * from './lib/loader-page/loader-page';
 export * from './lib/login-form/login-form';
 export * from './lib/quiz-card/quiz-card';

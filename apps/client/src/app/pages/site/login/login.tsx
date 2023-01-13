@@ -1,4 +1,5 @@
 import styles from './login.module.scss';
+// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
 import {
   BannerNotification,
   BannerType,

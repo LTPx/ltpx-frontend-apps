@@ -1,9 +1,9 @@
 @import '../../styles/styles.module.scss';
 
 .container {
-  background-color: #fff;
+  background-color: $white-color;
   min-width: 14rem;
-  border: 1px solid #f7f7f7;
+  border: 1px solid $white-color;
   box-shadow: $card-shadow-strong;
   padding: 10px;
 
@@ -27,18 +27,18 @@
 
   .category {
     font-size: 12px;
-    color: #888888;
+    color: $text-gray-color;
   }
 
   .title {
     font-weight: bold;
-    color: #0a0861;
+    color: $text-color;
   }
 
   .info {
     display: flex;
     justify-content: space-between;
-    color: #888888;
+    color: $text-gray-color;
   }
 
   .info-item {

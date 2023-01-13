@@ -86,7 +86,7 @@ export const Error = () => {
   const props: SnackbarProps = {
     position: SnackbarPosition.centerBottom,
     open: true,
-    icon: 'close',
+    icon: 'close-circle-outline',
     title: 'Error Message',
     date: 'Today 10:30PM',
     typeSnackbar: SnackbarType.error,

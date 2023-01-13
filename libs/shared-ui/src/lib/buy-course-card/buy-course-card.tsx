@@ -62,7 +62,7 @@ export function BuyCourseCard(props: BuyCourseCardProps) {
           <div className={styles['details']}>
             <div className={styles['item']}>
               <div className={styles['item-text']}>
-                <Icon icon={'clock'} size={15} color="#888888"></Icon>
+                <Icon icon={'trophy'} size={15} color="#888888"></Icon>
                 <h4>Achievement</h4>
               </div>
               <h4>{achievements}</h4>
@@ -70,7 +70,7 @@ export function BuyCourseCard(props: BuyCourseCardProps) {
             <div className={styles['item']}>
               <div className={styles['item-text']}>
                 <Icon icon={'copy'} size={15} color="#888888"></Icon>
-                <h4>Lectures</h4>
+                <h4>Contents</h4>
               </div>
               <h4>{lectures}</h4>
             </div>

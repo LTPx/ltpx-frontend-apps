@@ -1,4 +1,3 @@
-import { ICredentials } from '@ltpx-frontend-apps/api';
 import type { ComponentMeta } from '@storybook/react';
 import { LoginForm } from './login-form';
 

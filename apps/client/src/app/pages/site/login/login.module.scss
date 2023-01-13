@@ -1,33 +1,17 @@
-@import "../../../../styles.scss";
+@import '../../../../styles.scss';
 
 .container {
   display: flex;
   justify-content: center;
-  margin-top: 2rem;
+  margin-top: $size-lg-1;
 }
 
 .content {
   max-width: 30rem;
-
-  span {
-    color: $text-gray-color;
-  }
-
   .link {
     color: $primary-color-400;
     display: flex;
     justify-content: center;
-    margin-top: 1rem;
+    margin-top: $size-md-1;
   }
-}
-
-.btn-submit {
-  margin-top: 20px;
-}
-
-.error {
-  background-color: #ef4444;
-  color: $white-color;
-  padding: 1rem;
-  margin: 0.5rem 0;
 }

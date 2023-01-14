@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import Button from '../button/button';
 import SelectDates from '../select-dates/select-dates';
 import Select from '../select/select';
 import styles from './classroom-form.module.scss';
@@ -11,16 +12,16 @@ export interface Classroom {
   meetings: {
    durationMin: number,
    dates: string[]
-  }
+  },
 }
 /* eslint-disable-next-line */
 export interface ClassroomFormProps {
-  onChange?: (data: Classroom) => void
+  onChange?: (data: Classroom) => void;
+  children?: any;
 }
 
 export function ClassroomForm(props: ClassroomFormProps) {
-  const { onChange } = props;
-
+  const { onChange, children } = props;
   const [formData, setFormData] = useState<Classroom>(
     {
       students: {
@@ -133,6 +134,10 @@ export function ClassroomForm(props: ClassroomFormProps) {
       <div className={styles['field-form']}>
         <label>Las clases seran en estas fechas</label>
         <SelectDates onChange={(dates)=>{handleDates(dates)}}/>
+      </div>
+      <div className={styles['buttons']}>
+        {children}
+        <Button title='Guardar clases'/>
       </div>
     </div>
   );

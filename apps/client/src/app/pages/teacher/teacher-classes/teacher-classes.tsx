@@ -66,25 +66,41 @@ export function TeacherClasses(props: TeacherClassesProps) {
     meetings: [],
   };
 
-  const [dataForm, setDataForm] = useState(data);
+  const [classroom, setClassroom] = useState(data);
   const [openModal, setOpenModal] = useState(false);
-  const [selectedTypeClass, setSelectedTypeClass] = useState<string>(
-    TeacherClassType.mandatory
-  );
 
-  const handleClasses = (data: any) => {
-    console.log(data);
-  };
-
-  const handleCondition = (option: OptionSelect) => {
-    setSelectedTypeClass(option.value.toString());
-  };
   const selectedOptionClass = (option: any) => {
     console.log(option);
     if (option === TeacherClassType.mandatory || option === TeacherClassType.flexible) {
       setOpenModal(true);
     }
   };
+
+  const handleClassroom = (classroom: any) => {
+    setClassroom(classroom);
+  };
+
+  const formatDatetime = (date: string) => {
+    return date.split('T').join(' a las ');
+  }
+
+  const toHoursAndMinutes = (totalMinutes: number)  => {
+    const hours = Math.floor(totalMinutes / 60);
+    const minutes = totalMinutes % 60;
+    return `${hours}h${minutes > 0 ? ` ${minutes}m` : ''}`;
+  }
+
+  const ClassroomSummary = () => (
+    <div className={styles['classroom-summary']}>
+      <h3>Resumen de las clases</h3>
+      <h4>Este curso tendrá un rango de: {classroom.min} a {classroom.max} de estudiantes</h4>
+      <h4>Cada clase durara: {toHoursAndMinutes(classroom.call_time_min)}</h4>
+      <h4>Las clases se dictaran los días: </h4>
+      { classroom.meetings.map((date)=>(
+        <li>{formatDatetime(date)}</li>
+      ))}
+    </div>
+  );
 
   return (
     <div className={styles['container']}>
@@ -97,12 +113,15 @@ export function TeacherClasses(props: TeacherClassesProps) {
         options={classesOptions}
         onChange={(option) => { selectedOptionClass(option) }}
       />
+      { classroom && (
+        <ClassroomSummary/>
+      )}
       <Modal open={openModal}>
         <div className={styles['content-form']}>
           <h2>Crear Clases</h2>
           <ClassroomForm
             onSubmit={(data) => {
-              // handleClasses(data);
+              handleClassroom(data);
             }}
           >
             <Button
@@ -118,19 +137,3 @@ export function TeacherClasses(props: TeacherClassesProps) {
 }
 
 export default TeacherClasses;
-
-// [{
-//   condition: 'no mandatory',
-//   min: 3,
-//   max: 5,
-//   weeks: 2,
-//   timeMin: 45,
-//   meetings: [
-//     { date: 'Monday 9', hour: '9am'},
-//     { date: 'Wednesday 11', hour: '9am'},
-//     { date: 'Friday 13', hour: '9am'},
-//     { date: 'Monday 16', hour: '9am'},
-//     { date: 'Wednesday 17', hour: '9am'},
-//     { date: 'Friday 18', hour: '9am'},
-//   ]
-// }]

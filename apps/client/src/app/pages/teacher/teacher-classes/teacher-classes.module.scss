@@ -1,3 +1,5 @@
+@import '../../../../styles.scss';
+
 .header-text {
   margin-bottom: 2rem;
 }
@@ -38,4 +40,13 @@
 .classes-options {
   display: grid;
   grid-template-columns: 1fr 1fr;
+}
+
+.classroom-summary {
+  background-color: $green-color-100;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1rem 2rem;
+  margin-top: 2rem;
 }

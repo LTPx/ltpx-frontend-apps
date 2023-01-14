@@ -93,8 +93,10 @@
 
 .btn-primary.disabled,.btn-primary:disabled {
   color: $white-color;
-  background-color: $primary-color-400;
-  border-color: $primary-color-400;
+  background-color: $primary-color;
+  border-color: $primary-color;
+  opacity: 0.4;
+  cursor: not-allowed;
 }
 
 // secondary button

@@ -4,38 +4,15 @@ import {
   ClassroomForm,
   ClassroomView,
   ColorsButton,
+  CourseClasses,
+  Drawer,
   GroupSelectOptionCard,
+  Icon,
   Modal,
 } from '@ltpx-frontend-apps/shared-ui';
 import { useState } from 'react';
 import styles from './teacher-classes.module.scss';
-
-const classesOptions = [
-  {
-    value: TeacherClassType.mandatory,
-    title: 'CLASES OBLIGATORIAS',
-    text: 'Este curso requiere que los estudiantes asistan a todas las clases',
-    icon: 'user',
-  },
-  {
-    value: TeacherClassType.flexible,
-    title: 'CLASES FLEXIBLES',
-    text: 'Este curso no requiere que los estudiantes asistan a todas las clases',
-    icon: 'sliders',
-  },
-  {
-    value: TeacherClassType.customize,
-    title: 'CLASES PERSONALIZADAS',
-    text: 'En este curso se acuerda con el estudiante hora y días en las que se dictaran las clases',
-    icon: 'mate',
-  },
-  {
-    value: TeacherClassType.none,
-    title: 'NO SE REQUIERE CLASES',
-    text: 'Este curso no requiere de clases para que los estudiante apruebe este curso',
-    icon: 'forbidden',
-  },
-];
+import { Dialog } from 'evergreen-ui';
 
 /* eslint-disable-next-line */
 export interface TeacherClassesProps {
@@ -78,22 +55,61 @@ export function TeacherClasses(props: TeacherClassesProps) {
     <div className={styles['container']}>
       <div className={styles['header-text']}>
         <h2>Sesiones</h2>
-        <h4 className="muted">Configura y agenda clases con tus estudiantes</h4>
+        <h4 className="muted">
+          Establece horarios y fechas para reunirte con tus estudiantes
+        </h4>
       </div>
-      <GroupSelectOptionCard
-        className={styles['classes-options']}
-        options={classesOptions}
-        onChange={(option) => {
-          selectedOptionClass(option);
+      <div className={styles['information']}>
+        <Icon icon="cog" size={50} />
+        <h4 className="muted">
+          Elige la opción que mejor se acople para este curso
+        </h4>
+        <Button
+          title="Configurar Ahora"
+          onClick={() => {
+            setOpenModal(true);
+          }}
+        />
+      </div>
+      <CourseClasses
+        open={openModal}
+        onClose={() => {
+          setOpenModal(false);
         }}
       />
+      {/* <Dialog
+        isShown={openModal}
+        title="Dialog title"
+        onCloseComplete={() => setOpenModal(false)}
+        confirmLabel="Guardar"
+        width={'120vh'}
+      >
+        <div className={styles['modal-classroom']}>
+          <GroupSelectOptionCard
+            className={styles['classes']}
+            options={classesOptions}
+            onChange={(option) => {
+              selectedOptionClass(option);
+            }}
+          />
+          <div className={styles['content']}>
+            <ClassroomForm
+              onSubmit={(data) => {
+                handleClassroom(data);
+                setOpenModal(false);
+              }}
+            ></ClassroomForm>
+          </div>
+        </div>
+      </Dialog> */}
+
       {classroom && (
         <ClassroomView
           classroom={classroom}
           className={styles['classroom-summary']}
         />
       )}
-      <Modal open={openModal}>
+      {/* <Drawer open={openModal} onClose={()=>{setOpenModal(false)}}>
         <div className={styles['content-form']}>
           <h2>Crear Clases</h2>
           <ClassroomForm
@@ -111,7 +127,7 @@ export function TeacherClasses(props: TeacherClassesProps) {
             />
           </ClassroomForm>
         </div>
-      </Modal>
+      </Drawer> */}
     </div>
   );
 }

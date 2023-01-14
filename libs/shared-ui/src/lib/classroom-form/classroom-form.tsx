@@ -9,10 +9,11 @@ import styles from './classroom-form.module.scss';
 export interface ClassroomFormProps {
   onSubmit?: (data: Omit<Classroom, 'condition'>) => void;
   children?: any;
+  className?: string;
 }
 
 export function ClassroomForm(props: ClassroomFormProps) {
-  const { onSubmit, children } = props;
+  const { onSubmit, children, className } = props;
 
   const formik = useFormik({
     initialValues: {
@@ -62,63 +63,65 @@ export function ClassroomForm(props: ClassroomFormProps) {
   ];
 
   return (
-    <form className={styles['form']}>
-      <div className={styles['field-form']}>
-        <label>Tamaño de la clase</label>
-        <div className={styles['range']}>
-          De{' '}
-          <Select
-            options={numbers}
-            onChange={(e) => {
-              formik.setFieldValue('min', e.value);
-            }}
-          />{' '}
-          a
-          <Select
-            options={numbers}
-            onChange={(e) => {
-              formik.setFieldValue('max', e.value);
-            }}
-          />{' '}
-          Estudiantes
+    <form className={`${styles['form']} ${className}`}>
+      <section>
+        <div className={styles['field-form']}>
+          <label>Tamaño de la clase</label>
+          <div className={styles['range']}>
+            De{' '}
+            <Select
+              options={numbers}
+              onChange={(e) => {
+                formik.setFieldValue('min', e.value);
+              }}
+            />{' '}
+            a
+            <Select
+              options={numbers}
+              onChange={(e) => {
+                formik.setFieldValue('max', e.value);
+              }}
+            />{' '}
+            Estudiantes
+          </div>
         </div>
-      </div>
-      <div className={styles['field-form']}>
-        <label>Duración de la clases</label>
-        <div className={styles['range']}>
-          Cada clase durara{' '}
-          <Select
-            options={hours}
-            onChange={(e) => {
-              formik.setFieldValue('hour', e.value);
-            }}
-          />{' '}
-          hora(s), con
-          <Select
-            options={minutes}
-            onChange={(e) => {
-              formik.setFieldValue('minutes', e.value);
-            }}
-          />{' '}
-          minutos
+        <div className={styles['field-form']}>
+          <label>Duración de la clases</label>
+          <div className={styles['range']}>
+            Cada clase durara{' '}
+            <Select
+              options={hours}
+              onChange={(e) => {
+                formik.setFieldValue('hour', e.value);
+              }}
+            />{' '}
+            hora(s), con
+            <Select
+              options={minutes}
+              onChange={(e) => {
+                formik.setFieldValue('minutes', e.value);
+              }}
+            />{' '}
+            minutos
+          </div>
         </div>
-      </div>
-      <div className={styles['field-form']}>
-        <label>Las clases serán en estas fechas</label>
-        <SelectDates
-          onChange={(dates) => {
-            formik.setFieldValue('dates', dates);
-          }}
-        />
-      </div>
-      <div className={styles['buttons']}>
+        <div className={styles['field-form']}>
+          <label>Las clases serán en estas fechas</label>
+          <SelectDates
+            onChange={(dates) => {
+              formik.setFieldValue('dates', dates);
+            }}
+          />
+        </div>
+      </section>
+      <footer className={styles['buttons']}>
         {children}
         <Button
           title="Guardar clases"
           type={TypeButton.submit}
           onClick={formik.handleSubmit}
         />
-      </div>
+      </footer>
     </form>
   );
 }

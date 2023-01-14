@@ -1,3 +1,5 @@
+export * from './lib/course-classes/course-classes';
+export * from './lib/drawer/drawer';
 export * from './lib/classroom-view/classroom-view';
 export * from './lib/loader-page/loader-page';
 export * from './lib/login-form/login-form';

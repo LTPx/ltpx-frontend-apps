@@ -1,9 +1,7 @@
 import {
   Button,
   ColorsButton,
-  OptionSelect,
   Select,
-  Tabs,
   TypeButton,
 } from '@ltpx-frontend-apps/shared-ui';
 import { useFormik } from 'formik';
@@ -11,7 +9,6 @@ import { useState } from 'react';
 import Achievement from '../achievement/achievement';
 import CourseContents from '../course/course-contents/course-contents';
 import CourseGeneralInformation from '../course/course-general-information/course-general-information';
-import CourseSettings from '../course/course-settings/course-settings';
 import Quiz from '../quiz/quiz';
 import TeacherClasses from '../teacher-classes/teacher-classes';
 import styles from './new-course.module.scss';
@@ -28,17 +25,8 @@ const optionsSave = [
   { value: 'public', text: 'Publicar' },
 ];
 
-const tabs = [
-  { text: 'Información General' },
-  { text: 'Contenidos' },
-  { text: 'Agendar Clases' },
-  // {text: 'Test'},
-  // {text: 'Logros'},
-  // {text: 'Settings'},
-];
-
 export function NewCourse(props: NewCourseProps) {
-  const [indexViewSelected, setIndexViewSelected] = useState(0);
+  const [classroomData, setClassroomData] = useState();
   const [contents, setContents] = useState<ContentCourse[]>([]);
   const { createCourse } = useTeacher();
   const navigate = useNavigate();
@@ -62,8 +50,12 @@ export function NewCourse(props: NewCourseProps) {
       console.log('formData: ', formData);
       const courseData = {
         ...formData,
-        ...{ contents: contents },
+        ...{
+          contents: contents,
+          classroom: classroomData
+        }
       };
+      console.log('courseData: ', courseData);
       const { saved, data } = await createCourse(courseData);
       if (saved) {
         navigate('/teacher/courses/all');
@@ -73,8 +65,9 @@ export function NewCourse(props: NewCourseProps) {
     },
   });
 
-  const handleClasses = (form: OptionSelect) =>  {
-    console.log(form);
+  const handleClasses = (formClasses: any) =>  {
+    console.log('formClasses: ', formClasses);
+    setClassroomData(formClasses);
   }
 
   return (
@@ -107,20 +100,14 @@ export function NewCourse(props: NewCourseProps) {
               />
             </section>
             <section className={styles['section']}>
-              <TeacherClasses onChange={() => {}} />
+              <TeacherClasses onChange={(data) => {handleClasses(data)}} />
             </section>
             <section className={styles['section-gray']}>
               <Quiz/>
             </section>
-            {/* <section>
+            <section className={styles['section']}>
               <Achievement/>
-            </section> */}
-            {/* <section>
-              <Quiz/>
             </section>
-            <section>
-              <CourseSettings/>
-            </section> */}
           </div>
         </div>
       </form>

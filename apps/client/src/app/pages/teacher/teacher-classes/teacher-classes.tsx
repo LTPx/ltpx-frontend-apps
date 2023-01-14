@@ -1,28 +1,15 @@
-import { TeacherClassType } from '@ltpx-frontend-apps/api';
+import { Classroom, TeacherClassType } from '@ltpx-frontend-apps/api';
 import {
-  BannerNotification,
-  BannerType,
   Button,
   ClassroomForm,
+  ClassroomView,
   ColorsButton,
-  DayTimePicker,
   GroupSelectOptionCard,
-  Icon,
-  Input,
   Modal,
-  OptionSelect,
-  Select,
-  SelectDates,
-  SelectOptionCardProps,
-  TimePicker,
 } from '@ltpx-frontend-apps/shared-ui';
 import { useState } from 'react';
 import styles from './teacher-classes.module.scss';
 
-// title: string;
-// text: string;
-// icon: string;
-// selected?: boolean;
 const classesOptions = [
   {
     value: TeacherClassType.mandatory,
@@ -52,13 +39,12 @@ const classesOptions = [
 
 /* eslint-disable-next-line */
 export interface TeacherClassesProps {
-  onChange?: () => void;
+  onChange?: (classroom: Classroom) => void;
 }
 
 export function TeacherClasses(props: TeacherClassesProps) {
   const { onChange } = props;
   const data = {
-    condition: TeacherClassType.none,
     min: 3,
     max: 5,
     weeks: 2,
@@ -66,41 +52,27 @@ export function TeacherClasses(props: TeacherClassesProps) {
     meetings: [],
   };
 
+  const [selectedTypeClass, setSelectedTypeClass] = useState(
+    TeacherClassType.none
+  );
   const [classroom, setClassroom] = useState(data);
   const [openModal, setOpenModal] = useState(false);
 
   const selectedOptionClass = (option: any) => {
-    console.log(option);
-    if (option === TeacherClassType.mandatory || option === TeacherClassType.flexible) {
+    if (
+      option === TeacherClassType.mandatory ||
+      option === TeacherClassType.flexible
+    ) {
       setOpenModal(true);
     }
+    setSelectedTypeClass(option);
   };
 
   const handleClassroom = (classroom: any) => {
     setClassroom(classroom);
+    const data = { ...classroom, ...{ condition: selectedTypeClass } };
+    onChange && onChange(data);
   };
-
-  const formatDatetime = (date: string) => {
-    return date.split('T').join(' a las ');
-  }
-
-  const toHoursAndMinutes = (totalMinutes: number)  => {
-    const hours = Math.floor(totalMinutes / 60);
-    const minutes = totalMinutes % 60;
-    return `${hours}h${minutes > 0 ? ` ${minutes}m` : ''}`;
-  }
-
-  const ClassroomSummary = () => (
-    <div className={styles['classroom-summary']}>
-      <h3>Resumen de las clases</h3>
-      <h4>Este curso tendrá un rango de: {classroom.min} a {classroom.max} de estudiantes</h4>
-      <h4>Cada clase durara: {toHoursAndMinutes(classroom.call_time_min)}</h4>
-      <h4>Las clases se dictaran los días: </h4>
-      { classroom.meetings.map((date)=>(
-        <li>{formatDatetime(date)}</li>
-      ))}
-    </div>
-  );
 
   return (
     <div className={styles['container']}>
@@ -111,10 +83,15 @@ export function TeacherClasses(props: TeacherClassesProps) {
       <GroupSelectOptionCard
         className={styles['classes-options']}
         options={classesOptions}
-        onChange={(option) => { selectedOptionClass(option) }}
+        onChange={(option) => {
+          selectedOptionClass(option);
+        }}
       />
-      { classroom && (
-        <ClassroomSummary/>
+      {classroom && (
+        <ClassroomView
+          classroom={classroom}
+          className={styles['classroom-summary']}
+        />
       )}
       <Modal open={openModal}>
         <div className={styles['content-form']}>
@@ -122,12 +99,15 @@ export function TeacherClasses(props: TeacherClassesProps) {
           <ClassroomForm
             onSubmit={(data) => {
               handleClassroom(data);
+              setOpenModal(false);
             }}
           >
             <Button
               title="Cancelar"
               color={ColorsButton.white}
-              onClick={() => { setOpenModal(false) }}
+              onClick={() => {
+                setOpenModal(false);
+              }}
             />
           </ClassroomForm>
         </div>

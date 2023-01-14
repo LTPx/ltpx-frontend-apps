@@ -3,7 +3,6 @@ import {
   BannerNotification,
   BannerType,
   Button,
-  Classroom,
   ClassroomForm,
   ColorsButton,
   DayTimePicker,
@@ -73,7 +72,7 @@ export function TeacherClasses(props: TeacherClassesProps) {
     TeacherClassType.mandatory
   );
 
-  const handleClasses = (data: Classroom) => {
+  const handleClasses = (data: any) => {
     console.log(data);
   };
 
@@ -102,11 +101,15 @@ export function TeacherClasses(props: TeacherClassesProps) {
         <div className={styles['content-form']}>
           <h2>Crear Clases</h2>
           <ClassroomForm
-            onChange={(data) => {
-              handleClasses(data);
+            onSubmit={(data) => {
+              // handleClasses(data);
             }}
           >
-            <Button title="Cancelar" color={ColorsButton.white} onClick={() => { setOpenModal(false) }} />
+            <Button
+              title="Cancelar"
+              color={ColorsButton.white}
+              onClick={() => { setOpenModal(false) }}
+            />
           </ClassroomForm>
         </div>
       </Modal>

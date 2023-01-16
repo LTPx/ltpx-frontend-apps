@@ -16,7 +16,9 @@ export function InformationCard(props: InformationCardProps) {
       <div className={styles['content']}>
         <div className={styles['status-content']}>
           <div className={styles['information']}>
-            <h3>{title}</h3>
+            <h3 className={`${selected ? styles['selected'] : ''}`}>
+              {title}
+            </h3>
             <p>{text}</p>
           </div>
         </div>

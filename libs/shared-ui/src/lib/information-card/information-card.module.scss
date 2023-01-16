@@ -29,6 +29,10 @@
           color: $text-color;
           font-size: 0.875rem;
           font-weight: 500;
+
+          &.selected {
+            color: $green-color;
+          }
         }
 
         p {

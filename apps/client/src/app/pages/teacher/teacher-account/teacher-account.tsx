@@ -1,6 +1,6 @@
 import { IUserAccount } from '@ltpx-frontend-apps/api';
-import { UserAccountForm } from '@ltpx-frontend-apps/shared-ui';
-import { useEffect } from 'react';
+import { BannerNotification, UserAccountForm } from '@ltpx-frontend-apps/shared-ui';
+import { useEffect, useState } from 'react';
 import { useTeacher } from '../../../store';
 import styles from './teacher-account.module.scss';
 
@@ -8,6 +8,7 @@ import styles from './teacher-account.module.scss';
 export interface TeacherAccountProps {}
 
 export function TeacherAccount(props: TeacherAccountProps) {
+  const [showMessage, setShowMessage] = useState(false);
   const { getProfile, updateProfile, profile } = useTeacher();
 
   useEffect(() => {
@@ -17,10 +18,10 @@ export function TeacherAccount(props: TeacherAccountProps) {
   }, []);
 
   const clickFunction = async(data: IUserAccount) => {
-    console.log('data: ', data);
     const response = await updateProfile(data);
     if (response.saved) {
       console.log(response);
+      setShowMessage(true);
     } else {
       console.log(response.data);
     }
@@ -28,6 +29,11 @@ export function TeacherAccount(props: TeacherAccountProps) {
 
   return (
     <div className={styles['container']}>
+      { showMessage && (
+        <BannerNotification onClickClose={()=>{setShowMessage(false)}}>
+          <h4>Tus datos se han actualizado</h4>
+        </BannerNotification>
+      )}
       { profile && (
         <UserAccountForm onSubmit={clickFunction} data={profile} />
       )}

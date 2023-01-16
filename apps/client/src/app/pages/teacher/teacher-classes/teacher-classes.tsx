@@ -15,15 +15,15 @@ export interface TeacherClassesProps {
 
 export function TeacherClasses(props: TeacherClassesProps) {
   const { onChange } = props;
-  const data = {
-    condition: '',
-    min: 3,
-    max: 5,
-    call_time_min: 45,
-    meetings: [],
-  };
+  // const data = {
+  //   condition: '',
+  //   min: 3,
+  //   max: 5,
+  //   call_time_min: 45,
+  //   meetings: [],
+  // };
 
-  const [classroom, setClassroom] = useState(data);
+  const [classroom, setClassroom] = useState();
   const [openModal, setOpenModal] = useState(false);
 
   // const handleClassroom = (classroom: any) => {
@@ -59,7 +59,7 @@ export function TeacherClasses(props: TeacherClassesProps) {
         }}
         onSave={(classroom) => {
           console.log(classroom);
-          setClassroom(classroom);
+          // setClassroom(classroom);
         }}
       />
       {classroom && (

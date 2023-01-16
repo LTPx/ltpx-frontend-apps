@@ -1,11 +1,13 @@
 import styles from './apply-teacher-form.module.scss';
 import {
   Button,
+  FilesUploaded,
   Input,
   InputTextStatus,
   StatusInputText,
   TextArea,
   TypeButton,
+  TypeFile,
 } from '@ltpx-frontend-apps/shared-ui';
 import { ApplyTeachApiParams } from '@ltpx-frontend-apps/api';
 import { useFormik } from 'formik';
@@ -22,10 +24,13 @@ export function ApplyTeacherForm(props: ApplyTeacherFormProps) {
       name: '',
       phone: '',
       national_id: '',
+      national_id_front: '',
+      national_id_back: '',
       country: '',
       city: '',
       experience: '',
       degrees: '',
+      college_degree: '',
       record_police: '',
       attached_files: [],
     },
@@ -35,8 +40,17 @@ export function ApplyTeacherForm(props: ApplyTeacherFormProps) {
       country: Yup.string().required('País es requerido'),
       city: Yup.string().required('Ciudad es requerido'),
       national_id: Yup.string().required('Identificación es requerido'),
+      national_id_front: Yup.mixed()
+        .nullable()
+        .required('Imagen de la identificación frontal es requerida'),
+      national_id_back: Yup.string().required(
+        'Imagen de la identificación trasera es requerida'
+      ),
       experience: Yup.string().required('Experiencia es requerido'),
       degrees: Yup.string().required('Títulos es requerido'),
+      college_degree: Yup.string().required(
+        'Título Universitario es requerido'
+      ),
       record_police: Yup.string().required('Record Policial es requerido'),
     }),
     onSubmit: (data) => {
@@ -78,6 +92,38 @@ export function ApplyTeacherForm(props: ApplyTeacherFormProps) {
           <InputTextStatus
             status={StatusInputText.error}
             text={formik.errors.national_id}
+          />
+        ) : null}
+        <h4>Identificación parte delantera</h4>
+        <div className={styles['file']}>
+          <FilesUploaded
+            className={styles['file-upload']}
+            type={TypeFile.image}
+            onChange={(value) => {
+              formik.setFieldValue('national_id_front', value);
+            }}
+          />
+        </div>
+        {formik.touched.national_id_front && formik.errors.national_id_front ? (
+          <InputTextStatus
+            status={StatusInputText.error}
+            text={formik.errors.national_id_front}
+          />
+        ) : null}
+        <h4>Identificación parte trasera</h4>
+        <div className={styles['file']}>
+          <FilesUploaded
+            className={styles['file-upload']}
+            type={TypeFile.image}
+            onChange={(value) => {
+              formik.setFieldValue('national_id_back', value);
+            }}
+          />
+        </div>
+        {formik.touched.national_id_back && formik.errors.national_id_back ? (
+          <InputTextStatus
+            status={StatusInputText.error}
+            text={formik.errors.national_id_back}
           />
         ) : null}
         <Input
@@ -164,23 +210,42 @@ export function ApplyTeacherForm(props: ApplyTeacherFormProps) {
             text={formik.errors.degrees}
           />
         ) : null}
-        <Input
-          label="Record Policial"
-          name="record_police"
-          placeholder="Obligatorio para usuarios de Ecuador, Mexico"
-          onChange={(e: any) => {
-            formik.handleChange(e);
-          }}
-          value={formik.values.record_police}
-          onBlur={formik.handleBlur}
-        />
+        <div className={styles['file']}>
+          <FilesUploaded
+            className={styles['file-upload']}
+            type={TypeFile.pdf}
+            onChange={(value) => {
+              formik.setFieldValue('college_degree', value);
+            }}
+          />
+        </div>
+        {formik.touched.college_degree && formik.errors.college_degree ? (
+          <InputTextStatus
+            status={StatusInputText.error}
+            text={formik.errors.college_degree}
+          />
+        ) : null}
+        <h4>Record Policial</h4>
+        <div className={styles['file']}>
+          <FilesUploaded
+            className={styles['file-upload']}
+            type={TypeFile.pdf}
+            onChange={(value) => {
+              formik.setFieldValue('record_police', value);
+            }}
+          />
+        </div>
         {formik.touched.record_police && formik.errors.record_police ? (
           <InputTextStatus
             status={StatusInputText.error}
             text={formik.errors.record_police}
           />
         ) : null}
-        <Button title="Enviar Solicitud" type={TypeButton.submit} />
+        <Button
+          className={styles['send-information']}
+          title="Enviar Solicitud"
+          type={TypeButton.submit}
+        />
       </form>
     </div>
   );

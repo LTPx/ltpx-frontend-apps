@@ -48,7 +48,7 @@ export function TeacherApply(props: TeacherApplyProps) {
     <div className={styles['banner-notification']}>
       <p>
         Tu solicitud ha sido enviada, validaremos tus datos en un periodo maximo
-        de 48h luego recibiras un correo con una respuesta de nuestro equipo
+        de 48h luego recibirás un correo con una respuesta de nuestro equipo
       </p>
     </div>
   );

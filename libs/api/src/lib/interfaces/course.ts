@@ -1,5 +1,12 @@
 import { PartialWithRequired } from './util';
 
+export enum TeacherClassType {
+  none = 'none',
+  mandatory = 'mandatory',
+  flexible = 'flexible',
+  customize = 'customize',
+}
+
 export enum CourseStatus {
   publish = 'published',
   draft = 'draft',
@@ -14,13 +21,6 @@ export enum CourseLevel {
   begging = 'begging',
   intermediate = 'intermediate',
   advanced = 'advanced',
-}
-
-export enum TeacherClassType {
-  none = 'none',
-  mandatory = 'mandatory',
-  flexible = 'flexible',
-  customize = 'customize',
 }
 
 export interface ContentCourse {
@@ -62,14 +62,48 @@ export interface CourseModel {
 }
 
 export type PublicCourse = Omit<
-  CourseModel, "user_id" | "created_at" | "updated_at" | "approved" | "status" | "cover_url"
->
+  CourseModel,
+  'user_id' | 'created_at' | 'updated_at' | 'approved' | 'status' | 'cover_url'
+>;
 
-export type TeacherCourse = Omit<
-  CourseModel, "user_id" | "cover"
->
+export type TeacherCourse = Omit<CourseModel, 'user_id' | 'cover'>;
 
 export type NewCourseApiParams = PartialWithRequired<
   TeacherCourse,
   'description' | 'title'
 >;
+
+export const CLASSROOM_MANDATORY = {
+  value: TeacherClassType.mandatory,
+  title: 'CLASES POR VIDEOCÁMARA OBLIGATORIAS',
+  text: 'Este curso incluirá clases para los estudiantes',
+  icon: 'person-video',
+};
+
+export const CLASSROOM_FLEXIBLE = {
+  value: TeacherClassType.flexible,
+  title: 'CLASES POR VIDEOCÁMARA NO OBLIGATORIAS',
+  text: 'Este curso incluirá clases para los estudiantes',
+  icon: 'person-video',
+};
+
+export const CLASSROOM_CUSTOMIZE = {
+  value: TeacherClassType.customize,
+  title: 'CLASES PERSONALIZADAS',
+  text: 'Este curso se acuerda con el estudiante hora y días en las que se dictaran las clases',
+  icon: 'sliders',
+};
+
+export const CLASSROOM_NONE = {
+  value: TeacherClassType.none,
+  title: 'NO SE REQUIERE CLASES',
+  text: 'Este curso no requiere de clases para que los estudiante apruebe este curso',
+  icon: 'forbidden',
+};
+
+export const CLASSROOMS = {
+  mandatory: CLASSROOM_MANDATORY,
+  flexible: CLASSROOM_FLEXIBLE,
+  customize: CLASSROOM_CUSTOMIZE,
+  none: CLASSROOM_NONE,
+}

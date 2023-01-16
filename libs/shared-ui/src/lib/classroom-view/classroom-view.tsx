@@ -29,8 +29,8 @@ export function ClassroomView(props: ClassroomViewProps) {
       </h4>
       <h4>Cada clase durara: {toHoursAndMinutes(classroom.call_time_min)}</h4>
       <h4>Las clases se dictaran los días: </h4>
-      {classroom.meetings.map((date) => (
-        <li>{formatDatetime(date)}</li>
+      {classroom.meetings.map((date, key) => (
+        <li key={key}>{formatDatetime(date)}</li>
       ))}
     </div>
   );

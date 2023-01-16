@@ -1,3 +1,5 @@
+export * from './lib/register-form/register-form';
+export * from './lib/information-card/information-card';
 export * from './lib/course-classes/course-classes';
 export * from './lib/drawer/drawer';
 export * from './lib/classroom-view/classroom-view';

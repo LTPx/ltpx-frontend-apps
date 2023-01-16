@@ -8,6 +8,9 @@ export const useTeacher = () => {
     createCourse,
     getApplicationTeach,
     application,
+    profile,
+    getProfile,
+    updateProfile,
   } = useAppStore();
 
   return {
@@ -17,5 +20,8 @@ export const useTeacher = () => {
     createCourse,
     getApplicationTeach,
     application,
+    profile,
+    getProfile,
+    updateProfile,
   }
 }

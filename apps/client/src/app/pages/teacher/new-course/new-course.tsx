@@ -100,7 +100,7 @@ export function NewCourse(props: NewCourseProps) {
               />
             </section>
             <section className={styles['section']}>
-              <TeacherClasses onChange={(data) => {handleClasses(data)}} />
+              <TeacherClasses onSubmit={(data) => {handleClasses(data)}} />
             </section>
             <section className={styles['section-gray']}>
               <Quiz/>

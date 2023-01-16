@@ -62,6 +62,7 @@ export function Button(props: ButtonProps) {
         type={type}
         onClick={onClick}
         disabled={disabled}
+        onMouseDown={(event)=>{event.preventDefault()}}
         {...other}
       >
         {title}
@@ -73,10 +74,10 @@ export function Button(props: ButtonProps) {
     <div className={`${className}`}>
       {link ? (
         <NavLink to={link}>
-          <Button></Button>
+          <Button />
         </NavLink>
       ) : (
-        <Button></Button>
+        <Button />
       )}
     </div>
   );

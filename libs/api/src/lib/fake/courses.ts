@@ -1,17 +1,30 @@
 import { faker } from '@faker-js/faker';
-import { ICourse } from '../interfaces/course';
+import { CourseLanguage, CourseLevel, PublicCourse, TeacherClassType } from '../interfaces/course';
 
-const createRandomCourse = ():ICourse => (
+const createRandomCourse = ():PublicCourse => (
   {
-    id: faker.datatype.uuid(),
-    image: faker.image.people(640, 480, true),
-    title: `Learn how to make a: ${faker.commerce.product()}`,
+    id: faker.datatype.number(500),
+    cover: faker.image.people(640, 480, true),
+    title: `Learning how to: ${faker.commerce.product()}`,
     description: `Learning: ${faker.commerce.productDescription()}`,
     category: faker.commerce.department(),
-    price: faker.datatype.number({min: 1000, max: 5000}),
-    duration: faker.datatype.number(60),
-    lessons: faker.datatype.number(8),
-    stars: faker.datatype.number(5)
+    price_cents: faker.datatype.number({min: 1000, max: 5000}),
+    contents_count: faker.datatype.number(8),
+    average_rating: faker.datatype.number(5),
+    level: CourseLevel.begging,
+    language: CourseLanguage.en,
+    contents: [],
+    learn_goals: `Learning: ${faker.commerce.productDescription()}`,
+    enrollments_count: 12,
+    requirements: 'No one',
+    price_currency: 'USD',
+    classroom: {
+      condition: TeacherClassType.flexible,
+      min: 1,
+      max: 10,
+      call_time_min: 45,
+      meetings:[]
+    }
   }
 )
 
@@ -72,7 +85,29 @@ const createRandomCourseDetail = () => (
         comment: `This course: ${faker.commerce.productDescription()}`,
         date: '3 days ago'
       }
-    ]
+    ],
+    contents: [
+      {
+        title: faker.commerce.department(),
+        description: faker.commerce.productDescription(),
+      },
+      {
+        title: faker.commerce.department(),
+        description: faker.commerce.productDescription(),
+      },
+      {
+        title: faker.commerce.department(),
+        description: faker.commerce.productDescription(),
+      },
+      {
+        title: faker.commerce.department(),
+        description: faker.commerce.productDescription(),
+      },
+      {
+        title: faker.commerce.department(),
+        description: faker.commerce.productDescription(),
+      },
+    ],
   }
 )
 
@@ -189,7 +224,7 @@ const createRandomTeacherCourseDetail = () => (
   }
 )
 
-export const buildCourses = (amount: number):ICourse[] => {
+export const buildCourses = (amount: number):PublicCourse[] => {
   const mocks = Array.from(Array(amount).keys())
   return mocks.map(() => {
     return createRandomCourse();

@@ -1,4 +1,4 @@
-import { FileUpload, Input, Select } from '@ltpx-frontend-apps/shared-ui';
+import { FileUpload, Input, Select, TextArea } from '@ltpx-frontend-apps/shared-ui';
 import { FormikValues } from 'formik';
 import styles from './course-general-information.module.scss';
 
@@ -34,13 +34,16 @@ export function CourseGeneralInformation(props: CourseGeneralInformationProps) {
   return (
     <div className={styles['container']}>
       <div className={styles['header-text']}>
-        <h2>Informacion General</h2>
-        <h4 className='muted'>Esta informacion atraera usuarios a tomar este curso</h4>
+        <h2>Información General</h2>
+        <h4 className='muted'>Esta información atraerá usuarios a tomar este curso</h4>
       </div>
       <section className={styles['text']}>
         <h3>Portada del curso</h3>
         <div className={styles['upload-media']}>
-          <FileUpload text='Agregue una foto o video de portada'/>
+          <FileUpload
+            onChange={(file)=>{ formik.setFieldValue('cover', file)}}
+            name='cover'
+          />
         </div>
       </section>
       <div className={styles['text']}>
@@ -52,18 +55,19 @@ export function CourseGeneralInformation(props: CourseGeneralInformationProps) {
           value={formik.values.title}
           onBlur={formik.handleBlur}
         />
-        <Input
+        <TextArea
           label='Descripcion del curso'
           placeholder='Un breve resumen de lo que trata este curso'
           name="description"
           onChange={(e: any) => { formik.handleChange(e); }}
           value={formik.values.description}
           onBlur={formik.handleBlur}
+          rows={8}
         />
       </div>
       <div className={styles['selects-form']}>
         <Select
-          label='Categoria'
+          label='Categoría'
           options={categories}
           onChange={option => formik.setFieldValue('category', option.value)}
         />
@@ -79,21 +83,23 @@ export function CourseGeneralInformation(props: CourseGeneralInformationProps) {
         />
       </div>
       <div className={styles['text']}>
-        <Input
+        <TextArea
           placeholder='Pueden se puntos claves del curso'
-          label='Que aprenderan los estudiantes?'
-          name="goals"
+          label='Que aprenderán los estudiantes?'
+          name="learn_goals"
           onChange={(e: any) => { formik.handleChange(e); }}
-          value={formik.values.goals}
+          value={formik.values.learn_goals}
           onBlur={formik.handleBlur}
+          rows={5}
         />
-        <Input
-          label='Requerimietos'
-          placeholder='Los estudiantes necesitan algun recurso antes de tomar este curso'
+        <TextArea
+          label='Requerimientos'
+          placeholder='Los estudiantes necesitan algún recurso antes de tomar este curso'
           name="requirements"
           onChange={(e: any) => { formik.handleChange(e); }}
           value={formik.values.requirements}
           onBlur={formik.handleBlur}
+          rows={5}
         />
       </div>
     </div>

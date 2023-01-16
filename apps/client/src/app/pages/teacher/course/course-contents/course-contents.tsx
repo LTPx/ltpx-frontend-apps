@@ -1,4 +1,4 @@
-import { Button, ColorsButton, FileUpload, Icon, Input } from '@ltpx-frontend-apps/shared-ui';
+import { Button, ColorsButton, FileUpload, Icon, Input, TextArea } from '@ltpx-frontend-apps/shared-ui';
 import { useState } from 'react';
 import styles from './course-contents.module.scss';
 
@@ -68,12 +68,13 @@ export function CourseContents(props: CourseContentsProps) {
             onChange={(e: { target: HTMLInputElement; }) => handleInputChange(e, index)}
             name='title'
           />
-          <Input
+          <TextArea
             placeholder='Descripcion de este contenido'
             label='Descripcion de esta seccion'
             value={form.description}
             onChange={(e: { target: HTMLInputElement; }) => handleInputChange(e, index)}
             name='description'
+            rows={8}
           />
         </div>
       )) }

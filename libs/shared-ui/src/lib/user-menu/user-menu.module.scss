@@ -2,10 +2,9 @@
 
 .container {
   box-sizing: border-box;
-  min-width: 2rem;
+  min-width: $size-lg-1;
   background: $white-color;
-  border: 1px solid #e7e7ec;
-  box-shadow: $card-shadow-medium;
+  border: 1px solid $stroke-color;
   border-radius: 4px;
   padding: $size-md-3;
 

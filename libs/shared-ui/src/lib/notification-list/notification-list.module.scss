@@ -2,13 +2,12 @@
 
 .container {
   box-sizing: border-box;
-  width: 25rem;
-  height: 395px;
   background: #ffffff;
   border: 1px solid #e7e7ec;
   box-shadow: $card-shadow-medium;
   border-radius: 4px;
-  padding: 1.5rem;
+  padding: 1rem;
+  min-width: 16rem;
 
   h3 {
     padding-bottom: 1.5rem;

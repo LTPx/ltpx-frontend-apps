@@ -4,7 +4,7 @@ import { getApiUrl } from "./api";
 const API = getApiUrl();
 
 export const createInstance = ( api_url: string ) => {
-  const auth_token = sessionStorage.getItem("auth_token");
+  const auth_token = localStorage.getItem("auth_token");
   if (auth_token) {
     axios.defaults.headers.common["Authorization"] = auth_token;
   }
@@ -15,7 +15,7 @@ export const setTokenAxios = (headers: any) => {
   if ( headers.authorization ) {
     const { authorization } = headers;
     _http.defaults.headers.common["Authorization"] = authorization;
-    sessionStorage.setItem("auth_token", authorization);
+    localStorage.setItem("auth_token", authorization);
   }
 }
 

@@ -13,9 +13,7 @@ export function TagsCard(props: TagsCardProps) {
       <h3>Tags</h3>
       <div className={styles['tags-content']}>
         {tags.map((tag, index) => (
-          <div className={styles['tag']} key={index}>
-            <Tag text={tag.text}></Tag>
-          </div>
+          <Tag text={tag.text} key={index}></Tag>
         ))}
       </div>
     </div>

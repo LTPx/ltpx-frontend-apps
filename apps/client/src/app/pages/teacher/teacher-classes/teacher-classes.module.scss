@@ -15,3 +15,26 @@
     border: 1px solid #d4d4d4;
   }
 }
+
+.days-config {
+  margin-top: 1rem;
+}
+
+.days {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.content-form {
+
+  .render-content {
+    margin-top: 1rem;
+  }
+}
+
+.classes-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}

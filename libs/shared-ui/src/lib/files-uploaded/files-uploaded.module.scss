@@ -1,0 +1,20 @@
+@import '../../styles/styles.module.scss';
+
+.container {
+  width: 25rem;
+  .files-content {
+    display: flex;
+    justify-content: space-between;
+    padding: $size-md-1;
+    .file {
+      display: flex;
+      gap: $size-md-1;
+      align-items: center;
+
+      h4 {
+        color: $text-gray-color;
+        font-size: 0.875rem;
+      }
+    }
+  }
+}

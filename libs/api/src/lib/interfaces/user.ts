@@ -7,6 +7,12 @@ export enum TypeAccounts {
   admin = 'admin',
 }
 
+export enum StatusAccount {
+  active = 'active',
+  removed = 'removed',
+  blocked = 'blocked',
+}
+
 export enum TypeViews {
   default = 'default',
   user = 'user',
@@ -45,4 +51,21 @@ export interface ICurrentUser {
   password: string;
   initial_register: TypeAccounts;
   teacher_account?: StatusTeacherAccount;
+}
+
+export interface IUserAccount {
+  fullName: string;
+  username: string;
+  phone: string;
+  country: string;
+  city: string;
+  address: string;
+  birth: string;
+  email: string;
+}
+
+export interface INewPassword {
+  currentPassword: string;
+  newPassword: string;
+  confirmPassword: string;
 }

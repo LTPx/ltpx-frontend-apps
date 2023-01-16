@@ -1,0 +1,11 @@
+@import '../../styles/styles.module.scss';
+
+.container {
+  width: 100%;
+  padding-top: $size-lg-3;
+  padding-bottom: $size-lg-3;
+
+  .content {
+    padding: $size-md-1;
+  }
+}

@@ -40,7 +40,9 @@ export function BannerNotification(props: BannerNotificationProps) {
           <div className={`${styles['content']}`}>
           {children}
           </div>
-          <Icon icon='close' size={18} onClick={closeBanner}/>
+          { onClickClose && (
+            <Icon icon='close' size={18} onClick={closeBanner}/>
+          )}
         </div>
       )}
     </>

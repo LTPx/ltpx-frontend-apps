@@ -1,7 +1,7 @@
-@import "../../../../styles.scss";
+@import '../../../../styles.scss';
 
 .container {
-  padding: 3rem 5rem;
+  padding: $size-lg-3 5rem;
 
   .cover {
     height: 20rem;
@@ -17,28 +17,31 @@
   }
 
   .course-details {
-    margin-top: 1rem;
+    margin-top: $size-md-1;
   }
 
-  h1, h2, h3, h4 {
-    margin: 0.5rem 0;
+  h1,
+  h2,
+  h3,
+  h4 {
+    margin: $size-sm-2 0;
   }
 
   p {
-    color: #77838F;
+    color: $text-gray-color;
   }
 }
 
 .basic-info {
   display: flex;
-  gap: 1rem;
+  gap: $size-sm-2;
 
   .noted {
-    padding: 0.25rem 1rem;
+    padding: $size-sm-1 $size-sm-2;
     background-color: #f9fafb;
     border-radius: 5px;
     text-transform: capitalize;
-    color: #77838F;
+    color: $text-gray-color;
 
     &.status {
       background-color: $green-color-100;
@@ -54,10 +57,6 @@
     .tabs-contents {
       width: 15rem;
       border-right: 1px solid #d4d4d4;
-    }
-
-    .render-content {
-      padding: 1rem 2rem;
     }
   }
 }

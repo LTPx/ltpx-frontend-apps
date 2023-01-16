@@ -1,0 +1,17 @@
+@import '../../../../../admin/src/styles.scss';
+
+.container {
+  display: flex;
+  justify-content: center;
+  margin-top: $size-lg-1;
+
+  .title-head {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: $size-md-1;
+  }
+  .content {
+    min-width: 20rem;
+  }
+}

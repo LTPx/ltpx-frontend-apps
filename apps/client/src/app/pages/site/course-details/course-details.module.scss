@@ -5,7 +5,7 @@
 }
 
 .course-details {
-  padding: 2rem 14rem;
+  padding: $size-lg-1 14rem;
   display: flex;
 
   .description {
@@ -26,7 +26,7 @@
     .description-course {
       display: flex;
       justify-content: space-between;
-      padding: 1rem 0;
+      padding: $size-md-1 0;
 
       .item {
         display: flex;
@@ -44,68 +44,4 @@
 
 .summary-course {
   padding-top: $size-md-1;
-
-  .overview {
-    padding-top: $size-md-1;
-
-    .course-description {
-      h3 {
-        color: $text-color;
-        padding-bottom: $size-md-1;
-      }
-
-      p {
-        color: $text-gray-color;
-      }
-    }
-
-    .achievements {
-
-      h3 {
-        color: $text-color;
-        padding-bottom: $size-md-1;
-      }
-
-      .items {
-        color: $text-gray-color;
-        display: flex;
-        flex-direction: column;
-        gap: $size-md-1;
-      }
-    }
-
-    .requirements {
-      display: flex;
-      flex-direction: column;
-      gap: $size-md-1;
-
-      h3 {
-        color: $text-color;
-      }
-
-      ul {
-        padding-left: $size-md-1;
-        color: $text-gray-color;
-
-        li {
-          color: $text-gray-color;
-        }
-      }
-    }
-  }
-
-  section {
-    margin-top: $size-md-3;
-  }
-  .items {
-    .item {
-      display: flex;
-      align-items: start;
-
-      svg {
-        margin-top: 0.2rem;
-        margin-right: 0.5rem;
-      }
-    }
-  }
 }

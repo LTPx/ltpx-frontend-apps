@@ -51,13 +51,13 @@ export function AllCourses(props: AllCoursesProps) {
             >
               <CourseCard
                 key={index}
-                image={course.image}
+                image={course.cover}
                 category={course.category}
                 title={course.title}
-                price={course.price}
-                duration={course.duration}
-                lessons={course.lessons}
-                stars={course.stars}
+                price={course.price_cents}
+                duration={0}
+                lessons={0}
+                stars={course.average_rating}
               />
             </NavLink>
           ))}

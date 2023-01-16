@@ -10,7 +10,8 @@ export function Brand(props: BrandProps) {
   const classSelected = negativeSpace ? styles['negative'] : '';
   return (
     <div className={`${styles['container']} ${classSelected}`}>
-      <h3>LTPX</h3>
+      <p>Open</p>
+      <p style={{marginLeft: '0.6rem'}}>Mind</p>
     </div>
   );
 }

@@ -1,9 +1,9 @@
-import { useEffect, useRef } from 'react';
+import { ReactElement, useEffect, useRef } from 'react';
 import styles from './dropdown.module.scss';
 
 /* eslint-disable-next-line */
 export interface DropdownProps {
-  children: any;
+  children: ReactElement[];
 }
 
 export function Dropdown(props: DropdownProps) {
@@ -13,7 +13,6 @@ export function Dropdown(props: DropdownProps) {
 
   useEffect(() => {
     if (mainElement.current?.offsetWidth) {
-      console.log('entro');
       setPosition();
     }
     return () => {

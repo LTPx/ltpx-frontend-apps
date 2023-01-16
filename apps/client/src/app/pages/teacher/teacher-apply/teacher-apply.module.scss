@@ -1,7 +1,15 @@
-/*
- * Replace this with your own classes
- *
- * e.g.
- * .container {
- * }
-*/
+@import "../../../../styles.scss";
+
+.container {
+  padding: 4rem 6rem;
+
+  .header {
+    h1 {
+      margin-bottom: $size-sm-2;
+    }
+    margin-bottom: $size-md-1;
+  }
+  .text {
+    margin-bottom: $size-lg-3;
+  }
+}

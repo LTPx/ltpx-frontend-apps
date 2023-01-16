@@ -83,7 +83,6 @@ export const logout = async() => {
     http
     .delete('logout')
     .then((response) => {
-      sessionStorage.removeItem("auth_token");
       http.defaults.headers.common["Authorization"] = null;
       resolve(response.data);
     })

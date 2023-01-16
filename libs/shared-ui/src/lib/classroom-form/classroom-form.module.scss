@@ -11,3 +11,9 @@
     border: 1px solid #d4d4d4;
   }
 }
+
+.buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+}

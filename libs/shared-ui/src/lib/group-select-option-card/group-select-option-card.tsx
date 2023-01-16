@@ -7,7 +7,7 @@ import styles from './group-select-option-card.module.scss';
 /* eslint-disable-next-line */
 export interface GroupSelectOptionCardProps {
   options: SelectOptionCardProps[];
-  onChange: (option: SelectOptionCardProps) => void;
+  onChange: (value: string) => void;
   className?: string;
 }
 
@@ -17,7 +17,7 @@ export function GroupSelectOptionCard(props: GroupSelectOptionCardProps) {
 
   const handleClick = (index: number) => {
     setSelectedIndex(index);
-    selectedIndex !== index && onChange(options[index]);
+    selectedIndex !== index && onChange(options[index].value);
   };
 
   return (
@@ -29,6 +29,7 @@ export function GroupSelectOptionCard(props: GroupSelectOptionCardProps) {
           text={option.text}
           icon={option.icon}
           selected={selectedIndex === index}
+          value={option.value}
           onClick={() => {
             handleClick(index);
           }}

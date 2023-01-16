@@ -23,7 +23,7 @@ export function TeacherClasses(props: TeacherClassesProps) {
   //   meetings: [],
   // };
 
-  const [classroom, setClassroom] = useState();
+  const [classroom, setClassroom] = useState<Classroom>();
   const [openModal, setOpenModal] = useState(false);
 
   // const handleClassroom = (classroom: any) => {
@@ -59,7 +59,7 @@ export function TeacherClasses(props: TeacherClassesProps) {
         }}
         onSave={(classroom) => {
           console.log(classroom);
-          // setClassroom(classroom);
+          setClassroom(classroom);
         }}
       />
       {classroom && (

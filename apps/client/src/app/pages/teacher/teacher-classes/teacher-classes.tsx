@@ -10,27 +10,19 @@ import styles from './teacher-classes.module.scss';
 
 /* eslint-disable-next-line */
 export interface TeacherClassesProps {
-  onChange?: (classroom: Classroom) => void;
+  onSubmit?: (classroom: Classroom) => void;
 }
 
 export function TeacherClasses(props: TeacherClassesProps) {
-  const { onChange } = props;
-  // const data = {
-  //   condition: '',
-  //   min: 3,
-  //   max: 5,
-  //   call_time_min: 45,
-  //   meetings: [],
-  // };
-
+  const { onSubmit } = props;
   const [classroom, setClassroom] = useState<Classroom>();
   const [openModal, setOpenModal] = useState(false);
 
-  // const handleClassroom = (classroom: any) => {
-  //   setClassroom(classroom);
-  //   const data = { ...classroom, ...{ condition: selectedTypeClass } };
-  //   onChange && onChange(data);
-  // };
+  const handleClassroom = (classroom: any) => {
+    console.log(classroom);
+    setClassroom(classroom);
+    onSubmit && onSubmit(classroom);
+  };
 
   return (
     <div className={styles['container']}>
@@ -58,8 +50,7 @@ export function TeacherClasses(props: TeacherClassesProps) {
           setOpenModal(false);
         }}
         onSave={(classroom) => {
-          console.log(classroom);
-          setClassroom(classroom);
+          handleClassroom(classroom);
         }}
       />
       {classroom && (

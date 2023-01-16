@@ -56,12 +56,12 @@ export function NewCourse(props: NewCourseProps) {
         }
       };
       console.log('courseData: ', courseData);
-      const { saved, data } = await createCourse(courseData);
-      if (saved) {
-        navigate('/teacher/courses/all');
-      } else {
-        console.log('error: ', data);
-      }
+      // const { saved, data } = await createCourse(courseData);
+      // if (saved) {
+      //   navigate('/teacher/courses/all');
+      // } else {
+      //   console.log('error: ', data);
+      // }
     },
   });
 
@@ -100,7 +100,7 @@ export function NewCourse(props: NewCourseProps) {
               />
             </section>
             <section className={styles['section']}>
-              <TeacherClasses onChange={(data) => {handleClasses(data)}} />
+              <TeacherClasses onSubmit={(data) => {handleClasses(data)}} />
             </section>
             <section className={styles['section-gray']}>
               <Quiz/>

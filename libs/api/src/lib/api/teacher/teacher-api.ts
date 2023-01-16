@@ -1,7 +1,34 @@
 import { _http } from '../../http';
 import { ApplicationTeach, ApplyTeachApiParams, StatusTeacherAccount } from '../../interfaces/teacher';
+import { IUserAccount } from '../../interfaces/user';
 
 const http = _http;
+
+export const getTeacherProfile = async () => {
+  return new Promise<IUserAccount>((resolve, reject) => {
+    http
+      .get('api/v1/teacher/profile')
+      .then((response) => {
+        resolve(response.data);
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
+};
+
+export const updateTeacherProfile = async (teacher: IUserAccount) => {
+  return new Promise<IUserAccount>((resolve, reject) => {
+    http
+      .put('api/v1/teacher/update_profile', teacher)
+      .then((response) => {
+        resolve(response.data);
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
+};
 
 export const applyToTeach = async (teacher: ApplyTeachApiParams) => {
   return new Promise<{status: StatusTeacherAccount}>((resolve, reject) => {

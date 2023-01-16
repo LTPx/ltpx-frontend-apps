@@ -11,24 +11,24 @@ import InputTextStatus, {
 
 export interface UserAccountFormProps {
   onSubmit: (data: IUserAccount) => void;
+  data?: IUserAccount | null;
 }
 
 export function UserAccountForm(props: UserAccountFormProps) {
-  const { onSubmit } = props;
-
+  const { onSubmit, data } = props;
   const formik = useFormik({
     initialValues: {
-      fullName: '',
-      username: '',
-      phone: '',
-      birth: '',
-      country: '',
-      city: '',
-      address: '',
-      email: '',
+      fullname: data?.fullname || '',
+      username: data?.username || '',
+      phone: data?.phone || '',
+      birth: data?.birth || '',
+      country: data?.country || '',
+      city: data?.city || '',
+      address: data?.address || '',
+      email: data?.email || '',
     },
     validationSchema: Yup.object({
-      fullName: Yup.string().required('Nombre completo es obligatorio'),
+      fullname: Yup.string().required('Nombre completo es obligatorio'),
       email: Yup.string()
         .email('Debe ser un correo electrónico válido')
         .required('Correo electrónico es obligatorio'),
@@ -48,18 +48,18 @@ export function UserAccountForm(props: UserAccountFormProps) {
               <div>
                 <Input
                   label="Nombre completo"
-                  name="fullName"
+                  name="fullname"
                   placeholder="Carlos Huerta"
                   onChange={(e: any) => {
                     formik.handleChange(e);
                   }}
-                  value={formik.values.fullName}
+                  value={formik.values.fullname}
                   onBlur={formik.handleBlur}
                 />
-                {formik.touched.fullName && formik.errors.fullName ? (
+                {formik.touched.fullname && formik.errors.fullname ? (
                   <InputTextStatus
                     status={StatusInputText.error}
-                    text={formik.errors.fullName}
+                    text={formik.errors.fullname}
                   />
                 ) : null}
               </div>

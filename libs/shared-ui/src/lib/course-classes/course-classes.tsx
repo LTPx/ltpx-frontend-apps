@@ -1,4 +1,4 @@
-import { TeacherClassType } from '@ltpx-frontend-apps/api';
+import { Classroom, TeacherClassType } from '@ltpx-frontend-apps/api';
 import { useState } from 'react';
 import Button, { ColorsButton } from '../button/button';
 import ClassroomForm from '../classroom-form/classroom-form';
@@ -31,11 +31,12 @@ const classesOptions = [
 export interface CourseClassesProps {
   open?: boolean;
   onClose?: () => void;
+  onSave?: (classroom: Classroom) => void;
 }
 
 export function CourseClasses(props: CourseClassesProps) {
-  const { open, onClose } = props;
-  const [selectedTypeClass, setSelectedTypeClass] = useState();
+  const { open, onClose, onSave } = props;
+  const [ selectedTypeClass, setSelectedTypeClass ] = useState(TeacherClassType.none);
   const [openClassroom, setOpenClassroom] = useState(false);
 
   const handleSelectedOption = (option: any) => {
@@ -57,7 +58,7 @@ export function CourseClasses(props: CourseClassesProps) {
       >
         <div className={styles['content']}>
           <div className="d">
-            <h2>Selecciona una opcion </h2>
+            <h2>Selecciona una opción </h2>
             <GroupSelectOptionCard
               className={styles['options']}
               options={classesOptions}
@@ -76,6 +77,13 @@ export function CourseClasses(props: CourseClassesProps) {
             />
             <Button
               onClick={() => {
+                onSave && onSave({
+                  condition: selectedTypeClass,
+                  max: 0,
+                  min: 0,
+                  call_time_min: 0,
+                  meetings: []
+                });
                 onClose && onClose();
               }}
               title="Guardar"
@@ -90,6 +98,7 @@ export function CourseClasses(props: CourseClassesProps) {
           <ClassroomForm
             className={styles['classroom']}
             onSubmit={(data) => {
+              onSave && onSave({...data, ...{ condition: selectedTypeClass }});
               setOpenClassroom(false);
               onClose && onClose();
             }}

@@ -40,13 +40,17 @@ const views = {
   student: TypeViews.student,
   admin: TypeViews.default,
 }
+//TODO: save current view locally to avoid show 404 page on reload page
+// const viewString = localStorage.getItem('view_app') || TypeViews.default;
+// const currentView: TypeViews = (<any>TypeViews)[viewString];
+// console.log('currentView slice: ', currentView);
 
 export const createUserSlice: StateCreator<
   StoreState,
   [],
   [],
   UserSlice
-> = (set, get) => ({
+> = (set) => ({
   user: {
     fullname: '',
     email: '',
@@ -73,18 +77,20 @@ export const createUserSlice: StateCreator<
         isAuthenticated: false,
         currentView: views.user
       });
-      sessionStorage.removeItem('auth_token');
+      localStorage.clear();
       return { isLogin: false, data: error };
     }
   },
   login: async (credentials: ICredentials):Promise<TResponseLogin> => {
     try {
       const { user } = await loginUser(credentials);
+      const view = views[user.initial_register];
       set({
         user: user,
         isAuthenticated: true,
-        currentView: views[user.initial_register]
+        currentView: view
       });
+      // localStorage.setItem('view_app', view);
       return { isLogin: true, data: user };
     } catch (error) {
       return { isLogin: false, data: error };
@@ -107,6 +113,7 @@ export const createUserSlice: StateCreator<
     try {
       await logout();
       set({ isAuthenticated: false });
+      localStorage.clear();
     } catch (error) {
       console.log(error);
     }

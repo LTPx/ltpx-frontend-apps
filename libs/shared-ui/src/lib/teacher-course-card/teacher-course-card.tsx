@@ -41,7 +41,7 @@ export function TeacherCourseCard(props: TeacherCourseCardProps) {
           icon={status === CourseStatus.publish ? 'globe' : 'edit'}
         />
         <Dropdown>
-          <Icon icon={'menu'} size={15} />
+          <Icon icon={'ellipsis-horizontal-outline'} size={15} />
           <Menu items={[
             {text: 'Editar curso', icon:'pencil'},
             {text: 'Ver curso', icon:'user-group'}

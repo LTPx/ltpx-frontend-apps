@@ -1,3 +1,5 @@
+@import '../../../../styles.scss';
+
 .header-text {
   margin-bottom: 2rem;
 }
@@ -28,6 +30,7 @@
 }
 
 .content-form {
+  padding: 1rem 2rem 2rem 2rem;
 
   .render-content {
     margin-top: 1rem;
@@ -36,5 +39,43 @@
 
 .classes-options {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.classroom-summary {
+  background-color: $green-color-100;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1rem 2rem;
+  margin-top: 1rem;
+}
+
+.modal-classroom {
+  display: flex;
+  gap: 1rem;
+
+  .content {
+    min-width: 40vw;
+  }
+}
+
+
+.information {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  background-color: $gray-color-100;
+  padding: 2rem 0;
+}
+
+.classroom-preview {
+  .edit-btn {
+    text-align: end;
+    margin-top: 1rem;
+    cursor: pointer;
+    color: $green-color;
+  }
 }

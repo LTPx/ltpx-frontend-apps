@@ -1,13 +1,11 @@
+@import '../../../../styles.scss';
+
 .container {
   display: flex;
   justify-content: center;
-  margin-top: 2rem;
+  margin-top: $size-lg-1;
 }
 
 .content {
   max-width: 30rem;
-}
-
-.btn-submit {
-  margin-top: 20px;
 }

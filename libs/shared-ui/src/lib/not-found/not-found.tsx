@@ -9,7 +9,7 @@ export function NotFound(props: NotFoundProps) {
     <div className={styles['container']}>
       <div className={styles['head']}>
         <h1>Oops!</h1>
-        <h3>You are lost</h3>
+        <h3>Esta pagina no existe</h3>
       </div>
       <div className={styles['content']}>
         <img src={illustration} alt="404" />

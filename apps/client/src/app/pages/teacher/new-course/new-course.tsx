@@ -56,12 +56,12 @@ export function NewCourse(props: NewCourseProps) {
         }
       };
       console.log('courseData: ', courseData);
-      // const { saved, data } = await createCourse(courseData);
-      // if (saved) {
-      //   navigate('/teacher/courses/all');
-      // } else {
-      //   console.log('error: ', data);
-      // }
+      const { saved, data } = await createCourse(courseData);
+      if (saved) {
+        navigate('/teacher/courses/all');
+      } else {
+        console.log('error: ', data);
+      }
     },
   });
 

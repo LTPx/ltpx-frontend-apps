@@ -1,4 +1,4 @@
-import { Classroom, TeacherClassType } from '@ltpx-frontend-apps/api';
+import { Classroom, CLASSROOM_CUSTOMIZE, CLASSROOM_NONE, TeacherClassType } from '@ltpx-frontend-apps/api';
 import { useState } from 'react';
 import Button, { ColorsButton } from '../button/button';
 import ClassroomForm from '../classroom-form/classroom-form';
@@ -13,18 +13,8 @@ const classesOptions = [
     text: 'Este curso incluirá clases para los estudiantes',
     icon: 'person-video',
   },
-  {
-    value: TeacherClassType.customize,
-    title: 'CLASES PERSONALIZADAS',
-    text: 'Este curso se acuerda con el estudiante hora y días en las que se dictaran las clases',
-    icon: 'sliders',
-  },
-  {
-    value: TeacherClassType.none,
-    title: 'NO SE REQUIERE CLASES',
-    text: 'Este curso no requiere de clases para que los estudiante apruebe este curso',
-    icon: 'forbidden',
-  },
+  CLASSROOM_CUSTOMIZE,
+  CLASSROOM_NONE
 ];
 
 /* eslint-disable-next-line */
@@ -36,16 +26,27 @@ export interface CourseClassesProps {
 
 export function CourseClasses(props: CourseClassesProps) {
   const { open, onClose, onSave } = props;
-  const [ selectedTypeClass, setSelectedTypeClass ] = useState(TeacherClassType.none);
+  const [selectedTypeClass, setSelectedTypeClass] = useState(
+    TeacherClassType.none
+  );
   const [openClassroom, setOpenClassroom] = useState(false);
 
   const handleSelectedOption = (option: any) => {
-    if (
-      option === 'classes'
-    ) {
+    if (option === 'classes') {
       setOpenClassroom(true);
     }
     setSelectedTypeClass(option);
+  };
+
+  const onSubmit = (data: any) => {
+    const classroom = { ...data };
+    if (data.condition) {
+      onSave && onSave(classroom);
+    } else {
+      onSave && onSave({ ...classroom, ...{ condition: selectedTypeClass } });
+    }
+    setOpenClassroom(false);
+    onClose && onClose();
   };
 
   return (
@@ -77,13 +78,14 @@ export function CourseClasses(props: CourseClassesProps) {
             />
             <Button
               onClick={() => {
-                onSave && onSave({
-                  condition: selectedTypeClass,
-                  max: 0,
-                  min: 0,
-                  call_time_min: 0,
-                  meetings: []
-                });
+                onSave &&
+                  onSave({
+                    condition: selectedTypeClass,
+                    max: 0,
+                    min: 0,
+                    call_time_min: 0,
+                    meetings: [],
+                  });
                 onClose && onClose();
               }}
               title="Guardar"
@@ -98,9 +100,7 @@ export function CourseClasses(props: CourseClassesProps) {
           <ClassroomForm
             className={styles['classroom']}
             onSubmit={(data) => {
-              onSave && onSave({...data, ...{ condition: selectedTypeClass }});
-              setOpenClassroom(false);
-              onClose && onClose();
+              onSubmit(data);
             }}
           >
             <Button

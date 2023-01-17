@@ -5,8 +5,8 @@ import {
   Tabs,
 } from '@ltpx-frontend-apps/shared-ui';
 import { useEffect, useState } from 'react';
-import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
+import { useCourse } from '../../../store/hooks/useCourse';
 import styles from './teacher-course-detail.module.scss';
 
 const tabs = [
@@ -51,7 +51,7 @@ export interface TeacherCourseDetailProps {}
 export function TeacherCourseDetail(props: TeacherCourseDetailProps) {
   const [course, setCourse] = useState<TeacherCourse>();
   const [selectedTab, setSelectedTab] = useState(0);
-  const { t } = useTranslation();
+  const { translateCategory, translateLanguage, translateLevel, translateStatus } = useCourse();
 
   const handleClick = (index: number) => {
     setSelectedTab(index);
@@ -93,16 +93,16 @@ export function TeacherCourseDetail(props: TeacherCourseDetailProps) {
           <h1>{course.title}</h1>
           <div className={styles['basic-info']}>
             <span className={`${styles['noted']} ${styles['status']}`}>
-              {t(`course_status.${course.status}`)}
+              {translateStatus(course.status)}
             </span>
             <span className={`${styles['noted']}`}>
-              {t(`course_categories.${course.category}`)}
+              {translateCategory(course.category)}
             </span>
             <span className={`${styles['noted']}`}>
-              {t(`levels.${course.level}`)}
+              {translateLevel(course.level)}
             </span>
             <span className={`${styles['noted']}`}>
-              {t(`languages.${course.language}`)}
+              {translateLanguage(course.language)}
             </span>
           </div>
           <div className={styles['about-course']}>

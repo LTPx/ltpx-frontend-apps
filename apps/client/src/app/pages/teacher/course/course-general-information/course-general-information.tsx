@@ -1,30 +1,7 @@
 import { FileUpload, Input, Select, TextArea } from '@ltpx-frontend-apps/shared-ui';
+import { useCourse } from 'apps/client/src/app/store/hooks/useCourse';
 import { FormikValues } from 'formik';
 import styles from './course-general-information.module.scss';
-
-const categories = [
-  {value: 'design', text: 'Diseño'},
-  {value: 'business', text: 'Negocios'},
-  {value: 'software_development', text: 'Desarrollo de Software'},
-  {value: 'personal_development', text: 'Desarrollo Personal'},
-  {value: 'photography', text: 'Fotografía'},
-  {value: 'audio', text: 'Audio + Música'},
-  {value: 'marketing', text: 'Marketing'},
-  {value: 'finance', text: 'Finanzas'},
-  {value: 'other', text: 'Otros'},
-];
-
-const levels = [
-  {value: 'beginner', text: 'Básico'},
-  {value: 'medium', text: 'Intermedio'},
-  {value: 'advance', text: 'Avanzado'},
-  {value: 'all', text: 'Todos los niveles'},
-];
-
-const languages = [
-  {value: 'es', text: 'Español'},
-  {value: 'en', text: 'Ingles'},
-];
 
 /* eslint-disable-next-line */
 export interface CourseGeneralInformationProps {
@@ -33,6 +10,8 @@ export interface CourseGeneralInformationProps {
 
 export function CourseGeneralInformation(props: CourseGeneralInformationProps) {
   const { formik } = props;
+  const { categories, languages, levels } = useCourse();
+
   return (
     <div className={styles['container']}>
       <div className={styles['header-text']}>
@@ -58,7 +37,7 @@ export function CourseGeneralInformation(props: CourseGeneralInformationProps) {
           onBlur={formik.handleBlur}
         />
         <TextArea
-          label='Descripcion del curso'
+          label='Descripción del curso'
           placeholder='Un breve resumen de lo que trata este curso'
           name="description"
           onChange={(e: any) => { formik.handleChange(e); }}

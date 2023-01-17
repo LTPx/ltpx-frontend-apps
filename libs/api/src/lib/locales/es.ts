@@ -31,6 +31,8 @@ export const es = {
     audio: 'Audio + Música',
     marketing: 'Marketing',
     finance: 'Finanzas',
+    basic_education: 'Educación Básica',
+    secondary_education: 'Educación Secundaria',
     other: 'Otros',
   },
   levels: {

@@ -7,6 +7,7 @@ export * from '../src/lib/locales/en';
 //interfaces
 export * from '../src/lib/interfaces/course';
 export * from '../src/lib/interfaces/user';
+export * from '../src/lib/interfaces/quiz';
 export * from '../src/lib/interfaces/teacher';
 
 //fake api

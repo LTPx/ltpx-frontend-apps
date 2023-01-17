@@ -13,6 +13,7 @@ export enum Question {
 /* eslint-disable-next-line */
 export interface QuizQuestionProps {
   kindQuestion: Question;
+  onChange: (option: any) => void;
 }
 
 const options = [
@@ -23,12 +24,13 @@ const options = [
 ];
 
 export function QuizQuestion(props: QuizQuestionProps) {
-  const { kindQuestion } = props;
+  const { kindQuestion, onChange } = props;
   const [selectedQuestion, setSelectedQuestion] = useState(Question.answer);
 
   const showQuestionForm = (selectedOption: any) => {
     if (selectedOption) {
       setSelectedQuestion(selectedOption.value);
+      onChange(selectedOption.value);
     }
   };
   return (

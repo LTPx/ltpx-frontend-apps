@@ -1,5 +1,7 @@
+@import '../../../../styles.scss';
+
 .header-text {
-  margin-bottom: 2rem;
+  margin-bottom: $size-lg-1;
 
   h2, h4 {
     margin: 0;
@@ -10,11 +12,11 @@
   position: absolute;
   right: -10px;
   top: -10px;
-  width: 1.5rem;
-  height: 1.5rem;
+  width: $size-md-3;
+  height: $size-md-3;
   background: #334155;
   border-radius: 100%;
-  color: white;
+  color: $white-color;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -22,17 +24,17 @@
 }
 
 .quiz-form {
-  margin-bottom: 1.5rem;
+  margin-bottom: $size-md-3;
   position: relative;
   border: 1px solid #f3f4f6;
   background-color: #f9fafb;
-  padding: 1rem 2rem 2rem 2rem;
+  padding: $size-md-1 $size-lg-1 $size-lg-1 $size-lg-1;
 }
 
 .quiz-question {
-  margin-top: 1.5rem;
-  padding: 1rem;
+  margin-top: $size-md-3;
+  padding: $size-md-1;
   position: relative;
-  background-color: #fff;
+  background-color: $white-color;
 
 }

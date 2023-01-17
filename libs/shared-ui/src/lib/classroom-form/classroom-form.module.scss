@@ -1,15 +1,15 @@
 @import '../../styles/styles.module.scss';
 
 .field-form {
-  margin-top: 1.5rem;
+  margin-top: $size-md-3;
 
   .range {
-    margin-top: 0.5rem;
+    margin-top: $size-sm-2;
     display: flex;
-    gap: 1rem;
+    gap: $size-md-1;
     align-items: center;
     background-color: #f9fafb;
-    padding: 1rem 2rem;
+    padding: $size-md-1 $size-lg-1;
     border: 1px solid #d4d4d4;
   }
 
@@ -27,5 +27,5 @@
 .buttons {
   display: flex;
   justify-content: flex-end;
-  gap: 1rem;
+  gap: $size-md-1;
 }

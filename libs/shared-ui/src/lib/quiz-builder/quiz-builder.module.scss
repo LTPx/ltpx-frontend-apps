@@ -1,0 +1,52 @@
+@import '../../styles/styles.module.scss';
+
+.quiz-form {
+  margin-bottom: $size-md-3;
+  position: relative;
+  border: 1px solid #f3f4f6;
+  background-color: #f9fafb;
+  padding: $size-md-1 $size-lg-1 $size-lg-1 $size-lg-1;
+}
+.remove-btn {
+  position: absolute;
+  right: -10px;
+  top: -10px;
+  width: $size-md-3;
+  height: $size-md-3;
+  background: #334155;
+  border-radius: 100%;
+  color: $white-color;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.quiz-question {
+  margin-top: $size-md-3;
+  padding: $size-md-1;
+  position: relative;
+  background-color: $white-color;
+}
+.footer {
+  display: flex;
+  justify-content: end;
+  gap: $size-md-1;
+  padding: $size-md-1;
+}
+
+.content {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  justify-content: space-between;
+  .title {
+    padding: $size-md-1;
+    .input {
+      padding-bottom: $size-md-1;
+    }
+    .questions {
+      padding-bottom: $size-md-1;
+    }
+  }
+}

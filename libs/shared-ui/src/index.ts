@@ -1,3 +1,5 @@
+export * from './lib/setup-card/setup-card';
+export * from './lib/quiz-builder/quiz-builder';
 export * from './lib/register-form/register-form';
 export * from './lib/information-card/information-card';
 export * from './lib/course-classes/course-classes';

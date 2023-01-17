@@ -26,7 +26,7 @@ export function Register(props: RegisterProps) {
     <div className="main-container">
       <div className={styles['container']}>
         <div className={styles['content']}>
-          <h1>Register</h1>
+          <h1>Registrame</h1>
           <span>
             Descubre una comunidad de apoyo de instructores en línea. Obtén
             acceso instantáneo a todos los recursos.
@@ -34,6 +34,10 @@ export function Register(props: RegisterProps) {
           <RegisterForm
             onSubmit={(formData) => {
               onSubmitForm(formData);
+            }}
+            termsAndConditions={{
+              text:'Acepto recibir correos informativos y/o promocionales de Open Mind',
+              link:'/terms-and-conditions'
             }}
           />
         </div>

@@ -1,5 +1,4 @@
 import styles from './register-form.module.scss';
-// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import Input from '../input/input';
@@ -8,14 +7,19 @@ import { IRegisterUser } from '@ltpx-frontend-apps/api';
 import InputTextStatus, {
   StatusInputText,
 } from '../input-text-status/input-text-status';
+import { NavLink } from 'react-router-dom';
 
 /* eslint-disable-next-line */
 export interface RegisterFormProps {
   onSubmit: (data: IRegisterUser) => void;
+  termsAndConditions?: {
+    link: string;
+    text: string;
+  }
 }
 
 export function RegisterForm(props: RegisterFormProps) {
-  const { onSubmit } = props;
+  const { onSubmit, termsAndConditions } = props;
 
   const formik = useFormik({
     initialValues: {
@@ -88,6 +92,14 @@ export function RegisterForm(props: RegisterFormProps) {
           text={formik.errors.password}
         />
       ) : null}
+      { termsAndConditions && (
+          <div className={styles['terms-conditions']}>
+          <input type="checkbox" id="accept" value="second_checkbox" />
+          <NavLink to={termsAndConditions.link} target={'blank'}>
+            <p>{termsAndConditions.text}</p>
+          </NavLink>
+        </div>
+      )}
       <Button
         className={styles['btn-submit']}
         color={ColorsButton.primary}

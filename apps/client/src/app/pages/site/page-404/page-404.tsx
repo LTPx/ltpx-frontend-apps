@@ -12,7 +12,7 @@ export function Page404(props: Page404Props) {
       <div className={styles['back']}>
         <NavLink to={'/home'} className={styles['link']}>
           <Icon icon={'arrow-left'} size={20} />
-          <h3>Go Home</h3>
+          <h3>Ir a Inicio</h3>
         </NavLink>
       </div>
     </div>

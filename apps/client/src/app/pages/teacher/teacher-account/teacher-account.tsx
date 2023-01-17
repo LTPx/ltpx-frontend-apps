@@ -1,17 +1,42 @@
 import { IUserAccount } from '@ltpx-frontend-apps/api';
-import { UserAccountForm } from '@ltpx-frontend-apps/shared-ui';
+import { BannerNotification, UserAccountForm } from '@ltpx-frontend-apps/shared-ui';
+import { useEffect, useState } from 'react';
+import { useTeacher } from '../../../store';
 import styles from './teacher-account.module.scss';
 
 /* eslint-disable-next-line */
 export interface TeacherAccountProps {}
 
 export function TeacherAccount(props: TeacherAccountProps) {
-  const clickFunction = () => {
-    console.log('click');
+  const [showMessage, setShowMessage] = useState(false);
+  const { getProfile, updateProfile, profile } = useTeacher();
+
+  useEffect(() => {
+    if (!profile) {
+      getProfile();
+    }
+  }, []);
+
+  const clickFunction = async(data: IUserAccount) => {
+    const response = await updateProfile(data);
+    if (response.saved) {
+      console.log(response);
+      setShowMessage(true);
+    } else {
+      console.log(response.data);
+    }
   };
+
   return (
     <div className={styles['container']}>
-      <UserAccountForm onSubmit={clickFunction} />
+      { showMessage && (
+        <BannerNotification onClickClose={()=>{setShowMessage(false)}}>
+          <h4>Tus datos se han actualizado</h4>
+        </BannerNotification>
+      )}
+      { profile && (
+        <UserAccountForm onSubmit={clickFunction} data={profile} />
+      )}
     </div>
   );
 }

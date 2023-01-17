@@ -54,7 +54,7 @@ export interface ICurrentUser {
 }
 
 export interface IUserAccount {
-  fullName: string;
+  fullname: string;
   username: string;
   phone: string;
   country: string;

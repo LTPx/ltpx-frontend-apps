@@ -24,7 +24,7 @@ export const AppRouter = () => {
       getCurrentUser().then(()=> {
         setTimeout(() => {
           setIsLoading(false)
-        }, 2500);
+        }, 1000);
       });
     }
     return () => {

@@ -1,9 +1,9 @@
-import { Button, ColorsButton, Input, TypeButton } from '@ltpx-frontend-apps/shared-ui';
-import { useFormik } from 'formik';
+// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
+import { RegisterForm } from '@ltpx-frontend-apps/shared-ui';
 import { useNavigate } from 'react-router-dom';
 import styles from './register-teacher.module.scss';
-import * as Yup from 'yup';
 import { useTeacher } from '../../../store';
+import { IRegisterUser } from '@ltpx-frontend-apps/api';
 
 /* eslint-disable-next-line */
 export interface RegisterTeacherProps {}
@@ -13,78 +13,34 @@ export function RegisterTeacher(props: RegisterTeacherProps) {
 
   const navigate = useNavigate();
 
-  const formik = useFormik({
-    initialValues: {
-      fullname: '',
-      email: '',
-      password: '',
-    },
-    validationSchema: Yup.object({
-      fullname: Yup.string()
-                .required('Nombre es obligatorio'),
-      email: Yup.string()
-                .email()
-                .required('Email es obligatorio'),
-      password: Yup.string()
-                    .required('Password es obligatorio')
-    }),
-    onSubmit: async formData => {
-      const { isLogin, data } = await registerTeacher(formData);
-      if (isLogin) {
-        navigate('/teacher/dashboard');
-        window.location.reload();
-      } else {
-        // setError(true);
-      }
+  const onSubmitForm = async (formData: IRegisterUser) => {
+    const { isLogin, data } = await registerTeacher(formData);
+    if (isLogin) {
+      navigate('/teacher/dashboard');
+      window.location.reload();
+    } else {
+      // setError(true);
     }
-  });
+  };
 
   return (
     <div className="main-container">
       <div className={styles['container']}>
         <div className={styles['content']}>
-          <h1>Become a E-Teacher</h1>
+          <h1>Quiero ser Profesor</h1>
           <span>
-            Discover a supportive community of online instructors.
-            Get instant access to all creation courses resources
+            Se parte de una comunidad de apoyo de instructores en línea.
+            comparte tus conocimientos con otros y genera ingresos.
           </span>
-          <form onSubmit={formik.handleSubmit}>
-            <Input
-              label='Name'
-              type="text"
-              name="fullname"
-              placeholder="John Doe"
-              onChange={(e: any) => { formik.handleChange(e); }}
-              value={formik.values.fullname}
-              onBlur={formik.handleBlur}
-            />
-            <Input
-              label='Email'
-              type="email"
-              name="email"
-              placeholder="myemail@example.com"
-              onChange={(e: any) => { formik.handleChange(e); }}
-              value={formik.values.email}
-              onBlur={formik.handleBlur}
-            />
-            <Input
-              label='Password'
-              type="password"
-              name="password"
-              placeholder='********'
-              onChange={(e: any) => { formik.handleChange(e); }}
-              value={formik.values.password}
-              onBlur={formik.handleBlur}
-            />
-            <Button
-              className={styles['btn-submit']}
-              color={ColorsButton.primary}
-              title="Sign In"
-              full={true}
-              type={TypeButton.submit}
-              onClick={formik.handleSubmit}
-            />
-          </form>
+          <RegisterForm
+            onSubmit={(formData) => {
+              onSubmitForm(formData);
+            }}
+            termsAndConditions={{
+              text:'Acepto recibir correos informativos y/o promocionales de Open Mind',
+              link:'/terms-and-conditions'
+            }}
+          />
         </div>
       </div>
     </div>

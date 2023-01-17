@@ -8,6 +8,7 @@ import {
   ApplyTeacherForm,
 } from '@ltpx-frontend-apps/shared-ui';
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useTeacher } from '../../../store';
 import styles from './teacher-apply.module.scss';
 
@@ -16,8 +17,8 @@ export interface TeacherApplyProps {}
 
 export function TeacherApply(props: TeacherApplyProps) {
   const [form, setForm] = useState<ApplicationTeach>();
-
   const { applyTeach, teacher_account, getApplicationTeach } = useTeacher();
+  const navigate = useNavigate();
 
   useEffect(() => {
     let mounted = true;
@@ -38,7 +39,7 @@ export function TeacherApply(props: TeacherApplyProps) {
   const handleSubmit = async (formData: ApplyTeachApiParams) => {
     const { accepted, data } = await applyTeach(formData);
     if (accepted) {
-      console.log('teacher: ', data);
+      navigate('/teacher/dashboard');
     } else {
       console.log('error: ', data);
     }

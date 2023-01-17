@@ -1,4 +1,4 @@
-import { applyToTeach, createCourse, ApplyTeachApiParams, IRegisterUser, ITeacher, registerTeacher, StatusTeacherAccount, TypeViews, UserResponse, NewCourseApiParams, ApplicationTeach, getApplicationTeach } from "@ltpx-frontend-apps/api";
+import { applyToTeach, createCourse, ApplyTeachApiParams, IRegisterUser, ITeacher, registerTeacher, StatusTeacherAccount, TypeViews, UserResponse, NewCourseApiParams, ApplicationTeach, getApplicationTeach, IUserAccount, getTeacherProfile, updateTeacherProfile } from "@ltpx-frontend-apps/api";
 import { StateCreator } from "zustand";
 import { StoreState } from "../store";
 
@@ -22,13 +22,26 @@ type TResponseGetApplication = {
   data: ApplicationTeach | any;
 };
 
+type TResponseProfile = {
+  ok: boolean;
+  data: IUserAccount | any;
+};
+
+type TResponseUpdateProfile = {
+  saved: boolean;
+  data: IUserAccount | any;
+};
+
 export type TeacherSlice = {
   teacher_account: StatusTeacherAccount | null;
   application: ApplicationTeach | null;
+  profile: IUserAccount | null;
   applyTeach: (params: ApplyTeachApiParams) => Promise<any>;
   getApplicationTeach: () => Promise<any>;
   registerTeacher: (params: IRegisterUser) => Promise<TResponseLogin>;
   createCourse: (params: NewCourseApiParams) => Promise<TResponseCreateCourse>;
+  getProfile: () => Promise<TResponseProfile>;
+  updateProfile: (params: IUserAccount) => Promise<TResponseUpdateProfile>;
 }
 
 export const createTeacherSlice:
@@ -38,6 +51,7 @@ export const createTeacherSlice:
   TeacherSlice > = (set) => ({
     teacher_account: null,
     application: null,
+    profile: null,
     applyTeach: async (params: ApplyTeachApiParams):Promise<TResponseApply> => {
       try {
         const teacher = await applyToTeach(params);
@@ -52,6 +66,15 @@ export const createTeacherSlice:
       try {
         const response = await getApplicationTeach();
         set({ application: response });
+        return { ok: true, data: response };
+      } catch (error) {
+        return { ok: false, data: error };
+      }
+    },
+    getProfile: async ():Promise<TResponseGetApplication> => {
+      try {
+        const response = await getTeacherProfile();
+        set({ profile: response });
         return { ok: true, data: response };
       } catch (error) {
         return { ok: false, data: error };
@@ -74,6 +97,15 @@ export const createTeacherSlice:
       try {
         const course = await createCourse(params);
         return { saved: true, data: course };
+      } catch (error) {
+        return { saved: false, data: error };
+      }
+    },
+    updateProfile: async (params: IUserAccount):Promise<TResponseUpdateProfile> => {
+      try {
+        const response = await updateTeacherProfile(params);
+        set({ profile: response });
+        return { saved: true, data: response };
       } catch (error) {
         return { saved: false, data: error };
       }

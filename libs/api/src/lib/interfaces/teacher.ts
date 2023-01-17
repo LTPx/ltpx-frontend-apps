@@ -1,5 +1,3 @@
-import { PartialWithRequired } from "./util";
-
 export enum StatusTeacherAccount {
   review = "review",
   active = "active",

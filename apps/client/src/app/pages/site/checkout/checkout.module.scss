@@ -18,7 +18,6 @@
     }
 
     .payments {
-
       .header {
         img {
           // width: 50px;
@@ -45,7 +44,6 @@
       flex-direction: column;
       max-width: 300px;
 
-
       .details {
         display: flex;
         flex-direction: column;
@@ -55,21 +53,21 @@
         }
 
         .item {
-         display: flex;
-         justify-content: space-between;
+          display: flex;
+          justify-content: space-between;
 
-         .item-text {
-           display: flex;
-           align-items: center;
+          .item-text {
+            display: flex;
+            align-items: center;
 
-           h4 {
-             color: #888888;
-           }
-         }
+            h4 {
+              color: #888888;
+            }
+          }
 
-         h4 {
-           color: black;
-         }
+          h4 {
+            color: black;
+          }
         }
       }
 

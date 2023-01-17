@@ -17,4 +17,4 @@ export * from '../src/lib/fake/chat-messages';
 //api
 export * from '../src/lib/api/auth';
 export * from './lib/api/teacher/courses-api';
-export * from './lib/api/teacher/apply-teach-api';
+export * from './lib/api/teacher/teacher-api';

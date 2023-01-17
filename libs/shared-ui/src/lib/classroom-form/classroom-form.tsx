@@ -1,4 +1,5 @@
-import { Classroom } from '@ltpx-frontend-apps/api';
+import { Classroom, TeacherClassType } from '@ltpx-frontend-apps/api';
+import { Switch } from 'evergreen-ui';
 import { useFormik } from 'formik';
 import Button, { TypeButton } from '../button/button';
 import SelectDates from '../select-dates/select-dates';
@@ -17,6 +18,7 @@ export function ClassroomForm(props: ClassroomFormProps) {
 
   const formik = useFormik({
     initialValues: {
+      mandatory: false,
       min: '1',
       max: '2',
       hour: '0',
@@ -25,6 +27,7 @@ export function ClassroomForm(props: ClassroomFormProps) {
     },
     onSubmit: (data) => {
       const formData = {
+        condition: data.mandatory ? TeacherClassType.mandatory : TeacherClassType.flexible,
         min: parseInt(data.min),
         max: parseInt(data.max),
         call_time_min: parseInt(data.minutes) + parseInt(data.hour),
@@ -60,11 +63,29 @@ export function ClassroomForm(props: ClassroomFormProps) {
     { value: '8', text: '8' },
     { value: '9', text: '9' },
     { value: '10', text: '10' },
+    { value: '11', text: '11' },
+    { value: '12', text: '12' },
   ];
 
   return (
     <form className={`${styles['form']} ${className}`}>
       <section>
+        <div className={`${styles['field-form']} ${styles['switch']}`}>
+          <div>
+            <h4>Las clases serán obligatorias?</h4>
+            <p>
+              Solo en caso que las clases sean necesarias para aprobar este
+              curso
+            </p>
+          </div>
+          <Switch
+            height={20}
+            checked={formik.values.mandatory}
+            onChange={(e: any) => {
+              formik.setFieldValue('mandatory', e.target.checked);
+            }}
+          />
+        </div>
         <div className={styles['field-form']}>
           <label>Tamaño de la clase</label>
           <div className={styles['range']}>

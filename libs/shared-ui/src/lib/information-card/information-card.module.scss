@@ -1,0 +1,60 @@
+@import '../../styles/styles.module.scss';
+
+.container {
+  border: 1px solid $gray-color-200;
+  cursor: pointer;
+
+  &.selected {
+    border: 1px solid $green-color;
+    color: $text-color;
+  }
+
+  .content {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: $size-lg-3;
+    padding: $size-lg-1 $size-md-3;
+
+    .status-content {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: $size-md-2;
+
+      .information {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+
+        h3 {
+          color: $text-color;
+          font-size: 0.875rem;
+          font-weight: 500;
+
+          &.selected {
+            color: $green-color;
+          }
+        }
+
+        p {
+          color: $text-gray-color;
+          text-align: left;
+          margin-top: $size-sm-1;
+          font-size: 0.875rem;
+        }
+      }
+    }
+
+    .status-content svg {
+      padding-top: 5px;
+      cursor: pointer;
+    }
+
+    .icon {
+      text-align: end;
+    }
+
+    .icon svg {
+      padding-top: 5px;
+    }
+  }
+}

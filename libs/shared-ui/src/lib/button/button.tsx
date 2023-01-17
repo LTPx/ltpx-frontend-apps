@@ -58,7 +58,7 @@ export function Button(props: ButtonProps) {
   const Button = () => {
     return (
       <button
-        className={`${btnClass}`}
+        className={`${btnClass} ${className}`}
         type={type}
         onClick={onClick}
         disabled={disabled}

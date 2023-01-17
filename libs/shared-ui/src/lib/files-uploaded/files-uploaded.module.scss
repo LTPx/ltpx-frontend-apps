@@ -1,19 +1,35 @@
 @import '../../styles/styles.module.scss';
 
 .container {
-  width: 25rem;
+  width: 100%;
   .files-content {
     display: flex;
     justify-content: space-between;
-    padding: $size-md-1;
+    gap: $size-sm-2;
     .file {
       display: flex;
       gap: $size-md-1;
       align-items: center;
-
       h4 {
         color: $text-gray-color;
+        margin-top: 0;
         font-size: 0.875rem;
+      }
+      .send-file {
+        cursor: pointer;
+        text-decoration: underline;
+        color: $primary-color-300;
+      }
+    }
+    input {
+      display: none;
+    }
+    .buttons {
+      display: flex;
+      gap: $size-md-1;
+
+      .btn {
+        font-size: $size-sm-3;
       }
     }
   }

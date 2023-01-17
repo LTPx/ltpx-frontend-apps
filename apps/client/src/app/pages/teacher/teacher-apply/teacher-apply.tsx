@@ -47,6 +47,7 @@ export function TeacherApply(props: TeacherApplyProps) {
     }
   };
 
+
   return (
     <div className={`${styles['container']} card`}>
       <div className={`${styles['header']}`}>

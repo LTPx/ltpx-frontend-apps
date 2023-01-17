@@ -55,7 +55,7 @@ export function TeacherLayout(props: TeacherLayoutProps) {
 
   return (
     <div className={styles['container']}>
-      <Header links={[]}>
+      <Header links={[]} className={styles['header']}>
         <div className={styles['teacher-actions']}>
           <Dropdown>
             <Icon icon='notification' size={22} className={styles['notification']}/>

@@ -1,5 +1,9 @@
 @import "../../../../styles.scss";
 
+.header {
+  padding: 1rem 3.5rem;
+}
+
 .container {
   display: grid;
   grid-template-columns: 260px 1fr;

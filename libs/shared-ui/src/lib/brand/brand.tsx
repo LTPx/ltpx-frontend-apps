@@ -11,7 +11,7 @@ export function Brand(props: BrandProps) {
   return (
     <div className={`${styles['container']} ${classSelected}`}>
       <p>Open</p>
-      <p style={{marginLeft: '0.6rem'}}>Mind</p>
+      <p style={{marginLeft: '0.6rem'}}>Minds</p>
     </div>
   );
 }

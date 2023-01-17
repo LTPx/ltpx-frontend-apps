@@ -3,20 +3,22 @@ import { FormikValues } from 'formik';
 import styles from './course-general-information.module.scss';
 
 const categories = [
-  {value: 'design', text: 'Design'},
-  {value: 'business', text: 'Business'},
-  {value: 'software-development', text: 'Software Development'},
-  {value: 'personal-development', text: 'Personal Development'},
-  {value: 'photography', text: 'Photography'},
-  {value: 'audio', text: 'Audio + Music'},
+  {value: 'design', text: 'Diseño'},
+  {value: 'business', text: 'Negocios'},
+  {value: 'software_development', text: 'Desarrollo de Software'},
+  {value: 'personal_development', text: 'Desarrollo Personal'},
+  {value: 'photography', text: 'Fotografía'},
+  {value: 'audio', text: 'Audio + Música'},
   {value: 'marketing', text: 'Marketing'},
-  {value: 'finance', text: 'Finance Accounting'},
+  {value: 'finance', text: 'Finanzas'},
+  {value: 'other', text: 'Otros'},
 ];
 
 const levels = [
-  {value: 'begginer', text: 'Basico'},
+  {value: 'beginner', text: 'Básico'},
   {value: 'medium', text: 'Intermedio'},
   {value: 'advance', text: 'Avanzado'},
+  {value: 'all', text: 'Todos los niveles'},
 ];
 
 const languages = [

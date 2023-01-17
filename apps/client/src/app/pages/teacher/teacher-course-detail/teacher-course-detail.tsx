@@ -1,20 +1,18 @@
-import {
-  getTeacherCourse,
-  TeacherCourse,
-} from '@ltpx-frontend-apps/api';
+import { getTeacherCourse, TeacherCourse } from '@ltpx-frontend-apps/api';
 import {
   CourseContents,
   LearnersTable,
   Tabs,
 } from '@ltpx-frontend-apps/shared-ui';
 import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 import styles from './teacher-course-detail.module.scss';
 
 const tabs = [
   { text: 'Contenidos' },
   { text: 'Estudiantes' },
-  { text: 'Estadisticas' },
+  { text: 'Estadísticas' },
 ];
 
 const users = [
@@ -53,6 +51,8 @@ export interface TeacherCourseDetailProps {}
 export function TeacherCourseDetail(props: TeacherCourseDetailProps) {
   const [course, setCourse] = useState<TeacherCourse>();
   const [selectedTab, setSelectedTab] = useState(0);
+  const { t } = useTranslation();
+
   const handleClick = (index: number) => {
     setSelectedTab(index);
   };
@@ -83,16 +83,27 @@ export function TeacherCourseDetail(props: TeacherCourseDetailProps) {
       {course && (
         <>
           <div className={styles['cover']}>
-            <img src={course.cover_url || 'https://designshack.net/wp-content/uploads/placeholder-image-368x246.png'}></img>
+            <img
+              src={
+                course.cover_url ||
+                'https://designshack.net/wp-content/uploads/placeholder-image-368x246.png'
+              }
+            ></img>
           </div>
           <h1>{course.title}</h1>
           <div className={styles['basic-info']}>
             <span className={`${styles['noted']} ${styles['status']}`}>
-              {course.status}
+              {t(`course_status.${course.status}`)}
             </span>
-            <span className={`${styles['noted']}`}>{course.category}</span>
-            <span className={`${styles['noted']}`}>{course.level}</span>
-            <span className={`${styles['noted']}`}>{course.language}</span>
+            <span className={`${styles['noted']}`}>
+              {t(`course_categories.${course.category}`)}
+            </span>
+            <span className={`${styles['noted']}`}>
+              {t(`levels.${course.level}`)}
+            </span>
+            <span className={`${styles['noted']}`}>
+              {t(`languages.${course.language}`)}
+            </span>
           </div>
           <div className={styles['about-course']}>
             <h2>Acerca del curso</h2>
@@ -104,9 +115,7 @@ export function TeacherCourseDetail(props: TeacherCourseDetailProps) {
               isNav={false}
               onClickTab={(option) => handleClick(option)}
             />
-            {selectedTab === 0 && (
-              <CourseContents contents={course.contents} />
-            )}
+            {selectedTab === 0 && <CourseContents contents={course.contents} />}
             {selectedTab === 1 && <LearnersTable users={users} />}
             {selectedTab === 2 && <h1>Mostrar Estadísticas</h1>}
           </div>

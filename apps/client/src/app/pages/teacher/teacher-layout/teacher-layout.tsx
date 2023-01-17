@@ -1,4 +1,5 @@
-import { Avatar, Dropdown, Header, Icon, Nav, NotificationList, UserMenu } from '@ltpx-frontend-apps/shared-ui';
+import { Dropdown, Header, Icon, Nav, NotificationList, UserMenu } from '@ltpx-frontend-apps/shared-ui';
+import { Avatar } from 'evergreen-ui';
 import { useTranslation } from 'react-i18next';
 import { Outlet, useNavigate } from 'react-router-dom';
 import { useUser } from '../../../store';
@@ -63,10 +64,7 @@ export function TeacherLayout(props: TeacherLayoutProps) {
           </Dropdown>
           <Dropdown>
             <div className={styles['avatar']}>
-              <Avatar
-                image='https://images.unsplash.com/photo-1669563306078-4c107b67d125?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=3387&q=80'
-                dropdown-id={'menu'}
-              />
+              <Avatar name={user.fullname} size={40} color='green'/>
               <h4>{user.fullname}</h4>
               <Icon icon='caret-down' size={18}/>
             </div>

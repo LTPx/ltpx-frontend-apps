@@ -15,7 +15,7 @@ export function TeacherDashboard(props: TeacherDashboardProps) {
         <BannerNotification>
           <p>
             Tu solicitud ha sido enviada, validaremos tus datos en un periodo
-            maximo de 48h luego recibiras un correo con una respuesta de nuestro
+            máximo de 48h luego recibirás un correo con una respuesta de nuestro
             equipo
           </p>
         </BannerNotification>
@@ -24,7 +24,7 @@ export function TeacherDashboard(props: TeacherDashboardProps) {
       <p>Estás a solo unos pasos de enseñar.
         ¡Siga nuestra guía paso a paso para comenzar!
       </p>
-      <h2>Aplicar para enseñar en Ltpx?</h2>
+      <h2>Aplicar para enseñar en Openminds?</h2>
       <h4>Llena esta solicitud para enseñar con nosotros</h4>
       <Button
         title= {teacher_account === StatusTeacherAccount.review ? 'Revisar Solicitud' : 'Aplicar Ahora'}

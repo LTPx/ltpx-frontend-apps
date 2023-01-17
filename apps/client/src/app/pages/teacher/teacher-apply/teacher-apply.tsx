@@ -16,16 +16,18 @@ import styles from './teacher-apply.module.scss';
 export interface TeacherApplyProps {}
 
 export function TeacherApply(props: TeacherApplyProps) {
-  const [form, setForm] = useState<ApplicationTeach>();
+  const [ application, setApplication ] = useState<ApplicationTeach>();
   const { applyTeach, teacher_account, getApplicationTeach } = useTeacher();
   const navigate = useNavigate();
+
+  console.log('application: ', application);
 
   useEffect(() => {
     let mounted = true;
     getApplicationTeach().then((resp) => {
       if (!mounted) {
         if (resp.ok) {
-          setForm(resp.data);
+          setApplication(resp.data);
         } else {
           console.log(resp.data);
         }
@@ -45,22 +47,14 @@ export function TeacherApply(props: TeacherApplyProps) {
     }
   };
 
-  const BannerNotification = () => (
-    <div className={styles['banner-notification']}>
-      <p>
-        Tu solicitud ha sido enviada, validaremos tus datos en un periodo maximo
-        de 48h luego recibirás un correo con una respuesta de nuestro equipo
-      </p>
-    </div>
-  );
 
   return (
     <div className={`${styles['container']} card`}>
       <div className={`${styles['header']}`}>
         <h1>Aplicar para maestro en OpenMind</h1>
       </div>
-      {teacher_account === StatusTeacherAccount.review && form && (
-        <ApplicationView application={form} />
+      { application?.status === StatusTeacherAccount.review && (
+        <ApplicationView application={application} />
       )}
       {teacher_account === StatusTeacherAccount.unapplied && (
         <>

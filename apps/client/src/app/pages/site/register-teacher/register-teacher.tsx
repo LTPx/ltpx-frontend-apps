@@ -27,14 +27,18 @@ export function RegisterTeacher(props: RegisterTeacherProps) {
     <div className="main-container">
       <div className={styles['container']}>
         <div className={styles['content']}>
-          <h1>Become a E-Teacher</h1>
+          <h1>Quiero ser Profesor</h1>
           <span>
-            Descubre una comunidad de apoyo de instructores en línea. Obtén
-            acceso instantáneo a todos los recursos.
+            Se parte de una comunidad de apoyo de instructores en línea.
+            comparte tus conocimientos con otros y genera ingresos.
           </span>
           <RegisterForm
             onSubmit={(formData) => {
               onSubmitForm(formData);
+            }}
+            termsAndConditions={{
+              text:'Acepto recibir correos informativos y/o promocionales de Open Mind',
+              link:'/terms-and-conditions'
             }}
           />
         </div>

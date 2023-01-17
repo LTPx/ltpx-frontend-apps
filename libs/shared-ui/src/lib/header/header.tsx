@@ -11,12 +11,13 @@ export interface LinkHeader {
 export interface HeaderProps {
   children?: any;
   links: Array<LinkHeader>;
+  className?: string;
 }
 
 export function Header(props: HeaderProps) {
-  const { children, links } = props;
+  const { children, links, className } = props;
   return (
-    <div className={styles['container']}>
+    <div className={`${styles['container']} ${className}`}>
       <div className={styles['main-action']}>
         <Brand/>
         <div className={styles['search']}>

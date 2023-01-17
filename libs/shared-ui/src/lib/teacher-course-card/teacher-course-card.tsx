@@ -1,4 +1,5 @@
 import { CourseStatus } from '@ltpx-frontend-apps/api';
+import { useTranslation } from 'react-i18next';
 import { NavLink } from 'react-router-dom';
 import Dropdown from '../dropdown/dropdown';
 import Icon from '../icon/icon';
@@ -20,6 +21,7 @@ export interface TeacherCourseCardProps {
 }
 
 export function TeacherCourseCard(props: TeacherCourseCardProps) {
+  const { t } = useTranslation();
   const {
     status,
     image,
@@ -34,7 +36,7 @@ export function TeacherCourseCard(props: TeacherCourseCardProps) {
     <div className={styles['container']}>
       <div className={styles['head-content']}>
         <Tag
-          text={status}
+          text={t(`course_status.${status}`)}
           color={
             status === CourseStatus.publish ? ColorsTag.green : ColorsTag.gray
           }
@@ -55,10 +57,11 @@ export function TeacherCourseCard(props: TeacherCourseCardProps) {
             <h4>{title}</h4>
             <div className={styles['describe']}>
               <h5>
-                <Icon icon={'user'} size={10}></Icon> {learners} estudiantes
+                <Icon icon={'user'} size={10}></Icon> {learners} Estudiantes
               </h5>
               <h5>
-                <Icon icon={'box-unpacked'} size={10}></Icon> {category}
+                <Icon icon={'box-unpacked'} size={10}></Icon> {t(`course_categories.${category}`)}
+
               </h5>
             </div>
           </div>

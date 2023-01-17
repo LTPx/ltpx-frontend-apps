@@ -22,7 +22,7 @@ export interface NewCourseProps {}
 
 const optionsSave = [
   { value: 'draff', text: 'Borrador' },
-  { value: 'public', text: 'Publicar' },
+  { value: 'public', text: 'Enviar a Revision' },
 ];
 
 export function NewCourse(props: NewCourseProps) {
@@ -77,7 +77,7 @@ export function NewCourse(props: NewCourseProps) {
           <h3>Crear Curso</h3>
           <div className={styles['actions']}>
             <h5 className="muted">Creado: Diciembre 21 2022</h5>
-            <Button title="Preview" outline={true} />
+            <Button title="Preview" outline={true} color={ColorsButton.secondary}/>
             <Select options={optionsSave} />
             <Button
               title="Guardar"

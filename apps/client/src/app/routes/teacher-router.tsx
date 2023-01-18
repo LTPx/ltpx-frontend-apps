@@ -17,6 +17,7 @@ export const TeacherRoutes = () => {
   return (
     <BrowserRouter>
       <Routes>
+        <Route path="/" element={<Navigate replace to="teacher/dashboard" />} />
         <Route path="teacher" element={
           <ProtectedRoutesTeacher>
             <TeacherLayout/>

@@ -98,7 +98,9 @@ export function QuizBuilder(props: QuizBuilderProps) {
           </div>
         </div>
       </Drawer>
-      <Drawer open={openTest}>
+      <Drawer open={openTest} onClose={()=>{
+        setOpenTest(false);
+      }}>
         <div className={styles['content']}>
           <div className={styles['quiz-form']}>
             {kindQuestion === TypeQuiz.conditional && (

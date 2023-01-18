@@ -1,3 +1,10 @@
+export enum TypeQuiz {
+  multiple = 'multiple',
+  single = 'single',
+  answer = 'answer',
+  conditional = 'conditional',
+}
+
 export interface QuizModel {
   id: number;
   user_id: number;
@@ -16,7 +23,7 @@ export type Quiz = Omit<
 export interface QuestionQuiz {
   question: string;
   description: string;
-  kind: string;
+  kind: TypeQuiz;
   answers: Answer[];
 }
 

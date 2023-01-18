@@ -1,3 +1,4 @@
+export * from './lib/quiz-form-conditional/quiz-form-conditional';
 export * from './lib/setup-card/setup-card';
 export * from './lib/quiz-builder/quiz-builder';
 export * from './lib/register-form/register-form';

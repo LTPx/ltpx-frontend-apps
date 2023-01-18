@@ -1,12 +1,12 @@
 import {
+  ApplicationView,
+  ApplyTeacherForm,
+} from '@ltpx-frontend-apps/shared-ui';
+import {
   ApplicationTeach,
   ApplyTeachApiParams,
   StatusTeacherAccount,
 } from '@ltpx-frontend-apps/api';
-import {
-  ApplicationView,
-  ApplyTeacherForm,
-} from '@ltpx-frontend-apps/shared-ui';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTeacher } from '../../../store';

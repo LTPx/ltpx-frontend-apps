@@ -8,7 +8,10 @@ import {
   TypeButton,
   TypeFile,
 } from '@ltpx-frontend-apps/shared-ui';
-import { ApplyTeachApiParams, COUNTRIES_ABLE_APP } from '@ltpx-frontend-apps/api';
+import {
+  ApplyTeachApiParams,
+  COUNTRIES_ABLE_APP,
+} from '@ltpx-frontend-apps/api';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { useTranslation } from 'react-i18next';
@@ -83,7 +86,7 @@ export function ApplyTeacherForm(props: ApplyTeacherFormProps) {
             <Input
               label="Teléfono"
               name="phone"
-              placeholder="Ejm: 0998473535"
+              placeholder="Ejm: +59398473535"
               description="Este sera usando para contactarte en caso de ser necesario"
               onChange={(e: any) => {
                 formik.handleChange(e);
@@ -99,7 +102,10 @@ export function ApplyTeacherForm(props: ApplyTeacherFormProps) {
           </div>
           <div className={styles['identification-files']}>
             <label>Documento de identificación (.jpg, .png)</label>
-            <p>Openmind necesita validar que se trata de ti por lo que requerimos que subas una imagen de tu identificación</p>
+            <p>
+              Openmind necesita validar que se trata de ti por lo que requerimos
+              que subas una imagen de tu identificación
+            </p>
             <div
               className={`${styles['field-group']} ${styles['field-background']}`}
             >
@@ -139,10 +145,10 @@ export function ApplyTeacherForm(props: ApplyTeacherFormProps) {
           </div>
           <div className={styles['field-group']}>
             <Select
-              label='País de residencia'
+              label="País de residencia"
               options={countries}
               onChange={(option) => {
-                formik.setFieldValue('country', option.text)
+                formik.setFieldValue('country', option.text);
               }}
               errorMessage={
                 formik.touched.country && formik.errors.country
@@ -168,7 +174,17 @@ export function ApplyTeacherForm(props: ApplyTeacherFormProps) {
           </div>
           <FilesUploaded
             label="Record policial"
-            description="Obligatorio para personas naturales de Ecuador 🇪🇨"
+            description={
+              <div>
+                <p>
+                  Obligatorio para personas naturales de Ecuador 🇪🇨, lo puedes
+                  obtener en el siguiente{' '}
+                  <a href="https://certificados.ministeriodelinterior.gob.ec/gestorcertificados/antecedentes" target={'_blank'}>
+                    link
+                  </a>
+                </p>
+              </div>
+            }
             className={styles['file-upload']}
             type={TypeFile.pdf}
             onChange={(value) => {
@@ -204,7 +220,11 @@ export function ApplyTeacherForm(props: ApplyTeacherFormProps) {
               onChange={(value) => {
                 formik.setFieldValue('degrees_files', value);
               }}
-              errorMessage={formik.touched.degrees_files && formik.errors.degrees_files ? formik.errors.degrees_files : null}
+              errorMessage={
+                formik.touched.degrees_files && formik.errors.degrees_files
+                  ? formik.errors.degrees_files
+                  : null
+              }
             />
           </div>
           <TextArea

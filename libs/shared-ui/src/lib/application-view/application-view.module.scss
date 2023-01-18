@@ -10,7 +10,13 @@
     color: $text-color;
     border-bottom: 1px solid $gray-color-400;
   }
+
   h4 {
+    color: $text-gray-color;
+    margin-top: $size-sm-3;
+  }
+
+  pre {
     color: $text-gray-color;
     margin-top: $size-sm-3;
   }
@@ -64,8 +70,9 @@
     }
 
     img {
-      width: 80px;
+      width: 120px;
       height: 80px;
+      object-fit: cover;
       border: 1px solid $stroke-color;
     }
   }

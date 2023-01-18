@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react';
-import Button, { ColorsButton } from '../button/button';
+import Button, { ColorsButton, TypeButton } from '../button/button';
 import Icon from '../icon/icon';
 import InputTextStatus, {
   StatusInputText,
@@ -16,7 +16,7 @@ export interface FilesUploadedProps {
   type: TypeFile;
   name?: string;
   label?: string;
-  description?: string;
+  description?: any;
   className?: string;
   canRemove?: boolean;
   multiple?: boolean;
@@ -97,6 +97,7 @@ export function FilesUploaded(props: FilesUploadedProps) {
               <>
                 <Button
                   className={styles['btn']}
+                  type={TypeButton.button}
                   title={'Editar'}
                   color={ColorsButton.primary}
                   onClick={handleClick}

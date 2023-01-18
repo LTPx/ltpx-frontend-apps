@@ -1,6 +1,9 @@
 import {
   ApplicationView,
   ApplyTeacherForm,
+  Button,
+  ColorsButton,
+  Loader,
 } from '@ltpx-frontend-apps/shared-ui';
 import {
   ApplicationTeach,
@@ -11,11 +14,15 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTeacher } from '../../../store';
 import styles from './teacher-apply.module.scss';
+import { Dialog } from 'evergreen-ui';
 
 /* eslint-disable-next-line */
 export interface TeacherApplyProps {}
 
 export function TeacherApply(props: TeacherApplyProps) {
+  const [ saving, setSaving ] = useState(false);
+  const [ formData, setFormData ] = useState<ApplyTeachApiParams>();
+  const [ openConfirmationModal, setOpenConfirmationModal ] = useState(false);
   const [ application, setApplication ] = useState<ApplicationTeach>();
   const { applyTeach, teacher_account, getApplicationTeach } = useTeacher();
   const navigate = useNavigate();
@@ -35,12 +42,17 @@ export function TeacherApply(props: TeacherApplyProps) {
     };
   }, []);
 
-  const handleSubmit = async (formData: ApplyTeachApiParams) => {
-    const { accepted, data } = await applyTeach(formData);
-    if (accepted) {
-      navigate('/teacher/dashboard');
-    } else {
-      console.log('error: ', data);
+  const handleSubmit = async () => {
+    if (formData) {
+      setSaving(true);
+      const { accepted, data } = await applyTeach(formData);
+      setSaving(false);
+      setOpenConfirmationModal(false)
+      if (accepted) {
+        navigate('/teacher/dashboard');
+      } else {
+        console.log('error: ', data);
+      }
     }
   };
 
@@ -60,12 +72,39 @@ export function TeacherApply(props: TeacherApplyProps) {
             una vez enviada no se podrá modificar
           </p>
           <ApplyTeacherForm
-            onSubmitForm={(e: ApplyTeachApiParams) => {
-              handleSubmit(e);
+            onSubmitForm={(data: ApplyTeachApiParams) => {
+              setOpenConfirmationModal(true);
+              setFormData(data);
             }}
           />
         </>
       )}
+      <Dialog
+        isShown={openConfirmationModal}
+        title={`${saving ? 'Guardando...' : 'Confirmar envió de solicitud'}`}
+        onCloseComplete={() => setOpenConfirmationModal(false)}
+        hasFooter={false}
+      >
+        <div className={styles['dialog-confirm']}>
+          { !saving && (
+            <>
+              <h4>Por favor asegúrate que toda la información este correcta asi nos ayudaras a que el proceso sea lo mas rápido posible</h4>
+              <div className={styles['footer']}>
+                <Button title='Cancelar' color={ColorsButton.white} onClick={()=>{ setOpenConfirmationModal(false)}}/>
+                <Button title='Enviar a revision' onClick={()=>{
+                  handleSubmit();
+                }}/>
+              </div>
+            </>
+          )}
+          { saving && (
+            <div className={styles['loading']}>
+              <Loader />
+              <h4>Estamos subiendo tus archivos...</h4>
+            </div>
+          )}
+        </div>
+      </Dialog>
     </div>
   );
 }

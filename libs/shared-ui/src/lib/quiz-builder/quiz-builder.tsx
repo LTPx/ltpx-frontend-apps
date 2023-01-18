@@ -1,4 +1,5 @@
 import { QuestionQuiz, QuizModel, TypeQuiz } from '@ltpx-frontend-apps/api';
+import { QuizFormMultipleOptions } from '@ltpx-frontend-apps/shared-ui';
 import { useFormik } from 'formik';
 import { useState } from 'react';
 import Button, { ColorsButton } from '../button/button';
@@ -114,6 +115,9 @@ export function QuizBuilder(props: QuizBuilderProps) {
                   setOpenTest(false);
                 }}
               />
+            )}
+            {kindQuestion === TypeQuiz.multiple && (
+              <QuizFormMultipleOptions/>
             )}
           </div>
         </div>

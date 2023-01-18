@@ -1,4 +1,5 @@
 import Icon from '../icon/icon';
+import InputTextStatus, { StatusInputText } from '../input-text-status/input-text-status';
 import css from './input.module.scss';
 
 /* eslint-disable-next-line */
@@ -28,6 +29,7 @@ export interface InputProps {
   description?: string;
   min?: any;
   max?: any;
+  errorMessage?: string | null;
 }
 
 export function Input(props: InputProps) {
@@ -40,6 +42,7 @@ export function Input(props: InputProps) {
     description,
     min,
     max,
+    errorMessage,
     ...other
   } = props;
 
@@ -84,6 +87,12 @@ export function Input(props: InputProps) {
           <AddonSymbol text={addonInput.text} position={Position.right} icon={addonInput.icon}/>
         )}
       </div>
+      { errorMessage && (
+        <InputTextStatus
+          status={StatusInputText.error}
+          text={errorMessage}
+        />
+      )}
     </div>
   );
 }

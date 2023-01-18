@@ -1,3 +1,4 @@
+import InputTextStatus, { StatusInputText } from '../input-text-status/input-text-status';
 import styles from './text-area.module.scss';
 
 /* eslint-disable-next-line */
@@ -16,24 +17,36 @@ export interface TextAreaProps {
   cols?: number;
   description?: string;
   placeholder?: string;
+  errorMessage?: string | null;
 }
 
 export function TextArea(props: TextAreaProps) {
-  const { className, onEnter, onChange, label, description, placeholder, ...other } = props;
+  const {
+    className,
+    onEnter,
+    onChange,
+    label,
+    description,
+    placeholder,
+    errorMessage,
+    ...other
+  } = props;
   return (
     <div className={styles['container']}>
-      {label && (
-        <label className={styles['label']}>{label}</label>
-      )}
-      { description && (
-        <p className={styles['description']}>{description}</p>
-      )}
+      {label && <label className={styles['label']}>{label}</label>}
+      {description && <p className={styles['description']}>{description}</p>}
       <textarea
         className={styles['textarea-container']}
         placeholder={placeholder}
-        {...other}
         onChange={(e) => onChange && onChange(e)}
+        {...other}
       />
+      { errorMessage && (
+        <InputTextStatus
+          status={StatusInputText.error}
+          text={errorMessage}
+        />
+      )}
     </div>
   );
 }

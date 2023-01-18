@@ -20,8 +20,6 @@ export function TeacherApply(props: TeacherApplyProps) {
   const { applyTeach, teacher_account, getApplicationTeach } = useTeacher();
   const navigate = useNavigate();
 
-  console.log('application: ', application);
-
   useEffect(() => {
     let mounted = true;
     getApplicationTeach().then((resp) => {
@@ -39,6 +37,7 @@ export function TeacherApply(props: TeacherApplyProps) {
   }, []);
 
   const handleSubmit = async (formData: ApplyTeachApiParams) => {
+    console.log('formData: ', formData);
     const { accepted, data } = await applyTeach(formData);
     if (accepted) {
       navigate('/teacher/dashboard');
@@ -46,7 +45,6 @@ export function TeacherApply(props: TeacherApplyProps) {
       console.log('error: ', data);
     }
   };
-
 
   return (
     <div className={`${styles['container']} card`}>

@@ -24,7 +24,7 @@ export function TeacherDashboard(props: TeacherDashboardProps) {
       <p>Estás a solo unos pasos de enseñar.
         ¡Siga nuestra guía paso a paso para comenzar!
       </p>
-      <h2>Aplicar para enseñar en Openminds?</h2>
+      <h2>Aplicar para enseñar en Openmind?</h2>
       <h4>Llena esta solicitud para enseñar con nosotros</h4>
       <Button
         title= {teacher_account === StatusTeacherAccount.review ? 'Revisar Solicitud' : 'Aplicar Ahora'}

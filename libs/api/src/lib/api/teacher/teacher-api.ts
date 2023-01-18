@@ -1,6 +1,7 @@
 import { _http } from '../../http';
 import { ApplicationTeach, ApplyTeachApiParams, ApplyTeachModel } from '../../interfaces/teacher';
 import { IUserAccount } from '../../interfaces/user';
+import { moveToFormData } from '../../utils';
 
 const http = _http;
 
@@ -31,9 +32,10 @@ export const updateTeacherProfile = async (teacher: IUserAccount) => {
 };
 
 export const applyToTeach = async (teacher: ApplyTeachApiParams) => {
+  const teacherFormData = moveToFormData(teacher);
   return new Promise<ApplyTeachModel>((resolve, reject) => {
     http
-      .post('api/v1/teacher/application_teachers', teacher)
+      .post('api/v1/teacher/application_teachers', teacherFormData)
       .then((response) => {
         resolve(response.data);
       })

@@ -21,3 +21,4 @@ export * from './lib/api/teacher/teacher-api';
 
 //constants
 export * from '../src/lib/constants/course-constants';
+export * from '../src/lib/constants/app-constants';

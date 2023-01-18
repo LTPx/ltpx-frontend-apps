@@ -3,9 +3,7 @@ import {
   Button,
   FilesUploaded,
   Input,
-  InputTextStatus,
   Select,
-  StatusInputText,
   TextArea,
   TypeButton,
   TypeFile,
@@ -47,7 +45,6 @@ export function ApplyTeacherForm(props: ApplyTeacherFormProps) {
       phone: Yup.string().required('Teléfono es requerido'),
       country: Yup.string().required('País es requerido'),
       city: Yup.string().required('Ciudad es requerido'),
-      national_id: Yup.string().required('Identificación es requerido'),
       degrees_files: Yup.string().required('Por favor suba los archivos'),
       police_record: Yup.string().required('Record Policial es requerido'),
       national_id_front: Yup.mixed()

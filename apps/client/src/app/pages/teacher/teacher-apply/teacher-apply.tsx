@@ -21,23 +21,21 @@ export function TeacherApply(props: TeacherApplyProps) {
   const navigate = useNavigate();
 
   useEffect(() => {
-    let mounted = true;
-    getApplicationTeach().then((resp) => {
-      if (!mounted) {
-        if (resp.ok) {
+    if (!application) {
+      getApplicationTeach().then((resp) => {
+        const { ok, data} = resp;
+        if (ok && data.status) {
           setApplication(resp.data);
         } else {
           console.log(resp.data);
         }
-      }
-    });
+      });
+    }
     return () => {
-      mounted = false;
     };
   }, []);
 
   const handleSubmit = async (formData: ApplyTeachApiParams) => {
-    console.log('formData: ', formData);
     const { accepted, data } = await applyTeach(formData);
     if (accepted) {
       navigate('/teacher/dashboard');

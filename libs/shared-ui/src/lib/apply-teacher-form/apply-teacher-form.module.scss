@@ -1,24 +1,53 @@
 @import '../../styles/styles.module.scss';
 
 .container {
+
+  section {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 2rem;
+
+    h2 {
+      border-bottom: 1px solid $gray-color-300;
+    }
+  }
+
   .send-information {
     margin-top: $size-md-1;
   }
 
   .file-upload {
-    background-color: $gray-color-100;
     padding: $size-md-1 $size-md-3;
-    margin-top: $size-sm-2;
   }
 
-  .file {
-    padding-right: $size-lg-3;
-  }
-
-  h4 {
-    font-size: 0.9rem;
+  label {
     color: $text-color;
     margin-top: $size-md-1;
-    font-weight: 400;
+  }
+
+  .field-group {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+
+    &.field-background {
+      background-color: $white-color-100;
+      padding: 2rem;
+    }
+  }
+
+  .identification-files {
+    margin-top: 1rem;
+
+    p {
+      font-size: 0.875rem;
+      color: $text-gray-color;
+      margin-bottom: 0.5rem;
+    }
+
+    .file h5{
+      margin-top: 0.5rem;
+    }
   }
 }

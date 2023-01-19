@@ -17,7 +17,7 @@ export enum ColorsButton {
 /* eslint-disable-next-line */
 export interface ButtonProps {
   className?: string;
-  onClick?: { (): void };
+  onClick?: (event?: any) => void;
   color?: ColorsButton;
   type?: TypeButton;
   title: string;
@@ -60,7 +60,9 @@ export function Button(props: ButtonProps) {
       <button
         className={`${btnClass} ${className}`}
         type={type}
-        onClick={onClick}
+        onClick={(event)=>{
+          onClick && onClick(event)
+        }}
         disabled={disabled}
         onMouseDown={(event)=>{event.preventDefault()}}
         {...other}

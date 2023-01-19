@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import InputTextStatus, { StatusInputText } from '../input-text-status/input-text-status';
 import styles from './select.module.scss';
 
 export interface OptionSelect {
@@ -13,10 +14,11 @@ export interface SelectProps {
   onChange?: (selectedOption: OptionSelect) => void;
   selected?: OptionSelect;
   className?: string;
+  errorMessage?: string | null;
 }
 
 export function Select(props: SelectProps) {
-  const { options, label, onChange, selected, className } = props;
+  const { options, label, onChange, selected, className, errorMessage } = props;
   const initialSelectedOption = selected?.value || options[0].value;
   const [selectedOption, setSelectedOption] = useState(initialSelectedOption)
 
@@ -41,6 +43,12 @@ export function Select(props: SelectProps) {
           </option>
         ))}
       </select>
+      { errorMessage && (
+        <InputTextStatus
+          status={StatusInputText.error}
+          text={errorMessage}
+        />
+      )}
     </div>
   );
 }

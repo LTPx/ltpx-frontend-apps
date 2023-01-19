@@ -1,11 +1,26 @@
 @import '../../styles/styles.module.scss';
 
 .container {
-  width: 100%;
+  &.with-label {
+    margin-top: 1rem;
+  }
+
+  p {
+    font-size: 14px;
+    color: $text-gray-color-medium;
+    margin-bottom: 0.5rem;
+  }
+}
+
+.content {
+  background-color: $white-color;
+  border: 1px dashed $stroke-color;
+
   .files-content {
     display: flex;
     justify-content: space-between;
     gap: $size-sm-2;
+
     .file {
       display: flex;
       gap: $size-md-1;

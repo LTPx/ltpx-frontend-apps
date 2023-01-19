@@ -50,5 +50,10 @@ export const en = {
     draft: 'Borrador',
     published: 'Publicado',
     review: 'En revision',
+  },
+  countries: {
+    ec: 'Ecuador',
+    es: 'Spain',
+    mx: 'Mexico'
   }
 }

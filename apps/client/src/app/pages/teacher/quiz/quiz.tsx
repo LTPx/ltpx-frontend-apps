@@ -1,6 +1,7 @@
 import { NewQuizParams, QuestionQuiz } from '@ltpx-frontend-apps/api';
 import { QuizBuilder, SetupCard } from '@ltpx-frontend-apps/shared-ui';
 import { useState } from 'react';
+import { useTeacher } from '../../../store';
 import styles from './quiz.module.scss';
 
 /* eslint-disable-next-line */
@@ -11,6 +12,13 @@ export interface QuizProps {
 export function Quiz(props: QuizProps) {
   const [openModal, setOpenModal] = useState(false);
   const [quiz, setQuiz] = useState<NewQuizParams>();
+  const { createQuiz } = useTeacher();
+
+  const handleCreateQuiz = async(quizParams: NewQuizParams) => {
+    const response = await createQuiz(quizParams);
+    console.log(response);
+    setQuiz(quizParams)
+  };
 
   return (
     <div className="quizzes">
@@ -35,7 +43,8 @@ export function Quiz(props: QuizProps) {
         }}
         onSubmit={(data) => {
           setOpenModal(false);
-          setQuiz(data);
+          // setQuiz(data);
+          handleCreateQuiz(data)
         }}
       />
       {quiz && (

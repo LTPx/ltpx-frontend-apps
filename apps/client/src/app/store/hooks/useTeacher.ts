@@ -11,6 +11,8 @@ export const useTeacher = () => {
     profile,
     getProfile,
     updateProfile,
+    myQuizzes,
+    createQuiz,
   } = useAppStore();
 
   return {
@@ -23,5 +25,7 @@ export const useTeacher = () => {
     profile,
     getProfile,
     updateProfile,
+    myQuizzes,
+    createQuiz
   }
 }

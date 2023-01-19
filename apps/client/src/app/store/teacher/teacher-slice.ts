@@ -14,9 +14,13 @@ import {
   IUserAccount,
   getTeacherProfile,
   updateTeacherProfile,
+  QuizModel,
+  NewQuizApiParams,
+  createQuiz,
 } from '@ltpx-frontend-apps/api';
 import { StateCreator } from 'zustand';
 import { StoreState } from '../store';
+import { teacherNewQuiz, teacherQuizzes } from './courses-actions';
 
 type TResponseApply = {
   accepted: boolean;
@@ -48,16 +52,25 @@ type TResponseUpdateProfile = {
   data: IUserAccount | any;
 };
 
+type TResponse = {
+  saved: boolean;
+  data?: any;
+  error?: any;
+};
+
 export type TeacherSlice = {
   teacher_account: StatusTeacherAccount;
   application: ApplicationTeach | null;
   profile: IUserAccount | null;
+  newQuiz: QuizModel;
   applyTeach: (params: ApplyTeachApiParams) => Promise<any>;
   getApplicationTeach: () => Promise<any>;
   registerTeacher: (params: IRegisterUser) => Promise<TResponseLogin>;
   createCourse: (params: NewCourseApiParams) => Promise<TResponseCreateCourse>;
   getProfile: () => Promise<TResponseProfile>;
   updateProfile: (params: IUserAccount) => Promise<TResponseUpdateProfile>;
+  createQuiz: (params: NewQuizApiParams) => Promise<TResponse>;
+  myQuizzes: () => Promise<TResponse>;
 };
 
 export const createTeacherSlice: StateCreator<
@@ -69,6 +82,7 @@ export const createTeacherSlice: StateCreator<
   teacher_account: StatusTeacherAccount.unapplied,
   application: null,
   profile: null,
+  newQuiz: {} as QuizModel,
   applyTeach: async (params: ApplyTeachApiParams): Promise<TResponseApply> => {
     try {
       const application = await applyToTeach(params);
@@ -133,4 +147,12 @@ export const createTeacherSlice: StateCreator<
       return { saved: false, data: error };
     }
   },
+  createQuiz: async(params) => {
+    const { success, response } =  await teacherNewQuiz(params, set);
+    return { saved: success, data: response };
+  },
+  myQuizzes: async() => {
+    const { success, response } =  await teacherQuizzes(set);
+    return { saved: success, data: response };
+  }
 });

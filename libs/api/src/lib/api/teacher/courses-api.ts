@@ -1,5 +1,5 @@
 import { _http } from '../../http';
-import { NewCourseApiParams, TeacherCourse } from '../../interfaces/course';
+import { NewCourseApiParams, TeacherCourse } from '../../interfaces/course-interface';
 import { moveToFormData } from '../../utils';
 
 const http = _http;

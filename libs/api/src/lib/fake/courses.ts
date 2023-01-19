@@ -1,5 +1,5 @@
 import { faker } from '@faker-js/faker';
-import { CourseLanguage, CourseLevel, PublicCourse, TeacherClassType } from '../interfaces/course';
+import { CourseLanguage, CourseLevel, PublicCourse, TeacherClassType } from '../interfaces/course-interface';
 
 const createRandomCourse = ():PublicCourse => (
   {

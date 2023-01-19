@@ -1,3 +1,4 @@
+export * from './lib/course-content-form/course-content-form';
 export * from './lib/quiz-form-answer/quiz-form-answer';
 export * from './lib/quiz-form-multiple-options/quiz-form-multiple-options';
 export * from './lib/quiz-form-conditional/quiz-form-conditional';

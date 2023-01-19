@@ -1,0 +1,24 @@
+@import '../../styles/styles.module.scss';
+
+.content {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  h2 {
+    padding: $size-md-1;
+  }
+  .form-content {
+    margin-bottom: $size-md-3;
+    position: relative;
+    height: 100%;
+    background-color: $white-color-100;
+    padding: $size-md-1 $size-md-1 $size-lg-1 $size-md-1;
+  }
+
+  .footer {
+    display: flex;
+    justify-content: end;
+    gap: $size-md-1;
+    padding: $size-md-1;
+  }
+}

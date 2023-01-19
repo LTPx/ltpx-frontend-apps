@@ -6,7 +6,7 @@ import {
 } from '@ltpx-frontend-apps/shared-ui';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { useCourse } from '../../../store/hooks/useCourse';
+import { useCourse } from '../../../store';
 import styles from './teacher-course-detail.module.scss';
 
 const tabs = [

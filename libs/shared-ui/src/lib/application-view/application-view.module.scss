@@ -10,9 +10,15 @@
     color: $text-color;
     border-bottom: 1px solid $gray-color-400;
   }
+
   h4 {
     color: $text-gray-color;
-    margin-top: $size-md-1;
+    margin-top: $size-sm-3;
+  }
+
+  pre {
+    color: $text-gray-color;
+    margin-top: $size-sm-3;
   }
 
   .formation {
@@ -25,6 +31,8 @@
     .content {
       display: flex;
       flex-direction: column;
+      margin-top: 1rem;
+
       .title {
         display: grid;
         grid-template-columns: 1fr 1fr 1fr;
@@ -36,6 +44,36 @@
         display: grid;
         grid-template-columns: 1fr 1fr 1fr;
       }
+    }
+  }
+
+  .files {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 1rem;
+
+    .field {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+
+      a {
+        color: $primary-color;
+      }
+    }
+
+    .file {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    img {
+      width: 120px;
+      height: 80px;
+      object-fit: cover;
+      border: 1px solid $stroke-color;
     }
   }
 }

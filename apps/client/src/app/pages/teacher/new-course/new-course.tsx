@@ -1,7 +1,6 @@
 import {
   Button,
   ColorsButton,
-  QuizBuilder,
   Select,
   TypeButton,
 } from '@ltpx-frontend-apps/shared-ui';

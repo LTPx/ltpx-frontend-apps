@@ -1,4 +1,4 @@
-import { QuestionQuiz } from '@ltpx-frontend-apps/api';
+import { NewQuizParams, QuestionQuiz } from '@ltpx-frontend-apps/api';
 import { QuizBuilder, SetupCard } from '@ltpx-frontend-apps/shared-ui';
 import { useState } from 'react';
 import styles from './quiz.module.scss';
@@ -10,7 +10,7 @@ export interface QuizProps {
 
 export function Quiz(props: QuizProps) {
   const [openModal, setOpenModal] = useState(false);
-  const [quiz, setQuiz] = useState<QuestionQuiz>();
+  const [quiz, setQuiz] = useState<NewQuizParams>();
 
   return (
     <div className="quizzes">
@@ -33,11 +33,30 @@ export function Quiz(props: QuizProps) {
         onClose={() => {
           setOpenModal(false);
         }}
+        onSubmit={(data) => {
+          setOpenModal(false);
+          setQuiz(data);
+        }}
       />
       {quiz && (
-        <div className={styles['classroom-preview']}>
-          <h4>sdadsa</h4>
-        </div>
+        <>
+          <div className={styles['quiz-preview']}>
+            <h4>Examen de: {quiz.name} </h4>
+            {quiz.questions.map((ele, key) => (
+              <div key={key}>
+                <h4>Preguntas de tipo: {ele.kind}</h4>
+              </div>
+            ))}
+          </div>
+          <div
+            className={styles['edit-btn']}
+            onClick={() => {
+              setOpenModal(true);
+            }}
+          >
+            <h4>Editar Test</h4>
+          </div>
+        </>
       )}
     </div>
   );

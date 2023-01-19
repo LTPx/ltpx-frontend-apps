@@ -72,3 +72,10 @@
   background-color: $white-color;
 }
 
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 1rem;
+  padding: 1rem 0;
+}

@@ -3,24 +3,10 @@
 .header-text {
   margin-bottom: $size-lg-1;
 
-  h2, h4 {
+  h2,
+  h4 {
     margin: 0;
   }
-}
-
-.remove-btn {
-  position: absolute;
-  right: -10px;
-  top: -10px;
-  width: $size-md-3;
-  height: $size-md-3;
-  background: #334155;
-  border-radius: 100%;
-  color: $white-color;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
 }
 
 .quiz-form {
@@ -36,5 +22,11 @@
   padding: $size-md-1;
   position: relative;
   background-color: $white-color;
+}
 
+.edit-btn {
+  text-align: end;
+  margin-top: $size-md-1;
+  cursor: pointer;
+  color: $green-color;
 }

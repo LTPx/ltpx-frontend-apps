@@ -1,11 +1,18 @@
-import { QuestionQuiz, QuizModel, TypeQuiz } from '@ltpx-frontend-apps/api';
-import { QuizFormMultipleOptions } from '@ltpx-frontend-apps/shared-ui';
+import {
+  NewQuizParams,
+  QuestionQuiz,
+  QuizModel,
+  TypeQuiz,
+} from '@ltpx-frontend-apps/api';
+import {
+  QuizFormAnswer,
+  QuizFormMultipleOptions,
+} from '@ltpx-frontend-apps/shared-ui';
 import { useFormik } from 'formik';
 import { useState } from 'react';
-import Button, { ColorsButton } from '../button/button';
+import Button, { ColorsButton, TypeButton } from '../button/button';
 import Drawer from '../drawer/drawer';
 import Input from '../input/input';
-import PanelAccordion from '../panel-accordion/panel-accordion';
 import QuizFormConditional from '../quiz-form-conditional/quiz-form-conditional';
 import styles from './quiz-builder.module.scss';
 
@@ -14,27 +21,27 @@ export interface QuizBuilderProps {
   open?: boolean;
   onClose?: () => void;
   onSave?: (quiz: QuizModel) => void;
+  onSubmit?: (data: NewQuizParams) => void;
   nameQuiz?: string;
 }
 
 export function QuizBuilder(props: QuizBuilderProps) {
-  const { open, onClose, onSave } = props;
+  const { open, onClose, onSave, onSubmit } = props;
   const [openTest, setOpenTest] = useState(false);
-  const [ questionsQuiz, setQuestionsQuiz] = useState<QuestionQuiz[]>([]);
+  const [questionsQuiz, setQuestionsQuiz] = useState<QuestionQuiz[]>([]);
   const [kindQuestion, setKindQuestion] = useState<TypeQuiz>();
 
   const formik = useFormik({
     initialValues: {
-      question: '',
-      kind: '',
-      description: '',
-      answers: [],
+      name: '',
+      questions: [],
     },
     onSubmit: (data) => {
-      console.log(data);
-      // const ff = { ...data, ...{ answers: [] } };
-      // setQuestionsQuiz(questionsQuiz.concat([ff]));
-      // setOpenTest(false);
+      onSubmit && onSubmit(data);
+      const elements = { ...data, ...{ questions: questionsQuiz } };
+      onSubmit && onSubmit(elements);
+      setOpenTest(false);
+      console.log(elements);
     },
   });
 
@@ -52,19 +59,29 @@ export function QuizBuilder(props: QuizBuilderProps) {
             <Input
               className={styles['input']}
               label={`Titulo de Examen`}
+              value={formik.values.name}
               placeholder="Ingresar Titulo"
               onChange={(e: any) => {
                 formik.handleChange(e);
               }}
-              name="title"
+              name="name"
             />
-            <div className={styles['questions']}>
+            {/* <div className={styles['questions']}>
               {questionsQuiz.map((q, key) => (
-                <PanelAccordion title={q.question} key={key}>
-                  {q.description}
-                </PanelAccordion>
+                <div key={key}>
+                  <h4>{q.question}</h4>
+                  <h4>{q.description}</h4>
+                  <div>
+                    {q.answers.map((ele, key) => (
+                      <div key={key}>
+                        <h4>{ele.correct ? 'true' : 'false'}</h4>
+                        <h4>{ele.text}</h4>
+                      </div>
+                    ))}
+                  </div>
+                </div>
               ))}
-            </div>
+            </div> */}
             <Button
               title="+ Agregar pregunta verdadera / falsa"
               color={ColorsButton.primary}
@@ -81,6 +98,22 @@ export function QuizBuilder(props: QuizBuilderProps) {
                 setKindQuestion(TypeQuiz.multiple);
               }}
             />
+            <Button
+              title="+ Agregar pregunta de una selección"
+              color={ColorsButton.primary}
+              onClick={() => {
+                setOpenTest(true);
+                setKindQuestion(TypeQuiz.single);
+              }}
+            />
+            <Button
+              title="+ Agregar pregunta"
+              color={ColorsButton.primary}
+              onClick={() => {
+                setOpenTest(true);
+                setKindQuestion(TypeQuiz.answer);
+              }}
+            />
           </div>
           <div className={styles['footer']}>
             <Button
@@ -91,17 +124,19 @@ export function QuizBuilder(props: QuizBuilderProps) {
               title="Cancelar"
             />
             <Button
-              onClick={() => {
-                onClose && onClose();
-              }}
+              type={TypeButton.submit}
+              onClick={formik.submitForm}
               title="Guardar"
             />
           </div>
         </div>
       </Drawer>
-      <Drawer open={openTest} onClose={()=>{
-        setOpenTest(false);
-      }}>
+      <Drawer
+        open={openTest}
+        onClose={() => {
+          setOpenTest(false);
+        }}
+      >
         <div className={styles['content']}>
           <div className={styles['quiz-form']}>
             {kindQuestion === TypeQuiz.conditional && (
@@ -109,7 +144,6 @@ export function QuizBuilder(props: QuizBuilderProps) {
                 onSubmit={(data) => {
                   setOpenTest(false);
                   setQuestionsQuiz(questionsQuiz.concat([data]));
-                  console.log('data from conditional form: ', data);
                 }}
                 onCancel={() => {
                   setOpenTest(false);
@@ -117,7 +151,38 @@ export function QuizBuilder(props: QuizBuilderProps) {
               />
             )}
             {kindQuestion === TypeQuiz.multiple && (
-              <QuizFormMultipleOptions/>
+              <QuizFormMultipleOptions
+                onCancel={() => {
+                  setOpenTest(false);
+                }}
+                onSubmit={(data) => {
+                  setOpenTest(false);
+                  setQuestionsQuiz(questionsQuiz.concat([data]));
+                }}
+              />
+            )}
+            {kindQuestion === TypeQuiz.single && (
+              <QuizFormMultipleOptions
+                onCancel={() => {
+                  setOpenTest(false);
+                }}
+                singleSelection={true}
+                onSubmit={(data) => {
+                  setOpenTest(false);
+                  setQuestionsQuiz(questionsQuiz.concat([data]));
+                }}
+              />
+            )}
+            {kindQuestion === TypeQuiz.answer && (
+              <QuizFormAnswer
+                onCancel={() => {
+                  setOpenTest(false);
+                }}
+                onSubmit={(data) => {
+                  setOpenTest(false);
+                  setQuestionsQuiz(questionsQuiz.concat([data]));
+                }}
+              />
             )}
           </div>
         </div>

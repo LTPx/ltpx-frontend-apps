@@ -5,6 +5,7 @@ import Input from '../input/input';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import Button, { ColorsButton, TypeButton } from '../button/button';
+import { TypeQuiz } from '@ltpx-frontend-apps/api';
 
 /* eslint-disable-next-line */
 export interface QuizFormConditionalProps {
@@ -18,6 +19,7 @@ export function QuizFormConditional(props: QuizFormConditionalProps) {
     initialValues: {
       question: '',
       description: '',
+      kind: '',
       true: false,
       false: false,
       answer: '',
@@ -26,22 +28,25 @@ export function QuizFormConditional(props: QuizFormConditionalProps) {
       question: Yup.string().required('Pregunta es obligatorio'),
     }),
     onSubmit: (data) => {
-      // onSubmit(data);
-      console.log(data);
-      onSubmit && onSubmit(data);
+      const ll = {
+        ...data,
+        ...{
+          kind: TypeQuiz.conditional,
+        },
+      };
+      onSubmit && onSubmit(ll);
     },
   });
-  const [answer, setAnswer] = useState('');
   const conditionals = [
     {
       correct: formik.values.true,
       text: 'Verdadera',
-      isTrue: true
+      isTrue: true,
     },
     {
       correct: formik.values.false,
       text: 'Falso',
-      isTrue: false
+      isTrue: false,
     },
   ];
 
@@ -101,8 +106,15 @@ export function QuizFormConditional(props: QuizFormConditionalProps) {
           onBlur={formik.handleBlur}
         />
         <div className={styles['footer']}>
-          <Button title='Cancelar' color={ColorsButton.white} type={TypeButton.button} onClick={()=>{ onCancel && onCancel()}}/>
-          <Button title='Guardar' type={TypeButton.submit}/>
+          <Button
+            title="Cancelar"
+            color={ColorsButton.white}
+            type={TypeButton.button}
+            onClick={() => {
+              onCancel && onCancel();
+            }}
+          />
+          <Button title="Guardar" type={TypeButton.submit} />
         </div>
       </form>
     </div>

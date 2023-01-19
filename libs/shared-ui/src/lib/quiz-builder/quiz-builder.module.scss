@@ -41,6 +41,9 @@
   justify-content: space-between;
   .title {
     padding: $size-md-1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
     .input {
       padding-bottom: $size-md-1;
     }

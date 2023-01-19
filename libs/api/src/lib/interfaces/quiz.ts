@@ -15,7 +15,7 @@ export interface QuizModel {
   updated_at: string;
 }
 
-export type Quiz = Omit<
+export type NewQuizParams = Omit<
   QuizModel,
   'user_id' | 'created_at' | 'updated_at' | 'id' | 'course_id'
 >;

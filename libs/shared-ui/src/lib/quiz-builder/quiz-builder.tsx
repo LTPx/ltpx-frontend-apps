@@ -30,9 +30,10 @@ export interface QuizBuilderProps {
 export function QuizBuilder(props: QuizBuilderProps) {
   const { open, onClose, onSave, onSubmit } = props;
   const [openTest, setOpenTest] = useState(false);
-  const [questionsQuiz, setQuestionsQuiz] = useState<QuestionQuiz[]>([]);
+  const [ questionsQuiz, setQuestionsQuiz ] = useState<QuestionQuiz[]>([]);
   const [kindQuestion, setKindQuestion] = useState<TypeQuiz>();
-  const [selectedTypeQuestion, setSelectedTypeQuestion] = useState<TypeQuiz>();
+  const [ selectedTypeQuestion, setSelectedTypeQuestion ] = useState<TypeQuiz>();
+  const [ questions, setQuestions ] = useState<string[]>([]);
 
   const formik = useFormik({
     initialValues: {
@@ -48,6 +49,12 @@ export function QuizBuilder(props: QuizBuilderProps) {
       // console.log(elements);
     },
   });
+
+  const handleTotalQuestions = (kind: string) => {
+    if (!selectedTypeQuestion) {
+      setQuestions(questions.concat([kind]));
+    }
+  }
 
   const QuizDetailsForm = () => (
     <div>
@@ -109,9 +116,10 @@ export function QuizBuilder(props: QuizBuilderProps) {
         </div>
       </div>
       <div className={styles['questions']}>
-        {questionsQuiz.map((question, index) => (
+        {questions.map((question, index) => (
           <div className={styles['question']} key={index}>
-            {question.question}
+            <h4>Pregunta {index + 1}</h4>
+            <h5>{question}</h5>
           </div>
         ))}
       </div>
@@ -146,6 +154,7 @@ export function QuizBuilder(props: QuizBuilderProps) {
                   className={styles['menu-option']}
                   onClick={() => {
                     setSelectedTypeQuestion(TypeQuiz.conditional);
+                    handleTotalQuestions('condicional');
                   }}
                 >
                   Condicional
@@ -154,6 +163,7 @@ export function QuizBuilder(props: QuizBuilderProps) {
                   className={styles['menu-option']}
                   onClick={() => {
                     setSelectedTypeQuestion(TypeQuiz.multiple);
+                    handleTotalQuestions('multiple');
                   }}
                 >
                   Selección Multiple
@@ -162,6 +172,7 @@ export function QuizBuilder(props: QuizBuilderProps) {
                   className={styles['menu-option']}
                   onClick={() => {
                     setSelectedTypeQuestion(TypeQuiz.single);
+                    handleTotalQuestions('una sola elección');
                   }}
                 >
                   Una sola elección
@@ -170,6 +181,7 @@ export function QuizBuilder(props: QuizBuilderProps) {
                   className={styles['menu-option']}
                   onClick={() => {
                     setSelectedTypeQuestion(TypeQuiz.answer);
+                    handleTotalQuestions('respuesta de usuario');
                   }}
                 >
                   Respuesta de usuario

@@ -10,6 +10,7 @@ export interface QuizModel {
   user_id: number;
   course_id: number;
   name: string;
+  description?: string;
   questions: QuestionQuiz[];
   created_at: string;
   updated_at: string;

@@ -32,6 +32,16 @@ export function QuizFormConditional(props: QuizFormConditionalProps) {
         ...data,
         ...{
           kind: TypeQuiz.conditional,
+          answers: [
+            {
+              text: 'true',
+              correct: data.true
+            },
+            {
+              text: 'false',
+              correct: data.false
+            }
+          ]
         },
       };
       onSubmit && onSubmit(ll);

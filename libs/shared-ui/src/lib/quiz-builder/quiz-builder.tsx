@@ -5,13 +5,15 @@ import {
   TypeQuiz,
 } from '@ltpx-frontend-apps/api';
 import {
+  Dropdown,
+  Icon,
   QuizFormAnswer,
   QuizFormMultipleOptions,
 } from '@ltpx-frontend-apps/shared-ui';
+import { Dialog } from 'evergreen-ui';
 import { useFormik } from 'formik';
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 import Button, { ColorsButton, TypeButton } from '../button/button';
-import Drawer from '../drawer/drawer';
 import Input from '../input/input';
 import QuizFormConditional from '../quiz-form-conditional/quiz-form-conditional';
 import styles from './quiz-builder.module.scss';
@@ -30,153 +32,210 @@ export function QuizBuilder(props: QuizBuilderProps) {
   const [openTest, setOpenTest] = useState(false);
   const [questionsQuiz, setQuestionsQuiz] = useState<QuestionQuiz[]>([]);
   const [kindQuestion, setKindQuestion] = useState<TypeQuiz>();
-  let mainApi = {};
 
   const formik = useFormik({
     initialValues: {
       name: '',
+      description: '',
       questions: [],
     },
     onSubmit: (data) => {
-      onSubmit && onSubmit(data);
-      const elements = { ...data, ...{ questions: questionsQuiz } };
-      onSubmit && onSubmit(elements);
-      setOpenTest(false);
-      console.log(elements);
+      // onSubmit && onSubmit(data);
+      // const elements = { ...data, ...{ questions: questionsQuiz } };
+      // onSubmit && onSubmit(elements);
+      // setOpenTest(false);
+      // console.log(elements);
     },
   });
 
-  return (
-    <div className={styles['container']}>
-      <Drawer
-        open={open}
-        onClose={() => {
-          onClose && onClose();
+  const QuizDetailsForm = () => (
+    <div>
+      <Input
+        label="Nombre del test"
+        name="name"
+        placeholder="Ejm: Test de clases"
+        onChange={formik.handleChange}
+        value={formik.values.name}
+        onBlur={formik.handleBlur}
+      />
+      <Input
+        label={'Description (Opcional)'}
+        value={formik.values.description}
+        placeholder="Un breve resumen de que trata este test"
+        onChange={(e: any) => {
+          formik.handleChange(e);
         }}
-      >
-        <div className={styles['content']}>
-          <div className={styles['title']}>
-            <h2>Banco de Preguntas </h2>
-            <Input
-              className={styles['input']}
-              label={`Titulo de Examen`}
-              value={formik.values.name}
-              placeholder="Ingresar Titulo"
-              onChange={(e: any) => {
-                formik.handleChange(e);
-              }}
-              name="name"
-            />
-            <Button
-              title="+ Agregar pregunta verdadera / falsa"
-              color={ColorsButton.primary}
+        name="description"
+      />
+    </div>
+  )
+
+  const HeaderQuiz = () => (
+    <div className={styles['header']}>
+      <div className={styles['text']}>
+        <h3>Crear Test</h3>
+      </div>
+      <div className={styles['actions']}>
+        <div className={styles['quiz-name']}>
+          <h3>{formik.values.name}</h3>
+        </div>
+        <div className={styles['buttons']}>
+          <Button
+            title="Cancelar"
+            outline={true}
+            color={ColorsButton.secondary}
+            onClick={()=>{
+              onClose && onClose()
+            }}
+          />
+          <Button
+            title="Guardar"
+            color={ColorsButton.primary}
+            type={TypeButton.submit}
+            onClick={formik.submitForm}
+          />
+        </div>
+      </div>
+    </div>
+  )
+
+  const NavQuiz = () => (
+    <div className={styles['side']}>
+      <div className={styles['add-question']}>
+        <h4>Preguntas</h4>
+        <Dropdown>
+          <div className={styles['icon-container']}>
+            <Icon icon='plus' size={18}/>
+          </div>
+          <div className={`${styles['menu']} card`}>
+            <div
+              className={styles['menu-option']}
               onClick={() => {
-                setOpenTest(true);
                 setKindQuestion(TypeQuiz.conditional);
               }}
-            />
-            <Button
-              title="+ Agregar pregunta selección multiple"
-              color={ColorsButton.primary}
+            >
+              Condicional
+            </div>
+            <div
+              className={styles['menu-option']}
               onClick={() => {
-                setOpenTest(true);
                 setKindQuestion(TypeQuiz.multiple);
               }}
-            />
-            <Button
-              title="+ Agregar pregunta de una selección"
-              color={ColorsButton.primary}
+            >
+              Selección Multiple
+            </div>
+            <div
+              className={styles['menu-option']}
               onClick={() => {
-                setOpenTest(true);
                 setKindQuestion(TypeQuiz.single);
               }}
-            />
-            <Button
-              title="+ Agregar pregunta"
-              color={ColorsButton.primary}
+            >
+              Una sola elección
+            </div>
+            <div
+              className={styles['menu-option']}
               onClick={() => {
-                setOpenTest(true);
                 setKindQuestion(TypeQuiz.answer);
               }}
-            />
+            >
+              Respuesta de usuario
+            </div>
           </div>
-          <div className={styles['footer']}>
-            <Button
-              color={ColorsButton.white}
-              onClick={() => {
-                onClose && onClose();
-              }}
-              title="Cancelar"
-            />
-            <Button
-              type={TypeButton.submit}
-              onClick={formik.submitForm}
-              title="Guardar"
-            />
+        </Dropdown>
+      </div>
+      <div className={styles['questions']}>
+        { questionsQuiz.map((question, index)=>(
+          <div className={styles['question']} key={index}>
+            {question.question}
           </div>
+        ))}
+      </div>
+    </div>
+  )
+
+  const ContentQuiz = () => (
+    <div className={styles['content']}>
+      { formik.values.name.length <= 0 ? (
+        <div className={styles['form-name']}>
+          <Input label='Nombre del test'/>
+          <Button
+            title="Continuar"
+            full={true}
+            className={styles['submit']}
+            onClick={() => {
+              formik.setFieldValue('name', 'Test 1')
+            }}
+          />
         </div>
-      </Drawer>
-      <Drawer
-        open={openTest}
-        onClose={() => {
-          setOpenTest(false);
-        }}
+      ): (
+        <QuestionsQuiz/>
+      )}
+    </div>
+  )
+
+  const QuestionsQuiz = () => (
+    <div className={styles['questions-quiz']}>
+      {kindQuestion === TypeQuiz.conditional && (
+        <QuizFormConditional
+          onSubmit={(data) => {
+            setOpenTest(false);
+            console.log(data);
+            setQuestionsQuiz(questionsQuiz.concat([data]));
+          }}
+          onCancel={() => {
+            setOpenTest(false);
+          }}
+        />
+      )}
+      {kindQuestion === TypeQuiz.multiple && (
+        <QuizFormMultipleOptions
+          onSubmit={(data) => {
+            setOpenTest(false);
+            setQuestionsQuiz(questionsQuiz.concat([data]));
+          }}
+        />
+      )}
+      {kindQuestion === TypeQuiz.single && (
+        <QuizFormMultipleOptions
+          singleSelection={true}
+          onSubmit={(data) => {
+            setOpenTest(false);
+            setQuestionsQuiz(questionsQuiz.concat([data]));
+          }}
+        />
+      )}
+      {kindQuestion === TypeQuiz.answer && (
+        <QuizFormAnswer
+          onCancel={() => {
+            setOpenTest(false);
+          }}
+          onSubmit={(data) => {
+            setOpenTest(false);
+            setQuestionsQuiz(questionsQuiz.concat([data]));
+          }}
+        />
+      )}
+    </div>
+  )
+
+  return (
+    <div className={styles['container']}>
+      <Dialog
+        isShown={open}
+        hasFooter={false}
+        hasHeader={false}
+        onCloseComplete={() => onClose && onClose()}
+        width={'80vw'}
+        minHeightContent={'64vh'}
       >
-        <div className={styles['content']}>
-          <div className={styles['quiz-form']}>
-            <h2>Formulario</h2>
-            {kindQuestion === TypeQuiz.conditional && (
-              <QuizFormConditional
-                onSubmit={(data) => {
-                  setOpenTest(false);
-                  setQuestionsQuiz(questionsQuiz.concat([data]));
-                }}
-                onCancel={() => {
-                  setOpenTest(false);
-                }}
-              />
-            )}
-            {kindQuestion === TypeQuiz.multiple && (
-              <QuizFormMultipleOptions
-                onSubmit={(data) => {
-                  setOpenTest(false);
-                  setQuestionsQuiz(questionsQuiz.concat([data]));
-                }}
-                api={(api: any)=>{
-                  mainApi = api;
-                }}
-              />
-            )}
-            {kindQuestion === TypeQuiz.single && (
-              <QuizFormMultipleOptions
-                singleSelection={true}
-                onSubmit={(data) => {
-                  setOpenTest(false);
-                  setQuestionsQuiz(questionsQuiz.concat([data]));
-                }}
-              />
-            )}
-            {kindQuestion === TypeQuiz.answer && (
-              <QuizFormAnswer
-                onCancel={() => {
-                  setOpenTest(false);
-                }}
-                onSubmit={(data) => {
-                  setOpenTest(false);
-                  setQuestionsQuiz(questionsQuiz.concat([data]));
-                }}
-              />
-            )}
+        <form onSubmit={formik.submitForm}>
+          <div className={styles['quiz-builder-layout']}>
+            <HeaderQuiz />
+            <NavQuiz />
+            <ContentQuiz />
           </div>
-          <div className={styles['footer']}>
-            <Button title={'Cancelar'} color={ColorsButton.white}/>
-            <Button title={'Guardar'} onClick={()=>{
-              debugger
-              mainApi
-            }}/>
-          </div>
-        </div>
-      </Drawer>
+        </form>
+      </Dialog>
     </div>
   );
 }

@@ -104,5 +104,34 @@
 
 .content {
   grid-area: content;
-  padding: 0 3rem;
+}
+
+.content-questions {
+
+  .control-questions {
+
+  }
+}
+
+.select-questions {
+  background-color: #f9fafb;
+  padding: 1rem;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  cursor: pointer;
+  color: $secondary-color;
+}
+
+.empty-questions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 14rem 0;
+  gap: 1rem;
+}
+
+.questions-quiz {
+  padding: 2rem 6rem 0 6rem;
 }

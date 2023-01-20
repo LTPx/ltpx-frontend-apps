@@ -32,6 +32,7 @@ export function QuizBuilder(props: QuizBuilderProps) {
   const [openTest, setOpenTest] = useState(false);
   const [questionsQuiz, setQuestionsQuiz] = useState<QuestionQuiz[]>([]);
   const [kindQuestion, setKindQuestion] = useState<TypeQuiz>();
+  const [selectedTypeQuestion, setSelectedTypeQuestion] = useState<TypeQuiz>();
 
   const formik = useFormik({
     initialValues: {
@@ -68,7 +69,7 @@ export function QuizBuilder(props: QuizBuilderProps) {
         name="description"
       />
     </div>
-  )
+  );
 
   const HeaderQuiz = () => (
     <div className={styles['header']}>
@@ -84,8 +85,8 @@ export function QuizBuilder(props: QuizBuilderProps) {
             title="Cancelar"
             outline={true}
             color={ColorsButton.secondary}
-            onClick={()=>{
-              onClose && onClose()
+            onClick={() => {
+              onClose && onClose();
             }}
           />
           <Button
@@ -97,85 +98,100 @@ export function QuizBuilder(props: QuizBuilderProps) {
         </div>
       </div>
     </div>
-  )
+  );
 
   const NavQuiz = () => (
     <div className={styles['side']}>
       <div className={styles['add-question']}>
         <h4>Preguntas</h4>
-        <Dropdown>
-          <div className={styles['icon-container']}>
-            <Icon icon='plus' size={18}/>
-          </div>
-          <div className={`${styles['menu']} card`}>
-            <div
-              className={styles['menu-option']}
-              onClick={() => {
-                setKindQuestion(TypeQuiz.conditional);
-              }}
-            >
-              Condicional
-            </div>
-            <div
-              className={styles['menu-option']}
-              onClick={() => {
-                setKindQuestion(TypeQuiz.multiple);
-              }}
-            >
-              Selección Multiple
-            </div>
-            <div
-              className={styles['menu-option']}
-              onClick={() => {
-                setKindQuestion(TypeQuiz.single);
-              }}
-            >
-              Una sola elección
-            </div>
-            <div
-              className={styles['menu-option']}
-              onClick={() => {
-                setKindQuestion(TypeQuiz.answer);
-              }}
-            >
-              Respuesta de usuario
-            </div>
-          </div>
-        </Dropdown>
+        <div className={styles['icon-container']}>
+          <Icon icon="plus" size={18} />
+        </div>
       </div>
       <div className={styles['questions']}>
-        { questionsQuiz.map((question, index)=>(
+        {questionsQuiz.map((question, index) => (
           <div className={styles['question']} key={index}>
             {question.question}
           </div>
         ))}
       </div>
     </div>
-  )
+  );
 
   const ContentQuiz = () => (
     <div className={styles['content']}>
-      { formik.values.name.length <= 0 ? (
+      {formik.values.name.length <= 0 && (
         <div className={styles['form-name']}>
-          <Input label='Nombre del test'/>
+          <Input label="Nombre del test" />
           <Button
             title="Continuar"
             full={true}
             className={styles['submit']}
             onClick={() => {
-              formik.setFieldValue('name', 'Test 1')
+              formik.setFieldValue('name', 'Test 1');
             }}
           />
         </div>
-      ): (
-        <QuestionsQuiz/>
       )}
+      {formik.values.name.length > 0 && (
+        <div className={styles['content-questions']}>
+          <div className={styles['control-questions']}>
+            <Dropdown>
+              <div className={styles['select-questions']}>
+                <h4>Seleccionar un tipo de pregunta</h4>
+                <Icon icon="caret-down" size={18} />
+              </div>
+              <div className={`${styles['menu']} card`}>
+                <div
+                  className={styles['menu-option']}
+                  onClick={() => {
+                    setSelectedTypeQuestion(TypeQuiz.conditional);
+                  }}
+                >
+                  Condicional
+                </div>
+                <div
+                  className={styles['menu-option']}
+                  onClick={() => {
+                    setSelectedTypeQuestion(TypeQuiz.multiple);
+                  }}
+                >
+                  Selección Multiple
+                </div>
+                <div
+                  className={styles['menu-option']}
+                  onClick={() => {
+                    setSelectedTypeQuestion(TypeQuiz.single);
+                  }}
+                >
+                  Una sola elección
+                </div>
+                <div
+                  className={styles['menu-option']}
+                  onClick={() => {
+                    setSelectedTypeQuestion(TypeQuiz.answer);
+                  }}
+                >
+                  Respuesta de usuario
+                </div>
+              </div>
+            </Dropdown>
+          </div>
+          {!selectedTypeQuestion && (
+            <div className={styles['empty-questions']}>
+              <Icon icon="apps" size={70} />
+              <h3>Por favor selecciona una pregunta </h3>
+            </div>
+          )}
+        </div>
+      )}
+      {selectedTypeQuestion && <QuestionsQuiz />}
     </div>
-  )
+  );
 
   const QuestionsQuiz = () => (
     <div className={styles['questions-quiz']}>
-      {kindQuestion === TypeQuiz.conditional && (
+      {selectedTypeQuestion === TypeQuiz.conditional && (
         <QuizFormConditional
           onSubmit={(data) => {
             setOpenTest(false);
@@ -187,7 +203,7 @@ export function QuizBuilder(props: QuizBuilderProps) {
           }}
         />
       )}
-      {kindQuestion === TypeQuiz.multiple && (
+      {selectedTypeQuestion === TypeQuiz.multiple && (
         <QuizFormMultipleOptions
           onSubmit={(data) => {
             setOpenTest(false);
@@ -195,7 +211,7 @@ export function QuizBuilder(props: QuizBuilderProps) {
           }}
         />
       )}
-      {kindQuestion === TypeQuiz.single && (
+      {selectedTypeQuestion === TypeQuiz.single && (
         <QuizFormMultipleOptions
           singleSelection={true}
           onSubmit={(data) => {
@@ -204,7 +220,7 @@ export function QuizBuilder(props: QuizBuilderProps) {
           }}
         />
       )}
-      {kindQuestion === TypeQuiz.answer && (
+      {selectedTypeQuestion === TypeQuiz.answer && (
         <QuizFormAnswer
           onCancel={() => {
             setOpenTest(false);
@@ -216,7 +232,7 @@ export function QuizBuilder(props: QuizBuilderProps) {
         />
       )}
     </div>
-  )
+  );
 
   return (
     <div className={styles['container']}>

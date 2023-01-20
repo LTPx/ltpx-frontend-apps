@@ -61,7 +61,7 @@ export function Button(props: ButtonProps) {
     return (
       <button
         className={`${btnClass} ${className}`}
-        type={type}
+        type={type || TypeButton.button}
         onClick={(event)=>{
           onClick && onClick(event)
         }}

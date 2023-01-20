@@ -31,7 +31,6 @@
 }
 
 .checker {
-  margin-top: 1.5rem;
   padding: 0 1rem;
   border: 1px solid #edf0f2;
   background-color: $white-color;
@@ -40,6 +39,7 @@
   align-items: center;
   gap: 1rem;
   cursor: pointer;
+  height: 100%;
 
   &:hover {
     color: $text-color;
@@ -63,13 +63,9 @@
 }
 
 .remove {
-  margin-top: 1.5rem;
-  padding: 0 1rem;
   display: flex;
-  align-items: center;
-  border: 1px solid $stroke-color;
+  justify-content: flex-end;
   color: #ef4444;
-  background-color: $white-color;
 }
 
 .footer {
@@ -78,4 +74,11 @@
   justify-content: flex-end;
   gap: 1rem;
   padding: 1rem 0;
+}
+
+.answer {
+  display: grid;
+  grid-template-columns: auto 1fr auto auto;
+  align-items: baseline;
+  gap: 0.5rem;
 }

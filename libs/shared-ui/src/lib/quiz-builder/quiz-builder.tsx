@@ -9,7 +9,7 @@ import {
   QuizFormMultipleOptions,
 } from '@ltpx-frontend-apps/shared-ui';
 import { useFormik } from 'formik';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import Button, { ColorsButton, TypeButton } from '../button/button';
 import Drawer from '../drawer/drawer';
 import Input from '../input/input';
@@ -30,6 +30,7 @@ export function QuizBuilder(props: QuizBuilderProps) {
   const [openTest, setOpenTest] = useState(false);
   const [questionsQuiz, setQuestionsQuiz] = useState<QuestionQuiz[]>([]);
   const [kindQuestion, setKindQuestion] = useState<TypeQuiz>();
+  let mainApi = {};
 
   const formik = useFormik({
     initialValues: {
@@ -66,22 +67,6 @@ export function QuizBuilder(props: QuizBuilderProps) {
               }}
               name="name"
             />
-            {/* <div className={styles['questions']}>
-              {questionsQuiz.map((q, key) => (
-                <div key={key}>
-                  <h4>{q.question}</h4>
-                  <h4>{q.description}</h4>
-                  <div>
-                    {q.answers.map((ele, key) => (
-                      <div key={key}>
-                        <h4>{ele.correct ? 'true' : 'false'}</h4>
-                        <h4>{ele.text}</h4>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              ))}
-            </div> */}
             <Button
               title="+ Agregar pregunta verdadera / falsa"
               color={ColorsButton.primary}
@@ -139,6 +124,7 @@ export function QuizBuilder(props: QuizBuilderProps) {
       >
         <div className={styles['content']}>
           <div className={styles['quiz-form']}>
+            <h2>Formulario</h2>
             {kindQuestion === TypeQuiz.conditional && (
               <QuizFormConditional
                 onSubmit={(data) => {
@@ -152,20 +138,17 @@ export function QuizBuilder(props: QuizBuilderProps) {
             )}
             {kindQuestion === TypeQuiz.multiple && (
               <QuizFormMultipleOptions
-                onCancel={() => {
-                  setOpenTest(false);
-                }}
                 onSubmit={(data) => {
                   setOpenTest(false);
                   setQuestionsQuiz(questionsQuiz.concat([data]));
+                }}
+                api={(api: any)=>{
+                  mainApi = api;
                 }}
               />
             )}
             {kindQuestion === TypeQuiz.single && (
               <QuizFormMultipleOptions
-                onCancel={() => {
-                  setOpenTest(false);
-                }}
                 singleSelection={true}
                 onSubmit={(data) => {
                   setOpenTest(false);
@@ -184,6 +167,13 @@ export function QuizBuilder(props: QuizBuilderProps) {
                 }}
               />
             )}
+          </div>
+          <div className={styles['footer']}>
+            <Button title={'Cancelar'} color={ColorsButton.white}/>
+            <Button title={'Guardar'} onClick={()=>{
+              debugger
+              mainApi
+            }}/>
           </div>
         </div>
       </Drawer>

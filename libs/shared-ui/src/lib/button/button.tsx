@@ -25,6 +25,7 @@ export interface ButtonProps {
   outline?: boolean;
   full?: boolean;
   link?: string;
+  ref?: any;
 }
 
 export function Button(props: ButtonProps) {
@@ -38,6 +39,7 @@ export function Button(props: ButtonProps) {
     outline,
     full,
     link,
+    ref,
     ...other
   } = props;
 

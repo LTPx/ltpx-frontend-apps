@@ -28,9 +28,7 @@ export interface QuizBuilderProps {
 
 export function QuizBuilder(props: QuizBuilderProps) {
   const { open, onClose, onSave, onSubmit } = props;
-  const [openTest, setOpenTest] = useState(false);
   const [ questionsQuiz, setQuestionsQuiz ] = useState<QuestionQuiz[]>([]);
-  const [ kindQuestion, setKindQuestion ] = useState<TypeQuiz>();
 
   const [ selectedTypeQuestion, setSelectedTypeQuestion ] = useState<TypeQuiz | null>();
   const [ questions, setQuestions ] = useState<string[]>([]);
@@ -158,7 +156,7 @@ export function QuizBuilder(props: QuizBuilderProps) {
           {!selectedTypeQuestion && (
             <div className={styles['empty-questions']}>
               <Icon icon="apps" size={70} />
-              <h3>Por favor selecciona una pregunta </h3>
+              <h3>Por favor selecciona un tipo pregunta </h3>
             </div>
           )}
         </div>
@@ -177,14 +175,12 @@ export function QuizBuilder(props: QuizBuilderProps) {
             setSelectedTypeQuestion(null);
           }}
           onCancel={() => {
-            setOpenTest(false);
           }}
         />
       )}
       {selectedTypeQuestion === TypeQuiz.multiple && (
         <QuizFormMultipleOptions
           onSubmit={(data) => {
-            setOpenTest(false);
             setQuestionsQuiz(questionsQuiz.concat([data]));
           }}
         />
@@ -193,7 +189,6 @@ export function QuizBuilder(props: QuizBuilderProps) {
         <QuizFormMultipleOptions
           singleSelection={true}
           onSubmit={(data) => {
-            setOpenTest(false);
             setQuestionsQuiz(questionsQuiz.concat([data]));
           }}
         />
@@ -201,10 +196,8 @@ export function QuizBuilder(props: QuizBuilderProps) {
       {selectedTypeQuestion === TypeQuiz.answer && (
         <QuizFormAnswer
           onCancel={() => {
-            setOpenTest(false);
           }}
           onSubmit={(data) => {
-            setOpenTest(false);
             setQuestionsQuiz(questionsQuiz.concat([data]));
           }}
         />

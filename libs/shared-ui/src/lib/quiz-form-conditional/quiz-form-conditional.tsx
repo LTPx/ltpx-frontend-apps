@@ -19,7 +19,7 @@ export function QuizFormConditional(props: QuizFormConditionalProps) {
     initialValues: {
       question: '',
       description: '',
-      kind: '',
+      kind: TypeQuiz.conditional,
       true: false,
       false: false,
       answer: '',
@@ -31,7 +31,6 @@ export function QuizFormConditional(props: QuizFormConditionalProps) {
       const ll = {
         ...data,
         ...{
-          kind: TypeQuiz.conditional,
           answers: [
             {
               text: 'true',
@@ -82,6 +81,7 @@ export function QuizFormConditional(props: QuizFormConditionalProps) {
           }}
           onBlur={formik.handleBlur}
           name="question"
+          errorMessage={formik.errors.question}
         />
         <Input
           label="Descripción (opcional)"

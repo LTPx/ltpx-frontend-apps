@@ -99,6 +99,12 @@
   .question {
     padding: 1rem;
     background-color: $green-color-100;
+    cursor: pointer;
+
+    &:hover {
+      background-color: $green-color;
+      color: $white-color;
+    }
   }
 }
 

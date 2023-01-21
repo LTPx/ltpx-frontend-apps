@@ -72,6 +72,10 @@ export function QuizBuilder(props: QuizBuilderProps) {
     </div>
   );
 
+  const editQuestion = (index: number) => {
+    console.log(questionsQuiz[index]);
+  }
+
   const NavQuiz = () => (
     <div className={styles['side']}>
       <div className={styles['add-question']}>
@@ -82,7 +86,9 @@ export function QuizBuilder(props: QuizBuilderProps) {
       </div>
       <div className={styles['questions']}>
         {questions.map((question, index) => (
-          <div className={styles['question']} key={index}>
+          <div className={styles['question']} key={index} onClick={()=>{
+            editQuestion(index);
+          }}>
             <h4>Pregunta {index + 1}</h4>
             <h5>{question}</h5>
           </div>

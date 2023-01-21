@@ -2,7 +2,7 @@ import {
   NewQuizParams,
   QuestionQuiz,
   QuizModel,
-  TypeQuiz,
+  TypeQuestionQuiz,
 } from '@ltpx-frontend-apps/api';
 import {
   Dropdown,
@@ -17,28 +17,55 @@ import Input from '../input/input';
 import QuizFormConditional from '../quiz-form-conditional/quiz-form-conditional';
 import styles from './quiz-builder.module.scss';
 
+
+enum StatusQuestion {
+  saved = 'saved',
+  new = 'new'
+}
+interface QuestionNav {
+  question?: QuestionQuiz;
+  status: StatusQuestion;
+  kind: TypeQuestionQuiz;
+}
+
 /* eslint-disable-next-line */
 export interface QuizBuilderProps {
   open?: boolean;
   onClose?: () => void;
   onSave?: (quiz: QuizModel) => void;
   onSubmit?: (data: NewQuizParams) => void;
-  nameQuiz?: string;
 }
 
 export function QuizBuilder(props: QuizBuilderProps) {
   const { open, onClose, onSave, onSubmit } = props;
+  const [ nameQuiz, setNameQuiz ] = useState<string>();
   const [ questionsQuiz, setQuestionsQuiz ] = useState<QuestionQuiz[]>([]);
 
-  const [ selectedTypeQuestion, setSelectedTypeQuestion ] = useState<TypeQuiz | null>();
-  const [ questions, setQuestions ] = useState<string[]>([]);
-  const [ nameQuiz, setNameQuiz ] = useState<string>();
+  const [ selectedTypeQuestion, setSelectedTypeQuestion ] = useState<TypeQuestionQuiz | null>();
+  const [ questions, setQuestions ] = useState<QuestionNav[]>([]);
   const elementRef = useRef<HTMLInputElement | null>(null);
 
-  const handleTotalQuestions = (kind: string) => {
-    if (!selectedTypeQuestion) {
-      setQuestions(questions.concat([kind]));
+  const handleNewQuestion = () => {
+    const nav = {
+      kind: selectedTypeQuestion || TypeQuestionQuiz.answer,
+      status: StatusQuestion.new,
     }
+    setQuestions(questions.concat([nav]));
+  }
+
+  const editQuestion = (index: number) => {
+    console.log(questions[index]);
+  }
+
+  const handleSaveQuestionData = (question: any) => {
+    const current = questions[questions.length - 1];
+    questions[questions.length - 1] = {...current, ...{
+      status: StatusQuestion.saved,
+      question: question
+    }};
+    setQuestions(questions);
+    setSelectedTypeQuestion(null);
+    console.log('questions: ', questions);
   }
 
   const HeaderQuiz = () => (
@@ -72,10 +99,6 @@ export function QuizBuilder(props: QuizBuilderProps) {
     </div>
   );
 
-  const editQuestion = (index: number) => {
-    console.log(questionsQuiz[index]);
-  }
-
   const NavQuiz = () => (
     <div className={styles['side']}>
       <div className={styles['add-question']}>
@@ -86,11 +109,14 @@ export function QuizBuilder(props: QuizBuilderProps) {
       </div>
       <div className={styles['questions']}>
         {questions.map((question, index) => (
-          <div className={styles['question']} key={index} onClick={()=>{
-            editQuestion(index);
-          }}>
+          <div className={`${styles['question']} ${index === questionsQuiz.length ? styles['selected'] : ''}`}
+            key={index}
+            onClick={()=>{
+              editQuestion(index);
+            }}
+          >
             <h4>Pregunta {index + 1}</h4>
-            <h5>{question}</h5>
+            <h5>{question.status}</h5>
           </div>
         ))}
       </div>
@@ -123,8 +149,8 @@ export function QuizBuilder(props: QuizBuilderProps) {
                 <div
                   className={styles['menu-option']}
                   onClick={() => {
-                    setSelectedTypeQuestion(TypeQuiz.conditional);
-                    handleTotalQuestions('condicional');
+                    setSelectedTypeQuestion(TypeQuestionQuiz.conditional);
+                    handleNewQuestion();
                   }}
                 >
                   Condicional
@@ -132,8 +158,8 @@ export function QuizBuilder(props: QuizBuilderProps) {
                 <div
                   className={styles['menu-option']}
                   onClick={() => {
-                    setSelectedTypeQuestion(TypeQuiz.multiple);
-                    handleTotalQuestions('multiple');
+                    setSelectedTypeQuestion(TypeQuestionQuiz.multiple);
+                    handleNewQuestion();
                   }}
                 >
                   Selección Multiple
@@ -141,8 +167,8 @@ export function QuizBuilder(props: QuizBuilderProps) {
                 <div
                   className={styles['menu-option']}
                   onClick={() => {
-                    setSelectedTypeQuestion(TypeQuiz.single);
-                    handleTotalQuestions('una sola elección');
+                    setSelectedTypeQuestion(TypeQuestionQuiz.single);
+                    handleNewQuestion();
                   }}
                 >
                   Una sola elección
@@ -150,8 +176,8 @@ export function QuizBuilder(props: QuizBuilderProps) {
                 <div
                   className={styles['menu-option']}
                   onClick={() => {
-                    setSelectedTypeQuestion(TypeQuiz.answer);
-                    handleTotalQuestions('respuesta de usuario');
+                    setSelectedTypeQuestion(TypeQuestionQuiz.answer);
+                    handleNewQuestion();
                   }}
                 >
                   Respuesta de usuario
@@ -173,38 +199,36 @@ export function QuizBuilder(props: QuizBuilderProps) {
 
   const QuestionsQuiz = () => (
     <div className={styles['questions-quiz']}>
-      {selectedTypeQuestion === TypeQuiz.conditional && (
+      {selectedTypeQuestion === TypeQuestionQuiz.conditional && (
         <QuizFormConditional
           onSubmit={(data) => {
-            console.log(data);
-            setQuestionsQuiz(questionsQuiz.concat([data]));
-            setSelectedTypeQuestion(null);
+            handleSaveQuestionData(data);
           }}
           onCancel={() => {
           }}
         />
       )}
-      {selectedTypeQuestion === TypeQuiz.multiple && (
+      {selectedTypeQuestion === TypeQuestionQuiz.multiple && (
         <QuizFormMultipleOptions
           onSubmit={(data) => {
-            setQuestionsQuiz(questionsQuiz.concat([data]));
+            handleSaveQuestionData(data);
           }}
         />
       )}
-      {selectedTypeQuestion === TypeQuiz.single && (
+      {selectedTypeQuestion === TypeQuestionQuiz.single && (
         <QuizFormMultipleOptions
           singleSelection={true}
           onSubmit={(data) => {
-            setQuestionsQuiz(questionsQuiz.concat([data]));
+            handleSaveQuestionData(data);
           }}
         />
       )}
-      {selectedTypeQuestion === TypeQuiz.answer && (
+      {selectedTypeQuestion === TypeQuestionQuiz.answer && (
         <QuizFormAnswer
           onCancel={() => {
           }}
           onSubmit={(data) => {
-            setQuestionsQuiz(questionsQuiz.concat([data]));
+            handleSaveQuestionData(data);
           }}
         />
       )}

@@ -5,7 +5,7 @@ import { generateAlphabet } from 'libs/api/src/lib/utils';
 import Button, { ColorsButton, TypeButton } from '../button/button';
 import { FieldArray, Form, Formik } from 'formik';
 import * as Yup from 'yup';
-import { QuestionQuiz, TypeQuiz } from '@ltpx-frontend-apps/api';
+import { QuestionQuiz, TypeQuestionQuiz } from '@ltpx-frontend-apps/api';
 import { useEffect, useRef } from 'react';
 
 /* eslint-disable-next-line */
@@ -47,7 +47,7 @@ export function QuizFormMultipleOptions(props: QuizFormMultipleOptionsProps) {
         initialValues={{
           question: '',
           description: '',
-          kind: singleSelection ? TypeQuiz.single : TypeQuiz.multiple,
+          kind: singleSelection ? TypeQuestionQuiz.single : TypeQuestionQuiz.multiple,
           answers: [
             {
               text: '',

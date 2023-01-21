@@ -1,4 +1,4 @@
-export enum TypeQuiz {
+export enum TypeQuestionQuiz {
   multiple = 'multiple',
   single = 'single',
   answer = 'answer',
@@ -29,7 +29,7 @@ export type NewQuizApiParams = Omit<
 export interface QuestionQuiz {
   question: string;
   description: string;
-  kind: TypeQuiz;
+  kind: TypeQuestionQuiz;
   answers: Answer[];
 }
 

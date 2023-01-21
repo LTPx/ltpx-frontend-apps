@@ -5,7 +5,7 @@ import Input from '../input/input';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import Button, { ColorsButton, TypeButton } from '../button/button';
-import { TypeQuiz } from '@ltpx-frontend-apps/api';
+import { TypeQuestionQuiz } from '@ltpx-frontend-apps/api';
 
 /* eslint-disable-next-line */
 export interface QuizFormConditionalProps {
@@ -19,7 +19,7 @@ export function QuizFormConditional(props: QuizFormConditionalProps) {
     initialValues: {
       question: '',
       description: '',
-      kind: TypeQuiz.conditional,
+      kind: TypeQuestionQuiz.conditional,
       true: false,
       false: false,
       answer: '',

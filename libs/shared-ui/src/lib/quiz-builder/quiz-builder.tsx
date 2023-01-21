@@ -11,8 +11,7 @@ import {
   QuizFormMultipleOptions,
 } from '@ltpx-frontend-apps/shared-ui';
 import { Dialog } from 'evergreen-ui';
-import { useFormik } from 'formik';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import Button, { ColorsButton, TypeButton } from '../button/button';
 import Input from '../input/input';
 import QuizFormConditional from '../quiz-form-conditional/quiz-form-conditional';
@@ -31,52 +30,18 @@ export function QuizBuilder(props: QuizBuilderProps) {
   const { open, onClose, onSave, onSubmit } = props;
   const [openTest, setOpenTest] = useState(false);
   const [ questionsQuiz, setQuestionsQuiz ] = useState<QuestionQuiz[]>([]);
-  const [kindQuestion, setKindQuestion] = useState<TypeQuiz>();
-  const [ selectedTypeQuestion, setSelectedTypeQuestion ] = useState<TypeQuiz>();
-  const [ questions, setQuestions ] = useState<string[]>([]);
+  const [ kindQuestion, setKindQuestion ] = useState<TypeQuiz>();
 
-  const formik = useFormik({
-    initialValues: {
-      name: '',
-      description: '',
-      questions: [],
-    },
-    onSubmit: (data) => {
-      // onSubmit && onSubmit(data);
-      // const elements = { ...data, ...{ questions: questionsQuiz } };
-      // onSubmit && onSubmit(elements);
-      // setOpenTest(false);
-      // console.log(elements);
-    },
-  });
+  const [ selectedTypeQuestion, setSelectedTypeQuestion ] = useState<TypeQuiz | null>();
+  const [ questions, setQuestions ] = useState<string[]>([]);
+  const [ nameQuiz, setNameQuiz ] = useState<string>();
+  const elementRef = useRef<HTMLInputElement | null>(null);
 
   const handleTotalQuestions = (kind: string) => {
     if (!selectedTypeQuestion) {
       setQuestions(questions.concat([kind]));
     }
   }
-
-  const QuizDetailsForm = () => (
-    <div>
-      <Input
-        label="Nombre del test"
-        name="name"
-        placeholder="Ejm: Test de clases"
-        onChange={formik.handleChange}
-        value={formik.values.name}
-        onBlur={formik.handleBlur}
-      />
-      <Input
-        label={'Description (Opcional)'}
-        value={formik.values.description}
-        placeholder="Un breve resumen de que trata este test"
-        onChange={(e: any) => {
-          formik.handleChange(e);
-        }}
-        name="description"
-      />
-    </div>
-  );
 
   const HeaderQuiz = () => (
     <div className={styles['header']}>
@@ -85,7 +50,7 @@ export function QuizBuilder(props: QuizBuilderProps) {
       </div>
       <div className={styles['actions']}>
         <div className={styles['quiz-name']}>
-          <h3>{formik.values.name}</h3>
+          <h3>{nameQuiz}</h3>
         </div>
         <div className={styles['buttons']}>
           <Button
@@ -100,7 +65,9 @@ export function QuizBuilder(props: QuizBuilderProps) {
             title="Guardar"
             color={ColorsButton.primary}
             type={TypeButton.submit}
-            onClick={formik.submitForm}
+            onClick={()=> {
+              console.log('guardando...');
+            }}
           />
         </div>
       </div>
@@ -128,20 +95,19 @@ export function QuizBuilder(props: QuizBuilderProps) {
 
   const ContentQuiz = () => (
     <div className={styles['content']}>
-      {formik.values.name.length <= 0 && (
+      {!nameQuiz && (
         <div className={styles['form-name']}>
-          <Input label="Nombre del test" />
+          <Input label="Nombre del test" refInput={elementRef}/>
           <Button
             title="Continuar"
             full={true}
-            className={styles['submit']}
             onClick={() => {
-              formik.setFieldValue('name', 'Test 1');
+              setNameQuiz(elementRef.current?.value);
             }}
           />
         </div>
       )}
-      {formik.values.name.length > 0 && (
+      {nameQuiz && (
         <div className={styles['content-questions']}>
           <div className={styles['control-questions']}>
             <Dropdown>
@@ -206,9 +172,9 @@ export function QuizBuilder(props: QuizBuilderProps) {
       {selectedTypeQuestion === TypeQuiz.conditional && (
         <QuizFormConditional
           onSubmit={(data) => {
-            setOpenTest(false);
             console.log(data);
             setQuestionsQuiz(questionsQuiz.concat([data]));
+            setSelectedTypeQuestion(null);
           }}
           onCancel={() => {
             setOpenTest(false);
@@ -256,13 +222,11 @@ export function QuizBuilder(props: QuizBuilderProps) {
         width={'80vw'}
         minHeightContent={'64vh'}
       >
-        <form onSubmit={formik.submitForm}>
-          <div className={styles['quiz-builder-layout']}>
-            <HeaderQuiz />
-            <NavQuiz />
-            <ContentQuiz />
-          </div>
-        </form>
+        <div className={styles['quiz-builder-layout']}>
+          <HeaderQuiz />
+          <NavQuiz />
+          <ContentQuiz />
+        </div>
       </Dialog>
     </div>
   );

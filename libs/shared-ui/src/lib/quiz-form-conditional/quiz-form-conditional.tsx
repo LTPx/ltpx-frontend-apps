@@ -1,5 +1,4 @@
 import styles from './quiz-form-conditional.module.scss';
-import { useState } from 'react';
 import Icon from '../icon/icon';
 import Input from '../input/input';
 import { useFormik } from 'formik';
@@ -20,52 +19,33 @@ export function QuizFormConditional(props: QuizFormConditionalProps) {
       question: '',
       description: '',
       kind: TypeQuestionQuiz.conditional,
-      true: false,
-      false: false,
+      answers: [
+        {
+          text: 'true',
+          correct: false
+        },
+        {
+          text: 'false',
+          correct: false
+        }
+      ],
       answer: '',
     },
     validationSchema: Yup.object({
       question: Yup.string().required('Pregunta es obligatorio'),
     }),
     onSubmit: (data) => {
-      const ll = {
-        ...data,
-        ...{
-          answers: [
-            {
-              text: 'true',
-              correct: data.true
-            },
-            {
-              text: 'false',
-              correct: data.false
-            }
-          ]
-        },
-      };
-      onSubmit && onSubmit(ll);
+      onSubmit && onSubmit(data);
     },
   });
-  const conditionals = [
-    {
-      correct: formik.values.true,
-      text: 'Verdadera',
-      isTrue: true,
-    },
-    {
-      correct: formik.values.false,
-      text: 'Falso',
-      isTrue: false,
-    },
-  ];
 
   const markAsCorrect = (conditional: any) => {
-    if (conditional.isTrue) {
-      formik.setFieldValue('true', !conditional.correct);
-      formik.setFieldValue('false', conditional.correct);
+    if (conditional.text === 'true') {
+      formik.setFieldValue(`answers[${0}].correct`, !conditional.correct);
+      formik.setFieldValue(`answers[${1}].correct`, conditional.correct);
     } else {
-      formik.setFieldValue('false', !conditional.correct);
-      formik.setFieldValue('true', conditional.correct);
+      formik.setFieldValue(`answers[${1}].correct`, !conditional.correct);
+      formik.setFieldValue(`answers[${0}].correct`, conditional.correct);
     }
   };
 
@@ -92,7 +72,7 @@ export function QuizFormConditional(props: QuizFormConditionalProps) {
           onBlur={formik.handleBlur}
         />
         <div className={styles['conditionals']}>
-          {conditionals.map((conditional, index) => (
+          {formik.values.answers.map((conditional, index) => (
             <div className={styles['conditional-container']} key={index}>
               <h4 className={styles['conditional']}>{conditional.text}</h4>
               <div

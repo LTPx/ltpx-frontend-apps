@@ -16,9 +16,9 @@ export function QuizFormConditional(props: QuizFormConditionalProps) {
   const { onSubmit, onCancel } = props;
   const formik = useFormik({
     initialValues: {
+      kind: TypeQuestionQuiz.conditional,
       question: '',
       description: '',
-      kind: TypeQuestionQuiz.conditional,
       answers: [
         {
           text: 'true',
@@ -29,7 +29,6 @@ export function QuizFormConditional(props: QuizFormConditionalProps) {
           correct: false
         }
       ],
-      answer: '',
     },
     validationSchema: Yup.object({
       question: Yup.string().required('Pregunta es obligatorio'),
@@ -40,13 +39,9 @@ export function QuizFormConditional(props: QuizFormConditionalProps) {
   });
 
   const markAsCorrect = (conditional: any) => {
-    if (conditional.text === 'true') {
-      formik.setFieldValue(`answers[${0}].correct`, !conditional.correct);
-      formik.setFieldValue(`answers[${1}].correct`, conditional.correct);
-    } else {
-      formik.setFieldValue(`answers[${1}].correct`, !conditional.correct);
-      formik.setFieldValue(`answers[${0}].correct`, conditional.correct);
-    }
+    const { text, correct } = conditional;
+    formik.setFieldValue(`answers[0].correct`, text === 'true' ? !correct : correct);
+    formik.setFieldValue(`answers[1].correct`, text === 'true' ? correct : !correct);
   };
 
   return (
@@ -74,7 +69,9 @@ export function QuizFormConditional(props: QuizFormConditionalProps) {
         <div className={styles['conditionals']}>
           {formik.values.answers.map((conditional, index) => (
             <div className={styles['conditional-container']} key={index}>
-              <h4 className={styles['conditional']}>{conditional.text}</h4>
+              <h4 className={styles['conditional']}>
+                {conditional.text === 'true' ? 'Verdadera' : 'Falsa'}
+              </h4>
               <div
                 className={`${styles['checker']} ${
                   conditional.correct ? styles['check'] : ''
@@ -87,14 +84,6 @@ export function QuizFormConditional(props: QuizFormConditionalProps) {
             </div>
           ))}
         </div>
-        <Input
-          label="Respuesta correcta"
-          placeholder="Respuesta correcta en caso que sea falsa"
-          name="answer"
-          value={formik.values.answer}
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-        />
         <div className={styles['footer']}>
           <Button
             title="Cancelar"

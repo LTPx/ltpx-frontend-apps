@@ -1,8 +1,7 @@
 import { ContentCourse } from '@ltpx-frontend-apps/api';
 import { useFormik } from 'formik';
-import { useState } from 'react';
+import { Dialog } from 'evergreen-ui';
 import Button, { ColorsButton, TypeButton } from '../button/button';
-import Drawer from '../drawer/drawer';
 import Input from '../input/input';
 import TextArea from '../text-area/text-area';
 import styles from './course-content-form.module.scss';
@@ -29,14 +28,13 @@ export function CourseContentForm(props: CourseContentFormProps) {
 
   return (
     <div className={styles['container']}>
-      <Drawer
-        open={open}
-        onClose={() => {
-          onClose && onClose();
-        }}
+      <Dialog
+        isShown={open}
+        title="Agregar Contenido"
+        onCloseComplete={onClose}
+        hasFooter={false}
       >
         <div className={styles['content']}>
-          <h2>Agregar Contenido </h2>
           <div className={styles['form-content']}>
             <Input
               placeholder="Ejm: Introducción"
@@ -73,7 +71,7 @@ export function CourseContentForm(props: CourseContentFormProps) {
             />
           </div>
         </div>
-      </Drawer>
+      </Dialog>
     </div>
   );
 }

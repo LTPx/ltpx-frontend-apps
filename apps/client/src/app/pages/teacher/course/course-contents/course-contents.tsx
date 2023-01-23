@@ -42,10 +42,9 @@ export function CourseContents(props: CourseContentsProps) {
       )}
       <CourseContentForm
         open={openModal}
-        onClose={() => {
-          setOpenModal(false);
-        }}
+        onClose={() => setOpenModal(false)}
         onSubmit={(data) => {
+          console.log(data)
           setOpenModal(false);
           setContentCourse(contentCourse.concat([data]));
         }}
@@ -53,7 +52,7 @@ export function CourseContents(props: CourseContentsProps) {
       {contentCourse.length >= 1 && (
         <>
           {contentCourse.map((element, key) => (
-            <PanelAccordion title={element.title} text={element.description} />
+            <PanelAccordion title={element.title} text={element.description} key={key} />
           ))}
           <Button
             title="+ Agregar otra sección"

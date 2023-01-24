@@ -1,3 +1,4 @@
+import Icon from '../icon/icon';
 import styles from './brand.module.scss';
 
 /* eslint-disable-next-line */
@@ -10,8 +11,10 @@ export function Brand(props: BrandProps) {
   const classSelected = negativeSpace ? styles['negative'] : '';
   return (
     <div className={`${styles['container']} ${classSelected}`}>
-      <p>Open</p>
-      <p style={{marginLeft: '0.6rem'}}>Mind</p>
+      {/* <p>Open</p>
+      <p style={{marginLeft: '0.6rem'}}>Mind</p> */}
+      <Icon icon='pix' color='#00bdab' size={25}/>
+      <p>Openmind</p>
     </div>
   );
 }

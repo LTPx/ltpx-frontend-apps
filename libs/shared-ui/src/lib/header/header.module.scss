@@ -1,10 +1,10 @@
-@import "../../styles/styles.module.scss";
+@import '../../styles/styles.module.scss';
 
 .container {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem 8rem;
+  padding: 1.5rem 8rem;
   grid-area: header;
   border-bottom: 1px solid #ebecef;
 }
@@ -17,6 +17,7 @@
 .links {
   display: flex;
   gap: 0.5rem;
+  align-items: center;
 }
 
 .link {
@@ -34,5 +35,13 @@
       color: $primary-color;
     }
   }
-}
+  &.accent {
+    background-color: $secondary-color;
+    padding: 0.5rem;
+    border-radius: 10px;
 
+    h4 {
+      color: white;
+    }
+  }
+}

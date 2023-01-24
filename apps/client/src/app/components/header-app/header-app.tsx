@@ -25,8 +25,8 @@ export function HeaderApp(props: HeaderAppProps) {
   ];
 
   const authLinks = [
-    { title: t('header.login'), url: '/login'},
     { title: t('header.register'), url: '/register'},
+    { title: t('header.login'), url: '/login', accent: true},
   ];
 
   // const linksTeacher = [

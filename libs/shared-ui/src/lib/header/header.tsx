@@ -7,6 +7,7 @@ import Brand from '../brand/brand';
 export interface LinkHeader {
   title: string;
   url: string;
+  accent?: boolean;
 }
 export interface HeaderProps {
   children?: any;
@@ -30,11 +31,11 @@ export function Header(props: HeaderProps) {
               <NavLink
                 key={index}
                 className={({ isActive }) =>
-                  isActive ? `${styles['active-link']} ${styles['link']}` : styles['link']
-                }
+                isActive ? `${styles['active-link']} ${styles['link']} ${link.accent ? styles['accent'] : ''}` : `${styles['link']} ${link.accent ? styles['accent'] : ''}`
+              }
                 to={link.url}
               >
-                <h4 className={styles['link']} >{link.title}</h4>
+                <h4 className={`${styles['link']}`} >{link.title}</h4>
               </NavLink>
           ))}
         </div>

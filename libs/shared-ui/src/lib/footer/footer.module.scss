@@ -1,8 +1,8 @@
 @import '../../styles/styles.module.scss';
 
 .container {
-  background-color: #0a0662;
-  color: $white-color;
+  background-color: #2e4057;
+  color: #f9fafb;
 
   .footer-content{
     display: flex;
@@ -24,7 +24,7 @@
         display: flex;
         flex-direction: column;
         gap: $size-md-1;
-        color: #8887b2;
+        color: #f9fafb;
         max-width: 20rem;
       }
 
@@ -56,7 +56,7 @@
 
         .link {
           font-size: 14px;
-          color: #8887b2;
+          color: #f9fafb;
           text-decoration: none;
         }
       }
@@ -64,7 +64,7 @@
   }
 
   .footer-end {
-    color: #8887b2;
+    color: #f9fafb;
     padding: $size-lg-3 0;
     display: flex;
     justify-content: center;

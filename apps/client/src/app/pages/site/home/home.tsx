@@ -31,7 +31,7 @@ export function Home(props: HomeProps) {
             </div>
             <div className={styles['actions']}>
               <Button
-                color={ColorsButton.primary}
+                color={ColorsButton.secondary}
                 title="GET STARTED"
                 outline={true}
                 link='/register'

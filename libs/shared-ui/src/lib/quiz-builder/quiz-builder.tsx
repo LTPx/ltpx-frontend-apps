@@ -1,7 +1,6 @@
 import {
   NewQuizParams,
   QuestionQuiz,
-  QuizModel,
   TypeQuestionQuiz,
 } from '@ltpx-frontend-apps/api';
 import {
@@ -32,13 +31,13 @@ interface QuestionNav {
 export interface QuizBuilderProps {
   open?: boolean;
   onClose?: () => void;
-  onSave?: (quiz: QuizModel) => void;
+  onSave?: (quiz: NewQuizParams) => void;
   onSubmit?: (data: NewQuizParams) => void;
 }
 
 export function QuizBuilder(props: QuizBuilderProps) {
   const { open, onClose, onSave, onSubmit } = props;
-  const [ nameQuiz, setNameQuiz ] = useState<string>();
+  const [ quizName, setQuizName ] = useState<string>();
   const [ questionsQuiz, setQuestionsQuiz ] = useState<QuestionQuiz[]>([]);
 
   const [ selectedTypeQuestion, setSelectedTypeQuestion ] = useState<TypeQuestionQuiz | null>();
@@ -75,7 +74,7 @@ export function QuizBuilder(props: QuizBuilderProps) {
       </div>
       <div className={styles['actions']}>
         <div className={styles['quiz-name']}>
-          <h3>{nameQuiz}</h3>
+          <h3>{quizName}</h3>
         </div>
         <div className={styles['buttons']}>
           <Button
@@ -92,6 +91,11 @@ export function QuizBuilder(props: QuizBuilderProps) {
             type={TypeButton.submit}
             onClick={()=> {
               console.log('guardando...');
+              const quiz = {
+                name: quizName,
+                questions: questions.map((q)=> q.question)
+              }
+              // onSave && onSave(quiz)
             }}
           />
         </div>
@@ -122,19 +126,19 @@ export function QuizBuilder(props: QuizBuilderProps) {
 
   const ContentQuiz = () => (
     <div className={styles['content']}>
-      {!nameQuiz && (
+      {!quizName && (
         <div className={styles['form-name']}>
           <Input label="Nombre del test" refInput={elementRef}/>
           <Button
             title="Continuar"
             full={true}
             onClick={() => {
-              setNameQuiz(elementRef.current?.value);
+              setQuizName(elementRef.current?.value);
             }}
           />
         </div>
       )}
-      {nameQuiz && (
+      {quizName && (
         <div className={styles['content-questions']}>
           <div className={styles['control-questions']}>
             <Dropdown>
@@ -240,7 +244,7 @@ export function QuizBuilder(props: QuizBuilderProps) {
         hasHeader={false}
         onCloseComplete={() => onClose && onClose()}
         width={'80vw'}
-        minHeightContent={'64vh'}
+        minHeightContent={'70vh'}
       >
         <div className={styles['quiz-builder-layout']}>
           <HeaderQuiz />

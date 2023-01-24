@@ -67,9 +67,9 @@ export function Input(props: InputProps) {
   }
 
   return (
-    <div className={`${css['container']} ${className}`}>
+    <div className={`${css['input-component']} ${className}`}>
       {label && (
-        <label className={css['label']}>{label}</label>
+        <label>{label}</label>
       )}
       { description && (
         <p className={css['description']}>{description}</p>
@@ -79,7 +79,7 @@ export function Input(props: InputProps) {
           <AddonSymbol text={addonInput.text} position={Position.left}/>
         )}
         <input
-          className={`${css['input-box']} ${inputClassesPosition}`}
+          className={`${css['input-box']} ${inputClassesPosition} ${label ? css['with-label'] : ''}`}
           {...other}
           min={min}
           onChange={e => onChange && onChange(e)}

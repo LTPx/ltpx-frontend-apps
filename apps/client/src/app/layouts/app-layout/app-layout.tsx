@@ -25,11 +25,15 @@ export function AppLayout(props: AppLayoutProps) {
 
   return (
     <div className={styles['container']}>
-      <HeaderApp/>
+      <div className={styles['header']}>
+        <HeaderApp/>
+      </div>
       <div className={styles['content']}>
         <Outlet />
       </div>
-      <Footer companyLinks={companyLinks} supportLinks={supportLinks} />
+      <div className={styles['footer']}>
+        <Footer companyLinks={companyLinks} supportLinks={supportLinks} />
+      </div>
     </div>
   );
 }

@@ -22,7 +22,6 @@ export function Header(props: HeaderProps) {
       <div className={styles['main-action']}>
         <Brand/>
         <div className={styles['search']}>
-
         </div>
       </div>
       <div className={styles['information']}>

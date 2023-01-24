@@ -6,7 +6,6 @@ import Button, { ColorsButton, TypeButton } from '../button/button';
 import { FieldArray, Form, Formik } from 'formik';
 import * as Yup from 'yup';
 import { QuestionQuiz, TypeQuestionQuiz } from '@ltpx-frontend-apps/api';
-import { useEffect, useRef } from 'react';
 
 /* eslint-disable-next-line */
 export interface QuizFormMultipleOptionsProps {
@@ -34,11 +33,17 @@ export function QuizFormMultipleOptions(props: QuizFormMultipleOptionsProps) {
             },
           ],
         }}
+        validationSchema = {
+          Yup.object({
+            question: Yup.string()
+              .required('La pregunta no puede estar en blanco'),
+          })
+        }
         onSubmit={(values) => {
           onSubmit && onSubmit(values);
         }}
       >
-        {({ values, handleChange, handleBlur, setFieldValue, submitForm }) => (
+        {({ values, handleChange, handleBlur, setFieldValue, submitForm, errors }) => (
           <Form className={className || ''}>
             <div className={styles['fields']}>
               <Input
@@ -48,6 +53,7 @@ export function QuizFormMultipleOptions(props: QuizFormMultipleOptionsProps) {
                 value={values.question}
                 onChange={handleChange}
                 onBlur={handleBlur}
+                errorMessage={errors.question}
               />
               <Input
                 label="Descripción (opcional)"
@@ -136,6 +142,7 @@ export function QuizFormMultipleOptions(props: QuizFormMultipleOptionsProps) {
                 title="Guardar"
                 type={TypeButton.submit}
                 onClick={submitForm}
+                color={ColorsButton.secondary}
               />
             </div>
           </Form>

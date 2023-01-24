@@ -39,8 +39,6 @@ export function QuizFormMultipleOptions(props: QuizFormMultipleOptionsProps) {
 
   const alphabetLetters = generateAlphabet();
 
-  const formClass = singleSelection ? `${styles['single']} ` : '';
-
   return (
     <div className={styles['questions']}>
       <Formik
@@ -85,25 +83,41 @@ export function QuizFormMultipleOptions(props: QuizFormMultipleOptionsProps) {
                 render={(arrayHelpers) => (
                   <div>
                     {values.answers.map((answer, index) => (
-                      <div key={index}>
-                        <div className={styles['answer']}>
-                          {!singleSelection && (
-                            <div className={styles['letter']}>
-                              <h2>{alphabetLetters[index]}.</h2>
-                            </div>
-                          )}
-                          <Input
-                            placeholder="Ingresa una respuesta"
-                            value={answer.text}
-                            onBlur={handleBlur}
-                            name={`answers[${index}].text`}
-                            onChange={handleChange}
-                          />
+                      <div className={`${styles['answer']} ${ singleSelection ? styles['single'] : ''}`} key={index}>
+                        {!singleSelection && (
+                          <div className={styles['letter']}>
+                            <h2>{alphabetLetters[index]}.</h2>
+                          </div>
+                        )}
+                        <Input
+                          placeholder="Ingresa una respuesta"
+                          className={styles['answer-input']}
+                          value={answer.text}
+                          onBlur={handleBlur}
+                          name={`answers[${index}].text`}
+                          onChange={handleChange}
+                        />
+                        <div className={styles['actions']}>
                           <div
                             className={`${styles['checker']} ${
                               answer.correct ? styles['check'] : ''
                             }`}
                             onClick={() => {
+                              if (singleSelection) {
+                                values.answers.forEach((answer, i)=>{
+                                  if (index === i) {
+                                    setFieldValue(
+                                      `answers[${index}].correct`,
+                                      !answer.correct
+                                    );
+                                  } else {
+                                    setFieldValue(
+                                      `answers[${i}].correct`,
+                                      false
+                                    );
+                                  }
+                                })
+                              };
                               setFieldValue(
                                 `answers[${index}].correct`,
                                 !answer.correct
@@ -112,17 +126,17 @@ export function QuizFormMultipleOptions(props: QuizFormMultipleOptionsProps) {
                           >
                             <Icon icon="check" size={15} />
                           </div>
-                        </div>
-                        <div
-                          className={styles['remove']}
-                          onClick={() => arrayHelpers.remove(index)}
-                        >
-                          Eliminar
-                        </div>
+                          <div
+                            className={styles['remove']}
+                            onClick={() => arrayHelpers.remove(index)}
+                          >
+                            <Icon icon="trash" size={15} />
+                          </div>
+                          </div>
                       </div>
                     ))}
-                    <button
-                      type="button"
+                    <div
+                      className={styles['add-new']}
                       onClick={() =>
                         arrayHelpers.push({
                           text: '',
@@ -130,8 +144,8 @@ export function QuizFormMultipleOptions(props: QuizFormMultipleOptionsProps) {
                         })
                       }
                     >
-                      Agregar otra pregunta
-                    </button>
+                      + Nueva respuesta
+                    </div>
                   </div>
                 )}
               />

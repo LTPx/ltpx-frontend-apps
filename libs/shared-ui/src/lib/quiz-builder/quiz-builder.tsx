@@ -103,9 +103,6 @@ export function QuizBuilder(props: QuizBuilderProps) {
     <div className={styles['side']}>
       <div className={styles['add-question']}>
         <h4>Preguntas</h4>
-        <div className={styles['icon-container']}>
-          <Icon icon="plus" size={18} />
-        </div>
       </div>
       <div className={styles['questions']}>
         {questions.map((question, index) => (

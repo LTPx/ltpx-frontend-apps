@@ -67,6 +67,12 @@ export function QuizBuilder(props: QuizBuilderProps) {
     console.log('questions: ', questions);
   }
 
+  const cancelQuestion = () => {
+    const updatedQuestions = [...questions].slice(0, -1);
+    setQuestions(updatedQuestions);
+    setSelectedTypeQuestion(null);
+  }
+
   const HeaderQuiz = () => (
     <div className={styles['header']}>
       <div className={styles['text']}>
@@ -79,9 +85,10 @@ export function QuizBuilder(props: QuizBuilderProps) {
         <div className={styles['buttons']}>
           <Button
             title="Cancelar"
-            outline={true}
             color={ColorsButton.white}
             onClick={() => {
+              setQuestions([]);
+              setQuizName('');
               onClose && onClose();
             }}
           />
@@ -207,6 +214,7 @@ export function QuizBuilder(props: QuizBuilderProps) {
             handleSaveQuestionData(data);
           }}
           onCancel={() => {
+            cancelQuestion();
           }}
         />
       )}
@@ -214,6 +222,9 @@ export function QuizBuilder(props: QuizBuilderProps) {
         <QuizFormMultipleOptions
           onSubmit={(data) => {
             handleSaveQuestionData(data);
+          }}
+          onCancel={() => {
+            cancelQuestion();
           }}
         />
       )}
@@ -223,14 +234,18 @@ export function QuizBuilder(props: QuizBuilderProps) {
           onSubmit={(data) => {
             handleSaveQuestionData(data);
           }}
+          onCancel={() => {
+            cancelQuestion();
+          }}
         />
       )}
       {selectedTypeQuestion === TypeQuestionQuiz.answer && (
         <QuizFormAnswer
-          onCancel={() => {
-          }}
           onSubmit={(data) => {
             handleSaveQuestionData(data);
+          }}
+          onCancel={() => {
+            cancelQuestion();
           }}
         />
       )}

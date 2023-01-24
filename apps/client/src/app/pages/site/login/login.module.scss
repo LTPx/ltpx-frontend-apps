@@ -4,6 +4,8 @@
   display: flex;
   justify-content: center;
   margin-top: $size-lg-1;
+  width: 100%;
+
 }
 
 .content {
@@ -14,4 +16,9 @@
     justify-content: center;
     margin-top: $size-md-1;
   }
+}
+
+.main-container{
+  display: flex;
+  width: 100%;
 }

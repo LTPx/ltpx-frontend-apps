@@ -24,7 +24,7 @@ const supportLinks = [
 export function AppLayout(props: AppLayoutProps) {
 
   return (
-    <div className={styles['container']}>
+    <div className={styles['layout']}>
       <div className={styles['header']}>
         <HeaderApp/>
       </div>

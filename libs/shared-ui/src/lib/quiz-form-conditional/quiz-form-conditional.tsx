@@ -93,7 +93,11 @@ export function QuizFormConditional(props: QuizFormConditionalProps) {
               onCancel && onCancel();
             }}
           />
-          <Button title="Guardar" type={TypeButton.submit} />
+          <Button
+            title="Crear Pregunta"
+            color={ColorsButton.secondary}
+            type={TypeButton.submit}
+          />
         </div>
       </form>
     </div>

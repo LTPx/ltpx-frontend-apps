@@ -70,9 +70,10 @@ export function QuizFormAnswer(props: QuizFormAnswerProps) {
             }}
           />
           <Button
-            title="Guardar"
+            title="Crear Pregunta"
             type={TypeButton.submit}
             onClick={formik.submitForm}
+            color={ColorsButton.secondary}
           />
         </div>
       </form>

@@ -80,7 +80,7 @@ export function QuizBuilder(props: QuizBuilderProps) {
           <Button
             title="Cancelar"
             outline={true}
-            color={ColorsButton.secondary}
+            color={ColorsButton.white}
             onClick={() => {
               onClose && onClose();
             }}
@@ -95,6 +95,7 @@ export function QuizBuilder(props: QuizBuilderProps) {
                 name: quizName,
                 questions: questions.map((q)=> q.question)
               }
+              console.log('quiz: ', quiz);
               // onSave && onSave(quiz)
             }}
           />

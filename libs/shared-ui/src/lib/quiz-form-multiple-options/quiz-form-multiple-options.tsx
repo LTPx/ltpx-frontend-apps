@@ -12,10 +12,11 @@ export interface QuizFormMultipleOptionsProps {
   singleSelection?: boolean;
   onSubmit?: (data: QuestionQuiz) => void;
   className?: string;
+  onCancel?: () => void;
 }
 
 export function QuizFormMultipleOptions(props: QuizFormMultipleOptionsProps) {
-  const { onSubmit, singleSelection, className } = props;
+  const { onSubmit, onCancel, singleSelection, className } = props;
 
   const alphabetLetters = generateAlphabet();
 
@@ -139,10 +140,18 @@ export function QuizFormMultipleOptions(props: QuizFormMultipleOptionsProps) {
             </div>
             <div className={styles['footer']}>
               <Button
-                title="Guardar"
+                title="Cancelar"
+                color={ColorsButton.white}
+                type={TypeButton.button}
+                onClick={() => {
+                  onCancel && onCancel();
+                }}
+              />
+              <Button
+                title="Crear Pregunta"
+                color={ColorsButton.secondary}
                 type={TypeButton.submit}
                 onClick={submitForm}
-                color={ColorsButton.secondary}
               />
             </div>
           </Form>

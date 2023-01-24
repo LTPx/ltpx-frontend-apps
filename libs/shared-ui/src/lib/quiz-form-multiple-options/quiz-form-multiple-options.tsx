@@ -13,29 +13,10 @@ export interface QuizFormMultipleOptionsProps {
   singleSelection?: boolean;
   onSubmit?: (data: QuestionQuiz) => void;
   className?: string;
-  api?: any,
 }
 
 export function QuizFormMultipleOptions(props: QuizFormMultipleOptionsProps) {
-  const { onSubmit, singleSelection, className, api } = props;
-  const submitRef = useRef();
-
-  useEffect(() => {
-    console.log('QuizFormMultipleOptions')
-    if(!!api) {
-      const apiQuizMultiple = createPublicApi();
-      api(apiQuizMultiple);
-    }
-    return () => {
-    }
-  }, [])
-
-
-  function createPublicApi() {
-    return {
-      submitRef: submitRef,
-    };
-  }
+  const { onSubmit, singleSelection, className } = props;
 
   const alphabetLetters = generateAlphabet();
 

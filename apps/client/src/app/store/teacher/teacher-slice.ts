@@ -8,7 +8,7 @@ import {
   StatusTeacherAccount,
   TypeViews,
   UserResponse,
-  NewCourseApiParams,
+  CourseApiParams,
   ApplicationTeach,
   getApplicationTeach,
   IUserAccount,
@@ -17,6 +17,7 @@ import {
   QuizModel,
   NewQuizApiParams,
   createQuiz,
+  editCourse,
 } from '@ltpx-frontend-apps/api';
 import { StateCreator } from 'zustand';
 import { StoreState } from '../store';
@@ -34,7 +35,7 @@ type TResponseLogin = {
 
 type TResponseCreateCourse = {
   saved: boolean;
-  data: NewCourseApiParams | any;
+  data: CourseApiParams | any;
 };
 
 type TResponseGetApplication = {
@@ -66,7 +67,8 @@ export type TeacherSlice = {
   applyTeach: (params: ApplyTeachApiParams) => Promise<any>;
   getApplicationTeach: () => Promise<any>;
   registerTeacher: (params: IRegisterUser) => Promise<TResponseLogin>;
-  createCourse: (params: NewCourseApiParams) => Promise<TResponseCreateCourse>;
+  createCourse: (params: CourseApiParams) => Promise<TResponseCreateCourse>;
+  editCourse: (params: CourseApiParams) => Promise<TResponseCreateCourse>;
   getProfile: () => Promise<TResponseProfile>;
   updateProfile: (params: IUserAccount) => Promise<TResponseUpdateProfile>;
   createQuiz: (params: NewQuizApiParams) => Promise<TResponse>;
@@ -127,10 +129,20 @@ export const createTeacherSlice: StateCreator<
     }
   },
   createCourse: async (
-    params: NewCourseApiParams
+    params: CourseApiParams
   ): Promise<TResponseCreateCourse> => {
     try {
       const course = await createCourse(params);
+      return { saved: true, data: course };
+    } catch (error) {
+      return { saved: false, data: error };
+    }
+  },
+  editCourse: async (
+    params: CourseApiParams
+  ): Promise<TResponseCreateCourse> => {
+    try {
+      const course = await editCourse(params);
       return { saved: true, data: course };
     } catch (error) {
       return { saved: false, data: error };

@@ -1,5 +1,6 @@
 import { CourseLanguage, CourseLevel } from '@ltpx-frontend-apps/api';
 import { Button, ColorsButton, FileUpload, Input, Select, TextArea, TypeButton } from '@ltpx-frontend-apps/shared-ui';
+import { useTeacher } from 'apps/client/src/app/store';
 import { useCourse } from 'apps/client/src/app/store/hooks/useCourse';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
@@ -7,8 +8,9 @@ import styles from './course-general-information.module.scss';
 
 /* eslint-disable-next-line */
 export interface CourseGeneralInformationProps {
-  cover?: string;
   title: string;
+  id: number;
+  cover?: string;
   description?: string;
   category?: string;
   language?: CourseLanguage;
@@ -18,8 +20,10 @@ export interface CourseGeneralInformationProps {
 }
 
 export function CourseGeneralInformation(props: CourseGeneralInformationProps) {
-  const { cover, title, description, category, language, level, learn_goals, requirements } = props;
+  const { cover, title, description, category, language, level, learn_goals, requirements, id } = props;
   const { categories, languages, levels } = useCourse();
+  const { editCourse } = useTeacher();
+
   const formik = useFormik({
     initialValues: {
       title: title,
@@ -37,6 +41,13 @@ export function CourseGeneralInformation(props: CourseGeneralInformationProps) {
     }),
     onSubmit: async (formData) => {
       console.log('formData: ', formData);
+      const data = {...formData, ...{ id }}
+      const result = await editCourse(data);
+      if (result.saved) {
+        console.log('saved');
+      } else {
+        console.log(result.data);
+      }
     },
   });
 

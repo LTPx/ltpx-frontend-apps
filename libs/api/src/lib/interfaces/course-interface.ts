@@ -68,9 +68,9 @@ export type PublicCourse = Omit<
 
 export type TeacherCourse = Omit<CourseModel, 'user_id' | 'cover'>;
 
-export type NewCourseApiParams = PartialWithRequired<
+export type CourseApiParams = PartialWithRequired<
   TeacherCourse,
-  'description' | 'title'
+  'title'
 >;
 
 export const CLASSROOM_MANDATORY = {

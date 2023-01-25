@@ -28,11 +28,11 @@ export function TeacherEditCourse(props: TeacherEditCourseProps) {
   const [ indexSelectedView, setIndexSelectedView ] = useState(0);
 
   const params = useParams();
+  const { courseId } = params;
 
   useEffect(() => {
     let mounted = true;
     try {
-      const { courseId } = params;
       if (courseId) {
         getTeacherCourse(courseId).then((course) => {
           if (mounted) {
@@ -50,41 +50,6 @@ export function TeacherEditCourse(props: TeacherEditCourseProps) {
   }, []);
 
 
-  const formik = useFormik({
-    initialValues: {
-      cover: null,
-      title: '',
-      description: '',
-      category: '',
-      language: CourseLanguage.es,
-      level: CourseLevel.begging,
-      learn_goals: '',
-      requirements: '',
-    },
-    validationSchema: Yup.object({
-      title: Yup.string().required('es obligatorio'),
-      description: Yup.string().required('es obligatorio'),
-    }),
-    onSubmit: async (formData) => {
-      console.log('formData: ', formData);
-      // const courseData = {
-      //   ...formData,
-      //   ...{
-      //     contents: contents,
-      //     classroom: classroomData,
-      //   },
-      // };
-      // console.log('courseData: ', courseData);
-      // const { saved, data } = await createCourse(courseData);
-      // if (saved) {
-      //   navigate('/teacher/courses/all');
-      // } else {
-      //   console.log('error: ', data);
-      // }
-    },
-  });
-
-
   return (
     <div className={styles['container']}>
       { course && (
@@ -93,17 +58,17 @@ export function TeacherEditCourse(props: TeacherEditCourseProps) {
             <h3>{course.title}</h3>
             <div className={styles['actions']}>
               <h5 className="muted">Creado: Diciembre 21 2022</h5>
-              {/* <Button
-                title="Preview"
-                outline={true}
-                color={ColorsButton.secondary}
-              /> */}
-              {/* <Select options={optionsSave} /> */}
+              <Button
+                title="Cancelar"
+                color={ColorsButton.white}
+              />
               <Button
                 title="Enviar a revision"
                 color={ColorsButton.primary}
                 type={TypeButton.submit}
-                onClick={formik.submitForm}
+                onClick={()=>{
+                  console.log('send to review')
+                }}
               />
             </div>
           </div>
@@ -114,6 +79,7 @@ export function TeacherEditCourse(props: TeacherEditCourseProps) {
             <div className={styles['course-section-content']}>
               <section className={`${styles['section']} ${indexSelectedView === 0 ? styles['selected'] : ''}`}>
                 <CourseGeneralInformation
+                  id={course.id}
                   title={course.title}
                   cover={course.cover_url}
                   description={course.description}

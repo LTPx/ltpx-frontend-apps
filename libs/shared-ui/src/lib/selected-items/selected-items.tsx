@@ -4,42 +4,70 @@ import styles from './selected-items.module.scss';
 
 export interface ItemOption {
   text: string;
-  id?: string;
+  id?: number;
   selected?: boolean;
 }
 /* eslint-disable-next-line */
 export interface SelectedItemsProps {
   items: ItemOption[];
   onlyOneSelection?: boolean;
+  onChange?: (array: Array<string>) => void;
 }
 
 export function SelectedItems(props: SelectedItemsProps) {
-  const { items, onlyOneSelection } = props;
-  const [ itemsOption, setItemsOption ] = useState(items);
+  const { items, onlyOneSelection, onChange } = props;
+  const [itemsOption, setItemsOption] = useState(items);
+  const [optionForm, setOptionForm] = useState<any[]>([]);
 
   const selectItem = (indexOption: number) => {
     if (onlyOneSelection) {
-      let forms = [...itemsOption];
-      let result = forms.filter((form, i)=> {
-        return Object.assign(form, { selected: indexOption == i})
-      })
+      const forms = [...itemsOption];
+      const element = [forms[indexOption]];
+      const copy = [...optionForm];
+      const addElements = copy.concat(element);
+      const result = forms.filter((form, i) => {
+        return Object.assign(form, { selected: indexOption == i });
+      });
       setItemsOption(result);
-    }else {
-      let forms = [...itemsOption];
-      forms[indexOption].selected = !(!!forms[indexOption].selected);
+      onChange && onChange(addElements);
+      console.log(addElements)
+    } else {
+      const forms = [...itemsOption];
+      forms[indexOption].selected = !forms[indexOption].selected;
       setItemsOption(forms);
-    };
-  }
+      //here
+      if (forms[indexOption].selected) {
+        const elements = forms[indexOption];
+        const copy = [...optionForm];
+        const addElements = copy.concat(elements);
+        setOptionForm(addElements);
+        console.log(addElements);
+        onChange && onChange(addElements);
+      } else {
+        const elms = optionForm.filter((item) => {
+          return item.selected;
+        });
+        setOptionForm(elms);
+        onChange && onChange(elms);
+        console.log('optionForm: ', elms);
+      }
+    }
+  };
 
   return (
     <div className={styles['container']}>
       <div className={styles['items-container']}>
-        {items.map((item, index)=>(
-          <div className={`${styles['item']} ${item.selected ? styles['checked'] : ''}`}
+        {items.map((item, index) => (
+          <div
+            className={`${styles['item']} ${
+              item.selected ? styles['checked'] : ''
+            }`}
             key={index}
-            onClick={()=>{selectItem(index)}}
+            onClick={() => {
+              selectItem(index);
+            }}
           >
-            <Icon icon='check' size={15}/>
+            <Icon icon="check" size={15} />
             <h4>{item.text}</h4>
           </div>
         ))}

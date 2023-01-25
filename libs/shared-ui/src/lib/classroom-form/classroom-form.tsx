@@ -27,7 +27,9 @@ export function ClassroomForm(props: ClassroomFormProps) {
     },
     onSubmit: (data) => {
       const formData = {
-        condition: data.mandatory ? TeacherClassType.mandatory : TeacherClassType.flexible,
+        condition: data.mandatory
+          ? TeacherClassType.mandatory
+          : TeacherClassType.flexible,
         min: parseInt(data.min),
         max: parseInt(data.max),
         call_time_min: parseInt(data.minutes) + parseInt(data.hour),

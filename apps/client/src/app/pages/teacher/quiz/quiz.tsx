@@ -1,88 +1,63 @@
-import { Button, ColorsButton, Icon, Input, Question, QuizQuestion } from '@ltpx-frontend-apps/shared-ui';
+import { NewQuizParams, QuestionQuiz } from '@ltpx-frontend-apps/api';
+import { QuizBuilder, SetupCard } from '@ltpx-frontend-apps/shared-ui';
 import { useState } from 'react';
 import styles from './quiz.module.scss';
 
-export interface FormQuiz {
-  question: string;
-  description?: string;
-  kindQuestion: Question;
+/* eslint-disable-next-line */
+export interface QuizProps {
+  onSubmit?: (quiz: QuestionQuiz) => void;
 }
 
-/* eslint-disable-next-line */
-export interface QuizProps {}
-
 export function Quiz(props: QuizProps) {
-
-  const quizzes: FormQuiz[] = [
-    {
-      question: '',
-      description: '',
-      kindQuestion: Question.answer
-    }
-  ];
-
-  const [quizForms, setQuizForms] = useState(quizzes);
-
-  const addNewForm = () => {
-    setQuizForms([...quizForms,     {
-      question: '',
-      description: '',
-      kindQuestion: Question.answer
-    }])
-  }
-  const removeForm = (index: number) => {
-    const forms = [...quizForms];
-    forms.splice(index, 1);
-    setQuizForms(forms);
-  }
-
-  const handleInputChange = (e: { target: HTMLInputElement; }, index: number) => {
-    const { name, value } = e.target;
-    let forms = [...quizForms];
-    if ( name === 'question') {
-      forms[index][name] = value;
-    }
-    if ( name === 'description') {
-      forms[index][name] = value;
-    }
-    setQuizForms(forms);
-  };
+  const [openModal, setOpenModal] = useState(false);
+  const [quiz, setQuiz] = useState<NewQuizParams>();
 
   return (
     <div className="quizzes">
       <div className={styles['header-text']}>
         <h2>Test</h2>
-        <h4 className='muted'>Los tests los tomara el estudiante</h4>
+        <h4 className="muted">Los tests los tomara el estudiante</h4>
       </div>
-      { quizForms.map((form, index)=> (
-        <div className={styles['quiz-form']} key={index}>
-          <div className={styles['remove-btn']} onClick={() => removeForm(index)}>
-            <Icon icon='close' size={15}/>
-          </div>
-          <Input
-            label={`${index + 1}. Pregunta`}
-            placeholder='Formula tu pregunta'
-            value={form.question}
-            onChange={(e: { target: HTMLInputElement; }) => handleInputChange(e, index)}
-            name='question'
-          />
-          <Input
-            label='Descripción (opcional)'
-            placeholder='Alguna observacion antes de responder esta pregunta'
-            value={form.description}
-            onChange={(e: { target: HTMLInputElement; }) => handleInputChange(e, index)}
-            name='description'
-          />
-          <div className={styles['quiz-question']}>
-            <QuizQuestion kindQuestion={Question.answer}/>
-          </div>
-        </div>
-      ))}
-      <Button
-        title='+ Agregar otra pregunta'
-        onClick={addNewForm}
-        color={ColorsButton.primary}
+      {!quiz && (
+        <SetupCard
+          onClick={() => {
+            setOpenModal(true);
+          }}
+          icon={'paper-outline'}
+          text={'Crear test'}
+          titleButton={'Configurar Ahora'}
+        />
+      )}
+      <QuizBuilder
+        open={openModal}
+        onClose={() => {
+          setOpenModal(false);
+        }}
+        onSubmit={(data) => {
+          setOpenModal(false);
+          setQuiz(data);
+        }}
       />
+      {quiz && (
+        <>
+          <div className={styles['quiz-preview']}>
+            <h4>Examen de: {quiz.name} </h4>
+            {quiz.questions.map((ele, key) => (
+              <div key={key}>
+                <h4>Preguntas de tipo: {ele.kind}</h4>
+              </div>
+            ))}
+          </div>
+          <div
+            className={styles['edit-btn']}
+            onClick={() => {
+              setOpenModal(true);
+            }}
+          >
+            <h4>Editar Test</h4>
+          </div>
+        </>
+      )}
     </div>
   );
 }

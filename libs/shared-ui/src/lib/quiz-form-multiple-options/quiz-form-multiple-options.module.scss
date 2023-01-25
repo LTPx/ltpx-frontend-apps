@@ -1,0 +1,81 @@
+@import '../../styles/styles.module.scss';
+
+.container {
+  h5 {
+    margin: 1.5rem 0;
+    cursor: pointer;
+    color: $green-color;
+  }
+}
+
+.form {
+  display: grid;
+  grid-template-columns: auto 1fr auto auto;
+  grid-auto-rows: 1fr;
+
+  &.single {
+    grid-template-columns: 1fr auto auto;
+  }
+
+  .letter {
+    margin-top: 1.5rem;
+    padding: 0 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    h2 {
+      margin: 0;
+    }
+  }
+}
+
+.checker {
+  margin-top: 1.5rem;
+  padding: 0 1rem;
+  border: 1px solid #edf0f2;
+  background-color: $white-color;
+  color: $gray-color;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  cursor: pointer;
+
+  &:hover {
+    color: $text-color;
+    h4 {
+      color: $text-color;
+    }
+  }
+
+  h4 {
+    color: $gray-color;
+  }
+
+  &.check {
+    color: $green-color;
+    background-color: $green-color-100;
+
+    h4 {
+      color: $green-color;
+    }
+  }
+}
+
+.remove {
+  margin-top: 1.5rem;
+  padding: 0 1rem;
+  display: flex;
+  align-items: center;
+  border: 1px solid $stroke-color;
+  color: #ef4444;
+  background-color: $white-color;
+}
+
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 1rem;
+  padding: 1rem 0;
+}

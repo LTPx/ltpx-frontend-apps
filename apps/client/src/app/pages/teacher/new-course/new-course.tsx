@@ -14,7 +14,11 @@ import TeacherClasses from '../teacher-classes/teacher-classes';
 import styles from './new-course.module.scss';
 import * as Yup from 'yup';
 import { useTeacher } from '../../../store';
-import { ContentCourse, CourseLanguage, CourseLevel } from '@ltpx-frontend-apps/api';
+import {
+  ContentCourse,
+  CourseLanguage,
+  CourseLevel,
+} from '@ltpx-frontend-apps/api';
 import { useNavigate } from 'react-router-dom';
 
 /* eslint-disable-next-line */
@@ -52,8 +56,8 @@ export function NewCourse(props: NewCourseProps) {
         ...formData,
         ...{
           contents: contents,
-          classroom: classroomData
-        }
+          classroom: classroomData,
+        },
       };
       console.log('courseData: ', courseData);
       const { saved, data } = await createCourse(courseData);
@@ -65,10 +69,10 @@ export function NewCourse(props: NewCourseProps) {
     },
   });
 
-  const handleClasses = (formClasses: any) =>  {
+  const handleClasses = (formClasses: any) => {
     console.log('formClasses: ', formClasses);
     setClassroomData(formClasses);
-  }
+  };
 
   return (
     <div className={styles['container']}>
@@ -77,7 +81,11 @@ export function NewCourse(props: NewCourseProps) {
           <h3>Crear Curso</h3>
           <div className={styles['actions']}>
             <h5 className="muted">Creado: Diciembre 21 2022</h5>
-            <Button title="Preview" outline={true} color={ColorsButton.secondary}/>
+            <Button
+              title="Preview"
+              outline={true}
+              color={ColorsButton.secondary}
+            />
             <Select options={optionsSave} />
             <Button
               title="Guardar"
@@ -93,20 +101,20 @@ export function NewCourse(props: NewCourseProps) {
               <CourseGeneralInformation formik={formik} />
             </section>
             <section className={styles['section-gray']}>
-              <CourseContents
-                onChange={(forms: any) => {
-                  setContents(forms);
+              <CourseContents />
+            </section>
+            <section className={styles['section']}>
+              <TeacherClasses
+                onSubmit={(data) => {
+                  handleClasses(data);
                 }}
               />
             </section>
-            <section className={styles['section']}>
-              <TeacherClasses onSubmit={(data) => {handleClasses(data)}} />
-            </section>
             <section className={styles['section-gray']}>
-              <Quiz/>
+              <Quiz />
             </section>
             <section className={styles['section']}>
-              <Achievement/>
+              <Achievement />
             </section>
           </div>
         </div>

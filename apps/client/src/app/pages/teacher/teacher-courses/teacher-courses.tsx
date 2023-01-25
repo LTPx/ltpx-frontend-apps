@@ -57,7 +57,7 @@ export function TeacherCourses(props: TeacherCoursesProps) {
           category={course.category}
           percentageRate={0}
           percentageLearner={0}
-          url={`/teacher/courses/${course.id}`}
+          url={`/teacher/courses/edit/${course.id}`}
         />
       )) }
     </div>

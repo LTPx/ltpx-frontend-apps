@@ -123,7 +123,11 @@ export function TeacherEditCourse(props: TeacherEditCourseProps) {
                 />
               </section>
               <section className={`${styles['section']} ${indexSelectedView === 3 ? styles['selected'] : ''}`}>
-                <Achievement />
+                <Achievement
+                  quizzes={course.quizzes || [] }
+                  courseId={course.id}
+                  initialAchievements={course.achievements || []}
+                />
               </section>
               <section className={`${styles['section']} ${indexSelectedView === 4 ? styles['selected'] : ''}`}>
                 <TeacherClasses

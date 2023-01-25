@@ -1,3 +1,4 @@
+import { AchievementModel } from './achievement-interface';
 import { QuizModel } from './quiz-interface';
 import { PartialWithRequired } from './util';
 
@@ -61,6 +62,7 @@ export interface CourseModel {
   contents: ContentCourse[];
   classroom: Classroom;
   quizzes?: QuizModel[];
+  achievements?: AchievementModel[];
 }
 
 export type PublicCourse = Omit<

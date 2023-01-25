@@ -1,4 +1,4 @@
-export enum RuleAchievement {
+export enum TypeAchievement {
   multiple = 'multiple',
   single = 'single',
   task = 'task',
@@ -16,7 +16,7 @@ export interface AchievementModel {
   user_id: number;
   course_id: number;
   title: string;
-  rule: RuleAchievement;
+  rule: TypeAchievement;
   image: string;
   settings: SettingAchievement[];
   created_at: string;

@@ -114,7 +114,7 @@ export function NewCourse(props: NewCourseProps) {
               {/* <Quiz /> */}
             </section>
             <section className={styles['section']}>
-              <Achievement />
+              {/* <Achievement /> */}
             </section>
           </div>
         </div>

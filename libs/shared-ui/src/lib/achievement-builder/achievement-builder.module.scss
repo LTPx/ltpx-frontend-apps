@@ -1,7 +1,12 @@
-/*
- * Replace this with your own classes
- *
- * e.g.
- * .container {
- * }
-*/
+@import '../../styles/styles.module.scss';
+
+.achievements {
+  display: flex;
+  gap: 1rem;
+
+  .achievement {
+    padding: 1rem;
+    background-color: $gray-color-100;
+    cursor: pointer;
+  }
+}

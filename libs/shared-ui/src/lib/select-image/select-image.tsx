@@ -17,7 +17,6 @@ export function SelectImage(props: SelectImageProps) {
 
   return (
     <div className={styles['container']}>
-      <label>Elige una imagen</label>
       <div className={styles['img']}>
         {images.map((element, index) => (
           <div

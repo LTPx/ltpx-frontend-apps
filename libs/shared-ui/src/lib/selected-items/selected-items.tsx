@@ -20,38 +20,38 @@ export function SelectedItems(props: SelectedItemsProps) {
   const [optionForm, setOptionForm] = useState<any[]>([]);
 
   const selectItem = (indexOption: number) => {
-    if (onlyOneSelection) {
-      const forms = [...itemsOption];
-      const element = [forms[indexOption]];
-      const copy = [...optionForm];
-      const addElements = copy.concat(element);
-      const result = forms.filter((form, i) => {
-        return Object.assign(form, { selected: indexOption == i });
-      });
-      setItemsOption(result);
-      onChange && onChange(addElements);
-      console.log(addElements)
-    } else {
-      const forms = [...itemsOption];
-      forms[indexOption].selected = !forms[indexOption].selected;
-      setItemsOption(forms);
-      //here
-      if (forms[indexOption].selected) {
-        const elements = forms[indexOption];
-        const copy = [...optionForm];
-        const addElements = copy.concat(elements);
-        setOptionForm(addElements);
-        console.log(addElements);
-        onChange && onChange(addElements);
-      } else {
-        const elms = optionForm.filter((item) => {
-          return item.selected;
-        });
-        setOptionForm(elms);
-        onChange && onChange(elms);
-        console.log('optionForm: ', elms);
-      }
-    }
+    // if (onlyOneSelection) {
+    //   const forms = [...itemsOption];
+    //   const element = [forms[indexOption]];
+    //   const copy = [...optionForm];
+    //   const addElements = copy.concat(element);
+    //   const result = forms.filter((form, i) => {
+    //     return Object.assign(form, { selected: indexOption == i });
+    //   });
+    //   setItemsOption(result);
+    //   onChange && onChange(addElements);
+    //   console.log(addElements)
+    // } else {
+    //   const forms = [...itemsOption];
+    //   forms[indexOption].selected = !forms[indexOption].selected;
+    //   setItemsOption(forms);
+    //   //here
+    //   if (forms[indexOption].selected) {
+    //     const elements = forms[indexOption];
+    //     const copy = [...optionForm];
+    //     const addElements = copy.concat(elements);
+    //     setOptionForm(addElements);
+    //     console.log(addElements);
+    //     onChange && onChange(addElements);
+    //   } else {
+    //     const elms = optionForm.filter((item) => {
+    //       return item.selected;
+    //     });
+    //     setOptionForm(elms);
+    //     onChange && onChange(elms);
+    //     console.log('optionForm: ', elms);
+    //   }
+    // }
   };
 
   return (
@@ -67,7 +67,6 @@ export function SelectedItems(props: SelectedItemsProps) {
               selectItem(index);
             }}
           >
-            <Icon icon="check" size={15} />
             <h4>{item.text}</h4>
           </div>
         ))}

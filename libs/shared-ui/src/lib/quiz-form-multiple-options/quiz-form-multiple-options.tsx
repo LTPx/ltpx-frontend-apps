@@ -20,6 +20,7 @@ export function QuizFormMultipleOptions(props: QuizFormMultipleOptionsProps) {
 
   const alphabetLetters = generateAlphabet();
 
+
   return (
     <div className={styles['questions']}>
       <Formik

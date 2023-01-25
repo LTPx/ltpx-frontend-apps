@@ -21,6 +21,7 @@ export * from '../src/lib/api/auth';
 export * from './lib/api/teacher/courses-api';
 export * from './lib/api/teacher/teacher-api';
 export * from './lib/api/teacher/quiz-api';
+export * from './lib/api/teacher/achievements-api';
 
 //constants
 export * from '../src/lib/constants/course-constants';

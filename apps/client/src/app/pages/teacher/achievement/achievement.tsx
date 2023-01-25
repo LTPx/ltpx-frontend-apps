@@ -26,7 +26,24 @@ export function Achievement(props: AchievementProps) {
   const [showForm, setShowForm] = useState(false);
   const [achievements, setAchievements] =
     useState<NewAchievementParams[]>(initialAchievements);
-  const { createQuiz } = useTeacher();
+  const { createAchievement } = useTeacher();
+
+  const handleSaveAchievement = async(achievement: NewAchievementParams) => {
+    const newAchievement = {
+      ...achievement,
+      ...{
+        course_id: courseId,
+      },
+    };
+    const { saved, data, error } = await createAchievement(newAchievement);
+    if ( saved ) {
+      setShowForm(false);
+      setAchievements(achievements.concat([achievement]));
+      setShowNotification(true);
+    } else {
+      console.log(error)
+    }
+  }
 
   return (
     <div className="achievements-section">
@@ -90,8 +107,7 @@ export function Achievement(props: AchievementProps) {
           <AchievementBuilder
             quizzes={quizzes}
             onSubmit={(achievement) => {
-              setShowForm(false);
-              setAchievements(achievements.concat([achievement]));
+              handleSaveAchievement(achievement)
             }}
           />
           <Button
@@ -112,31 +128,6 @@ export function Achievement(props: AchievementProps) {
         date={''}
       />
     </div>
-    // <div className="achievements">
-    //   <div className={styles['header-text']}>
-    //     <h2>Logros</h2>
-    //     <h4 className="muted">
-    //       El estudiante alcanzara logros al superar ciertas reglas
-    //     </h4>
-    //   </div>
-    //   <div className={styles['achievement-form']}>
-    //     <SetupCard
-    //       onClick={() => {
-    //         setOpenModal(true);
-    //       }}
-    //       icon={'trophy'}
-    //       text={'Añadir Achievement'}
-    //       titleButton={'Configurar Ahora'}
-    //     />
-    //     <AchievementBuilder
-    //       open={openModal}
-    //       onClose={() => setOpenModal(false)}
-    //       onSubmit={() => {
-    //         setOpenModal(false);
-    //       }}
-    //     />
-    //   </div>
-    // </div>
   );
 }
 

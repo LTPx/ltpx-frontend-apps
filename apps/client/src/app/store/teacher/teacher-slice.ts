@@ -16,11 +16,12 @@ import {
   updateTeacherProfile,
   QuizModel,
   NewQuizApiParams,
-  createQuiz,
   editCourse,
+  NewAchievementParams,
 } from '@ltpx-frontend-apps/api';
 import { StateCreator } from 'zustand';
 import { StoreState } from '../store';
+import { teacherNewAchievement } from './achievements-actions';
 import { teacherNewQuiz, teacherQuizzes } from './courses-actions';
 
 type TResponseApply = {
@@ -73,6 +74,7 @@ export type TeacherSlice = {
   updateProfile: (params: IUserAccount) => Promise<TResponseUpdateProfile>;
   createQuiz: (params: NewQuizApiParams) => Promise<TResponse>;
   myQuizzes: () => Promise<TResponse>;
+  createAchievement: (params: NewAchievementParams) => Promise<TResponse>;
 };
 
 export const createTeacherSlice: StateCreator<
@@ -166,5 +168,9 @@ export const createTeacherSlice: StateCreator<
   myQuizzes: async() => {
     const { success, response } =  await teacherQuizzes(set);
     return { saved: success, data: response };
-  }
+  },
+  createAchievement: async(params) => {
+    const { success, response } =  await teacherNewAchievement(params, set);
+    return { saved: success, data: response };
+  },
 });

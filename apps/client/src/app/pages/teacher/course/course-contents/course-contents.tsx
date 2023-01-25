@@ -16,11 +16,14 @@ export interface FormContent {
 }
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
-export interface CourseContentsProps {}
+export interface CourseContentsProps {
+  contents?: ContentCourse[];
+}
 
 export function CourseContents(props: CourseContentsProps) {
+  const { contents } = props;
   const [openModal, setOpenModal] = useState(false);
-  const [contentCourse, setContentCourse] = useState<ContentCourse[]>([]);
+  const [contentCourse, setContentCourse] = useState<ContentCourse[]>(contents || []);
 
   return (
     <div className={styles['contents']}>

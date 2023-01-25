@@ -1,8 +1,7 @@
 import { CourseLanguage, CourseLevel, getTeacherCourse, TeacherCourse } from '@ltpx-frontend-apps/api';
-import { Button, ColorsButton, CourseContents, Select, Tabs, TypeButton } from '@ltpx-frontend-apps/shared-ui';
+import { Button, ColorsButton, Select, Tabs, TypeButton } from '@ltpx-frontend-apps/shared-ui';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { useCourse } from '../../../store';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 
@@ -11,19 +10,14 @@ import CourseGeneralInformation from '../course/course-general-information/cours
 import TeacherClasses from '../teacher-classes/teacher-classes';
 import Quiz from '../quiz/quiz';
 import Achievement from '../achievement/achievement';
-
-
-const optionsSave = [
-  { value: 'draff', text: 'Borrador' },
-  { value: 'public', text: 'Enviar a Revision' },
-];
+import CourseContents from '../course/course-contents/course-contents';
 
 const linksEditCourse = [
   { selected: true, text: 'Detalles' },
   { selected: false, text: 'Contenidos' },
   { selected: false, text: 'Test' },
   { selected: false, text: 'Logros' },
-  { selected: false, text: 'Configuraciones' },
+  { selected: false, text: 'Sesiones' },
 ];
 
 /* eslint-disable-next-line */
@@ -99,14 +93,14 @@ export function TeacherEditCourse(props: TeacherEditCourseProps) {
             <h3>{course.title}</h3>
             <div className={styles['actions']}>
               <h5 className="muted">Creado: Diciembre 21 2022</h5>
-              <Button
+              {/* <Button
                 title="Preview"
                 outline={true}
                 color={ColorsButton.secondary}
-              />
-              <Select options={optionsSave} />
+              /> */}
+              {/* <Select options={optionsSave} /> */}
               <Button
-                title="Guardar"
+                title="Enviar a revision"
                 color={ColorsButton.primary}
                 type={TypeButton.submit}
                 onClick={formik.submitForm}
@@ -122,24 +116,20 @@ export function TeacherEditCourse(props: TeacherEditCourseProps) {
                 <CourseGeneralInformation />
               </section>
               <section className={`${styles['section']} ${indexSelectedView === 1 ? styles['selected'] : ''}`}>
-                {/* <CourseContents
-                  onChange={(forms: any) => {
-                    // setContents(forms);
-                  }}
-                /> */}
+                <CourseContents contents={course.contents}/>
               </section>
               <section className={`${styles['section']} ${indexSelectedView === 2 ? styles['selected'] : ''}`}>
+                <Quiz />
+              </section>
+              <section className={`${styles['section']} ${indexSelectedView === 3 ? styles['selected'] : ''}`}>
+                <Achievement />
+              </section>
+              <section className={`${styles['section']} ${indexSelectedView === 4 ? styles['selected'] : ''}`}>
                 <TeacherClasses
                   onSubmit={(data) => {
                     // handleClasses(data);
                   }}
                 />
-              </section>
-              <section className={`${styles['section']} ${indexSelectedView === 3 ? styles['selected'] : ''}`}>
-                <Quiz />
-              </section>
-              <section className={`${styles['section']} ${indexSelectedView === 4 ? styles['selected'] : ''}`}>
-                <Achievement />
               </section>
             </div>
           </div>

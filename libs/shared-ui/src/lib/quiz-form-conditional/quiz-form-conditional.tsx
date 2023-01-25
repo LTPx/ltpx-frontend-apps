@@ -94,7 +94,7 @@ export function QuizFormConditional(props: QuizFormConditionalProps) {
             }}
           />
           <Button
-            title="Crear Pregunta"
+            title="Agregar pregunta"
             color={ColorsButton.secondary}
             type={TypeButton.submit}
           />

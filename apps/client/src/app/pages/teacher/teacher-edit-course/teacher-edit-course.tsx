@@ -119,6 +119,7 @@ export function TeacherEditCourse(props: TeacherEditCourseProps) {
               <section className={`${styles['section']} ${indexSelectedView === 2 ? styles['selected'] : ''}`}>
                 <Quiz
                   courseId={course.id}
+                  initialQuizzes={course.quizzes || []}
                 />
               </section>
               <section className={`${styles['section']} ${indexSelectedView === 3 ? styles['selected'] : ''}`}>

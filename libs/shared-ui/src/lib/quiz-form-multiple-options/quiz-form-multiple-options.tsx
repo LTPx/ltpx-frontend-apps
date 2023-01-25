@@ -148,7 +148,7 @@ export function QuizFormMultipleOptions(props: QuizFormMultipleOptionsProps) {
                 }}
               />
               <Button
-                title="Crear Pregunta"
+                title="Agregar pregunta"
                 color={ColorsButton.secondary}
                 type={TypeButton.submit}
                 onClick={submitForm}

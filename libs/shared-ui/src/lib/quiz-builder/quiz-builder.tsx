@@ -19,15 +19,16 @@ import styles from './quiz-builder.module.scss';
 export interface QuizBuilderProps {
   onClose?: () => void;
   onSubmit?: (data: NewQuizParams) => void;
+  className?: string;
 }
 
 export function QuizBuilder(props: QuizBuilderProps) {
-  const { onClose, onSubmit } = props;
+  const { onClose, onSubmit, className } = props;
   const [ questionsQuiz, setQuestionsQuiz ] = useState<QuestionQuiz[]>([]);
 
   const [selectedTypeQuestion, setSelectedTypeQuestion] =
     useState<TypeQuestionQuiz | null>();
-  const elementRef = useRef<HTMLInputElement | null>(null);
+  const elementRef = useRef<HTMLInputElement>();
 
   const editQuestion = (index: number) => {
     // console.log(questions[index]);
@@ -44,7 +45,7 @@ export function QuizBuilder(props: QuizBuilderProps) {
   };
 
   const ContentQuizForm = () => (
-    <div className={styles['content']}>
+    <div className={`${styles['content']} ${className}`}>
       <Input label="Nombre del test" refInput={elementRef} />
       <div className={styles['questions']}>
         <label> Preguntas</label>

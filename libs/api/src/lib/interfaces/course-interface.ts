@@ -1,3 +1,4 @@
+import { QuizModel } from './quiz-interface';
 import { PartialWithRequired } from './util';
 
 export enum TeacherClassType {
@@ -59,6 +60,7 @@ export interface CourseModel {
   status: CourseStatus;
   contents: ContentCourse[];
   classroom: Classroom;
+  quizzes?: QuizModel[];
 }
 
 export type PublicCourse = Omit<

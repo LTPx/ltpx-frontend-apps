@@ -1,5 +1,6 @@
 import { _http } from '../../http';
 import { CourseApiParams, TeacherCourse } from '../../interfaces/course-interface';
+import { QuizModel } from '../../interfaces/quiz-interface';
 import { moveToFormData } from '../../utils';
 
 const http = _http;
@@ -50,6 +51,19 @@ export const getTeacherCourse = async (courseId: string) => {
   return new Promise<TeacherCourse>((resolve, reject) => {
     http
       .get(`api/v1/teacher/courses/${courseId}`)
+      .then((response) => {
+        resolve(response.data);
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
+};
+
+export const getCourseQuizzes = async (courseId: number) => {
+  return new Promise<QuizModel[]>((resolve, reject) => {
+    http
+      .get(`api/v1/teacher/courses/${courseId}/quizzes`)
       .then((response) => {
         resolve(response.data);
       })

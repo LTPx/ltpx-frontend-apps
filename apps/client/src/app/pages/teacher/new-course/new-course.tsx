@@ -98,7 +98,7 @@ export function NewCourse(props: NewCourseProps) {
         <div className={styles['content']}>
           <div className={styles['course-section-content']}>
             <section className={styles['section']}>
-              <CourseGeneralInformation formik={formik} />
+              {/* <CourseGeneralInformation formik={formik} /> */}
             </section>
             <section className={styles['section-gray']}>
               <CourseContents

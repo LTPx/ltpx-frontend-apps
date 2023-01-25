@@ -119,7 +119,7 @@ export function TeacherEditCourse(props: TeacherEditCourseProps) {
             }}/>
             <div className={styles['course-section-content']}>
               <section className={`${styles['section']} ${indexSelectedView === 0 ? styles['selected'] : ''}`}>
-                <CourseGeneralInformation formik={formik} />
+                <CourseGeneralInformation />
               </section>
               <section className={`${styles['section']} ${indexSelectedView === 1 ? styles['selected'] : ''}`}>
                 {/* <CourseContents

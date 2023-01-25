@@ -113,7 +113,16 @@ export function TeacherEditCourse(props: TeacherEditCourseProps) {
             }}/>
             <div className={styles['course-section-content']}>
               <section className={`${styles['section']} ${indexSelectedView === 0 ? styles['selected'] : ''}`}>
-                <CourseGeneralInformation />
+                <CourseGeneralInformation
+                  title={course.title}
+                  cover={course.cover_url}
+                  description={course.description}
+                  category={course.category}
+                  language={course.language}
+                  level={course.level}
+                  learn_goals={course.learn_goals}
+                  requirements={course.requirements}
+                />
               </section>
               <section className={`${styles['section']} ${indexSelectedView === 1 ? styles['selected'] : ''}`}>
                 <CourseContents contents={course.contents}/>

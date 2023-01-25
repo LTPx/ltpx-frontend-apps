@@ -7,21 +7,29 @@ import styles from './course-general-information.module.scss';
 
 /* eslint-disable-next-line */
 export interface CourseGeneralInformationProps {
-  // formik: FormikValues;
+  cover?: string;
+  title: string;
+  description?: string;
+  category?: string;
+  language?: CourseLanguage;
+  level?: CourseLevel;
+  learn_goals?: string;
+  requirements?: string;
 }
 
 export function CourseGeneralInformation(props: CourseGeneralInformationProps) {
+  const { cover, title, description, category, language, level, learn_goals, requirements } = props;
   const { categories, languages, levels } = useCourse();
   const formik = useFormik({
     initialValues: {
-      cover: null,
-      title: '',
-      description: '',
-      category: '',
-      language: CourseLanguage.es,
-      level: CourseLevel.begging,
-      learn_goals: '',
-      requirements: '',
+      title: title,
+      cover: cover,
+      description: description,
+      category: category,
+      language: language,
+      level: level,
+      learn_goals: learn_goals,
+      requirements: requirements,
     },
     validationSchema: Yup.object({
       title: Yup.string().required('es obligatorio'),
@@ -42,6 +50,7 @@ export function CourseGeneralInformation(props: CourseGeneralInformationProps) {
         <h3>Portada del curso</h3>
         <div className={styles['upload-media']}>
           <FileUpload
+            image={cover}
             onChange={(file)=>{ formik.setFieldValue('cover', file)}}
             name='cover'
           />

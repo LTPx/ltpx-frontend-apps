@@ -1,6 +1,6 @@
 @import '../../styles/styles.module.scss';
 
-.container {
+.container-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -8,13 +8,6 @@
   grid-area: header;
   border-bottom: 1px solid #ebecef;
 }
-// @media screen and (max-width: 400px) {
-//   .container {
-//     display: flex;    
-//     width: 100%;
-//   }
-  
-// }
 
 .information {
   display: flex;
@@ -50,5 +43,78 @@
     h4 {
       color: white;
     }
+  }
+}
+
+.header-small {
+  display: none;
+}
+.panel-open {
+  background: $secondary-color;
+  box-sizing: border-box;
+  color: $white-color;
+  cursor: pointer;
+  padding: 0.5rem;
+  width: 50px;
+  border: 1px solid $stroke-color;
+  border-radius: 4px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: background-color 0.2s ease-in-out;
+}
+.panel-open:hover {
+  background-color: $secondary-color-300;
+  color: $white-color;
+}
+
+.panel {
+  background: $white-color;
+  box-sizing: border-box;
+  border: 1px solid $stroke-color;
+  width: 0;
+  height: 0;
+  box-shadow: $card-shadow-medium;
+  display: none;
+  // transform: translateX(-250px);
+  // transition: transform 0.5s ease-in-out;
+
+  &.open {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    height: 19rem;
+    padding: 0.5rem;
+    width: auto;
+    transform: translateX(-110px);
+    // transition: transform 0.5s ease-in-out;
+  }
+  .link-options {
+    margin-right: 5px;
+    text-decoration: none;
+    color: $text-gray-color;
+    padding: 0 10px;
+    &:hover {
+      color: $secondary-color;
+    }
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .header-small  {
+    display: flex; 
+    justify-content: space-between;   
+  }
+  .information {
+    display: none;
+  }  
+  .container-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    grid-area: header;
+    border-bottom: 1px solid #ebecef;
   }
 }

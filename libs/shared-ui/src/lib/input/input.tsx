@@ -82,6 +82,7 @@ export function Input(props: InputProps) {
           className={`${css['input-box']} ${inputClassesPosition} ${label ? css['with-label'] : ''}`}
           {...other}
           min={min}
+          max={max}
           onChange={e => onChange && onChange(e)}
           onKeyDown={e => onKeyDown && onKeyDown(e)}
           ref={refInput}

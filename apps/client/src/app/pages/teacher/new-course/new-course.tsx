@@ -101,11 +101,7 @@ export function NewCourse(props: NewCourseProps) {
               {/* <CourseGeneralInformation formik={formik} /> */}
             </section>
             <section className={styles['section-gray']}>
-              <CourseContents
-                onChange={(forms: any) => {
-                  setContents(forms);
-                }}
-              />
+              <CourseContents />
             </section>
             <section className={styles['section']}>
               <TeacherClasses

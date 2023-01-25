@@ -1,0 +1,26 @@
+@import '../../styles/styles.module.scss';
+
+.score-form {
+  display: flex;
+  flex-direction: column;
+  background-color: #f9fafb;
+  padding: 1rem 2rem 2rem 2rem;
+  
+  .title-test {
+    padding-top: 1rem;
+  }
+
+  .upload {
+    margin-bottom: 1rem;
+  }
+  .input {
+    margin-top: 0;
+    padding-bottom: 1rem;
+  }
+}
+.footer {
+  display: flex;
+  justify-content: end;
+  gap: $size-md-1;
+  padding: $size-md-1;
+}

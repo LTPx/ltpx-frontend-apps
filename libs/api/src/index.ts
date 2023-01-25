@@ -9,6 +9,7 @@ export * from './lib/interfaces/course-interface';
 export * from './lib/interfaces/user-interface';
 export * from './lib/interfaces/quiz-interface';
 export * from './lib/interfaces/teacher-interface';
+export * from './lib/interfaces/achievement-interface';
 
 //fake api
 export * from '../src/lib/fake/courses';

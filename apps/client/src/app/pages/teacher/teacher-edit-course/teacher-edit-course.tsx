@@ -1,5 +1,5 @@
 import { CourseApiParams, CourseLanguage, CourseLevel, getTeacherCourse, TeacherCourse } from '@ltpx-frontend-apps/api';
-import { Button, ColorsButton, Select, Tabs, TypeButton } from '@ltpx-frontend-apps/shared-ui';
+import { Button, ColorsButton, Select, Snackbar, SnackbarPosition, SnackbarType, Tabs, TypeButton } from '@ltpx-frontend-apps/shared-ui';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useFormik } from 'formik';
@@ -25,6 +25,7 @@ const linksEditCourse = [
 export interface TeacherEditCourseProps {}
 
 export function TeacherEditCourse(props: TeacherEditCourseProps) {
+  const [ showNotification, setShowNotification ] = useState(false);
   const [ course, setCourse ] = useState<TeacherCourse>();
   const [ indexSelectedView, setIndexSelectedView ] = useState(0);
   const params = useParams();
@@ -58,6 +59,7 @@ export function TeacherEditCourse(props: TeacherEditCourseProps) {
       const result = await editCourse(data);
       if (result.saved) {
         console.log('saved');
+        setShowNotification(true);
       } else {
         console.log(result.data);
       }
@@ -130,6 +132,13 @@ export function TeacherEditCourse(props: TeacherEditCourseProps) {
           </div>
         </div>
       )}
+      <Snackbar
+        position={SnackbarPosition.top}
+        open={showNotification}
+        title={'Cambios guardados'}
+        typeSnackbar={SnackbarType.success}
+        date={''}
+      />
     </div>
   );
 }

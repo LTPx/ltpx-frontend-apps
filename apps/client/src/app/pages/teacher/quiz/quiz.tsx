@@ -81,7 +81,7 @@ export function Quiz(props: QuizProps) {
           ))}
         </div>
       )}
-      {quizzes.length === 0 && (
+      {!showForm && quizzes.length === 0 && (
         <SetupCard
           onClick={() => {
             setShowForm(true);
@@ -91,7 +91,7 @@ export function Quiz(props: QuizProps) {
           titleButton={'Configurar Ahora'}
         />
       )}
-      {!showForm && (
+      {!showForm && quizzes.length > 0 &&(
         <Button
           title="Crear Nuevo Test"
           className={styles['add-button']}

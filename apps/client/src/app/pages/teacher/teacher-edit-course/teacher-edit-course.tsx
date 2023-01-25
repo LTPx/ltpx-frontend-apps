@@ -1,4 +1,4 @@
-import { CourseLanguage, CourseLevel, getTeacherCourse, TeacherCourse } from '@ltpx-frontend-apps/api';
+import { CourseApiParams, CourseLanguage, CourseLevel, getTeacherCourse, TeacherCourse } from '@ltpx-frontend-apps/api';
 import { Button, ColorsButton, Select, Tabs, TypeButton } from '@ltpx-frontend-apps/shared-ui';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
@@ -11,6 +11,7 @@ import TeacherClasses from '../teacher-classes/teacher-classes';
 import Quiz from '../quiz/quiz';
 import Achievement from '../achievement/achievement';
 import CourseContents from '../course/course-contents/course-contents';
+import { useTeacher } from '../../../store';
 
 const linksEditCourse = [
   { selected: true, text: 'Detalles' },
@@ -26,8 +27,9 @@ export interface TeacherEditCourseProps {}
 export function TeacherEditCourse(props: TeacherEditCourseProps) {
   const [ course, setCourse ] = useState<TeacherCourse>();
   const [ indexSelectedView, setIndexSelectedView ] = useState(0);
-
   const params = useParams();
+  const { editCourse } = useTeacher();
+
   const { courseId } = params;
 
   useEffect(() => {
@@ -49,6 +51,18 @@ export function TeacherEditCourse(props: TeacherEditCourseProps) {
     };
   }, []);
 
+  const saveChanges = async(formData: CourseApiParams) => {
+    console.log('formData: ', formData);
+    if (course) {
+      const data = {...formData, ...{ id: course.id }}
+      const result = await editCourse(data);
+      if (result.saved) {
+        console.log('saved');
+      } else {
+        console.log(result.data);
+      }
+    }
+  }
 
   return (
     <div className={styles['container']}>
@@ -91,7 +105,13 @@ export function TeacherEditCourse(props: TeacherEditCourseProps) {
                 />
               </section>
               <section className={`${styles['section']} ${indexSelectedView === 1 ? styles['selected'] : ''}`}>
-                <CourseContents contents={course.contents}/>
+                <CourseContents contents={course.contents} onSubmit={(contents)=>{
+                  console.log(contents);
+                  saveChanges({
+                    title: course.title,
+                    contents
+                  });
+                }}/>
               </section>
               <section className={`${styles['section']} ${indexSelectedView === 2 ? styles['selected'] : ''}`}>
                 <Quiz />

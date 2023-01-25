@@ -67,7 +67,7 @@ export function CourseContentForm(props: CourseContentFormProps) {
             <Button
               type={TypeButton.submit}
               onClick={formik.submitForm}
-              title="Guardar"
+              title="Agregar contenido"
             />
           </div>
         </div>

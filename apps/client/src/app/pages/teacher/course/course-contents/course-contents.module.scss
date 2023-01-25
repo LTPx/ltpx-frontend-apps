@@ -17,3 +17,10 @@
   background-color: #f9fafb;
   padding: $size-md-1 $size-md-1 $size-lg-1 $size-md-1;
 }
+
+.footer {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+  padding: 1.5rem 0;
+}

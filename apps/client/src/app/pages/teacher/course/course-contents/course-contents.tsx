@@ -18,12 +18,13 @@ export interface FormContent {
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface CourseContentsProps {
   contents?: ContentCourse[];
+  onSubmit?: (contents: ContentCourse[]) => void;
 }
 
 export function CourseContents(props: CourseContentsProps) {
-  const { contents } = props;
-  const [openModal, setOpenModal] = useState(false);
-  const [contentCourse, setContentCourse] = useState<ContentCourse[]>(contents || []);
+  const { contents, onSubmit } = props;
+  const [ openModal, setOpenModal] = useState(false);
+  const [ contentsCourse, setContentsCourse] = useState<ContentCourse[]>(contents || []);
 
   return (
     <div className={styles['contents']}>
@@ -33,7 +34,7 @@ export function CourseContents(props: CourseContentsProps) {
           Agrega los contenidos que se impartirán en el desarrollo del curso
         </h4>
       </div>
-      {contentCourse.length <1 && (
+      {contentsCourse.length <1 && (
         <SetupCard
           onClick={() => {
             setOpenModal(true);
@@ -49,12 +50,12 @@ export function CourseContents(props: CourseContentsProps) {
         onSubmit={(data) => {
           console.log(data)
           setOpenModal(false);
-          setContentCourse(contentCourse.concat([data]));
+          setContentsCourse(contentsCourse.concat([data]));
         }}
       />
-      {contentCourse.length >= 1 && (
+      {contentsCourse.length >= 1 && (
         <>
-          {contentCourse.map((element, key) => (
+          {contentsCourse.map((element, key) => (
             <PanelAccordion title={element.title} text={element.description} key={key} />
           ))}
           <Button
@@ -62,10 +63,23 @@ export function CourseContents(props: CourseContentsProps) {
             onClick={() => {
               setOpenModal(true);
             }}
-            color={ColorsButton.primary}
+            color={ColorsButton.accent}
           />
         </>
       )}
+      <div className={styles['footer']}>
+        <Button
+          title='Cancelar'
+          color={ColorsButton.white}
+        />
+        <Button
+          title='Actualizar contenidos'
+          color={ColorsButton.secondary}
+          onClick={()=>{
+            onSubmit && onSubmit(contentsCourse);
+          }}
+        />
+      </div>
     </div>
   );
 }

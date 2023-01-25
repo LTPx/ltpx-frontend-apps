@@ -44,29 +44,29 @@
 // accent button
 
 .btn-accent {
-  color: $white-color;
-  background-color: #ed0b4c;
-  border-color: #ed0b4c;
+  color: $text-color;
+  background-color: $gray-color-200;
+  border-color: $gray-color-200;
   box-shadow: inset 0 1px 0 hsla(0,0%,100%,.15),0 1px 1px rgba(39,44,51,.075);
 }
 
 .btn-accent:hover {
-  color: $white-color;
-  background-color: #c80940;
-  border-color: #bc093c;
+  color: $text-color;
+  background-color: $gray-color-300;
+  border-color: $gray-color-200;
 }
 
 .btn-accent.focus,.btn-accent:focus {
   color: $white-color;
-  background-color: #c80940;
-  border-color: #bc093c;
+  background-color: $gray-color-300;
+  border-color: $gray-color-200;
   box-shadow: inset 0 1px 0 hsla(0,0%,100%,.15),0 1px 1px rgba(39,44,51,.075),0 0 0 1px rgba(240,48,103,.5)
 }
 
 .btn-accent.disabled,.btn-accent:disabled {
   color: $white-color;
-  background-color: #ed0b4c;
-  border-color: #ed0b4c;
+  background-color: $gray-color-200;
+  border-color: $gray-color-200;
 }
 
 // primary button
@@ -138,14 +138,14 @@
 }
 
 .btn-accent-outline {
-  border: 1px solid #ed0b4c;
-  color:#ed0b4c;
+  border: 1px solid $gray-color-200;
+  color:$gray-color-200;
 }
 
 .btn-accent-outline:hover {
   color: $white-color;
-  background-color: #ed0b4c;
-  border-color: #ed0b4c;
+  background-color: $gray-color-200;
+  border-color: $gray-color-200;
 }
 
 .btn-primary-outline {

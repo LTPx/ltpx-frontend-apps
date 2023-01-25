@@ -25,9 +25,40 @@ export function Header(props: HeaderProps) {
   };
   return (
     <div className={`${styles['container-header']} ${className}`}>
+      <div className={styles['header-responsive']}>
+        <div className={styles['panel-container']}>
+          <div className={styles['navbar']} onClick={handleClick}>
+            {isOpen === false ? (
+              <Icon icon={'menu'} size={40}></Icon>
+            ) : (
+              <Icon icon={'minus'} size={40}></Icon>
+            )}
+          </div>
+          <div
+            className={`${styles['panel']} ${
+              isOpen ? styles['open'] : styles['close']
+            }`}
+          >
+            <div className={styles['close-option']}>
+              <Icon
+                icon={'close-circle-outline'}
+                size={40}
+                onClick={handleClick}
+              ></Icon>
+            </div>
+            <div className={styles['navigate-content']}>
+              {links.map((link, index) => (
+                <NavLink to={link.url}>
+                  <h4 className={`${styles['link-options']}`}>{link.title}</h4>
+                </NavLink>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
       <div className={styles['main-action']}>
         <Brand />
-      </div> 
+      </div>
       <div className={styles['information']}>
         <div className={styles['links']}>
           {links.map((link, index) => (
@@ -48,24 +79,8 @@ export function Header(props: HeaderProps) {
         </div>
         {children}
       </div>
-
-      <div className={styles['header-small']}>
-        <div className={styles['panel-container']}>
-          <div className={styles['panel-open']} onClick={handleClick}>
-            {isOpen === false ? (
-              <Icon icon={'menu'} size={40}></Icon>
-            ) : (
-              <Icon icon={'minus'} size={40}></Icon>
-            )}
-          </div>
-          <div className={`${styles['panel']} ${isOpen ? styles['open'] : ''}`}>
-            {links.map((link, index) => (
-              <NavLink to={link.url}>
-                <h4 className={`${styles['link-options']}`}>{link.title}</h4>
-              </NavLink>
-            ))}
-          </div>
-        </div>
+      <div className={styles['shopping']}>
+        <Icon icon={'shopping-cart'} size={25}></Icon>
       </div>
     </div>
   );

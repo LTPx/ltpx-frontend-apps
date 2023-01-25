@@ -1,5 +1,13 @@
 import { CourseLanguage, CourseLevel } from '@ltpx-frontend-apps/api';
-import { Button, ColorsButton, FileUpload, Input, Select, TextArea, TypeButton } from '@ltpx-frontend-apps/shared-ui';
+import {
+  Button,
+  ColorsButton,
+  FileUpload,
+  Input,
+  Select,
+  TextArea,
+  TypeButton,
+} from '@ltpx-frontend-apps/shared-ui';
 import { useTeacher } from 'apps/client/src/app/store';
 import { useCourse } from 'apps/client/src/app/store/hooks/useCourse';
 import { useFormik } from 'formik';
@@ -7,9 +15,8 @@ import * as Yup from 'yup';
 import styles from './course-general-information.module.scss';
 
 /* eslint-disable-next-line */
-export interface CourseGeneralInformationProps {
+export interface CourseGeneralInformation {
   title: string;
-  id: number;
   cover?: string;
   description?: string;
   category?: string;
@@ -18,9 +25,23 @@ export interface CourseGeneralInformationProps {
   learn_goals?: string;
   requirements?: string;
 }
+export interface CourseGeneralInformationProps
+  extends CourseGeneralInformation {
+  onSubmit?: (params: CourseGeneralInformation) => void;
+}
 
 export function CourseGeneralInformation(props: CourseGeneralInformationProps) {
-  const { cover, title, description, category, language, level, learn_goals, requirements, id } = props;
+  const {
+    cover,
+    title,
+    description,
+    category,
+    language,
+    level,
+    learn_goals,
+    requirements,
+    onSubmit,
+  } = props;
   const { categories, languages, levels } = useCourse();
   const { editCourse } = useTeacher();
 
@@ -41,13 +62,10 @@ export function CourseGeneralInformation(props: CourseGeneralInformationProps) {
     }),
     onSubmit: async (formData) => {
       console.log('formData: ', formData);
-      const data = {...formData, ...{ id }}
-      const result = await editCourse(data);
-      if (result.saved) {
-        console.log('saved');
-      } else {
-        console.log(result.data);
+      if (formData.cover) {
+        delete formData.cover
       }
+      onSubmit && onSubmit(formData);
     },
   });
 
@@ -62,15 +80,17 @@ export function CourseGeneralInformation(props: CourseGeneralInformationProps) {
         <div className={styles['upload-media']}>
           <FileUpload
             image={cover}
-            onChange={(file)=>{ formik.setFieldValue('cover', file)}}
-            name='cover'
+            onChange={(file) => {
+              formik.setFieldValue('cover', file);
+            }}
+            name="cover"
           />
         </div>
       </section>
       <div className={styles['text']}>
         <Input
-          label='Nombre del curso'
-          placeholder='Evita nombres confusos'
+          label="Nombre del curso"
+          placeholder="Evita nombres confusos"
           name="title"
           onChange={formik.handleChange}
           value={formik.values.title}
@@ -78,8 +98,8 @@ export function CourseGeneralInformation(props: CourseGeneralInformationProps) {
           errorMessage={formik.errors.title}
         />
         <TextArea
-          label='Descripción del curso'
-          placeholder='Un breve resumen de lo que trata este curso'
+          label="Descripción del curso"
+          placeholder="Un breve resumen de lo que trata este curso"
           name="description"
           onChange={formik.handleChange}
           value={formik.values.description}
@@ -89,25 +109,25 @@ export function CourseGeneralInformation(props: CourseGeneralInformationProps) {
       </div>
       <div className={styles['selects-form']}>
         <Select
-          label='Categoría'
+          label="Categoría"
           options={categories}
-          onChange={option => formik.setFieldValue('category', option.value)}
+          onChange={(option) => formik.setFieldValue('category', option.value)}
         />
         <Select
-          label='Nivel'
+          label="Nivel"
           options={levels}
-          onChange={option => formik.setFieldValue('level', option.value)}
+          onChange={(option) => formik.setFieldValue('level', option.value)}
         />
         <Select
-          label='Idioma'
+          label="Idioma"
           options={languages}
-          onChange={option => formik.setFieldValue('language', option.value)}
+          onChange={(option) => formik.setFieldValue('language', option.value)}
         />
       </div>
       <div className={styles['text']}>
         <TextArea
-          placeholder='Pueden se puntos claves del curso'
-          label='Que aprenderán los estudiantes?'
+          placeholder="Pueden se puntos claves del curso"
+          label="Que aprenderán los estudiantes?"
           name="learn_goals"
           onChange={formik.handleChange}
           value={formik.values.learn_goals}
@@ -115,8 +135,8 @@ export function CourseGeneralInformation(props: CourseGeneralInformationProps) {
           rows={5}
         />
         <TextArea
-          label='Requerimientos'
-          placeholder='Los estudiantes necesitan algún recurso antes de tomar este curso'
+          label="Requerimientos"
+          placeholder="Los estudiantes necesitan algún recurso antes de tomar este curso"
           name="requirements"
           onChange={formik.handleChange}
           value={formik.values.requirements}
@@ -125,12 +145,9 @@ export function CourseGeneralInformation(props: CourseGeneralInformationProps) {
         />
       </div>
       <div className={styles['footer']}>
+        <Button title="Cancelar" color={ColorsButton.white} />
         <Button
-          title='Cancelar'
-          color={ColorsButton.white}
-        />
-        <Button
-          title='Actualizar información'
+          title="Actualizar información"
           color={ColorsButton.secondary}
           type={TypeButton.submit}
         />

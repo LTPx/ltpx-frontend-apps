@@ -53,9 +53,10 @@ export function TeacherEditCourse(props: TeacherEditCourseProps) {
   }, []);
 
   const saveChanges = async(formData: CourseApiParams) => {
-    console.log('formData: ', formData);
     if (course) {
       const data = {...formData, ...{ id: course.id }}
+      delete data.cover_url;
+      console.log('formData edit: ', data);
       const result = await editCourse(data);
       if (result.saved) {
         console.log('saved');
@@ -95,7 +96,6 @@ export function TeacherEditCourse(props: TeacherEditCourseProps) {
             <div className={styles['course-section-content']}>
               <section className={`${styles['section']} ${indexSelectedView === 0 ? styles['selected'] : ''}`}>
                 <CourseGeneralInformation
-                  id={course.id}
                   title={course.title}
                   cover={course.cover_url}
                   description={course.description}
@@ -104,6 +104,9 @@ export function TeacherEditCourse(props: TeacherEditCourseProps) {
                   level={course.level}
                   learn_goals={course.learn_goals}
                   requirements={course.requirements}
+                  onSubmit={(data)=>{
+                    saveChanges(data);
+                  }}
                 />
               </section>
               <section className={`${styles['section']} ${indexSelectedView === 1 ? styles['selected'] : ''}`}>

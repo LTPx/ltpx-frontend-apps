@@ -10,14 +10,15 @@ export interface QuizProps {
 }
 
 export function Quiz(props: QuizProps) {
-  const [openModal, setOpenModal] = useState(false);
-  const [quiz, setQuiz] = useState<NewQuizParams>();
+  const [ showForm, setShowForm ] = useState(true);
+  const [ quiz, setQuiz] = useState<NewQuizParams>();
   const { createQuiz } = useTeacher();
 
   const handleCreateQuiz = async(quizParams: NewQuizParams) => {
-    const response = await createQuiz(quizParams);
-    console.log(response);
-    setQuiz(quizParams)
+    console.log(quizParams);
+    // const response = await createQuiz(quizParams);
+    // console.log(response);
+    // setQuiz(quizParams)
   };
 
   return (
@@ -26,27 +27,25 @@ export function Quiz(props: QuizProps) {
         <h2>Test</h2>
         <h4 className="muted">Los tests los tomara el estudiante</h4>
       </div>
-      {!quiz && (
+      {!showForm &&(
         <SetupCard
           onClick={() => {
-            setOpenModal(true);
+            setShowForm(true);
           }}
           icon={'paper-outline'}
           text={'Crear test'}
           titleButton={'Configurar Ahora'}
         />
       )}
-      <QuizBuilder
-        open={openModal}
-        onClose={() => {
-          setOpenModal(false);
-        }}
-        onSubmit={(data) => {
-          setOpenModal(false);
-          // setQuiz(data);
-          handleCreateQuiz(data)
-        }}
-      />
+      { showForm && (
+        <QuizBuilder
+          onSubmit={(data) => {
+            setShowForm(false);
+            // setQuiz(data);
+            handleCreateQuiz(data)
+          }}
+        />
+      )}
       {quiz && (
         <>
           <div className={styles['quiz-preview']}>
@@ -60,7 +59,7 @@ export function Quiz(props: QuizProps) {
           <div
             className={styles['edit-btn']}
             onClick={() => {
-              setOpenModal(true);
+              setShowForm(true);
             }}
           >
             <h4>Editar Test</h4>

@@ -2,8 +2,6 @@ import { CourseApiParams, CourseLanguage, CourseLevel, getTeacherCourse, Teacher
 import { Button, ColorsButton, Select, Snackbar, SnackbarPosition, SnackbarType, Tabs, TypeButton } from '@ltpx-frontend-apps/shared-ui';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { useFormik } from 'formik';
-import * as Yup from 'yup';
 
 import styles from './teacher-edit-course.module.scss';
 import CourseGeneralInformation from '../course/course-general-information/course-general-information';

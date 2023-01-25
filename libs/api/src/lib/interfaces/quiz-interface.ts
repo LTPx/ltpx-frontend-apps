@@ -26,6 +26,11 @@ export type NewQuizApiParams = Omit<
   'user_id' | 'created_at' | 'updated_at' | 'id' | 'course_id'
 >;
 
+export type EditQuizApiParams = Omit<
+  QuizModel,
+  'user_id' | 'created_at' | 'updated_at'
+>;
+
 export interface QuestionQuiz {
   question: string;
   description: string;

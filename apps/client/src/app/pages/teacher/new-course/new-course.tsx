@@ -111,7 +111,7 @@ export function NewCourse(props: NewCourseProps) {
               />
             </section>
             <section className={styles['section-gray']}>
-              <Quiz />
+              {/* <Quiz /> */}
             </section>
             <section className={styles['section']}>
               <Achievement />

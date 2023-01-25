@@ -1,4 +1,4 @@
-import { NewQuizParams, QuestionQuiz } from '@ltpx-frontend-apps/api';
+import { EditQuizApiParams, NewQuizParams, QuestionQuiz } from '@ltpx-frontend-apps/api';
 import { QuizBuilder, SetupCard } from '@ltpx-frontend-apps/shared-ui';
 import { useState } from 'react';
 import { useTeacher } from '../../../store';
@@ -6,19 +6,26 @@ import styles from './quiz.module.scss';
 
 /* eslint-disable-next-line */
 export interface QuizProps {
+  courseId: number;
   onSubmit?: (quiz: QuestionQuiz) => void;
 }
 
 export function Quiz(props: QuizProps) {
+  const { courseId } = props;
   const [ showForm, setShowForm ] = useState(true);
   const [ quiz, setQuiz] = useState<NewQuizParams>();
   const { createQuiz } = useTeacher();
 
   const handleCreateQuiz = async(quizParams: NewQuizParams) => {
     console.log(quizParams);
-    // const response = await createQuiz(quizParams);
-    // console.log(response);
-    // setQuiz(quizParams)
+    const data = {
+      ...quizParams,
+      ...{
+        course_id: courseId
+      }
+    }
+    const response = await createQuiz(data);
+    console.log(response);
   };
 
   return (
@@ -27,7 +34,7 @@ export function Quiz(props: QuizProps) {
         <h2>Test</h2>
         <h4 className="muted">Los tests los tomara el estudiante</h4>
       </div>
-      {!showForm &&(
+      {!showForm && !quiz &&(
         <SetupCard
           onClick={() => {
             setShowForm(true);
@@ -41,7 +48,7 @@ export function Quiz(props: QuizProps) {
         <QuizBuilder
           onSubmit={(data) => {
             setShowForm(false);
-            // setQuiz(data);
+            setQuiz(data);
             handleCreateQuiz(data)
           }}
         />

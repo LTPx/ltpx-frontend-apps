@@ -14,7 +14,7 @@ import { useTeacher } from '../../../store';
 const linksEditCourse = [
   { selected: true, text: 'Detalles' },
   { selected: false, text: 'Contenidos' },
-  { selected: false, text: 'Test' },
+  { selected: false, text: 'Tests' },
   { selected: false, text: 'Logros' },
   { selected: false, text: 'Sesiones' },
 ];
@@ -117,7 +117,9 @@ export function TeacherEditCourse(props: TeacherEditCourseProps) {
                 }}/>
               </section>
               <section className={`${styles['section']} ${indexSelectedView === 2 ? styles['selected'] : ''}`}>
-                <Quiz />
+                <Quiz
+                  courseId={course.id}
+                />
               </section>
               <section className={`${styles['section']} ${indexSelectedView === 3 ? styles['selected'] : ''}`}>
                 <Achievement />

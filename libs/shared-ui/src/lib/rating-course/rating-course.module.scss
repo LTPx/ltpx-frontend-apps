@@ -2,6 +2,8 @@
 
 .container {
   width: 100%;
+  display: flex;
+  flex-direction: column;
   padding-top: $size-lg-3;
 
   h3 {
@@ -12,6 +14,7 @@
 .content {
   padding-top: $size-md-3;
   display: flex;
+  justify-content:flex-start;
   gap: $size-md-1;
 
   .total-rating {
@@ -42,8 +45,7 @@
       padding-bottom: $size-md-1;
 
       .bar {
-        width: 295px;
-        height: 10px;
+       width: 200px; 
       }
     }
   }

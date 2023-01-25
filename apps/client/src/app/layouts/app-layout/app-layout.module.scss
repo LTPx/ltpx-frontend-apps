@@ -1,19 +1,9 @@
-.container {
-  // display: flex;
-  // width: 100%;
-  // flex-direction: column;
-}
-// @media screen and (max-width: 400px) {
-
-// }
-
 .layout {
   display: grid;
   // grid-template-columns: repeat(4, 1fr);
   grid-template-rows: auto 1fr auto;
   grid-template-areas:
     'header header header'
-    'content content content'
     'content content content'
     'footer footer footer';
 

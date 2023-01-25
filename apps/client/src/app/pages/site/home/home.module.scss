@@ -69,8 +69,6 @@
   justify-content: center;
   flex-direction: column;
   align-items: center;
-  
-  // width: 100%;
 
   h4 {
     margin-top: 0px;
@@ -84,18 +82,6 @@
   flex-wrap: wrap;
   justify-content: center;
   gap: 2rem;
-}
-
-@media screen and (max-width: 500px) {
-
-    .category-content {
-      display: grid;
-      gap: 1rem;
-      grid-auto-rows: auto;
-      grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr)); 
-      width: 100%;
-    }
-    
 }
 
 .link {

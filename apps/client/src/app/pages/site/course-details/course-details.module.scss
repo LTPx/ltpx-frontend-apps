@@ -2,11 +2,13 @@
 
 .container {
   background-color: $white-color;
+  display: flex;
 }
 
 .course-details {
   padding: $size-lg-1 14rem;
   display: flex;
+  width: 100%;
 
   .description {
     margin-right: 10rem;
@@ -42,6 +44,21 @@
   }
 }
 
+@media screen and (max-width: 500px) {
+
+  .course-details {
+    display: grid;
+    padding: 2rem 6rem;
+  }
+  .description {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+  
+}
+
 .summary-course {
   padding-top: $size-md-1;
+
 }

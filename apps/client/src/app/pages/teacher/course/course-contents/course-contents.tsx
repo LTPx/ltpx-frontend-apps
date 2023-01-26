@@ -39,9 +39,9 @@ export function CourseContents(props: CourseContentsProps) {
           onClick={() => {
             setOpenModal(true);
           }}
-          icon={'caret-down'}
-          text={'Añadir Contenido'}
-          titleButton={'Configurar Ahora'}
+          icon={'copy'}
+          text={'Los contenidos son recursos de textos para tus estudiantes'}
+          titleButton={'Agregar Ahora'}
         />
       )}
       <CourseContentForm

@@ -26,3 +26,4 @@ export * from './lib/api/teacher/achievements-api';
 //constants
 export * from '../src/lib/constants/course-constants';
 export * from '../src/lib/constants/app-constants';
+export * from '../src/lib/constants/achievements-constants';

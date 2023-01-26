@@ -28,6 +28,10 @@
     .summary {
       display: flex;
       gap: 1rem;
+
+      img {
+        width: 40px;
+      }
     }
 
     .actions {
@@ -55,7 +59,10 @@
     h5 {
       color: $text-gray-color;
     }
-
   }
+}
+
+.add-button {
+  margin-top: 1rem;
 }
 

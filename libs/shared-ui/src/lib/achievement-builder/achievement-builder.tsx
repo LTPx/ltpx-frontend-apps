@@ -73,7 +73,12 @@ export function AchievementBuilder(props: AchievementBuilderProps) {
           />
         )}
         {achievementSelected === TypeAchievement.score && (
-          <AchievementByScoreForm singleSelection={true} />
+          <AchievementByScoreForm
+            quizzes={quizzes}
+            onSubmit={(data) => {
+              saveNewAchievement(data);
+            }}
+          />
         )}
         {achievementSelected === TypeAchievement.task && (
           <AchievementTaskForm />

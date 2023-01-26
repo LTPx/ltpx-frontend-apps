@@ -5,6 +5,7 @@ import Button, { ColorsButton, TypeButton } from '../button/button';
 import { Form, Formik } from 'formik';
 import * as Yup from 'yup';
 import {
+  AchievementsImages,
   EntityAchievement,
   NewAchievementParams,
   QuizModel,
@@ -23,21 +24,6 @@ export interface AchievementByQuizzesFormProps {
 
 export function AchievementByQuizzesForm(props: AchievementByQuizzesFormProps) {
   const { onSubmit, onCancel, singleSelection, quizzes, className } = props;
-
-  const images = [
-    {
-      img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQIIL-TvTwFYcMpJ5OnfGFgW6P3oUcO6XEKAA&usqp=CAU',
-    },
-    {
-      img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQIIL-TvTwFYcMpJ5OnfGFgW6P3oUcO6XEKAA&usqp=CAU',
-    },
-    {
-      img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQIIL-TvTwFYcMpJ5OnfGFgW6P3oUcO6XEKAA&usqp=CAU',
-    },
-    {
-      img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQIIL-TvTwFYcMpJ5OnfGFgW6P3oUcO6XEKAA&usqp=CAU',
-    },
-  ];
 
   return (
     <Formik
@@ -98,7 +84,7 @@ export function AchievementByQuizzesForm(props: AchievementByQuizzesFormProps) {
               onChange={(img) => {
                 setFieldValue('image', img);
               }}
-              images={images}
+              images={AchievementsImages}
             />
             { errors.image && (
               <InputTextStatus

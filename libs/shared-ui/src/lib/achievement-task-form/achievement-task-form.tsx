@@ -1,3 +1,4 @@
+import { AchievementsImages } from '@ltpx-frontend-apps/api';
 import { useFormik } from 'formik';
 import Button, { TypeButton } from '../button/button';
 import FilesUploaded, { TypeFile } from '../files-uploaded/files-uploaded';
@@ -19,21 +20,6 @@ export function AchievementTaskForm(props: AchievementTaskFormProps) {
       console.log(data);
     },
   });
-
-  const images = [
-    {
-      img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQIIL-TvTwFYcMpJ5OnfGFgW6P3oUcO6XEKAA&usqp=CAU',
-    },
-    {
-      img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQIIL-TvTwFYcMpJ5OnfGFgW6P3oUcO6XEKAA&usqp=CAU',
-    },
-    {
-      img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQIIL-TvTwFYcMpJ5OnfGFgW6P3oUcO6XEKAA&usqp=CAU',
-    },
-    {
-      img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQIIL-TvTwFYcMpJ5OnfGFgW6P3oUcO6XEKAA&usqp=CAU',
-    },
-  ];
 
   return (
     <div className={styles['container']}>
@@ -61,7 +47,7 @@ export function AchievementTaskForm(props: AchievementTaskFormProps) {
             onChange={(img) => {
               formik.setFieldValue('image', img);
             }}
-            images={images}
+            images={AchievementsImages}
           />
         </div>
         <div className={styles['footer']}>

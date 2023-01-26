@@ -2,13 +2,10 @@ import { useState } from 'react';
 import styles from './select-image.module.scss';
 
 /* eslint-disable-next-line */
-export interface Image {
-  img : string;
-}
 
 export interface SelectImageProps {
   onChange?: (img: string) => void;
-  images : Array<Image>;
+  images : string[];
 }
 
 export function SelectImage(props: SelectImageProps) {
@@ -18,7 +15,7 @@ export function SelectImage(props: SelectImageProps) {
   return (
     <div className={styles['container']}>
       <div className={styles['img']}>
-        {images.map((element, index) => (
+        {images.map((img, index) => (
           <div
             className={
               indexSelected === index
@@ -28,11 +25,11 @@ export function SelectImage(props: SelectImageProps) {
             key={index}
           >
             <img
-              src={element.img}
+              src={img}
               alt=""
               onClick={()=>{
                 setIndexSelected(index);
-                onChange && onChange(element.img);
+                onChange && onChange(img);
               }}
               key={index}
             />

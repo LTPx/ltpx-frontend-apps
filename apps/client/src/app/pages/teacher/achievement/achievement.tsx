@@ -35,7 +35,7 @@ export function Achievement(props: AchievementProps) {
         course_id: courseId,
       },
     };
-    const { saved, data, error } = await createAchievement(newAchievement);
+    const { saved, error } = await createAchievement(newAchievement);
     if ( saved ) {
       setShowForm(false);
       setAchievements(achievements.concat([achievement]));
@@ -58,7 +58,7 @@ export function Achievement(props: AchievementProps) {
           {achievements.map((achievement, index) => (
             <div className={styles['achievement']} key={index}>
               <div className={styles['summary']}>
-                <Icon icon={'trophy'} size={20} />
+                <img src={achievement.image}/>
                 <div className="d">
                   <h4>{achievement.title}</h4>
                   <h5>{achievement.rule}</h5>
@@ -94,7 +94,7 @@ export function Achievement(props: AchievementProps) {
       )}
       {!showForm && achievements.length > 0 && (
         <Button
-          title="Crear Nuevo Test"
+          title="Crear un logro"
           className={styles['add-button']}
           color={ColorsButton.accent}
           onClick={() => {

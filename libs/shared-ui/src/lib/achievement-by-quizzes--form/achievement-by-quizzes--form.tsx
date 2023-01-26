@@ -79,20 +79,6 @@ export function AchievementByQuizzesForm(props: AchievementByQuizzesFormProps) {
               errorMessage={errors.title}
             />
             <br />
-            <label>Selecciona la imagen que obtendrá al cumplir el logro</label>
-            <SelectImage
-              onChange={(img) => {
-                setFieldValue('image', img);
-              }}
-              images={AchievementsImages}
-            />
-            { errors.image && (
-              <InputTextStatus
-                status={StatusInputText.error}
-                text={errors.image}
-              />
-            )}
-            <br />
             <label>Que test debe aprobar</label>
             <div className={styles['quizzes']}>
               {values.settings.map((setting, index) => (
@@ -108,6 +94,20 @@ export function AchievementByQuizzesForm(props: AchievementByQuizzesFormProps) {
                 </div>
               ))}
             </div>
+            <br />
+            <label>Selecciona la imagen que obtendrá al cumplir el logro</label>
+            <SelectImage
+              onChange={(img) => {
+                setFieldValue('image', img);
+              }}
+              images={AchievementsImages}
+            />
+            { errors.image && (
+              <InputTextStatus
+                status={StatusInputText.error}
+                text={errors.image}
+              />
+            )}
           </div>
           <div className={styles['footer']}>
             <Button

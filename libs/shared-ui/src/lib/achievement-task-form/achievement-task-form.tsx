@@ -61,6 +61,16 @@ export function AchievementTaskForm(props: AchievementTaskFormProps) {
               name="title"
               errorMessage={errors.title}
             />
+            <div className={styles['field-upload']}>
+              <label>Sube la tarea debe cumplir el alumno (.pdf)</label>
+              <FilesUploaded
+                className={styles['upload']}
+                type={TypeFile.pdf}
+                onChange={(value) => {
+                  setFieldValue('file', value);
+                }}
+              />
+            </div>
             <br />
             <label>Selecciona la imagen que obtendrá al cumplir el logro</label>
             <SelectImage
@@ -75,15 +85,6 @@ export function AchievementTaskForm(props: AchievementTaskFormProps) {
                 text={errors.image}
               />
             )}
-            <br />
-            <label>Que calificación debe obtener entre (10 - 100)</label>
-            <FilesUploaded
-              className={styles['upload']}
-              type={TypeFile.pdf}
-              onChange={(value) => {
-                setFieldValue('file', value);
-              }}
-            />
           </div>
           <div className={styles['footer']}>
             <Button

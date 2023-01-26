@@ -14,12 +14,12 @@ export function SelectImage(props: SelectImageProps) {
 
   return (
     <div className={styles['container']}>
-      <div className={styles['img']}>
+      <div className={styles['images']}>
         {images.map((img, index) => (
           <div
             className={
               indexSelected === index
-                ? `${styles['image-selected']}`
+                ? `${styles['image']} ${styles['image-selected']}`
                 : `${styles['image']}`
             }
             key={index}

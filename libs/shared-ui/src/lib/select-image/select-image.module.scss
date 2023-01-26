@@ -1,15 +1,32 @@
-.img {
-  display: flex;
-  justify-content: space-between;
-  padding: 1rem 3rem;
+@import '../../styles/styles.module.scss';
 
-  img {
-    width: 100px;
-    height: 100px;
-    cursor: pointer;
+.images {
+  display: flex;
+  gap: 1rem;
+  padding: 1rem 0;
+
+  .image {
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &:hover {
+      background-color: $gray-color-100;
+    }
+
+    img {
+      width: 60px;
+      height: 60px;
+      cursor: pointer;
+    }
   }
+
 }
 
 .image-selected {
-  border: 1px solid black;
+  border: 1px solid $gray-color-300;
+  background-color: $gray-color-200;
+  border-radius: 5px;
 }

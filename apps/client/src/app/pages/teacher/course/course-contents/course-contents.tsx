@@ -18,7 +18,7 @@ export interface FormContent {
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface CourseContentsProps {
   contents?: ContentCourse[];
-  onSubmit?: (contents: ContentCourse[]) => void;
+  onSubmit?: (content: ContentCourse) => void;
 }
 
 export function CourseContents(props: CourseContentsProps) {
@@ -31,7 +31,7 @@ export function CourseContents(props: CourseContentsProps) {
       <div className={styles['header-text']}>
         <h2>Contenidos</h2>
         <h4 className="muted">
-          Agrega los contenidos que se impartirán en el desarrollo del curso
+          Puedes agregar contenidos que sirvan de apoyo para tus estudiantes
         </h4>
       </div>
       {contentsCourse.length <1 && (
@@ -47,10 +47,11 @@ export function CourseContents(props: CourseContentsProps) {
       <CourseContentForm
         open={openModal}
         onClose={() => setOpenModal(false)}
-        onSubmit={(data) => {
-          console.log(data)
+        onSubmit={(content) => {
+          console.log(content)
           setOpenModal(false);
-          setContentsCourse(contentsCourse.concat([data]));
+          setContentsCourse(contentsCourse.concat([content]));
+          onSubmit && onSubmit(content);
         }}
       />
       {contentsCourse.length >= 1 && (
@@ -59,7 +60,7 @@ export function CourseContents(props: CourseContentsProps) {
             <PanelAccordion title={element.title} text={element.description} key={key} />
           ))}
           <Button
-            title="+ Agregar otra sección"
+            title="+ Agregar otra contenido"
             onClick={() => {
               setOpenModal(true);
             }}
@@ -67,19 +68,6 @@ export function CourseContents(props: CourseContentsProps) {
           />
         </>
       )}
-      <div className={styles['footer']}>
-        <Button
-          title='Cancelar'
-          color={ColorsButton.white}
-        />
-        <Button
-          title='Actualizar contenidos'
-          color={ColorsButton.secondary}
-          onClick={()=>{
-            onSubmit && onSubmit(contentsCourse);
-          }}
-        />
-      </div>
     </div>
   );
 }

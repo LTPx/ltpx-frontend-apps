@@ -1,5 +1,5 @@
-import { CourseApiParams, CourseLanguage, CourseLevel, getTeacherCourse, TeacherCourse } from '@ltpx-frontend-apps/api';
-import { Button, ColorsButton, Select, Snackbar, SnackbarPosition, SnackbarType, Tabs, TypeButton } from '@ltpx-frontend-apps/shared-ui';
+import { CourseApiParams, getTeacherCourse, TeacherCourse } from '@ltpx-frontend-apps/api';
+import { Button, ColorsButton, Snackbar, SnackbarPosition, SnackbarType, Tabs, TypeButton } from '@ltpx-frontend-apps/shared-ui';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
@@ -108,11 +108,10 @@ export function TeacherEditCourse(props: TeacherEditCourseProps) {
                 />
               </section>
               <section className={`${styles['section']} ${indexSelectedView === 1 ? styles['selected'] : ''}`}>
-                <CourseContents contents={course.contents} onSubmit={(contents)=>{
-                  console.log(contents);
+                <CourseContents contents={course.contents} onSubmit={(content)=>{
                   saveChanges({
                     title: course.title,
-                    contents
+                    contents: course.contents.concat([content])
                   });
                 }}/>
               </section>

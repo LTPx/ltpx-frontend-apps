@@ -22,36 +22,40 @@ export function CourseContentForm(props: CourseContentFormProps) {
     },
     onSubmit: (data) => {
       onSubmit && onSubmit(data);
-      onClose && onClose();
+      closeReset();
     },
   });
+
+  const closeReset = () => {
+    onClose && onClose();
+    formik.resetForm();
+  }
 
   return (
     <div className={styles['container']}>
       <Dialog
         isShown={open}
         title="Agregar Contenido"
-        onCloseComplete={onClose}
+        onCloseComplete={()=>{
+          closeReset();
+        }}
         hasFooter={false}
+        width={'50vw'}
       >
         <div className={styles['content']}>
           <div className={styles['form-content']}>
             <Input
               placeholder="Ejm: Introducción"
-              label="Titulo de esta sección"
+              label="Titulo"
               value={formik.values.title}
-              onChange={(e: any) => {
-                formik.handleChange(e);
-              }}
+              onChange={formik.handleChange}
               name="title"
             />
             <TextArea
-              placeholder="Descripción de este contenido"
-              label="Descripción de esta sección"
+              placeholder="Agrega el contenido necesario"
+              label="Descripción"
               value={formik.values.description}
-              onChange={(e: any) => {
-                formik.handleChange(e);
-              }}
+              onChange={formik.handleChange}
               name="description"
               rows={8}
             />
@@ -67,7 +71,7 @@ export function CourseContentForm(props: CourseContentFormProps) {
             <Button
               type={TypeButton.submit}
               onClick={formik.submitForm}
-              title="Agregar contenido"
+              title="Guardar contenido"
             />
           </div>
         </div>

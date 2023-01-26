@@ -1,8 +1,13 @@
-import { NewAchievementParams, QuizModel } from '@ltpx-frontend-apps/api';
+import {
+  NewAchievementParams,
+  QuizModel,
+  TypeAchievement,
+} from '@ltpx-frontend-apps/api';
 import {
   AchievementBuilder,
   Button,
   ColorsButton,
+  Dropdown,
   Icon,
   SetupCard,
   Snackbar,
@@ -23,12 +28,32 @@ export interface AchievementProps {
 export function Achievement(props: AchievementProps) {
   const { courseId, initialAchievements, quizzes } = props;
   const [showNotification, setShowNotification] = useState(false);
-  const [showForm, setShowForm] = useState(false);
   const [achievements, setAchievements] =
     useState<NewAchievementParams[]>(initialAchievements);
+  const [showAchievementFormType, setShowAchievementFormType] =
+    useState<TypeAchievement | null>();
   const { createAchievement } = useTeacher();
 
-  const handleSaveAchievement = async(achievement: NewAchievementParams) => {
+  const achievementsForms = [
+    {
+      kind: TypeAchievement.multiple,
+      text: 'Cuando el alumno aprueba varios tests',
+    },
+    {
+      kind: TypeAchievement.single,
+      text: 'Cuando el alumno aprueba un test',
+    },
+    {
+      kind: TypeAchievement.score,
+      text: 'Por calificación',
+    },
+    {
+      kind: TypeAchievement.task,
+      text: 'Al Cumplir una tarea',
+    },
+  ];
+
+  const handleSaveAchievement = async (achievement: NewAchievementParams) => {
     const newAchievement = {
       ...achievement,
       ...{
@@ -36,14 +61,14 @@ export function Achievement(props: AchievementProps) {
       },
     };
     const { saved, error } = await createAchievement(newAchievement);
-    if ( saved ) {
-      setShowForm(false);
+    if (saved) {
       setAchievements(achievements.concat([achievement]));
       setShowNotification(true);
+      setShowAchievementFormType(null);
     } else {
-      console.log(error)
+      console.log(error);
     }
-  }
+  };
 
   return (
     <div className="achievements-section">
@@ -53,13 +78,13 @@ export function Achievement(props: AchievementProps) {
           El estudiante alcanzara logros al superar ciertas reglas
         </h4>
       </div>
-      {!showForm && (
+      {!showAchievementFormType && (
         <div className={styles['achievements']}>
           {achievements.map((achievement, index) => (
             <div className={styles['achievement']} key={index}>
               <div className={styles['summary']}>
-                <img src={achievement.image}/>
-                <div className="d">
+                <img src={achievement.image} />
+                <div className={styles['text']}>
                   <h4>{achievement.title}</h4>
                   <h5>{achievement.rule}</h5>
                 </div>
@@ -82,40 +107,48 @@ export function Achievement(props: AchievementProps) {
           ))}
         </div>
       )}
-      {!showForm && achievements.length === 0 && (
+      {!showAchievementFormType && achievements.length === 0 && (
         <SetupCard
-          onClick={() => {
-            setShowForm(true);
-          }}
+          onClick={() => {}}
           icon={'trophy'}
           text={'Agregar un logro'}
           titleButton={'Configurar Ahora'}
         />
       )}
-      {!showForm && achievements.length > 0 && (
-        <Button
-          title="Crear un logro"
-          className={styles['add-button']}
-          color={ColorsButton.accent}
-          onClick={() => {
-            setShowForm(true);
-          }}
-        />
+      {!showAchievementFormType && achievements.length > 0 && (
+        <Dropdown>
+          <div className={styles['select-questions']}>
+            <Button
+              title="Crear un logro"
+              className={styles['add-button']}
+              color={ColorsButton.accent}
+            />
+          </div>
+          <div className={`${styles['menu']} card`}>
+            {achievementsForms.map((form, index) => (
+              <div
+                className={styles['menu-option']}
+                key={index}
+                onClick={() => {
+                  setShowAchievementFormType(form.kind);
+                }}
+              >
+                <h4>{form.text}</h4>
+              </div>
+            ))}
+          </div>
+        </Dropdown>
       )}
-      {showForm && (
+      {showAchievementFormType && showAchievementFormType && (
         <>
           <AchievementBuilder
             quizzes={quizzes}
+            typeAchievement={showAchievementFormType}
             onSubmit={(achievement) => {
-              handleSaveAchievement(achievement)
+              handleSaveAchievement(achievement);
             }}
-          />
-          <Button
-            title="Cancelar"
-            className={styles['add-button']}
-            color={ColorsButton.accent}
-            onClick={() => {
-              setShowForm(false);
+            onCancel={() => {
+              setShowAchievementFormType(null);
             }}
           />
         </>

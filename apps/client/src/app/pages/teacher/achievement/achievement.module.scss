@@ -66,3 +66,37 @@
   margin-top: 1rem;
 }
 
+.control-questions {
+  margin-top: 1rem;
+  width: 10rem;
+
+  .select-questions {
+    background-color: #f9fafb;
+    padding: 1rem;
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    cursor: pointer;
+    color: $secondary-color;
+    margin-top: 0.5rem;
+    border-radius: 10px;
+  }
+}
+
+.menu {
+  display: flex;
+  flex-direction: column;
+  padding: 0.5rem;
+  min-width: 15rem;
+  z-index: 4;
+
+  .menu-option {
+    padding: 0.5rem;
+    cursor: pointer;
+
+    &:hover {
+      background-color: $secondary-color-400;
+      color: $white-color;
+    }
+  }
+}

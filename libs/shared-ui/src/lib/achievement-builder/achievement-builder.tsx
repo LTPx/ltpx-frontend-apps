@@ -1,11 +1,16 @@
 import { useState } from 'react';
-import { Dialog } from 'evergreen-ui';
 import AchievementByQuizzesForm from '../achievement-by-quizzes--form/achievement-by-quizzes--form';
 import AchievementByScoreForm from '../achievement-by-score-form/achievement-by-score-form';
 import AchievementTaskForm from '../achievement-task-form/achievement-task-form';
 import Button, { ColorsButton } from '../button/button';
 import styles from './achievement-builder.module.scss';
-import { AchievementModel, NewAchievementParams, QuizModel, TypeAchievement } from '@ltpx-frontend-apps/api';
+import {
+  NewAchievementParams,
+  QuizModel,
+  TypeAchievement,
+} from '@ltpx-frontend-apps/api';
+import Dropdown from '../dropdown/dropdown';
+import Icon from '../icon/icon';
 
 /* eslint-disable-next-line */
 export interface AchievementBuilderProps {
@@ -37,57 +42,84 @@ export function AchievementBuilder(props: AchievementBuilderProps) {
     },
   ];
 
-  const saveNewAchievement = async(achievement: NewAchievementParams) => {
+  const saveNewAchievement = async (achievement: NewAchievementParams) => {
     onSubmit && onSubmit(achievement);
-  }
+  };
 
   return (
     <div className={styles['container']}>
-      <label>Asignar logro por:</label>
-      <div className={styles['achievements']}>
-        {achievementsForms.map((form, index) => (
-          <div
-            className={styles['achievement']}
-            key={index}
-            onClick={() => setAchievementSelected(form.kind)}
-          >
-            <h4>{form.text}</h4>
-          </div>
-        ))}
-      </div>
-      <div className={styles['achievement-form']}>
-        {achievementSelected === TypeAchievement.multiple && (
-          <AchievementByQuizzesForm
-            quizzes={quizzes}
-            onSubmit={(data) => {
-              saveNewAchievement(data);
-            }}
-          />
-        )}
-        {achievementSelected === TypeAchievement.single && (
-          <AchievementByQuizzesForm
-            singleSelection={true}
-            quizzes={quizzes}
-            onSubmit={() => {
-            }}
-          />
-        )}
-        {achievementSelected === TypeAchievement.score && (
-          <AchievementByScoreForm
-            quizzes={quizzes}
-            onSubmit={(data) => {
-              saveNewAchievement(data);
-            }}
-          />
-        )}
-        {achievementSelected === TypeAchievement.task && (
-          <AchievementTaskForm
-            onSubmit={(data) => {
-              saveNewAchievement(data);
-            }}
-          />
-        )}
-      </div>
+      {!achievementSelected && (
+        <div className={styles['control-questions']}>
+          <label>Crear logro por:</label>
+          <Dropdown>
+            <div className={styles['select-questions']}>
+              <h4>Tipo de logro</h4>
+              <Icon icon="caret-down" size={18} />
+            </div>
+            <div className={`${styles['menu']} card`}>
+              {achievementsForms.map((form, index) => (
+                <div
+                  className={styles['menu-option']}
+                  key={index}
+                  onClick={() => {
+                    setAchievementSelected(form.kind);
+                  }}
+                >
+                  <h4>{form.text}</h4>
+                </div>
+              ))}
+            </div>
+          </Dropdown>
+        </div>
+      )}
+      {achievementSelected && (
+        <div className={styles['achievement-form']}>
+          {achievementSelected === TypeAchievement.multiple && (
+            <AchievementByQuizzesForm
+              quizzes={quizzes}
+              onSubmit={(data) => {
+                saveNewAchievement(data);
+              }}
+              onCancel={() => {
+                setAchievementSelected(null);
+              }}
+            />
+          )}
+          {achievementSelected === TypeAchievement.single && (
+            <AchievementByQuizzesForm
+              singleSelection={true}
+              quizzes={quizzes}
+              onSubmit={(data) => {
+                saveNewAchievement(data);
+              }}
+              onCancel={() => {
+                setAchievementSelected(null);
+              }}
+            />
+          )}
+          {achievementSelected === TypeAchievement.score && (
+            <AchievementByScoreForm
+              quizzes={quizzes}
+              onSubmit={(data) => {
+                saveNewAchievement(data);
+              }}
+              onCancel={() => {
+                setAchievementSelected(null);
+              }}
+            />
+          )}
+          {achievementSelected === TypeAchievement.task && (
+            <AchievementTaskForm
+              onSubmit={(data) => {
+                saveNewAchievement(data);
+              }}
+              onCancel={() => {
+                setAchievementSelected(null);
+              }}
+            />
+          )}
+        </div>
+      )}
     </div>
   );
 }

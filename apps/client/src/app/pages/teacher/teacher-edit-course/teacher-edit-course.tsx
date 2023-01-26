@@ -1,5 +1,5 @@
-import { CourseApiParams, getTeacherCourse, TeacherCourse } from '@ltpx-frontend-apps/api';
-import { Button, ColorsButton, Snackbar, SnackbarPosition, SnackbarType, Tabs, TypeButton } from '@ltpx-frontend-apps/shared-ui';
+import { CourseApiParams, CourseStatus, getTeacherCourse, TeacherCourse } from '@ltpx-frontend-apps/api';
+import { Button, ColorsButton, ColorsTag, Snackbar, SnackbarPosition, SnackbarType, Tabs, Tag, TypeButton } from '@ltpx-frontend-apps/shared-ui';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
@@ -9,7 +9,7 @@ import TeacherClasses from '../teacher-classes/teacher-classes';
 import Quiz from '../quiz/quiz';
 import Achievement from '../achievement/achievement';
 import CourseContents from '../course/course-contents/course-contents';
-import { useTeacher } from '../../../store';
+import { useCourse, useTeacher } from '../../../store';
 
 const linksEditCourse = [
   { selected: true, text: 'Detalles' },
@@ -28,6 +28,7 @@ export function TeacherEditCourse(props: TeacherEditCourseProps) {
   const [ indexSelectedView, setIndexSelectedView ] = useState(0);
   const params = useParams();
   const { editCourse } = useTeacher();
+  const { translateStatus } = useCourse();
 
   const { courseId } = params;
 
@@ -70,7 +71,16 @@ export function TeacherEditCourse(props: TeacherEditCourseProps) {
       { course && (
         <div className={styles['container']}>
           <div className={styles['header']}>
-            <h3>{course.title}</h3>
+            <div className={styles['title']}>
+              <h3>{course.title}</h3>
+              <Tag
+                text={translateStatus(course.status)}
+                color={
+                  course.status === CourseStatus.publish ? ColorsTag.green : ColorsTag.gray
+                }
+                icon={course.status === CourseStatus.publish ? 'globe' : 'edit'}
+              />
+            </div>
             <div className={styles['actions']}>
               <h5 className="muted">Creado: Diciembre 21 2022</h5>
               <Button
@@ -146,7 +156,7 @@ export function TeacherEditCourse(props: TeacherEditCourseProps) {
         </div>
       )}
       <Snackbar
-        position={SnackbarPosition.top}
+        position={SnackbarPosition.centerBottom}
         open={showNotification}
         title={'Cambios guardados'}
         typeSnackbar={SnackbarType.success}

@@ -31,10 +31,14 @@ export function NewCourseForm(props: NewCourseFormProps) {
 
   return (
     <form className={styles['form']}>
+      <div className={styles['text']}>
+        <h2>Por que no empezamos agregando un titulo</h2>
+        <h5>No hay problema si no se te ocurre un buen titulo. Puedes cambiarlo luego</h5>
+      </div>
       <Input
         label="Nombre del curso"
         name="title"
-        placeholder="myemail@example.com"
+        placeholder="Un nombre sencillo"
         onChange={(e: any) => {
           formik.handleChange(e);
         }}

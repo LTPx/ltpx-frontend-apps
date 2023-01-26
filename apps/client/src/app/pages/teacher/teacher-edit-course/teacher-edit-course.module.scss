@@ -5,6 +5,11 @@
     align-items: center;
     padding: 1rem;
 
+    .title {
+      display: flex;
+      gap: 1rem;
+    }
+
     h3 {
       font-weight: 500;
     }

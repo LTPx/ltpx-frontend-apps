@@ -118,6 +118,7 @@ export function TeacherCourses(props: TeacherCoursesProps) {
         hasFooter={false}
         hasHeader={false}
         onCloseComplete={() => setOpenModal(false)}
+        width={'40vw'}
       >
         <NewCourseForm onSubmit={(data)=>{
           console.log(data);

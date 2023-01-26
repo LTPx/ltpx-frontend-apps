@@ -69,6 +69,30 @@ export function Achievement(props: AchievementProps) {
       console.log(error);
     }
   };
+  const ButtonAddAchievement = ({color, className}: {color: ColorsButton, className?: string}) => (
+    <Dropdown>
+      <div className={styles['select-questions']}>
+        <Button
+          title="Crear un logro"
+          className={className}
+          color={color}
+        />
+      </div>
+      <div className={`${styles['menu']} card`}>
+        {achievementsForms.map((form, index) => (
+          <div
+            className={styles['menu-option']}
+            key={index}
+            onClick={() => {
+              setShowAchievementFormType(form.kind);
+            }}
+          >
+            <h4>{form.text}</h4>
+          </div>
+        ))}
+      </div>
+    </Dropdown>
+  )
 
   return (
     <div className="achievements-section">
@@ -109,35 +133,17 @@ export function Achievement(props: AchievementProps) {
       )}
       {!showAchievementFormType && achievements.length === 0 && (
         <SetupCard
-          onClick={() => {}}
+          onClick={() => {
+            setShowAchievementFormType(TypeAchievement.multiple)
+          }}
           icon={'trophy'}
-          text={'Agregar un logro'}
-          titleButton={'Configurar Ahora'}
-        />
+          text={'Agrega logros que los estudiantes puedan alcanzar'}
+        >
+          <ButtonAddAchievement color={ColorsButton.primary}/>
+        </SetupCard>
       )}
       {!showAchievementFormType && achievements.length > 0 && (
-        <Dropdown>
-          <div className={styles['select-questions']}>
-            <Button
-              title="Crear un logro"
-              className={styles['add-button']}
-              color={ColorsButton.accent}
-            />
-          </div>
-          <div className={`${styles['menu']} card`}>
-            {achievementsForms.map((form, index) => (
-              <div
-                className={styles['menu-option']}
-                key={index}
-                onClick={() => {
-                  setShowAchievementFormType(form.kind);
-                }}
-              >
-                <h4>{form.text}</h4>
-              </div>
-            ))}
-          </div>
-        </Dropdown>
+        <ButtonAddAchievement color={ColorsButton.secondary} className={styles['add-button']}/>
       )}
       {showAchievementFormType && showAchievementFormType && (
         <>

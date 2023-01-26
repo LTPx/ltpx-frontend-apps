@@ -8,7 +8,6 @@ import {
   TextArea,
   TypeButton,
 } from '@ltpx-frontend-apps/shared-ui';
-import { useTeacher } from 'apps/client/src/app/store';
 import { useCourse } from 'apps/client/src/app/store/hooks/useCourse';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
@@ -43,26 +42,25 @@ export function CourseGeneralInformation(props: CourseGeneralInformationProps) {
     onSubmit,
   } = props;
   const { categories, languages, levels } = useCourse();
-  const { editCourse } = useTeacher();
 
   const formik = useFormik({
     initialValues: {
       title: title,
       cover: cover,
-      description: description,
+      description: description || '',
       category: category,
       language: language,
       level: level,
-      learn_goals: learn_goals,
-      requirements: requirements,
+      learn_goals: learn_goals || '',
+      requirements: requirements || '',
     },
     validationSchema: Yup.object({
       title: Yup.string().required('es obligatorio'),
-      description: Yup.string().required('es obligatorio'),
     }),
     onSubmit: async (formData) => {
       console.log('formData: ', formData);
-      if (formData.cover) {
+      const  isFile = typeof formData.cover !== 'string';
+      if (!isFile) { // could be a url img
         delete formData.cover
       }
       onSubmit && onSubmit(formData);
@@ -71,10 +69,6 @@ export function CourseGeneralInformation(props: CourseGeneralInformationProps) {
 
   return (
     <form className={styles['container']} onSubmit={formik.handleSubmit}>
-      {/* <div className={styles['header-text']}>
-        <h2>Información General</h2>
-        <h4 className='muted'>Esta información atraerá usuarios a tomar este curso</h4>
-      </div> */}
       <section className={styles['text']}>
         <h3>Portada del curso</h3>
         <div className={styles['upload-media']}>

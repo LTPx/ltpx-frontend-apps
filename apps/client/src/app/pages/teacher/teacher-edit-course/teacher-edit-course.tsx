@@ -109,9 +109,10 @@ export function TeacherEditCourse(props: TeacherEditCourseProps) {
               </section>
               <section className={`${styles['section']} ${indexSelectedView === 1 ? styles['selected'] : ''}`}>
                 <CourseContents contents={course.contents} onSubmit={(content)=>{
+                  const contents = course.contents || [];
                   saveChanges({
                     title: course.title,
-                    contents: course.contents.concat([content])
+                    contents: contents.concat([content])
                   });
                 }}/>
               </section>

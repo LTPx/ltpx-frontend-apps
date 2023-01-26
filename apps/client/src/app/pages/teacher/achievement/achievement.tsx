@@ -37,11 +37,11 @@ export function Achievement(props: AchievementProps) {
   const achievementsForms = [
     {
       kind: TypeAchievement.multiple,
-      text: 'Cuando el alumno aprueba varios tests',
+      text: 'Cuando el alumno apruebe varios tests',
     },
     {
       kind: TypeAchievement.single,
-      text: 'Cuando el alumno aprueba un test',
+      text: 'Cuando el alumno apruebe un test',
     },
     {
       kind: TypeAchievement.score,
@@ -49,7 +49,7 @@ export function Achievement(props: AchievementProps) {
     },
     {
       kind: TypeAchievement.task,
-      text: 'Al Cumplir una tarea',
+      text: 'Al cumplir una tarea',
     },
   ];
 
@@ -69,11 +69,11 @@ export function Achievement(props: AchievementProps) {
       console.log(error);
     }
   };
-  const ButtonAddAchievement = ({color, className}: {color: ColorsButton, className?: string}) => (
+  const ButtonAddAchievement = ({color, className, title}: {color: ColorsButton, className?: string, title:string}) => (
     <Dropdown>
       <div className={styles['select-questions']}>
         <Button
-          title="Crear un logro"
+          title={title}
           className={className}
           color={color}
         />
@@ -139,11 +139,11 @@ export function Achievement(props: AchievementProps) {
           icon={'trophy'}
           text={'Agrega logros que los estudiantes puedan alcanzar'}
         >
-          <ButtonAddAchievement color={ColorsButton.primary}/>
+          <ButtonAddAchievement color={ColorsButton.primary} title={'Crear un logro'}/>
         </SetupCard>
       )}
       {!showAchievementFormType && achievements.length > 0 && (
-        <ButtonAddAchievement color={ColorsButton.secondary} className={styles['add-button']}/>
+        <ButtonAddAchievement color={ColorsButton.secondary} className={styles['add-button']} title={'Agregar nuevo logro'}/>
       )}
       {showAchievementFormType && showAchievementFormType && (
         <>

@@ -64,7 +64,7 @@ export function AchievementTaskForm(props: AchievementTaskFormProps) {
             <div className={styles['field-upload']}>
               <label>Sube la tarea debe cumplir el alumno (.pdf)</label>
               <FilesUploaded
-                className={styles['upload']}
+                className={styles['uploader']}
                 type={TypeFile.pdf}
                 onChange={(value) => {
                   setFieldValue('file', value);

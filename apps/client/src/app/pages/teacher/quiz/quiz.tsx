@@ -49,8 +49,8 @@ export function Quiz(props: QuizProps) {
   return (
     <div className="quiz-section">
       <div className={styles['header-text']}>
-        <h2>Test</h2>
-        <h4 className="muted">Los tests los tomara el estudiante</h4>
+        <h2>Tests</h2>
+        <h4 className="muted">Evalúa a tus estudiantes creando tests</h4>
       </div>
       {!showForm && (
         <div className={styles['quizzes']}>

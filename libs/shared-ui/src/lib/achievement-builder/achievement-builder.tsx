@@ -81,7 +81,11 @@ export function AchievementBuilder(props: AchievementBuilderProps) {
           />
         )}
         {achievementSelected === TypeAchievement.task && (
-          <AchievementTaskForm />
+          <AchievementTaskForm
+            onSubmit={(data) => {
+              saveNewAchievement(data);
+            }}
+          />
         )}
       </div>
     </div>

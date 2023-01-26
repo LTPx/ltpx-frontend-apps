@@ -8,7 +8,6 @@ import * as Yup from 'yup';
 import InputTextStatus, { StatusInputText } from '../input-text-status/input-text-status';
 /* eslint-disable-next-line */
 export interface AchievementByScoreFormProps {
-  singleSelection?: boolean;
   quizzes: QuizModel[];
   onCancel?: () => void;
   onSubmit?: (data: NewAchievementParams) => void;
@@ -16,11 +15,7 @@ export interface AchievementByScoreFormProps {
 }
 
 export function AchievementByScoreForm(props: AchievementByScoreFormProps) {
-  const { singleSelection, quizzes, onCancel, onSubmit, className } = props;
-
-  const handleSelectQuiz = (index: number) => {
-
-  }
+  const { quizzes, onCancel, onSubmit, className } = props;
 
   return (
     <Formik

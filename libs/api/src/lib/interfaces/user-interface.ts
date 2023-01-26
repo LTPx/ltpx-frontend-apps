@@ -1,4 +1,4 @@
-import { StatusTeacherAccount } from './teacher';
+import { StatusTeacherAccount } from './teacher-interface';
 
 export enum TypeAccounts {
   user = 'user',

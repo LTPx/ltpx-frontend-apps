@@ -1,6 +1,6 @@
 import { _http } from '../../http';
-import { ApplicationTeach, ApplyTeachApiParams, ApplyTeachModel } from '../../interfaces/teacher';
-import { IUserAccount } from '../../interfaces/user';
+import { ApplicationTeach, ApplyTeachApiParams, ApplyTeachModel } from '../../interfaces/teacher-interface';
+import { IUserAccount } from '../../interfaces/user-interface';
 import { moveToFormData } from '../../utils';
 
 const http = _http;

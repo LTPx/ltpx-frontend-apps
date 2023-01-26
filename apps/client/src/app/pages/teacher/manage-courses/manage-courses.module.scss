@@ -3,4 +3,14 @@
   margin-top: 2rem;
 }
 
+.breadcrumbs {
+  display: flex;
 
+  .breadcrumb {
+    display: flex;
+
+    p {
+      margin: 0 0.5rem;;
+    }
+  }
+}

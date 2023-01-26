@@ -12,9 +12,9 @@ export interface Tab {
 export interface TabsProps {
   tabs: Array<Tab>;
   isNav?: boolean;
-  onClickTab?: (indexTab: number) => void;
   vertical?: boolean;
   className?: string;
+  onClickTab?: (indexTab: number) => void;
 }
 
 export function Tabs(props: TabsProps) {

@@ -1,37 +1,16 @@
 @import '../../styles/styles.module.scss';
 
 .container {
-  h5 {
-    margin: 1.5rem 0;
-    cursor: pointer;
-    color: $green-color;
-  }
+
 }
 
 .form {
   display: grid;
   grid-template-columns: auto 1fr auto auto;
   grid-auto-rows: 1fr;
-
-  &.single {
-    grid-template-columns: 1fr auto auto;
-  }
-
-  .letter {
-    margin-top: 1.5rem;
-    padding: 0 1rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    h2 {
-      margin: 0;
-    }
-  }
 }
 
 .checker {
-  margin-top: 1.5rem;
   padding: 0 1rem;
   border: 1px solid #edf0f2;
   background-color: $white-color;
@@ -39,6 +18,7 @@
   display: flex;
   align-items: center;
   gap: 1rem;
+  height: 100%;
   cursor: pointer;
 
   &:hover {
@@ -56,20 +36,10 @@
     color: $green-color;
     background-color: $green-color-100;
 
-    h4 {
+    svg {
       color: $green-color;
     }
   }
-}
-
-.remove {
-  margin-top: 1.5rem;
-  padding: 0 1rem;
-  display: flex;
-  align-items: center;
-  border: 1px solid $stroke-color;
-  color: #ef4444;
-  background-color: $white-color;
 }
 
 .footer {
@@ -78,4 +48,50 @@
   justify-content: flex-end;
   gap: 1rem;
   padding: 1rem 0;
+}
+
+.answer {
+  display: grid;
+  grid-template-columns: auto 1fr auto auto;
+  align-items: center;
+  margin-bottom: 1rem;
+
+  &.single {
+    grid-template-columns: 1fr auto auto;
+  }
+
+  .letter {
+    padding: 0 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+
+    h2 {
+      margin: 0;
+    }
+  }
+
+  .actions {
+    display: flex;
+    gap: 1rem;
+    height: 100%;
+  }
+}
+
+.remove {
+  display: flex;
+  align-items: center;
+  padding: 0 1rem;
+  background-color: $gray-color-100;
+  cursor: pointer;
+}
+
+.answer-input {
+  margin-top: 0;
+}
+
+.add-new {
+  color: $green-color;
+  cursor: pointer;
 }

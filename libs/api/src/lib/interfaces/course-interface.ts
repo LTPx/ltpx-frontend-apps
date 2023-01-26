@@ -1,3 +1,5 @@
+import { AchievementModel } from './achievement-interface';
+import { QuizModel } from './quiz-interface';
 import { PartialWithRequired } from './util';
 
 export enum TeacherClassType {
@@ -59,6 +61,8 @@ export interface CourseModel {
   status: CourseStatus;
   contents: ContentCourse[];
   classroom: Classroom;
+  quizzes?: QuizModel[];
+  achievements?: AchievementModel[];
 }
 
 export type PublicCourse = Omit<
@@ -68,9 +72,9 @@ export type PublicCourse = Omit<
 
 export type TeacherCourse = Omit<CourseModel, 'user_id' | 'cover'>;
 
-export type NewCourseApiParams = PartialWithRequired<
+export type CourseApiParams = PartialWithRequired<
   TeacherCourse,
-  'description' | 'title'
+  'title'
 >;
 
 export const CLASSROOM_MANDATORY = {

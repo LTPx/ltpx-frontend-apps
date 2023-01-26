@@ -3,7 +3,7 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import Input from '../input/input';
 import Button, { ColorsButton, TypeButton } from '../button/button';
-import { TypeQuiz } from '@ltpx-frontend-apps/api';
+import { TypeQuestionQuiz } from '@ltpx-frontend-apps/api';
 
 /* eslint-disable-next-line */
 export interface QuizFormAnswerProps {
@@ -27,7 +27,7 @@ export function QuizFormAnswer(props: QuizFormAnswerProps) {
       const elements = {
         ...data,
         ...{
-          kind: TypeQuiz.answer,
+          kind: TypeQuestionQuiz.answer,
         },
       };
       onSubmit && onSubmit(elements);
@@ -70,9 +70,10 @@ export function QuizFormAnswer(props: QuizFormAnswerProps) {
             }}
           />
           <Button
-            title="Guardar"
+            title="Agregar pregunta"
             type={TypeButton.submit}
             onClick={formik.submitForm}
+            color={ColorsButton.secondary}
           />
         </div>
       </form>

@@ -16,50 +16,55 @@ export interface FormContent {
 }
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
-export interface CourseContentsProps {}
+export interface CourseContentsProps {
+  contents?: ContentCourse[];
+  onSubmit?: (content: ContentCourse) => void;
+}
 
 export function CourseContents(props: CourseContentsProps) {
-  const [openModal, setOpenModal] = useState(false);
-  const [contentCourse, setContentCourse] = useState<ContentCourse[]>([]);
+  const { contents, onSubmit } = props;
+  const [ openModal, setOpenModal] = useState(false);
+  const [ contentsCourse, setContentsCourse] = useState<ContentCourse[]>(contents || []);
 
   return (
     <div className={styles['contents']}>
       <div className={styles['header-text']}>
         <h2>Contenidos</h2>
         <h4 className="muted">
-          Agrega los contenidos que se impartirán en el desarrollo del curso
+          Puedes agregar contenidos que sirvan de apoyo para tus estudiantes
         </h4>
       </div>
-      {contentCourse.length <1 && (
+      {contentsCourse.length <1 && (
         <SetupCard
           onClick={() => {
             setOpenModal(true);
           }}
-          icon={'caret-down'}
-          text={'Añadir Contenido'}
-          titleButton={'Configurar Ahora'}
+          icon={'copy'}
+          text={'Los contenidos son recursos de textos para tus estudiantes'}
+          titleButton={'Agregar Ahora'}
         />
       )}
       <CourseContentForm
         open={openModal}
         onClose={() => setOpenModal(false)}
-        onSubmit={(data) => {
-          console.log(data)
+        onSubmit={(content) => {
+          console.log(content)
           setOpenModal(false);
-          setContentCourse(contentCourse.concat([data]));
+          setContentsCourse(contentsCourse.concat([content]));
+          onSubmit && onSubmit(content);
         }}
       />
-      {contentCourse.length >= 1 && (
+      {contentsCourse.length >= 1 && (
         <>
-          {contentCourse.map((element, key) => (
+          {contentsCourse.map((element, key) => (
             <PanelAccordion title={element.title} text={element.description} key={key} />
           ))}
           <Button
-            title="+ Agregar otra sección"
+            title="+ Agregar otra contenido"
             onClick={() => {
               setOpenModal(true);
             }}
-            color={ColorsButton.primary}
+            color={ColorsButton.accent}
           />
         </>
       )}

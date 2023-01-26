@@ -5,7 +5,7 @@
   flex-direction: column;
   background-color: #f9fafb;
   padding: 1rem 2rem 2rem 2rem;
-  
+
   label {
     margin-top: 1rem;
     margin-bottom: 0.5rem;
@@ -14,6 +14,16 @@
     margin-bottom: 1rem;
   }
 }
+
+.field-upload {
+  margin-top: 1rem;
+
+  .uploader {
+    margin-top: 0.5rem;
+    padding: 0.5rem 1rem;
+  }
+}
+
 .footer {
   display: flex;
   justify-content: end;

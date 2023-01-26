@@ -6,13 +6,13 @@ import styles from './file-upload.module.scss';
 export interface FileUploadProps {
   onChange: (file: any) => void;
   name?: string;
+  image?: string;
 }
 
 export function FileUpload(props: FileUploadProps) {
-  const { name, onChange } = props;
-  const [file, setFile] = useState('');
+  const { name, onChange, image } = props;
+  const [file, setFile] = useState(image || '');
   const elementRef = useRef<HTMLInputElement | null>(null);
-
   const handleChange = (e: any) => {
     console.log(e.target.files);
     const { target } = e;

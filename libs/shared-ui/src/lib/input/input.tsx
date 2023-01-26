@@ -30,6 +30,7 @@ export interface InputProps {
   min?: any;
   max?: any;
   errorMessage?: string | null;
+  refInput?: any
 }
 
 export function Input(props: InputProps) {
@@ -43,6 +44,7 @@ export function Input(props: InputProps) {
     min,
     max,
     errorMessage,
+    refInput,
     ...other
   } = props;
 
@@ -65,9 +67,9 @@ export function Input(props: InputProps) {
   }
 
   return (
-    <div className={`${css['container']} ${className}`}>
+    <div className={`${css['input-component']} ${className}`}>
       {label && (
-        <label className={css['label']}>{label}</label>
+        <label>{label}</label>
       )}
       { description && (
         <p className={css['description']}>{description}</p>
@@ -77,12 +79,13 @@ export function Input(props: InputProps) {
           <AddonSymbol text={addonInput.text} position={Position.left}/>
         )}
         <input
-          className={`${css['input-box']} ${inputClassesPosition}`}
+          className={`${css['input-box']} ${inputClassesPosition} ${label ? css['with-label'] : ''}`}
           {...other}
           min={min}
           max={max}
           onChange={e => onChange && onChange(e)}
           onKeyDown={e => onKeyDown && onKeyDown(e)}
+          ref={refInput}
         />
         { addonInput && addonInput.position === 'right' && (
           <AddonSymbol text={addonInput.text} position={Position.right} icon={addonInput.icon}/>

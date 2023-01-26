@@ -1,11 +1,10 @@
 import styles from './quiz-form-conditional.module.scss';
-import { useState } from 'react';
 import Icon from '../icon/icon';
 import Input from '../input/input';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import Button, { ColorsButton, TypeButton } from '../button/button';
-import { TypeQuiz } from '@ltpx-frontend-apps/api';
+import { TypeQuestionQuiz } from '@ltpx-frontend-apps/api';
 
 /* eslint-disable-next-line */
 export interface QuizFormConditionalProps {
@@ -17,47 +16,32 @@ export function QuizFormConditional(props: QuizFormConditionalProps) {
   const { onSubmit, onCancel } = props;
   const formik = useFormik({
     initialValues: {
+      kind: TypeQuestionQuiz.conditional,
       question: '',
       description: '',
-      kind: '',
-      true: false,
-      false: false,
-      answer: '',
+      answers: [
+        {
+          text: 'true',
+          correct: false
+        },
+        {
+          text: 'false',
+          correct: false
+        }
+      ],
     },
     validationSchema: Yup.object({
       question: Yup.string().required('Pregunta es obligatorio'),
     }),
     onSubmit: (data) => {
-      const ll = {
-        ...data,
-        ...{
-          kind: TypeQuiz.conditional,
-        },
-      };
-      onSubmit && onSubmit(ll);
+      onSubmit && onSubmit(data);
     },
   });
-  const conditionals = [
-    {
-      correct: formik.values.true,
-      text: 'Verdadera',
-      isTrue: true,
-    },
-    {
-      correct: formik.values.false,
-      text: 'Falso',
-      isTrue: false,
-    },
-  ];
 
   const markAsCorrect = (conditional: any) => {
-    if (conditional.isTrue) {
-      formik.setFieldValue('true', !conditional.correct);
-      formik.setFieldValue('false', conditional.correct);
-    } else {
-      formik.setFieldValue('false', !conditional.correct);
-      formik.setFieldValue('true', conditional.correct);
-    }
+    const { text, correct } = conditional;
+    formik.setFieldValue(`answers[0].correct`, text === 'true' ? !correct : correct);
+    formik.setFieldValue(`answers[1].correct`, text === 'true' ? correct : !correct);
   };
 
   return (
@@ -72,6 +56,7 @@ export function QuizFormConditional(props: QuizFormConditionalProps) {
           }}
           onBlur={formik.handleBlur}
           name="question"
+          errorMessage={formik.errors.question}
         />
         <Input
           label="Descripción (opcional)"
@@ -82,9 +67,11 @@ export function QuizFormConditional(props: QuizFormConditionalProps) {
           onBlur={formik.handleBlur}
         />
         <div className={styles['conditionals']}>
-          {conditionals.map((conditional, index) => (
+          {formik.values.answers.map((conditional, index) => (
             <div className={styles['conditional-container']} key={index}>
-              <h4 className={styles['conditional']}>{conditional.text}</h4>
+              <h4 className={styles['conditional']}>
+                {conditional.text === 'true' ? 'Verdadera' : 'Falsa'}
+              </h4>
               <div
                 className={`${styles['checker']} ${
                   conditional.correct ? styles['check'] : ''
@@ -97,14 +84,6 @@ export function QuizFormConditional(props: QuizFormConditionalProps) {
             </div>
           ))}
         </div>
-        <Input
-          label="Respuesta correcta"
-          placeholder="Respuesta correcta en caso que sea falsa"
-          name="answer"
-          value={formik.values.answer}
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-        />
         <div className={styles['footer']}>
           <Button
             title="Cancelar"
@@ -114,7 +93,11 @@ export function QuizFormConditional(props: QuizFormConditionalProps) {
               onCancel && onCancel();
             }}
           />
-          <Button title="Guardar" type={TypeButton.submit} />
+          <Button
+            title="Agregar pregunta"
+            color={ColorsButton.secondary}
+            type={TypeButton.submit}
+          />
         </div>
       </form>
     </div>

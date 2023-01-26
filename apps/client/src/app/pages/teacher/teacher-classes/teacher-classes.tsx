@@ -11,11 +11,12 @@ import styles from './teacher-classes.module.scss';
 /* eslint-disable-next-line */
 export interface TeacherClassesProps {
   onSubmit?: (classroom: Classroom) => void;
+  initialClassroom?: Classroom;
 }
 
 export function TeacherClasses(props: TeacherClassesProps) {
-  const { onSubmit } = props;
-  const [classroom, setClassroom] = useState<Classroom>();
+  const { onSubmit, initialClassroom } = props;
+  const [classroom, setClassroom] = useState<Classroom | null>(initialClassroom || null);
   const [openModal, setOpenModal] = useState(false);
 
   const handleClassroom = (classroom: any) => {

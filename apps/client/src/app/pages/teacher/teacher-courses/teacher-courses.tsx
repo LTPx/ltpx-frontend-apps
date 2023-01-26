@@ -1,6 +1,9 @@
 import { TeacherCourse, getTeacherCourses, CourseStatus } from '@ltpx-frontend-apps/api';
-import { Button, ColorsButton, InputSearch, Select, TeacherCourseCard } from '@ltpx-frontend-apps/shared-ui';
+import { Button, ColorsButton, InputSearch, NewCourseForm, Select, TeacherCourseCard } from '@ltpx-frontend-apps/shared-ui';
+import { Dialog } from 'evergreen-ui';
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useTeacher } from '../../../store';
 import styles from './teacher-courses.module.scss';
 
 const placeholderImage = 'https://designshack.net/wp-content/uploads/placeholder-image-368x246.png';
@@ -9,6 +12,9 @@ export interface TeacherCoursesProps {}
 
 export function TeacherCourses(props: TeacherCoursesProps) {
   const [courses, setCourses] = useState<TeacherCourse[]>([]);
+  const [openModal, setOpenModal] = useState(false);
+  const { createCourse } = useTeacher();
+  const navigate = useNavigate();
 
   useEffect(() => {
     let mounted = true;
@@ -51,7 +57,7 @@ export function TeacherCourses(props: TeacherCoursesProps) {
           category={course.category}
           percentageRate={0}
           percentageLearner={0}
-          url={`/teacher/courses/${course.id}`}
+          url={`/teacher/courses/edit/${course.id}`}
         />
       )) }
     </div>
@@ -73,6 +79,21 @@ export function TeacherCourses(props: TeacherCoursesProps) {
     </div>
   )
 
+  const openNewCourse = () => {
+    setOpenModal(true);
+  }
+
+  const saveNewCourse = async(newCourseParams: any) => {
+    setOpenModal(false);
+    const { saved, data } = await createCourse(newCourseParams);
+    const { id } = data;
+    if (saved) {
+      navigate(`/teacher/courses/edit/${id}`);
+    } else {
+      console.log('error: ', data);
+    }
+  }
+
   return (
     <div className={`${styles['container']}`}>
       <div className={`${styles['filters-container']}`}>
@@ -81,15 +102,29 @@ export function TeacherCourses(props: TeacherCoursesProps) {
           <InputSearch placeholder='Search course'/>
           <Select options={categories} />
           <Button
-            title={'+ Nuevo Curso'}
+            title={'Nuevo Curso'}
             color={ColorsButton.primary}
-            link='/teacher/courses/new'
+            onClick={()=>{
+              openNewCourse();
+            }}
           />
         </div>
       </div>
       <div className={`${styles['courses-container']}`}>
         <MyCourses/>
       </div>
+      <Dialog
+        isShown={openModal}
+        hasFooter={false}
+        hasHeader={false}
+        onCloseComplete={() => setOpenModal(false)}
+        width={'40vw'}
+      >
+        <NewCourseForm onSubmit={(data)=>{
+          console.log(data);
+          saveNewCourse(data);
+        }}/>
+      </Dialog>
     </div>
   );
 }

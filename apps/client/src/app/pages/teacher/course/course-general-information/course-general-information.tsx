@@ -1,46 +1,101 @@
-import { FileUpload, Input, Select, TextArea } from '@ltpx-frontend-apps/shared-ui';
+import { CourseLanguage, CourseLevel } from '@ltpx-frontend-apps/api';
+import {
+  Button,
+  ColorsButton,
+  FileUpload,
+  Input,
+  Select,
+  TextArea,
+  TypeButton,
+} from '@ltpx-frontend-apps/shared-ui';
 import { useCourse } from 'apps/client/src/app/store/hooks/useCourse';
-import { FormikValues } from 'formik';
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
 import styles from './course-general-information.module.scss';
 
 /* eslint-disable-next-line */
-export interface CourseGeneralInformationProps {
-  formik: FormikValues;
+export interface CourseGeneralInformation {
+  title: string;
+  cover?: string;
+  description?: string;
+  category?: string;
+  language?: CourseLanguage;
+  level?: CourseLevel;
+  learn_goals?: string;
+  requirements?: string;
+}
+export interface CourseGeneralInformationProps
+  extends CourseGeneralInformation {
+  onSubmit?: (params: CourseGeneralInformation) => void;
 }
 
 export function CourseGeneralInformation(props: CourseGeneralInformationProps) {
-  const { formik } = props;
+  const {
+    cover,
+    title,
+    description,
+    category,
+    language,
+    level,
+    learn_goals,
+    requirements,
+    onSubmit,
+  } = props;
   const { categories, languages, levels } = useCourse();
 
+  const formik = useFormik({
+    initialValues: {
+      title: title,
+      cover: cover,
+      description: description || '',
+      category: category,
+      language: language,
+      level: level,
+      learn_goals: learn_goals || '',
+      requirements: requirements || '',
+    },
+    validationSchema: Yup.object({
+      title: Yup.string().required('es obligatorio'),
+    }),
+    onSubmit: async (formData) => {
+      console.log('formData: ', formData);
+      const  isFile = typeof formData.cover !== 'string';
+      if (!isFile) { // could be a url img
+        delete formData.cover
+      }
+      onSubmit && onSubmit(formData);
+    },
+  });
+
   return (
-    <div className={styles['container']}>
-      <div className={styles['header-text']}>
-        <h2>Información General</h2>
-        <h4 className='muted'>Esta información atraerá usuarios a tomar este curso</h4>
-      </div>
+    <form className={styles['container']} onSubmit={formik.handleSubmit}>
       <section className={styles['text']}>
         <h3>Portada del curso</h3>
         <div className={styles['upload-media']}>
           <FileUpload
-            onChange={(file)=>{ formik.setFieldValue('cover', file)}}
-            name='cover'
+            image={cover}
+            onChange={(file) => {
+              formik.setFieldValue('cover', file);
+            }}
+            name="cover"
           />
         </div>
       </section>
       <div className={styles['text']}>
         <Input
-          label='Nombre del curso'
-          placeholder='Evita nombres confusos'
+          label="Nombre del curso"
+          placeholder="Evita nombres confusos"
           name="title"
-          onChange={(e: any) => { formik.handleChange(e); }}
+          onChange={formik.handleChange}
           value={formik.values.title}
           onBlur={formik.handleBlur}
+          errorMessage={formik.errors.title}
         />
         <TextArea
-          label='Descripción del curso'
-          placeholder='Un breve resumen de lo que trata este curso'
+          label="Descripción del curso"
+          placeholder="Un breve resumen de lo que trata este curso"
           name="description"
-          onChange={(e: any) => { formik.handleChange(e); }}
+          onChange={formik.handleChange}
           value={formik.values.description}
           onBlur={formik.handleBlur}
           rows={8}
@@ -48,42 +103,50 @@ export function CourseGeneralInformation(props: CourseGeneralInformationProps) {
       </div>
       <div className={styles['selects-form']}>
         <Select
-          label='Categoría'
+          label="Categoría"
           options={categories}
-          onChange={option => formik.setFieldValue('category', option.value)}
+          onChange={(option) => formik.setFieldValue('category', option.value)}
         />
         <Select
-          label='Nivel'
+          label="Nivel"
           options={levels}
-          onChange={option => formik.setFieldValue('level', option.value)}
+          onChange={(option) => formik.setFieldValue('level', option.value)}
         />
         <Select
-          label='Idioma'
+          label="Idioma"
           options={languages}
-          onChange={option => formik.setFieldValue('language', option.value)}
+          onChange={(option) => formik.setFieldValue('language', option.value)}
         />
       </div>
       <div className={styles['text']}>
         <TextArea
-          placeholder='Pueden se puntos claves del curso'
-          label='Que aprenderán los estudiantes?'
+          placeholder="Pueden se puntos claves del curso"
+          label="Que aprenderán los estudiantes?"
           name="learn_goals"
-          onChange={(e: any) => { formik.handleChange(e); }}
+          onChange={formik.handleChange}
           value={formik.values.learn_goals}
           onBlur={formik.handleBlur}
           rows={5}
         />
         <TextArea
-          label='Requerimientos'
-          placeholder='Los estudiantes necesitan algún recurso antes de tomar este curso'
+          label="Requerimientos"
+          placeholder="Los estudiantes necesitan algún recurso antes de tomar este curso"
           name="requirements"
-          onChange={(e: any) => { formik.handleChange(e); }}
+          onChange={formik.handleChange}
           value={formik.values.requirements}
           onBlur={formik.handleBlur}
           rows={5}
         />
       </div>
-    </div>
+      <div className={styles['footer']}>
+        <Button title="Cancelar" color={ColorsButton.white} />
+        <Button
+          title="Actualizar información"
+          color={ColorsButton.secondary}
+          type={TypeButton.submit}
+        />
+      </div>
+    </form>
   );
 }
 

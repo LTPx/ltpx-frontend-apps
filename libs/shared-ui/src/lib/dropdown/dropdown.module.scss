@@ -6,6 +6,7 @@
   &:hover {
     .content {
       visibility: inherit;
+      z-index: 10;
     }
   }
 

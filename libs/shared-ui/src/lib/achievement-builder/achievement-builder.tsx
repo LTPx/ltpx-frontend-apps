@@ -1,47 +1,70 @@
-import { useState } from 'react';
-import { Dialog } from 'evergreen-ui';
 import AchievementByQuizzesForm from '../achievement-by-quizzes--form/achievement-by-quizzes--form';
 import AchievementByScoreForm from '../achievement-by-score-form/achievement-by-score-form';
 import AchievementTaskForm from '../achievement-task-form/achievement-task-form';
-import Button, { ColorsButton } from '../button/button';
 import styles from './achievement-builder.module.scss';
+import {
+  NewAchievementParams,
+  QuizModel,
+  TypeAchievement,
+} from '@ltpx-frontend-apps/api';
 
 /* eslint-disable-next-line */
 export interface AchievementBuilderProps {
-  open?: boolean;
-  onClose?: () => void;
-  onSubmit?: () => void;
-  nameQuiz?: string;
+  quizzes: QuizModel[];
+  typeAchievement?: TypeAchievement;
+  onSubmit?: (achievement: NewAchievementParams) => void;
+  onCancel?: () => void;
 }
 
 export function AchievementBuilder(props: AchievementBuilderProps) {
-  const { open, onClose, onSubmit } = props;
-  const [openTest, setOpenTest] = useState(false);
+  const { onSubmit, onCancel, quizzes, typeAchievement } = props;
+  const saveNewAchievement = (achievement: NewAchievementParams) => {
+    onSubmit && onSubmit(achievement);
+  };
+
   return (
-    <Dialog
-      isShown={open}
-      title="Agregar Achievement"
-      onCloseComplete={onClose}
-      hasFooter={false}
-    >
-      <div className={styles['container']}>
-        {/* <Button
-          title="+ Achievement"
-          color={ColorsButton.primary}
-          onClick={() => {
-            setOpenTest(true);
-          }}
-        /> */}
-        <AchievementByQuizzesForm
-          singleSelection={true}
-          onSubmit={() => {
-            setOpenTest(false);
-          }}
-        />
-        <AchievementTaskForm />
-        <AchievementByScoreForm singleSelection={true} />
-      </div>
-    </Dialog>
+    <div className={styles['container']}>
+      {typeAchievement && (
+        <div className={styles['achievement-form']}>
+          {typeAchievement === TypeAchievement.multiple && (
+            <AchievementByQuizzesForm
+              quizzes={quizzes}
+              onSubmit={(data) => {
+                saveNewAchievement(data);
+              }}
+              onCancel={onCancel}
+            />
+          )}
+          {typeAchievement === TypeAchievement.single && (
+            <AchievementByQuizzesForm
+              singleSelection={true}
+              quizzes={quizzes}
+              onSubmit={(data) => {
+                saveNewAchievement(data);
+              }}
+              onCancel={onCancel}
+            />
+          )}
+          {typeAchievement === TypeAchievement.score && (
+            <AchievementByScoreForm
+              quizzes={quizzes}
+              onSubmit={(data) => {
+                saveNewAchievement(data);
+              }}
+              onCancel={onCancel}
+            />
+          )}
+          {typeAchievement === TypeAchievement.task && (
+            <AchievementTaskForm
+              onSubmit={(data) => {
+                saveNewAchievement(data);
+              }}
+              onCancel={onCancel}
+            />
+          )}
+        </div>
+      )}
+    </div>
   );
 }
 

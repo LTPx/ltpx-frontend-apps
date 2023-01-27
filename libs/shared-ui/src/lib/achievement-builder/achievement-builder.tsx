@@ -1,4 +1,4 @@
-import AchievementByQuizzesForm from '../achievement-by-quizzes--form/achievement-by-quizzes--form';
+import AchievementByQuizzesForm from '../achievement-by-quizzes-form/achievement-by-quizzes-form';
 import AchievementByScoreForm from '../achievement-by-score-form/achievement-by-score-form';
 import AchievementTaskForm from '../achievement-task-form/achievement-task-form';
 import styles from './achievement-builder.module.scss';

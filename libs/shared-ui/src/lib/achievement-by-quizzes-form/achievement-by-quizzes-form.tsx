@@ -1,4 +1,4 @@
-import styles from './achievement-by-quizzes--form.module.scss';
+import styles from './achievement-by-quizzes-form.module.scss';
 import SelectImage from '../select-image/select-image';
 import Input from '../input/input';
 import Button, { ColorsButton, TypeButton } from '../button/button';

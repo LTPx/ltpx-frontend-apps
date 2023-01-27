@@ -22,25 +22,13 @@
   }
 
   .content {
-    .course-sections {
-      border-right: 1px solid #d4d4d4;
-    }
-
-    .course-section-content {
+    .section-content {
       flex-grow: 1;
       padding: 2rem 8rem;
 
       .section-gray {
         padding: 2rem 8rem;
         background-color: #f9fafb;
-      }
-
-      .section {
-        display: none;
-
-        &.selected {
-          display: initial;
-        }
       }
     }
   }

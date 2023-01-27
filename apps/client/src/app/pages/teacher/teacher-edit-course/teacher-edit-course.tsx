@@ -100,10 +100,11 @@ export function TeacherEditCourse(props: TeacherEditCourseProps) {
           </div>
           <div className={styles['content']}>
             <Tabs tabs={linksEditCourse} onClickTab={(index)=>{
+              console.log('indexS: ', index);
               setIndexSelectedView(index);
             }}/>
-            <div className={styles['course-section-content']}>
-              <section className={`${styles['section']} ${indexSelectedView === 0 ? styles['selected'] : ''}`}>
+            <div className={styles['section-content']}>
+              { indexSelectedView === 0 && (
                 <CourseGeneralInformation
                   title={course.title}
                   cover={course.cover_url}
@@ -117,8 +118,8 @@ export function TeacherEditCourse(props: TeacherEditCourseProps) {
                     saveChanges(data);
                   }}
                 />
-              </section>
-              <section className={`${styles['section']} ${indexSelectedView === 1 ? styles['selected'] : ''}`}>
+              )}
+              { indexSelectedView === 1 && (
                 <CourseContents contents={course.contents} onSubmit={(content)=>{
                   const contents = course.contents || [];
                   saveChanges({
@@ -126,21 +127,21 @@ export function TeacherEditCourse(props: TeacherEditCourseProps) {
                     contents: contents.concat([content])
                   });
                 }}/>
-              </section>
-              <section className={`${styles['section']} ${indexSelectedView === 2 ? styles['selected'] : ''}`}>
+              )}
+              { indexSelectedView === 2 && (
                 <Quiz
                   courseId={course.id}
                   initialQuizzes={course.quizzes || []}
                 />
-              </section>
-              <section className={`${styles['section']} ${indexSelectedView === 3 ? styles['selected'] : ''}`}>
+              )}
+              { indexSelectedView === 3 && (
                 <Achievement
                   quizzes={course.quizzes || [] }
                   courseId={course.id}
                   initialAchievements={course.achievements || []}
                 />
-              </section>
-              <section className={`${styles['section']} ${indexSelectedView === 4 ? styles['selected'] : ''}`}>
+              )}
+              { indexSelectedView === 4 && (
                 <TeacherClasses
                   initialClassroom={course.classroom}
                   onSubmit={(classroom) => {
@@ -150,7 +151,7 @@ export function TeacherEditCourse(props: TeacherEditCourseProps) {
                     })
                   }}
                 />
-              </section>
+              )}
             </div>
           </div>
         </div>

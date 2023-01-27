@@ -5,11 +5,11 @@ import { useParams } from 'react-router-dom';
 
 import styles from './teacher-edit-course.module.scss';
 import CourseGeneralInformation from '../course/course-general-information/course-general-information';
-import TeacherClasses from '../teacher-classes/teacher-classes';
-import Quiz from '../quiz/quiz';
-import Achievement from '../achievement/achievement';
 import CourseContents from '../course/course-contents/course-contents';
 import { useCourse, useTeacher } from '../../../store';
+import CourseAchievements from '../course/course-achievements/course-achievements';
+import CourseQuizzes from '../course/course-quizzes/course-quizzes';
+import CourseClassroom from '../course/course-classroom/course-classroom';
 
 const linksEditCourse = [
   { selected: true, text: 'Detalles' },
@@ -129,20 +129,20 @@ export function TeacherEditCourse(props: TeacherEditCourseProps) {
                 }}/>
               )}
               { indexSelectedView === 2 && (
-                <Quiz
+                <CourseQuizzes
                   courseId={course.id}
                   initialQuizzes={course.quizzes || []}
                 />
               )}
               { indexSelectedView === 3 && (
-                <Achievement
+                <CourseAchievements
                   quizzes={course.quizzes || [] }
                   courseId={course.id}
                   initialAchievements={course.achievements || []}
                 />
               )}
               { indexSelectedView === 4 && (
-                <TeacherClasses
+                <CourseClassroom
                   initialClassroom={course.classroom}
                   onSubmit={(classroom) => {
                     saveChanges({

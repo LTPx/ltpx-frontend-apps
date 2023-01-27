@@ -1,10 +1,10 @@
 import { render } from '@testing-library/react';
 
-import Achievement from './achievement';
+import CourseQuizzes from './course-quizzes';
 
-describe('Achievement', () => {
+describe('CourseQuizzes', () => {
   it('should render successfully', () => {
-    const { baseElement } = render(<Achievement />);
+    const { baseElement } = render(<CourseQuizzes />);
     expect(baseElement).toBeTruthy();
   });
 });

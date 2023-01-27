@@ -9,18 +9,18 @@ import {
   SnackbarPosition,
   SnackbarType,
 } from '@ltpx-frontend-apps/shared-ui';
+import { useTeacher } from 'apps/client/src/app/store';
 import { useState } from 'react';
-import { useTeacher } from '../../../store';
-import styles from './quiz.module.scss';
+import styles from './course-quizzes.module.scss';
 
 /* eslint-disable-next-line */
-export interface QuizProps {
+export interface CourseQuizzesProps {
   courseId: number;
   initialQuizzes: NewQuizParams[];
   onSubmit?: (quiz: QuestionQuiz) => void;
 }
 
-export function Quiz(props: QuizProps) {
+export function CourseQuizzes(props: CourseQuizzesProps) {
   const { courseId, initialQuizzes } = props;
   const [ showNotification, setShowNotification ] = useState(false);
   const [ showForm, setShowForm ] = useState(false);
@@ -133,4 +133,4 @@ export function Quiz(props: QuizProps) {
   );
 }
 
-export default Quiz;
+export default CourseQuizzes;

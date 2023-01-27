@@ -14,18 +14,18 @@ import {
   SnackbarPosition,
   SnackbarType,
 } from '@ltpx-frontend-apps/shared-ui';
+import { useTeacher } from 'apps/client/src/app/store';
 import { useState } from 'react';
-import { useTeacher } from '../../../store';
-import styles from './achievement.module.scss';
+import styles from './course-achievements.module.scss';
 
 /* eslint-disable-next-line */
-export interface AchievementProps {
+export interface CourseAchievementsProps {
   courseId: number;
   initialAchievements: NewAchievementParams[];
   quizzes: QuizModel[];
 }
 
-export function Achievement(props: AchievementProps) {
+export function CourseAchievements(props: CourseAchievementsProps) {
   const { courseId, initialAchievements, quizzes } = props;
   const [showNotification, setShowNotification] = useState(false);
   const [achievements, setAchievements] =
@@ -170,4 +170,4 @@ export function Achievement(props: AchievementProps) {
   );
 }
 
-export default Achievement;
+export default CourseAchievements;

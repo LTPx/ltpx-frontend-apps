@@ -2,15 +2,14 @@ import { Routes, Route, BrowserRouter, Navigate } from "react-router-dom";
 import {
   Earnings,
   ManageCourses,
-  NewCourse,
   TeacherAccount,
   TeacherApply,
   TeacherCourseDetail,
   TeacherCourses,
   TeacherDashboard,
+  TeacherEditCourse,
   TeacherLayout
 } from "../pages/teacher";
-import TeacherEditCourse from "../pages/teacher/teacher-edit-course/teacher-edit-course";
 import TeacherQuizzesPage from "../pages/teacher/teacher-quizzes-page/teacher-quizzes-page";
 import { ProtectedRoutesTeacher } from "./guards/protected-routes-teacher/protected-routes-teacher";
 
@@ -33,7 +32,6 @@ export const TeacherRoutes = () => {
             <Route path="/teacher/courses" element={<Navigate replace to="all" />} />
             <Route path=":courseId" element={<TeacherCourseDetail/>}/>
             <Route path="all" element={<TeacherCourses/>}/>
-            <Route path="new" element={<NewCourse/>}/>
             <Route path="edit/:courseId" element={<TeacherEditCourse/>}/>
           </Route>
         </Route>

@@ -6,15 +6,15 @@ import {
   SetupCard,
 } from '@ltpx-frontend-apps/shared-ui';
 import { useState } from 'react';
-import styles from './teacher-classes.module.scss';
+import styles from './course-classroom.module.scss';
 
 /* eslint-disable-next-line */
-export interface TeacherClassesProps {
+export interface CourseClassroomProps {
   onSubmit?: (classroom: Classroom) => void;
   initialClassroom?: Classroom;
 }
 
-export function TeacherClasses(props: TeacherClassesProps) {
+export function CourseClassroom(props: CourseClassroomProps) {
   const { onSubmit, initialClassroom } = props;
   const [classroom, setClassroom] = useState<Classroom | null>(initialClassroom || null);
   const [openModal, setOpenModal] = useState(false);
@@ -80,4 +80,4 @@ export function TeacherClasses(props: TeacherClassesProps) {
   );
 }
 
-export default TeacherClasses;
+export default CourseClassroom;

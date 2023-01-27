@@ -10,6 +10,7 @@ export * from './lib/interfaces/user-interface';
 export * from './lib/interfaces/quiz-interface';
 export * from './lib/interfaces/teacher-interface';
 export * from './lib/interfaces/achievement-interface';
+export * from './lib/interfaces/api-response-ui-interface';
 
 //fake api
 export * from '../src/lib/fake/courses';

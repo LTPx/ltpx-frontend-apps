@@ -1,15 +1,31 @@
-import { CourseApiParams, CourseStatus, getTeacherCourse, TeacherCourse } from '@ltpx-frontend-apps/api';
-import { Button, ColorsButton, ColorsTag, Snackbar, SnackbarPosition, SnackbarType, Tabs, Tag, TypeButton } from '@ltpx-frontend-apps/shared-ui';
+import {
+  CourseApiParams,
+  CourseStatus,
+  getTeacherCourse,
+  TeacherCourse,
+} from '@ltpx-frontend-apps/api';
+import {
+  Button,
+  ColorsButton,
+  ColorsTag,
+  Snackbar,
+  SnackbarPosition,
+  SnackbarType,
+  Tabs,
+  Tag,
+  TypeButton,
+} from '@ltpx-frontend-apps/shared-ui';
+import {
+  CourseAchievements,
+  CourseClassroom,
+  CourseContents,
+  CourseGeneralInformation,
+  CourseQuizzes,
+} from '../course';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-
-import styles from './teacher-edit-course.module.scss';
-import CourseGeneralInformation from '../course/course-general-information/course-general-information';
-import CourseContents from '../course/course-contents/course-contents';
 import { useCourse, useTeacher } from '../../../store';
-import CourseAchievements from '../course/course-achievements/course-achievements';
-import CourseQuizzes from '../course/course-quizzes/course-quizzes';
-import CourseClassroom from '../course/course-classroom/course-classroom';
+import styles from './teacher-edit-course.module.scss';
 
 const linksEditCourse = [
   { selected: true, text: 'Detalles' },
@@ -19,15 +35,12 @@ const linksEditCourse = [
   { selected: false, text: 'Sesiones' },
 ];
 
-/* eslint-disable-next-line */
-export interface TeacherEditCourseProps {}
-
-export function TeacherEditCourse(props: TeacherEditCourseProps) {
-  const [ showNotification, setShowNotification ] = useState(false);
-  const [ course, setCourse ] = useState<TeacherCourse>();
-  const [ indexSelectedView, setIndexSelectedView ] = useState(0);
+export function TeacherEditCourse() {
+  const [showNotification, setShowNotification] = useState(false);
+  const [indexSelectedView, setIndexSelectedView] = useState(0);
+  const [course, setCourse] = useState<TeacherCourse>();
   const params = useParams();
-  const { editCourse } = useTeacher();
+  const { editCourse, getCourse } = useTeacher();
   const { translateStatus } = useCourse();
 
   const { courseId } = params;
@@ -36,7 +49,8 @@ export function TeacherEditCourse(props: TeacherEditCourseProps) {
     let mounted = true;
     try {
       if (courseId) {
-        getTeacherCourse(courseId).then((course) => {
+        const id = parseInt(courseId);
+        getTeacherCourse(id).then((course) => {
           if (mounted) {
             setCourse(course);
             console.log('course: ', course);
@@ -51,9 +65,9 @@ export function TeacherEditCourse(props: TeacherEditCourseProps) {
     };
   }, []);
 
-  const saveChanges = async(formData: CourseApiParams) => {
+  const saveChanges = async (formData: CourseApiParams) => {
     if (course) {
-      const data = {...formData, ...{ id: course.id }}
+      const data = { ...formData, ...{ id: course.id } };
       delete data.cover_url;
       console.log('formData edit: ', data);
       const result = await editCourse(data);
@@ -64,11 +78,11 @@ export function TeacherEditCourse(props: TeacherEditCourseProps) {
         console.log(result.data);
       }
     }
-  }
+  };
 
   return (
     <div className={styles['container']}>
-      { course && (
+      {course && (
         <div className={styles['container']}>
           <div className={styles['header']}>
             <div className={styles['title']}>
@@ -76,7 +90,9 @@ export function TeacherEditCourse(props: TeacherEditCourseProps) {
               <Tag
                 text={translateStatus(course.status)}
                 color={
-                  course.status === CourseStatus.publish ? ColorsTag.green : ColorsTag.gray
+                  course.status === CourseStatus.publish
+                    ? ColorsTag.green
+                    : ColorsTag.gray
                 }
                 icon={course.status === CourseStatus.publish ? 'globe' : 'edit'}
               />
@@ -92,19 +108,22 @@ export function TeacherEditCourse(props: TeacherEditCourseProps) {
                 title="Enviar a revision"
                 color={ColorsButton.primary}
                 type={TypeButton.submit}
-                onClick={()=>{
-                  console.log('send to review')
+                onClick={() => {
+                  console.log('send to review');
                 }}
               />
             </div>
           </div>
           <div className={styles['content']}>
-            <Tabs tabs={linksEditCourse} onClickTab={(index)=>{
-              console.log('indexS: ', index);
-              setIndexSelectedView(index);
-            }}/>
+            <Tabs
+              tabs={linksEditCourse}
+              onClickTab={(index) => {
+                console.log('indexS: ', index);
+                setIndexSelectedView(index);
+              }}
+            />
             <div className={styles['section-content']}>
-              { indexSelectedView === 0 && (
+              {indexSelectedView === 0 && (
                 <CourseGeneralInformation
                   title={course.title}
                   cover={course.cover_url}
@@ -114,41 +133,44 @@ export function TeacherEditCourse(props: TeacherEditCourseProps) {
                   level={course.level}
                   learn_goals={course.learn_goals}
                   requirements={course.requirements}
-                  onSubmit={(data)=>{
+                  onSubmit={(data) => {
                     saveChanges(data);
                   }}
                 />
               )}
-              { indexSelectedView === 1 && (
-                <CourseContents contents={course.contents} onSubmit={(content)=>{
-                  const contents = course.contents || [];
-                  saveChanges({
-                    title: course.title,
-                    contents: contents.concat([content])
-                  });
-                }}/>
+              {indexSelectedView === 1 && (
+                <CourseContents
+                  contents={course.contents}
+                  onSubmit={(content) => {
+                    const contents = course.contents || [];
+                    saveChanges({
+                      title: course.title,
+                      contents: contents.concat([content]),
+                    });
+                  }}
+                />
               )}
-              { indexSelectedView === 2 && (
+              {indexSelectedView === 2 && (
                 <CourseQuizzes
                   courseId={course.id}
                   initialQuizzes={course.quizzes || []}
                 />
               )}
-              { indexSelectedView === 3 && (
+              {indexSelectedView === 3 && (
                 <CourseAchievements
-                  quizzes={course.quizzes || [] }
+                  quizzes={course.quizzes || []}
                   courseId={course.id}
                   initialAchievements={course.achievements || []}
                 />
               )}
-              { indexSelectedView === 4 && (
+              {indexSelectedView === 4 && (
                 <CourseClassroom
                   initialClassroom={course.classroom}
                   onSubmit={(classroom) => {
                     saveChanges({
                       title: course.title,
-                      classroom: classroom
-                    })
+                      classroom: classroom,
+                    });
                   }}
                 />
               )}

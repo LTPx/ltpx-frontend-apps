@@ -15,6 +15,7 @@ export const useTeacher = () => {
     myQuizzes,
     createQuiz,
     createAchievement,
+    getCourse,
   } = useAppStore();
 
   return {
@@ -31,5 +32,6 @@ export const useTeacher = () => {
     myQuizzes,
     createQuiz,
     createAchievement,
+    getCourse,
   }
 }

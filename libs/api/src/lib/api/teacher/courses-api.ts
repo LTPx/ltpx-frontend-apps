@@ -47,7 +47,7 @@ export const editCourse = async (course: CourseApiParams) => {
   });
 };
 
-export const getTeacherCourse = async (courseId: string) => {
+export const getTeacherCourse = async (courseId: number) => {
   return new Promise<TeacherCourse>((resolve, reject) => {
     http
       .get(`api/v1/teacher/courses/${courseId}`)

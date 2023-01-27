@@ -69,38 +69,39 @@ export function CourseDetails(props: CourseDetailsProps) {
               </div>
             </div>
             <div className={styles['description-course']}>
-              <div className={styles['avatar']} >
-              <Avatar
-                image={courseDetails.instructor.image}
-                size={AvatarSize.medium}
-                outline={true}
-              />
+              <div className={styles['avatar']}>
+                <Avatar
+                  image={courseDetails.instructor.image}
+                  size={AvatarSize.medium}
+                  outline={true}
+                />
               </div>
-              <div className={styles['items']} >
-              <div className={styles['item']}>
-                <label htmlFor="creator">Instructor</label>
-                <h5>{courseDetails.instructor.name}</h5>
-              </div>
-              <div className={styles['item']}>
-                <label htmlFor="creator">Categories</label>
-                <h5>{courseDetails.course.category}</h5>
-              </div>
-              <div className={styles['item']}>
-                <label htmlFor="creator">Review</label>
-                <div className={styles['rating']}>
-                  <Rating stars={courseDetails.course.stars} />
+              <div className={styles['items']}>
+                <div className={styles['item']}>
+                  <label htmlFor="creator">Instructor</label>
+                  <h5>{courseDetails.instructor.name}</h5>
                 </div>
-              </div>
+                <div className={styles['item']}>
+                  <label htmlFor="creator">Categories</label>
+                  <h5>{courseDetails.course.category}</h5>
+                </div>
+                <div className={styles['item']}>
+                  <label htmlFor="creator">Review</label>
+                  <div className={styles['rating']}>
+                    <Rating stars={courseDetails.course.stars} />
+                  </div>
+                </div>
               </div>
             </div>
             <div className={styles['summary-course']}>
-              {/* <Tabs
+              <Tabs
+                className={styles['tabs']}
                 tabs={tabs}
                 isNav={false}
                 onClickTab={(option) => handleClick(option)}
-              /> */}
-              {/* {selectedTab === 0 && <OverviewCourse />} */}
-              {/* {selectedTab === 1 && (
+              />
+              {selectedTab === 0 && <OverviewCourse />}
+              {selectedTab === 1 && (
                 <CourseContents contents={courseDetails.contents} />
               )}
               {selectedTab === 2 && (
@@ -114,27 +115,29 @@ export function CourseDetails(props: CourseDetailsProps) {
                   biography={courseDetails.instructor.biography}
                   image={courseDetails.instructor.image}
                 />
-              )} */}
-              {/* {selectedTab === 3 && (
+              )}
+              {selectedTab === 3 && (
                 <>
                   <RatingCourse ratings={courseDetails.ratings}></RatingCourse>
-                  {courseDetails.comments.map((comment, index) => (
-                    <CommentCourse
-                      reviewTitle={comment.title}
-                      name={comment.name}
-                      comment={comment.comment}
-                      date={comment.date}
-                      key={index}
-                      image={comment.image}
-                    />
-                  ))}
+                  <div className={styles['comment-course']}>
+                    {courseDetails.comments.map((comment, index) => (
+                      <CommentCourse
+                        reviewTitle={comment.title}
+                        name={comment.name}
+                        comment={comment.comment}
+                        date={comment.date}
+                        key={index}
+                        image={comment.image}
+                      />
+                    ))}
+                  </div>
                   <ReviewForm />
                 </>
-              )} */}
+              )}
             </div>
           </div>
         </div>
-        {/* <BuyCourseCard
+        <BuyCourseCard
           price={courseDetails.course.price}
           discount={courseDetails.course.discount}
           achievements={courseDetails.course.achievements}
@@ -146,7 +149,7 @@ export function CourseDetails(props: CourseDetailsProps) {
           image={courseDetails.course.image}
           onClickBuy={addToCart}
           onClickEnroll={enrolled}
-        /> */}
+        />
       </div>
     </div>
   );

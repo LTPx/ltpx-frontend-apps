@@ -3,22 +3,12 @@
 .container {
   .buy-card {
     padding: 10px;
-
     background-color: $white-color;
     box-shadow: $card-shadow-strong;
     border: 1px solid $stroke-color;
 
     img {
       width: 300px;
-    }
-    @media screen and (max-width: 500px) {
-
-      img {
-        width: 100%;
-        height: 350px;
-        object-fit: cover;
-      }
-      
     }
     .summary {
       padding: 15px;
@@ -81,5 +71,18 @@
         }
       }
     }
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .container {
+    display: flex;
+    justify-content: center;
+    padding-bottom: 3rem;
+  }
+  img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
   }
 }

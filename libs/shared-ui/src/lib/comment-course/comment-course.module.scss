@@ -2,7 +2,7 @@
 
 .container {
   display: flex;
-  width: 100%;
+  // width: 100%;
   padding-top: $size-lg-3;
   padding-bottom: $size-lg-3;
 
@@ -34,5 +34,18 @@
       color: $text-gray-color;
       text-align: justify;
     }
+  }
+}
+@media screen and (max-width: 500px) {
+  .container{
+    width: 100%;
+    padding: 1rem 2rem;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
+  .comment-content {
+    padding: 0;
+    width: 15rem;
   }
 }

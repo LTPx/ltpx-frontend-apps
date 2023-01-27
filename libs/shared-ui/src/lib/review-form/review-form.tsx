@@ -23,7 +23,7 @@ export function ReviewForm(props: ReviewFormProps) {
           </div>
           <div className={styles['textArea']}>
             <h4>Review Content</h4>
-            <TextArea rows={10} cols={62}></TextArea>
+            <TextArea rows={10} ></TextArea>
           </div>
           <Button
             className={styles['button']}

@@ -61,3 +61,37 @@
     padding-top: $size-md-1;
   }
 }
+
+@media screen and (max-width: 500px) {
+  .container {
+    width: 85%;
+    h3 {
+      text-align: center;
+    }
+  }
+  .teacher-photo-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem !important;
+    .information-photo-container {
+      text-align: center;
+    }
+  }
+  .teacher-review-information {
+    display: flex;
+    justify-content: center;
+    gap: 1rem !important;
+    .review-information {
+      display: flex;
+      flex-direction: column;
+      .icon {
+        padding-right: 0 !important;
+      }
+
+      h4 {
+        padding-right: 0 !important;
+        font-size: 12px;
+      }
+    }
+  }
+}

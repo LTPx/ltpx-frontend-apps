@@ -19,7 +19,7 @@ export function TeacherAccount(props: TeacherAccountProps) {
 
   const clickFunction = async(data: IUserAccount) => {
     const response = await updateProfile(data);
-    if (response.saved) {
+    if (response.success) {
       console.log(response);
       setShowMessage(true);
     } else {

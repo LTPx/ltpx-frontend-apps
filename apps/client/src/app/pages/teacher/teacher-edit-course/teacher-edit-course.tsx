@@ -22,7 +22,7 @@ import {
   CourseGeneralInformation,
   CourseQuizzes,
 } from '../course';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useCourse, useTeacher } from '../../../store';
 import styles from './teacher-edit-course.module.scss';
@@ -38,32 +38,48 @@ const linksEditCourse = [
 export function TeacherEditCourse() {
   const [showNotification, setShowNotification] = useState(false);
   const [indexSelectedView, setIndexSelectedView] = useState(0);
-  const [course, setCourse] = useState<TeacherCourse>();
+  // const [course, setCourse] = useState<TeacherCourse>();
   const params = useParams();
-  const { editCourse, getCourse } = useTeacher();
+  const { editCourse, getCourse, course } = useTeacher();
   const { translateStatus } = useCourse();
 
   const { courseId } = params;
+  const id = parseInt(courseId || '');
+
+  const fetchData = useCallback(async () => {
+    console.log('calling....');
+    await getCourse(id);
+    // const resp = await getCourse(id);
+    // if (resp.success) {
+    //   setCourse(resp.data)
+    // } else {
+    //   console.log(resp.error)
+    // }
+  }, [])
 
   useEffect(() => {
-    let mounted = true;
-    try {
-      if (courseId) {
-        const id = parseInt(courseId);
-        getTeacherCourse(id).then((course) => {
-          if (mounted) {
-            setCourse(course);
-            console.log('course: ', course);
-          }
-        });
-      }
-    } catch (error) {
-      console.log(error);
-    }
-    return () => {
-      mounted = false;
-    };
-  }, []);
+    fetchData()
+  }, [fetchData])
+
+  // useEffect(() => {
+  //   let mounted = true;
+  //   try {
+  //     if (courseId) {
+  //       const id = parseInt(courseId);
+  //       getTeacherCourse(id).then((course) => {
+  //         if (mounted) {
+  //           setCourse(course);
+  //           console.log('course: ', course);
+  //         }
+  //       });
+  //     }
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  //   return () => {
+  //     mounted = false;
+  //   };
+  // }, []);
 
   const saveChanges = async (formData: CourseApiParams) => {
     if (course) {
@@ -71,8 +87,8 @@ export function TeacherEditCourse() {
       delete data.cover_url;
       console.log('formData edit: ', data);
       const result = await editCourse(data);
-      if (result.saved) {
-        console.log('saved');
+      if (result.success) {
+        console.log('success');
         setShowNotification(true);
       } else {
         console.log(result.data);

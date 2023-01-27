@@ -85,9 +85,9 @@ export function TeacherCourses(props: TeacherCoursesProps) {
 
   const saveNewCourse = async(newCourseParams: any) => {
     setOpenModal(false);
-    const { saved, data } = await createCourse(newCourseParams);
+    const { success, data } = await createCourse(newCourseParams);
     const { id } = data;
-    if (saved) {
+    if (success) {
       navigate(`/teacher/courses/edit/${id}`);
     } else {
       console.log('error: ', data);

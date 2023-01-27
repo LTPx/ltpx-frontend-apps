@@ -27,3 +27,36 @@
   grid-auto-rows: 22rem;
   grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
 }
+
+@media screen and (max-width: 500px) {
+  .container {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .cover {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .courses-container {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 1rem 6rem;
+
+    .filters-container {
+    width: 100%;
+    box-sizing: border-box;
+    }
+  }
+  .courses {
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    padding-bottom: 2rem;
+  }
+
+
+}

@@ -9,3 +9,9 @@
 .content {
   max-width: 30rem;
 }
+
+@media screen and (max-width: 500px) {
+  .content {
+    width: 75%;
+  }
+}

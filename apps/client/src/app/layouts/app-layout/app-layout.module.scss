@@ -20,3 +20,28 @@
     grid-area: footer;
   }
 }
+@media screen and (max-width: 500px) {
+  .layout {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .header {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .content {
+    width: 100%;
+    display: flex;
+    box-sizing: border-box;
+  }
+
+  .footer {
+    width: 100%;
+    display: flex;
+    box-sizing: border-box;
+  }
+
+
+}

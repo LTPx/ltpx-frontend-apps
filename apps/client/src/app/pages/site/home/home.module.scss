@@ -3,27 +3,21 @@
   height: 30rem;
 
   .cover {
-    display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    grid-template-rows: auto;
-    grid-template-areas:
-      ". t t i i .";
+    display: flex;
     align-items: center;
-
-    .info {
-      grid-area: t;
-    }
-
+    justify-content: center;
+    gap: 1rem;
     img {
-      grid-area: i;
       padding-top: 4rem;
-      max-width: 22rem;
+      max-width: 25rem;
     }
   }
 }
 
 .text {
   margin-bottom: 20px;
+  width: 30rem;
+  box-sizing: border-box;
 }
 
 .actions {
@@ -33,51 +27,63 @@
 
 .popular-courses-container {
   background-color: #f7f7f7;
-  display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  grid-template-rows: auto;
-  grid-template-areas:
-    "t t t t t t"
-    ". g g g g ."
-    "b b b b b b";
-  padding: 2rem 0;
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
   .text {
     text-align: center;
-    grid-area: t;
+    margin-top: 5rem;
   }
 
   .popular-courses {
-    display: grid;
-    grid-area: g;
-    gap: 1rem;
-    grid-auto-rows: 22rem;
-    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 80%;
+
+    .course {
+      height: 20rem;
+      width: 14rem;
+    }
   }
 
   .link-browser {
     margin-top: 2rem;
     text-align: center;
-    grid-area: b;
+    margin-bottom: 2rem;
   }
 }
 
 .categories-container {
   padding: 5rem 14rem;
+  width: 100%;
+  box-sizing: border-box;
   background-color: #fff;
   display: flex;
   justify-content: center;
   flex-direction: column;
   align-items: center;
 
+  .text-categories {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    h2 {
+      text-align: center;
+    }
+  }
   h4 {
     margin-top: 0px;
     margin-bottom: 40px;
   }
 }
 
-
-.category-content{
+.category-content {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -95,5 +101,63 @@
 }
 
 @media screen and (max-width: 500px) {
-  
+  .container {
+    width: 100%;
+    box-sizing: border-box;
+  }
+  .main-cover {
+    width: 100%;
+    height: auto;
+    box-sizing: border-box;
+    .cover {
+      display: flex;
+      width: 100%;
+      box-sizing: border-box;
+      .info {
+        display: flex;
+        width: 80%;
+        flex-direction: column;
+        justify-content: center;
+        padding-top: 4rem;
+        padding-bottom: 4rem;
+        box-sizing: border-box;
+      }
+      img {
+        display: none;
+      }
+      .text {
+        margin-bottom: 20px;
+        width: 20rem;
+        box-sizing: border-box;
+      }
+    }
+  }
+
+  .popular-courses-container {
+    .text {
+      width: 12rem;
+    }
+    .popular-courses {
+      width: 100%;
+      .course {
+        height: 19rem;
+        width: 20rem;
+      }
+    }
+  }
+
+  .categories-container {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 4rem 0;
+    .text-categories {
+      width: 15rem;
+      text-align: center;
+    }
+  }
+
+  .category-content {
+    // width: 100%;
+    box-sizing: border-box;
+  }
 }

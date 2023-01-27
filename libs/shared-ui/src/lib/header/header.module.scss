@@ -2,10 +2,11 @@
 
 .container-header {
   display: flex;
+  width: 100%;
+  box-sizing: border-box;
   justify-content: space-between;
   align-items: center;
   padding: 1.5rem 8rem;
-  grid-area: header;
   border-bottom: 1px solid #ebecef;
 }
 
@@ -57,7 +58,7 @@
   padding: 0.5rem;
   width: 40px;
   height: 40px;
-  border: 1px solid $stroke-color;
+  // border: 1px solid $stroke-color;
   border-radius: 4px;
 }
 .navbar:hover {
@@ -130,29 +131,42 @@
 }
 
 @media screen and (max-width: 550px) {
+  .container-header {
+    padding: 1rem 2rem;
+    border-bottom: 1px solid #ebecef;
+  }
+
+  .header-responsive {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .panel-container {
+    box-sizing: border-box;
+  }
+
+  .shopping {
+    display: flex;
+  }
+
+  .navbar {
+    display: flex;
+    // width: 100%;
+    justify-content: space-between;
+    align-items: center;
+  }
+
   .header-small {
     display: flex;
+    // width: 100%;
     justify-content: space-between;
   }
   .information {
     display: none;
   }
-  .container-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem 2rem;
-    border-bottom: 1px solid #ebecef;
-  }
-  .navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  .shopping {
-    display: flex;
-  }
-  .header-responsive {
-    display: flex;
+
+  .main-action {
+    display: none;
   }
 }

@@ -3,16 +3,9 @@
 .container {
   background-color: #2e4057;
   color: #f9fafb;
-  @media screen and (max-width: 400px) {
-    .container {
-      // display: flex;
-      // max-width: 100%;
-      // padding: 100;
-    }
-    
-  }
+  width: 100%;
 
-  .footer-content{
+  .footer-content {
     display: flex;
     justify-content: space-around;
     border-bottom: 1px solid #d8d8d8;
@@ -84,3 +77,25 @@
   }
 }
 
+@media screen and (max-width: 500px) {
+  .container {
+    width: 100%;
+    box-sizing: border-box;
+  }
+  .footer-content {
+    display: flex;
+    flex-direction: column;
+  }
+  .company-information {
+    padding: 0 2rem;
+    padding-bottom: 1rem;
+  }
+
+  .site-links {
+    padding: 0 2rem;
+    display: none !important;
+  }
+  .footer-end {
+    margin: 0 1rem;
+  }
+}

@@ -20,4 +20,11 @@
     margin-top: 1rem;
     background-color: #f7f7f7;
   }
+
+  .footer {
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-end;
+    padding: 1.5rem 0;
+  }
 }

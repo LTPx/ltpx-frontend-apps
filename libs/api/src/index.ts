@@ -5,9 +5,12 @@ export * from '../src/lib/locales/es';
 export * from '../src/lib/locales/en';
 
 //interfaces
-export * from '../src/lib/interfaces/course';
-export * from '../src/lib/interfaces/user';
-export * from '../src/lib/interfaces/teacher';
+export * from './lib/interfaces/course-interface';
+export * from './lib/interfaces/user-interface';
+export * from './lib/interfaces/quiz-interface';
+export * from './lib/interfaces/teacher-interface';
+export * from './lib/interfaces/achievement-interface';
+export * from './lib/interfaces/api-response-ui-interface';
 
 //fake api
 export * from '../src/lib/fake/courses';
@@ -18,7 +21,10 @@ export * from '../src/lib/fake/chat-messages';
 export * from '../src/lib/api/auth';
 export * from './lib/api/teacher/courses-api';
 export * from './lib/api/teacher/teacher-api';
+export * from './lib/api/teacher/quiz-api';
+export * from './lib/api/teacher/achievements-api';
 
 //constants
 export * from '../src/lib/constants/course-constants';
 export * from '../src/lib/constants/app-constants';
+export * from '../src/lib/constants/achievements-constants';

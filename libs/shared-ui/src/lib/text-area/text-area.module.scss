@@ -30,3 +30,8 @@
     font-size: 0.875rem;
   }
 }
+
+.textarea-container::placeholder {
+  color: $gray-color-400;
+  opacity: 1
+}

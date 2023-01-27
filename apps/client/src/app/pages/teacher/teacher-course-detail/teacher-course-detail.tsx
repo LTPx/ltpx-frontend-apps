@@ -63,7 +63,8 @@ export function TeacherCourseDetail(props: TeacherCourseDetailProps) {
     try {
       const { courseId } = params;
       if (courseId) {
-        getTeacherCourse(courseId).then((course) => {
+        const id = parseInt(courseId);
+        getTeacherCourse(id).then((course) => {
           if (mounted) {
             setCourse(course);
             console.log('course: ', course);
@@ -115,7 +116,7 @@ export function TeacherCourseDetail(props: TeacherCourseDetailProps) {
               isNav={false}
               onClickTab={(option) => handleClick(option)}
             />
-            {selectedTab === 0 && <CourseContents contents={course.contents} />}
+            {selectedTab === 0 && <CourseContents contents={course.contents || []} />}
             {selectedTab === 1 && <LearnersTable users={users} />}
             {selectedTab === 2 && <h1>Mostrar Estadísticas</h1>}
           </div>

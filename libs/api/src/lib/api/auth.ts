@@ -1,5 +1,5 @@
 import { setTokenAxios, _http } from "../http";
-import { ICurrentUser, IRegisterUser, UserResponse } from "../interfaces/user";
+import { ICurrentUser, IRegisterUser, UserResponse } from "../interfaces/user-interface";
 const http = _http;
 
 export interface Credentials {

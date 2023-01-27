@@ -1,0 +1,35 @@
+.container {
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+
+    .title {
+      display: flex;
+      gap: 1rem;
+    }
+
+    h3 {
+      font-weight: 500;
+    }
+
+    .actions {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+  }
+
+  .content {
+    .section-content {
+      flex-grow: 1;
+      padding: 2rem 8rem;
+
+      .section-gray {
+        padding: 2rem 8rem;
+        background-color: #f9fafb;
+      }
+    }
+  }
+}

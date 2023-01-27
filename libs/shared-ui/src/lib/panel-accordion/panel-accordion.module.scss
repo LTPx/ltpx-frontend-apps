@@ -41,7 +41,8 @@
 
     &.open {
       visibility: visible;
-      max-height: 15rem;
+      padding: $size-md-1;
+      max-height: 45rem;
     }
   }
 }

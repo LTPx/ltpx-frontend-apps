@@ -1,5 +1,6 @@
 import { _http } from '../../http';
-import { NewCourseApiParams, TeacherCourse } from '../../interfaces/course';
+import { CourseApiParams, TeacherCourse } from '../../interfaces/course-interface';
+import { QuizModel } from '../../interfaces/quiz-interface';
 import { moveToFormData } from '../../utils';
 
 const http = _http;
@@ -17,7 +18,7 @@ export const getTeacherCourses = async () => {
   });
 };
 
-export const createCourse = async (course: NewCourseApiParams) => {
+export const createCourse = async (course: CourseApiParams) => {
   return new Promise<TeacherCourse>((resolve, reject) => {
     const data = moveToFormData(course);
     http
@@ -31,10 +32,38 @@ export const createCourse = async (course: NewCourseApiParams) => {
   });
 };
 
-export const getTeacherCourse = async (courseId: string) => {
+export const editCourse = async (course: CourseApiParams) => {
+  return new Promise<TeacherCourse>((resolve, reject) => {
+    const { id } = course;
+    const data = moveToFormData(course);
+    http
+      .put(`api/v1/teacher/courses/${id}`, data)
+      .then((response) => {
+        resolve(response.data);
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
+};
+
+export const getTeacherCourse = async (courseId: number) => {
   return new Promise<TeacherCourse>((resolve, reject) => {
     http
       .get(`api/v1/teacher/courses/${courseId}`)
+      .then((response) => {
+        resolve(response.data);
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
+};
+
+export const getCourseQuizzes = async (courseId: number) => {
+  return new Promise<QuizModel[]>((resolve, reject) => {
+    http
+      .get(`api/v1/teacher/courses/${courseId}/quizzes`)
       .then((response) => {
         resolve(response.data);
       })

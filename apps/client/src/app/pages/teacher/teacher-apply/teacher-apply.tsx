@@ -20,17 +20,17 @@ import { Dialog } from 'evergreen-ui';
 export interface TeacherApplyProps {}
 
 export function TeacherApply(props: TeacherApplyProps) {
-  const [ saving, setSaving ] = useState(false);
-  const [ formData, setFormData ] = useState<ApplyTeachApiParams>();
-  const [ openConfirmationModal, setOpenConfirmationModal ] = useState(false);
-  const [ application, setApplication ] = useState<ApplicationTeach>();
+  const [saving, setSaving] = useState(false);
+  const [formData, setFormData] = useState<ApplyTeachApiParams>();
+  const [openConfirmationModal, setOpenConfirmationModal] = useState(false);
+  const [application, setApplication] = useState<ApplicationTeach>();
   const { applyTeach, teacher_account, getApplicationTeach } = useTeacher();
   const navigate = useNavigate();
 
   useEffect(() => {
     if (!application) {
       getApplicationTeach().then((resp) => {
-        const { ok, data} = resp;
+        const { ok, data } = resp;
         if (ok && data.status) {
           setApplication(resp.data);
         } else {
@@ -38,8 +38,8 @@ export function TeacherApply(props: TeacherApplyProps) {
         }
       });
     }
-    return () => {
-    };
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
+    return () => {};
   }, []);
 
   const handleSubmit = async () => {
@@ -47,7 +47,7 @@ export function TeacherApply(props: TeacherApplyProps) {
       setSaving(true);
       const { accepted, data } = await applyTeach(formData);
       setSaving(false);
-      setOpenConfirmationModal(false)
+      setOpenConfirmationModal(false);
       if (accepted) {
         navigate('/teacher/dashboard');
       } else {
@@ -61,7 +61,7 @@ export function TeacherApply(props: TeacherApplyProps) {
       <div className={`${styles['header']}`}>
         <h1>Aplicar para maestro en OpenMind</h1>
       </div>
-      { application?.status === StatusTeacherAccount.review && (
+      {application?.status === StatusTeacherAccount.review && (
         <ApplicationView application={application} />
       )}
       {teacher_account === StatusTeacherAccount.unapplied && (
@@ -86,18 +86,30 @@ export function TeacherApply(props: TeacherApplyProps) {
         hasFooter={false}
       >
         <div className={styles['dialog-confirm']}>
-          { !saving && (
+          {!saving && (
             <>
-              <h4>Por favor asegúrate que toda la información este correcta asi nos ayudaras a que el proceso sea lo mas rápido posible</h4>
+              <h4>
+                Por favor asegúrate que toda la información este correcta asi
+                nos ayudaras a que el proceso sea lo mas rápido posible
+              </h4>
               <div className={styles['footer']}>
-                <Button title='Cancelar' color={ColorsButton.white} onClick={()=>{ setOpenConfirmationModal(false)}}/>
-                <Button title='Enviar a revision' onClick={()=>{
-                  handleSubmit();
-                }}/>
+                <Button
+                  title="Cancelar"
+                  color={ColorsButton.white}
+                  onClick={() => {
+                    setOpenConfirmationModal(false);
+                  }}
+                />
+                <Button
+                  title="Enviar a revision"
+                  onClick={() => {
+                    handleSubmit();
+                  }}
+                />
               </div>
             </>
           )}
-          { saving && (
+          {saving && (
             <div className={styles['loading']}>
               <Loader />
               <h4>Estamos subiendo tus archivos...</h4>

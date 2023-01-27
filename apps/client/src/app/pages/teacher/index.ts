@@ -1,5 +1,4 @@
 export * from './teacher-layout/teacher-layout';
-export * from './earnings/earnings';
 export * from './manage-courses/manage-courses';
 export * from './teacher-account/teacher-account';
 export * from './teacher-dashboard/teacher-dashboard';
@@ -7,3 +6,4 @@ export * from './teacher-courses/teacher-courses';
 export * from './teacher-course-detail/teacher-course-detail';
 export * from './teacher-apply/teacher-apply';
 export * from './teacher-edit-course/teacher-edit-course';
+export * from './teacher-earnings/teacher-earnings';

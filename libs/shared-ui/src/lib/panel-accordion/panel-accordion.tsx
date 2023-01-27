@@ -29,7 +29,7 @@ export function PanelAccordion(props: PanelAccordionProps) {
         )}
       </div>
       <div className={`${styles['panel']} ${isOpen ? styles['open'] : ''}`}>
-        {children ? children : <p>{text}</p>}
+        {children ? children : <pre>{text}</pre>}
       </div>
     </div>
   );

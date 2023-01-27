@@ -110,4 +110,5 @@ export const CLASSROOMS = {
   flexible: CLASSROOM_FLEXIBLE,
   customize: CLASSROOM_CUSTOMIZE,
   none: CLASSROOM_NONE,
+  classes: CLASSROOM_NONE,
 }

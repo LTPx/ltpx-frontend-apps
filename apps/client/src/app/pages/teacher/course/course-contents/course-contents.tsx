@@ -60,7 +60,7 @@ export function CourseContents(props: CourseContentsProps) {
             <PanelAccordion title={element.title} text={element.description} key={key} />
           ))}
           <Button
-            title="+ Agregar otra contenido"
+            title="+ Agregar otro contenido"
             onClick={() => {
               setOpenModal(true);
             }}

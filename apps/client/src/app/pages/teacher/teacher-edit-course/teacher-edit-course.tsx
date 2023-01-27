@@ -84,7 +84,7 @@ export function TeacherEditCourse(props: TeacherEditCourseProps) {
             <div className={styles['actions']}>
               <h5 className="muted">Creado: Diciembre 21 2022</h5>
               <Button
-                title="Volver a cursos"
+                title="Guardar Borrador"
                 color={ColorsButton.accent}
                 link={'/teacher/courses/all'}
               />

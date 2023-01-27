@@ -18,6 +18,7 @@ import {
   NewQuizApiParams,
   editCourse,
   NewAchievementParams,
+  TeacherCourse,
 } from '@ltpx-frontend-apps/api';
 import { StateCreator } from 'zustand';
 import { StoreState } from '../store';
@@ -65,6 +66,7 @@ export type TeacherSlice = {
   application: ApplicationTeach | null;
   profile: IUserAccount | null;
   newQuiz: QuizModel;
+  currentCourse: TeacherCourse;
   applyTeach: (params: ApplyTeachApiParams) => Promise<any>;
   getApplicationTeach: () => Promise<any>;
   registerTeacher: (params: IRegisterUser) => Promise<TResponseLogin>;
@@ -87,6 +89,7 @@ export const createTeacherSlice: StateCreator<
   application: null,
   profile: null,
   newQuiz: {} as QuizModel,
+  currentCourse: {} as TeacherCourse,
   applyTeach: async (params: ApplyTeachApiParams): Promise<TResponseApply> => {
     try {
       const application = await applyToTeach(params);

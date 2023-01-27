@@ -1,5 +1,13 @@
+.container {
+  width: 100%;
+  box-sizing: border-box;
+}
+
 .cover {
   padding: 2rem 12rem;
+  .search-responsive {
+    display: none;
+  }
 }
 
 .filters-container {
@@ -22,41 +30,61 @@
 }
 
 .courses {
-  display: grid;
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 1rem;
-  grid-auto-rows: 22rem;
-  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  .course {
+    height: 20rem;
+    width: 14rem;
+  }
 }
 
 @media screen and (max-width: 500px) {
-  .container {
-    width: 100%;
-    box-sizing: border-box;
-  }
-
   .cover {
-    width: 100%;
-    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 3rem 0;
+    .search-responsive {
+      display: flex;
+      padding-top: 1rem;
+    }
   }
 
   .courses-container {
     width: 100%;
     box-sizing: border-box;
-    padding: 1rem 6rem;
+    padding: 2rem 0;
 
     .filters-container {
-    width: 100%;
-    box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      box-sizing: border-box;
+      margin: 0 0;
+      .text {
+        text-align: center;
+        padding-bottom: 1rem;
+      }
+      .filters {
+        display: flex;
+        justify-content: center;
+        gap: 0.5rem;
+        .search {
+          display: none;
+        }
+      }
     }
   }
   .courses {
-    width: 100%;
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
     gap: 2rem;
-    padding-bottom: 2rem;
+    padding: 2rem 0;
+
+    .course {
+      height: 19rem;
+      width: 20rem;
+    }
   }
-
-
 }

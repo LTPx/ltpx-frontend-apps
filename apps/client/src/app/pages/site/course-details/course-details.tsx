@@ -60,18 +60,23 @@ export function CourseDetails(props: CourseDetailsProps) {
         <div className={styles['description-container']}>
           <div className={styles['description']}>
             <div className={styles['description-title']}>
-              <h1>Learn Blockchain: Basic concepts and How to invest</h1>
-              <h4 className="muted">
-                Looking how to increase your incomes and learn about new digital
-                money
-              </h4>
+              <div className={styles['title']}>
+                <h1>Learn Blockchain: Basic concepts and How to invest</h1>
+                <h4 className="muted">
+                  Looking how to increase your incomes and learn about new
+                  digital money
+                </h4>
+              </div>
             </div>
             <div className={styles['description-course']}>
+              <div className={styles['avatar']} >
               <Avatar
                 image={courseDetails.instructor.image}
                 size={AvatarSize.medium}
                 outline={true}
               />
+              </div>
+              <div className={styles['items']} >
               <div className={styles['item']}>
                 <label htmlFor="creator">Instructor</label>
                 <h5>{courseDetails.instructor.name}</h5>
@@ -86,15 +91,16 @@ export function CourseDetails(props: CourseDetailsProps) {
                   <Rating stars={courseDetails.course.stars} />
                 </div>
               </div>
+              </div>
             </div>
             <div className={styles['summary-course']}>
-              <Tabs
+              {/* <Tabs
                 tabs={tabs}
                 isNav={false}
                 onClickTab={(option) => handleClick(option)}
-              />
-              {selectedTab === 0 && <OverviewCourse />}
-              {selectedTab === 1 && (
+              /> */}
+              {/* {selectedTab === 0 && <OverviewCourse />} */}
+              {/* {selectedTab === 1 && (
                 <CourseContents contents={courseDetails.contents} />
               )}
               {selectedTab === 2 && (
@@ -108,8 +114,8 @@ export function CourseDetails(props: CourseDetailsProps) {
                   biography={courseDetails.instructor.biography}
                   image={courseDetails.instructor.image}
                 />
-              )}
-              {selectedTab === 3 && (
+              )} */}
+              {/* {selectedTab === 3 && (
                 <>
                   <RatingCourse ratings={courseDetails.ratings}></RatingCourse>
                   {courseDetails.comments.map((comment, index) => (
@@ -124,11 +130,11 @@ export function CourseDetails(props: CourseDetailsProps) {
                   ))}
                   <ReviewForm />
                 </>
-              )}
+              )} */}
             </div>
           </div>
         </div>
-        <BuyCourseCard
+        {/* <BuyCourseCard
           price={courseDetails.course.price}
           discount={courseDetails.course.discount}
           achievements={courseDetails.course.achievements}
@@ -140,7 +146,7 @@ export function CourseDetails(props: CourseDetailsProps) {
           image={courseDetails.course.image}
           onClickBuy={addToCart}
           onClickEnroll={enrolled}
-        />
+        /> */}
       </div>
     </div>
   );

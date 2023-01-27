@@ -108,6 +108,9 @@ export function Quiz(props: QuizProps) {
             onSubmit={(data) => {
               handleCreateQuiz(data);
             }}
+            onClose={()=>{
+              setShowForm(false);
+            }}
           />
           <Button
             title="Cancelar"

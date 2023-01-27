@@ -9,12 +9,13 @@ import {
   QuizFormAnswer,
   QuizFormMultipleOptions,
 } from '@ltpx-frontend-apps/shared-ui';
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 import Button, { ColorsButton, TypeButton } from '../button/button';
 import Input from '../input/input';
 import QuizFormConditional from '../quiz-form-conditional/quiz-form-conditional';
 import styles from './quiz-builder.module.scss';
-
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
 /* eslint-disable-next-line */
 export interface QuizBuilderProps {
   onClose?: () => void;
@@ -24,20 +25,32 @@ export interface QuizBuilderProps {
 
 export function QuizBuilder(props: QuizBuilderProps) {
   const { onClose, onSubmit, className } = props;
-  const [ questionsQuiz, setQuestionsQuiz ] = useState<QuestionQuiz[]>([]);
-
   const [selectedTypeQuestion, setSelectedTypeQuestion] =
     useState<TypeQuestionQuiz | null>();
-  const elementRef = useRef<HTMLInputElement>();
+  const initialValues: NewQuizParams = {
+    name: '',
+    questions: [],
+  };
+
+  const formik = useFormik({
+    initialValues: initialValues,
+    validationSchema: Yup.object({
+      name: Yup.string().required('Necesitas agregar un nombre al test'),
+    }),
+    onSubmit: (quiz) => {
+      onSubmit && onSubmit(quiz);
+    },
+  });
 
   const editQuestion = (index: number) => {
     // console.log(questions[index]);
   };
 
-  const handleSaveQuestionData = (question: any) => {
-    setQuestionsQuiz(questionsQuiz.concat([question]));
+  const handleSaveQuestionData = (question: QuestionQuiz) => {
+    const { questions } = formik.values;
+    const totalQuestions = questions.concat([question]);
+    formik.setFieldValue('questions', totalQuestions);
     setSelectedTypeQuestion(null);
-    console.log('question: ', question);
   };
 
   const cancelQuestion = () => {
@@ -46,13 +59,22 @@ export function QuizBuilder(props: QuizBuilderProps) {
 
   const ContentQuizForm = () => (
     <div className={`${styles['content']} ${className}`}>
-      <Input label="Nombre del test" refInput={elementRef} />
+      <form className={styles['form']}>
+        <Input
+          label="Nombre del test"
+          name="name"
+          placeholder="Agrega un nombre"
+          onChange={formik.handleChange}
+          value={formik.values.name}
+          onBlur={formik.handleBlur}
+        />
+      </form>
       <div className={styles['questions']}>
         <label> Preguntas</label>
-        {questionsQuiz.map((question, index) => (
+        {formik.values.questions.map((question, index) => (
           <div
             className={`${styles['question']} ${
-              index === questionsQuiz.length ? styles['selected'] : ''
+              index === formik.values.questions.length ? styles['selected'] : ''
             }`}
             key={index}
             onClick={() => {
@@ -116,7 +138,7 @@ export function QuizBuilder(props: QuizBuilderProps) {
           </Dropdown>
         </div>
       )}
-      {!selectedTypeQuestion && questionsQuiz.length > 0 && (
+      {!selectedTypeQuestion && formik.values.questions.length > 0 && (
         <div className={styles['footer']}>
           <Button
             title="Cancelar"
@@ -130,11 +152,7 @@ export function QuizBuilder(props: QuizBuilderProps) {
             color={ColorsButton.secondary}
             type={TypeButton.submit}
             onClick={() => {
-              const quiz = {
-                name: elementRef.current?.value || '',
-                questions: questionsQuiz
-              }
-              onSubmit && onSubmit(quiz);
+              formik.handleSubmit();
             }}
           />
         </div>

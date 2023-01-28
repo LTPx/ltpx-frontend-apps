@@ -33,8 +33,8 @@ export function HeaderApp(props: HeaderAppProps) {
   ];
 
   const authLinks = [
-    { title: t('header.register'), url: '/register' },
-    { title: t('header.login'), url: '/login', accent: true },
+    { title: t('header.login'), url: '/login' },
+    { title: t('header.register'), url: '/register', accent: true },
   ];
 
   const linksStudent = [{ title: 'My Dashboard', url: '/student/dashboard' }];

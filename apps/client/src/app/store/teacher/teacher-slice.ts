@@ -21,6 +21,7 @@ import {
   TeacherCourse,
   getTeacherCourse,
   createQuiz,
+  createAchievement,
 } from '@ltpx-frontend-apps/api';
 import { StateCreator } from 'zustand';
 import { StoreState } from '../store';
@@ -186,8 +187,17 @@ export const createTeacherSlice: StateCreator<
     return { success: success, data: response };
   },
   createAchievement: async (params) => {
-    const { success, response } = await teacherNewAchievement(params, set);
-    return { success: success, data: response };
+    try {
+      const achievement = await createAchievement(params);
+      const course = get().currentCourse;
+      const allAchievements = course.achievements || [];
+      const achievements = allAchievements.concat([achievement]);
+      const courseUpdated = { ...course, ...{achievements}}
+      set({ currentCourse: courseUpdated });
+      return { success: true, data: achievement };
+    } catch (error) {
+      return { success: false, data: error };
+    }
   },
   getCourse: async (id: number) => {
     try {

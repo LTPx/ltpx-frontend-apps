@@ -27,13 +27,15 @@
 
     .description-course {
       display: flex;
-      justify-content: space-between;
       padding: $size-md-1 0;
       align-items: center;
+      gap: 2rem;
+
       .items {
         display: flex;
         gap: 5rem;
       }
+
       .item {
         display: flex;
         flex-direction: column;

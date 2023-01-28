@@ -37,10 +37,6 @@ export function HeaderApp(props: HeaderAppProps) {
     { title: t('header.login'), url: '/login', accent: true },
   ];
 
-  // const linksTeacher = [
-  //   { title: 'My Dashboard', url: '/teacher/dashboard'},
-  // ];
-
   const linksStudent = [{ title: 'My Dashboard', url: '/student/dashboard' }];
 
   const linksNotAccount = mainLinks.concat(authLinks);
@@ -58,9 +54,6 @@ export function HeaderApp(props: HeaderAppProps) {
     <div className={styles['container']}>
       <Header links={links}>
         <div className={styles['actions']}>
-          <NavLink to={'/cart'}>
-            <Cart amount={totalProducts} />
-          </NavLink>
           {isAuthenticated && (
             <>
               <Icon icon="notification" size={22}></Icon>

@@ -35,7 +35,7 @@ export function QuizBuilder(props: QuizBuilderProps) {
   const formik = useFormik({
     initialValues: initialValues,
     validationSchema: Yup.object({
-      name: Yup.string().required('Necesitas agregar un nombre al test'),
+      name: Yup.string().required('Necesitas agregar un nombre'),
     }),
     onSubmit: (quiz) => {
       onSubmit && onSubmit(quiz);
@@ -58,17 +58,7 @@ export function QuizBuilder(props: QuizBuilderProps) {
   };
 
   const ContentQuizForm = () => (
-    <div className={`${styles['content']} ${className}`}>
-      <form className={styles['form']}>
-        <Input
-          label="Nombre del test"
-          name="name"
-          placeholder="Agrega un nombre"
-          onChange={formik.handleChange}
-          value={formik.values.name}
-          onBlur={formik.handleBlur}
-        />
-      </form>
+    <>
       <div className={styles['questions']}>
         <label> Preguntas</label>
         {formik.values.questions.map((question, index) => (
@@ -157,7 +147,7 @@ export function QuizBuilder(props: QuizBuilderProps) {
           />
         </div>
       )}
-    </div>
+    </>
   );
 
   const QuestionsQuiz = () => (
@@ -208,7 +198,20 @@ export function QuizBuilder(props: QuizBuilderProps) {
 
   return (
     <div className={styles['container']}>
-      <ContentQuizForm />
+      <div className={`${styles['content']} ${className}`}>
+        <form className={styles['form']}>
+          <Input
+            label="Nombre del test"
+            name="name"
+            placeholder="Agrega un nombre"
+            onChange={formik.handleChange}
+            value={formik.values.name}
+            onBlur={formik.handleBlur}
+            errorMessage={formik.errors.name}
+          />
+        </form>
+        <ContentQuizForm />
+      </div>
     </div>
   );
 }

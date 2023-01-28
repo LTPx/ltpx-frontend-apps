@@ -134,7 +134,6 @@ export function TeacherEditCourse() {
             <Tabs
               tabs={linksEditCourse}
               onClickTab={(index) => {
-                console.log('indexS: ', index);
                 setIndexSelectedView(index);
               }}
             />

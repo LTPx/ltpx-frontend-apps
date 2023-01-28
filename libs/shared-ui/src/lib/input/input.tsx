@@ -30,7 +30,6 @@ export interface InputProps {
   min?: any;
   max?: any;
   errorMessage?: string | null;
-  refInput?: any
 }
 
 export function Input(props: InputProps) {
@@ -44,7 +43,6 @@ export function Input(props: InputProps) {
     min,
     max,
     errorMessage,
-    refInput,
     ...other
   } = props;
 
@@ -85,7 +83,6 @@ export function Input(props: InputProps) {
           max={max}
           onChange={e => onChange && onChange(e)}
           onKeyDown={e => onKeyDown && onKeyDown(e)}
-          ref={refInput}
         />
         { addonInput && addonInput.position === 'right' && (
           <AddonSymbol text={addonInput.text} position={Position.right} icon={addonInput.icon}/>

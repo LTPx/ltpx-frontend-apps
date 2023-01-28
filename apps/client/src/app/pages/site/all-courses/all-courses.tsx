@@ -43,7 +43,6 @@ export function AllCourses(props: AllCoursesProps) {
           </div>
           <div className={styles['filters']}>
             <InputSearch
-              className={styles['search']}
               placeholder="Search Our Courses"
             />
             <Select options={categories} />

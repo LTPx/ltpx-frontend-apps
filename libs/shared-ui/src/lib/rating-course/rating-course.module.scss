@@ -50,6 +50,8 @@
     }
   }
 }
+
+//smartphones-responsive
 @media screen and (max-width: 500px) {
   .container {
     width: 85%;
@@ -72,6 +74,22 @@
           .bar {
             width: 180px;
           }
+        }
+      }
+    }
+  }
+}
+//tablet-responsive-vertical
+@media screen and (max-width: 850px) {
+  .content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .rating-content {
+      padding: 0;
+      .rating-bar {
+        .bar {
+          width: 250px;
         }
       }
     }

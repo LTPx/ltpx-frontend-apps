@@ -74,7 +74,7 @@
   }
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 550px) {
   .container {
     display: flex;
     justify-content: center;
@@ -87,13 +87,13 @@
   }
 }
 
-@media screen and (max-width: 850px) {
+@media screen and (min-width: 560px) and (max-width: 850px){
   .container {
     padding-bottom: 3rem;
     display: flex;
     justify-content: center;
     .buy-card {
-      width: 80%;
+      width: 60%;
       display: flex;
       flex-direction: column;
       justify-content: center;

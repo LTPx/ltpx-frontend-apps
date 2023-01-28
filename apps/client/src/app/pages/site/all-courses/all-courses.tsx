@@ -1,6 +1,5 @@
 import { buildCourses } from '@ltpx-frontend-apps/api';
 import { CourseCard } from '@ltpx-frontend-apps/shared-ui';
-import { NavLink } from 'react-router-dom';
 import styles from './all-courses.module.scss';
 import { InputSearch } from '@ltpx-frontend-apps/shared-ui';
 import { Select } from '@ltpx-frontend-apps/shared-ui';
@@ -43,6 +42,7 @@ export function AllCourses(props: AllCoursesProps) {
           </div>
           <div className={styles['filters']}>
             <InputSearch
+              className={styles['search']}
               placeholder="Search Our Courses"
             />
             <Select options={categories} />

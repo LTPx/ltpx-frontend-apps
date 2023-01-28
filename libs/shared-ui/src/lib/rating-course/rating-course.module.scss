@@ -52,7 +52,7 @@
 }
 
 //smartphones-responsive
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 550px) {
   .container {
     width: 85%;
 
@@ -80,7 +80,7 @@
   }
 }
 //tablet-responsive-vertical
-@media screen and (max-width: 850px) {
+@media screen and (min-width: 560px) and (max-width: 850px) {
   .content {
     display: flex;
     align-items: center;

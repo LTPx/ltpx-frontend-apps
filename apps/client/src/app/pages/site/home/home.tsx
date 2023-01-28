@@ -64,7 +64,7 @@ export function Home(props: HomeProps) {
             </div>
           </div>
           <img
-            src="https://unireziverse.com/wp-content/uploads/2021/04/illustration-1.png"
+            src="../../../../assets/images/illustration-cover.svg"
             alt="cover"
           />
         </div>

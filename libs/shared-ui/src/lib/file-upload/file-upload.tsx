@@ -11,6 +11,7 @@ export interface FileUploadProps {
 
 export function FileUpload(props: FileUploadProps) {
   const { name, onChange, image } = props;
+  console.log('image: ', image);
   const [file, setFile] = useState(image || '');
   const elementRef = useRef<HTMLInputElement | null>(null);
   const handleChange = (e: any) => {

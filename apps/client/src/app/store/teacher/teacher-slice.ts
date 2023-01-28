@@ -68,7 +68,7 @@ export type TeacherSlice = {
   teacher_account: StatusTeacherAccount;
   application: ApplicationTeach | null;
   profile: IUserAccount | null;
-  newQuiz: QuizModel;
+  newQuiz: QuizModel | null;
   currentCourse: TeacherCourse;
   applyTeach: (params: ApplyTeachApiParams) => Promise<any>;
   getApplicationTeach: () => Promise<any>;
@@ -92,7 +92,7 @@ export const createTeacherSlice: StateCreator<
   teacher_account: StatusTeacherAccount.unapplied,
   application: null,
   profile: null,
-  newQuiz: {} as QuizModel,
+  newQuiz: null,
   currentCourse: {} as TeacherCourse,
   applyTeach: async (params: ApplyTeachApiParams): Promise<TResponseApply> => {
     try {

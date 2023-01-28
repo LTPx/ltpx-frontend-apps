@@ -42,7 +42,7 @@ export function CourseGeneralInformation(props: CourseGeneralInformationProps) {
     onSubmit,
   } = props;
   const { categories, languages, levels } = useCourse();
-
+  console.log('cover: ', cover);
   const formik = useFormik({
     initialValues: {
       title: title,

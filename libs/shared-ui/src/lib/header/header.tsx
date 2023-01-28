@@ -24,7 +24,7 @@ export function Header(props: HeaderProps) {
     setIsOpen(!isOpen);
   };
   return (
-    <div className={`${styles['container-header']} ${className}`}>    
+    <div className={`${styles['container-header']} ${className}`}>
       <div className={styles['header-responsive']}>
         <div className={styles['panel-container']}>
           <div className={styles['navbar']} onClick={handleClick}>
@@ -48,7 +48,7 @@ export function Header(props: HeaderProps) {
             </div>
             <div className={styles['navigate-content']}>
               {links.map((link, index) => (
-                <NavLink to={link.url}>
+                <NavLink to={link.url} key={index}>
                   <h4 className={`${styles['link-options']}`}>{link.title}</h4>
                 </NavLink>
               ))}
@@ -64,7 +64,7 @@ export function Header(props: HeaderProps) {
       </div>
       <div className={styles['main-action']}>
         <Brand />
-      </div>    
+      </div>
       <div className={styles['information']}>
         <div className={styles['links']}>
           {links.map((link, index) => (

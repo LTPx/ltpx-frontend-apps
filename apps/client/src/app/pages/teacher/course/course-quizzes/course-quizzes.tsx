@@ -9,7 +9,7 @@ import {
   SnackbarPosition,
   SnackbarType,
 } from '@ltpx-frontend-apps/shared-ui';
-import { useTeacher } from 'apps/client/src/app/store';
+import { useCourse } from '@ltpx-frontend-apps/store';
 import { useState } from 'react';
 import styles from './course-quizzes.module.scss';
 
@@ -24,26 +24,25 @@ export function CourseQuizzes(props: CourseQuizzesProps) {
   const { courseId, initialQuizzes } = props;
   const [ showNotification, setShowNotification ] = useState(false);
   const [ showForm, setShowForm ] = useState(false);
-  const [ quizzes, setQuizzes ] = useState<NewQuizParams[]>(initialQuizzes);
-  const { createQuiz } = useTeacher();
+  const { course, removeQuiz } = useCourse();
+  const { quizzes } = course;
 
   const handleCreateQuiz = async (newQuiz: NewQuizParams) => {
-    console.log(newQuiz);
-    const data = {
-      ...newQuiz,
-      ...{
-        course_id: courseId,
-      },
-    };
-    const response = await createQuiz(data);
-    if (response.success) {
-      setQuizzes(quizzes.concat([newQuiz]));
-      setShowForm(false);
-      setShowNotification(true);
-    } else {
-      console.log(response.error);
-    }
-    console.log(response);
+    // console.log(newQuiz);
+    // const data = {
+    //   ...newQuiz,
+    //   ...{
+    //     course_id: courseId,
+    //   },
+    // };
+    // const response = await createQuiz(data);
+    // if (response.success) {
+    //   setShowForm(false);
+    //   setShowNotification(true);
+    // } else {
+    //   console.log(response.error);
+    // }
+    // console.log(response);
   };
 
   return (
@@ -54,7 +53,7 @@ export function CourseQuizzes(props: CourseQuizzesProps) {
       </div>
       {!showForm && (
         <div className={styles['quizzes']}>
-          {quizzes.map((quiz, index) => (
+          {quizzes?.map((quiz, index) => (
             <div className={styles['quiz']} key={index}>
               <div className={styles['summary']}>
                 <Icon icon="list" size={20} />
@@ -72,7 +71,9 @@ export function CourseQuizzes(props: CourseQuizzesProps) {
                 </div>
                 <div
                   className={styles['action']}
-                  onClick={() => console.log('remove')}
+                  onClick={() => {
+                    removeQuiz(quiz.id)
+                  }}
                 >
                   <Icon icon="trash" size={15} />
                 </div>
@@ -81,7 +82,7 @@ export function CourseQuizzes(props: CourseQuizzesProps) {
           ))}
         </div>
       )}
-      {!showForm && quizzes.length === 0 && (
+      {!showForm && quizzes?.length === 0 && (
         <SetupCard
           onClick={() => {
             setShowForm(true);
@@ -91,7 +92,7 @@ export function CourseQuizzes(props: CourseQuizzesProps) {
           titleButton={'Configurar Ahora'}
         />
       )}
-      {!showForm && quizzes.length > 0 &&(
+      {!showForm  && quizzes && quizzes.length > 0 &&(
         <Button
           title="Crear Nuevo Test"
           className={styles['add-button']}

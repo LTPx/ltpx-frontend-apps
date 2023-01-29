@@ -4,6 +4,7 @@ export const useCourse = () => {
   const {
     addNewContent,
     removeContent,
+    removeQuiz,
     getCourse,
     loadedCourse,
     course,
@@ -13,6 +14,7 @@ export const useCourse = () => {
   return {
     addNewContent,
     removeContent,
+    removeQuiz,
     getCourse,
     loadedCourse,
     course,

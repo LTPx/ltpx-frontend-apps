@@ -8,6 +8,7 @@ import {
   getTeacherCourse,
   TeacherCourse,
   editCourse,
+  removeQuiz,
 } from '@ltpx-frontend-apps/api';
 
 type TResponse = {
@@ -27,7 +28,7 @@ export type CourseSlice = {
   addNewContent: (content: ContentCourse) => void;
   removeContent: (index: number) => void;
   addNewQuiz: (quiz: QuizModel) => void;
-  removeQuiz: (index: number) => void;
+  removeQuiz: (id: number) => void;
   addNewAchievement: (achievement: AchievementModel) => void;
   removeNewAchievement: (index: number) => void;
   addClassroom: (classroom: Classroom) => void;
@@ -88,10 +89,16 @@ export const createCourseSlice: StateCreator<
     const quizzes = get().quizzes.concat([quiz]);
     set({ quizzes });
   },
-  removeQuiz: (index: number) => {
-    let quizzes = get().quizzes;
-    quizzes.slice(index, 1);
-    set({ quizzes });
+  removeQuiz: async(id: number) => {
+    try {
+      const courseStore = get().course;
+      const quizzes = courseStore.quizzes?.filter((quiz)=> quiz.id !== id);
+      const courseUpdated = {...courseStore, ...{quizzes}};
+      await removeQuiz(id);
+      set({ course: courseUpdated });
+    } catch (error) {
+      console.log(error);
+    }
   },
   addNewAchievement: (achievement: AchievementModel) => {
     const achievements = get().achievements.concat([achievement]);

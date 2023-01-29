@@ -5,6 +5,7 @@ import Button, { ColorsButton, TypeButton } from '../button/button';
 import { Form, Formik } from 'formik';
 import * as Yup from 'yup';
 import {
+  AchievementModel,
   AchievementsImages,
   EntityAchievement,
   NewAchievementParams,
@@ -15,34 +16,38 @@ import InputTextStatus, { StatusInputText } from '../input-text-status/input-tex
 
 /* eslint-disable-next-line */
 export interface AchievementByQuizzesFormProps {
+  quizzes: QuizModel[];
+  achievement?: AchievementModel;
   singleSelection?: boolean;
   onCancel?: () => void;
   onSubmit?: (data: NewAchievementParams) => void;
-  quizzes: QuizModel[];
   className?: string;
 }
 
 export function AchievementByQuizzesForm(props: AchievementByQuizzesFormProps) {
-  const { onSubmit, onCancel, singleSelection, quizzes, className } = props;
+  const { onSubmit, onCancel, singleSelection, quizzes, className, achievement } = props;
+  const ids = achievement?.settings.map((setting)=> setting.entity_id) || [];
+
+  const initialValues = {
+    title: achievement?.title || '',
+    image:  achievement?.image || '',
+    settings: quizzes.map((quiz)=> {
+      return {
+        entity: EntityAchievement.quiz,
+        text: quiz.name,
+        entity_id: quiz.id,
+        score: 100,
+        selected: ids.includes(quiz.id),
+      }
+    }),
+    rule: achievement?.rule || singleSelection
+      ? TypeAchievement.single
+      : TypeAchievement.multiple,
+  };
 
   return (
     <Formik
-      initialValues={{
-        title: '',
-        image: '',
-        settings: quizzes.map((quiz)=> {
-          return {
-            entity: EntityAchievement.quiz,
-            text: quiz.name,
-            entity_id: quiz.id,
-            score: 100,
-            selected: false,
-          }
-        }),
-        rule: singleSelection
-          ? TypeAchievement.single
-          : TypeAchievement.multiple,
-      }}
+      initialValues={initialValues}
       validationSchema={Yup.object({
         title: Yup.string().required('Titulo no puede estar en blanco'),
         image: Yup.string().required('Es necesario seleccionar una imagen'),

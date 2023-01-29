@@ -3,6 +3,7 @@ import AchievementByScoreForm from '../achievement-by-score-form/achievement-by-
 import AchievementTaskForm from '../achievement-task-form/achievement-task-form';
 import styles from './achievement-builder.module.scss';
 import {
+  AchievementModel,
   NewAchievementParams,
   QuizModel,
   TypeAchievement,
@@ -12,12 +13,13 @@ import {
 export interface AchievementBuilderProps {
   quizzes: QuizModel[];
   typeAchievement?: TypeAchievement;
+  achievement?: AchievementModel;
   onSubmit?: (achievement: NewAchievementParams) => void;
   onCancel?: () => void;
 }
 
 export function AchievementBuilder(props: AchievementBuilderProps) {
-  const { onSubmit, onCancel, quizzes, typeAchievement } = props;
+  const { onSubmit, onCancel, quizzes, typeAchievement, achievement } = props;
   const saveNewAchievement = (achievement: NewAchievementParams) => {
     onSubmit && onSubmit(achievement);
   };
@@ -28,6 +30,7 @@ export function AchievementBuilder(props: AchievementBuilderProps) {
         <div className={styles['achievement-form']}>
           {typeAchievement === TypeAchievement.multiple && (
             <AchievementByQuizzesForm
+              achievement={achievement}
               quizzes={quizzes}
               onSubmit={(data) => {
                 saveNewAchievement(data);
@@ -37,6 +40,7 @@ export function AchievementBuilder(props: AchievementBuilderProps) {
           )}
           {typeAchievement === TypeAchievement.single && (
             <AchievementByQuizzesForm
+              achievement={achievement}
               singleSelection={true}
               quizzes={quizzes}
               onSubmit={(data) => {

@@ -1,4 +1,5 @@
 import {
+  AchievementModel,
   NewAchievementParams,
   TypeAchievement,
 } from '@ltpx-frontend-apps/api';
@@ -22,6 +23,7 @@ export interface CourseAchievementsProps {
 }
 
 export function CourseAchievements(props: CourseAchievementsProps) {
+  const [ achievementEdit, setAchievementEdit ] = useState<AchievementModel>();
   const [ showNotification, setShowNotification ] = useState(false);
   const [showAchievementFormType, setShowAchievementFormType] =
     useState<TypeAchievement | null>();
@@ -105,7 +107,8 @@ export function CourseAchievements(props: CourseAchievementsProps) {
                 <div
                   className={styles['action']}
                   onClick={() => {
-                    //edit
+                    setAchievementEdit(achievement);
+                    setShowAchievementFormType(achievement.rule)
                   }}
                 >
                   <Icon icon="pencil" size={15} />
@@ -138,18 +141,17 @@ export function CourseAchievements(props: CourseAchievementsProps) {
         <ButtonAddAchievement color={ColorsButton.secondary} className={styles['add-button']} title={'Agregar nuevo logro'}/>
       )}
       {showAchievementFormType && showAchievementFormType && (
-        <>
-          <AchievementBuilder
-            quizzes={quizzes || []}
-            typeAchievement={showAchievementFormType}
-            onSubmit={(achievement) => {
-              handleSaveAchievement(achievement);
-            }}
-            onCancel={() => {
-              setShowAchievementFormType(null);
-            }}
-          />
-        </>
+        <AchievementBuilder
+          quizzes={quizzes || []}
+          typeAchievement={showAchievementFormType}
+          achievement={achievementEdit}
+          onSubmit={(achievement) => {
+            handleSaveAchievement(achievement);
+          }}
+          onCancel={() => {
+            setShowAchievementFormType(null);
+          }}
+        />
       )}
       <Snackbar
         position={SnackbarPosition.centerBottom}

@@ -3,7 +3,6 @@ import { StoreState } from '../store';
 import {
   ContentCourse,
   QuizModel,
-  AchievementModel,
   Classroom,
   getTeacherCourse,
   TeacherCourse,
@@ -23,10 +22,6 @@ type TResponse = {
 export type CourseSlice = {
   loadedCourse: boolean;
   course: TeacherCourse;
-  contents: ContentCourse[];
-  quizzes: QuizModel[];
-  achievements: AchievementModel[];
-  classroom: Partial<Classroom>;
   getCourse: (id: number) => Promise<TResponse>;
   addNewContent: (content: ContentCourse) => void;
   addNewQuiz: (quiz: QuizModel) => void;
@@ -46,21 +41,12 @@ export const createCourseSlice: StateCreator<
 > = (set, get) => ({
   loadedCourse: false,
   course: {} as TeacherCourse,
-  contents: [],
-  quizzes: [],
-  achievements: [],
-  classroom: {},
   getCourse: async (id: number) => {
     try {
       set({ loadedCourse: false });
       const course = await getTeacherCourse(id);
-      const { contents, quizzes, achievements, classroom } = course;
       set({
         course,
-        contents,
-        quizzes,
-        achievements,
-        classroom,
         loadedCourse: true,
       });
       return { success: true, data: course };
@@ -86,11 +72,9 @@ export const createCourseSlice: StateCreator<
     const courseStore = get().course;
     const courseUpdated = { ...courseStore, ...{ contents } };
     await editCourse(courseUpdated);
-    set({ course: courseUpdated, contents: contents });
+    set({ course: courseUpdated });
   },
   addNewQuiz: (quiz: QuizModel) => {
-    const quizzes = get().quizzes.concat([quiz]);
-    set({ quizzes });
   },
   removeQuiz: async (id: number) => {
     try {
@@ -130,9 +114,7 @@ export const createCourseSlice: StateCreator<
     }
   },
   addClassroom: (classroom: Classroom) => {
-    set({ classroom });
   },
   updateClassroom: (classroom: Classroom) => {
-    set({ classroom });
   },
 });

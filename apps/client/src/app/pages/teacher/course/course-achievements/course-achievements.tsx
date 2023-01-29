@@ -1,6 +1,5 @@
 import {
   NewAchievementParams,
-  QuizModel,
   TypeAchievement,
 } from '@ltpx-frontend-apps/api';
 import {
@@ -15,24 +14,19 @@ import {
   SnackbarType,
 } from '@ltpx-frontend-apps/shared-ui';
 import { useCourse } from '@ltpx-frontend-apps/store';
-import { useTeacher } from 'apps/client/src/app/store';
 import { useState } from 'react';
 import styles from './course-achievements.module.scss';
 
 /* eslint-disable-next-line */
 export interface CourseAchievementsProps {
-  courseId: number;
-  initialAchievements: NewAchievementParams[];
-  quizzes: QuizModel[];
 }
 
 export function CourseAchievements(props: CourseAchievementsProps) {
-  const { courseId, initialAchievements, quizzes } = props;
   const [ showNotification, setShowNotification ] = useState(false);
   const [showAchievementFormType, setShowAchievementFormType] =
     useState<TypeAchievement | null>();
   const { addNewAchievement, removeAchievement, course } = useCourse();
-  const { achievements } = course;
+  const { achievements, quizzes } = course;
 
   const achievementsForms = [
     {
@@ -110,7 +104,9 @@ export function CourseAchievements(props: CourseAchievementsProps) {
               <div className={styles['actions']}>
                 <div
                   className={styles['action']}
-                  onClick={() => console.log('remove')}
+                  onClick={() => {
+                    //edit
+                  }}
                 >
                   <Icon icon="pencil" size={15} />
                 </div>
@@ -144,7 +140,7 @@ export function CourseAchievements(props: CourseAchievementsProps) {
       {showAchievementFormType && showAchievementFormType && (
         <>
           <AchievementBuilder
-            quizzes={quizzes}
+            quizzes={quizzes || []}
             typeAchievement={showAchievementFormType}
             onSubmit={(achievement) => {
               handleSaveAchievement(achievement);

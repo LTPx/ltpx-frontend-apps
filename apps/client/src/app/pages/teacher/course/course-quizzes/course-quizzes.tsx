@@ -15,13 +15,11 @@ import styles from './course-quizzes.module.scss';
 
 /* eslint-disable-next-line */
 export interface CourseQuizzesProps {
-  courseId: number;
-  initialQuizzes: NewQuizParams[];
   onSubmit?: (quiz: QuestionQuiz) => void;
 }
 
 export function CourseQuizzes(props: CourseQuizzesProps) {
-  const { courseId, initialQuizzes } = props;
+  const { onSubmit } = props;
   const [ showNotification, setShowNotification ] = useState(false);
   const [ showForm, setShowForm ] = useState(false);
   const { course, removeQuiz } = useCourse();

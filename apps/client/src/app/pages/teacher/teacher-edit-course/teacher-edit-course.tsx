@@ -129,17 +129,10 @@ export function TeacherEditCourse() {
                 />
               )}
               {indexSelectedView === 2 && (
-                <CourseQuizzes
-                  courseId={course.id}
-                  initialQuizzes={course.quizzes || []}
-                />
+                <CourseQuizzes />
               )}
               {indexSelectedView === 3 && (
-                <CourseAchievements
-                  quizzes={course.quizzes || []}
-                  courseId={course.id}
-                  initialAchievements={course.achievements || []}
-                />
+                <CourseAchievements />
               )}
               {indexSelectedView === 4 && (
                 <CourseClassroom

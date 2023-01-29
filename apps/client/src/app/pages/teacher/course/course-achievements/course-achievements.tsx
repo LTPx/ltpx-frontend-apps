@@ -28,11 +28,10 @@ export interface CourseAchievementsProps {
 
 export function CourseAchievements(props: CourseAchievementsProps) {
   const { courseId, initialAchievements, quizzes } = props;
-  const [showNotification, setShowNotification] = useState(false);
+  const [ showNotification, setShowNotification ] = useState(false);
   const [showAchievementFormType, setShowAchievementFormType] =
     useState<TypeAchievement | null>();
-  const { createAchievement } = useTeacher();
-  const { removeAchievement, course } = useCourse();
+  const { addNewAchievement, removeAchievement, course } = useCourse();
   const { achievements } = course;
 
   const achievementsForms = [
@@ -55,17 +54,11 @@ export function CourseAchievements(props: CourseAchievementsProps) {
   ];
 
   const handleSaveAchievement = async (achievement: NewAchievementParams) => {
-    // const newAchievement = {
-    //   ...achievement,
-    //   ...{
-    //     course_id: courseId,
-    //   },
-    // };
-    // const { success, error } = await createAchievement(newAchievement);
+    await addNewAchievement(achievement);
     // if (success) {
     //   setAchievements(achievements.concat([achievement]));
-    //   setShowNotification(true);
-    //   setShowAchievementFormType(null);
+      setShowNotification(true);
+      setShowAchievementFormType(null);
     // } else {
     //   console.log(error);
     // }

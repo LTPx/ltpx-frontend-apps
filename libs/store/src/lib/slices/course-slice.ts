@@ -10,6 +10,8 @@ import {
   editCourse,
   removeQuiz,
   removeAchievement,
+  createAchievement,
+  NewAchievementParams,
 } from '@ltpx-frontend-apps/api';
 
 type TResponse = {
@@ -19,7 +21,7 @@ type TResponse = {
 };
 
 export type CourseSlice = {
-  loadedCourse: boolean,
+  loadedCourse: boolean;
   course: TeacherCourse;
   contents: ContentCourse[];
   quizzes: QuizModel[];
@@ -27,10 +29,10 @@ export type CourseSlice = {
   classroom: Partial<Classroom>;
   getCourse: (id: number) => Promise<TResponse>;
   addNewContent: (content: ContentCourse) => void;
-  removeContent: (index: number) => void;
   addNewQuiz: (quiz: QuizModel) => void;
+  addNewAchievement: (achievement: NewAchievementParams) => void;
+  removeContent: (index: number) => void;
   removeQuiz: (id: number) => void;
-  addNewAchievement: (achievement: AchievementModel) => void;
   removeAchievement: (id: number) => void;
   addClassroom: (classroom: Classroom) => void;
   updateClassroom: (classroom: Classroom) => void;
@@ -50,7 +52,7 @@ export const createCourseSlice: StateCreator<
   classroom: {},
   getCourse: async (id: number) => {
     try {
-      set({loadedCourse: false});
+      set({ loadedCourse: false });
       const course = await getTeacherCourse(id);
       const { contents, quizzes, achievements, classroom } = course;
       set({
@@ -59,30 +61,30 @@ export const createCourseSlice: StateCreator<
         quizzes,
         achievements,
         classroom,
-        loadedCourse: true
+        loadedCourse: true,
       });
       return { success: true, data: course };
     } catch (error) {
-      set({loadedCourse: true});
+      set({ loadedCourse: true });
       return { success: false, data: error };
     }
   },
-  addNewContent: async(content: ContentCourse) => {
+  addNewContent: async (content: ContentCourse) => {
     try {
       const courseStore = get().course;
       const contents = courseStore.contents.concat([content]);
-      const courseUpdated = {...courseStore, ...{contents}};
+      const courseUpdated = { ...courseStore, ...{ contents } };
       await editCourse(courseUpdated);
       set({ course: courseUpdated });
     } catch (error) {
       console.log(error);
     }
   },
-  removeContent: async(index: number) => {
+  removeContent: async (index: number) => {
     let contents = get().course.contents;
     contents.splice(index, 1);
     const courseStore = get().course;
-    const courseUpdated = {...courseStore, ...{contents}};
+    const courseUpdated = { ...courseStore, ...{ contents } };
     await editCourse(courseUpdated);
     set({ course: courseUpdated, contents: contents });
   },
@@ -90,26 +92,37 @@ export const createCourseSlice: StateCreator<
     const quizzes = get().quizzes.concat([quiz]);
     set({ quizzes });
   },
-  removeQuiz: async(id: number) => {
+  removeQuiz: async (id: number) => {
     try {
       const courseStore = get().course;
-      const quizzes = courseStore.quizzes?.filter((quiz)=> quiz.id !== id);
-      const courseUpdated = {...courseStore, ...{quizzes}};
+      const quizzes = courseStore.quizzes?.filter((quiz) => quiz.id !== id);
+      const courseUpdated = { ...courseStore, ...{ quizzes } };
       await removeQuiz(id);
       set({ course: courseUpdated });
     } catch (error) {
       console.log(error);
     }
   },
-  addNewAchievement: (achievement: AchievementModel) => {
-    const achievements = get().achievements.concat([achievement]);
-    set({ achievements });
+  addNewAchievement: async (params: NewAchievementParams) => {
+    try {
+      const course = get().course;
+      const paramsCourseId = {...params, ...{course_id: course.id}};
+      const achievement = await createAchievement(paramsCourseId);
+      const achievements = course.achievements?.concat([achievement]);
+      const courseUpdated = { ...course, ...{ achievements } };
+      set({ course: courseUpdated });
+      return { success: true, data: achievement };
+    } catch (error) {
+      return { success: false, data: error };
+    }
   },
-  removeAchievement: async(id: number) => {
+  removeAchievement: async (id: number) => {
     try {
       const courseStore = get().course;
-      const achievements = courseStore.achievements?.filter((achievement)=> achievement.id !== id);
-      const courseUpdated = {...courseStore, ...{achievements}};
+      const achievements = courseStore.achievements?.filter(
+        (achievement) => achievement.id !== id
+      );
+      const courseUpdated = { ...courseStore, ...{ achievements } };
       await removeAchievement(id);
       set({ course: courseUpdated });
     } catch (error) {

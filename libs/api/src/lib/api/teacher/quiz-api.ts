@@ -16,6 +16,19 @@ export const createQuiz = async (quiz: NewQuizApiParams) => {
   });
 };
 
+export const removeQuiz = async (id: number) => {
+  return new Promise((resolve, reject) => {
+    http
+      .delete(`api/v1/teacher/quizzes/${id}`)
+      .then((response) => {
+        resolve(response.data);
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
+};
+
 export const getTeacherQuizzes = async () => {
   return new Promise<QuizModel[]>((resolve, reject) => {
     http

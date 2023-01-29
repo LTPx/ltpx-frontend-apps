@@ -1,8 +1,15 @@
 import { CATEGORIES, LANGUAGES, LEVELS } from '@ltpx-frontend-apps/api';
 import { useTranslation } from 'react-i18next';
+import { useAppStore } from '../store';
 
 export const useCourse = () => {
   const { t } = useTranslation();
+  const {
+    addNewContent,
+    getCourse,
+    loadedCourse,
+    course
+  } = useAppStore();
 
   const categories = CATEGORIES.map((value) => {
     return {
@@ -49,5 +56,9 @@ export const useCourse = () => {
     translateLevel,
     translateLanguage,
     translateStatus,
+    addNewContent,
+    getCourse,
+    loadedCourse,
+    course
   };
 };

@@ -1,7 +1,6 @@
 import {
   CourseApiParams,
   CourseStatus,
-  getTeacherCourse,
   TeacherCourse,
 } from '@ltpx-frontend-apps/api';
 import {
@@ -38,48 +37,21 @@ const linksEditCourse = [
 export function TeacherEditCourse() {
   const [showNotification, setShowNotification] = useState(false);
   const [indexSelectedView, setIndexSelectedView] = useState(0);
-  // const [course, setCourse] = useState<TeacherCourse>();
-  const params = useParams();
-  const { editCourse, getCourse, course } = useTeacher();
-  const { translateStatus } = useCourse();
+  const { editCourse } = useTeacher();
+  const { translateStatus, getCourse, addNewContent, loadedCourse, course } = useCourse();
 
+  const params = useParams();
   const { courseId } = params;
   const id = parseInt(courseId || '');
 
   const fetchData = useCallback(async () => {
-    console.log('calling....');
-    await getCourse(id);
-    // const resp = await getCourse(id);
-    // if (resp.success) {
-    //   setCourse(resp.data)
-    // } else {
-    //   console.log(resp.error)
-    // }
-  }, [])
+    const resp = await getCourse(id);
+    console.log('resp....: ', resp);
+  }, []);
 
   useEffect(() => {
-    fetchData()
-  }, [fetchData])
-
-  // useEffect(() => {
-  //   let mounted = true;
-  //   try {
-  //     if (courseId) {
-  //       const id = parseInt(courseId);
-  //       getTeacherCourse(id).then((course) => {
-  //         if (mounted) {
-  //           setCourse(course);
-  //           console.log('course: ', course);
-  //         }
-  //       });
-  //     }
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  //   return () => {
-  //     mounted = false;
-  //   };
-  // }, []);
+    fetchData();
+  }, [fetchData]);
 
   const saveChanges = async (formData: CourseApiParams) => {
     if (course) {
@@ -98,7 +70,7 @@ export function TeacherEditCourse() {
 
   return (
     <div className={styles['container']}>
-      {course && (
+      {loadedCourse && (
         <div className={styles['container']}>
           <div className={styles['header']}>
             <div className={styles['title']}>
@@ -140,14 +112,7 @@ export function TeacherEditCourse() {
             <div className={styles['section-content']}>
               {indexSelectedView === 0 && (
                 <CourseGeneralInformation
-                  title={course.title}
-                  cover={course.cover_url}
-                  description={course.description}
-                  category={course.category}
-                  language={course.language}
-                  level={course.level}
-                  learn_goals={course.learn_goals}
-                  requirements={course.requirements}
+                  {...course}
                   onSubmit={(data) => {
                     saveChanges(data);
                   }}
@@ -157,11 +122,8 @@ export function TeacherEditCourse() {
                 <CourseContents
                   contents={course.contents}
                   onSubmit={(content) => {
-                    const contents = course.contents || [];
-                    saveChanges({
-                      title: course.title,
-                      contents: contents.concat([content]),
-                    });
+                    addNewContent(content);
+                    setShowNotification(true);
                   }}
                 />
               )}

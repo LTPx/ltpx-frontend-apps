@@ -29,8 +29,7 @@ export type CourseSlice = {
   removeContent: (index: number) => void;
   removeQuiz: (id: number) => void;
   removeAchievement: (id: number) => void;
-  addClassroom: (classroom: Classroom) => void;
-  updateClassroom: (classroom: Classroom) => void;
+  addUpdateClassroom: (classroom: Classroom) => void;
 };
 
 export const createCourseSlice: StateCreator<
@@ -113,8 +112,14 @@ export const createCourseSlice: StateCreator<
       console.log(error);
     }
   },
-  addClassroom: (classroom: Classroom) => {
-  },
-  updateClassroom: (classroom: Classroom) => {
-  },
+  addUpdateClassroom: async (classroom: Classroom) => {
+    try {
+      const courseStore = get().course;
+      const courseUpdated = { ...courseStore, ...{ classroom } };
+      await editCourse(courseUpdated);
+      set({ course: courseUpdated });
+    } catch (error) {
+      console.log(error);
+    }
+  }
 });

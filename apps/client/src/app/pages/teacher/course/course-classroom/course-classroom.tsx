@@ -5,23 +5,23 @@ import {
   InformationCard,
   SetupCard,
 } from '@ltpx-frontend-apps/shared-ui';
+import { useCourse } from '@ltpx-frontend-apps/store';
 import { useState } from 'react';
 import styles from './course-classroom.module.scss';
 
 /* eslint-disable-next-line */
 export interface CourseClassroomProps {
   onSubmit?: (classroom: Classroom) => void;
-  initialClassroom?: Classroom;
 }
 
 export function CourseClassroom(props: CourseClassroomProps) {
-  const { onSubmit, initialClassroom } = props;
-  const [classroom, setClassroom] = useState<Classroom | null>(initialClassroom || null);
+  const { onSubmit } = props;
   const [openModal, setOpenModal] = useState(false);
+  const { course, addUpdateClassroom } = useCourse();
+  const { classroom  } = course;
 
   const handleClassroom = (classroom: any) => {
-    console.log(classroom);
-    setClassroom(classroom);
+    addUpdateClassroom(classroom);
     onSubmit && onSubmit(classroom);
   };
 

@@ -30,7 +30,7 @@ export type CourseSlice = {
   removeQuiz: (index: number) => void;
   addNewAchievement: (achievement: AchievementModel) => void;
   removeAchievement: (index: number) => void;
-  addClassroom: (classroom: Classroom) => void;
+  addUpdateClassroom: (classroom: Classroom) => void;
   updateClassroom: (classroom: Classroom) => void;
 };
 
@@ -99,7 +99,7 @@ export const createCourseSlice: StateCreator<
     achievements.slice(index, 1);
     set({ achievements });
   },
-  addClassroom: (classroom: Classroom) => {
+  addUpdateClassroom: (classroom: Classroom) => {
     set({ classroom });
   },
   updateClassroom: (classroom: Classroom) => {

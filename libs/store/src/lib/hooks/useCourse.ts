@@ -4,6 +4,7 @@ export const useCourse = () => {
   const {
     addNewContent,
     addNewAchievement,
+    addUpdateClassroom,
     removeContent,
     removeQuiz,
     removeAchievement,
@@ -15,6 +16,7 @@ export const useCourse = () => {
   return {
     addNewContent,
     addNewAchievement,
+    addUpdateClassroom,
     removeContent,
     removeQuiz,
     removeAchievement,

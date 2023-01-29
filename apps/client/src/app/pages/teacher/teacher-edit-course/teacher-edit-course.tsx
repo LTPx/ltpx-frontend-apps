@@ -135,15 +135,7 @@ export function TeacherEditCourse() {
                 <CourseAchievements />
               )}
               {indexSelectedView === 4 && (
-                <CourseClassroom
-                  initialClassroom={course.classroom}
-                  onSubmit={(classroom) => {
-                    saveChanges({
-                      title: course.title,
-                      classroom: classroom,
-                    });
-                  }}
-                />
+                <CourseClassroom />
               )}
             </div>
           </div>

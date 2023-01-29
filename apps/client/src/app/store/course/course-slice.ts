@@ -29,7 +29,7 @@ export type CourseSlice = {
   addNewQuiz: (quiz: QuizModel) => void;
   removeQuiz: (index: number) => void;
   addNewAchievement: (achievement: AchievementModel) => void;
-  removeNewAchievement: (index: number) => void;
+  removeAchievement: (index: number) => void;
   addClassroom: (classroom: Classroom) => void;
   updateClassroom: (classroom: Classroom) => void;
 };
@@ -94,7 +94,7 @@ export const createCourseSlice: StateCreator<
     const achievements = get().achievements.concat([achievement]);
     set({ achievements });
   },
-  removeNewAchievement: (index: number) => {
+  removeAchievement: (index: number) => {
     let achievements = get().achievements;
     achievements.slice(index, 1);
     set({ achievements });

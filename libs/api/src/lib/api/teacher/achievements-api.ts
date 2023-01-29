@@ -16,3 +16,15 @@ export const createAchievement = async (quiz: NewAchievementParams) => {
   });
 };
 
+export const removeAchievement = async (id: number) => {
+  return new Promise((resolve, reject) => {
+    http
+      .delete(`api/v1/teacher/achievements/${id}`)
+      .then((response) => {
+        resolve(response.data);
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
+};

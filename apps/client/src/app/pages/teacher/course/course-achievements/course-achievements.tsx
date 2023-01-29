@@ -150,6 +150,7 @@ export function CourseAchievements(props: CourseAchievementsProps) {
           }}
           onCancel={() => {
             setShowAchievementFormType(null);
+            setAchievementEdit(undefined);
           }}
         />
       )}

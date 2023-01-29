@@ -4,12 +4,13 @@ import styles from './select-image.module.scss';
 /* eslint-disable-next-line */
 
 export interface SelectImageProps {
+  images: string[];
+  selected?: string;
   onChange?: (img: string) => void;
-  images : string[];
 }
 
 export function SelectImage(props: SelectImageProps) {
-  const { images, onChange } = props;
+  const { images, onChange, selected } = props;
   const [indexSelected, setIndexSelected] = useState(-1);
 
   return (
@@ -18,7 +19,7 @@ export function SelectImage(props: SelectImageProps) {
         {images.map((img, index) => (
           <div
             className={
-              indexSelected === index
+              (indexSelected === index || selected === img)
                 ? `${styles['image']} ${styles['image-selected']}`
                 : `${styles['image']}`
             }

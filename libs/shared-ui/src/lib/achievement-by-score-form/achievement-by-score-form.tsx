@@ -1,4 +1,4 @@
-import { AchievementsImages, EntityAchievement, NewAchievementParams, QuizModel, TypeAchievement } from '@ltpx-frontend-apps/api';
+import { AchievementModel, AchievementsImages, EntityAchievement, NewAchievementParams, QuizModel, TypeAchievement } from '@ltpx-frontend-apps/api';
 import { Form, Formik, useFormik } from 'formik';
 import Button, { ColorsButton, TypeButton } from '../button/button';
 import Input from '../input/input';
@@ -9,31 +9,35 @@ import InputTextStatus, { StatusInputText } from '../input-text-status/input-tex
 /* eslint-disable-next-line */
 export interface AchievementByScoreFormProps {
   quizzes: QuizModel[];
+  achievement?: AchievementModel;
   onCancel?: () => void;
   onSubmit?: (data: NewAchievementParams) => void;
   className?: string;
 }
 
 export function AchievementByScoreForm(props: AchievementByScoreFormProps) {
-  const { quizzes, onCancel, onSubmit, className } = props;
+  const { quizzes, onCancel, onSubmit, className, achievement } = props;
+  const ids = achievement?.settings.map((setting)=> setting.entity_id) || [];
+
+  const initialValues = {
+    title: achievement?.title || '',
+    image:  achievement?.image || '',
+    settings: quizzes.map((quiz)=> {
+      return {
+        entity: EntityAchievement.quiz,
+        text: quiz.name,
+        entity_id: quiz.id,
+        score: 0,
+        selected: ids.includes(quiz.id),
+      }
+    }),
+    rule: TypeAchievement.score,
+    score: 10
+  };
 
   return (
     <Formik
-      initialValues={{
-        title: '',
-        image: '',
-        settings: quizzes.map((quiz)=> {
-          return {
-            entity: EntityAchievement.quiz,
-            text: quiz.name,
-            entity_id: quiz.id,
-            score: 0,
-            selected: false,
-          }
-        }),
-        rule: TypeAchievement.score,
-        score: 10
-      }}
+      initialValues={initialValues}
       validationSchema={Yup.object({
         title: Yup.string().required('Titulo no puede estar en blanco'),
         image: Yup.string().required('Es necesario seleccionar una imagen'),
@@ -113,6 +117,7 @@ export function AchievementByScoreForm(props: AchievementByScoreFormProps) {
             <br />
             <label>Selecciona la imagen que obtendrá al cumplir el logro</label>
             <SelectImage
+              selected={values.image}
               onChange={(img) => {
                 setFieldValue('image', img);
               }}

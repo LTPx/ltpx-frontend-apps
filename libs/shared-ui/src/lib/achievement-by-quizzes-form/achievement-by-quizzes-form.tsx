@@ -102,6 +102,7 @@ export function AchievementByQuizzesForm(props: AchievementByQuizzesFormProps) {
             <br />
             <label>Selecciona la imagen que obtendrá al cumplir el logro</label>
             <SelectImage
+              selected={values.image}
               onChange={(img) => {
                 setFieldValue('image', img);
               }}

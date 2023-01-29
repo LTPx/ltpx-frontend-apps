@@ -76,10 +76,13 @@ export const createCourseSlice: StateCreator<
       console.log(error);
     }
   },
-  removeContent: (index: number) => {
-    let contents = get().contents;
-    contents.slice(index, 1);
-    set({ contents });
+  removeContent: async(index: number) => {
+    let contents = get().course.contents;
+    contents.splice(index, 1);
+    const courseStore = get().course;
+    const courseUpdated = {...courseStore, ...{contents}};
+    await editCourse(courseUpdated);
+    set({ course: courseUpdated, contents: contents });
   },
   addNewQuiz: (quiz: QuizModel) => {
     const quizzes = get().quizzes.concat([quiz]);

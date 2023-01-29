@@ -8,18 +8,20 @@ import styles from './course-content-form.module.scss';
 
 /* eslint-disable-next-line */
 export interface CourseContentFormProps {
+  content?: ContentCourse;
   open?: boolean;
   onClose?: () => void;
   onSubmit?: (data: ContentCourse) => void;
 }
 
 export function CourseContentForm(props: CourseContentFormProps) {
-  const { open, onClose, onSubmit } = props;
+  const { open, onClose, onSubmit, content } = props;
+  const initialValues = {
+    title: content?.title || '',
+    description: content?.description || '',
+  };
   const formik = useFormik({
-    initialValues: {
-      title: '',
-      description: '',
-    },
+    initialValues: initialValues,
     onSubmit: (data) => {
       onSubmit && onSubmit(data);
       closeReset();
@@ -27,8 +29,8 @@ export function CourseContentForm(props: CourseContentFormProps) {
   });
 
   const closeReset = () => {
-    onClose && onClose();
     formik.resetForm();
+    onClose && onClose();
   }
 
   return (
@@ -64,7 +66,7 @@ export function CourseContentForm(props: CourseContentFormProps) {
             <Button
               color={ColorsButton.white}
               onClick={() => {
-                onClose && onClose();
+                closeReset();
               }}
               title="Cancelar"
             />

@@ -14,6 +14,7 @@ import {
   Tag,
   TypeButton,
 } from '@ltpx-frontend-apps/shared-ui';
+import { useCourse, useCourseUtil } from '@ltpx-frontend-apps/store';
 import {
   CourseAchievements,
   CourseClassroom,
@@ -23,7 +24,7 @@ import {
 } from '../course';
 import { useCallback, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { useCourse, useTeacher } from '../../../store';
+import { useTeacher } from '../../../store';
 import styles from './teacher-edit-course.module.scss';
 
 const linksEditCourse = [
@@ -38,7 +39,8 @@ export function TeacherEditCourse() {
   const [showNotification, setShowNotification] = useState(false);
   const [indexSelectedView, setIndexSelectedView] = useState(0);
   const { editCourse } = useTeacher();
-  const { translateStatus, getCourse, addNewContent, loadedCourse, course } = useCourse();
+  const { getCourse, addNewContent, loadedCourse, course } = useCourse();
+  const { translateStatus } = useCourseUtil();
 
   const params = useParams();
   const { courseId } = params;
@@ -120,7 +122,6 @@ export function TeacherEditCourse() {
               )}
               {indexSelectedView === 1 && (
                 <CourseContents
-                  contents={course.contents}
                   onSubmit={(content) => {
                     addNewContent(content);
                     setShowNotification(true);

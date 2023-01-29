@@ -6,6 +6,9 @@ import {
   PanelAccordion,
   SetupCard,
 } from '@ltpx-frontend-apps/shared-ui';
+import {
+  useCourse
+} from '@ltpx-frontend-apps/store';
 import { useState } from 'react';
 import styles from './course-contents.module.scss';
 
@@ -17,14 +20,13 @@ export interface FormContent {
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface CourseContentsProps {
-  contents?: ContentCourse[];
   onSubmit?: (content: ContentCourse) => void;
 }
 
 export function CourseContents(props: CourseContentsProps) {
-  const { contents, onSubmit } = props;
+  const { onSubmit } = props;
   const [ openModal, setOpenModal] = useState(false);
-  const [ contentsCourse, setContentsCourse] = useState<ContentCourse[]>(contents || []);
+  const { contents } = useCourse();
 
   return (
     <div className={styles['contents']}>
@@ -34,7 +36,7 @@ export function CourseContents(props: CourseContentsProps) {
           Puedes agregar contenidos que sirvan de apoyo para tus estudiantes
         </h4>
       </div>
-      {contentsCourse.length <1 && (
+      {contents.length <1 && (
         <SetupCard
           onClick={() => {
             setOpenModal(true);
@@ -50,13 +52,12 @@ export function CourseContents(props: CourseContentsProps) {
         onSubmit={(content) => {
           console.log(content)
           setOpenModal(false);
-          setContentsCourse(contentsCourse.concat([content]));
           onSubmit && onSubmit(content);
         }}
       />
-      {contentsCourse.length >= 1 && (
+      {contents.length >= 1 && (
         <>
-          {contentsCourse.map((element, key) => (
+          {contents.map((element, key) => (
             <PanelAccordion title={element.title} text={element.description} key={key} />
           ))}
           <Button

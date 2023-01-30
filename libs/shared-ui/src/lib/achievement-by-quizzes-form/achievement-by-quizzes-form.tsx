@@ -5,10 +5,9 @@ import Button, { ColorsButton, TypeButton } from '../button/button';
 import { Form, Formik } from 'formik';
 import * as Yup from 'yup';
 import {
-  AchievementModel,
+  AchievementParamsUi,
   AchievementsImages,
   EntityAchievement,
-  NewAchievementParams,
   QuizModel,
   TypeAchievement,
 } from '@ltpx-frontend-apps/api';
@@ -17,10 +16,10 @@ import InputTextStatus, { StatusInputText } from '../input-text-status/input-tex
 /* eslint-disable-next-line */
 export interface AchievementByQuizzesFormProps {
   quizzes: QuizModel[];
-  achievement?: AchievementModel;
+  achievement?: AchievementParamsUi;
   singleSelection?: boolean;
   onCancel?: () => void;
-  onSubmit?: (data: NewAchievementParams) => void;
+  onSubmit?: (data: AchievementParamsUi) => void;
   className?: string;
 }
 

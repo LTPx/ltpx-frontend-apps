@@ -1,5 +1,5 @@
-import { AchievementModel, AchievementsImages, EntityAchievement, NewAchievementParams, QuizModel, TypeAchievement } from '@ltpx-frontend-apps/api';
-import { Form, Formik, useFormik } from 'formik';
+import { AchievementParamsUi, AchievementsImages, EntityAchievement, QuizModel, TypeAchievement } from '@ltpx-frontend-apps/api';
+import { Form, Formik } from 'formik';
 import Button, { ColorsButton, TypeButton } from '../button/button';
 import Input from '../input/input';
 import SelectImage from '../select-image/select-image';
@@ -9,9 +9,9 @@ import InputTextStatus, { StatusInputText } from '../input-text-status/input-tex
 /* eslint-disable-next-line */
 export interface AchievementByScoreFormProps {
   quizzes: QuizModel[];
-  achievement?: AchievementModel;
+  achievement?: AchievementParamsUi;
   onCancel?: () => void;
-  onSubmit?: (data: NewAchievementParams) => void;
+  onSubmit?: (data: AchievementParamsUi) => void;
   className?: string;
 }
 

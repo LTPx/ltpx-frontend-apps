@@ -4,9 +4,9 @@ import AchievementTaskForm from '../achievement-task-form/achievement-task-form'
 import styles from './achievement-builder.module.scss';
 import {
   AchievementModel,
-  NewAchievementParams,
   QuizModel,
   TypeAchievement,
+  AchievementParamsUi,
 } from '@ltpx-frontend-apps/api';
 
 /* eslint-disable-next-line */
@@ -14,14 +14,14 @@ export interface AchievementBuilderProps {
   quizzes: QuizModel[];
   typeAchievement?: TypeAchievement;
   achievement?: AchievementModel;
-  onSubmit?: (achievement: NewAchievementParams) => void;
+  onSubmit?: (achievement: AchievementParamsUi) => void;
   onCancel?: () => void;
 }
 
 export function AchievementBuilder(props: AchievementBuilderProps) {
   const { onSubmit, onCancel, quizzes, typeAchievement, achievement } = props;
-  const saveNewAchievement = (achievement: NewAchievementParams) => {
-    onSubmit && onSubmit(achievement);
+  const saveNewAchievement = (achievementForm: AchievementParamsUi) => {
+    onSubmit && onSubmit({...achievementForm, ...{id: achievement?.id}});
   };
 
   return (

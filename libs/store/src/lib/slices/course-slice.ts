@@ -14,6 +14,8 @@ import {
   createQuiz,
   editQuiz,
   EditQuizParams,
+  EditAchievementParams,
+  editAchievement,
 } from '@ltpx-frontend-apps/api';
 
 type TResponse = {
@@ -33,8 +35,9 @@ export type CourseSlice = {
   removeQuiz: (id: number) => void;
   removeAchievement: (id: number) => void;
   addUpdateClassroom: (classroom: Classroom) => void;
-  updateQuiz: (quiz: EditQuizParams) => void;
   updateContent: (content: ContentCourse, index: number) => void;
+  updateQuiz: (quiz: EditQuizParams) => void;
+  updateAchievement: (achievement: EditAchievementParams) => void;
 };
 
 export const createCourseSlice: StateCreator<
@@ -163,6 +166,21 @@ export const createCourseSlice: StateCreator<
       await editCourse(courseUpdated);
       set({ course: courseUpdated });
       return { success: true, data: contents };
+    } catch (error) {
+      return { success: true, data: error };
+    }
+  },
+  updateAchievement:async (params: EditAchievementParams) => {
+    try {
+      const course = get().course;
+      const paramsAchievementId = {...params, ...{ course_id: course.id }};
+      const achievement = await editAchievement(paramsAchievementId);
+      const achievements = course.achievements?.map((achievementStore)=> {
+        return achievementStore.id === achievement.id ? achievement : achievementStore
+      });
+      const courseUpdated = { ...course, ...{ achievements } };
+      set({ course: courseUpdated });
+      return { success: true, data: achievements };
     } catch (error) {
       return { success: true, data: error };
     }

@@ -1,5 +1,6 @@
 import {
   AchievementModel,
+  AchievementParamsUi,
   NewAchievementParams,
   TypeAchievement,
 } from '@ltpx-frontend-apps/api';
@@ -27,7 +28,7 @@ export function CourseAchievements(props: CourseAchievementsProps) {
   const [ showNotification, setShowNotification ] = useState(false);
   const [ showAchievementFormType, setShowAchievementFormType ] =
     useState<TypeAchievement | null>();
-  const { addNewAchievement, removeAchievement, course } = useCourse();
+  const { addNewAchievement, removeAchievement, updateAchievement, course } = useCourse();
   const { achievements, quizzes } = course;
 
   const achievementsForms = [
@@ -49,15 +50,17 @@ export function CourseAchievements(props: CourseAchievementsProps) {
     },
   ];
 
-  const handleSaveAchievement = async (achievement: NewAchievementParams) => {
-    await addNewAchievement(achievement);
-    // if (success) {
-    //   setAchievements(achievements.concat([achievement]));
+  const handleSaveAchievement = async (achievement: AchievementParamsUi) => {
+    if (achievement.id) {
+      const { id } = achievement;
+      await updateAchievement({...achievement, ...{ id }});
       setShowNotification(true);
       setShowAchievementFormType(null);
-    // } else {
-    //   console.log(error);
-    // }
+    } else {
+      await addNewAchievement(achievement);
+      setShowNotification(true);
+      setShowAchievementFormType(null);
+    }
   };
   const ButtonAddAchievement = ({color, className, title}: {color: ColorsButton, className?: string, title:string}) => (
     <Dropdown>

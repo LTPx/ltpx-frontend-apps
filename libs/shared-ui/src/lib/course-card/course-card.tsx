@@ -19,7 +19,7 @@ export function CourseCard(props: CourseCardProps) {
 
   const Card = () => (
     <div className={styles['container']}>
-      <img src={image} alt="" />
+      <img loading='lazy' src={image} alt="" />
       <div className={styles['content']}>
         <span className={styles['category']}>{category}</span>
         <h3 className={styles['title']}>{title}</h3>

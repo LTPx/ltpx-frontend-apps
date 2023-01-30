@@ -43,6 +43,24 @@ export function CourseQuizzes(props: CourseQuizzesProps) {
     }
   };
 
+  const handleRemoveQuiz = async (id: number) => {
+    try {
+      const { data } =  await removeQuiz(id)
+      onSubmit &&
+        onSubmit({
+          success: true,
+          data: data,
+        });
+      setShowForm(false);
+    } catch (error: any) {
+      onSubmit &&
+        onSubmit({
+          success: false,
+          error: error,
+        });
+    }
+  };
+
   return (
     <div className="quiz-section">
       <div className={styles['header-text']}>
@@ -73,7 +91,7 @@ export function CourseQuizzes(props: CourseQuizzesProps) {
                 <div
                   className={styles['action']}
                   onClick={() => {
-                    removeQuiz(quiz.id);
+                    handleRemoveQuiz(quiz.id);
                   }}
                 >
                   <Icon icon="trash" size={15} />

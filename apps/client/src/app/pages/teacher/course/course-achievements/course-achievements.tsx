@@ -58,7 +58,7 @@ export function CourseAchievements(props: CourseAchievementsProps) {
           data: data,
         });
         setShowAchievementType(null);
-    } catch (error: any) {
+    } catch (error) {
       onSubmit &&
         onSubmit({
           success: false,
@@ -66,6 +66,23 @@ export function CourseAchievements(props: CourseAchievementsProps) {
         });
     }
   };
+
+  const handleRemoveAchievement = async (id: number) => {
+    try {
+      const { data } = await removeAchievement(id);
+      onSubmit &&
+        onSubmit({
+          success: true,
+          data: data,
+        });
+    } catch (error) {
+      onSubmit &&
+        onSubmit({
+          success: false,
+          error: error,
+        });
+    }
+  }
   const ButtonAddAchievement = ({color, className, title}: {color: ColorsButton, className?: string, title:string}) => (
     <Dropdown>
       <div className={styles['select-questions']}>
@@ -123,7 +140,7 @@ export function CourseAchievements(props: CourseAchievementsProps) {
                 <div
                   className={styles['action']}
                   onClick={() => {
-                    removeAchievement(achievement.id);
+                    handleRemoveAchievement(achievement.id);
                   }}
                 >
                   <Icon icon="trash" size={15} />

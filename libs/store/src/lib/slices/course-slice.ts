@@ -11,6 +11,8 @@ import {
   removeAchievement,
   createAchievement,
   NewAchievementParams,
+  NewQuizParams,
+  createQuiz,
 } from '@ltpx-frontend-apps/api';
 
 type TResponse = {
@@ -24,7 +26,7 @@ export type CourseSlice = {
   course: TeacherCourse;
   getCourse: (id: number) => Promise<TResponse>;
   addNewContent: (content: ContentCourse) => void;
-  addNewQuiz: (quiz: QuizModel) => void;
+  addNewQuiz: (quiz: NewQuizParams) => void;
   addNewAchievement: (achievement: NewAchievementParams) => void;
   removeContent: (index: number) => void;
   removeQuiz: (id: number) => void;
@@ -73,7 +75,18 @@ export const createCourseSlice: StateCreator<
     await editCourse(courseUpdated);
     set({ course: courseUpdated });
   },
-  addNewQuiz: (quiz: QuizModel) => {
+  addNewQuiz: async (params: NewQuizParams) => {
+    try {
+      const course = get().course;
+      const paramsCourseId = {...params, ...{course_id: course.id}};
+      const quiz = await createQuiz(paramsCourseId);
+      const quizzes = course.quizzes?.concat([quiz]);
+      const courseUpdated = { ...course, ...{ quizzes } };
+      set({ course: courseUpdated });
+      return { success: true, data: quizzes };
+    } catch (error) {
+      return { success: false, data: error };
+    }
   },
   removeQuiz: async (id: number) => {
     try {

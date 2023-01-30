@@ -22,7 +22,7 @@ export function CourseQuizzes(props: CourseQuizzesProps) {
   const { onSubmit } = props;
   const [ showNotification, setShowNotification ] = useState(false);
   const [ showForm, setShowForm ] = useState(false);
-  const { course, removeQuiz } = useCourse();
+  const { course, removeQuiz, addNewQuiz } = useCourse();
   const { quizzes } = course;
 
   const handleCreateQuiz = async (newQuiz: NewQuizParams) => {
@@ -33,10 +33,10 @@ export function CourseQuizzes(props: CourseQuizzesProps) {
     //     course_id: courseId,
     //   },
     // };
-    // const response = await createQuiz(data);
+    const response = await addNewQuiz(newQuiz);
     // if (response.success) {
-    //   setShowForm(false);
-    //   setShowNotification(true);
+      setShowForm(false);
+      setShowNotification(true);
     // } else {
     //   console.log(response.error);
     // }

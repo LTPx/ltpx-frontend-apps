@@ -33,6 +33,25 @@ export function CourseContents(props: CourseContentsProps) {
   const { course, addNewContent, updateContent, removeContent } = useCourse();
   const { contents } = course;
 
+  const actionsContent = [
+    {
+      icon: 'pencil',
+      onClick: (data: any)=>{
+        const { content, index } = data;
+        setContentEdit(content);
+        setIndexContentEdit(index);
+        setOpenModal(true);
+      }
+    },
+    {
+      icon: 'trash',
+      onClick: (data: any)=>{
+        const { index } = data;
+        removeContent(index);
+      }
+    }
+  ]
+
   return (
     <div className={styles['contents']}>
       <div className={styles['header-text']}>
@@ -54,28 +73,14 @@ export function CourseContents(props: CourseContentsProps) {
       {contents.length >= 1 && (
         <>
           {contents.map((content, index) => (
-            <PanelAccordion title={content.title} text={content.description} key={index}>
+            <PanelAccordion
+              title={content.title}
+              text={content.description}
+              key={index}
+              data={{content, index}}
+              actions={actionsContent}
+            >
               <pre>{content.description}</pre>
-              <div className={styles['actions']}>
-                <div
-                  className={styles['action']}
-                  onClick={() => {
-                    setContentEdit(content);
-                    setIndexContentEdit(index);
-                    setOpenModal(true);
-                  }}
-                >
-                  <Icon icon="pencil" size={15} />
-                </div>
-                <div
-                  className={styles['action']}
-                  onClick={() => {
-                    removeContent(index)
-                  }}
-                >
-                  <Icon icon="trash" size={15} />
-                </div>
-              </div>
             </PanelAccordion>
           ))}
           <Button

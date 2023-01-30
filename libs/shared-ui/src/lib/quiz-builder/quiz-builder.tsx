@@ -1,8 +1,6 @@
 import {
-  EditQuizParams,
-  NewQuizParams,
   QuestionQuiz,
-  QuizModel,
+  QuizParamsUi,
   TypeQuestionQuiz,
 } from '@ltpx-frontend-apps/api';
 import {
@@ -21,9 +19,9 @@ import * as Yup from 'yup';
 /* eslint-disable-next-line */
 export interface QuizBuilderProps {
   onClose?: () => void;
-  onSubmit?: (data: NewQuizParams | EditQuizParams) => void;
+  onSubmit?: (data: QuizParamsUi) => void;
   className?: string;
-  quiz?: QuizModel;
+  quiz?: QuizParamsUi;
 }
 
 export function QuizBuilder(props: QuizBuilderProps) {
@@ -42,7 +40,7 @@ export function QuizBuilder(props: QuizBuilderProps) {
     validationSchema: Yup.object({
       name: Yup.string().required('Necesitas agregar un nombre'),
     }),
-    onSubmit: (quiz: NewQuizParams | EditQuizParams) => {
+    onSubmit: (quiz) => {
       onSubmit && onSubmit(quiz);
     },
   });

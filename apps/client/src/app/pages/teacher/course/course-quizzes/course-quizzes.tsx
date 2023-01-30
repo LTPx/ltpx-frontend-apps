@@ -1,4 +1,4 @@
-import { EditQuizParams, NewQuizParams, QuestionQuiz, QuizModel } from '@ltpx-frontend-apps/api';
+import { QuestionQuiz, QuizModel, QuizParamsUi } from '@ltpx-frontend-apps/api';
 import {
   Button,
   ColorsButton,
@@ -26,29 +26,17 @@ export function CourseQuizzes(props: CourseQuizzesProps) {
   const { course, removeQuiz, addNewQuiz, updateQuiz } = useCourse();
   const { quizzes } = course;
 
-  const handleSaveQuiz = async (quiz: EditQuizParams | NewQuizParams) => {
-    console.log('N: ', quiz);
-    // if (quiz.id) {
-    //   await updateQuiz(quiz);
-    // } else {
-    //   await addNewQuiz(quiz);
-    // }
-
-    // console.log(newQuiz);
-    // const data = {
-    //   ...newQuiz,
-    //   ...{
-    //     course_id: courseId,
-    //   },
-    // };
-    // const response = await addNewQuiz(newQuiz);
-    // if (response.success) {
-      // setShowForm(false);
-      // setShowNotification(true);
-    // } else {
-    //   console.log(response.error);
-    // }
-    // console.log(response);
+  const handleSaveQuiz = async (quiz: QuizParamsUi) => {
+    if (quiz.id) {
+      const { id } = quiz;
+      await updateQuiz({...quiz, ...{ id }});
+      setShowForm(false);
+      setShowNotification(true);
+    } else {
+      await addNewQuiz(quiz);
+      setShowForm(false);
+      setShowNotification(true);
+    }
   };
 
   return (

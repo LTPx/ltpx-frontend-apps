@@ -1,3 +1,5 @@
+import { PartialBy } from "./util";
+
 export enum TypeQuestionQuiz {
   multiple = 'multiple',
   single = 'single',
@@ -25,6 +27,10 @@ export type EditQuizParams = Omit<
   'user_id' | 'created_at' | 'updated_at' | 'course_id'
 >;
 
+export type QuizParamsUi = PartialBy<
+  EditQuizParams,
+  'id'
+>;
 export interface QuestionQuiz {
   question: string;
   description: string;

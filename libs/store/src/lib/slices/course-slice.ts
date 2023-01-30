@@ -142,7 +142,9 @@ export const createCourseSlice: StateCreator<
       const course = get().course;
       const paramsCourseId = {...params, ...{ course_id: course.id }};
       const quiz = await editQuiz(paramsCourseId);
-      const quizzes = course.quizzes?.concat([quiz]);
+      const quizzes = course.quizzes?.map((quizStore)=> {
+        return quizStore.id === quiz.id ? quiz : quizStore
+      });
       const courseUpdated = { ...course, ...{ quizzes } };
       set({ course: courseUpdated });
       return { success: true, data: quizzes };

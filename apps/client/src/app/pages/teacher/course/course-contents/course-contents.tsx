@@ -98,7 +98,7 @@ export function CourseContents(props: CourseContentsProps) {
           }}
           onSubmit={(content) => {
             setOpenModal(false);
-            if (indexContentEdit) {
+            if (indexContentEdit !== undefined) {
               updateContent(content, indexContentEdit);
             } else {
               addNewContent(content);

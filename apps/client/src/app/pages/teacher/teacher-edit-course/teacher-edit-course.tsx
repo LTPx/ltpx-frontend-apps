@@ -115,6 +115,7 @@ export function TeacherEditCourse() {
               {indexSelectedView === 0 && (
                 <CourseGeneralInformation
                   {...course}
+                  cover={course.cover_url}
                   onSubmit={(data) => {
                     saveChanges(data);
                   }}

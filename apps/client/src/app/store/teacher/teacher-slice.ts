@@ -19,12 +19,14 @@ import {
   editCourse,
   NewAchievementParams,
   TeacherCourse,
-  StoreApiResponse,
+  getTeacherCourse,
+  createQuiz,
+  createAchievement,
 } from '@ltpx-frontend-apps/api';
 import { StateCreator } from 'zustand';
 import { StoreState } from '../store';
 import { teacherNewAchievement } from './achievements-actions';
-import { teacherGetCourse, teacherNewQuiz, teacherQuizzes } from './courses-actions';
+import { teacherNewQuiz, teacherQuizzes } from './courses-actions';
 
 type TResponseApply = {
   accepted: boolean;
@@ -37,7 +39,7 @@ type TResponseLogin = {
 };
 
 type TResponseCreateCourse = {
-  saved: boolean;
+  success: boolean;
   data: CourseApiParams | any;
 };
 
@@ -52,21 +54,21 @@ type TResponseProfile = {
 };
 
 type TResponseUpdateProfile = {
-  saved: boolean;
+  success: boolean;
   data: IUserAccount | any;
 };
 
 type TResponse = {
-  saved: boolean;
+  success: boolean;
   data?: any;
-  error?: any;
+  error?: Error;
 };
 
 export type TeacherSlice = {
   teacher_account: StatusTeacherAccount;
   application: ApplicationTeach | null;
   profile: IUserAccount | null;
-  newQuiz: QuizModel;
+  newQuiz: QuizModel | null;
   currentCourse: TeacherCourse;
   applyTeach: (params: ApplyTeachApiParams) => Promise<any>;
   getApplicationTeach: () => Promise<any>;
@@ -78,7 +80,7 @@ export type TeacherSlice = {
   createQuiz: (params: NewQuizApiParams) => Promise<TResponse>;
   myQuizzes: () => Promise<TResponse>;
   createAchievement: (params: NewAchievementParams) => Promise<TResponse>;
-  getCourse: (id: number) => Promise<StoreApiResponse>;
+  getCourse: (id: number) => Promise<TResponse>;
 };
 
 export const createTeacherSlice: StateCreator<
@@ -86,11 +88,11 @@ export const createTeacherSlice: StateCreator<
   [],
   [],
   TeacherSlice
-> = (set) => ({
+> = (set, get) => ({
   teacher_account: StatusTeacherAccount.unapplied,
   application: null,
   profile: null,
-  newQuiz: {} as QuizModel,
+  newQuiz: null,
   currentCourse: {} as TeacherCourse,
   applyTeach: async (params: ApplyTeachApiParams): Promise<TResponseApply> => {
     try {
@@ -140,9 +142,9 @@ export const createTeacherSlice: StateCreator<
   ): Promise<TResponseCreateCourse> => {
     try {
       const course = await createCourse(params);
-      return { saved: true, data: course };
+      return { success: true, data: course };
     } catch (error) {
-      return { saved: false, data: error };
+      return { success: false, data: error };
     }
   },
   editCourse: async (
@@ -150,9 +152,10 @@ export const createTeacherSlice: StateCreator<
   ): Promise<TResponseCreateCourse> => {
     try {
       const course = await editCourse(params);
-      return { saved: true, data: course };
+      set({currentCourse: course})
+      return { success: true, data: course };
     } catch (error) {
-      return { saved: false, data: error };
+      return { success: false, data: error };
     }
   },
   updateProfile: async (
@@ -161,28 +164,48 @@ export const createTeacherSlice: StateCreator<
     try {
       const response = await updateTeacherProfile(params);
       set({ profile: response });
-      return { saved: true, data: response };
+      return { success: true, data: response };
     } catch (error) {
-      return { saved: false, data: error };
+      return { success: false, data: error };
     }
   },
-  createQuiz: async(params) => {
-    const { success, response } =  await teacherNewQuiz(params, set);
-    return { saved: success, data: response };
-  },
-  myQuizzes: async() => {
-    const { success, response } =  await teacherQuizzes(set);
-    return { saved: success, data: response };
-  },
-  createAchievement: async(params) => {
-    const { success, response } =  await teacherNewAchievement(params, set);
-    return { saved: success, data: response };
-  },
-  getCourse: async(id: number) => {
-    const { success, response } =  await teacherGetCourse(id);
-    if (success) {
-      set({currentCourse: response.data })
+  createQuiz: async (params) => {
+    try {
+      const quiz = await createQuiz(params);
+      const course = get().currentCourse;
+      const allQuizzes = course.quizzes || [];
+      const quizzes = allQuizzes.concat([quiz]);
+      const courseUpdated = { ...course, ...{quizzes}}
+      set({ currentCourse: courseUpdated });
+      return { success: true, data: quiz };
+    } catch (error) {
+      return { success: false, data: error };
     }
-    return { success, response };
-  }
+  },
+  myQuizzes: async () => {
+    const { success, response } = await teacherQuizzes(set);
+    return { success: success, data: response };
+  },
+  createAchievement: async (params) => {
+    try {
+      const achievement = await createAchievement(params);
+      const course = get().currentCourse;
+      const allAchievements = course.achievements || [];
+      const achievements = allAchievements.concat([achievement]);
+      const courseUpdated = { ...course, ...{achievements}}
+      set({ currentCourse: courseUpdated });
+      return { success: true, data: achievement };
+    } catch (error) {
+      return { success: false, data: error };
+    }
+  },
+  getCourse: async (id: number) => {
+    try {
+      const course = await getTeacherCourse(id);
+      set({ currentCourse: course });
+      return { success: true, data: course };
+    } catch (error) {
+      return { success: false, data: error };
+    }
+  },
 });

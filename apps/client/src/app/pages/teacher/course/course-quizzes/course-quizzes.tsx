@@ -36,7 +36,7 @@ export function CourseQuizzes(props: CourseQuizzesProps) {
       },
     };
     const response = await createQuiz(data);
-    if (response.saved) {
+    if (response.success) {
       setQuizzes(quizzes.concat([newQuiz]));
       setShowForm(false);
       setShowNotification(true);

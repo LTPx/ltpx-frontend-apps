@@ -16,9 +16,11 @@ export const useTeacher = () => {
     createQuiz,
     createAchievement,
     getCourse,
+    currentCourse
   } = useAppStore();
 
   return {
+    course: currentCourse,
     teacher_account,
     registerTeacher,
     applyTeach,

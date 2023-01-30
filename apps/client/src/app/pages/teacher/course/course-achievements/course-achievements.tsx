@@ -60,8 +60,8 @@ export function CourseAchievements(props: CourseAchievementsProps) {
         course_id: courseId,
       },
     };
-    const { saved, error } = await createAchievement(newAchievement);
-    if (saved) {
+    const { success, error } = await createAchievement(newAchievement);
+    if (success) {
       setAchievements(achievements.concat([achievement]));
       setShowNotification(true);
       setShowAchievementFormType(null);

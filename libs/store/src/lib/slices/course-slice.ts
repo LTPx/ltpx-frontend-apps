@@ -190,12 +190,12 @@ export const createCourseSlice: StateCreator<
     }
   },
   updateCourse: async (params: CourseApiParams): Promise<TResponse> => {
-    const course = get().course;
-    const paramsCourse = { ...course, ...params };
     try {
-      const course = await editCourse(paramsCourse);
-      set({ course });
-      return { success: true, data: course };
+      const courseStore = get().course;
+      const updatedCourse = { ...courseStore, ...params };
+      await editCourse(updatedCourse);
+      set({ course: updatedCourse });
+      return { success: true, data: updatedCourse };
     } catch (error) {
       return { success: false, data: error };
     }

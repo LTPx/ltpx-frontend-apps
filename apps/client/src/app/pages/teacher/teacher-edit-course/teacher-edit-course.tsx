@@ -39,7 +39,7 @@ export function TeacherEditCourse() {
   const [showNotification, setShowNotification] = useState(false);
   const [indexSelectedView, setIndexSelectedView] = useState(0);
   const { editCourse } = useTeacher();
-  const { getCourse, loadedCourse, course } = useCourse();
+  const { getCourse, updateCourse, loadedCourse, course } = useCourse();
   const { translateStatus } = useCourseUtil();
 
   const params = useParams();
@@ -56,23 +56,26 @@ export function TeacherEditCourse() {
   }, [fetchData]);
 
   const saveChanges = async (formData: CourseApiParams) => {
-    if (course) {
-      const data = { ...formData, ...{ id: course.id } };
-      delete data.cover_url;
-      console.log('formData edit: ', data);
-      const result = await editCourse(data);
-      if (result.success) {
-        console.log('success');
-        setShowNotification(true);
-      } else {
-        console.log(result.data);
-      }
-    }
+    debugger
+    console.log(formData);
+    await updateCourse(formData);
+    // if (course) {
+    //   const data = { ...formData, ...{ id: course.id } };
+    //   delete data.cover_url;
+    //   console.log('formData edit: ', data);
+    //   const result = await editCourse(data);
+    //   if (result.success) {
+    //     console.log('success');
+    //     setShowNotification(true);
+    //   } else {
+    //     console.log(result.data);
+    //   }
+    // }
   };
 
   return (
     <div className={styles['container']}>
-      {loadedCourse && (
+      {course.id && (
         <div className={styles['container']}>
           <div className={styles['header']}>
             <div className={styles['title']}>

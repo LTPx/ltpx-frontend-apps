@@ -16,6 +16,7 @@ import {
   EditQuizParams,
   EditAchievementParams,
   editAchievement,
+  CourseApiParams,
 } from '@ltpx-frontend-apps/api';
 
 type TResponse = {
@@ -38,6 +39,7 @@ export type CourseSlice = {
   updateContent: (content: ContentCourse, index: number) => void;
   updateQuiz: (quiz: EditQuizParams) => void;
   updateAchievement: (achievement: EditAchievementParams) => void;
+  updateCourse: (course: CourseApiParams) => void;
 };
 
 export const createCourseSlice: StateCreator<
@@ -183,6 +185,17 @@ export const createCourseSlice: StateCreator<
       return { success: true, data: achievements };
     } catch (error) {
       return { success: true, data: error };
+    }
+  },
+  updateCourse:async (params: CourseApiParams) => {
+    const course = get().course;
+    const paramsCourse = {...course, ...params};
+    try {
+      const course = await editCourse(paramsCourse);
+      set({course: course})
+      return { success: true, data: course };
+    } catch (error) {
+      return { success: false, data: error };
     }
   }
 });

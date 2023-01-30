@@ -45,9 +45,22 @@ export function CourseContents(props: CourseContentsProps) {
     },
     {
       icon: 'trash',
-      onClick: (data: any)=>{
-        const { index } = data;
-        removeContent(index);
+      onClick: async(content: any)=>{
+        try {
+          const { index } = content;
+          const { data } = await removeContent(index);
+          onSubmit &&
+          onSubmit({
+            success: true,
+            data: data,
+          });
+        } catch (error) {
+          onSubmit &&
+          onSubmit({
+            success: false,
+            error: error,
+          });
+        }
       }
     }
   ];

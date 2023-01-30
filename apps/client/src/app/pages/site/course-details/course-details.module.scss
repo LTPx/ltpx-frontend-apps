@@ -2,11 +2,13 @@
 
 .container {
   background-color: $white-color;
+  display: flex;
 }
 
 .course-details {
   padding: $size-lg-1 14rem;
   display: flex;
+  width: 100%;
 
   .description {
     margin-right: 10rem;
@@ -25,8 +27,14 @@
 
     .description-course {
       display: flex;
-      justify-content: space-between;
       padding: $size-md-1 0;
+      align-items: center;
+      gap: $size-lg-1;
+
+      .items {
+        display: flex;
+        gap: 5rem;
+      }
 
       .item {
         display: flex;
@@ -40,8 +48,102 @@
       }
     }
   }
+
+  .summary-course {
+    padding-top: $size-md-1;
+  }
 }
 
-.summary-course {
-  padding-top: $size-md-1;
+//smartphones-responsive
+@media screen and (max-width: 550px) {
+  .course-details {
+    padding: 0 0;
+    display: flex;
+    flex-direction: column;
+
+    .description {
+      margin-right: 0;
+      width: 100%;
+
+      .description-title {
+        display: flex;
+        justify-content: center;
+        padding: $size-lg-3 0;
+        .title {
+          width: 80%;
+          text-align: center;
+        }
+      }
+
+      .description-course {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 0 0;
+
+        .avatar {
+          padding-bottom: $size-md-1;
+        }
+        .items {
+          display: flex;
+          gap: $size-lg-3;
+        }
+      }
+
+      .summary-course {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        .tabs {
+          overflow-x: auto;
+          width: 22rem;
+          gap: $size-lg-3;
+        }
+        .comment-course {
+          display: flex;
+          width: 20rem;
+          gap: $size-md-1;
+          align-items: center;
+          overflow-x: auto;
+        }
+      }
+    }
+  }
+}
+
+//tablet-responsive-horizontal
+@media screen and (min-width: 860px) and (max-width: 1224px) {
+  .course-details {
+    padding: $size-lg-1 $size-lg-4;
+    display: flex;
+  }
+  .description-course {
+    .items {
+      gap: 7rem !important;
+    }
+  }
+}
+//tablet-responsive-vertical
+@media screen and (min-width: 560px) and (max-width: 850px){
+  .container {
+    display: flex;
+    justify-content: center;
+  }
+  .course-details {
+    width: 85%;
+    padding: $size-lg-1 $size-lg-1;
+    display: flex;
+    flex-direction: column;
+    .description-container {
+      .description {
+        margin-right: 0;
+      }
+    }
+  }
+  .description-course {
+    .items {
+      gap: 10rem !important;
+    }
+  }
 }

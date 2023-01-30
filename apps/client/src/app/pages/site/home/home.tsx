@@ -1,5 +1,11 @@
 import { buildCourses } from '@ltpx-frontend-apps/api';
-import { Button, CategoryCard, CategoryCardProps, ColorsButton, CourseCard } from '@ltpx-frontend-apps/shared-ui';
+import {
+  Button,
+  CategoryCard,
+  CategoryCardProps,
+  ColorsButton,
+  CourseCard,
+} from '@ltpx-frontend-apps/shared-ui';
 import { NavLink } from 'react-router-dom';
 import styles from './home.module.scss';
 
@@ -7,18 +13,29 @@ import styles from './home.module.scss';
 export interface HomeProps {}
 
 export function Home(props: HomeProps) {
-
   const popularCourses = buildCourses(8);
   const categories = [
-    {icon: 'desktop', title: 'Design', description:'Over 960 courses'},
-    {icon: 'briefcase', title: 'Business', description:'Over 600 courses'},
-    {icon: 'browser', title: 'Software Development', description:'Over 320 courses'},
-    {icon: 'user', title: 'Personal Development', description:'Over 180 courses'},
-    {icon: 'picture', title: 'Photography', description:'Over 400 courses'},
-    {icon: 'guitar', title: 'Audio + Music', description:'Over 250 courses'},
-    {icon: 'marketing', title: 'Marketing', description:'Over 380 courses'},
-    {icon: 'wallet', title: 'Finance Accounting', description:'Over 100 courses'}
-  ]
+    { icon: 'desktop', title: 'Design', description: 'Over 960 courses' },
+    { icon: 'briefcase', title: 'Business', description: 'Over 600 courses' },
+    {
+      icon: 'browser',
+      title: 'Software Development',
+      description: 'Over 320 courses',
+    },
+    {
+      icon: 'user',
+      title: 'Personal Development',
+      description: 'Over 180 courses',
+    },
+    { icon: 'picture', title: 'Photography', description: 'Over 400 courses' },
+    { icon: 'guitar', title: 'Audio + Music', description: 'Over 250 courses' },
+    { icon: 'marketing', title: 'Marketing', description: 'Over 380 courses' },
+    {
+      icon: 'wallet',
+      title: 'Finance Accounting',
+      description: 'Over 100 courses',
+    },
+  ];
 
   return (
     <div className={styles['container']}>
@@ -27,39 +44,39 @@ export function Home(props: HomeProps) {
           <div className={styles['info']}>
             <div className={styles['text']}>
               <h1>Learn From Anywhere</h1>
-              <h4>Tecnology is Bringing A Massive Wave Of Education On Learning Things in different ways</h4>
+              <h4>
+                Tecnology is Bringing A Massive Wave Of Education On Learning
+                Things in different ways
+              </h4>
             </div>
             <div className={styles['actions']}>
               <Button
-                color={ColorsButton.primary}
+                color={ColorsButton.secondary}
                 title="GET STARTED"
                 outline={true}
-                link='/register'
+                link="/register"
               />
               <Button
                 color={ColorsButton.primary}
                 title="VIEW COURSES"
-                link='/courses'
+                link="/courses"
               />
             </div>
           </div>
-          <img src="https://unireziverse.com/wp-content/uploads/2021/04/illustration-1.png" alt="cover" />
-          </div>
+          <img
+            src="../../../../assets/images/illustration-cover.svg"
+            alt="cover"
+          />
+        </div>
       </div>
       <div className={styles['popular-courses-container']}>
         <div className={styles['text']}>
           <h2>Popular Courses</h2>
-          <h4 className='muted'>
-            Discover you perfect program in our courses
-          </h4>
+          <h4 className="muted">Discover you perfect program in our courses</h4>
         </div>
         <div className={styles['popular-courses']}>
-          { popularCourses.map((course, index)=>(
-            <NavLink
-              key={index}
-              to={`/course/${course.id}/details`}
-              className={`${styles['link']} link-wrapper`}
-            >
+          {popularCourses.map((course, index) => (
+            <div className={styles['course']} key={index}>
               <CourseCard
                 image={course.cover}
                 category={course.category}
@@ -68,29 +85,31 @@ export function Home(props: HomeProps) {
                 duration={0}
                 lessons={0}
                 stars={course.average_rating}
+                link={`/course/${course.id}/details`}
               />
-            </NavLink>
+            </div>
           ))}
         </div>
         <div className={styles['link-browser']}>
-          <NavLink to='/courses'>
-            Browser All
-          </NavLink>
+          <NavLink to="/courses">Browser All</NavLink>
         </div>
       </div>
       <div className={styles['categories-container']}>
-        <h2>Trending Categories</h2>
-        <h4 className='muted'>
-          Select your category and discover your perfect class
-        </h4>
+        <div className={styles['text-categories']}>
+          <h2>Trending Categories</h2>
+          <h4 className="muted">
+            Select your category and discover your perfect class
+          </h4>
+        </div>
         <div className={styles['category-content']}>
-          {categories.map((category, index)=>(
+          {categories.map((category, index) => (
             <CategoryCard
               icon={category.icon}
               key={index}
               title={category.title}
-              description={category.description}/>
-            ))}
+              description={category.description}
+            />
+          ))}
         </div>
       </div>
     </div>

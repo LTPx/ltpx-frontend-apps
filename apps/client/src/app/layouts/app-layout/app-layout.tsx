@@ -7,29 +7,32 @@ import styles from './app-layout.module.scss';
 export interface AppLayoutProps {}
 
 const companyLinks = [
-  { text: 'Our Company', url: '/company'},
-  { text: 'About us', url: '/about'},
-  { text: 'Contact us', url: '/contact'},
-  { text: 'Community', url: '/community'},
-  { text: 'Blog', url: '/blog'},
+  { text: 'Our Company', url: '/company' },
+  { text: 'About us', url: '/about' },
+  { text: 'Contact us', url: '/contact' },
+  { text: 'Community', url: '/community' },
+  { text: 'Blog', url: '/blog' },
 ];
 
 const supportLinks = [
-  { text: 'Documentation', url: '/documentation'},
-  { text: 'Forums', url: '/forums'},
-  { text: 'Language Packs', url: '/languages'},
-  { text: 'Release', url: '/release'},
+  { text: 'Documentation', url: '/documentation' },
+  { text: 'Forums', url: '/forums' },
+  { text: 'Language Packs', url: '/languages' },
+  { text: 'Release', url: '/release' },
 ];
 
 export function AppLayout(props: AppLayoutProps) {
-
   return (
-    <div className={styles['container']}>
-      <HeaderApp/>
+    <div className={styles['layout']}>
+      <div className={styles['header']}>
+        <HeaderApp />
+      </div>
       <div className={styles['content']}>
         <Outlet />
       </div>
-      <Footer companyLinks={companyLinks} supportLinks={supportLinks} />
+      <div className={styles['footer']}>
+        <Footer companyLinks={companyLinks} supportLinks={supportLinks} />
+      </div>
     </div>
   );
 }

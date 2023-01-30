@@ -2,6 +2,8 @@
 
 .container {
   width: 100%;
+  display: flex;
+  flex-direction: column;
   padding-top: $size-lg-3;
 
   h3 {
@@ -12,6 +14,7 @@
 .content {
   padding-top: $size-md-3;
   display: flex;
+  justify-content: flex-start;
   gap: $size-md-1;
 
   .total-rating {
@@ -20,7 +23,7 @@
     align-items: center;
     justify-content: center;
     gap: $size-sm-2;
-    padding: $size-lg-1 $size-lg-3;
+    padding: $size-md-1 $size-lg-1;
     border: 1px solid #d4d4d4;
 
     h1 {
@@ -33,7 +36,7 @@
   }
 
   .rating-content {
-    padding: $size-md-1;
+    // padding: $size-md-1;
 
     .rating-bar {
       display: flex;
@@ -42,8 +45,55 @@
       padding-bottom: $size-md-1;
 
       .bar {
-        width: 295px;
-        height: 10px;
+        width: 200px;
+      }
+    }
+  }
+}
+
+//smartphones-responsive
+@media screen and (max-width: 550px) {
+  .container {
+    width: 85%;
+
+    h3 {
+      text-align: center;
+    }
+
+    .content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      .total-rating {
+        padding: $size-md-1 $size-lg-1;
+      }
+
+      .rating-content {
+        padding: 0;
+        .rating-bar {
+          .bar {
+            width: 180px;
+          }
+        }
+      }
+    }
+  }
+}
+//tablet-responsive-vertical
+@media screen and (min-width: 560px) and (max-width: 850px) {
+  .content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .total-rating {
+      padding: $size-lg-1 $size-lg-1;
+    }
+    .rating-content {
+      padding-top: $size-md-1;
+      .rating-bar {
+        .bar {
+          width: 250px;
+        }
       }
     }
   }

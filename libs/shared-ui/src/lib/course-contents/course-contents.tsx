@@ -15,6 +15,7 @@ export function CourseContents(props: CourseContentsProps) {
   const { contents } = props;
   return (
     <div className={styles['container']}>
+      <h3>Contenidos del Curso</h3>
       {contents.map((content, index) =>(
         <PanelAccordion title={content.title} key={index}>
           <div className={styles['content']}>

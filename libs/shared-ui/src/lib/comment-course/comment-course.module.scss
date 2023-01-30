@@ -2,7 +2,7 @@
 
 .container {
   display: flex;
-  width: 100%;
+  // width: 100%;
   padding-top: $size-lg-3;
   padding-bottom: $size-lg-3;
 
@@ -34,5 +34,22 @@
       color: $text-gray-color;
       text-align: justify;
     }
+  }
+}
+
+//smartphones-responsive
+@media screen and (max-width: 550px) {
+  .container{
+    width: 100%;
+    padding-top: $size-lg-1;
+    padding-bottom: $size-lg-2;
+    height: 18rem;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
+  .comment-content {
+    padding: 0;
+    width: 15rem;
   }
 }

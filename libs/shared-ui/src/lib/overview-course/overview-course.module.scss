@@ -17,7 +17,7 @@
       color: $text-gray-color;
     }
   }
-
+  
   .achievements {
     h3 {
       color: $text-color;
@@ -60,5 +60,10 @@
         color: $text-gray-color;
       }
     }
+  }
+}
+@media screen and (max-width: 500px) {
+  .container {
+    width: 85%;
   }
 }

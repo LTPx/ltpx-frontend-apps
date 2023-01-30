@@ -4,6 +4,7 @@
   display: flex;
   justify-content: center;
   margin-top: $size-lg-1;
+  width: 100%;
 }
 
 .content {
@@ -13,5 +14,11 @@
     display: flex;
     justify-content: center;
     margin-top: $size-md-1;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .content {
+    width: 75%;
   }
 }

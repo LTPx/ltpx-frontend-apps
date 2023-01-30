@@ -25,7 +25,7 @@ export interface CourseAchievementsProps {
 export function CourseAchievements(props: CourseAchievementsProps) {
   const [ achievementEdit, setAchievementEdit ] = useState<AchievementModel>();
   const [ showNotification, setShowNotification ] = useState(false);
-  const [showAchievementFormType, setShowAchievementFormType] =
+  const [ showAchievementFormType, setShowAchievementFormType ] =
     useState<TypeAchievement | null>();
   const { addNewAchievement, removeAchievement, course } = useCourse();
   const { achievements, quizzes } = course;

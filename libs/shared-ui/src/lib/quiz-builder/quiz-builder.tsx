@@ -1,6 +1,8 @@
 import {
+  EditQuizParams,
   NewQuizParams,
   QuestionQuiz,
+  QuizModel,
   TypeQuestionQuiz,
 } from '@ltpx-frontend-apps/api';
 import {
@@ -19,17 +21,20 @@ import * as Yup from 'yup';
 /* eslint-disable-next-line */
 export interface QuizBuilderProps {
   onClose?: () => void;
-  onSubmit?: (data: NewQuizParams) => void;
+  onSubmit?: (data: NewQuizParams | EditQuizParams) => void;
   className?: string;
+  quiz?: QuizModel;
 }
 
 export function QuizBuilder(props: QuizBuilderProps) {
-  const { onClose, onSubmit, className } = props;
+  const { onClose, onSubmit, className, quiz } = props;
   const [selectedTypeQuestion, setSelectedTypeQuestion] =
     useState<TypeQuestionQuiz | null>();
-  const initialValues: NewQuizParams = {
-    name: '',
-    questions: [],
+
+  const initialValues = {
+    id: quiz?.id,
+    name: quiz?.name || '',
+    questions: quiz?.questions || [],
   };
 
   const formik = useFormik({
@@ -37,7 +42,7 @@ export function QuizBuilder(props: QuizBuilderProps) {
     validationSchema: Yup.object({
       name: Yup.string().required('Necesitas agregar un nombre'),
     }),
-    onSubmit: (quiz) => {
+    onSubmit: (quiz: NewQuizParams | EditQuizParams) => {
       onSubmit && onSubmit(quiz);
     },
   });
@@ -138,7 +143,7 @@ export function QuizBuilder(props: QuizBuilderProps) {
             }}
           />
           <Button
-            title="Guardar test"
+            title={quiz?.id ? "Actualizar Test" : "Crear Test"}
             color={ColorsButton.secondary}
             type={TypeButton.submit}
             onClick={() => {

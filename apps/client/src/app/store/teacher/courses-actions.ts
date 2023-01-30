@@ -3,10 +3,10 @@ import {
   createQuiz,
   getTeacherCourse,
   getTeacherQuizzes,
-  NewQuizApiParams,
+  NewQuizParams,
 } from '@ltpx-frontend-apps/api';
 
-export const teacherNewQuiz = async (params: NewQuizApiParams, set: any) => {
+export const teacherNewQuiz = async (params: NewQuizParams, set: any) => {
   try {
     const quiz = await createQuiz(params);
     set({ newQuiz: quiz });

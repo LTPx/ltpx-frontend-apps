@@ -2,7 +2,6 @@ import { StateCreator } from 'zustand';
 import { StoreState } from '../store';
 import {
   ContentCourse,
-  QuizModel,
   Classroom,
   getTeacherCourse,
   TeacherCourse,
@@ -13,6 +12,8 @@ import {
   NewAchievementParams,
   NewQuizParams,
   createQuiz,
+  editQuiz,
+  EditQuizParams,
 } from '@ltpx-frontend-apps/api';
 
 type TResponse = {
@@ -32,6 +33,7 @@ export type CourseSlice = {
   removeQuiz: (id: number) => void;
   removeAchievement: (id: number) => void;
   addUpdateClassroom: (classroom: Classroom) => void;
+  updateQuiz: (quiz: EditQuizParams) => void;
 };
 
 export const createCourseSlice: StateCreator<
@@ -133,6 +135,19 @@ export const createCourseSlice: StateCreator<
       set({ course: courseUpdated });
     } catch (error) {
       console.log(error);
+    }
+  },
+  updateQuiz: async (params: EditQuizParams) => {
+    try {
+      const course = get().course;
+      const paramsCourseId = {...params, ...{ course_id: course.id }};
+      const quiz = await editQuiz(paramsCourseId);
+      const quizzes = course.quizzes?.concat([quiz]);
+      const courseUpdated = { ...course, ...{ quizzes } };
+      set({ course: courseUpdated });
+      return { success: true, data: quizzes };
+    } catch (error) {
+      return { success: true, data: error };
     }
   }
 });

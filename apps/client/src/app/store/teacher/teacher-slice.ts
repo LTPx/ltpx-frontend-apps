@@ -15,7 +15,6 @@ import {
   getTeacherProfile,
   updateTeacherProfile,
   QuizModel,
-  NewQuizApiParams,
   editCourse,
   NewAchievementParams,
   TeacherCourse,
@@ -77,7 +76,6 @@ export type TeacherSlice = {
   editCourse: (params: CourseApiParams) => Promise<TResponseCreateCourse>;
   getProfile: () => Promise<TResponseProfile>;
   updateProfile: (params: IUserAccount) => Promise<TResponseUpdateProfile>;
-  createQuiz: (params: NewQuizApiParams) => Promise<TResponse>;
   myQuizzes: () => Promise<TResponse>;
   createAchievement: (params: NewAchievementParams) => Promise<TResponse>;
   getCourse: (id: number) => Promise<TResponse>;
@@ -165,19 +163,6 @@ export const createTeacherSlice: StateCreator<
       const response = await updateTeacherProfile(params);
       set({ profile: response });
       return { success: true, data: response };
-    } catch (error) {
-      return { success: false, data: error };
-    }
-  },
-  createQuiz: async (params) => {
-    try {
-      const quiz = await createQuiz(params);
-      const course = get().currentCourse;
-      const allQuizzes = course.quizzes || [];
-      const quizzes = allQuizzes.concat([quiz]);
-      const courseUpdated = { ...course, ...{quizzes}}
-      set({ currentCourse: courseUpdated });
-      return { success: true, data: quiz };
     } catch (error) {
       return { success: false, data: error };
     }

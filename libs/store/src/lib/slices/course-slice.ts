@@ -39,7 +39,7 @@ export type CourseSlice = {
   updateContent: (content: ContentCourse, index: number) => void;
   updateQuiz: (quiz: EditQuizParams) => void;
   updateAchievement: (achievement: EditAchievementParams) => void;
-  updateCourse: (course: CourseApiParams) => void;
+  updateCourse: (course: CourseApiParams) => Promise<TResponse>;
 };
 
 export const createCourseSlice: StateCreator<
@@ -86,7 +86,7 @@ export const createCourseSlice: StateCreator<
   addNewQuiz: async (params: NewQuizParams) => {
     try {
       const course = get().course;
-      const paramsCourseId = {...params, ...{course_id: course.id}};
+      const paramsCourseId = { ...params, ...{ course_id: course.id } };
       const quiz = await createQuiz(paramsCourseId);
       const quizzes = course.quizzes?.concat([quiz]);
       const courseUpdated = { ...course, ...{ quizzes } };
@@ -110,7 +110,7 @@ export const createCourseSlice: StateCreator<
   addNewAchievement: async (params: NewAchievementParams) => {
     try {
       const course = get().course;
-      const paramsCourseId = {...params, ...{course_id: course.id}};
+      const paramsCourseId = { ...params, ...{ course_id: course.id } };
       const achievement = await createAchievement(paramsCourseId);
       const achievements = course.achievements?.concat([achievement]);
       const courseUpdated = { ...course, ...{ achievements } };
@@ -146,10 +146,10 @@ export const createCourseSlice: StateCreator<
   updateQuiz: async (params: EditQuizParams) => {
     try {
       const course = get().course;
-      const paramsCourseId = {...params, ...{ course_id: course.id }};
+      const paramsCourseId = { ...params, ...{ course_id: course.id } };
       const quiz = await editQuiz(paramsCourseId);
-      const quizzes = course.quizzes?.map((quizStore)=> {
-        return quizStore.id === quiz.id ? quiz : quizStore
+      const quizzes = course.quizzes?.map((quizStore) => {
+        return quizStore.id === quiz.id ? quiz : quizStore;
       });
       const courseUpdated = { ...course, ...{ quizzes } };
       set({ course: courseUpdated });
@@ -161,7 +161,7 @@ export const createCourseSlice: StateCreator<
   updateContent: async (content: ContentCourse, index: number) => {
     try {
       const courseStore = get().course;
-      const contents = courseStore.contents?.map((contentStore, i)=> {
+      const contents = courseStore.contents?.map((contentStore, i) => {
         return i === index ? content : contentStore;
       });
       const courseUpdated = { ...courseStore, ...{ contents } };
@@ -172,13 +172,15 @@ export const createCourseSlice: StateCreator<
       return { success: true, data: error };
     }
   },
-  updateAchievement:async (params: EditAchievementParams) => {
+  updateAchievement: async (params: EditAchievementParams) => {
     try {
       const course = get().course;
-      const paramsAchievementId = {...params, ...{ course_id: course.id }};
+      const paramsAchievementId = { ...params, ...{ course_id: course.id } };
       const achievement = await editAchievement(paramsAchievementId);
-      const achievements = course.achievements?.map((achievementStore)=> {
-        return achievementStore.id === achievement.id ? achievement : achievementStore
+      const achievements = course.achievements?.map((achievementStore) => {
+        return achievementStore.id === achievement.id
+          ? achievement
+          : achievementStore;
       });
       const courseUpdated = { ...course, ...{ achievements } };
       set({ course: courseUpdated });
@@ -187,15 +189,15 @@ export const createCourseSlice: StateCreator<
       return { success: true, data: error };
     }
   },
-  updateCourse:async (params: CourseApiParams) => {
+  updateCourse: async (params: CourseApiParams): Promise<TResponse> => {
     const course = get().course;
-    const paramsCourse = {...course, ...params};
+    const paramsCourse = { ...course, ...params };
     try {
       const course = await editCourse(paramsCourse);
-      set({course: course})
+      set({ course });
       return { success: true, data: course };
     } catch (error) {
       return { success: false, data: error };
     }
-  }
+  },
 });

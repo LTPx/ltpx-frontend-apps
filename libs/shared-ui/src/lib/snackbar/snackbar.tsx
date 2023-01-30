@@ -18,31 +18,24 @@ export enum SnackbarType {
 }
 
 export interface SnackbarProps {
-  text?: string;
   open: boolean;
+  text?: string;
   tag?: string;
   position: SnackbarPosition;
   duration?: number;
-  typeSnackbar?: SnackbarType;
+  kind?: SnackbarType;
   title: string;
   icon?: string;
-  date: string;
+  date?: string;
+  onClose?: () => void;
 }
 
 export const Snackbar = (props: SnackbarProps) => {
-  const {
-    text,
-    tag,
-    title,
-    date,
-    position,
-    duration,
-    icon,
-    open,
-    typeSnackbar,
-  } = props;
+  const { text, tag, title, date, position, duration, icon, open, kind, onClose } =
+    props;
 
   useEffect(() => {
+    console.log('here...');
     if (duration && open) {
       setIsHidden(false);
       setAnimateOut(false);
@@ -50,14 +43,24 @@ export const Snackbar = (props: SnackbarProps) => {
         setAnimateOut(true);
         setTimeout(() => {
           setIsHidden(true);
+          onClose && onClose();
         }, 1500);
       }, duration);
+    }
+
+    if (!duration && open) {
+      setTimeout(() => {
+        setAnimateOut(true);
+        setTimeout(() => {
+          setIsHidden(true);
+          onClose && onClose();
+        }, 1500);
+      }, 1000);
     }
   }, [open]);
 
   const [isHidden, setIsHidden] = useState(false);
   const [animateOut, setAnimateOut] = useState(false);
-
   const defaultClasses = styles['snackbar'];
   const positionClasses = {
     top: styles['top-snackbar'],
@@ -65,15 +68,21 @@ export const Snackbar = (props: SnackbarProps) => {
     centerTop: styles['center-top-snackbar'],
     centerBottom: styles['center-bottom-snackbar'],
   };
-  const positionSnackbar = positionClasses[position] || positionClasses.top;
   const colorsClasses = {
     warning: styles['warning-snackbar'],
     success: styles['success-snackbar'],
     error: styles['error-snackbar'],
     message: styles['message-snackbar'],
   };
-  const snackbarColorClass =
-    colorsClasses[typeSnackbar || SnackbarType.message];
+  const iconsStatus = {
+    warning: 'exclamation-triangle',
+    success: 'check-circle',
+    error: 'close-circle-outline',
+    message: 'exclamation-circle',
+  };
+  const positionSnackbar = positionClasses[position] || positionClasses.top;
+  const snackbarColorClass = colorsClasses[kind || SnackbarType.message];
+  const iconStatus = iconsStatus[kind || SnackbarType.message];
 
   const handleClose = () => {
     setIsHidden(!isHidden);
@@ -92,6 +101,7 @@ export const Snackbar = (props: SnackbarProps) => {
           <div className={styles['container']}>
             <div className={styles['icon-section']}>
               {icon && <Icon icon={icon} size={20}></Icon>}
+              {iconStatus && !icon && <Icon icon={iconStatus} size={20}></Icon>}
             </div>
             <div className={styles['content-section']}>
               <h4>{tag}</h4>

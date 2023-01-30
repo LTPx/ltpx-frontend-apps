@@ -1,7 +1,6 @@
 import {
   CourseApiParams,
   CourseStatus,
-  TeacherCourse,
 } from '@ltpx-frontend-apps/api';
 import {
   Button,
@@ -24,7 +23,6 @@ import {
 } from '../course';
 import { useCallback, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { useTeacher } from '../../../store';
 import styles from './teacher-edit-course.module.scss';
 
 const linksEditCourse = [
@@ -36,9 +34,8 @@ const linksEditCourse = [
 ];
 
 export function TeacherEditCourse() {
-  const [showNotification, setShowNotification] = useState(false);
-  const [indexSelectedView, setIndexSelectedView] = useState(0);
-  const { editCourse } = useTeacher();
+  const [ showNotification, setShowNotification ] = useState(false);
+  const [ indexSelectedView, setIndexSelectedView ] = useState(0);
   const { getCourse, updateCourse, loadedCourse, course } = useCourse();
   const { translateStatus } = useCourseUtil();
 
@@ -56,21 +53,14 @@ export function TeacherEditCourse() {
   }, [fetchData]);
 
   const saveChanges = async (formData: CourseApiParams) => {
-    debugger
     console.log(formData);
-    await updateCourse(formData);
-    // if (course) {
-    //   const data = { ...formData, ...{ id: course.id } };
-    //   delete data.cover_url;
-    //   console.log('formData edit: ', data);
-    //   const result = await editCourse(data);
-    //   if (result.success) {
-    //     console.log('success');
-    //     setShowNotification(true);
-    //   } else {
-    //     console.log(result.data);
-    //   }
-    // }
+    const { success, data } = await updateCourse(formData);
+    if (success) {
+      setShowNotification(true);
+    } else {
+      setShowNotification(true);
+      console.log(data);
+    }
   };
 
   return (
@@ -126,7 +116,7 @@ export function TeacherEditCourse() {
               )}
               {indexSelectedView === 1 && (
                 <CourseContents
-                  onSubmit={(content) => {
+                  onSubmit={() => {
                     setShowNotification(true);
                   }}
                 />
@@ -144,13 +134,17 @@ export function TeacherEditCourse() {
           </div>
         </div>
       )}
-      <Snackbar
-        position={SnackbarPosition.centerBottom}
-        open={showNotification}
-        title={'Cambios guardados'}
-        typeSnackbar={SnackbarType.success}
-        date={''}
-      />
+      {showNotification && (
+        <Snackbar
+          position={SnackbarPosition.centerBottom}
+          open={showNotification}
+          title={'Cambios guardados'}
+          kind={SnackbarType.success}
+          onClose={()=>{
+            setShowNotification(false);
+          }}
+        />
+      )}
     </div>
   );
 }

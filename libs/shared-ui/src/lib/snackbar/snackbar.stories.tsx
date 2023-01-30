@@ -16,7 +16,7 @@ export const Warning = () => {
   const props: SnackbarProps = {
     position: SnackbarPosition.bottom,
     open: true,
-    typeSnackbar: SnackbarType.warning,
+    kind: SnackbarType.warning,
     title: 'Alert Message',
     icon: 'info-circle',
     date: 'Today 10:30PM',
@@ -29,7 +29,7 @@ export const Warning = () => {
       title={props.title}
       date={props.date}
       icon={props.icon}
-      typeSnackbar={props.typeSnackbar}
+      kind={props.kind}
     />
   );
 };
@@ -42,7 +42,7 @@ export const MessageText = () => {
     tag: 'News',
     title: 'News Title',
     date: 'Today 10:30PM',
-    typeSnackbar: SnackbarType.message,
+    kind: SnackbarType.message,
   };
 
   return (
@@ -53,7 +53,7 @@ export const MessageText = () => {
       tag={props.tag}
       title={props.title}
       date={props.date}
-      typeSnackbar={props.typeSnackbar}
+      kind={props.kind}
     />
   );
 };
@@ -65,7 +65,7 @@ export const Message = () => {
     tag: 'News',
     title: 'News Title',
     date: 'Today 10:30PM',
-    typeSnackbar: SnackbarType.message,
+    kind: SnackbarType.message,
   };
 
   return (
@@ -76,7 +76,7 @@ export const Message = () => {
       tag={props.tag}
       title={props.title}
       date={props.date}
-      typeSnackbar={props.typeSnackbar}
+      kind={props.kind}
     />
   );
 };
@@ -89,7 +89,7 @@ export const Error = () => {
     icon: 'close-circle-outline',
     title: 'Error Message',
     date: 'Today 10:30PM',
-    typeSnackbar: SnackbarType.error,
+    kind: SnackbarType.error,
   };
 
   return (
@@ -99,7 +99,7 @@ export const Error = () => {
       title={props.title}
       icon={props.icon}
       date={props.date}
-      typeSnackbar={props.typeSnackbar}
+      kind={props.kind}
     />
   );
 };
@@ -112,7 +112,7 @@ export const Success = () => {
     icon: 'check-circle',
     title: 'Successfully Message',
     date: 'Today 10:30PM',
-    typeSnackbar: SnackbarType.success,
+    kind: SnackbarType.success,
   };
 
   return (
@@ -122,7 +122,7 @@ export const Success = () => {
         title={props.title}
         date={props.date}
         icon={props.icon}
-        typeSnackbar={props.typeSnackbar}
+        kind={props.kind}
       />
   );
 };

@@ -161,7 +161,7 @@ export function CourseAchievements(props: CourseAchievementsProps) {
         position={SnackbarPosition.centerBottom}
         open={showNotification}
         title={'Cambios guardados'}
-        typeSnackbar={SnackbarType.success}
+        kind={SnackbarType.success}
         date={''}
       />
     </div>

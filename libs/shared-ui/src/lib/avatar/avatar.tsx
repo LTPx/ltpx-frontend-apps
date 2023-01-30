@@ -6,7 +6,7 @@ export enum AvatarSize {
   tiny = 'tiny',
   small = 'small',
   medium = 'medium',
-  large = 'large'
+  large = 'large',
 }
 
 export interface AvatarProps {
@@ -22,7 +22,12 @@ export function Avatar(props: AvatarProps) {
 
   return (
     <div className={`${styles['container']}`}>
-      <img src={image} alt="user" className={`${styles[sizeAvatar]} ${outlineClass}`}/>
+      <img
+        loading="lazy"
+        src={image}
+        alt="user"
+        className={`${styles[sizeAvatar]} ${outlineClass}`}
+      />
     </div>
   );
 }

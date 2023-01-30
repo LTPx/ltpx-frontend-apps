@@ -39,7 +39,6 @@ export function Login(props: LoginProps) {
   }
 
   return (
-    <div className="main-container">
       <div className={styles['container']}>
         <div className={styles['content']}>
           <h1>Iniciar Sesión</h1>
@@ -61,7 +60,6 @@ export function Login(props: LoginProps) {
           </NavLink>
         </div>
       </div>
-    </div>
   );
 }
 

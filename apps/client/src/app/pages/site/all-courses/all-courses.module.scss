@@ -1,20 +1,31 @@
+@import '../../../../styles.scss';
+
+.container {
+  width: 100%;
+  box-sizing: border-box;
+}
+
 .cover {
-  padding: 2rem 12rem;
+  padding: $size-lg-1 12rem;
+  .search-responsive {
+    display: none;
+  }
 }
 
 .filters-container {
   display: flex;
   justify-content: space-between;
-  margin: 2rem 2rem;
+  margin: $size-lg-1 $size-lg-1;
 
   .filters {
     display: flex;
-    gap: 1.5rem;
+    align-items: center;
+    gap: $size-md-3;
   }
 }
 
 .courses-container {
-  padding: 2rem 12rem;
+  padding: $size-lg-1 12rem;
   background-color: #f7f7f7;
   display: flex;
   justify-content: center;
@@ -22,8 +33,87 @@
 }
 
 .courses {
-  display: grid;
-  gap: 1rem;
-  grid-auto-rows: 22rem;
-  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: $size-md-1;
+
+  .course {
+    height: 20rem;
+    width: 16rem;
+  }
+}
+
+//smartphones-responsive
+@media screen and (max-width: 550px) {
+  .cover {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: $size-lg-3 0;
+    .search-responsive {
+      display: flex;
+      padding-top: $size-md-1;
+    }
+  }
+
+  .courses-container {
+    width: 100%;
+    box-sizing: border-box;
+    padding: $size-lg-1 0;
+
+    .filters-container {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      box-sizing: border-box;
+      margin: 0 0;
+      .text {
+        text-align: center;
+        padding-bottom: $size-md-1;
+      }
+      .filters {
+        display: flex;
+        justify-content: center;
+        gap: $size-sm-2;
+        .search {
+          display: none;
+        }
+      }
+    }
+  }
+  .courses {
+    gap: $size-lg-1;
+    padding: $size-lg-1 0;
+
+    .course {
+      height: 19rem;
+      width: 20rem;
+    }
+  }
+}
+
+// tablet-responsive-horizontal
+@media screen and (min-width: 860px) and (max-width: 1224px) {
+  .container {
+    width: 100%;
+  }
+  .courses-container {
+    padding: $size-lg-1 8rem;
+
+    .courses {
+      display: flex;
+      gap: $size-lg-1;
+    }
+  }
+}
+//tablet-responsive-vertical
+@media screen and (min-width: 560px) and (max-width: 850px) {
+  .courses-container {
+    padding: $size-lg-1 $size-lg-1;
+  }
+  .cover {
+    padding: $size-lg-1 6rem;
+  }
 }

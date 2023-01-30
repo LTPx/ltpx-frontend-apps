@@ -60,35 +60,42 @@ export function CourseDetails(props: CourseDetailsProps) {
         <div className={styles['description-container']}>
           <div className={styles['description']}>
             <div className={styles['description-title']}>
-              <h1>Learn Blockchain: Basic concepts and How to invest</h1>
-              <h4 className="muted">
-                Looking how to increase your incomes and learn about new digital
-                money
-              </h4>
+              <div className={styles['title']}>
+                <h1>Learn Blockchain: Basic concepts and How to invest</h1>
+                <h4 className="muted">
+                  Looking how to increase your incomes and learn about new
+                  digital money
+                </h4>
+              </div>
             </div>
             <div className={styles['description-course']}>
-              <Avatar
-                image={courseDetails.instructor.image}
-                size={AvatarSize.medium}
-                outline={true}
-              />
-              <div className={styles['item']}>
-                <label htmlFor="creator">Instructor</label>
-                <h5>{courseDetails.instructor.name}</h5>
+              <div className={styles['avatar']}>
+                <Avatar
+                  image={courseDetails.instructor.image}
+                  size={AvatarSize.medium}
+                  outline={true}
+                />
               </div>
-              <div className={styles['item']}>
-                <label htmlFor="creator">Categories</label>
-                <h5>{courseDetails.course.category}</h5>
-              </div>
-              <div className={styles['item']}>
-                <label htmlFor="creator">Review</label>
-                <div className={styles['rating']}>
-                  <Rating stars={courseDetails.course.stars} />
+              <div className={styles['items']}>
+                <div className={styles['item']}>
+                  <label htmlFor="creator">Instructor</label>
+                  <h5>{courseDetails.instructor.name}</h5>
+                </div>
+                <div className={styles['item']}>
+                  <label htmlFor="creator">Categories</label>
+                  <h5>{courseDetails.course.category}</h5>
+                </div>
+                <div className={styles['item']}>
+                  <label htmlFor="creator">Review</label>
+                  <div className={styles['rating']}>
+                    <Rating stars={courseDetails.course.stars} />
+                  </div>
                 </div>
               </div>
             </div>
             <div className={styles['summary-course']}>
               <Tabs
+                className={styles['tabs']}
                 tabs={tabs}
                 isNav={false}
                 onClickTab={(option) => handleClick(option)}
@@ -112,16 +119,18 @@ export function CourseDetails(props: CourseDetailsProps) {
               {selectedTab === 3 && (
                 <>
                   <RatingCourse ratings={courseDetails.ratings}></RatingCourse>
-                  {courseDetails.comments.map((comment, index) => (
-                    <CommentCourse
-                      reviewTitle={comment.title}
-                      name={comment.name}
-                      comment={comment.comment}
-                      date={comment.date}
-                      key={index}
-                      image={comment.image}
-                    />
-                  ))}
+                  <div className={styles['comment-course']}>
+                    {courseDetails.comments.map((comment, index) => (
+                      <CommentCourse
+                        reviewTitle={comment.title}
+                        name={comment.name}
+                        comment={comment.comment}
+                        date={comment.date}
+                        key={index}
+                        image={comment.image}
+                      />
+                    ))}
+                  </div>
                   <ReviewForm />
                 </>
               )}

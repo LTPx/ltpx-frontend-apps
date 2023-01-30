@@ -5,7 +5,20 @@
   padding-top: $size-lg-3;
   padding-bottom: $size-lg-3;
 
+  h3 {
+    padding-bottom: $size-md-3;
+  }
+
   .content {
     padding: $size-md-1;
   }
 }
+@media screen and (max-width: 500px) {
+  .container {
+    width: 85%;
+    h3 {
+      text-align: center;
+    }
+  }
+}
+

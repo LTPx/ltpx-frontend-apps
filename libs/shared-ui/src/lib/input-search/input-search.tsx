@@ -26,7 +26,7 @@ export function InputSearch(props: InputSearchProps) {
   } = props;
 
   return (
-    <div className={styles['search-container']}>
+    <div className={`${styles['search-container']} ${className}`}>
       <Input
         addonInput={
           {

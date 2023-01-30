@@ -1,5 +1,4 @@
 import {
-  CourseApiParams,
   CourseStatus,
 } from '@ltpx-frontend-apps/api';
 import {
@@ -33,10 +32,20 @@ const linksEditCourse = [
   { selected: false, text: 'Sesiones' },
 ];
 
+export type ResponseRequest = {
+  success: boolean;
+  data?: any;
+  error?: any;
+};
+
 export function TeacherEditCourse() {
-  const [ showNotification, setShowNotification ] = useState(false);
   const [ indexSelectedView, setIndexSelectedView ] = useState(0);
-  const { getCourse, updateCourse, loadedCourse, course } = useCourse();
+  const [ notification, setNotification ] = useState({
+    show: false,
+    kind: SnackbarType.success,
+    text: ''
+  });
+  const { getCourse, course } = useCourse();
   const { translateStatus } = useCourseUtil();
 
   const params = useParams();
@@ -52,14 +61,21 @@ export function TeacherEditCourse() {
     fetchData();
   }, [fetchData]);
 
-  const saveChanges = async (formData: CourseApiParams) => {
-    console.log(formData);
-    const { success, data } = await updateCourse(formData);
+  const showAndConfigNotification = async (response: ResponseRequest) => {
+    const { success, data, error } = response;
     if (success) {
-      setShowNotification(true);
+      setNotification((prevState) => ({
+        ...prevState,
+        show: true,
+        text: 'Tus cambios han sido guardados'
+      }))
     } else {
-      setShowNotification(true);
-      console.log(data);
+      setNotification((prevState) => ({
+        ...prevState,
+        show: true,
+        text: 'Ha ocurrido un error',
+        kind: SnackbarType.error
+      }))
     }
   };
 
@@ -110,38 +126,53 @@ export function TeacherEditCourse() {
                   {...course}
                   cover={course.cover_url}
                   onSubmit={(data) => {
-                    saveChanges(data);
+                    showAndConfigNotification(data);
                   }}
                 />
               )}
               {indexSelectedView === 1 && (
                 <CourseContents
-                  onSubmit={() => {
-                    setShowNotification(true);
+                  onSubmit={(data) => {
+                    showAndConfigNotification(data);
                   }}
                 />
               )}
               {indexSelectedView === 2 && (
-                <CourseQuizzes />
+                <CourseQuizzes
+                  onSubmit={(data) => {
+                    showAndConfigNotification(data);
+                  }}
+                />
               )}
               {indexSelectedView === 3 && (
-                <CourseAchievements />
+                <CourseAchievements
+                  onSubmit={(data) => {
+                    showAndConfigNotification(data);
+                  }}
+                />
               )}
               {indexSelectedView === 4 && (
-                <CourseClassroom />
+                <CourseClassroom
+                  onSubmit={(data) => {
+                    showAndConfigNotification(data);
+                  }}
+                />
               )}
             </div>
           </div>
         </div>
       )}
-      {showNotification && (
+      {notification.show && (
         <Snackbar
           position={SnackbarPosition.centerBottom}
-          open={showNotification}
-          title={'Cambios guardados'}
-          kind={SnackbarType.success}
+          open={notification.show}
+          title={notification.text}
+          kind={notification.kind}
           onClose={()=>{
-            setShowNotification(false);
+            setNotification( (prevState) => ({
+              ...prevState,
+              show: false,
+            }));
           }}
         />
       )}

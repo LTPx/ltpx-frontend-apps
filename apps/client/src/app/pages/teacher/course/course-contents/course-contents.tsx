@@ -4,7 +4,6 @@ import {
   ColorsButton,
   CourseContent,
   CourseContentForm,
-  Icon,
   PanelAccordion,
   SetupCard,
 } from '@ltpx-frontend-apps/shared-ui';
@@ -12,6 +11,7 @@ import {
   useCourse
 } from '@ltpx-frontend-apps/store';
 import { useState } from 'react';
+import { ResponseRequest } from '../../teacher-edit-course/teacher-edit-course';
 import styles from './course-contents.module.scss';
 
 /* eslint-disable-next-line */
@@ -22,7 +22,7 @@ export interface FormContent {
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface CourseContentsProps {
-  onSubmit?: (content: ContentCourse) => void;
+  onSubmit?: (content: ResponseRequest) => void;
 }
 
 export function CourseContents(props: CourseContentsProps) {
@@ -50,7 +50,27 @@ export function CourseContents(props: CourseContentsProps) {
         removeContent(index);
       }
     }
-  ]
+  ];
+
+  const saveContent = async (content: ContentCourse) => {
+    try {
+      const { data } = indexContentEdit !== undefined
+        ? await updateContent(content, indexContentEdit)
+        : await addNewContent(content);
+      onSubmit &&
+        onSubmit({
+          success: true,
+          data: data,
+        });
+      setOpenModal(false);
+    } catch (error: any) {
+      onSubmit &&
+        onSubmit({
+          success: false,
+          error: error,
+        });
+    }
+  }
 
   return (
     <div className={styles['contents']}>
@@ -101,15 +121,7 @@ export function CourseContents(props: CourseContentsProps) {
             setContentEdit(undefined);
             setIndexContentEdit(undefined);
           }}
-          onSubmit={(content) => {
-            setOpenModal(false);
-            if (indexContentEdit !== undefined) {
-              updateContent(content, indexContentEdit);
-            } else {
-              addNewContent(content);
-            }
-            onSubmit && onSubmit(content);
-          }}
+          onSubmit={(content) => saveContent(content)}
         />
       )}
     </div>

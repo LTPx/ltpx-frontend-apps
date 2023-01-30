@@ -26,6 +26,7 @@ export interface QuizBuilderProps {
 
 export function QuizBuilder(props: QuizBuilderProps) {
   const { onClose, onSubmit, className, quiz } = props;
+  const [ questionEdit, setQuestionEdit ] = useState<QuestionQuiz>();
   const [selectedTypeQuestion, setSelectedTypeQuestion] =
     useState<TypeQuestionQuiz | null>();
 
@@ -70,14 +71,32 @@ export function QuizBuilder(props: QuizBuilderProps) {
               index === formik.values.questions.length ? styles['selected'] : ''
             }`}
             key={index}
-            onClick={() => {
-              editQuestion(index);
-            }}
           >
-            <div className={styles['number']}>{index + 1}</div>
-            <div className={styles['text']}>
-              <h4>{question.question}</h4>
-              <h5>{question.kind}</h5>
+            <div className={styles['summary']}>
+              <div className={styles['number']}>{index + 1}</div>
+              <div className={styles['text']}>
+                <h4>{question.question}</h4>
+                <h5>{question.kind}</h5>
+              </div>
+            </div>
+            <div className={styles['actions']}>
+              <div
+                className={styles['action']}
+                onClick={() => {
+                  setSelectedTypeQuestion(question.kind);
+                  setQuestionEdit(question);
+                }}
+              >
+                <Icon icon="pencil" size={15} />
+              </div>
+              <div
+                className={styles['action']}
+                onClick={() => {
+                  // handleRemoveAchievement(achievement.id);
+                }}
+              >
+                <Icon icon="trash" size={15} />
+              </div>
             </div>
           </div>
         ))}
@@ -141,7 +160,7 @@ export function QuizBuilder(props: QuizBuilderProps) {
             }}
           />
           <Button
-            title={quiz?.id ? "Actualizar Test" : "Crear Test"}
+            title={quiz?.id ? 'Actualizar Test' : 'Crear Test'}
             color={ColorsButton.secondary}
             type={TypeButton.submit}
             onClick={() => {
@@ -157,6 +176,7 @@ export function QuizBuilder(props: QuizBuilderProps) {
     <div className={styles['questions-quiz']}>
       {selectedTypeQuestion === TypeQuestionQuiz.conditional && (
         <QuizFormConditional
+          question={questionEdit}
           onSubmit={(data) => {
             handleSaveQuestionData(data);
           }}
@@ -167,6 +187,7 @@ export function QuizBuilder(props: QuizBuilderProps) {
       )}
       {selectedTypeQuestion === TypeQuestionQuiz.multiple && (
         <QuizFormMultipleOptions
+          question={questionEdit}
           onSubmit={(data) => {
             handleSaveQuestionData(data);
           }}
@@ -177,6 +198,7 @@ export function QuizBuilder(props: QuizBuilderProps) {
       )}
       {selectedTypeQuestion === TypeQuestionQuiz.single && (
         <QuizFormMultipleOptions
+          question={questionEdit}
           singleSelection={true}
           onSubmit={(data) => {
             handleSaveQuestionData(data);
@@ -188,6 +210,7 @@ export function QuizBuilder(props: QuizBuilderProps) {
       )}
       {selectedTypeQuestion === TypeQuestionQuiz.answer && (
         <QuizFormAnswer
+          question={questionEdit}
           onSubmit={(data) => {
             handleSaveQuestionData(data);
           }}

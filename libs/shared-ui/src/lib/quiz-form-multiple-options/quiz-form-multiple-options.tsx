@@ -13,28 +13,34 @@ export interface QuizFormMultipleOptionsProps {
   onSubmit?: (data: QuestionQuiz) => void;
   className?: string;
   onCancel?: () => void;
+  question?: QuestionQuiz;
 }
 
 export function QuizFormMultipleOptions(props: QuizFormMultipleOptionsProps) {
-  const { onSubmit, onCancel, singleSelection, className } = props;
+  const { onSubmit, onCancel, singleSelection, className, question } = props;
 
   const alphabetLetters = generateAlphabet();
 
+  const initialValues = {
+    kind: singleSelection ? TypeQuestionQuiz.single : TypeQuestionQuiz.multiple,
+    question: question?.question || '',
+    description: question?.description || '',
+    answers: question?.answers || [
+      {
+        text: '',
+        correct: false,
+      },
+      {
+        text: '',
+        correct: false,
+      },
+    ],
+  };
 
   return (
     <div className={styles['questions']}>
       <Formik
-        initialValues={{
-          question: '',
-          description: '',
-          kind: singleSelection ? TypeQuestionQuiz.single : TypeQuestionQuiz.multiple,
-          answers: [
-            {
-              text: '',
-              correct: false,
-            },
-          ],
-        }}
+        initialValues={initialValues}
         validationSchema = {
           Yup.object({
             question: Yup.string()

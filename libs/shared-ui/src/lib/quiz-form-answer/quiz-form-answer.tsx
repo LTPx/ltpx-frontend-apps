@@ -3,34 +3,30 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import Input from '../input/input';
 import Button, { ColorsButton, TypeButton } from '../button/button';
-import { TypeQuestionQuiz } from '@ltpx-frontend-apps/api';
+import { QuestionQuiz, TypeQuestionQuiz } from '@ltpx-frontend-apps/api';
 
 /* eslint-disable-next-line */
 export interface QuizFormAnswerProps {
   onSubmit?: (data: any) => void;
   onCancel?: () => void;
+  question?: QuestionQuiz;
 }
 
 export function QuizFormAnswer(props: QuizFormAnswerProps) {
-  const { onSubmit, onCancel } = props;
-
+  const { onSubmit, onCancel, question } = props;
+  const initialValues = {
+    kind: TypeQuestionQuiz.answer,
+    question: question?.question || '',
+    description: question?.description || '',
+    answers: [],
+  };
   const formik = useFormik({
-    initialValues: {
-      question: '',
-      description: '',
-      kind: '',
-    },
+    initialValues: initialValues,
     validationSchema: Yup.object({
       question: Yup.string().required('Pregunta es obligatorio'),
     }),
     onSubmit: (data) => {
-      const elements = {
-        ...data,
-        ...{
-          kind: TypeQuestionQuiz.answer,
-        },
-      };
-      onSubmit && onSubmit(elements);
+      onSubmit && onSubmit(data);
       onCancel && onCancel();
     },
   });

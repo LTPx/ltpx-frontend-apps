@@ -42,7 +42,7 @@ export function Header(props: HeaderProps) {
             <div className={styles['close-option']}>
               <Icon
                 icon={'close-circle-outline'}
-                size={40}
+                size={35}
                 onClick={handleClick}
               ></Icon>
             </div>

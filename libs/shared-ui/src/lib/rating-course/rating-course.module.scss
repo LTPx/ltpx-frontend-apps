@@ -23,7 +23,7 @@
     align-items: center;
     justify-content: center;
     gap: $size-sm-2;
-    padding: $size-lg-1 $size-lg-3;
+    padding: $size-md-1 $size-lg-1;
     border: 1px solid #d4d4d4;
 
     h1 {
@@ -36,7 +36,7 @@
   }
 
   .rating-content {
-    padding: $size-md-1;
+    // padding: $size-md-1;
 
     .rating-bar {
       display: flex;
@@ -65,7 +65,7 @@
       flex-direction: column;
       align-items: center;
       .total-rating {
-        padding: 1rem 2rem;
+        padding: $size-md-1 $size-lg-1;
       }
 
       .rating-content {
@@ -85,8 +85,11 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    .total-rating {
+      padding: $size-lg-1 $size-lg-1;
+    }
     .rating-content {
-      padding: 0;
+      padding-top: $size-md-1;
       .rating-bar {
         .bar {
           width: 250px;

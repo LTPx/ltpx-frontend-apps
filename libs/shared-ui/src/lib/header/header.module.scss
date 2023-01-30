@@ -6,7 +6,7 @@
   box-sizing: border-box;
   justify-content: space-between;
   align-items: center;
-  padding: 1.5rem 8rem;
+  padding: $size-md-3 8rem;
   border-bottom: 1px solid #ebecef;
 }
 
@@ -17,7 +17,7 @@
 
 .links {
   display: flex;
-  gap: 0.5rem;
+  gap: $size-sm-2;
   align-items: center;
 }
 
@@ -38,7 +38,7 @@
   }
   &.accent {
     background-color: $secondary-color;
-    padding: 0.5rem;
+    padding: $size-sm-2;
     border-radius: 10px;
 
     &:hover {
@@ -55,17 +55,17 @@
   display: none;
 }
 .navbar {
-  background: $white-color;
+  background: $primary-color;
   box-sizing: border-box;
-  color: $secondary-color;
+  color: $white-color;
   cursor: pointer;
-  padding: 0.5rem;
+  padding: $size-sm-2;
   width: 40px;
   height: 40px;
   border-radius: 4px;
 }
 .navbar:hover {
-  background-color: $secondary-color-300;
+  background-color: $primary-color-500;
   color: $white-color;
 }
 
@@ -84,11 +84,15 @@
 
   .close-option {
     display: flex;
+    border-bottom: 1px solid $stroke-color;
     justify-content: end;
-    padding-bottom: 1rem;
+    padding-bottom: $size-md-1;
     svg {
       cursor: pointer;
     }
+  }
+  .navigate-content {
+    padding-top: $size-md-3;
   }
 
   &.open {
@@ -97,9 +101,9 @@
     display: flex;
     flex-direction: column;
     position: fixed;
-    padding: 1rem;
+    padding: $size-md-1;
     height: 100%;
-    width: 33%;
+    width: 40%;
     z-index: 1;
     transform: translateX(0px);
     transition: transform 0.4s ease-out, visibility 1s;
@@ -111,9 +115,9 @@
     display: flex;
     flex-direction: column;
     position: fixed;
-    padding: 1rem;
+    padding: $size-md-1;
     height: 100%;
-    width: 33%;
+    width: 40%;
     z-index: 1;
     transform: translateX(-300px);
     transition: transform 0.4s ease-out, visibility 1s;
@@ -123,7 +127,7 @@
     margin-right: 5px;
     text-decoration: none;
     color: $text-gray-color;
-    padding-bottom: 1rem;
+    padding-bottom: $size-md-1;
     &:hover {
       color: $secondary-color;
     }
@@ -136,7 +140,7 @@
 //smartphones-responsive
 @media screen and (max-width: 550px) {
   .container-header {
-    padding: 1rem 2rem;
+    padding: $size-md-1 $size-lg-1;
     border-bottom: 1px solid #ebecef;
   }
 
@@ -175,7 +179,7 @@
 //tablet-responsive-vertical
 @media screen and (max-width: 850px) {
   .container-header {
-    padding: 1.5rem 2rem;
+    padding: $size-md-3 $size-lg-1;
   }
 
   .links {

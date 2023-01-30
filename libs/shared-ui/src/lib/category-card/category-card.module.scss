@@ -23,3 +23,12 @@
     color: $text-gray-color;
   }
 }
+//smartphones-responsive
+@media screen and (max-width: 550px) {
+  .container {
+    .description {
+      text-align: center;
+      width: 10rem;
+    }
+  }
+}

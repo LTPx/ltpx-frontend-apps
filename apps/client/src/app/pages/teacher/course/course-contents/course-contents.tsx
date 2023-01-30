@@ -29,7 +29,8 @@ export function CourseContents(props: CourseContentsProps) {
   const { onSubmit } = props;
   const [ openModal, setOpenModal] = useState(false);
   const [ contentEdit, setContentEdit] = useState<CourseContent>();
-  const { course, removeContent } = useCourse();
+  const [ indexContentEdit, setIndexContentEdit] = useState<number>();
+  const { course, addNewContent, updateContent, removeContent } = useCourse();
   const { contents } = course;
 
   return (
@@ -60,6 +61,7 @@ export function CourseContents(props: CourseContentsProps) {
                   className={styles['action']}
                   onClick={() => {
                     setContentEdit(content);
+                    setIndexContentEdit(index);
                     setOpenModal(true);
                   }}
                 >
@@ -92,9 +94,15 @@ export function CourseContents(props: CourseContentsProps) {
           onClose={() => {
             setOpenModal(false);
             setContentEdit(undefined);
+            setIndexContentEdit(undefined);
           }}
           onSubmit={(content) => {
             setOpenModal(false);
+            if (indexContentEdit) {
+              updateContent(content, indexContentEdit);
+            } else {
+              addNewContent(content);
+            }
             onSubmit && onSubmit(content);
           }}
         />

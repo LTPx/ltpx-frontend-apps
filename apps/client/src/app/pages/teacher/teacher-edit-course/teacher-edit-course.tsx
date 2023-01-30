@@ -39,7 +39,7 @@ export function TeacherEditCourse() {
   const [showNotification, setShowNotification] = useState(false);
   const [indexSelectedView, setIndexSelectedView] = useState(0);
   const { editCourse } = useTeacher();
-  const { getCourse, addNewContent, loadedCourse, course } = useCourse();
+  const { getCourse, loadedCourse, course } = useCourse();
   const { translateStatus } = useCourseUtil();
 
   const params = useParams();
@@ -123,7 +123,6 @@ export function TeacherEditCourse() {
               {indexSelectedView === 1 && (
                 <CourseContents
                   onSubmit={(content) => {
-                    addNewContent(content);
                     setShowNotification(true);
                   }}
                 />

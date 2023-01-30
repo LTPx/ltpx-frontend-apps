@@ -34,6 +34,7 @@ export type CourseSlice = {
   removeAchievement: (id: number) => void;
   addUpdateClassroom: (classroom: Classroom) => void;
   updateQuiz: (quiz: EditQuizParams) => void;
+  updateContent: (content: ContentCourse, index: number) => void;
 };
 
 export const createCourseSlice: StateCreator<
@@ -148,6 +149,20 @@ export const createCourseSlice: StateCreator<
       const courseUpdated = { ...course, ...{ quizzes } };
       set({ course: courseUpdated });
       return { success: true, data: quizzes };
+    } catch (error) {
+      return { success: true, data: error };
+    }
+  },
+  updateContent: async (content: ContentCourse, index: number) => {
+    try {
+      const courseStore = get().course;
+      const contents = courseStore.contents?.map((contentStore, i)=> {
+        return i === index ? content : contentStore;
+      });
+      const courseUpdated = { ...courseStore, ...{ contents } };
+      await editCourse(courseUpdated);
+      set({ course: courseUpdated });
+      return { success: true, data: contents };
     } catch (error) {
       return { success: true, data: error };
     }

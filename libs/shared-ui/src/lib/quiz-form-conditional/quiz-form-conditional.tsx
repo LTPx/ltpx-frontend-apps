@@ -4,32 +4,39 @@ import Input from '../input/input';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import Button, { ColorsButton, TypeButton } from '../button/button';
-import { TypeQuestionQuiz } from '@ltpx-frontend-apps/api';
+import {
+  QuestionQuiz,
+  QuizParamsUi,
+  TypeQuestionQuiz,
+} from '@ltpx-frontend-apps/api';
 
 /* eslint-disable-next-line */
 export interface QuizFormConditionalProps {
+  question?: QuestionQuiz;
   onSubmit?: (data: any) => void;
   onCancel?: () => void;
 }
 
 export function QuizFormConditional(props: QuizFormConditionalProps) {
-  const { onSubmit, onCancel } = props;
+  const { onSubmit, onCancel, question } = props;
+  const initialValues = {
+    kind: TypeQuestionQuiz.conditional,
+    question: question?.question || '',
+    description: question?.description || '',
+    answers: question?.answers || [
+      {
+        text: 'true',
+        correct: false,
+      },
+      {
+        text: 'false',
+        correct: false,
+      },
+    ],
+  };
+  console.log('initialValues: ', initialValues);
   const formik = useFormik({
-    initialValues: {
-      kind: TypeQuestionQuiz.conditional,
-      question: '',
-      description: '',
-      answers: [
-        {
-          text: 'true',
-          correct: false
-        },
-        {
-          text: 'false',
-          correct: false
-        }
-      ],
-    },
+    initialValues: initialValues,
     validationSchema: Yup.object({
       question: Yup.string().required('Pregunta es obligatorio'),
     }),
@@ -40,8 +47,14 @@ export function QuizFormConditional(props: QuizFormConditionalProps) {
 
   const markAsCorrect = (conditional: any) => {
     const { text, correct } = conditional;
-    formik.setFieldValue(`answers[0].correct`, text === 'true' ? !correct : correct);
-    formik.setFieldValue(`answers[1].correct`, text === 'true' ? correct : !correct);
+    formik.setFieldValue(
+      `answers[0].correct`,
+      text === 'true' ? !correct : correct
+    );
+    formik.setFieldValue(
+      `answers[1].correct`,
+      text === 'true' ? correct : !correct
+    );
   };
 
   return (
@@ -94,7 +107,9 @@ export function QuizFormConditional(props: QuizFormConditionalProps) {
             }}
           />
           <Button
-            title="Agregar pregunta"
+            title={
+              question?.question ? 'Actualizar pregunta' : 'Agregar pregunta'
+            }
             color={ColorsButton.secondary}
             type={TypeButton.submit}
           />

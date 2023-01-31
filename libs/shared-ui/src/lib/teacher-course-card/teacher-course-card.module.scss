@@ -12,6 +12,17 @@
     align-items: center;
     justify-content: space-between;
     padding: $size-sm-2;
+
+    .information {
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+
+      .accent {
+        color: $green-color;
+        font-weight: 500;
+      }
+    }
   }
 
   .content {
@@ -34,6 +45,7 @@
       .describe {
         display: flex;
         gap: $size-md-1;
+
         h5 {
           color: $gray-color-400;
         }

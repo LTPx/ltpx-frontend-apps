@@ -1,3 +1,5 @@
+import { PartialBy } from "./util";
+
 export enum TypeAchievement {
   multiple = 'multiple',
   single = 'single',
@@ -18,6 +20,7 @@ export interface AchievementModel {
   title: string;
   rule: TypeAchievement;
   image: string;
+  price: number;
   settings: SettingAchievement[];
   created_at: string;
   updated_at: string;
@@ -26,6 +29,16 @@ export interface AchievementModel {
 export type NewAchievementParams = Omit<
   AchievementModel,
   'user_id' | 'created_at' | 'updated_at' | 'id' | 'course_id'
+>;
+
+export type EditAchievementParams = Omit<
+  AchievementModel,
+  'user_id' | 'created_at' | 'updated_at' | 'course_id'
+>;
+
+export type AchievementParamsUi = PartialBy<
+EditAchievementParams,
+  'id'
 >;
 
 export interface SettingAchievement {

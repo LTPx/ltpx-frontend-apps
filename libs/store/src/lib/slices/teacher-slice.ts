@@ -24,8 +24,6 @@ import {
 } from '@ltpx-frontend-apps/api';
 import { StateCreator } from 'zustand';
 import { StoreState } from '../store';
-import { teacherNewAchievement } from './achievements-actions';
-import { teacherNewQuiz, teacherQuizzes } from './courses-actions';
 
 type TResponseApply = {
   accepted: boolean;
@@ -76,7 +74,7 @@ export type TeacherSlice = {
   editCourse: (params: CourseApiParams) => Promise<TResponseCreateCourse>;
   getProfile: () => Promise<TResponseProfile>;
   updateProfile: (params: IUserAccount) => Promise<TResponseUpdateProfile>;
-  myQuizzes: () => Promise<TResponse>;
+  createQuiz: (params: any) => Promise<TResponse>;
   createAchievement: (params: NewAchievementParams) => Promise<TResponse>;
   getCourse: (id: number) => Promise<TResponse>;
 };
@@ -167,9 +165,18 @@ export const createTeacherSlice: StateCreator<
       return { success: false, data: error };
     }
   },
-  myQuizzes: async () => {
-    const { success, response } = await teacherQuizzes(set);
-    return { success: success, data: response };
+  createQuiz: async (params) => {
+    try {
+      const quiz = await createQuiz(params);
+      const course = get().currentCourse;
+      const allQuizzes = course.quizzes || [];
+      const quizzes = allQuizzes.concat([quiz]);
+      const courseUpdated = { ...course, ...{quizzes}}
+      set({ currentCourse: courseUpdated });
+      return { success: true, data: quiz };
+    } catch (error) {
+      return { success: false, data: error };
+    }
   },
   createAchievement: async (params) => {
     try {

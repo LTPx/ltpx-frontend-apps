@@ -9,6 +9,9 @@ export const CATEGORIES = [
   'audio',
   'marketing',
   'finance',
+  'basic_education',
+  'secondary_education',
+  'others',
 ];
 
 export const LEVELS = ['beginner', 'medium', 'advance', 'all'];

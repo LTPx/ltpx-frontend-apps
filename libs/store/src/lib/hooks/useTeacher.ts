@@ -12,7 +12,7 @@ export const useTeacher = () => {
     profile,
     getProfile,
     updateProfile,
-    myQuizzes,
+    createQuiz,
     createAchievement,
     getCourse,
     currentCourse
@@ -30,7 +30,7 @@ export const useTeacher = () => {
     profile,
     getProfile,
     updateProfile,
-    myQuizzes,
+    createQuiz,
     createAchievement,
     getCourse,
   }

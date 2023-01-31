@@ -1,15 +1,13 @@
-import { CATEGORIES, LANGUAGES, LEVELS } from '@ltpx-frontend-apps/api';
+import {
+  AchievementModel,
+  CATEGORIES,
+  LANGUAGES,
+  LEVELS,
+} from '@ltpx-frontend-apps/api';
 import { useTranslation } from 'react-i18next';
-import { useAppStore } from '../store';
 
-export const useCourse = () => {
+export const useCourseUtil = () => {
   const { t } = useTranslation();
-  const {
-    addNewContent,
-    getCourse,
-    loadedCourse,
-    course
-  } = useAppStore();
 
   const categories = CATEGORIES.map((value) => {
     return {
@@ -48,6 +46,10 @@ export const useCourse = () => {
     return t(`course_status.${status}`);
   };
 
+  const translateQuizCategories = (category: string) => {
+    return t(`quizzes_categories.${category}`);
+  };
+
   return {
     categories,
     languages,
@@ -56,9 +58,12 @@ export const useCourse = () => {
     translateLevel,
     translateLanguage,
     translateStatus,
-    addNewContent,
-    getCourse,
-    loadedCourse,
-    course
+    translateQuizCategories,
+    getPriceCourse: (achievements: AchievementModel[]) => {
+      return achievements.reduce(
+        (accumulator, achievement) => accumulator + achievement.price,
+        0
+      );
+    },
   };
 };

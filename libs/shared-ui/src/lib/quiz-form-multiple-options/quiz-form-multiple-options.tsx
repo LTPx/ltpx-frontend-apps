@@ -13,39 +13,51 @@ export interface QuizFormMultipleOptionsProps {
   onSubmit?: (data: QuestionQuiz) => void;
   className?: string;
   onCancel?: () => void;
+  question?: QuestionQuiz;
 }
 
 export function QuizFormMultipleOptions(props: QuizFormMultipleOptionsProps) {
-  const { onSubmit, onCancel, singleSelection, className } = props;
+  const { onSubmit, onCancel, singleSelection, className, question } = props;
 
   const alphabetLetters = generateAlphabet();
 
+  const initialValues = {
+    kind: singleSelection ? TypeQuestionQuiz.single : TypeQuestionQuiz.multiple,
+    question: question?.question || '',
+    description: question?.description || '',
+    answers: question?.answers || [
+      {
+        text: '',
+        correct: false,
+      },
+      {
+        text: '',
+        correct: false,
+      },
+    ],
+  };
 
   return (
     <div className={styles['questions']}>
       <Formik
-        initialValues={{
-          question: '',
-          description: '',
-          kind: singleSelection ? TypeQuestionQuiz.single : TypeQuestionQuiz.multiple,
-          answers: [
-            {
-              text: '',
-              correct: false,
-            },
-          ],
-        }}
-        validationSchema = {
-          Yup.object({
-            question: Yup.string()
-              .required('La pregunta no puede estar en blanco'),
-          })
-        }
+        initialValues={initialValues}
+        validationSchema={Yup.object({
+          question: Yup.string().required(
+            'La pregunta no puede estar en blanco'
+          ),
+        })}
         onSubmit={(values) => {
           onSubmit && onSubmit(values);
         }}
       >
-        {({ values, handleChange, handleBlur, setFieldValue, submitForm, errors }) => (
+        {({
+          values,
+          handleChange,
+          handleBlur,
+          setFieldValue,
+          submitForm,
+          errors,
+        }) => (
           <Form className={className || ''}>
             <div className={styles['fields']}>
               <Input
@@ -72,7 +84,12 @@ export function QuizFormMultipleOptions(props: QuizFormMultipleOptionsProps) {
                 render={(arrayHelpers) => (
                   <div>
                     {values.answers.map((answer, index) => (
-                      <div className={`${styles['answer']} ${ singleSelection ? styles['single'] : ''}`} key={index}>
+                      <div
+                        className={`${styles['answer']} ${
+                          singleSelection ? styles['single'] : ''
+                        }`}
+                        key={index}
+                      >
                         {!singleSelection && (
                           <div className={styles['letter']}>
                             <h2>{alphabetLetters[index]}.</h2>
@@ -93,7 +110,7 @@ export function QuizFormMultipleOptions(props: QuizFormMultipleOptionsProps) {
                             }`}
                             onClick={() => {
                               if (singleSelection) {
-                                values.answers.forEach((answer, i)=>{
+                                values.answers.forEach((answer, i) => {
                                   if (index === i) {
                                     setFieldValue(
                                       `answers[${index}].correct`,
@@ -105,8 +122,8 @@ export function QuizFormMultipleOptions(props: QuizFormMultipleOptionsProps) {
                                       false
                                     );
                                   }
-                                })
-                              };
+                                });
+                              }
                               setFieldValue(
                                 `answers[${index}].correct`,
                                 !answer.correct
@@ -121,7 +138,7 @@ export function QuizFormMultipleOptions(props: QuizFormMultipleOptionsProps) {
                           >
                             <Icon icon="trash" size={15} />
                           </div>
-                          </div>
+                        </div>
                       </div>
                     ))}
                     <div
@@ -149,7 +166,11 @@ export function QuizFormMultipleOptions(props: QuizFormMultipleOptionsProps) {
                 }}
               />
               <Button
-                title="Agregar pregunta"
+                title={
+                  question?.question
+                    ? 'Actualizar pregunta'
+                    : 'Agregar pregunta'
+                }
                 color={ColorsButton.secondary}
                 type={TypeButton.submit}
                 onClick={submitForm}

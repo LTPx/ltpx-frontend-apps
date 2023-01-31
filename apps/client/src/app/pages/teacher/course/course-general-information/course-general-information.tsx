@@ -8,9 +8,10 @@ import {
   TextArea,
   TypeButton,
 } from '@ltpx-frontend-apps/shared-ui';
-import { useCourse } from 'apps/client/src/app/store/hooks/useCourse';
+import { useCourse, useCourseUtil } from '@ltpx-frontend-apps/store';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
+import { ResponseRequest } from '../../teacher-edit-course/teacher-edit-course';
 import styles from './course-general-information.module.scss';
 
 /* eslint-disable-next-line */
@@ -26,7 +27,7 @@ export interface CourseGeneralInformation {
 }
 export interface CourseGeneralInformationProps
   extends CourseGeneralInformation {
-  onSubmit?: (params: CourseGeneralInformation) => void;
+  onSubmit?: (data: ResponseRequest) => void;
 }
 
 export function CourseGeneralInformation(props: CourseGeneralInformationProps) {
@@ -41,8 +42,8 @@ export function CourseGeneralInformation(props: CourseGeneralInformationProps) {
     requirements,
     onSubmit,
   } = props;
-  const { categories, languages, levels } = useCourse();
-  console.log('cover: ', cover);
+  const { categories, languages, levels } = useCourseUtil();
+  const { course, updateCourse } = useCourse();
   const formik = useFormik({
     initialValues: {
       title: title,
@@ -58,12 +59,23 @@ export function CourseGeneralInformation(props: CourseGeneralInformationProps) {
       title: Yup.string().required('es obligatorio'),
     }),
     onSubmit: async (formData) => {
-      console.log('formData: ', formData);
-      const  isFile = typeof formData.cover !== 'string';
-      if (!isFile) { // could be a url img
-        delete formData.cover
+      try {
+        const  isFile = typeof formData.cover !== 'string';
+        if (!isFile) { // could be a url img
+          delete formData.cover
+        }
+        const { data } = await updateCourse(formData);
+        onSubmit && onSubmit({
+          success: true,
+          data
+        });
+      } catch (error) {
+        onSubmit && onSubmit({
+          success: false,
+          error
+        });
+
       }
-      onSubmit && onSubmit(formData);
     },
   });
 

@@ -1,49 +1,65 @@
-import { NewQuizParams, QuestionQuiz } from '@ltpx-frontend-apps/api';
+import { QuizModel, QuizParamsUi } from '@ltpx-frontend-apps/api';
 import {
   Button,
   ColorsButton,
   Icon,
   QuizBuilder,
   SetupCard,
-  Snackbar,
-  SnackbarPosition,
-  SnackbarType,
 } from '@ltpx-frontend-apps/shared-ui';
-import { useTeacher } from 'apps/client/src/app/store';
+import { useCourse } from '@ltpx-frontend-apps/store';
 import { useState } from 'react';
+import { ResponseRequest } from '../../teacher-edit-course/teacher-edit-course';
 import styles from './course-quizzes.module.scss';
 
 /* eslint-disable-next-line */
 export interface CourseQuizzesProps {
-  courseId: number;
-  initialQuizzes: NewQuizParams[];
-  onSubmit?: (quiz: QuestionQuiz) => void;
+  onSubmit?: (data: ResponseRequest) => void;
 }
 
 export function CourseQuizzes(props: CourseQuizzesProps) {
-  const { courseId, initialQuizzes } = props;
-  const [ showNotification, setShowNotification ] = useState(false);
+  const { onSubmit } = props;
+  const [ quizEdit, setQuizEdit ] = useState<QuizModel>();
   const [ showForm, setShowForm ] = useState(false);
-  const [ quizzes, setQuizzes ] = useState<NewQuizParams[]>(initialQuizzes);
-  const { createQuiz } = useTeacher();
+  const { course, removeQuiz, addNewQuiz, updateQuiz } = useCourse();
+  const { quizzes } = course;
 
-  const handleCreateQuiz = async (newQuiz: NewQuizParams) => {
-    console.log(newQuiz);
-    const data = {
-      ...newQuiz,
-      ...{
-        course_id: courseId,
-      },
-    };
-    const response = await createQuiz(data);
-    if (response.success) {
-      setQuizzes(quizzes.concat([newQuiz]));
+  const handleSaveQuiz = async (quiz: QuizParamsUi) => {
+    try {
+      const { data } = quiz.id
+        ? await updateQuiz({ ...quiz, ...{ id: quiz.id } })
+        : await addNewQuiz(quiz);
+      onSubmit &&
+        onSubmit({
+          success: true,
+          data: data,
+        });
       setShowForm(false);
-      setShowNotification(true);
-    } else {
-      console.log(response.error);
+      setQuizEdit(undefined);
+    } catch (error: any) {
+      onSubmit &&
+        onSubmit({
+          success: false,
+          error: error,
+        });
     }
-    console.log(response);
+  };
+
+  const handleRemoveQuiz = async (id: number) => {
+    try {
+      const { data } =  await removeQuiz(id)
+      onSubmit &&
+        onSubmit({
+          success: true,
+          data: data,
+        });
+      setShowForm(false);
+    } catch (error: any) {
+      onSubmit &&
+        onSubmit({
+          success: false,
+          error: error,
+        });
+    }
   };
 
   return (
@@ -54,7 +70,7 @@ export function CourseQuizzes(props: CourseQuizzesProps) {
       </div>
       {!showForm && (
         <div className={styles['quizzes']}>
-          {quizzes.map((quiz, index) => (
+          {quizzes?.map((quiz, index) => (
             <div className={styles['quiz']} key={index}>
               <div className={styles['summary']}>
                 <Icon icon="list" size={20} />
@@ -66,13 +82,18 @@ export function CourseQuizzes(props: CourseQuizzesProps) {
               <div className={styles['actions']}>
                 <div
                   className={styles['action']}
-                  onClick={() => console.log('remove')}
+                  onClick={() => {
+                    setQuizEdit(quiz);
+                    setShowForm(true);
+                  }}
                 >
                   <Icon icon="pencil" size={15} />
                 </div>
                 <div
                   className={styles['action']}
-                  onClick={() => console.log('remove')}
+                  onClick={() => {
+                    handleRemoveQuiz(quiz.id);
+                  }}
                 >
                   <Icon icon="trash" size={15} />
                 </div>
@@ -81,7 +102,7 @@ export function CourseQuizzes(props: CourseQuizzesProps) {
           ))}
         </div>
       )}
-      {!showForm && quizzes.length === 0 && (
+      {!showForm && quizzes?.length === 0 && (
         <SetupCard
           onClick={() => {
             setShowForm(true);
@@ -91,7 +112,7 @@ export function CourseQuizzes(props: CourseQuizzesProps) {
           titleButton={'Configurar Ahora'}
         />
       )}
-      {!showForm && quizzes.length > 0 &&(
+      {!showForm && quizzes && quizzes.length > 0 && (
         <Button
           title="Crear Nuevo Test"
           className={styles['add-button']}
@@ -104,12 +125,14 @@ export function CourseQuizzes(props: CourseQuizzesProps) {
       {showForm && (
         <>
           <QuizBuilder
+            quiz={quizEdit}
             className={styles['quiz-forms']}
             onSubmit={(data) => {
-              handleCreateQuiz(data);
+              handleSaveQuiz(data);
             }}
-            onClose={()=>{
+            onClose={() => {
               setShowForm(false);
+              setQuizEdit(undefined);
             }}
           />
           <Button
@@ -122,13 +145,6 @@ export function CourseQuizzes(props: CourseQuizzesProps) {
           />
         </>
       )}
-      <Snackbar
-        position={SnackbarPosition.centerBottom}
-        open={showNotification}
-        title={'Cambios guardados'}
-        typeSnackbar={SnackbarType.success}
-        date={''}
-      />
     </div>
   );
 }

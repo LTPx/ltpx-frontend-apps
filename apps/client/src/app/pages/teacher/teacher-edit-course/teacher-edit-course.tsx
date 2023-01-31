@@ -1,8 +1,5 @@
 import {
-  CourseApiParams,
   CourseStatus,
-  getTeacherCourse,
-  TeacherCourse,
 } from '@ltpx-frontend-apps/api';
 import {
   Button,
@@ -15,6 +12,7 @@ import {
   Tag,
   TypeButton,
 } from '@ltpx-frontend-apps/shared-ui';
+import { useCourse, useCourseUtil } from '@ltpx-frontend-apps/store';
 import {
   CourseAchievements,
   CourseClassroom,
@@ -24,7 +22,6 @@ import {
 } from '../course';
 import { useCallback, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { useCourse, useTeacher } from '../../../store';
 import styles from './teacher-edit-course.module.scss';
 
 const linksEditCourse = [
@@ -35,70 +32,56 @@ const linksEditCourse = [
   { selected: false, text: 'Sesiones' },
 ];
 
-export function TeacherEditCourse() {
-  const [showNotification, setShowNotification] = useState(false);
-  const [indexSelectedView, setIndexSelectedView] = useState(0);
-  // const [course, setCourse] = useState<TeacherCourse>();
-  const params = useParams();
-  const { editCourse, getCourse, course } = useTeacher();
-  const { translateStatus } = useCourse();
+export type ResponseRequest = {
+  success: boolean;
+  data?: any;
+  error?: any;
+};
 
+export function TeacherEditCourse() {
+  const [ indexSelectedView, setIndexSelectedView ] = useState(0);
+  const [ notification, setNotification ] = useState({
+    show: false,
+    kind: SnackbarType.success,
+    text: ''
+  });
+  const { getCourse, course } = useCourse();
+  const { translateStatus } = useCourseUtil();
+
+  const params = useParams();
   const { courseId } = params;
   const id = parseInt(courseId || '');
 
   const fetchData = useCallback(async () => {
-    console.log('calling....');
-    await getCourse(id);
-    // const resp = await getCourse(id);
-    // if (resp.success) {
-    //   setCourse(resp.data)
-    // } else {
-    //   console.log(resp.error)
-    // }
-  }, [])
+    const resp = await getCourse(id);
+    console.log('resp....: ', resp);
+  }, []);
 
   useEffect(() => {
-    fetchData()
-  }, [fetchData])
+    fetchData();
+  }, [fetchData]);
 
-  // useEffect(() => {
-  //   let mounted = true;
-  //   try {
-  //     if (courseId) {
-  //       const id = parseInt(courseId);
-  //       getTeacherCourse(id).then((course) => {
-  //         if (mounted) {
-  //           setCourse(course);
-  //           console.log('course: ', course);
-  //         }
-  //       });
-  //     }
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  //   return () => {
-  //     mounted = false;
-  //   };
-  // }, []);
-
-  const saveChanges = async (formData: CourseApiParams) => {
-    if (course) {
-      const data = { ...formData, ...{ id: course.id } };
-      delete data.cover_url;
-      console.log('formData edit: ', data);
-      const result = await editCourse(data);
-      if (result.success) {
-        console.log('success');
-        setShowNotification(true);
-      } else {
-        console.log(result.data);
-      }
+  const showAndConfigNotification = async (response: ResponseRequest) => {
+    const { success, data, error } = response;
+    if (success) {
+      setNotification((prevState) => ({
+        ...prevState,
+        show: true,
+        text: 'Tus cambios han sido guardados'
+      }))
+    } else {
+      setNotification((prevState) => ({
+        ...prevState,
+        show: true,
+        text: 'Ha ocurrido un error',
+        kind: SnackbarType.error
+      }))
     }
   };
 
   return (
     <div className={styles['container']}>
-      {course && (
+      {course.id && (
         <div className={styles['container']}>
           <div className={styles['header']}>
             <div className={styles['title']}>
@@ -140,52 +123,38 @@ export function TeacherEditCourse() {
             <div className={styles['section-content']}>
               {indexSelectedView === 0 && (
                 <CourseGeneralInformation
-                  title={course.title}
+                  {...course}
                   cover={course.cover_url}
-                  description={course.description}
-                  category={course.category}
-                  language={course.language}
-                  level={course.level}
-                  learn_goals={course.learn_goals}
-                  requirements={course.requirements}
                   onSubmit={(data) => {
-                    saveChanges(data);
+                    showAndConfigNotification(data);
                   }}
                 />
               )}
               {indexSelectedView === 1 && (
                 <CourseContents
-                  contents={course.contents}
-                  onSubmit={(content) => {
-                    const contents = course.contents || [];
-                    saveChanges({
-                      title: course.title,
-                      contents: contents.concat([content]),
-                    });
+                  onSubmit={(data) => {
+                    showAndConfigNotification(data);
                   }}
                 />
               )}
               {indexSelectedView === 2 && (
                 <CourseQuizzes
-                  courseId={course.id}
-                  initialQuizzes={course.quizzes || []}
+                  onSubmit={(data) => {
+                    showAndConfigNotification(data);
+                  }}
                 />
               )}
               {indexSelectedView === 3 && (
                 <CourseAchievements
-                  quizzes={course.quizzes || []}
-                  courseId={course.id}
-                  initialAchievements={course.achievements || []}
+                  onSubmit={(data) => {
+                    showAndConfigNotification(data);
+                  }}
                 />
               )}
               {indexSelectedView === 4 && (
                 <CourseClassroom
-                  initialClassroom={course.classroom}
-                  onSubmit={(classroom) => {
-                    saveChanges({
-                      title: course.title,
-                      classroom: classroom,
-                    });
+                  onSubmit={(data) => {
+                    showAndConfigNotification(data);
                   }}
                 />
               )}
@@ -193,13 +162,20 @@ export function TeacherEditCourse() {
           </div>
         </div>
       )}
-      <Snackbar
-        position={SnackbarPosition.centerBottom}
-        open={showNotification}
-        title={'Cambios guardados'}
-        typeSnackbar={SnackbarType.success}
-        date={''}
-      />
+      {notification.show && (
+        <Snackbar
+          position={SnackbarPosition.centerBottom}
+          open={notification.show}
+          title={notification.text}
+          kind={notification.kind}
+          onClose={()=>{
+            setNotification( (prevState) => ({
+              ...prevState,
+              show: false,
+            }));
+          }}
+        />
+      )}
     </div>
   );
 }

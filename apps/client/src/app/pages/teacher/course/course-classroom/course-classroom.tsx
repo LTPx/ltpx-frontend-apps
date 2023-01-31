@@ -1,28 +1,40 @@
-import { Classroom, CLASSROOMS } from '@ltpx-frontend-apps/api';
+import { CLASSROOMS } from '@ltpx-frontend-apps/api';
 import {
   ClassroomView,
   CourseClasses,
   InformationCard,
   SetupCard,
 } from '@ltpx-frontend-apps/shared-ui';
+import { useCourse } from '@ltpx-frontend-apps/store';
 import { useState } from 'react';
+import { ResponseRequest } from '../../teacher-edit-course/teacher-edit-course';
 import styles from './course-classroom.module.scss';
 
 /* eslint-disable-next-line */
 export interface CourseClassroomProps {
-  onSubmit?: (classroom: Classroom) => void;
-  initialClassroom?: Classroom;
+  onSubmit?: (data: ResponseRequest) => void;
 }
 
 export function CourseClassroom(props: CourseClassroomProps) {
-  const { onSubmit, initialClassroom } = props;
-  const [classroom, setClassroom] = useState<Classroom | null>(initialClassroom || null);
+  const { onSubmit } = props;
   const [openModal, setOpenModal] = useState(false);
+  const { course, addUpdateClassroom } = useCourse();
+  const { classroom  } = course;
 
-  const handleClassroom = (classroom: any) => {
-    console.log(classroom);
-    setClassroom(classroom);
-    onSubmit && onSubmit(classroom);
+  const handleClassroom = async(classroom: any) => {
+    try {
+      const { data } = await addUpdateClassroom(classroom);
+      onSubmit && onSubmit({
+        success: true,
+        data: data
+      });
+
+    } catch (error) {
+      onSubmit && onSubmit({
+        success: false,
+        error: error
+      });
+    }
   };
 
   return (

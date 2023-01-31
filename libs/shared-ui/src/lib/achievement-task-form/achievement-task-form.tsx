@@ -1,4 +1,5 @@
 import {
+  AchievementModel,
   AchievementsImages,
   NewAchievementParams,
   TypeAchievement,
@@ -16,23 +17,25 @@ import InputTextStatus, {
 
 /* eslint-disable-next-line */
 export interface AchievementTaskFormProps {
+  achievement?: AchievementModel;
   className?: string;
   onCancel?: () => void;
   onSubmit?: (data: NewAchievementParams) => void;
 }
 
 export function AchievementTaskForm(props: AchievementTaskFormProps) {
-  const { onCancel, onSubmit, className } = props;
-
+  const { onCancel, onSubmit, className, achievement } = props;
+  const initialValues = {
+    title: achievement?.title || '',
+    image:  achievement?.image || '',
+    price:  achievement?.price || 0,
+    file: null,
+    rule: TypeAchievement.score,
+    settings: [],
+  };
   return (
     <Formik
-      initialValues={{
-        title: '',
-        image: '',
-        file: null,
-        rule: TypeAchievement.task,
-        settings: [],
-      }}
+      initialValues={initialValues}
       validationSchema={Yup.object({
         title: Yup.string().required('Titulo no puede estar en blanco'),
         image: Yup.string().required('Es necesario seleccionar una imagen'),
@@ -74,6 +77,7 @@ export function AchievementTaskForm(props: AchievementTaskFormProps) {
             <br />
             <label>Selecciona la imagen que obtendrá al cumplir el logro</label>
             <SelectImage
+              selected={values.image}
               onChange={(img) => {
                 setFieldValue('image', img);
               }}
@@ -85,6 +89,18 @@ export function AchievementTaskForm(props: AchievementTaskFormProps) {
                 text={errors.image}
               />
             )}
+            <Input
+              placeholder="1"
+              label="Precio"
+              description='Este valor sera enviado a tu cuenta una vez el alumno alcance este logro'
+              type='number'
+              min={1}
+              value={values.price}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              name="price"
+              errorMessage={errors.price}
+            />
           </div>
           <div className={styles['footer']}>
             <Button

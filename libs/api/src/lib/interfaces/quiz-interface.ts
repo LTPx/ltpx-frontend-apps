@@ -1,3 +1,5 @@
+import { PartialBy } from "./util";
+
 export enum TypeQuestionQuiz {
   multiple = 'multiple',
   single = 'single',
@@ -6,14 +8,13 @@ export enum TypeQuestionQuiz {
 }
 
 export interface QuizModel {
-  id: number;
-  user_id: number;
-  course_id: number;
+  id: number; // ignore in new but not in edit
+  user_id: number;  //ignore in new/edit
+  course_id: number; //ignore in new
   name: string;
-  description?: string;
   questions: QuestionQuiz[];
-  created_at: string;
-  updated_at: string;
+  created_at: string; //ignore in new/edit
+  updated_at: string; //ignore in new/edit
 }
 
 export type NewQuizParams = Omit<
@@ -21,16 +22,15 @@ export type NewQuizParams = Omit<
   'user_id' | 'created_at' | 'updated_at' | 'id' | 'course_id'
 >;
 
-export type NewQuizApiParams = Omit<
+export type EditQuizParams = Omit<
   QuizModel,
-  'user_id' | 'created_at' | 'updated_at' | 'id' | 'course_id'
+  'user_id' | 'created_at' | 'updated_at' | 'course_id'
 >;
 
-export type EditQuizApiParams = Omit<
-  QuizModel,
-  'user_id' | 'created_at' | 'updated_at'
+export type QuizParamsUi = PartialBy<
+  EditQuizParams,
+  'id'
 >;
-
 export interface QuestionQuiz {
   question: string;
   description: string;

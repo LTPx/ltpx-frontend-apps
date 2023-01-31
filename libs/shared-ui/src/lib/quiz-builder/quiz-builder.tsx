@@ -26,9 +26,10 @@ export interface QuizBuilderProps {
 
 export function QuizBuilder(props: QuizBuilderProps) {
   const { onClose, onSubmit, className, quiz } = props;
-  const [ questionEdit, setQuestionEdit ] = useState<QuestionQuiz>();
+  const [selectedIndexEdit, setSelectedIndexEdit] = useState<number>(1);
+  const [questionEdit, setQuestionEdit] = useState<QuestionQuiz>();
   const [selectedTypeQuestion, setSelectedTypeQuestion] =
-    useState<TypeQuestionQuiz | null>();
+    useState<TypeQuestionQuiz>();
 
   const initialValues = {
     id: quiz?.id,
@@ -46,64 +47,97 @@ export function QuizBuilder(props: QuizBuilderProps) {
     },
   });
 
-  const editQuestion = (index: number) => {
-    // console.log(questions[index]);
-  };
-
   const handleSaveQuestionData = (question: QuestionQuiz) => {
     const { questions } = formik.values;
     const totalQuestions = questions.concat([question]);
     formik.setFieldValue('questions', totalQuestions);
-    setSelectedTypeQuestion(null);
+    setSelectedTypeQuestion(undefined);
   };
 
   const cancelQuestion = () => {
-    setSelectedTypeQuestion(null);
+    setSelectedTypeQuestion(undefined);
   };
 
-  const ContentQuizForm = () => (
+  const handleRemoveQuestion = (index: number) => {
+    const { questions } = formik.values;
+    const updatedQuestions = questions.filter((q, i) => i !== index);
+    formik.setFieldValue('questions', updatedQuestions);
+  };
+
+  const handleUpdateQuestion = (question: QuestionQuiz, index: number) => {
+    const { questions } = formik.values;
+    const updatedQuestions = questions.map((q, i) =>
+      i === index ? question : q
+    );
+    formik.setFieldValue('questions', updatedQuestions);
+    setQuestionEdit(undefined);
+    setSelectedIndexEdit(-1);
+    setSelectedTypeQuestion(undefined);
+  };
+
+  const ContentQuizForm = ({ questions }: { questions: QuestionQuiz[] }) => (
     <>
       <div className={styles['questions']}>
         <label> Preguntas</label>
-        {formik.values.questions.map((question, index) => (
-          <div
-            className={`${styles['question']} ${
-              index === formik.values.questions.length ? styles['selected'] : ''
-            }`}
-            key={index}
-          >
-            <div className={styles['summary']}>
-              <div className={styles['number']}>{index + 1}</div>
-              <div className={styles['text']}>
-                <h4>{question.question}</h4>
-                <h5>{question.kind}</h5>
+        {questions.map((question, index) => (
+          <div className={`${styles['question-wrapper']}`} key={index}>
+            <div className={`${styles['question']}`}>
+              <div className={styles['summary']}>
+                <div className={styles['number']}>{index + 1}</div>
+                <div className={styles['text']}>
+                  <h4>{question.question}</h4>
+                  <h5>{question.kind}</h5>
+                </div>
+              </div>
+              <div className={styles['actions']}>
+                <div
+                  className={styles['action']}
+                  onClick={() => {
+                    setQuestionEdit(question);
+                    setSelectedIndexEdit(index);
+                  }}
+                >
+                  <Icon icon="pencil" size={15} />
+                </div>
+                <div
+                  className={styles['action']}
+                  onClick={() => {
+                    handleRemoveQuestion(index);
+                  }}
+                >
+                  <Icon icon="trash" size={15} />
+                </div>
               </div>
             </div>
-            <div className={styles['actions']}>
-              <div
-                className={styles['action']}
-                onClick={() => {
-                  setSelectedTypeQuestion(question.kind);
-                  setQuestionEdit(question);
-                }}
-              >
-                <Icon icon="pencil" size={15} />
+            {questionEdit && selectedIndexEdit === index && (
+              <div className={styles['question-edit-form']}>
+                <QuestionsQuiz
+                  question={question}
+                  type={question.kind}
+                  onCancel={() => {
+                    setSelectedIndexEdit(-1);
+                  }}
+                  onSubmit={(data) => {
+                    handleUpdateQuestion(data, index);
+                  }}
+                />
               </div>
-              <div
-                className={styles['action']}
-                onClick={() => {
-                  // handleRemoveAchievement(achievement.id);
-                }}
-              >
-                <Icon icon="trash" size={15} />
-              </div>
-            </div>
+            )}
           </div>
         ))}
       </div>
       {selectedTypeQuestion && (
         <div className={styles['forms']}>
-          {selectedTypeQuestion && <QuestionsQuiz />}
+          {selectedTypeQuestion && !questionEdit && (
+            <QuestionsQuiz
+              question={questionEdit}
+              type={selectedTypeQuestion}
+              onCancel={cancelQuestion}
+              onSubmit={(data) => {
+                handleSaveQuestionData(data);
+              }}
+            />
+          )}
         </div>
       )}
       {!selectedTypeQuestion && (
@@ -172,51 +206,53 @@ export function QuizBuilder(props: QuizBuilderProps) {
     </>
   );
 
-  const QuestionsQuiz = () => (
+  const QuestionsQuiz = ({
+    type,
+    onCancel,
+    onSubmit,
+    question,
+  }: {
+    type: TypeQuestionQuiz;
+    onCancel: () => void;
+    onSubmit: (data: QuestionQuiz) => void;
+    question?: QuestionQuiz;
+  }) => (
     <div className={styles['questions-quiz']}>
-      {selectedTypeQuestion === TypeQuestionQuiz.conditional && (
+      {type === TypeQuestionQuiz.conditional && (
         <QuizFormConditional
-          question={questionEdit}
+          question={question}
           onSubmit={(data) => {
-            handleSaveQuestionData(data);
+            onSubmit(data);
           }}
-          onCancel={() => {
-            cancelQuestion();
-          }}
+          onCancel={onCancel}
         />
       )}
-      {selectedTypeQuestion === TypeQuestionQuiz.multiple && (
+      {type === TypeQuestionQuiz.multiple && (
         <QuizFormMultipleOptions
-          question={questionEdit}
+          question={question}
           onSubmit={(data) => {
-            handleSaveQuestionData(data);
+            onSubmit(data);
           }}
-          onCancel={() => {
-            cancelQuestion();
-          }}
+          onCancel={onCancel}
         />
       )}
-      {selectedTypeQuestion === TypeQuestionQuiz.single && (
+      {type === TypeQuestionQuiz.single && (
         <QuizFormMultipleOptions
-          question={questionEdit}
+          question={question}
           singleSelection={true}
           onSubmit={(data) => {
-            handleSaveQuestionData(data);
+            onSubmit(data);
           }}
-          onCancel={() => {
-            cancelQuestion();
-          }}
+          onCancel={onCancel}
         />
       )}
-      {selectedTypeQuestion === TypeQuestionQuiz.answer && (
+      {type === TypeQuestionQuiz.answer && (
         <QuizFormAnswer
-          question={questionEdit}
+          question={question}
           onSubmit={(data) => {
-            handleSaveQuestionData(data);
+            onSubmit(data);
           }}
-          onCancel={() => {
-            cancelQuestion();
-          }}
+          onCancel={onCancel}
         />
       )}
     </div>
@@ -236,7 +272,7 @@ export function QuizBuilder(props: QuizBuilderProps) {
             errorMessage={formik.errors.name}
           />
         </form>
-        <ContentQuizForm />
+        <ContentQuizForm questions={formik.values.questions} />
       </div>
     </div>
   );

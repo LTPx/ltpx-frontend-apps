@@ -35,6 +35,15 @@
   border-radius: 10px;
 }
 
+.question-wrapper {
+
+  .question-edit-form {
+    border: 1px solid $gray-color-200;
+    padding: 0.5rem 2rem;
+  }
+}
+
+
 .questions {
   display: flex;
   flex-direction: column;

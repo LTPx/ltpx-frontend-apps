@@ -61,5 +61,10 @@ export const es = {
     single: 'Una sola elección',
     conditional: 'Condicional Verdadera / Falsa',
     answer: 'Respuesta de estudiante',
-  }
+  },
+  application_teacher_status: {
+    approved: 'Aprobada',
+    rejected: 'Requiere cambios',
+    review: 'En revision',
+  },
 }

@@ -5,13 +5,13 @@ import styles from './application-view.module.scss';
 /* eslint-disable-next-line */
 export interface ApplicationViewProps {
   application: ApplicationTeach;
+  className?: string;
 }
 
 export function ApplicationView(props: ApplicationViewProps) {
-  const { application } = props;
+  const { application, className } = props;
   const {
     name,
-    national_id,
     experience,
     phone,
     country,
@@ -23,7 +23,7 @@ export function ApplicationView(props: ApplicationViewProps) {
     degrees_attached_files,
   } = application;
   return (
-    <div className={styles['container']}>
+    <div className={`${styles['container']} ${className || ''}`}>
       <div className={styles['information-personal']}>
         <h3>Información Personal</h3>
         <div className={styles['content']}>

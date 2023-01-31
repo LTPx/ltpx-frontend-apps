@@ -6,7 +6,7 @@ import {
   SnackbarPosition,
   SnackbarType,
 } from '@ltpx-frontend-apps/shared-ui';
-import { useAdmin } from '@ltpx-frontend-apps/store';
+import { useAdmin, useUtil } from '@ltpx-frontend-apps/store';
 import { Dialog } from 'evergreen-ui';
 import { useCallback, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -26,6 +26,7 @@ export function ApplicationDetailsPage(props: ApplicationDetailsPageProps) {
     _approveApplication,
   } = useAdmin();
   const navigate = useNavigate();
+  const { translateStatusTeacherApplication } = useUtil();
   const params = useParams();
   const { id } = params;
   const appId = parseInt(id || '');
@@ -63,24 +64,33 @@ export function ApplicationDetailsPage(props: ApplicationDetailsPageProps) {
         <>
           <div className={styles['header']}>
             <h1>Solicitud de: {currentApplication.name}</h1>
-            <div className={styles['actions']}>
-              <Button
-                title="Requiere cambios"
-                color={ColorsButton.secondary}
-                outline={true}
-                onClick={() => {
-                  handleRequestChange();
-                }}
-              />
-              <Button
-                title="Aprobar Solicitud"
-                onClick={() => {
-                  handleApproveApplication();
-                }}
-              />
-            </div>
+            {currentApplication.status !== 'review' ? (
+              <div>
+                <h3>{translateStatusTeacherApplication(currentApplication.status)}</h3>
+                <h4>{currentApplication.updated_at}</h4>
+              </div>
+            ) : (
+              <div className={styles['actions']}>
+                <Button
+                  title="Requiere cambios"
+                  color={ColorsButton.secondary}
+                  outline={true}
+                  onClick={() => {
+                    handleRequestChange();
+                  }}
+                />
+                <Button
+                  title="Aprobar Solicitud"
+                  onClick={() => {
+                    handleApproveApplication();
+                  }}
+                />
+              </div>
+            )}
           </div>
-          <ApplicationView application={currentApplication} />
+          <ApplicationView
+            application={currentApplication}
+          />
         </>
       )}
       <Dialog
@@ -102,7 +112,7 @@ export function ApplicationDetailsPage(props: ApplicationDetailsPageProps) {
           position={SnackbarPosition.centerBottom}
           kind={SnackbarType.error}
           title={'Ups! no se pudo aprobar esta solicitud'}
-          onClose={()=> setError(false)}
+          onClose={() => setError(false)}
           duration={3000}
         />
       )}

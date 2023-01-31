@@ -66,7 +66,9 @@ export function QuizFormAnswer(props: QuizFormAnswerProps) {
             }}
           />
           <Button
-            title="Agregar pregunta"
+            title={
+              question?.question ? 'Actualizar pregunta' : 'Agregar pregunta'
+            }
             type={TypeButton.submit}
             onClick={formik.submitForm}
             color={ColorsButton.secondary}

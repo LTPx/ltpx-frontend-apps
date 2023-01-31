@@ -4,7 +4,11 @@ import Input from '../input/input';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import Button, { ColorsButton, TypeButton } from '../button/button';
-import { QuestionQuiz, QuizParamsUi, TypeQuestionQuiz } from '@ltpx-frontend-apps/api';
+import {
+  QuestionQuiz,
+  QuizParamsUi,
+  TypeQuestionQuiz,
+} from '@ltpx-frontend-apps/api';
 
 /* eslint-disable-next-line */
 export interface QuizFormConditionalProps {
@@ -22,12 +26,12 @@ export function QuizFormConditional(props: QuizFormConditionalProps) {
     answers: question?.answers || [
       {
         text: 'true',
-        correct: false
+        correct: false,
       },
       {
         text: 'false',
-        correct: false
-      }
+        correct: false,
+      },
     ],
   };
   console.log('initialValues: ', initialValues);
@@ -43,8 +47,14 @@ export function QuizFormConditional(props: QuizFormConditionalProps) {
 
   const markAsCorrect = (conditional: any) => {
     const { text, correct } = conditional;
-    formik.setFieldValue(`answers[0].correct`, text === 'true' ? !correct : correct);
-    formik.setFieldValue(`answers[1].correct`, text === 'true' ? correct : !correct);
+    formik.setFieldValue(
+      `answers[0].correct`,
+      text === 'true' ? !correct : correct
+    );
+    formik.setFieldValue(
+      `answers[1].correct`,
+      text === 'true' ? correct : !correct
+    );
   };
 
   return (
@@ -97,7 +107,9 @@ export function QuizFormConditional(props: QuizFormConditionalProps) {
             }}
           />
           <Button
-            title="Agregar pregunta"
+            title={
+              question?.question ? 'Actualizar pregunta' : 'Agregar pregunta'
+            }
             color={ColorsButton.secondary}
             type={TypeButton.submit}
           />

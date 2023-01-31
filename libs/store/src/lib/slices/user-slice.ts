@@ -11,7 +11,8 @@ import {
   UserResponse,
   TypeViews,
   UserStore,
-  TypeAccounts
+  TypeAccounts,
+  loginAdmin
 } from '@ltpx-frontend-apps/api';
 
 type TResponseLogin = {
@@ -28,6 +29,7 @@ export type UserSlice = {
   currentView: TypeViews,
   getCurrentUser: () => Promise<TResponseLogin>;
   login: (credentials: ICredentials) => Promise<TResponseLogin>;
+  loginAdmin: (credentials: ICredentials) => Promise<TResponseLogin>;
   register: (params: IRegisterUser) => Promise<TResponseLogin>;
   logout: () => void;
   addCourseCart: (course: PublicCourse) => void;
@@ -84,6 +86,21 @@ export const createUserSlice: StateCreator<
   login: async (credentials: ICredentials):Promise<TResponseLogin> => {
     try {
       const { user } = await loginUser(credentials);
+      const view = views[user.initial_register];
+      set({
+        user: user,
+        isAuthenticated: true,
+        currentView: view
+      });
+      // localStorage.setItem('view_app', view);
+      return { isLogin: true, data: user };
+    } catch (error) {
+      return { isLogin: false, data: error };
+    }
+  },
+  loginAdmin: async (credentials: ICredentials):Promise<TResponseLogin> => {
+    try {
+      const { user } = await loginAdmin(credentials);
       const view = views[user.initial_register];
       set({
         user: user,

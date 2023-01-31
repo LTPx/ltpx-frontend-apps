@@ -41,7 +41,7 @@ export function CourseDetails(props: CourseDetailsProps) {
 
   const tabs = [
     {
-      text: 'Descripción general',
+      text: 'Descripción',
     },
     {
       text: 'Contenidos',

@@ -28,6 +28,7 @@ export function AchievementTaskForm(props: AchievementTaskFormProps) {
   const initialValues = {
     title: achievement?.title || '',
     image:  achievement?.image || '',
+    price:  achievement?.price || 0,
     file: null,
     rule: TypeAchievement.score,
     settings: [],
@@ -88,6 +89,18 @@ export function AchievementTaskForm(props: AchievementTaskFormProps) {
                 text={errors.image}
               />
             )}
+            <Input
+              placeholder="1"
+              label="Precio"
+              description='Este valor sera enviado a tu cuenta una vez el alumno alcance este logro'
+              type='number'
+              min={1}
+              value={values.price}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              name="price"
+              errorMessage={errors.price}
+            />
           </div>
           <div className={styles['footer']}>
             <Button

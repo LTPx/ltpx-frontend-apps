@@ -20,6 +20,7 @@ export interface AchievementModel {
   title: string;
   rule: TypeAchievement;
   image: string;
+  price: number;
   settings: SettingAchievement[];
   created_at: string;
   updated_at: string;

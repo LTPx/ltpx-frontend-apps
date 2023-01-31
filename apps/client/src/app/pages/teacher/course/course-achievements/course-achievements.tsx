@@ -124,7 +124,7 @@ export function CourseAchievements(props: CourseAchievementsProps) {
                 <img src={achievement.image} />
                 <div className={styles['text']}>
                   <h4>{achievement.title}</h4>
-                  <h5>{achievement.rule}</h5>
+                  <h5>Precio: ${achievement.price}</h5>
                 </div>
               </div>
               <div className={styles['actions']}>

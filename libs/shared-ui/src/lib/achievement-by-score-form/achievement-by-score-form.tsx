@@ -22,6 +22,7 @@ export function AchievementByScoreForm(props: AchievementByScoreFormProps) {
   const initialValues = {
     title: achievement?.title || '',
     image:  achievement?.image || '',
+    price:  achievement?.price || 0,
     settings: quizzes.map((quiz)=> {
       return {
         entity: EntityAchievement.quiz,
@@ -129,6 +130,18 @@ export function AchievementByScoreForm(props: AchievementByScoreFormProps) {
                 text={errors.image}
               />
             )}
+            <Input
+              placeholder="1"
+              label="Precio"
+              description='Este valor sera enviado a tu cuenta una vez el alumno alcance este logro'
+              type='number'
+              min={1}
+              value={values.price}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              name="price"
+              errorMessage={errors.price}
+            />
           </div>
           <div className={styles['footer']}>
             <Button

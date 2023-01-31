@@ -33,7 +33,7 @@ export const es = {
     finance: 'Finanzas',
     basic_education: 'Educación Básica',
     secondary_education: 'Educación Secundaria',
-    other: 'Otros',
+    others: 'Otros',
   },
   levels: {
     beginner: 'Básico',

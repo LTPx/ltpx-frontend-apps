@@ -55,5 +55,11 @@ export const en = {
     ec: 'Ecuador',
     es: 'Spain',
     mx: 'Mexico'
+  },
+  quizzes_categories: {
+    multiple: 'Selección multiple',
+    single: 'Una sola elección',
+    conditional: 'Condicional Verdadera / Falsa',
+    answer: 'Respuesta de estudiante',
   }
 }

@@ -41,6 +41,10 @@ export const useCourseUtil = () => {
     return t(`course_status.${status}`);
   };
 
+  const translateQuizCategories = (category: string) => {
+    return t(`quizzes_categories.${category}`);
+  };
+
   return {
     categories,
     languages,
@@ -49,5 +53,6 @@ export const useCourseUtil = () => {
     translateLevel,
     translateLanguage,
     translateStatus,
+    translateQuizCategories,
   };
 };

@@ -16,6 +16,7 @@ import QuizFormConditional from '../quiz-form-conditional/quiz-form-conditional'
 import styles from './quiz-builder.module.scss';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
+import { useCourseUtil } from 'libs/store/src';
 /* eslint-disable-next-line */
 export interface QuizBuilderProps {
   onClose?: () => void;
@@ -30,6 +31,7 @@ export function QuizBuilder(props: QuizBuilderProps) {
   const [questionEdit, setQuestionEdit] = useState<QuestionQuiz>();
   const [selectedTypeQuestion, setSelectedTypeQuestion] =
     useState<TypeQuestionQuiz>();
+  const { translateQuizCategories } = useCourseUtil();
 
   const initialValues = {
     id: quiz?.id,
@@ -86,7 +88,7 @@ export function QuizBuilder(props: QuizBuilderProps) {
                 <div className={styles['number']}>{index + 1}</div>
                 <div className={styles['text']}>
                   <h4>{question.question}</h4>
-                  <h5>{question.kind}</h5>
+                  <h5>{translateQuizCategories(question.kind)}</h5>
                 </div>
               </div>
               <div className={styles['actions']}>

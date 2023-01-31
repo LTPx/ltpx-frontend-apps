@@ -34,6 +34,7 @@ export function CourseQuizzes(props: CourseQuizzesProps) {
           data: data,
         });
       setShowForm(false);
+      setQuizEdit(undefined);
     } catch (error: any) {
       onSubmit &&
         onSubmit({

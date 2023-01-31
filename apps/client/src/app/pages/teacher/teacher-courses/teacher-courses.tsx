@@ -1,5 +1,6 @@
 import { TeacherCourse, getTeacherCourses, CourseStatus } from '@ltpx-frontend-apps/api';
 import { Button, ColorsButton, InputSearch, NewCourseForm, Select, TeacherCourseCard } from '@ltpx-frontend-apps/shared-ui';
+import { useCourseUtil } from '@ltpx-frontend-apps/store';
 import { Dialog } from 'evergreen-ui';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -14,6 +15,7 @@ export function TeacherCourses(props: TeacherCoursesProps) {
   const [courses, setCourses] = useState<TeacherCourse[]>([]);
   const [openModal, setOpenModal] = useState(false);
   const { createCourse } = useTeacher();
+  const { getPriceCourse } = useCourseUtil();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -58,6 +60,7 @@ export function TeacherCourses(props: TeacherCoursesProps) {
           percentageRate={0}
           percentageLearner={0}
           url={`/teacher/courses/edit/${course.id}`}
+          price={getPriceCourse(course.achievements || [])}
         />
       )) }
     </div>

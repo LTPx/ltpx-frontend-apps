@@ -1,4 +1,9 @@
-import { CATEGORIES, LANGUAGES, LEVELS } from '@ltpx-frontend-apps/api';
+import {
+  AchievementModel,
+  CATEGORIES,
+  LANGUAGES,
+  LEVELS,
+} from '@ltpx-frontend-apps/api';
 import { useTranslation } from 'react-i18next';
 
 export const useCourseUtil = () => {
@@ -54,5 +59,11 @@ export const useCourseUtil = () => {
     translateLanguage,
     translateStatus,
     translateQuizCategories,
+    getPriceCourse: (achievements: AchievementModel[]) => {
+      return achievements.reduce(
+        (accumulator, achievement) => accumulator + achievement.price,
+        0
+      );
+    },
   };
 };

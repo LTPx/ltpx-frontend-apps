@@ -18,6 +18,7 @@ export interface TeacherCourseCardProps {
   percentageRate: number;
   percentageLearner: number;
   url: string;
+  price?: number;
 }
 
 export function TeacherCourseCard(props: TeacherCourseCardProps) {
@@ -31,23 +32,29 @@ export function TeacherCourseCard(props: TeacherCourseCardProps) {
     percentageRate,
     percentageLearner,
     url,
+    price,
   } = props;
   return (
     <div className={styles['container']}>
       <div className={styles['head-content']}>
-        <Tag
-          text={t(`course_status.${status}`)}
-          color={
-            status === CourseStatus.publish ? ColorsTag.green : ColorsTag.gray
-          }
-          icon={status === CourseStatus.publish ? 'globe' : 'edit'}
-        />
+        <div className={styles['information']}>
+          <h4 className={styles['accent']}>${price}</h4>
+          {/* <Tag
+            text={t(`course_status.${status}`)}
+            color={
+              status === CourseStatus.publish ? ColorsTag.green : ColorsTag.gray
+            }
+            icon={status === CourseStatus.publish ? 'globe' : 'edit'}
+          /> */}
+        </div>
         <Dropdown>
           <Icon icon={'ellipsis-horizontal-outline'} size={15} />
-          <Menu items={[
-            {text: 'Editar curso', icon:'pencil'},
-            {text: 'Ver curso', icon:'user-group'}
-          ]}/>
+          <Menu
+            items={[
+              { text: 'Editar curso', icon: 'pencil' },
+              { text: 'Ver curso', icon: 'user-group' },
+            ]}
+          />
         </Dropdown>
       </div>
       <NavLink to={url}>
@@ -60,8 +67,8 @@ export function TeacherCourseCard(props: TeacherCourseCardProps) {
                 <Icon icon={'user'} size={10}></Icon> {learners} Estudiantes
               </h5>
               <h5>
-                <Icon icon={'box-unpacked'} size={10}></Icon> {t(`course_categories.${category}`)}
-
+                <Icon icon={'box-unpacked'} size={10}></Icon>{' '}
+                {t(`course_categories.${category}`)}
               </h5>
             </div>
           </div>

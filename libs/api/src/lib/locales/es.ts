@@ -18,8 +18,8 @@ export const es = {
   header: {
     home: 'Inicio',
     courses: 'Cursos',
-    beTeacher: 'Quiero ser profesor',
-    login: 'Iniciar Sesion',
+    beTeacher: 'Enseñar',
+    login: 'Iniciar Sesión',
     register: 'Registrarme',
   },
   course_categories: {

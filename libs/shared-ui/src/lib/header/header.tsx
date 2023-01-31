@@ -56,14 +56,14 @@ export function Header(props: HeaderProps) {
           </div>
         </div>
         <div className={styles['brand']}>
-        <Brand />
+          <Brand  link='/'/>
         </div>
         <div className={styles['shopping']}>
           <Icon icon={'shopping-cart'} size={25}></Icon>
         </div>
       </div>
       <div className={styles['main-action']}>
-        <Brand />
+        <Brand link='/'/>
       </div>
       <div className={styles['information']}>
         <div className={styles['links']}>

@@ -28,8 +28,10 @@ export function AllCourses(props: AllCoursesProps) {
   return (
     <div className={styles['container']}>
       <div className={styles['cover']}>
-        <h1>Find a class or course</h1>
-        <h4>Explore and learn new things</h4>
+        <div>
+          <h1>Find a class or course</h1>
+          <h4>Explore and learn new things</h4>
+        </div>
         <InputSearch
           className={styles['search-responsive']}
           placeholder="Search Our Courses"
@@ -41,10 +43,6 @@ export function AllCourses(props: AllCoursesProps) {
             We found 123 courses available for you
           </div>
           <div className={styles['filters']}>
-            <InputSearch
-              className={styles['search']}
-              placeholder="Search Our Courses"
-            />
             <Select options={categories} />
             <Select options={sortByOptions} />
           </div>

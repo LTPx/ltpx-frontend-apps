@@ -1,21 +1,34 @@
+import { NavLink } from 'react-router-dom';
 import Icon from '../icon/icon';
 import styles from './brand.module.scss';
 
 /* eslint-disable-next-line */
 export interface BrandProps {
-  negativeSpace?: boolean
+  negativeSpace?: boolean;
+  link?: string;
 }
 
 export function Brand(props: BrandProps) {
-  const { negativeSpace } = props;
+  const { negativeSpace, link } = props;
   const classSelected = negativeSpace ? styles['negative'] : '';
-  return (
+
+  const BrandComponent = () => (
     <div className={`${styles['container']} ${classSelected}`}>
-      {/* <p>Open</p>
-      <p style={{marginLeft: '0.6rem'}}>Mind</p> */}
-      <Icon icon='pix' color='#00bdab' size={25}/>
-      <p>Openmind</p>
-    </div>
+    <Icon icon='pix' color='#00bdab' size={25}/>
+    <p>Openmind</p>
+  </div>
+  )
+
+  return (
+    <>
+      {link ? (
+        <NavLink to={link}>
+          <BrandComponent />
+        </NavLink>
+      ) : (
+        <BrandComponent />
+      )}
+    </>
   );
 }
 

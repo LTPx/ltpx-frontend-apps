@@ -1,5 +1,6 @@
 import { useAdmin } from '@ltpx-frontend-apps/store';
 import { useCallback, useEffect } from 'react';
+import { NavLink } from 'react-router-dom';
 import styles from './teachers-page.module.scss';
 
 /* eslint-disable-next-line */
@@ -32,13 +33,15 @@ export function TeachersPage() {
         <tbody>
           {applications.map((application, index) => (
             <tr key={index}>
-              <td className={styles['user-name']}>
-                {application.name}
-              </td>
+              <td className={styles['user-name']}>{application.name}</td>
               <td>{application.country}</td>
               <td>{application.status}</td>
               <td>{application.created_at}</td>
-              <td>Ver solicitud</td>
+              <td>
+                <NavLink to={`/admin/application/${application.id}`}>
+                  Ver formulario
+                </NavLink>
+              </td>
             </tr>
           ))}
         </tbody>

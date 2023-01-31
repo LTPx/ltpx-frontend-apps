@@ -13,6 +13,8 @@ export type TResponse = {
 
 export type AdminSlice = {
   applications: ApplicationTeach[];
+  currentApplication: ApplicationTeach;
+  getStoreApplication: (id: number) => void;
   pendingApplications: () => Promise<TResponse>;
 };
 
@@ -23,6 +25,12 @@ export const createAdminSlice: StateCreator<
   AdminSlice
 > = (set, get) => ({
   applications: [],
+  currentApplication: {} as ApplicationTeach,
+  getStoreApplication: (id: number) => {
+    const applications = get().applications || [];
+    const application = applications.find((application)=> application.id === id) || {} as ApplicationTeach;
+    set({currentApplication: application})
+  },
   pendingApplications: async (): Promise<TResponse> => {
     try {
       const applications = await getPendingApplications();

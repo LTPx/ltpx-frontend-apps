@@ -118,6 +118,7 @@ export function QuizBuilder(props: QuizBuilderProps) {
                   type={question.kind}
                   onCancel={() => {
                     setSelectedIndexEdit(-1);
+                    setQuestionEdit(undefined);
                   }}
                   onSubmit={(data) => {
                     handleUpdateQuestion(data, index);
@@ -128,18 +129,15 @@ export function QuizBuilder(props: QuizBuilderProps) {
           </div>
         ))}
       </div>
-      {selectedTypeQuestion && (
+      {selectedTypeQuestion && !questionEdit && (
         <div className={styles['forms']}>
-          {selectedTypeQuestion && !questionEdit && (
-            <QuestionsQuiz
-              question={questionEdit}
-              type={selectedTypeQuestion}
-              onCancel={cancelQuestion}
-              onSubmit={(data) => {
-                handleSaveQuestionData(data);
-              }}
-            />
-          )}
+          <QuestionsQuiz
+            type={selectedTypeQuestion}
+            onCancel={cancelQuestion}
+            onSubmit={(data) => {
+              handleSaveQuestionData(data);
+            }}
+          />
         </div>
       )}
       {!selectedTypeQuestion && (

@@ -1,25 +1,45 @@
+import { Tabs } from '@ltpx-frontend-apps/shared-ui';
 import { useAdmin } from '@ltpx-frontend-apps/store';
-import { useCallback, useEffect } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import styles from './teachers-page.module.scss';
 
 /* eslint-disable-next-line */
 export function TeachersPage() {
-  const { pendingApplications, applications } = useAdmin();
+  const { _pendingApplications, _approvedApplications, applications } = useAdmin();
 
-  const fetchData = useCallback(async () => {
-    const resp = await pendingApplications();
+  const tabs = [
+    { text: 'Pendientes' },
+    { text: 'Aprobadas' },
+  ];
+
+  const fetchPending = useCallback(async () => {
+    const resp = await _pendingApplications();
+    console.log('resp....: ', resp);
+  }, []);
+
+  const fetchApproved = useCallback(async () => {
+    const resp = await _approvedApplications();
     console.log('resp....: ', resp);
   }, []);
 
   useEffect(() => {
-    fetchData();
-  }, [fetchData]);
+    fetchPending();
+  }, [fetchPending]);
+
+  const handleChangeTab = async( tabIndex: number) => {
+    if (tabIndex) {
+      await fetchApproved();
+    } else {
+      await fetchPending();
+    }
+  }
 
   return (
     <div className={styles['container']}>
       <h1>Administración de Profesores</h1>
-      <p>Solicitudes pendientes de revision</p>
+      <p>Solicitudes</p>
+      <Tabs tabs={tabs} onClickTab={(index)=>{ handleChangeTab(index)}}/>
       <table>
         <thead>
           <tr>
@@ -31,7 +51,7 @@ export function TeachersPage() {
           </tr>
         </thead>
         <tbody>
-          {applications.map((application, index) => (
+          { applications.map((application, index) => (
             <tr key={index}>
               <td className={styles['user-name']}>{application.name}</td>
               <td>{application.country}</td>

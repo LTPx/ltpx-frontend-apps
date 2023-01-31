@@ -3,15 +3,21 @@ import { useAppStore } from "../store";
 export const useAdmin = () => {
   const {
     applications,
-    pendingApplications,
     getStoreApplication,
     currentApplication,
+    _pendingApplications,
+    _getApplication,
+    _approveApplication,
+    _approvedApplications,
   } = useAppStore();
 
   return {
     applications,
-    pendingApplications,
     getStoreApplication,
     currentApplication,
+    _pendingApplications,
+    _getApplication,
+    _approveApplication,
+    _approvedApplications,
   }
 }

@@ -54,7 +54,7 @@ export function AppLayout(props: AppLayoutProps) {
 
   return (
     <div className={styles['container']}>
-      <Header links={[]}></Header>
+      <Header className={styles['header']} links={[]}></Header>
       <div className={styles['navbar']}>
         <Nav links={links} />
       </div>

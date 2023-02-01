@@ -1,0 +1,45 @@
+@import '../../../../styles.scss';
+
+.container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 3rem 0;
+  .content {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    img {
+      height: 302px;
+      padding: 1rem;
+      width: 100%;
+      border-radius: 0.5em;
+      background-color: $primary-color;
+    }
+    .information {
+      padding-top: 2rem;
+      p{
+        line-height: 2rem;
+        padding-bottom: 2rem;
+      }
+    }
+    .information-blog {
+      h2 {
+        padding-bottom: 1rem;
+      }
+      p{
+        line-height: 2rem;
+      }
+      ul {
+        li{
+          margin-left: 2rem;
+          a {
+            text-decoration: underline;
+            color: #4b01d4;
+            cursor: pointer;
+          }
+        }
+      }
+    }
+  }
+}

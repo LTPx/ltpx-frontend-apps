@@ -54,6 +54,7 @@ export interface ICurrentUser {
 }
 
 export interface IUserAccount {
+  id?: number;
   fullname: string;
   username: string;
   phone: string;
@@ -68,4 +69,18 @@ export interface INewPassword {
   currentPassword: string;
   newPassword: string;
   confirmPassword: string;
+}
+
+export interface UserModel {
+  id                     :number;
+  email                  :string;
+  created_at             :string;
+  updated_at             :string;
+  fullname               :string;
+  username               :string;
+  country                :string;
+  city                   :string;
+  address                :string;
+  phone                  :string;
+  initial_register       :TypeAccounts;
 }

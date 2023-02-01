@@ -9,6 +9,7 @@ export const useAdmin = () => {
     _getApplication,
     _approveApplication,
     _approvedApplications,
+    _getUsers,
   } = useAppStore();
 
   return {
@@ -19,5 +20,6 @@ export const useAdmin = () => {
     _getApplication,
     _approveApplication,
     _approvedApplications,
+    _getUsers,
   }
 }

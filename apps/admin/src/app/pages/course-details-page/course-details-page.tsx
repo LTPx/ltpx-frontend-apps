@@ -1,4 +1,5 @@
 import {
+  AchievementsList,
   CourseContents,
   OverviewCourse,
   QuizzesList,
@@ -16,7 +17,6 @@ export function CourseDetailsPage() {
     translateCategory,
     translateLanguage,
     translateLevel,
-    translateStatus,
   } = useCourseUtil();
   const params = useParams();
   const { id } = params;
@@ -35,6 +35,7 @@ export function CourseDetailsPage() {
 
   useEffect(() => {
     if (viewCourse.id) {
+      console.log('here');
       getCourseStore(appId);
     } else {
       fetchData();
@@ -77,6 +78,9 @@ export function CourseDetailsPage() {
             )}
             {selectedTab === 2 && (
               <QuizzesList quizzes={viewCourse.quizzes || []} />
+            )}
+            {selectedTab === 3 && (
+              <AchievementsList achievements={viewCourse.achievements || []} />
             )}
           </div>
         </>

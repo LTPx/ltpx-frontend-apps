@@ -3,8 +3,16 @@
   background-color: $white-color;
   padding: $size-lg-3 5rem;
 
-  h1 {
-    padding: 1rem 0;
+  .header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+    align-items: center;
+
+    .actions {
+      display: flex;
+      gap: 1rem;
+    }
   }
 
   .cover {
@@ -32,6 +40,7 @@
 .basic-info {
   display: flex;
   gap: $size-sm-2;
+  padding: 1rem 0;
 
   .noted {
     padding: $size-sm-1 $size-sm-2;

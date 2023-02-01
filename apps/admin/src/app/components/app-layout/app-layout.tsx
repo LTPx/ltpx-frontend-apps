@@ -1,4 +1,12 @@
-import { Header, Nav } from '@ltpx-frontend-apps/shared-ui';
+import {
+  Dropdown,
+  Header,
+  Icon,
+  Nav,
+  UserMenu,
+} from '@ltpx-frontend-apps/shared-ui';
+import { useUser } from '@ltpx-frontend-apps/store';
+import { Avatar } from 'evergreen-ui';
 import { useTranslation } from 'react-i18next';
 import { Outlet } from 'react-router-dom';
 import styles from './app-layout.module.scss';
@@ -8,6 +16,7 @@ export interface AppLayoutProps {}
 
 export function AppLayout(props: AppLayoutProps) {
   const { t } = useTranslation();
+  const { user, logout } = useUser();
 
   const links = [
     {
@@ -54,7 +63,27 @@ export function AppLayout(props: AppLayoutProps) {
 
   return (
     <div className={styles['container']}>
-      <Header className={styles['header']} links={[]}></Header>
+      <Header className={styles['header']} links={[]}>
+        <Dropdown>
+          <div className={styles['avatar']}>
+            <h4>Administrador</h4>
+            <Icon icon="caret-down" size={18} />
+          </div>
+          <UserMenu
+            name={'admin'}
+            email={'email@example.com'}
+            links={[
+              {
+                icon: 'log-out',
+                text: 'Cerrar Session',
+                onClick: () => {
+                  logout();
+                },
+              },
+            ]}
+          />
+        </Dropdown>
+      </Header>
       <div className={styles['navbar']}>
         <Nav links={links} />
       </div>

@@ -65,6 +65,6 @@ export const es = {
   application_teacher_status: {
     approved: 'Aprobada',
     rejected: 'Requiere cambios',
-    review: 'En revision',
+    review: 'Revision',
   },
 }

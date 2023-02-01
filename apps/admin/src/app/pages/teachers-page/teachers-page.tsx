@@ -1,12 +1,14 @@
-import { Tabs } from '@ltpx-frontend-apps/shared-ui';
-import { useAdmin } from '@ltpx-frontend-apps/store';
-import { useCallback, useEffect, useState } from 'react';
+import { AvatarSize, Tabs } from '@ltpx-frontend-apps/shared-ui';
+import { useAdmin, useUtil } from '@ltpx-frontend-apps/store';
+import { Avatar } from 'evergreen-ui';
+import { useCallback, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import styles from './teachers-page.module.scss';
 
 /* eslint-disable-next-line */
 export function TeachersPage() {
   const { _pendingApplications, _approvedApplications, applications } = useAdmin();
+  const { translateStatusTeacherApplication } = useUtil();
 
   const tabs = [
     { text: 'Pendientes' },
@@ -45,7 +47,7 @@ export function TeachersPage() {
           <tr>
             <th>Nombre</th>
             <th>País</th>
-            <th>Status</th>
+            <th>Estado</th>
             <th>Solicitud enviada</th>
             <th>Acciones</th>
           </tr>
@@ -53,9 +55,12 @@ export function TeachersPage() {
         <tbody>
           { applications.map((application, index) => (
             <tr key={index}>
-              <td className={styles['user-name']}>{application.name}</td>
+              <td className={styles['user-name']}>
+                <Avatar name={application.name} size={40}></Avatar>
+                {application.name}
+              </td>
               <td>{application.country}</td>
-              <td>{application.status}</td>
+              <td>{translateStatusTeacherApplication(application.status)}</td>
               <td>{application.created_at}</td>
               <td>
                 <NavLink to={`/admin/application/${application.id}`}>

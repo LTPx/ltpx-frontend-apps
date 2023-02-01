@@ -11,6 +11,13 @@
 
   .header {
     grid-area: header;
+    padding: 1.5rem 3rem;
+
+    .avatar {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
   }
 
   .content {

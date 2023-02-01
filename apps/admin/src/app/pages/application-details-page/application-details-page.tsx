@@ -20,8 +20,8 @@ export function ApplicationDetailsPage(props: ApplicationDetailsPageProps) {
   const [error, setError] = useState(false);
   const [openModal, setOpenModal] = useState(false);
   const {
-    getStoreApplication,
-    currentApplication,
+    getApplicationStore,
+    viewApplication,
     _getApplication,
     _approveApplication,
   } = useAdmin();
@@ -37,8 +37,8 @@ export function ApplicationDetailsPage(props: ApplicationDetailsPageProps) {
   }, []);
 
   useEffect(() => {
-    if (currentApplication.id) {
-      getStoreApplication(appId);
+    if (viewApplication.id) {
+      getApplicationStore(appId);
     } else {
       fetchData();
     }
@@ -49,7 +49,7 @@ export function ApplicationDetailsPage(props: ApplicationDetailsPageProps) {
   };
 
   const handleApproveApplication = async () => {
-    const { success, error } = await _approveApplication(currentApplication.id);
+    const { success, error } = await _approveApplication(viewApplication.id);
     if (success) {
       navigate('/admin/teachers');
     } else {
@@ -60,14 +60,14 @@ export function ApplicationDetailsPage(props: ApplicationDetailsPageProps) {
 
   return (
     <div className={styles['container']}>
-      {currentApplication.id && (
+      {viewApplication.id && (
         <>
           <div className={styles['header']}>
-            <h1>Solicitud de: {currentApplication.name}</h1>
-            {currentApplication.status !== 'review' ? (
+            <h1>Solicitud de: {viewApplication.name}</h1>
+            {viewApplication.status !== 'review' ? (
               <div>
-                <h3>{translateStatusTeacherApplication(currentApplication.status)}</h3>
-                <h4>{currentApplication.updated_at}</h4>
+                <h3>{translateStatusTeacherApplication(viewApplication.status)}</h3>
+                <h4>{viewApplication.updated_at}</h4>
               </div>
             ) : (
               <div className={styles['actions']}>
@@ -89,7 +89,7 @@ export function ApplicationDetailsPage(props: ApplicationDetailsPageProps) {
             )}
           </div>
           <ApplicationView
-            application={currentApplication}
+            application={viewApplication}
           />
         </>
       )}

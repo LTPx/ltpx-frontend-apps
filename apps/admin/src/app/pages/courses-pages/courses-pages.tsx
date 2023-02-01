@@ -58,7 +58,7 @@ export function CoursesPages() {
               <td>{course.category}</td>
               <td>{course.created_at}</td>
               <td>
-                <NavLink to={`/admin/application/${course.id}`}>
+                <NavLink to={`/admin/courses/${course.id}`}>
                   Ver curso
                 </NavLink>
               </td>

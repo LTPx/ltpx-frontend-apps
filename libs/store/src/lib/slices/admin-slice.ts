@@ -9,6 +9,7 @@ import {
   getUsers,
   getPendingApproveCourses,
   CourseModel,
+  adminGetCourse,
 } from '@ltpx-frontend-apps/api';
 
 export type TResponse = {
@@ -20,14 +21,17 @@ export type TResponse = {
 export type AdminSlice = {
   applications: ApplicationTeach[];
   courses: CourseModel[];
-  currentApplication: ApplicationTeach;
-  getStoreApplication: (id: number) => void;
+  viewCourse: CourseModel;
+  viewApplication: ApplicationTeach;
+  getApplicationStore: (id: number) => void;
+  getCourseStore: (id: number) => void;
   _pendingApplications: () => Promise<TResponse>;
   _approvedApplications: () => Promise<TResponse>;
   _getApplication: (id: number) => void;
   _approveApplication: (id: number) => Promise<TResponse>;
   _getUsers: () => Promise<TResponse>;
   _getPendingApproveCourses: () => Promise<TResponse>;
+  _getCourse: (id: number) => void;
 };
 
 export const createAdminSlice: StateCreator<StoreState, [], [], AdminSlice> = (
@@ -36,13 +40,20 @@ export const createAdminSlice: StateCreator<StoreState, [], [], AdminSlice> = (
 ) => ({
   applications: [],
   courses: [],
-  currentApplication: {} as ApplicationTeach,
-  getStoreApplication: (id: number) => {
+  viewApplication: {} as ApplicationTeach,
+  viewCourse: {} as CourseModel,
+  getApplicationStore: (id: number) => {
     const applications = get().applications || [];
     const application =
       applications.find((application) => application.id === id) ||
       ({} as ApplicationTeach);
-    set({ currentApplication: application });
+    set({ viewApplication: application });
+  },
+  getCourseStore: (id: number) => {
+    const courses = get().courses || [];
+    const course =
+      courses.find((course) => course.id === id) || ({} as CourseModel);
+    set({ viewCourse: course });
   },
   _pendingApplications: async (): Promise<TResponse> => {
     try {
@@ -65,7 +76,7 @@ export const createAdminSlice: StateCreator<StoreState, [], [], AdminSlice> = (
   _getApplication: async (id: number): Promise<TResponse> => {
     try {
       const application = await getApplication(id);
-      set({ currentApplication: application });
+      set({ viewApplication: application });
       return { success: true, data: application };
     } catch (error) {
       return { success: false, error };
@@ -79,7 +90,7 @@ export const createAdminSlice: StateCreator<StoreState, [], [], AdminSlice> = (
       return { success: false, error };
     }
   },
-  _getUsers: async():  Promise<TResponse> => {
+  _getUsers: async (): Promise<TResponse> => {
     try {
       const users = await getUsers();
       return { success: true, data: users };
@@ -87,11 +98,20 @@ export const createAdminSlice: StateCreator<StoreState, [], [], AdminSlice> = (
       return { success: false, error };
     }
   },
-  _getPendingApproveCourses: async():  Promise<TResponse> => {
+  _getPendingApproveCourses: async (): Promise<TResponse> => {
     try {
       const courses = await getPendingApproveCourses();
       set({ courses });
       return { success: true, data: courses };
+    } catch (error) {
+      return { success: false, error };
+    }
+  },
+  _getCourse: async (id: number): Promise<TResponse> => {
+    try {
+      const course = await adminGetCourse(id);
+      set({ viewCourse: course });
+      return { success: true, data: course };
     } catch (error) {
       return { success: false, error };
     }

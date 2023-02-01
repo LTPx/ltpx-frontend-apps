@@ -4,26 +4,32 @@ export const useAdmin = () => {
   const {
     applications,
     courses,
-    getStoreApplication,
-    currentApplication,
+    getApplicationStore,
+    getCourseStore,
+    viewApplication,
+    viewCourse,
     _pendingApplications,
     _getApplication,
     _approveApplication,
     _approvedApplications,
     _getUsers,
     _getPendingApproveCourses,
+    _getCourse,
   } = useAppStore();
 
   return {
     applications,
     courses,
-    getStoreApplication,
-    currentApplication,
+    getApplicationStore,
+    getCourseStore,
+    viewApplication,
+    viewCourse,
     _pendingApplications,
     _getApplication,
     _approveApplication,
     _approvedApplications,
     _getUsers,
     _getPendingApproveCourses,
+    _getCourse,
   }
 }

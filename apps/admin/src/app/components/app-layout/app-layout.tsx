@@ -6,9 +6,8 @@ import {
   UserMenu,
 } from '@ltpx-frontend-apps/shared-ui';
 import { useUser } from '@ltpx-frontend-apps/store';
-import { Avatar } from 'evergreen-ui';
 import { useTranslation } from 'react-i18next';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useNavigate } from 'react-router-dom';
 import styles from './app-layout.module.scss';
 
 /* eslint-disable-next-line */
@@ -17,6 +16,7 @@ export interface AppLayoutProps {}
 export function AppLayout(props: AppLayoutProps) {
   const { t } = useTranslation();
   const { user, logout } = useUser();
+  const navigate = useNavigate();
 
   const links = [
     {
@@ -76,8 +76,9 @@ export function AppLayout(props: AppLayoutProps) {
               {
                 icon: 'log-out',
                 text: 'Cerrar Session',
-                onClick: () => {
-                  logout();
+                onClick: async() => {
+                  await logout();
+                  navigate('/');
                 },
               },
             ]}

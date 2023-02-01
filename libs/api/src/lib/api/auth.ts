@@ -50,7 +50,7 @@ export const loginAdmin = (credentials: Credentials) => {
       if(initial_register === 'admin') {
         setTokenAxios(response.headers);
       } else {
-        reject({message: 'not allow'});
+        reject({message: 'No cuentas con los permisos necesarios'});
       }
       resolve(response.data);
     })

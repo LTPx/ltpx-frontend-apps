@@ -22,6 +22,8 @@ export const AppRouter = () => {
       </Route>
       <Route path="login" element={<Login />} />
       <Route path="new-user" element={<NewUserPage />} />
+      <Route path="/" element={<Login />} />
     </Routes>
   );
+
 };

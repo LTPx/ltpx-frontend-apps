@@ -24,19 +24,13 @@ export function Login() {
       password: formData.password,
     };
     const { isLogin, data } = await loginAdmin(userAccount);
+    console.log('data: ', data);
     if (isLogin) {
-      if (data.initial_register === TypeAccounts.admin) {
-        navigate('/admin/dashboard');
-      } else {
-        setError({
-          invalid: true,
-          message: 'No tienes permisos suficientes para acceder a este sitio'
-        });
-      }
+      navigate('/admin/dashboard');
     } else {
       setError({
         invalid: true,
-        message: 'Tu email o password no coinciden'
+        message: data.message
       });
     }
   }
@@ -58,7 +52,7 @@ export function Login() {
               });
             }}
           >
-            Tu email o password no coinciden, prueba recuperando contraseña
+            {error.message}
           </BannerNotification>
         )}
         <LoginForm onSubmit={onSubmitForm} />

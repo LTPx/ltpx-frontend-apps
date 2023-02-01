@@ -1,3 +1,4 @@
+export * from './lib/quizzes-list/quizzes-list';
 export * from './lib/new-course-form/new-course-form';
 export * from './lib/achievement-builder/achievement-builder';
 export * from './lib/achievement-by-score-form/achievement-by-score-form';

@@ -1,8 +1,6 @@
 @import '../../styles/styles.module.scss';
 
 .overview {
-  padding-top: $size-lg-3;
-  padding-bottom: $size-lg-3;
   display: flex;
   flex-direction: column;
   gap: $size-lg-2;

@@ -1,6 +1,7 @@
 import {
   CourseContents,
   OverviewCourse,
+  QuizzesList,
   Tabs,
 } from '@ltpx-frontend-apps/shared-ui';
 import { useAdmin, useCourseUtil } from '@ltpx-frontend-apps/store';
@@ -58,12 +59,12 @@ export function CourseDetailsPage() {
               {translateLanguage(viewCourse.language)}
             </span>
           </div>
-          <div className={styles['course-details']}>
-            <Tabs
-              tabs={tabs}
-              isNav={false}
-              onClickTab={(index) => setSelectedTab(index)}
-            />
+          <Tabs
+            tabs={tabs}
+            isNav={false}
+            onClickTab={(index) => setSelectedTab(index)}
+          />
+          <div className={styles['course-content']}>
             {selectedTab === 0 && (
               <OverviewCourse
                 description={viewCourse.description}
@@ -73,6 +74,9 @@ export function CourseDetailsPage() {
             )}
             {selectedTab === 1 && (
               <CourseContents contents={viewCourse.contents || []} />
+            )}
+            {selectedTab === 2 && (
+              <QuizzesList quizzes={viewCourse.quizzes || []} />
             )}
           </div>
         </>

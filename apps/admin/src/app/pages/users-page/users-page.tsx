@@ -21,8 +21,12 @@ export function UsersPage(props: UsersPageProps) {
   const { _getUsers } = useAdmin();
 
   const fetchUsers = useCallback(async () => {
-    const { data } = await _getUsers();
-    setUsers(data);
+    const { success, data, error } = await _getUsers();
+    if ( success) {
+      setUsers(data);
+    } else {
+      console.log('error: ', error);
+    }
     console.log('resp....: ', data);
   }, []);
 
@@ -32,7 +36,7 @@ export function UsersPage(props: UsersPageProps) {
 
   return (
     <div className={styles['container']}>
-      <h1>Usuarios registrados</h1>
+      <h1>Usuarios registrados ({users.length})</h1>
       <table>
         <thead>
           <tr>

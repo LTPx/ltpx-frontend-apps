@@ -50,6 +50,10 @@ export const useCourseUtil = () => {
     return t(`quizzes_categories.${category}`);
   };
 
+  const translateAchievementType = (type: string) => {
+    return t(`achievements_types.${type}`);
+  };
+
   return {
     categories,
     languages,
@@ -59,6 +63,7 @@ export const useCourseUtil = () => {
     translateLanguage,
     translateStatus,
     translateQuizCategories,
+    translateAchievementType,
     getPriceCourse: (achievements: AchievementModel[]) => {
       return achievements.reduce(
         (accumulator, achievement) => accumulator + achievement.price,

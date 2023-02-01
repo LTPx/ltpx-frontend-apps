@@ -1,4 +1,5 @@
 import { AchievementParamsUi } from '@ltpx-frontend-apps/api';
+import { useCourseUtil } from '@ltpx-frontend-apps/store';
 import Icon from '../icon/icon';
 import styles from './achievements-list.module.scss';
 
@@ -9,6 +10,7 @@ export interface AchievementsListProps {
 
 export function AchievementsList(props: AchievementsListProps) {
   const { achievements } = props;
+  const { translateAchievementType }= useCourseUtil();
   return (
     <div className={styles['achievements']}>
       {achievements?.map((achievement, index) => (
@@ -18,7 +20,7 @@ export function AchievementsList(props: AchievementsListProps) {
               <img src={achievement.image} />
               <div className={styles['text']}>
                 <h4>{achievement.title}</h4>
-                <h5>{achievement.rule}</h5>
+                <h5>El alumno debe: {translateAchievementType(achievement.rule)}</h5>
               </div>
             </div>
             <div className={styles['actions']}>
@@ -31,7 +33,7 @@ export function AchievementsList(props: AchievementsListProps) {
             {achievement.settings?.map((setting, index) => (
               <div className={styles['setting']} key={index}>
                 <div className="s">Test: {setting.text}</div>
-                <div className="s">Puntaje necesario: 100/{setting.score} pts</div>
+                <div className="s">Puntaje necesario: {setting.score}/100 pts</div>
               </div>
             ))}
           </div>

@@ -67,4 +67,10 @@ export const es = {
     rejected: 'Requiere cambios',
     review: 'Revision',
   },
+  achievements_types: {
+    multiple: 'Aprobar multiples test',
+    single: 'Aprobar un test',
+    task: 'Realizar una tarea',
+    score: 'Obtener un resultado',
+  },
 }

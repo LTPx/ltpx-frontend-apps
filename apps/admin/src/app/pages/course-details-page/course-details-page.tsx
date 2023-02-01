@@ -1,6 +1,9 @@
+import { CLASSROOMS } from '@ltpx-frontend-apps/api';
 import {
   AchievementsList,
+  ClassroomView,
   CourseContents,
+  InformationCard,
   OverviewCourse,
   QuizzesList,
   Tabs,
@@ -13,11 +16,9 @@ import styles from './course-details-page.module.scss';
 export function CourseDetailsPage() {
   const [selectedTab, setSelectedTab] = useState(0);
   const { viewCourse, _getCourse, getCourseStore } = useAdmin();
-  const {
-    translateCategory,
-    translateLanguage,
-    translateLevel,
-  } = useCourseUtil();
+  const { translateCategory, translateLanguage, translateLevel } =
+    useCourseUtil();
+  const { classroom, quizzes, contents, achievements } = viewCourse;
   const params = useParams();
   const { id } = params;
   const appId = parseInt(id || '');
@@ -26,6 +27,7 @@ export function CourseDetailsPage() {
     { text: 'Contenidos' },
     { text: 'Test' },
     { text: 'Logros' },
+    { text: 'Sesiones' },
   ];
 
   const fetchData = useCallback(async () => {
@@ -35,7 +37,6 @@ export function CourseDetailsPage() {
 
   useEffect(() => {
     if (viewCourse.id) {
-      console.log('here');
       getCourseStore(appId);
     } else {
       fetchData();
@@ -74,13 +75,29 @@ export function CourseDetailsPage() {
               />
             )}
             {selectedTab === 1 && (
-              <CourseContents contents={viewCourse.contents || []} />
+              <CourseContents contents={contents || []} />
             )}
             {selectedTab === 2 && (
-              <QuizzesList quizzes={viewCourse.quizzes || []} />
+              <QuizzesList quizzes={quizzes || []} />
             )}
             {selectedTab === 3 && (
-              <AchievementsList achievements={viewCourse.achievements || []} />
+              <AchievementsList achievements={achievements || []} />
+            )}
+            {selectedTab === 4 && (
+              <>
+                <InformationCard
+                  title={CLASSROOMS[classroom.condition].title}
+                  text={CLASSROOMS[classroom.condition].text}
+                  icon={CLASSROOMS[classroom.condition].icon}
+                  selected={true}
+                />
+                {classroom.meetings.length > 0 && (
+                  <ClassroomView
+                    classroom={classroom}
+                    className={styles['classroom-summary']}
+                  />
+                )}
+              </>
             )}
           </div>
         </>

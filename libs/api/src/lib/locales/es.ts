@@ -25,7 +25,7 @@ export const es = {
   course_categories: {
     design: 'Diseño',
     business: 'Negocios',
-    software_development: 'Desarrollo de Software',
+    software_development: 'Desarrollo de software',
     personal_development: 'Desarrollo Personal',
     photography: 'Fotografía',
     audio: 'Audio + Música',

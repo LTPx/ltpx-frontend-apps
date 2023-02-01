@@ -31,7 +31,7 @@ export function AppLayout(props: AppLayoutProps) {
       title: t('Usuarios'),
       url: '/admin/users',
       icon: {
-        icon: 'user-circle',
+        icon: 'user-group',
         size: 20,
       },
     },
@@ -44,7 +44,15 @@ export function AppLayout(props: AppLayoutProps) {
       },
     },
     {
-      title: t('Configuracion'),
+      title: t('Cursos'),
+      url: '/admin/courses',
+      icon: {
+        icon: 'university',
+        size: 20,
+      },
+    },
+    {
+      title: t('Configuración'),
       url: '/admin/settings',
       icon: {
         icon: 'cog',

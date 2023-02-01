@@ -7,6 +7,8 @@ import {
   approveApplication,
   approvedApplications,
   getUsers,
+  getPendingApproveCourses,
+  CourseModel,
 } from '@ltpx-frontend-apps/api';
 
 export type TResponse = {
@@ -17,6 +19,7 @@ export type TResponse = {
 
 export type AdminSlice = {
   applications: ApplicationTeach[];
+  courses: CourseModel[];
   currentApplication: ApplicationTeach;
   getStoreApplication: (id: number) => void;
   _pendingApplications: () => Promise<TResponse>;
@@ -24,6 +27,7 @@ export type AdminSlice = {
   _getApplication: (id: number) => void;
   _approveApplication: (id: number) => Promise<TResponse>;
   _getUsers: () => Promise<TResponse>;
+  _getPendingApproveCourses: () => Promise<TResponse>;
 };
 
 export const createAdminSlice: StateCreator<StoreState, [], [], AdminSlice> = (
@@ -31,6 +35,7 @@ export const createAdminSlice: StateCreator<StoreState, [], [], AdminSlice> = (
   get
 ) => ({
   applications: [],
+  courses: [],
   currentApplication: {} as ApplicationTeach,
   getStoreApplication: (id: number) => {
     const applications = get().applications || [];
@@ -81,5 +86,14 @@ export const createAdminSlice: StateCreator<StoreState, [], [], AdminSlice> = (
     } catch (error) {
       return { success: false, error };
     }
-  }
+  },
+  _getPendingApproveCourses: async():  Promise<TResponse> => {
+    try {
+      const courses = await getPendingApproveCourses();
+      set({ courses });
+      return { success: true, data: courses };
+    } catch (error) {
+      return { success: false, error };
+    }
+  },
 });

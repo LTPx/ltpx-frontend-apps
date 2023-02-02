@@ -30,37 +30,27 @@ export function ApplicationView(props: ApplicationViewProps) {
           <div className={styles['title']}>
             <h4>Nombre:</h4>
             <h4>Teléfono:</h4>
+            <h4>Ubicación:</h4>
           </div>
           <div className={styles['text']}>
             <h4>{name}</h4>
             <h4>{phone}</h4>
+            <h4> {country} - {city}</h4>
           </div>
         </div>
         <div className={styles['attached-files']}>
-          <div className={styles['files']}>
-            <p>Identificación imágenes</p>
-            <div className={styles['file']}>
-              <div className={styles['field']}>
-                <img src={national_id_front} alt="national id front" />
-                <a href={national_id_front} target="_blank">Ver imagen</a>
-              </div>
-              <p>Parte delantera</p>
+          <p>Identificación</p>
+          <div className={styles['images']}>
+            <div className={styles['image']}>
+              <img src={national_id_front} alt="national id front" />
+              <a href={national_id_front} target="_blank">Ver imagen</a>
             </div>
-            <div className={styles['file']}>
-              <div className={styles['field']}>
-                <img src={national_id_back} alt="national id front" />
-                <a href={national_id_back} target="_blank">Ver imagen</a>
-              </div>
-              <p>Parte trasera</p>
+            <div className={styles['image']}>
+              <img src={national_id_back} alt="national id front" />
+              <a href={national_id_back} target="_blank">Ver imagen</a>
             </div>
           </div>
         </div>
-      </div>
-      <div className={styles['location']}>
-        <h3>Ubicación</h3>
-        <h4>
-          {country} - {city}
-        </h4>
       </div>
       <div className={styles['formation']}>
         <h3>Experiencia</h3>
@@ -78,7 +68,7 @@ export function ApplicationView(props: ApplicationViewProps) {
                   <Icon icon={'file-pdf'} size={40} />
                   <a href={file.file_url} target="_blank">Ver archivo</a>
                 </div>
-                <p>{file.filename}</p>
+                <p className={styles['filename']}>{file.filename}</p>
               </div>
             ))}
           </div>

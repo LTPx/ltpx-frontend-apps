@@ -60,7 +60,7 @@ export function AppLayout(props: AppLayoutProps) {
       },
     },
     {
-      title: 'Plan de Carrera',
+      title: 'Planes de carrera',
       url: '/admin/learning-path',
       icon: {
         icon: 'box-unpacked',

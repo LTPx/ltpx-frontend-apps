@@ -1,5 +1,5 @@
 import { Tabs } from '@ltpx-frontend-apps/shared-ui';
-import { useAdmin, useUtil } from '@ltpx-frontend-apps/store';
+import { useAdmin, useCourseUtil, useUtil } from '@ltpx-frontend-apps/store';
 import { useCallback, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import styles from './courses-pages.module.scss';
@@ -7,7 +7,8 @@ import styles from './courses-pages.module.scss';
 export function CoursesPages() {
   const { _getPendingReviewCourses, courses, _getApprovedCourses } =
     useAdmin();
-
+  const { translateCategory } =
+    useCourseUtil();
   const tabs = [{ text: 'Pendientes' }, { text: 'Aprobados' }];
 
   const fetchPending = useCallback(async () => {
@@ -55,7 +56,7 @@ export function CoursesPages() {
           {courses.map((course, index) => (
             <tr key={index}>
               <td className={styles['user-name']}>{course.title}</td>
-              <td>{course.category}</td>
+              <td>{translateCategory(course.category)}</td>
               <td>{course.created_at}</td>
               <td>
                 <NavLink to={`/admin/courses/${course.id}`}>

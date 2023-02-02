@@ -117,7 +117,7 @@ export function CourseDetailsPage() {
               {selectedTab === 3 && (
                 <AchievementsList achievements={achievements || []} />
               )}
-              {selectedTab === 4 && (
+              {selectedTab === 4 && classroom &&(
                 <>
                   <InformationCard
                     title={CLASSROOMS[classroom.condition].title}

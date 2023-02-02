@@ -20,7 +20,7 @@ export const getPendingReviewCourses = async () => {
 export const getApprovedCourses = async () => {
   return new Promise<CourseModel[]>((resolve, reject) => {
     http
-      .get('api/v1/admin/courses/approved_course')
+      .get('api/v1/admin/courses/approved_courses')
       .then((response) => {
         resolve(response.data);
       })

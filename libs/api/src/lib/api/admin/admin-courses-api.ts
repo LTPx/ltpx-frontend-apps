@@ -4,10 +4,23 @@ import { moveToFormData } from '../../utils';
 
 const http = _http;
 
-export const getPendingApproveCourses = async () => {
+export const getPendingReviewCourses = async () => {
   return new Promise<CourseModel[]>((resolve, reject) => {
     http
       .get('api/v1/admin/courses/pending_approve')
+      .then((response) => {
+        resolve(response.data);
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
+};
+
+export const getApprovedCourses = async () => {
+  return new Promise<CourseModel[]>((resolve, reject) => {
+    http
+      .get('api/v1/admin/courses/approved_course')
       .then((response) => {
         resolve(response.data);
       })

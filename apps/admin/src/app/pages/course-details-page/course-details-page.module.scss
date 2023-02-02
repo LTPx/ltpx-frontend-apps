@@ -7,11 +7,12 @@
     display: flex;
     justify-content: space-between;
     margin-bottom: 2rem;
-    align-items: center;
+    align-items: baseline;
 
     .actions {
       display: flex;
       gap: 1rem;
+      flex: none;
     }
   }
 

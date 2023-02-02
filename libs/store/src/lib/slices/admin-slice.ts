@@ -7,10 +7,11 @@ import {
   approveApplication,
   approvedApplications,
   getUsers,
-  getPendingApproveCourses,
+  getPendingReviewCourses,
   CourseModel,
   adminGetCourse,
   adminApproveCourse,
+  getApprovedCourses,
 } from '@ltpx-frontend-apps/api';
 
 export type TResponse = {
@@ -31,9 +32,10 @@ export type AdminSlice = {
   _getApplication: (id: number) => void;
   _approveApplication: (id: number) => Promise<TResponse>;
   _getUsers: () => Promise<TResponse>;
-  _getPendingApproveCourses: () => Promise<TResponse>;
+  _getPendingReviewCourses: () => Promise<TResponse>;
   _getCourse: (id: number) => void;
   _approveCourse: (id: number) => Promise<TResponse>;
+  _getApprovedCourses: () => Promise<TResponse>;
 };
 
 export const createAdminSlice: StateCreator<StoreState, [], [], AdminSlice> = (
@@ -100,9 +102,9 @@ export const createAdminSlice: StateCreator<StoreState, [], [], AdminSlice> = (
       return { success: false, error };
     }
   },
-  _getPendingApproveCourses: async (): Promise<TResponse> => {
+  _getPendingReviewCourses: async (): Promise<TResponse> => {
     try {
-      const courses = await getPendingApproveCourses();
+      const courses = await getPendingReviewCourses();
       set({ courses });
       return { success: true, data: courses };
     } catch (error) {
@@ -122,6 +124,15 @@ export const createAdminSlice: StateCreator<StoreState, [], [], AdminSlice> = (
     try {
       const course = await adminApproveCourse(id);
       return { success: true, data: course };
+    } catch (error) {
+      return { success: false, error };
+    }
+  },
+  _getApprovedCourses: async (): Promise<TResponse> => {
+    try {
+      const courses = await getApprovedCourses();
+      set({ courses });
+      return { success: true, data: courses };
     } catch (error) {
       return { success: false, error };
     }

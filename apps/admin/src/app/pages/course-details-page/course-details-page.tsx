@@ -1,4 +1,4 @@
-import { CLASSROOMS } from '@ltpx-frontend-apps/api';
+import { CLASSROOMS, CourseStatus } from '@ltpx-frontend-apps/api';
 import {
   AchievementsList,
   Button,
@@ -64,24 +64,25 @@ export function CourseDetailsPage() {
         <div className="c">
           <div className={styles['header']}>
             <h1>{viewCourse.title}</h1>
-            <div className={styles['actions']}>
-              <Button
-                title="Requiere cambios"
-                color={ColorsButton.secondary}
-                outline={true}
-                onClick={() => {
-                  // handleRequestChange();
-                }}
-              />
-              <Button
-                title="Aprobar curso"
-                onClick={() => {
-                  handleApproveCourse();
-                }}
-              />
-            </div>
+            { viewCourse.status === CourseStatus.review && (
+              <div className={styles['actions']}>
+                <Button
+                  title="Requiere cambios"
+                  color={ColorsButton.secondary}
+                  outline={true}
+                  onClick={() => {
+                    // handleRequestChange();
+                  }}
+                />
+                <Button
+                  title="Aprobar curso"
+                  onClick={() => {
+                    handleApproveCourse();
+                  }}
+                />
+              </div>
+            )}
           </div>
-
           <div>
             <div className={styles['cover']}>
               <img src={viewCourse.cover_url}></img>

@@ -5,18 +5,18 @@ import { NavLink } from 'react-router-dom';
 import styles from './courses-pages.module.scss';
 
 export function CoursesPages() {
-  const { _getPendingApproveCourses, courses } =
+  const { _getPendingReviewCourses, courses, _getApprovedCourses } =
     useAdmin();
 
-  const tabs = [{ text: 'Pendientes' }, { text: 'Aprobadas' }];
+  const tabs = [{ text: 'Pendientes' }, { text: 'Aprobados' }];
 
   const fetchPending = useCallback(async () => {
-    const resp = await _getPendingApproveCourses();
+    const resp = await _getPendingReviewCourses();
     console.log('resp....: ', resp);
   }, []);
 
   const fetchApproved = useCallback(async () => {
-    const resp = await _getPendingApproveCourses();
+    const resp = await _getApprovedCourses();
     console.log('resp....: ', resp);
   }, []);
 

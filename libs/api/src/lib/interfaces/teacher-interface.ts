@@ -3,6 +3,7 @@ export enum StatusTeacherAccount {
   active = "active",
   disable = "disable",
   deleted = "deleted",
+  approved = "approved",
   unapplied = "unapplied",
 }
 

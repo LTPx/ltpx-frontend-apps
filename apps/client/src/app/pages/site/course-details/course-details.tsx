@@ -100,7 +100,13 @@ export function CourseDetails(props: CourseDetailsProps) {
                 isNav={false}
                 onClickTab={(option) => handleClick(option)}
               />
-              {selectedTab === 0 && <OverviewCourse />}
+              {selectedTab === 0 && (
+                <OverviewCourse
+                  description={courseDetails.course.description}
+                  goals={courseDetails.course.learn_goals}
+                  requirements={courseDetails.course.requirements}
+                />
+              )}
               {selectedTab === 1 && (
                 <CourseContents contents={courseDetails.contents} />
               )}

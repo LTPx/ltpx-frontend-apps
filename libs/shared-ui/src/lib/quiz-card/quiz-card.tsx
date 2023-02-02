@@ -42,7 +42,7 @@ export function QuizCard(props: QuizCardProps) {
           }
           icon={status === CourseStatus.publish ? 'globe' : 'edit'}
         />
-        <Dropdown>
+        {/* <Dropdown>
           <Icon icon={'ellipsis-horizontal-outline'} size={15} />
           <Menu
             items={[
@@ -50,7 +50,7 @@ export function QuizCard(props: QuizCardProps) {
               { text: 'Ver test', icon: 'paper-outline' },
             ]}
           />
-        </Dropdown>
+        </Dropdown> */}
       </div>
       <NavLink to={url}>
         <div className={styles['content']}>

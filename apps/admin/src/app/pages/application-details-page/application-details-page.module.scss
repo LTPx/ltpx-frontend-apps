@@ -1,0 +1,15 @@
+.container {
+  background-color: #fff;
+  padding: 3rem 6rem;
+
+  .header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+
+    .actions {
+      display: flex;
+      gap: 1rem;
+    }
+  }
+}

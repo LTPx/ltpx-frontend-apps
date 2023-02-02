@@ -23,4 +23,11 @@
       background-color: $gray-color-100;
     }
   }
+
+  a {
+    display: flex;
+    align-items: center;
+    gap: $size-sm-3;
+    flex-grow: 1;
+  }
 }

@@ -45,4 +45,5 @@ export interface SettingAchievement {
   entity: EntityAchievement;
   entity_id: number;
   score: number;
+  text: string;
 }

@@ -33,6 +33,33 @@ export const loginUser = (credentials: Credentials) => {
   });
 }
 
+export const loginAdmin = (credentials: Credentials) => {
+  const { email, password } = credentials;
+  const payload = {
+    user: {
+      email,
+      password
+    }
+  };
+  return new Promise<IAuthSuccessResponse>((resolve, reject) => {
+    http
+    .post('login', payload) //TODO: validate in backend maybe another endpoint
+    .then((response) => {
+      const { user } = response.data;
+      const { initial_register } = user;
+      if(initial_register === 'admin') {
+        setTokenAxios(response.headers);
+      } else {
+        reject({message: 'No cuentas con los permisos necesarios'});
+      }
+      resolve(response.data);
+    })
+    .catch((error) => {
+      reject(error);
+    });
+  });
+}
+
 export const registerUser = async(params: IRegisterUser):Promise<IAuthSuccessResponse> => {
   const { email, password, fullname } = params;
   const payload = {

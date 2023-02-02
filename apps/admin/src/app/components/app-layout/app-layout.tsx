@@ -1,6 +1,13 @@
-import { Header, Nav } from '@ltpx-frontend-apps/shared-ui';
+import {
+  Dropdown,
+  Header,
+  Icon,
+  Nav,
+  UserMenu,
+} from '@ltpx-frontend-apps/shared-ui';
+import { useUser } from '@ltpx-frontend-apps/store';
 import { useTranslation } from 'react-i18next';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useNavigate } from 'react-router-dom';
 import styles from './app-layout.module.scss';
 
 /* eslint-disable-next-line */
@@ -8,6 +15,8 @@ export interface AppLayoutProps {}
 
 export function AppLayout(props: AppLayoutProps) {
   const { t } = useTranslation();
+  const { user, logout } = useUser();
+  const navigate = useNavigate();
 
   const links = [
     {
@@ -22,7 +31,7 @@ export function AppLayout(props: AppLayoutProps) {
       title: t('Usuarios'),
       url: '/admin/users',
       icon: {
-        icon: 'user-circle',
+        icon: 'user-group',
         size: 20,
       },
     },
@@ -35,7 +44,15 @@ export function AppLayout(props: AppLayoutProps) {
       },
     },
     {
-      title: t('Configuracion'),
+      title: t('Cursos'),
+      url: '/admin/courses',
+      icon: {
+        icon: 'university',
+        size: 20,
+      },
+    },
+    {
+      title: t('Configuración'),
       url: '/admin/settings',
       icon: {
         icon: 'cog',
@@ -43,7 +60,7 @@ export function AppLayout(props: AppLayoutProps) {
       },
     },
     {
-      title: 'Plan de Carrera',
+      title: 'Planes de carrera',
       url: '/admin/learning-path',
       icon: {
         icon: 'box-unpacked',
@@ -54,7 +71,28 @@ export function AppLayout(props: AppLayoutProps) {
 
   return (
     <div className={styles['container']}>
-      <Header links={[]}></Header>
+      <Header className={styles['header']} links={[]}>
+        <Dropdown>
+          <div className={styles['avatar']}>
+            <h4>Administrador</h4>
+            <Icon icon="caret-down" size={18} />
+          </div>
+          <UserMenu
+            name={'admin'}
+            email={'email@example.com'}
+            links={[
+              {
+                icon: 'log-out',
+                text: 'Cerrar Session',
+                onClick: async() => {
+                  await logout();
+                  navigate('/');
+                },
+              },
+            ]}
+          />
+        </Dropdown>
+      </Header>
       <div className={styles['navbar']}>
         <Nav links={links} />
       </div>

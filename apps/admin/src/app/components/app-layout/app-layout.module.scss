@@ -9,11 +9,23 @@
     'nav content content';
   height: 100vh;
 
+  .header {
+    grid-area: header;
+    padding: 1.5rem 3rem;
+
+    .avatar {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+  }
+
   .content {
     grid-area: content;
     background-color: $background-gray-color;
     padding: $size-lg-3 $size-lg-4;
   }
+
   .navbar {
     background-color: $white-color;
     padding: 30px;

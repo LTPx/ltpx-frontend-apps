@@ -21,6 +21,7 @@ import {
   getTeacherCourse,
   createQuiz,
   createAchievement,
+  sendCourseToReview,
 } from '@ltpx-frontend-apps/api';
 import { StateCreator } from 'zustand';
 import { StoreState } from '../store';
@@ -77,6 +78,7 @@ export type TeacherSlice = {
   createQuiz: (params: any) => Promise<TResponse>;
   createAchievement: (params: NewAchievementParams) => Promise<TResponse>;
   getCourse: (id: number) => Promise<TResponse>;
+  _sendCourseToReview: (id: number) => Promise<TResponse>;
 };
 
 export const createTeacherSlice: StateCreator<
@@ -200,4 +202,12 @@ export const createTeacherSlice: StateCreator<
       return { success: false, data: error };
     }
   },
+  _sendCourseToReview: async (id:number) => {
+    try {
+      const course = await sendCourseToReview(id);
+      return { success: true, data: course };
+    } catch (error) {
+      return { success: false, data: error };
+    }
+  }
 });

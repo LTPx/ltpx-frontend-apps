@@ -72,3 +72,16 @@ export const getCourseQuizzes = async (courseId: number) => {
       });
   });
 };
+
+export const sendCourseToReview = async (id: number) => {
+  return new Promise<TeacherCourse>((resolve, reject) => {
+    http
+      .post(`/api/v1/teacher/courses/${id}/send_to_review`)
+      .then((response) => {
+        resolve(response.data);
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
+};

@@ -5,7 +5,6 @@ export interface LearningInOpenMindProps {}
 
 export function LearningInOpenMind(props: LearningInOpenMindProps) {
   return (
-    <div className={styles['container']}>
       <div className={styles['content']}>
         <img
           alt="cover"
@@ -32,7 +31,6 @@ export function LearningInOpenMind(props: LearningInOpenMindProps) {
           </p>
         </div>
       </div>
-    </div>
   );
 }
 

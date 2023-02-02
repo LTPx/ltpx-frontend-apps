@@ -6,39 +6,32 @@
   justify-content: center;
   padding: 3rem 0;
   .content {
-    width: 50%;
+    width: 45%;
     display: flex;
     flex-direction: column;
+    line-height: 2rem;
     img {
       height: 302px;
-      padding: 1rem;
       width: 100%;
       border-radius: 0.5em;
-      background-color: $primary-color;
+      object-fit: cover;
     }
-    .information {
-      padding-top: 2rem;
-      p{
-        line-height: 2rem;
-        padding-bottom: 2rem;
-      }
+    h1 {
+      padding-top: 1rem;
+      font-weight: 500;
     }
-    .information-blog {
-      h2 {
-        padding-bottom: 1rem;
-      }
-      p{
-        line-height: 2rem;
-      }
-      ul {
-        li{
-          margin-left: 2rem;
-          a {
-            text-decoration: underline;
-            color: #4b01d4;
-            cursor: pointer;
-          }
-        }
+    h2 {
+      padding-top: 1rem;
+    }
+    p {
+      padding-top: 1rem;
+    }
+    h4 {
+      padding-top: 1rem;
+    }
+    ul {
+      li {
+        margin-left: 2rem;
       }
     }
   }

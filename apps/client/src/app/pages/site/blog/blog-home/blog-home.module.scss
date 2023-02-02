@@ -1,0 +1,23 @@
+@import '../../../../../styles.scss';
+
+  .content {
+    img {
+      background-color: $primary-color;
+    }
+
+    .information-blog {
+      h2 {
+        padding-top: 2rem;
+      }
+      ul {
+        li{
+          margin-left: 2rem;
+          a {
+            text-decoration: underline;
+            color: #4b01d4;
+            cursor: pointer;
+          }
+        }
+      }
+    }
+  }

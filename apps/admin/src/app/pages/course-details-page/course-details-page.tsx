@@ -8,22 +8,28 @@ import {
   InformationCard,
   OverviewCourse,
   QuizzesList,
+  Snackbar,
+  SnackbarPosition,
+  SnackbarType,
   Tabs,
 } from '@ltpx-frontend-apps/shared-ui';
 import { useAdmin, useCourseUtil } from '@ltpx-frontend-apps/store';
 import { useCallback, useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import styles from './course-details-page.module.scss';
 
 export function CourseDetailsPage() {
+  const [error, setError] = useState(false);
   const [selectedTab, setSelectedTab] = useState(0);
-  const { viewCourse, _getCourse, getCourseStore } = useAdmin();
+  const { viewCourse, _getCourse, _approveCourse } = useAdmin();
   const { translateCategory, translateLanguage, translateLevel } =
     useCourseUtil();
   const { classroom, quizzes, contents, achievements } = viewCourse;
   const params = useParams();
   const { id } = params;
-  const appId = parseInt(id || '');
+  const courseId = parseInt(id || '');
+  const navigate = useNavigate();
+
   const tabs = [
     { text: 'Detalles' },
     { text: 'Contenidos' },
@@ -33,25 +39,28 @@ export function CourseDetailsPage() {
   ];
 
   const fetchData = useCallback(async () => {
-    const resp = await _getCourse(appId);
+    const resp = await _getCourse(courseId);
     console.log('viewCourse....: ', resp);
   }, []);
 
   useEffect(() => {
-    if (viewCourse.id) {
-      getCourseStore(appId);
+    fetchData();
+  }, [fetchData]);
+
+  const handleApproveCourse = async() => {
+    const { success, error } = await _approveCourse(viewCourse.id);
+    if (success) {
+      console.log('approved');
+      navigate('/admin/courses');
     } else {
-      fetchData();
+      setError(true);
+      console.log('error: ', error);
     }
-  }, []);
-
-  const handleApproveCourse = () => {
-
   }
 
   return (
     <div className={styles['container']}>
-      {viewCourse && (
+      {viewCourse.id && (
         <div className="c">
           <div className={styles['header']}>
             <h1>{viewCourse.title}</h1>
@@ -127,6 +136,16 @@ export function CourseDetailsPage() {
             </div>
           </div>
         </div>
+      )}
+      {error && (
+        <Snackbar
+          open={error}
+          position={SnackbarPosition.centerBottom}
+          kind={SnackbarType.error}
+          title={'Ups! no se pudo aprobar este curso'}
+          onClose={() => setError(false)}
+          duration={3000}
+        />
       )}
     </div>
   );

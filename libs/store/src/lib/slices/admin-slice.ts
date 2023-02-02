@@ -10,6 +10,7 @@ import {
   getPendingApproveCourses,
   CourseModel,
   adminGetCourse,
+  adminApproveCourse,
 } from '@ltpx-frontend-apps/api';
 
 export type TResponse = {
@@ -32,6 +33,7 @@ export type AdminSlice = {
   _getUsers: () => Promise<TResponse>;
   _getPendingApproveCourses: () => Promise<TResponse>;
   _getCourse: (id: number) => void;
+  _approveCourse: (id: number) => Promise<TResponse>;
 };
 
 export const createAdminSlice: StateCreator<StoreState, [], [], AdminSlice> = (
@@ -111,6 +113,14 @@ export const createAdminSlice: StateCreator<StoreState, [], [], AdminSlice> = (
     try {
       const course = await adminGetCourse(id);
       set({ viewCourse: course });
+      return { success: true, data: course };
+    } catch (error) {
+      return { success: false, error };
+    }
+  },
+  _approveCourse: async (id: number): Promise<TResponse> => {
+    try {
+      const course = await adminApproveCourse(id);
       return { success: true, data: course };
     } catch (error) {
       return { success: false, error };

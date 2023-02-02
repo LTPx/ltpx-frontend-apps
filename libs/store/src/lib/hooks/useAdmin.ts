@@ -15,6 +15,7 @@ export const useAdmin = () => {
     _getUsers,
     _getPendingApproveCourses,
     _getCourse,
+    _approveCourse,
   } = useAppStore();
 
   return {
@@ -31,5 +32,6 @@ export const useAdmin = () => {
     _getUsers,
     _getPendingApproveCourses,
     _getCourse,
+    _approveCourse,
   }
 }

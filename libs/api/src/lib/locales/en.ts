@@ -25,7 +25,7 @@ export const en = {
   course_categories: {
     design: 'Diseño',
     business: 'Negocios',
-    software_development: 'Desarrollo de Software',
+    software_development: 'Desarrollo de software',
     personal_development: 'Desarrollo Personal',
     photography: 'Fotografía',
     audio: 'Audio + Música',
@@ -61,5 +61,10 @@ export const en = {
     single: 'Una sola elección',
     conditional: 'Condicional Verdadera / Falsa',
     answer: 'Respuesta de estudiante',
+  },
+  application_teacher_status: {
+    approved: 'Aprobada',
+    rejected: 'Requiere cambios',
+    review: 'En revision',
   }
 }

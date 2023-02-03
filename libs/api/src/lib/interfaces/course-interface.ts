@@ -11,6 +11,7 @@ export enum TeacherClassType {
 
 export enum CourseStatus {
   publish = 'published',
+  review = 'review',
   draft = 'draft',
 }
 

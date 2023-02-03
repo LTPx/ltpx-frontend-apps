@@ -1,20 +1,39 @@
+import { ICredentials, loginAdmin, TypeAccounts } from '@ltpx-frontend-apps/api';
 import {
   BannerNotification,
   BannerType,
   Brand,
   LoginForm,
 } from '@ltpx-frontend-apps/shared-ui';
+import { useUser } from '@ltpx-frontend-apps/store';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styles from './login.module.scss';
 
-/* eslint-disable-next-line */
-export interface LoginProps {}
+export function Login() {
+  const [error, setError] = useState({
+    invalid: false,
+    message: ''
+  });
+  const { loginAdmin } = useUser();
+  const navigate = useNavigate();
 
-export function Login(props: LoginProps) {
-  const [error, setError] = useState(false);
-  const clickFunction = () => {
-    console.log('click');
-  };
+  const onSubmitForm = async(formData: ICredentials) => {
+    const userAccount = {
+      email: formData.email,
+      password: formData.password,
+    };
+    const { isLogin, data } = await loginAdmin(userAccount);
+    console.log('data: ', data);
+    if (isLogin) {
+      navigate('/admin/dashboard');
+    } else {
+      setError({
+        invalid: true,
+        message: data.message
+      });
+    }
+  }
 
   return (
     <div className={styles['container']}>
@@ -23,15 +42,20 @@ export function Login(props: LoginProps) {
           <Brand />
           <h1>Iniciar Sesión</h1>
         </div>
-        {error && (
+        {error.invalid && (
           <BannerNotification
             type={BannerType.error}
-            onClickClose={() => setError(false)}
+            onClickClose={() => {
+              setError({
+                invalid: false,
+                message: ''
+              });
+            }}
           >
-            Tu email o password no coinciden, prueba recuperando contraseña
+            {error.message}
           </BannerNotification>
         )}
-        <LoginForm onSubmit={clickFunction} />
+        <LoginForm onSubmit={onSubmitForm} />
       </div>
     </div>
   );

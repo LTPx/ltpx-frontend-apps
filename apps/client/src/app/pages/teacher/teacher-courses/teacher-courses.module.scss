@@ -28,10 +28,9 @@
     overflow-y: auto;
 
     .courses {
-      display: grid;
-      gap: 1rem;
-      grid-auto-rows: 22rem;
-      grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
     }
   }
 }

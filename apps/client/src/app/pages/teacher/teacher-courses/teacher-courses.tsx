@@ -1,5 +1,16 @@
-import { TeacherCourse, getTeacherCourses, CourseStatus } from '@ltpx-frontend-apps/api';
-import { Button, ColorsButton, InputSearch, NewCourseForm, Select, TeacherCourseCard } from '@ltpx-frontend-apps/shared-ui';
+import {
+  TeacherCourse,
+  getTeacherCourses,
+  CourseStatus,
+} from '@ltpx-frontend-apps/api';
+import {
+  Button,
+  ColorsButton,
+  InputSearch,
+  NewCourseForm,
+  Select,
+  TeacherCourseCard,
+} from '@ltpx-frontend-apps/shared-ui';
 import { useCourseUtil } from '@ltpx-frontend-apps/store';
 import { Dialog } from 'evergreen-ui';
 import { useEffect, useState } from 'react';
@@ -7,7 +18,8 @@ import { useNavigate } from 'react-router-dom';
 import { useTeacher } from '../../../store';
 import styles from './teacher-courses.module.scss';
 
-const placeholderImage = 'https://designshack.net/wp-content/uploads/placeholder-image-368x246.png';
+const placeholderImage =
+  'https://designshack.net/wp-content/uploads/placeholder-image-368x246.png';
 /* eslint-disable-next-line */
 export interface TeacherCoursesProps {}
 
@@ -21,7 +33,7 @@ export function TeacherCourses(props: TeacherCoursesProps) {
   useEffect(() => {
     let mounted = true;
     try {
-      getTeacherCourses().then((courses)=> {
+      getTeacherCourses().then((courses) => {
         if (mounted) {
           setCourses(courses);
         }
@@ -31,13 +43,13 @@ export function TeacherCourses(props: TeacherCoursesProps) {
     }
     return () => {
       mounted = false;
-    }
-  }, [])
+    };
+  }, []);
 
   const categories = [
-    {value: 'all', text: 'Todos'},
-    {value: 'draff', text: 'Borradores'},
-    {value: 'pending', text: 'Pendientes'},
+    { value: 'all', text: 'Todos' },
+    { value: 'draff', text: 'Borradores' },
+    { value: 'pending', text: 'Pendientes' },
   ];
 
   const EmptyState = () => (
@@ -45,15 +57,15 @@ export function TeacherCourses(props: TeacherCoursesProps) {
       <h4>Aun no has creado ningún curso</h4>
       <h5>porque no empezamos creado uno</h5>
     </div>
-  )
+  );
 
   const CoursesList = () => (
     <div className={styles['courses']}>
-      { courses.map((course, index)=>(
+      {courses.map((course, index) => (
         <TeacherCourseCard
           key={index}
-          status={ course.status || CourseStatus.draft }
-          image={ course.cover_url || placeholderImage }
+          status={course.status || CourseStatus.draft}
+          image={course.cover_url || placeholderImage}
           title={course.title}
           learners={course.enrollments_count || 0}
           category={course.category}
@@ -61,32 +73,32 @@ export function TeacherCourses(props: TeacherCoursesProps) {
           percentageLearner={0}
           url={`/teacher/courses/edit/${course.id}`}
           price={getPriceCourse(course.achievements || [])}
+          dropdownActions={[
+            { text: 'Ver Curso',  icon: 'user-group', url: `/teacher/courses/${course.id}`},
+            { text: 'Editar Curso',  icon: 'pencil', url: `/teacher/courses/edit/${course.id}`},
+          ]}
         />
-      )) }
+      ))}
     </div>
-  )
+  );
 
   const MyCourses = () => (
     <div className={styles['courses']}>
-      { courses.length ? (
-        <CoursesList />
-      ) : (
-        <EmptyState/>
-      )}
+      {courses.length ? <CoursesList /> : <EmptyState />}
     </div>
-  )
+  );
 
   const PendingApprove = () => (
     <div className={styles['courses']}>
       <h4>No hay cursos pendientes de revision</h4>
     </div>
-  )
+  );
 
   const openNewCourse = () => {
     setOpenModal(true);
-  }
+  };
 
-  const saveNewCourse = async(newCourseParams: any) => {
+  const saveNewCourse = async (newCourseParams: any) => {
     setOpenModal(false);
     const { success, data } = await createCourse(newCourseParams);
     const { id } = data;
@@ -95,26 +107,26 @@ export function TeacherCourses(props: TeacherCoursesProps) {
     } else {
       console.log('error: ', data);
     }
-  }
+  };
 
   return (
     <div className={`${styles['container']}`}>
       <div className={`${styles['filters-container']}`}>
         <h4>{courses.length} Cursos en total</h4>
         <div className={styles['filters']}>
-          <InputSearch placeholder='Search course'/>
+          <InputSearch placeholder="Search course" />
           <Select options={categories} />
           <Button
             title={'Nuevo Curso'}
             color={ColorsButton.primary}
-            onClick={()=>{
+            onClick={() => {
               openNewCourse();
             }}
           />
         </div>
       </div>
       <div className={`${styles['courses-container']}`}>
-        <MyCourses/>
+        <MyCourses />
       </div>
       <Dialog
         isShown={openModal}
@@ -123,10 +135,12 @@ export function TeacherCourses(props: TeacherCoursesProps) {
         onCloseComplete={() => setOpenModal(false)}
         width={'40vw'}
       >
-        <NewCourseForm onSubmit={(data)=>{
-          console.log(data);
-          saveNewCourse(data);
-        }}/>
+        <NewCourseForm
+          onSubmit={(data) => {
+            saveNewCourse(data);
+          }}
+          onCancel={() => setOpenModal(false)}
+        />
       </Dialog>
     </div>
   );

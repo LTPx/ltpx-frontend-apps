@@ -75,7 +75,7 @@ export function Button(props: ButtonProps) {
   };
 
   return (
-    <div className={`${className}`}>
+    <>
       {link ? (
         <NavLink to={link}>
           <Button />
@@ -83,7 +83,7 @@ export function Button(props: ButtonProps) {
       ) : (
         <Button />
       )}
-    </div>
+    </>
   );
 }
 

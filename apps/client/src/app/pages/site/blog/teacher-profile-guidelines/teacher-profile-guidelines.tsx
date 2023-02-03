@@ -7,8 +7,8 @@ export function TeacherProfileGuidelines() {
   return (
     <div className={styles['content']}>
       <img
-        alt="cover"
-        src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80"
+        alt="teacher"
+        src="https://images.unsplash.com/photo-1509062522246-3755977927d7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=3332&q=80"
       />
       <div className={styles['information']}>
         <h1>Pautas para la imagen de perfil del docente</h1>

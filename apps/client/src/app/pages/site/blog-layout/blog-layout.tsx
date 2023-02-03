@@ -1,15 +1,18 @@
-import { Outlet } from 'react-router-dom';
+import { NavLink, Outlet } from 'react-router-dom';
 import styles from './blog-layout.module.scss';
 
-/* eslint-disable-next-line */
-export interface BlogLayoutProps {}
-
-export function BlogLayout(props: BlogLayoutProps) {
+export function BlogLayout() {
   return (
     <div className={styles['container']}>
-      {/* <div>breadcrumbs</div> */}
-      <div className={styles['content']}>
-        <Outlet />
+      <div className={styles['content-wrapper']}>
+        <div className={styles['breadcrumbs']}>
+          <NavLink to='/blog'>
+            Inicio
+          </NavLink>
+        </div>
+        <div className={styles['content']}>
+          <Outlet />
+        </div>
       </div>
     </div>
   );

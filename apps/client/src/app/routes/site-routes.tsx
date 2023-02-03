@@ -49,14 +49,14 @@ export const SiteRoutes = () => {
           <Route path="/terms-and-conditions" element={<TermsConditions />} />
           <Route path="/forget-password" element={<ForgetPassword />} />
           <Route path="blog" element={<BlogLayout />}>
-            <Route path="/blog" element={<Navigate replace to="home" />} />
+            <Route path="/blog" element={<BlogHome />} />
             <Route path="home" element={<BlogHome />} />
-            <Route path="what-is-openMind" element={<WhatIsOpenMind />} />
+            <Route path="what-is-openmind" element={<WhatIsOpenMind />} />
             <Route
-              path="learning-in-openMind"
+              path="learning-in-openmind"
               element={<LearningInOpenMind />}
             />
-            <Route path="how-openMind-works" element={<HowOpenMindWorks />} />
+            <Route path="how-openmind-works" element={<HowOpenMindWorks />} />
             <Route
               path="achievement-payment-system"
               element={<AchievementPaymentSystem />}

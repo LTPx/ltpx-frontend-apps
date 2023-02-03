@@ -4,14 +4,28 @@
   width: 100%;
   display: flex;
   justify-content: center;
+  flex-direction: column;
+  align-items: center;
   padding: $size-lg-3 0;
+
+  .breadcrumbs {
+    padding: 0.5rem 1rem;
+  }
+
+  .content-wrapper {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+  }
+
   .content {
-    width: 45%;
     display: flex;
     flex-direction: column;
     line-height: $size-lg-1;
+    padding: 0 1rem;
+
     img {
-      height: 302px;
+      height: 22rem;
       width: 100%;
       border-radius: $size-sm-2;
       object-fit: cover;
@@ -32,6 +46,20 @@
     ul {
       li {
         margin-left: $size-lg-1;
+      }
+    }
+  }
+}
+
+//smartphones-responsive
+@media screen and (max-width: 550px) {
+  .container {
+    .content-wrapper {
+      width: inherit;
+
+      img {
+        object-fit: cover;
+        height: inherit;
       }
     }
   }

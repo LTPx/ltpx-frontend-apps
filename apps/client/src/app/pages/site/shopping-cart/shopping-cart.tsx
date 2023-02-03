@@ -1,5 +1,5 @@
 import { Button, ColorsButton, CourseCartItem } from '@ltpx-frontend-apps/shared-ui';
-import { useUser } from '../../../store';
+import { useUser } from '@ltpx-frontend-apps/store';
 import styles from './shopping-cart.module.scss';
 
 /* eslint-disable-next-line */
@@ -30,7 +30,7 @@ export function ShoppingCart(props: ShoppingCartProps) {
             <CourseCartItem
               key={index}
               id={product.id}
-              cover={product.cover_url}
+              cover={product.cover}
               category={product.category}
               title={product.title}
               price={product.price_cents}

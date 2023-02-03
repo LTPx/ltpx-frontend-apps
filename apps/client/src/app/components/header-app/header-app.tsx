@@ -9,7 +9,7 @@ import {
 import { NavLink, useNavigate } from 'react-router-dom';
 import styles from './header-app.module.scss';
 import { useTranslation } from 'react-i18next';
-import { useUser } from '../../store';
+import { useUser } from '@ltpx-frontend-apps/store';
 
 /* eslint-disable-next-line */
 export interface HeaderAppProps {}

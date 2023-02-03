@@ -1,8 +1,8 @@
 import { Dropdown, Header, Icon, Nav, NotificationList, UserMenu } from '@ltpx-frontend-apps/shared-ui';
+import { useUser } from '@ltpx-frontend-apps/store';
 import { Avatar } from 'evergreen-ui';
 import { useTranslation } from 'react-i18next';
 import { Outlet, useNavigate } from 'react-router-dom';
-import { useUser } from '../../../store';
 import styles from './teacher-layout.module.scss';
 
 export function TeacherLayout() {

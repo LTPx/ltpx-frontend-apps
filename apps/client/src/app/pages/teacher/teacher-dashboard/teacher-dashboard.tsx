@@ -4,7 +4,7 @@ import {
   Button,
   ColorsButton,
 } from '@ltpx-frontend-apps/shared-ui';
-import { useTeacher, useUser } from '../../../store';
+import { useTeacher, useUser } from '@ltpx-frontend-apps/store';
 import styles from './teacher-dashboard.module.scss';
 
 /* eslint-disable-next-line */

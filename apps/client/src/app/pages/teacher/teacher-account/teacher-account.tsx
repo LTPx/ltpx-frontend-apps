@@ -1,7 +1,7 @@
 import { IUserAccount } from '@ltpx-frontend-apps/api';
 import { BannerNotification, UserAccountForm } from '@ltpx-frontend-apps/shared-ui';
+import { useTeacher } from '@ltpx-frontend-apps/store';
 import { useEffect, useState } from 'react';
-import { useTeacher } from '../../../store';
 import styles from './teacher-account.module.scss';
 
 /* eslint-disable-next-line */

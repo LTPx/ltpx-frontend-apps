@@ -12,9 +12,9 @@ import {
 } from '@ltpx-frontend-apps/api';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useTeacher } from '../../../store';
 import styles from './teacher-apply.module.scss';
 import { Dialog } from 'evergreen-ui';
+import { useTeacher } from '@ltpx-frontend-apps/store';
 
 /* eslint-disable-next-line */
 export interface TeacherApplyProps {}

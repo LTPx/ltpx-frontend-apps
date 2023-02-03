@@ -8,7 +8,7 @@ import {
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { ICredentials, TypeAccounts } from '@ltpx-frontend-apps/api';
-import { useUser } from '../../../store';
+import { useUser } from '@ltpx-frontend-apps/store';
 
 /* eslint-disable-next-line */
 export interface LoginProps {}

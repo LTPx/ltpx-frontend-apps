@@ -11,11 +11,10 @@ import {
   Select,
   TeacherCourseCard,
 } from '@ltpx-frontend-apps/shared-ui';
-import { useCourseUtil } from '@ltpx-frontend-apps/store';
+import { useCourseUtil, useTeacher } from '@ltpx-frontend-apps/store';
 import { Dialog } from 'evergreen-ui';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useTeacher } from '../../../store';
 import styles from './teacher-courses.module.scss';
 
 const placeholderImage =

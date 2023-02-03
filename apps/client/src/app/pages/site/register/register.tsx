@@ -2,8 +2,8 @@ import styles from './register.module.scss';
 // eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
 import { RegisterForm } from '@ltpx-frontend-apps/shared-ui';
 import { useNavigate } from 'react-router-dom';
-import { useUser } from '../../../store';
 import { IRegisterUser } from '@ltpx-frontend-apps/api';
+import { useUser } from '@ltpx-frontend-apps/store';
 
 /* eslint-disable-next-line */
 export interface RegisterProps {}
@@ -26,7 +26,7 @@ export function Register(props: RegisterProps) {
     <div className="main-container">
       <div className={styles['container']}>
         <div className={styles['content']}>
-          <h1>Registrame</h1>
+          <h1>Registrarme</h1>
           <span>
             Descubre una comunidad de apoyo de instructores en línea. Obtén
             acceso instantáneo a todos los recursos.

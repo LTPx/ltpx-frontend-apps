@@ -44,7 +44,7 @@ export function BlogHome() {
       url: '/blog/social-media-policy',
     },
     {
-      text: 'Seguridad y privacidad del alumno: para profesores',
+      text: 'Seguridad y privacidad del alumno',
       url: '/blog/student-safety-privacy',
     },
   ];

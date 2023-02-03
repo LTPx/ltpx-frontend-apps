@@ -3,43 +3,33 @@
 .container {
   width: 100%;
   display: flex;
+  flex-direction: column;
   justify-content: center;
-  padding: 4rem 0;
   .content {
-    width: 80%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    .title {
-      padding: 4rem 0;
-      width: 100%;
-      background: linear-gradient(to right top, $secondary-color, $secondary-color-400, $secondary-color-300, $primary-color-300, $primary-color-400);
+    width: 100%;
+    .mission{
+      display: flex;
       justify-content: center;
+      gap: 3rem;
       align-items: center;
-      text-align: center;
-      color: $white-color;
-    }
-    p {
-      color: $gray-color ;
-    }
-    h3 {
-      color: $text-color;
-      padding-bottom: 0.75rem;
-    }
-    .information-ltp {
-      background-color: #fff;
-      padding: 3rem;
-      text-align: justify;
-    }
-    .operating-information{
-      background-color: #f7f7f7;
-      padding: 3rem;
-      text-align: justify;
-    }
-    .information {
-      background-color: #fff;
-      padding: 3rem;
-      text-align: justify;
+      width: 100%;
+      padding: 5rem 0;
+      box-sizing: border-box;
+      .mission-text {
+        h1 {
+          padding-bottom: 1rem;
+        }
+        p {
+          width: 25rem;
+        }
+      }
+      .mission-image {
+        img {
+          width: 350px;
+          height: 290px;
+        }
+      }
     }
   }
+
 }

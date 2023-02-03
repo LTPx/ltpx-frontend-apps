@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import Button, { ColorsButton } from '../button/button';
 import Icon from '../icon/icon';
 import styles from './buy-course-card.module.scss';
@@ -31,6 +32,7 @@ export function BuyCourseCard(props: BuyCourseCardProps) {
     onClickBuy,
     onClickEnroll,
   } = props;
+  const { t } = useTranslation();
 
   return (
     <div className={styles['container']}>
@@ -47,13 +49,13 @@ export function BuyCourseCard(props: BuyCourseCardProps) {
           </div>
           <div className={styles['actions']}>
             <Button
-              title="BUY NOW"
+              title={t('coursesDetails.buyCourseCard.buttons.buy')}
               color={ColorsButton.primary}
               onClick={onClickBuy}
               full={true}
             />
             <Button
-              title="ENROLL"
+              title={t('coursesDetails.buyCourseCard.buttons.enroll')}
               color={ColorsButton.secondary}
               onClick={onClickEnroll}
               full={true}
@@ -63,42 +65,42 @@ export function BuyCourseCard(props: BuyCourseCardProps) {
             <div className={styles['item']}>
               <div className={styles['item-text']}>
                 <Icon icon={'trophy'} size={15} color="#888888"></Icon>
-                <h4>Achievement</h4>
+                <h4>{t('coursesDetails.buyCourseCard.details.achievement')}</h4>
               </div>
               <h4>{achievements}</h4>
             </div>
             <div className={styles['item']}>
               <div className={styles['item-text']}>
                 <Icon icon={'copy'} size={15} color="#888888"></Icon>
-                <h4>Contents</h4>
+                <h4>{t('coursesDetails.buyCourseCard.details.contents')}</h4>
               </div>
               <h4>{lectures}</h4>
             </div>
             <div className={styles['item']}>
               <div className={styles['item-text']}>
                 <Icon icon={'user'} size={15} color="#888888"></Icon>
-                <h4>Enrolled</h4>
+                <h4>{t('coursesDetails.buyCourseCard.details.enrolled')}</h4>
               </div>
-              <h4>{enrolled} Students</h4>
+              <h4>{enrolled} Alumnos</h4>
             </div>
             <div className={styles['item']}>
               <div className={styles['item-text']}>
                 <Icon icon={'text-size'} size={15} color="#888888"></Icon>
-                <h4>Language</h4>
+                <h4>{t('coursesDetails.buyCourseCard.details.language')}</h4>
               </div>
               <h4>{language}</h4>
             </div>
             <div className={styles['item']}>
               <div className={styles['item-text']}>
                 <Icon icon={'sliders'} size={15} color="#888888"></Icon>
-                <h4>Skill Level</h4>
+                <h4>{t('coursesDetails.buyCourseCard.details.skill')}</h4>
               </div>
               <h4>{skillLevel}</h4>
             </div>
             <div className={styles['item']}>
               <div className={styles['item-text']}>
                 <Icon icon={'file'} size={15} color="#888888"></Icon>
-                <h4>Certificate</h4>
+                <h4>{t('coursesDetails.buyCourseCard.details.certificate')}</h4>
               </div>
               <h4>{certificate ? 'Yes' : 'No'}</h4>
             </div>

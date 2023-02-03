@@ -5,3 +5,4 @@ export * from './lib/hooks/useTeacher';
 export * from './lib/hooks/useUser';
 export * from './lib/hooks/useUtil';
 export * from './lib/hooks/useAdmin';
+export * from './lib/hooks/useSiteUtil';

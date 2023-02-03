@@ -28,6 +28,7 @@ const createRandomCourse = ():PublicCourse => (
   }
 )
 
+
 const createRandomCourseDetail = () => (
   {
     course: {

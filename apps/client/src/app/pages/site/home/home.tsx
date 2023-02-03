@@ -1,18 +1,18 @@
-import { buildCourses } from '@ltpx-frontend-apps/api';
+import { buildCourses, CourseModel } from '@ltpx-frontend-apps/api';
 import {
   Button,
   CategoryCard,
-  CategoryCardProps,
   ColorsButton,
   CourseCard,
 } from '@ltpx-frontend-apps/shared-ui';
+import { useSite } from '@ltpx-frontend-apps/store';
+import { useCallback, useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import styles from './home.module.scss';
 
-/* eslint-disable-next-line */
-export interface HomeProps {}
-
-export function Home(props: HomeProps) {
+export function Home() {
+  const [ courses, setCourses] = useState<CourseModel[]>([])
+  const {_getPopularCourses } = useSite();
   const popularCourses = buildCourses(8);
   const categories = [
     { icon: 'desktop', title: 'Design', description: 'Over 960 courses' },
@@ -37,28 +37,41 @@ export function Home(props: HomeProps) {
     },
   ];
 
+  const fetchPopularCourse = useCallback(async () => {
+    const { success , data, error} = await _getPopularCourses();
+    if ( success ) {
+      setCourses(data);
+    } else {
+      console.log('error: ', error);
+    }
+  }, []);
+
+  useEffect(() => {
+    fetchPopularCourse();
+  }, [fetchPopularCourse]);
+
   return (
     <div className={styles['container']}>
       <div className={styles['main-cover']}>
         <div className={styles['cover']}>
           <div className={styles['info']}>
             <div className={styles['text']}>
-              <h1>Learn From Anywhere</h1>
+              <h1>Aprende desde cualquier lugar</h1>
               <h4>
-                Tecnology is Bringing A Massive Wave Of Education On Learning
-                Things in different ways
+                La tecnología está trayendo una ola masiva de educación sobre el aprendizaje
+                Cosas de diferentes maneras
               </h4>
             </div>
             <div className={styles['actions']}>
               <Button
                 color={ColorsButton.secondary}
-                title="GET STARTED"
+                title="REGISTRARME"
                 outline={true}
                 link="/register"
               />
               <Button
                 color={ColorsButton.primary}
-                title="VIEW COURSES"
+                title="VER CURSOS"
                 link="/courses"
               />
             </div>
@@ -71,14 +84,14 @@ export function Home(props: HomeProps) {
       </div>
       <div className={styles['popular-courses-container']}>
         <div className={styles['text']}>
-          <h2>Popular Courses</h2>
-          <h4 className="muted">Discover you perfect program in our courses</h4>
+          <h2>Cursos Populares</h2>
+          <h4 className="muted">Descubre y aprende en nuestros curso</h4>
         </div>
         <div className={styles['popular-courses']}>
-          {popularCourses.map((course, index) => (
+          {courses.map((course, index) => (
             <div className={styles['course']} key={index}>
               <CourseCard
-                image={course.cover}
+                image={course.cover_url}
                 category={course.category}
                 title={course.title}
                 price={course.price_cents}
@@ -91,7 +104,7 @@ export function Home(props: HomeProps) {
           ))}
         </div>
         <div className={styles['link-browser']}>
-          <NavLink to="/courses">Browser All</NavLink>
+          <NavLink to="/courses">Ver todos</NavLink>
         </div>
       </div>
       <div className={styles['categories-container']}>

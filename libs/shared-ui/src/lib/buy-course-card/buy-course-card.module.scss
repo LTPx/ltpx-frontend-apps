@@ -8,7 +8,9 @@
     border: 1px solid $stroke-color;
 
     img {
-      width: 300px;
+      width: 19rem;
+      height: 10rem;
+      object-fit: cover;
     }
     .summary {
       padding: 15px;

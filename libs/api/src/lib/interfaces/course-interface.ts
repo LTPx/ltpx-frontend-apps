@@ -66,6 +66,35 @@ export interface CourseModel {
   achievements?: AchievementModel[];
 }
 
+export interface Comment {
+  name: string;
+  image: string;
+  title: string;
+  comment: string;
+  date: string;
+}
+
+export interface Rating {
+  stars: number;
+  reviewers: number;
+}
+
+export interface FullCourse {
+  course: CourseModel;
+  teacher: {
+    id: string;
+    image: string;
+    biography: string;
+    fullname: string;
+    profession: string;
+    total_courses: number;
+    rating_average: number;
+    total_students: number;
+  };
+  comments: Comment[];
+  ratings: Rating[];
+}
+
 export type PublicCourse = Omit<
   CourseModel,
   'user_id' | 'created_at' | 'updated_at' | 'approved' | 'status' | 'cover_url'
@@ -73,10 +102,7 @@ export type PublicCourse = Omit<
 
 export type TeacherCourse = Omit<CourseModel, 'user_id' | 'cover'>;
 
-export type CourseApiParams = PartialWithRequired<
-  TeacherCourse,
-  'title'
->;
+export type CourseApiParams = PartialWithRequired<TeacherCourse, 'title'>;
 
 export const CLASSROOM_MANDATORY = {
   value: TeacherClassType.mandatory,
@@ -112,4 +138,4 @@ export const CLASSROOMS = {
   customize: CLASSROOM_CUSTOMIZE,
   none: CLASSROOM_NONE,
   classes: CLASSROOM_NONE,
-}
+};

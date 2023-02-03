@@ -28,6 +28,8 @@ export * from './lib/api/admin/applications-api';
 export * from './lib/api/admin/users-api';
 export * from './lib/api/admin/admin-courses-api';
 
+export * from './lib/api/site/site-courses-api';
+
 //constants
 export * from '../src/lib/constants/course-constants';
 export * from '../src/lib/constants/app-constants';

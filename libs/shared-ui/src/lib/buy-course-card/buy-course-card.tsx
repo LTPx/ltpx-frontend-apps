@@ -6,7 +6,7 @@ import styles from './buy-course-card.module.scss';
 export interface BuyCourseCardProps {
   image: string;
   price: number;
-  discount: number;
+  discount?: number;
   achievements: number;
   lectures: number;
   enrolled: number;
@@ -39,23 +39,17 @@ export function BuyCourseCard(props: BuyCourseCardProps) {
         <div className={`${styles['summary']}`}>
           <div className={styles['price-promo']}>
             <div className={styles['price']}>
-              <h3>${price / 100}</h3>
+              <h3>${price}</h3>
             </div>
             <div className={styles['discount']}>
-              <span>{discount}% off</span>
+              <span>{discount || 20}% descuento</span>
             </div>
           </div>
           <div className={styles['actions']}>
             <Button
-              title="BUY NOW"
+              title="SUSCRIBIRME"
               color={ColorsButton.primary}
               onClick={onClickBuy}
-              full={true}
-            />
-            <Button
-              title="ENROLL"
-              color={ColorsButton.secondary}
-              onClick={onClickEnroll}
               full={true}
             />
           </div>
@@ -100,7 +94,7 @@ export function BuyCourseCard(props: BuyCourseCardProps) {
                 <Icon icon={'file'} size={15} color="#888888"></Icon>
                 <h4>Certificate</h4>
               </div>
-              <h4>{certificate ? 'Yes' : 'No'}</h4>
+              <h4>{certificate ? 'Si' : 'No'}</h4>
             </div>
           </div>
         </div>

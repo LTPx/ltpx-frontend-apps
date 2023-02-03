@@ -1,7 +1,5 @@
 import {
-  buildCourseDetails,
-  CourseModel,
-  FullCourse,
+  FullCourse, ICredentials, IRegisterUser,
 } from '@ltpx-frontend-apps/api';
 import {
   Avatar,
@@ -15,20 +13,19 @@ import {
   ReviewForm,
   OverviewCourse,
   CourseContents,
+  RegisterForm,
 } from '@ltpx-frontend-apps/shared-ui';
-import { useSite } from '@ltpx-frontend-apps/store';
+import { useSite, useUser } from '@ltpx-frontend-apps/store';
+import { Dialog } from 'evergreen-ui';
 import { useCallback, useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import { useUser } from '../../../store';
+import { useNavigate, useParams } from 'react-router-dom';
 import styles from './course-details.module.scss';
 
-/* eslint-disable-next-line */
-export interface CourseDetailsProps {}
-
-export function CourseDetails(props: CourseDetailsProps) {
+export function CourseDetails() {
+  const [openModal, setOpenModal] = useState(false);
   const { courseId } = useParams();
-  const { addCourseCart } = useUser();
-  const courseDetails = buildCourseDetails();
+  const navigate = useNavigate();
+  const { addCourseCart, isAuthenticated, register } = useUser();
   const [selectedTab, setSelectedTab] = useState(0);
   const [course, setCourse] = useState<FullCourse>();
   const { _getSiteCourse } = useSite();
@@ -43,6 +40,18 @@ export function CourseDetails(props: CourseDetailsProps) {
     }
   }, []);
 
+  const onSubmitForm = async (formData: IRegisterUser) => {
+    const { isLogin, data } = await register(formData);
+    if (isLogin) {
+      navigate('/cart');
+      if(course){
+        addCourseCart(course.course);
+      }
+    } else {
+      console.log(data);
+    }
+  };
+
   useEffect(() => {
     fetchCourse();
   }, [fetchCourse]);
@@ -52,8 +61,11 @@ export function CourseDetails(props: CourseDetailsProps) {
   };
 
   const addToCart = () => {
-    if (course) {
+    if (course && isAuthenticated) {
       addCourseCart(course.course);
+    } else {
+      console.log('login account');
+      setOpenModal(true);
     }
   };
 
@@ -184,6 +196,17 @@ export function CourseDetails(props: CourseDetailsProps) {
           />
         </div>
       )}
+      <Dialog
+        isShown={openModal}
+        hasFooter={false}
+        title="Regístrate y aprende hoy mismo"
+        onCloseComplete={() => setOpenModal(false)}
+        width={'35vw'}
+      >
+        <div className={styles['register-modal']}>
+          <RegisterForm onSubmit={(data)=>{ onSubmitForm(data)}} />
+        </div>
+      </Dialog>
     </div>
   );
 }

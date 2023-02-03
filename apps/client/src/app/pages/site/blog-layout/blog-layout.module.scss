@@ -1,0 +1,66 @@
+@import '../../../../styles.scss';
+
+.container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  padding: $size-lg-3 0;
+
+  .breadcrumbs {
+    padding: 0.5rem 1rem;
+  }
+
+  .content-wrapper {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .content {
+    display: flex;
+    flex-direction: column;
+    line-height: $size-lg-1;
+    padding: 0 1rem;
+
+    img {
+      height: 22rem;
+      width: 100%;
+      border-radius: $size-sm-2;
+      object-fit: cover;
+    }
+    h1 {
+      padding-top: $size-md-1;
+      font-weight: 500;
+    }
+    h2 {
+      padding-top: $size-md-1;
+    }
+    p {
+      padding-top: $size-md-1;
+    }
+    h4 {
+      padding-top: $size-md-1;
+    }
+    ul {
+      li {
+        margin-left: $size-lg-1;
+      }
+    }
+  }
+}
+
+//smartphones-responsive
+@media screen and (max-width: 550px) {
+  .container {
+    .content-wrapper {
+      width: inherit;
+
+      img {
+        object-fit: cover;
+        height: inherit;
+      }
+    }
+  }
+}

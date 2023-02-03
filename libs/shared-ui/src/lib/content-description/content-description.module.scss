@@ -1,7 +1,7 @@
 @import '../../styles/styles.module.scss';
 
 .container {
-  background-color: #f7f9fb;
+  background-color: #f7f7f7;;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -12,7 +12,7 @@
     flex-direction: column;
     text-align: center;
     h1 {
-      padding-bottom: 1rem;
+      padding-bottom: $size-md-1;
     }
     h4 {
       color: $text-gray-color;
@@ -20,7 +20,7 @@
   }
   .content {
     display: flex;
-    padding-top: 3rem;
+    padding-top: $size-lg-3;
     gap: 14rem;
     width: 100%;
     justify-content: center;
@@ -31,7 +31,7 @@
       align-items: center;
       text-align: center;
       h4 {
-        padding-top: 2rem;
+        padding-top: $size-lg-1;
       }
       h5 {
         color: $text-gray-color;
@@ -43,7 +43,7 @@
       justify-content: center;
       align-items: center;
       border: 1px solid #f8cb96;
-      padding: 4rem;
+      padding: $size-lg-4;
       border-radius: 50%;
       height: 20px;
       width: 20px;
@@ -52,7 +52,7 @@
         display: flex;
         justify-content: center;
         border-radius: 50%;
-        padding: 1.5rem;
+        padding: $size-md-3;
       }
       span {
         padding: 5rem;
@@ -63,7 +63,7 @@
       justify-content: center;
       align-items: center;
       border: 1px solid #b7b3f8;
-      padding: 4rem;
+      padding: $size-lg-4;
       border-radius: 50%;
       height: 20px;
       width: 20px;
@@ -72,7 +72,7 @@
         display: flex;
         justify-content: center;
         border-radius: 50%;
-        padding: 1.5rem;
+        padding: $size-md-3;
       }
     }
     .item-tree {
@@ -80,7 +80,7 @@
       justify-content: center;
       align-items: center;
       border: 1px solid #b2f4dc;
-      padding: 4rem;
+      padding: $size-lg-4;
       border-radius: 50%;
       height: 20px;
       width: 20px;
@@ -89,7 +89,7 @@
         display: flex;
         justify-content: center;
         border-radius: 50%;
-        padding: 1.5rem;
+        padding: $size-md-3;
       }
     }
   }

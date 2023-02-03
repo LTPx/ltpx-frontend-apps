@@ -9,3 +9,4 @@ export * from './long-term-potentiation/long-term-potentiation';
 export * from './teacher-profile-guidelines/teacher-profile-guidelines';
 export * from './student-safety-privacy/student-safety-privacy';
 export * from './student-privacy-guide/student-privacy-guide';
+export * from './removal-of-teachers/removal-of-teachers';

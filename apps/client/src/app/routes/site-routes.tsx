@@ -12,6 +12,7 @@ import {
   TeacherProfileGuidelines,
   StudentSafetyPrivacy,
   StudentPrivacyGuide,
+  RemovalOfTeachers,
 } from '../pages/site/blog';
 import BlogLayout from '../pages/site/blog-layout/blog-layout';
 import BlogHome from '../pages/site/blog/blog-home/blog-home';
@@ -72,6 +73,7 @@ export const SiteRoutes = () => {
               path="guidelines-teacher-profile"
               element={<RulesTeacherProfile />}
             />
+            <Route path="removal-of-teachers" element={<RemovalOfTeachers />} />
             <Route
               path="teacher-profile-guidelines"
               element={<TeacherProfileGuidelines />}

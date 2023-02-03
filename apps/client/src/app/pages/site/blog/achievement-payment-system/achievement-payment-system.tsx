@@ -8,7 +8,7 @@ export function AchievementPaymentSystem() {
     <div className={styles['content']}>
       <img
         alt="cover"
-        src="https://plus.unsplash.com/premium_photo-1661919585183-9656936b6fc1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NTR8fG1pbmR8ZW58MHx8MHx8&auto=format&fit=crop&w=800&q=60"
+        src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cGF5bWVudHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=800&q=60"
       />
       <div className={styles['information']}>
         <h1>¿Cómo funciona el sistema de cobro por logros de Open Mind?</h1>

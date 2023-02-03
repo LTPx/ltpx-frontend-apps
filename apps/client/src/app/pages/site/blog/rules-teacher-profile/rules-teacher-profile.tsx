@@ -8,7 +8,7 @@ export function RulesTeacherProfile() {
     <div className={styles['content']}>
       <img
         alt="cover"
-        src="https://images.unsplash.com/photo-1562654501-a0ccc0fc3fb1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8cnVsZXN8ZW58MHx8MHx8&auto=format&fit=crop&w=800&q=60"
+        src="https://images.unsplash.com/photo-1590402494682-cd3fb53b1f70?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cHJlc2VudGF0aW9ufGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=800&q=60"
       />
       <div className={styles['information']}>
         <h1>Pautas para el perfil de docente</h1>

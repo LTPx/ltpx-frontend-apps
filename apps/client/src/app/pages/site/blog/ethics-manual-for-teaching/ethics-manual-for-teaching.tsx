@@ -8,7 +8,7 @@ export function EthicsManualForTeaching() {
     <div className={styles['content']}>
       <img
         alt="cover"
-        src="https://plus.unsplash.com/premium_photo-1661919585183-9656936b6fc1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NTR8fG1pbmR8ZW58MHx8MHx8&auto=format&fit=crop&w=800&q=60"
+        src="https://images.unsplash.com/photo-1483546416237-76fd26bbcdd1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTZ8fG1hbnVhbHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=800&q=60"
       />
       <div className={styles['information']}>
         <h1>Manual de ética para dar clases en Open Mind</h1>

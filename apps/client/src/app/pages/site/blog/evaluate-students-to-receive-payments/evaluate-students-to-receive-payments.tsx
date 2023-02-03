@@ -8,7 +8,7 @@ export function EvaluateStudentsToReceivePayments() {
     <div className={styles['content']}>
       <img
         alt="cover"
-        src="https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjR8fGV4YW18ZW58MHx8MHx8&auto=format&fit=crop&w=800&q=60"
+        src="https://images.unsplash.com/photo-1604872441539-ef1db9b25f92?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTd8fGV4YW18ZW58MHx8MHx8&auto=format&fit=crop&w=800&q=60"
       />
       <div className={styles['information']}>
         <h1>¿Como evaluar a mis alumnos para recibir pagos en Open Mind?</h1>

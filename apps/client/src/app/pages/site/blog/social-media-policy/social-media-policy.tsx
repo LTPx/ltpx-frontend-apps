@@ -8,7 +8,7 @@ export function SocialMediaPolicy() {
     <div className={styles['content']}>
       <img
         alt="cover"
-        src="https://images.unsplash.com/photo-1562654501-a0ccc0fc3fb1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8cnVsZXN8ZW58MHx8MHx8&auto=format&fit=crop&w=800&q=60"
+        src="https://images.unsplash.com/photo-1611926653458-09294b3142bf?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8c29jaWFsJTIwbmV0d29ya3N8ZW58MHx8MHx8&auto=format&fit=crop&w=800&q=60"
       />
       <div className={styles['information']}>
         <h1>Política de redes sociales para maestros</h1>

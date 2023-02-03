@@ -10,14 +10,14 @@
     .mission{
       display: flex;
       justify-content: center;
-      gap: 3rem;
+      gap: $size-lg-3;
       align-items: center;
       width: 100%;
       padding: 5rem 0;
       box-sizing: border-box;
       .mission-text {
         h1 {
-          padding-bottom: 1rem;
+          padding-bottom: $size-md-1;
         }
         p {
           width: 25rem;

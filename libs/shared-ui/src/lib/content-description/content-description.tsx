@@ -18,7 +18,7 @@ export function ContentDescription(props: ContentDescriptionProps) {
               <Icon color="#EE8E00" icon={'browser'} size={45} />
             </div>
           </div>
-          <h4>Aprende cualquier cosa</h4>
+          <h4>Aprende cualquier tema</h4>
           <h5>
             Aprende nuevas habilidades, inspírate a hacer nuevos
             descubrimientos.

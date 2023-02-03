@@ -7,11 +7,11 @@
 
     .information-blog {
       h2 {
-        padding-top: 2rem;
+        padding-top: $size-lg-1;
       }
       ul {
         li{
-          margin-left: 2rem;
+          margin-left: $size-lg-1;
           a {
             text-decoration: underline;
             color: #4b01d4;

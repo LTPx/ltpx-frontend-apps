@@ -32,16 +32,20 @@ export function BlogHome() {
       url: '/blog/guidelines-teacher-profile',
     },
     {
-      text: ' ¿Como evaluar a mis alumnos para recibir pagos en Open Mind?',
-      url: '/blog/evaluate-to-receive-payments',
-    },
-    {
       text: 'Pautas para la imagen de perfil del docente',
       url: '/blog/teacher-profile-guidelines',
     },
     {
+      text: 'Restricción y remoción de maestros',
+      url: '/blog/removal-of-teachers',
+    },
+    {
       text: 'Política de redes sociales para maestros',
       url: '/blog/social-media-policy',
+    },
+    {
+      text: ' ¿Como evaluar a mis alumnos para recibir pagos en Open Mind?',
+      url: '/blog/evaluate-to-receive-payments',
     },
     {
       text: 'Seguridad y privacidad del alumno',
@@ -62,9 +66,9 @@ export function BlogHome() {
       <div className={styles['information']}>
         <h1>Bienvenido al blog de Open Mind</h1>
         <p>
-          Un directorio rápido de los blogs más populares de Open Mind sobre
-          crianza de los hijos, educación en el hogar, plan de estudios, cómo
-          complementar la educación de sus hijos y más.
+          Un directorio rápido de los blogs más populares de Open Mind acerca de
+          la educación en el hogar, planes de estudios, cómo complementar la
+          educación de sus hijos y más.
           <br />
           Ya sea que esté educando en el hogar o buscando complementar la
           educación tradicional, tiene el poder de brindarles a sus hijos los

@@ -122,46 +122,50 @@ export function CourseDetails(props: CourseDetailsProps) {
                   isNav={false}
                   onClickTab={(option) => handleClick(option)}
                 />
-                {selectedTab === 0 && (
-                  <OverviewCourse
-                    description={course?.course.description}
-                    goals={course?.course.learn_goals.split('\n')}
-                    requirements={course?.course.requirements.split('\n')}
-                  />
-                )}
-                {selectedTab === 1 && (
-                  <CourseContents contents={course?.course.contents || []} />
-                )}
-                {selectedTab === 2 && (
-                  <TeacherOverview
-                    name={course?.teacher.fullname || ''}
-                    profession={course?.teacher.profession || ''}
-                    rating={course?.teacher.rating_average || 0}
-                    reviews={course?.teacher.rating_average}
-                    students={course?.teacher.total_students}
-                    courses={5}
-                    biography={course?.teacher.biography}
-                    image={course?.teacher.image}
-                  />
-                )}
-                {selectedTab === 3 && (
-                  <>
-                    <RatingCourse ratings={course.ratings || []}></RatingCourse>
-                    <div className={styles['comment-course']}>
-                      {course.comments.map((comment, index) => (
-                        <CommentCourse
-                          reviewTitle={comment.title}
-                          name={comment.name}
-                          comment={comment.comment}
-                          date={comment.date}
-                          key={index}
-                          image={comment.image}
-                        />
-                      ))}
-                    </div>
-                    <ReviewForm />
-                  </>
-                )}
+                <div className={styles['tabs-content']}>
+                  {selectedTab === 0 && (
+                    <OverviewCourse
+                      description={course?.course.description}
+                      goals={course?.course.learn_goals.split('\n')}
+                      requirements={course?.course.requirements.split('\n')}
+                    />
+                  )}
+                  {selectedTab === 1 && (
+                    <CourseContents contents={course?.course.contents || []} />
+                  )}
+                  {selectedTab === 2 && (
+                    <TeacherOverview
+                      name={course?.teacher.fullname || ''}
+                      profession={course?.teacher.profession || ''}
+                      rating={course?.teacher.rating_average || 0}
+                      reviews={course?.teacher.rating_average}
+                      students={course?.teacher.total_students}
+                      courses={5}
+                      biography={course?.teacher.biography}
+                      image={course?.teacher.image}
+                    />
+                  )}
+                  {selectedTab === 3 && (
+                    <>
+                      <RatingCourse
+                        ratings={course.ratings || []}
+                      ></RatingCourse>
+                      <div className={styles['comment-course']}>
+                        {course.comments.map((comment, index) => (
+                          <CommentCourse
+                            reviewTitle={comment.title}
+                            name={comment.name}
+                            comment={comment.comment}
+                            date={comment.date}
+                            key={index}
+                            image={comment.image}
+                          />
+                        ))}
+                      </div>
+                      <ReviewForm />
+                    </>
+                  )}
+                </div>
               </div>
             </div>
           </div>

@@ -50,7 +50,9 @@
   }
 
   .summary-course {
-    padding-top: $size-md-1;
+    .tabs-content {
+      margin: 2rem 0 4rem 0;
+    }
   }
 }
 
@@ -95,11 +97,13 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
+
         .tabs {
           overflow-x: auto;
           width: 22rem;
           gap: $size-lg-3;
         }
+
         .comment-course {
           display: flex;
           width: 20rem;

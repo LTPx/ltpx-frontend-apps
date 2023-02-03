@@ -5,10 +5,7 @@ import { Outlet, useNavigate } from 'react-router-dom';
 import { useUser } from '../../../store';
 import styles from './teacher-layout.module.scss';
 
-/* eslint-disable-next-line */
-export interface TeacherLayoutProps {}
-
-export function TeacherLayout(props: TeacherLayoutProps) {
+export function TeacherLayout() {
   const { user, logout } = useUser();
   const navigate = useNavigate();
   const { t } = useTranslation();

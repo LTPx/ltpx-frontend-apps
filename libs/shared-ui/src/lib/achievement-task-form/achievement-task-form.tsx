@@ -30,7 +30,7 @@ export function AchievementTaskForm(props: AchievementTaskFormProps) {
     image:  achievement?.image || '',
     price:  achievement?.price || 0,
     file: null,
-    rule: TypeAchievement.score,
+    rule: TypeAchievement.task,
     settings: [],
   };
   return (

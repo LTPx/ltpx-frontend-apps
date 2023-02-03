@@ -12,7 +12,7 @@ import {
   Tag,
   TypeButton,
 } from '@ltpx-frontend-apps/shared-ui';
-import { useCourse, useCourseUtil } from '@ltpx-frontend-apps/store';
+import { useCourse, useCourseUtil, useTeacher } from '@ltpx-frontend-apps/store';
 import {
   CourseAchievements,
   CourseClassroom,
@@ -46,7 +46,9 @@ export function TeacherEditCourse() {
     text: ''
   });
   const { getCourse, course } = useCourse();
+  const { _sendCourseToReview } = useTeacher();
   const { translateStatus } = useCourseUtil();
+
 
   const params = useParams();
   const { courseId } = params;
@@ -79,6 +81,24 @@ export function TeacherEditCourse() {
     }
   };
 
+  const handleSendToReview =async () => {
+    const { success } = await _sendCourseToReview(course.id);
+    if (success) {
+      setNotification((prevState) => ({
+        ...prevState,
+        show: true,
+        text: 'Tu curso ha sido enviado a revision'
+      }))
+    } else {
+      setNotification((prevState) => ({
+        ...prevState,
+        show: true,
+        text: 'Ha ocurrido un error',
+        kind: SnackbarType.error
+      }))
+    }
+  }
+
   return (
     <div className={styles['container']}>
       {course.id && (
@@ -108,7 +128,7 @@ export function TeacherEditCourse() {
                 color={ColorsButton.primary}
                 type={TypeButton.submit}
                 onClick={() => {
-                  console.log('send to review');
+                  handleSendToReview();
                 }}
               />
             </div>

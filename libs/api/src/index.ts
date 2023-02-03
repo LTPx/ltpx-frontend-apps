@@ -24,6 +24,10 @@ export * from './lib/api/teacher/teacher-api';
 export * from './lib/api/teacher/quiz-api';
 export * from './lib/api/teacher/achievements-api';
 
+export * from './lib/api/admin/applications-api';
+export * from './lib/api/admin/users-api';
+export * from './lib/api/admin/admin-courses-api';
+
 //constants
 export * from '../src/lib/constants/course-constants';
 export * from '../src/lib/constants/app-constants';

@@ -3,7 +3,7 @@
 .container {
   display: flex;
   flex-direction: column;
-  gap: $size-lg-3;
+  gap: $size-md-1;
   width: 100%;
 
   h3 {
@@ -47,11 +47,15 @@
     }
   }
 
+  .attached-files {
+    p {
+      margin: 1rem 0;
+    }
+  }
+
   .files {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
-    margin-top: 1rem;
 
     .field {
       display: flex;
@@ -65,15 +69,33 @@
 
     .file {
       display: flex;
-      justify-content: space-between;
-      align-items: center;
+      flex-direction: column;
+      // justify-content: space-between;
+      // align-items: center;
+
+      .filename {
+        font-size:12px;
+      }
     }
+  }
+}
+
+
+.images {
+  display: flex;
+  gap: 2rem;
+
+  .image {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
 
     img {
-      width: 120px;
-      height: 80px;
+      width: 16rem;
+      height: 8rem;
       object-fit: cover;
       border: 1px solid $stroke-color;
+      margin-bottom: 0.5rem;
     }
   }
 }

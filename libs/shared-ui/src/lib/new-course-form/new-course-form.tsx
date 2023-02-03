@@ -10,10 +10,11 @@ import * as Yup from 'yup';
 /* eslint-disable-next-line */
 export interface NewCourseFormProps {
   onSubmit: (data: {title: string}) => void;
+  onCancel: () => void;
 }
 
 export function NewCourseForm(props: NewCourseFormProps) {
-  const { onSubmit } = props;
+  const { onSubmit, onCancel } = props;
 
   const formik = useFormik({
     initialValues: {
@@ -24,7 +25,6 @@ export function NewCourseForm(props: NewCourseFormProps) {
         .required('Titulo es obligatorio'),
     }),
     onSubmit: (data) => {
-      console.log(data);
       onSubmit(data);
     },
   });
@@ -45,14 +45,21 @@ export function NewCourseForm(props: NewCourseFormProps) {
         onBlur={formik.handleBlur}
         errorMessage={formik.errors.title}
       />
-      <Button
-        className={styles['btn-submit']}
-        color={ColorsButton.primary}
-        title="Crear Curso"
-        full={true}
-        type={TypeButton.submit}
-        onClick={formik.handleSubmit}
-      />
+      <div className={styles['footer']}>
+        <Button
+          className={styles['btn-submit']}
+          color={ColorsButton.white}
+          title="Cancelar"
+          onClick={onCancel}
+        />
+        <Button
+          className={styles['btn-submit']}
+          color={ColorsButton.primary}
+          title="Crear Curso"
+          type={TypeButton.submit}
+          onClick={formik.handleSubmit}
+        />
+      </div>
     </form>
   );
 }

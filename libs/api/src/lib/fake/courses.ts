@@ -46,6 +46,8 @@ const createRandomCourseDetail = () => (
       skillLevel: 'Expert',
       language: 'English',
       certificate: true,
+      learn_goals: [`Learn: ${faker.commerce.product()}`, `Learn: ${faker.commerce.product()}`, `Learn: ${faker.commerce.product()}`],
+      requirements: ['Good Internet', 'Free time', 'Laptop']
     },
     overview: {
       description: `In this course: ${faker.commerce.productDescription()}`,

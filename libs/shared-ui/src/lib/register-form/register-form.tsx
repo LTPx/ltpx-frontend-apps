@@ -103,7 +103,7 @@ export function RegisterForm(props: RegisterFormProps) {
       <Button
         className={styles['btn-submit']}
         color={ColorsButton.primary}
-        title="Sign In"
+        title="Crear una cuenta"
         full={true}
         type={TypeButton.submit}
         onClick={formik.handleSubmit}

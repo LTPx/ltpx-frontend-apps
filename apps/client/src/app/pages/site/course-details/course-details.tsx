@@ -52,8 +52,9 @@ export function CourseDetails(props: CourseDetailsProps) {
   };
 
   const addToCart = () => {
-    // addCourseToCart(courseDetails.course);
-    // addCourseCart(courseDetails.course);
+    if (course) {
+      addCourseCart(course.course);
+    }
   };
 
   const enrolled = () => {
@@ -83,7 +84,7 @@ export function CourseDetails(props: CourseDetailsProps) {
             <div className={styles['description']}>
               <div className={styles['description-title']}>
                 <div className={styles['title']}>
-                  <h1>Learn Blockchain: Basic concepts and How to invest</h1>
+                  <h1>{course.course.title}</h1>
                   <h4 className="muted">
                     Looking how to increase your incomes and learn about new
                     digital money

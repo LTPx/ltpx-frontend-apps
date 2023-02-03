@@ -74,7 +74,7 @@ export function LoginForm(props: LoginFormProps) {
       <Button
         className={styles['btn-submit']}
         color={ColorsButton.primary}
-        title="Iniciar"
+        title="Iniciar Sesión"
         full={true}
         type={TypeButton.submit}
         onClick={formik.handleSubmit}

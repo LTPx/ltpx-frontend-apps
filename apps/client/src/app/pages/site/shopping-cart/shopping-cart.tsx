@@ -23,14 +23,14 @@ export function ShoppingCart(props: ShoppingCartProps) {
 
   return (
     <div className={styles['container']}>
-      <h1>Shopping Cart</h1>
+      <h1>Cursos en la cesta</h1>
       <div className={styles['content']}>
         <div className={styles['products']}>
           { products.map((product, index) => (
             <CourseCartItem
               key={index}
               id={product.id}
-              cover={product.cover}
+              cover={product.cover_url}
               category={product.category}
               title={product.title}
               price={product.price_cents}
@@ -57,7 +57,7 @@ export function ShoppingCart(props: ShoppingCartProps) {
         </div>
       </div>
       { products.length === 0 && (
-        <h3>Your cart is empty</h3>
+        <h3>Tu carrito esta vació</h3>
       )}
     </div>
   );

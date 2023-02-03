@@ -39,7 +39,9 @@ export function HeaderApp(props: HeaderAppProps) {
 
   const linksStudent = [{ title: 'My Dashboard', url: '/student/dashboard' }];
 
-  const linksNotAccount = mainLinks.concat(authLinks);
+  const linksNotAccount = isAuthenticated
+    ? mainLinks
+    : mainLinks.concat(authLinks);
 
   const linksView = {
     default: linksNotAccount,
@@ -56,7 +58,10 @@ export function HeaderApp(props: HeaderAppProps) {
         <div className={styles['actions']}>
           {isAuthenticated && (
             <>
-              <Icon icon="notification" size={22}></Icon>
+              <NavLink className="c" to={'cart'}>
+                {totalProducts > 0 && <div className="badge">{totalProducts}</div>}
+                <Icon icon="shopping-cart" size={18}></Icon>
+              </NavLink>
               <Dropdown>
                 <Avatar
                   image="https://images.unsplash.com/photo-1669563306078-4c107b67d125?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=3387&q=80"

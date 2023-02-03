@@ -11,7 +11,8 @@ import {
   UserResponse,
   TypeViews,
   UserStore,
-  TypeAccounts
+  TypeAccounts,
+  CourseModel
 } from '@ltpx-frontend-apps/api';
 
 type TResponseLogin = {
@@ -23,14 +24,14 @@ export type UserSlice = {
   user: UserStore;
   isAuthenticated: boolean;
   cart: {
-    courses: PublicCourse[];
+    courses: CourseModel[];
   };
   currentView: TypeViews,
   getCurrentUser: () => Promise<TResponseLogin>;
   login: (credentials: ICredentials) => Promise<TResponseLogin>;
   register: (params: IRegisterUser) => Promise<TResponseLogin>;
   logout: () => void;
-  addCourseCart: (course: PublicCourse) => void;
+  addCourseCart: (course: CourseModel) => void;
   removeCourseCart: (id: number) => void;
 };
 
@@ -118,7 +119,7 @@ export const createUserSlice: StateCreator<
       console.log(error);
     }
   },
-  addCourseCart: (course: PublicCourse) =>
+  addCourseCart: (course: CourseModel) =>
     set((state) => ({
       cart: {
         courses: state.cart.courses.concat([course]),

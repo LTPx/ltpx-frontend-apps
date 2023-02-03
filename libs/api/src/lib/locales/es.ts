@@ -85,7 +85,7 @@ export const es = {
   },
   home: {
     cover: {
-      title: 'Aprende desde donde sea',
+      title: 'Cursos de aprendizaje en línea',
       subtitle: 'La tecnología está trayendo una ola masiva de educación sobre el aprendizaje de cosas de diferentes maneras',
     },
     popularCourse: {

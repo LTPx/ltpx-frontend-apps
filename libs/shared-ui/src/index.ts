@@ -1,3 +1,4 @@
+export * from './lib/content-description/content-description';
 export * from './lib/achievements-list/achievements-list';
 export * from './lib/quizzes-list/quizzes-list';
 export * from './lib/new-course-form/new-course-form';

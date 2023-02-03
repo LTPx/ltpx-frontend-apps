@@ -19,6 +19,7 @@ export const es = {
     home: 'Inicio',
     courses: 'Cursos',
     beTeacher: 'Enseñar',
+    blog: 'Blog',
     login: 'Iniciar Sesión',
     register: 'Registrarme',
   },

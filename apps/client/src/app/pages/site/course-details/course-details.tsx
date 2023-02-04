@@ -187,15 +187,15 @@ export function CourseDetails() {
           </div>
           <BuyCourseCard
             price={10}
-            achievements={3}
-            lectures={9}
-            enrolled={13}
+            achievements={course.course.achievements?.length || 0}
+            lectures={course.course.contents.length}
+            enrolled={course.course.enrollments_count}
             language={course.course.language}
             skillLevel={course.course.level}
-            certificate={true}
             image={course.course.cover_url}
             onClickBuy={addToCart}
             onClickEnroll={enrolled}
+            certificate={true}
           />
         </div>
       )}

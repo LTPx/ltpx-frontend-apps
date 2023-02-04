@@ -1,3 +1,5 @@
+@import '../../styles/styles.module.scss';
+
 .container {
   position: relative;
 
@@ -5,7 +7,7 @@
     position: absolute;
     top: -12px;
     left: 10px;
-    background-color: #5567ff;
+    background-color: $primary-color;
     color: white;
     border-radius: 100%;
     text-align: center;

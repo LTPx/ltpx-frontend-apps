@@ -1,22 +1,18 @@
 import {
-  Avatar,
   Cart,
   Dropdown,
   Header,
-  Icon,
   UserMenu,
 } from '@ltpx-frontend-apps/shared-ui';
 import { NavLink, useNavigate } from 'react-router-dom';
 import styles from './header-app.module.scss';
 import { useTranslation } from 'react-i18next';
-import { useUser } from '@ltpx-frontend-apps/store';
+import { useCart, useUser } from '@ltpx-frontend-apps/store';
+import { Avatar } from 'evergreen-ui';
 
-/* eslint-disable-next-line */
-export interface HeaderAppProps {}
-
-export function HeaderApp(props: HeaderAppProps) {
-  const { user, logout, isAuthenticated, totalProducts, currentView } =
-    useUser();
+export function HeaderApp() {
+  const { user, logout, isAuthenticated, currentView } = useUser();
+  const { totalCourses } = useCart();
   const { t } = useTranslation();
   const navigate = useNavigate();
 
@@ -60,14 +56,10 @@ export function HeaderApp(props: HeaderAppProps) {
           {isAuthenticated && (
             <>
               <NavLink className="c" to={'cart'}>
-                {totalProducts > 0 && <div className="badge">{totalProducts}</div>}
-                <Icon icon="shopping-cart" size={18}></Icon>
+                <Cart amount={totalCourses}/>
               </NavLink>
               <Dropdown>
-                <Avatar
-                  image="https://images.unsplash.com/photo-1669563306078-4c107b67d125?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=3387&q=80"
-                  dropdown-id={'menu'}
-                />
+                <Avatar name={user.fullname} size={35}/>
                 <UserMenu
                   name={user.fullname}
                   email={user.email}

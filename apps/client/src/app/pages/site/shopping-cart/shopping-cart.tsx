@@ -1,24 +1,13 @@
-import { Button, ColorsButton, CourseCartItem } from '@ltpx-frontend-apps/shared-ui';
-import { useUser } from '@ltpx-frontend-apps/store';
 import styles from './shopping-cart.module.scss';
+import { Button, ColorsButton, CourseCartItem } from '@ltpx-frontend-apps/shared-ui';
+import { useCart } from '@ltpx-frontend-apps/store';
 
-/* eslint-disable-next-line */
-export interface ShoppingCartProps {}
+export function ShoppingCart() {
 
-export function ShoppingCart(props: ShoppingCartProps) {
-
-  const { isAuthenticated, products, removeCourseCart } = useUser();
+  const { getTotal, coursesInCart, removeCourseCart } = useCart();
 
   const handleRemoveItem = (id: number) => {
     removeCourseCart(id);
-  }
-
-  const subtotal = () => {
-    let total = 0;
-    products.forEach((product)=>{
-      total = total + product.price_cents;
-    })
-    return total;
   }
 
   return (
@@ -26,7 +15,7 @@ export function ShoppingCart(props: ShoppingCartProps) {
       <h1>Cursos en la cesta</h1>
       <div className={styles['content']}>
         <div className={styles['products']}>
-          { products.map((product, index) => (
+          { coursesInCart.map((product, index) => (
             <CourseCartItem
               key={index}
               id={product.id}
@@ -42,21 +31,21 @@ export function ShoppingCart(props: ShoppingCartProps) {
           ))}
         </div>
         <div className={styles['checkout']}>
-          { products.length ? (
+          { coursesInCart.length ? (
             <>
               <h3>Subtotal</h3>
-              <h2>${subtotal()}</h2>
+              <h2>${getTotal()}</h2>
               <Button
                 color={ColorsButton.primary}
                 title='Checkout'
                 full={true}
-                link={isAuthenticated ? '/checkout' : '/register' }
+                link='/checkout'
               />
             </>
           ) : null}
         </div>
       </div>
-      { products.length === 0 && (
+      { coursesInCart.length === 0 && (
         <h3>Tu carrito esta vació</h3>
       )}
     </div>

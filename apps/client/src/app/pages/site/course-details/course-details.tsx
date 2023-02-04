@@ -1,6 +1,5 @@
-import {
-  FullCourse, ICredentials, IRegisterUser,
-} from '@ltpx-frontend-apps/api';
+import styles from './course-details.module.scss';
+import { FullCourse, IRegisterUser } from '@ltpx-frontend-apps/api';
 import {
   Avatar,
   AvatarSize,
@@ -15,21 +14,21 @@ import {
   CourseContents,
   RegisterForm,
 } from '@ltpx-frontend-apps/shared-ui';
-import { useSite, useUser } from '@ltpx-frontend-apps/store';
 import { Dialog } from 'evergreen-ui';
+import { useCart, useSite, useUser } from '@ltpx-frontend-apps/store';
 import { useCallback, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import styles from './course-details.module.scss';
 
 export function CourseDetails() {
   const [openModal, setOpenModal] = useState(false);
-  const { courseId } = useParams();
-  const navigate = useNavigate();
-  const { addCourseCart, isAuthenticated, register } = useUser();
   const [selectedTab, setSelectedTab] = useState(0);
   const [course, setCourse] = useState<FullCourse>();
+  const { courseId } = useParams();
+  const { isAuthenticated, register } = useUser();
+  const { addCourseCart } = useCart();
   const { _getSiteCourse } = useSite();
   const id = parseInt(courseId || '');
+  const navigate = useNavigate();
 
   const fetchCourse = useCallback(async () => {
     const { success, data, error } = await _getSiteCourse(id);
@@ -44,7 +43,7 @@ export function CourseDetails() {
     const { isLogin, data } = await register(formData);
     if (isLogin) {
       navigate('/cart');
-      if(course){
+      if (course) {
         addCourseCart(course.course);
       }
     } else {
@@ -64,13 +63,17 @@ export function CourseDetails() {
     if (course && isAuthenticated) {
       addCourseCart(course.course);
     } else {
-      console.log('login account');
       setOpenModal(true);
     }
   };
 
   const enrolled = () => {
-    console.log('click enrolled');
+    if (course && isAuthenticated) {
+      addCourseCart(course.course);
+      navigate('/cart');
+    } else {
+      setOpenModal(true);
+    }
   };
 
   const tabs = [
@@ -204,7 +207,11 @@ export function CourseDetails() {
         width={'35vw'}
       >
         <div className={styles['register-modal']}>
-          <RegisterForm onSubmit={(data)=>{ onSubmitForm(data)}} />
+          <RegisterForm
+            onSubmit={(data) => {
+              onSubmitForm(data);
+            }}
+          />
         </div>
       </Dialog>
     </div>

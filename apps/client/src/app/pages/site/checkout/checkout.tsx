@@ -1,21 +1,10 @@
 import { Button, ColorsButton } from '@ltpx-frontend-apps/shared-ui';
-import { useUser } from '@ltpx-frontend-apps/store';
+import { useCart } from '@ltpx-frontend-apps/store';
 import { NavLink } from 'react-router-dom';
 import styles from './checkout.module.scss';
 
-/* eslint-disable-next-line */
-export interface CheckoutProps {}
-
-export function Checkout(props: CheckoutProps) {
-  const { products } = useUser();
-
-  const subtotal = () => {
-    let total = 0;
-    products.forEach((product)=>{
-      total = total + product.price_cents;
-    })
-    return total;
-  }
+export function Checkout() {
+  const { getTotal } = useCart();
 
   return (
     <div className={styles['container']}>
@@ -55,7 +44,7 @@ export function Checkout(props: CheckoutProps) {
               <div className={styles['item-text']}>
                 <h4>Original Price:</h4>
               </div>
-              <h4>${subtotal()}</h4>
+              <h4>${getTotal()}</h4>
             </div>
             <div className={styles['item']}>
               <div className={styles['item-text']} >
@@ -66,9 +55,9 @@ export function Checkout(props: CheckoutProps) {
             <hr className="solid" />
             <div className={styles['item']}>
               <div className={styles['item-text']}>
-                <h4>Subtotal</h4>
+                <h4>getTotal</h4>
               </div>
-              <h4>${subtotal()}</h4>
+              <h4>${getTotal()}</h4>
             </div>
             <div className={styles['item']}>
               <div className={styles['item-text']}>
@@ -81,7 +70,7 @@ export function Checkout(props: CheckoutProps) {
               <div className={styles['item-text']}>
                 <h4>Total</h4>
               </div>
-              <h4>${subtotal()}</h4>
+              <h4>${getTotal()}</h4>
             </div>
           </div>
           <div className={styles['terms-conditions']}>

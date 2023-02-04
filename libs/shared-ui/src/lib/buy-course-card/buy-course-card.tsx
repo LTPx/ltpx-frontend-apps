@@ -47,9 +47,15 @@ export function BuyCourseCard(props: BuyCourseCardProps) {
           </div>
           <div className={styles['actions']}>
             <Button
-              title="SUSCRIBIRME"
-              color={ColorsButton.primary}
+              title="AGREGAR AL CARRITO"
+              color={ColorsButton.secondary}
               onClick={onClickBuy}
+              full={true}
+            />
+            <Button
+              title="COMPRAR AHORA"
+              color={ColorsButton.primary}
+              onClick={onClickEnroll}
               full={true}
             />
           </div>

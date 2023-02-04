@@ -6,3 +6,4 @@ export * from './lib/hooks/useUser';
 export * from './lib/hooks/useUtil';
 export * from './lib/hooks/useAdmin';
 export * from './lib/hooks/useSite';
+export * from './lib/hooks/useCart';

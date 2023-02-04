@@ -2,17 +2,19 @@ import { useAppStore } from "../store";
 
 export const useCart = () => {
   const {
-    addCourseCart,
-    removeCourseCart,
     coursesInCart,
     getTotal,
+    _addCourseCart,
+    _removeCourseCart,
+    _getCart,
   } = useAppStore();
 
   return {
     totalCourses: coursesInCart.length,
-    addCourseCart,
-    removeCourseCart,
     coursesInCart,
     getTotal,
+    _addCourseCart,
+    _removeCourseCart,
+    _getCart,
   }
 }

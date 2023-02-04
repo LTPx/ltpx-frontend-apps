@@ -11,6 +11,7 @@ export * from './lib/interfaces/quiz-interface';
 export * from './lib/interfaces/teacher-interface';
 export * from './lib/interfaces/achievement-interface';
 export * from './lib/interfaces/api-response-ui-interface';
+export * from './lib/interfaces/cart-interface';
 
 //fake api
 export * from '../src/lib/fake/courses';
@@ -29,6 +30,7 @@ export * from './lib/api/admin/users-api';
 export * from './lib/api/admin/admin-courses-api';
 
 export * from './lib/api/site/site-courses-api';
+export * from './lib/api/site/carts-api';
 
 //constants
 export * from '../src/lib/constants/course-constants';

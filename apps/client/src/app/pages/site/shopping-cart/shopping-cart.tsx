@@ -1,13 +1,22 @@
 import styles from './shopping-cart.module.scss';
 import { Button, ColorsButton, CourseCartItem } from '@ltpx-frontend-apps/shared-ui';
 import { useCart } from '@ltpx-frontend-apps/store';
+import { useCallback, useEffect } from 'react';
 
 export function ShoppingCart() {
+  const { getTotal, coursesInCart, _removeCourseCart, _getCart } = useCart();
 
-  const { getTotal, coursesInCart, removeCourseCart } = useCart();
+  // const fetchCart = useCallback(async () => {
+  //   const resp = await _getCart();
+  //   console.log('resp....: ', resp);
+  // }, []);
+
+  // useEffect(() => {
+  //   fetchCart();
+  // }, [fetchCart]);
 
   const handleRemoveItem = (id: number) => {
-    removeCourseCart(id);
+    _removeCourseCart(id);
   }
 
   return (

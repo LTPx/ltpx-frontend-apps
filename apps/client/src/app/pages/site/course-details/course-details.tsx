@@ -25,7 +25,7 @@ export function CourseDetails() {
   const [course, setCourse] = useState<FullCourse>();
   const { courseId } = useParams();
   const { isAuthenticated, register } = useUser();
-  const { addCourseCart } = useCart();
+  const { _addCourseCart } = useCart();
   const { _getSiteCourse } = useSite();
   const id = parseInt(courseId || '');
   const navigate = useNavigate();
@@ -44,7 +44,7 @@ export function CourseDetails() {
     if (isLogin) {
       navigate('/cart');
       if (course) {
-        addCourseCart(course.course);
+        _addCourseCart(course.course);
       }
     } else {
       console.log(data);
@@ -61,7 +61,7 @@ export function CourseDetails() {
 
   const addToCart = () => {
     if (course && isAuthenticated) {
-      addCourseCart(course.course);
+      _addCourseCart(course.course);
     } else {
       setOpenModal(true);
     }
@@ -69,7 +69,7 @@ export function CourseDetails() {
 
   const enrolled = () => {
     if (course && isAuthenticated) {
-      addCourseCart(course.course);
+      _addCourseCart(course.course);
       navigate('/cart');
     } else {
       setOpenModal(true);

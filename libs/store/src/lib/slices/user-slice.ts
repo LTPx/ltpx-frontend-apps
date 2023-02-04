@@ -1,7 +1,6 @@
 import { StateCreator } from 'zustand';
 import { StoreState } from '../store';
 import {
-  CourseModel,
   ICredentials,
   IRegisterUser,
   loginUser,
@@ -23,17 +22,12 @@ type TResponseLogin = {
 export type UserSlice = {
   user: UserStore;
   isAuthenticated: boolean;
-  cart: {
-    courses: CourseModel[];
-  };
   currentView: TypeViews,
   getCurrentUser: () => Promise<TResponseLogin>;
   login: (credentials: ICredentials) => Promise<TResponseLogin>;
   loginAdmin: (credentials: ICredentials) => Promise<TResponseLogin>;
   register: (params: IRegisterUser) => Promise<TResponseLogin>;
   logout: () => void;
-  addCourseCart: (course: CourseModel) => void;
-  removeCourseCart: (id: number) => void;
 };
 
 const views = {
@@ -59,9 +53,6 @@ export const createUserSlice: StateCreator<
     initial_register: TypeAccounts.user
   },
   isAuthenticated: false,
-  cart: {
-    courses: [],
-  },
   currentView: TypeViews.default,
   getCurrentUser: async ():Promise<TResponseLogin> => {
     try {
@@ -135,16 +126,4 @@ export const createUserSlice: StateCreator<
       console.log(error);
     }
   },
-  addCourseCart: (course: CourseModel) =>
-    set((state) => ({
-      cart: {
-        courses: state.cart.courses.concat([course]),
-      },
-    })),
-  removeCourseCart: (id: number) =>
-    set((state) => ({
-      cart: {
-        courses: state.cart.courses.filter((course) => course.id !== id),
-      },
-    })),
 });

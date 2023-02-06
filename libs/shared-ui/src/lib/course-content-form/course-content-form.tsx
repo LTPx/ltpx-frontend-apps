@@ -5,6 +5,7 @@ import Button, { ColorsButton, TypeButton } from '../button/button';
 import Input from '../input/input';
 import TextArea from '../text-area/text-area';
 import styles from './course-content-form.module.scss';
+import { useTranslation } from 'react-i18next';
 
 /* eslint-disable-next-line */
 export interface CourseContentFormProps {
@@ -16,6 +17,7 @@ export interface CourseContentFormProps {
 
 export function CourseContentForm(props: CourseContentFormProps) {
   const { open, onClose, onSubmit, content } = props;
+  const { t } = useTranslation();
   const initialValues = {
     title: content?.title || '',
     description: content?.description || '',
@@ -31,14 +33,14 @@ export function CourseContentForm(props: CourseContentFormProps) {
   const closeReset = () => {
     formik.resetForm();
     onClose && onClose();
-  }
+  };
 
   return (
     <div className={styles['container']}>
       <Dialog
         isShown={open}
-        title="Agregar Contenido"
-        onCloseComplete={()=>{
+        title={t('courseContentForm.title')}
+        onCloseComplete={() => {
           closeReset();
         }}
         hasFooter={false}
@@ -48,14 +50,14 @@ export function CourseContentForm(props: CourseContentFormProps) {
           <div className={styles['form-content']}>
             <Input
               placeholder="Ejm: Introducción"
-              label="Titulo"
+              label={t('courseContentForm.subtitle') || ''}
               value={formik.values.title}
               onChange={formik.handleChange}
               name="title"
             />
             <TextArea
               placeholder="Agrega el contenido necesario"
-              label="Descripción"
+              label={t('courseContentForm.description') || ''}
               value={formik.values.description}
               onChange={formik.handleChange}
               name="description"
@@ -68,12 +70,12 @@ export function CourseContentForm(props: CourseContentFormProps) {
               onClick={() => {
                 closeReset();
               }}
-              title="Cancelar"
+              title={t('buttons.cancel')}
             />
             <Button
               type={TypeButton.submit}
               onClick={formik.submitForm}
-              title="Guardar contenido"
+              title={t('buttons.saveContent')}
             />
           </div>
         </div>

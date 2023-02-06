@@ -1,5 +1,11 @@
-import { Classroom, CLASSROOM_CUSTOMIZE, CLASSROOM_NONE, TeacherClassType } from '@ltpx-frontend-apps/api';
+import {
+  Classroom,
+  CLASSROOM_CUSTOMIZE,
+  CLASSROOM_NONE,
+  TeacherClassType,
+} from '@ltpx-frontend-apps/api';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import Button, { ColorsButton } from '../button/button';
 import ClassroomForm from '../classroom-form/classroom-form';
 import Drawer from '../drawer/drawer';
@@ -14,7 +20,7 @@ const classesOptions = [
     icon: 'person-video',
   },
   CLASSROOM_CUSTOMIZE,
-  CLASSROOM_NONE
+  CLASSROOM_NONE,
 ];
 
 /* eslint-disable-next-line */
@@ -29,6 +35,7 @@ export function CourseClasses(props: CourseClassesProps) {
   const [selectedTypeClass, setSelectedTypeClass] = useState(
     TeacherClassType.none
   );
+  const { t } = useTranslation();
   const [openClassroom, setOpenClassroom] = useState(false);
 
   const handleSelectedOption = (option: any) => {
@@ -59,7 +66,7 @@ export function CourseClasses(props: CourseClassesProps) {
       >
         <div className={styles['content']}>
           <div className="d">
-            <h2>Selecciona una opción </h2>
+            <h2>{t('courseClasses.title')}</h2>
             <GroupSelectOptionCard
               className={styles['options']}
               options={classesOptions}
@@ -74,7 +81,7 @@ export function CourseClasses(props: CourseClassesProps) {
               onClick={() => {
                 onClose && onClose();
               }}
-              title="Cancelar"
+              title={t('buttons.cancel')}
             />
             <Button
               onClick={() => {
@@ -88,7 +95,7 @@ export function CourseClasses(props: CourseClassesProps) {
                   });
                 onClose && onClose();
               }}
-              title="Guardar"
+              title={t('buttons.save')}
               disabled={!selectedTypeClass}
             />
           </div>
@@ -96,7 +103,7 @@ export function CourseClasses(props: CourseClassesProps) {
       </Drawer>
       <Drawer open={openClassroom}>
         <div className={styles['content']}>
-          <h2>Crear Clase</h2>
+          <h2>{t('courseClasses.subtitle')}</h2>
           <ClassroomForm
             className={styles['classroom']}
             onSubmit={(data) => {
@@ -108,7 +115,7 @@ export function CourseClasses(props: CourseClassesProps) {
               onClick={() => {
                 setOpenClassroom(false);
               }}
-              title="Cancelar"
+              title={t('buttons.cancel')}
             />
           </ClassroomForm>
         </div>

@@ -4,6 +4,7 @@ import * as Yup from 'yup';
 import Input from '../input/input';
 import Button, { ColorsButton, TypeButton } from '../button/button';
 import { QuestionQuiz, TypeQuestionQuiz } from '@ltpx-frontend-apps/api';
+import { useTranslation } from 'react-i18next';
 
 /* eslint-disable-next-line */
 export interface QuizFormAnswerProps {
@@ -14,6 +15,7 @@ export interface QuizFormAnswerProps {
 
 export function QuizFormAnswer(props: QuizFormAnswerProps) {
   const { onSubmit, onCancel, question } = props;
+  const { t } = useTranslation();
   const initialValues = {
     kind: TypeQuestionQuiz.answer,
     question: question?.question || '',
@@ -35,7 +37,7 @@ export function QuizFormAnswer(props: QuizFormAnswerProps) {
     <div className={styles['container']}>
       <form onSubmit={formik.handleSubmit}>
         <Input
-          label={`Pregunta`}
+          label={t('quizFormAnswer.question') || ''}
           placeholder="Formula tu pregunta"
           value={formik.values.question}
           onChange={(e: any) => {
@@ -45,7 +47,7 @@ export function QuizFormAnswer(props: QuizFormAnswerProps) {
           name="question"
         />
         <Input
-          label="Descripción (opcional)"
+          label={t('quizFormAnswer.description') || ''}
           name="description"
           placeholder="Alguna observación antes de responder esta pregunta"
           value={formik.values.description}
@@ -53,12 +55,11 @@ export function QuizFormAnswer(props: QuizFormAnswerProps) {
           onBlur={formik.handleBlur}
         />
         <h5 className={styles['text']}>
-          Al estudiante le aparecerá un campo de texto para responder esta
-          pregunta
+          {t('quizFormAnswer.text')}
         </h5>
         <div className={styles['footer']}>
           <Button
-            title="Cancelar"
+            title={t('buttons.cancel')}
             color={ColorsButton.white}
             type={TypeButton.button}
             onClick={() => {
@@ -67,7 +68,7 @@ export function QuizFormAnswer(props: QuizFormAnswerProps) {
           />
           <Button
             title={
-              question?.question ? 'Actualizar pregunta' : 'Agregar pregunta'
+              question?.question ? t('buttons.updateQuestion') : t('buttons.addQuestion')
             }
             type={TypeButton.submit}
             onClick={formik.submitForm}

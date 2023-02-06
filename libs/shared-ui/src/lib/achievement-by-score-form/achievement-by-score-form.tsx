@@ -6,6 +6,7 @@ import SelectImage from '../select-image/select-image';
 import styles from './achievement-by-score-form.module.scss';
 import * as Yup from 'yup';
 import InputTextStatus, { StatusInputText } from '../input-text-status/input-text-status';
+import { useTranslation } from 'react-i18next';
 /* eslint-disable-next-line */
 export interface AchievementByScoreFormProps {
   quizzes: QuizModel[];
@@ -18,6 +19,7 @@ export interface AchievementByScoreFormProps {
 export function AchievementByScoreForm(props: AchievementByScoreFormProps) {
   const { quizzes, onCancel, onSubmit, className, achievement } = props;
   const ids = achievement?.settings.map((setting)=> setting.entity_id) || [];
+  const { t } = useTranslation();
 
   const initialValues = {
     title: achievement?.title || '',
@@ -70,7 +72,7 @@ export function AchievementByScoreForm(props: AchievementByScoreFormProps) {
           <div className={styles['fields']}>
             <Input
               placeholder="Asigna un nombre interesante"
-              label="Titulo del logro"
+              label={t('achievementByScoreForm.title')||''}
               value={values.title}
               onChange={handleChange}
               onBlur={handleBlur}
@@ -78,7 +80,7 @@ export function AchievementByScoreForm(props: AchievementByScoreFormProps) {
               errorMessage={errors.title}
             />
             <br />
-            <label>Que test debe aprobar</label>
+            <label>{t('achievementByScoreForm.quiz')}</label>
             <div className={styles['quizzes']}>
               {values.settings.map((setting, index) => (
                 <div className={`${styles['quiz']} ${setting.selected ? styles['selected'] : ''}`} key={index}
@@ -103,7 +105,7 @@ export function AchievementByScoreForm(props: AchievementByScoreFormProps) {
               ))}
             </div>
             <br />
-            <label>Que calificación debe obtener entre (10 - 100)</label>
+            <label>{t('achievementByScoreForm.score')}</label>
             <Input
               className={styles['input']}
               type="number"
@@ -116,7 +118,7 @@ export function AchievementByScoreForm(props: AchievementByScoreFormProps) {
               errorMessage={errors.score}
             />
             <br />
-            <label>Selecciona la imagen que obtendrá al cumplir el logro</label>
+            <label>{t('achievementByScoreForm.titleImage')}</label>
             <SelectImage
               selected={values.image}
               onChange={(img) => {
@@ -132,7 +134,7 @@ export function AchievementByScoreForm(props: AchievementByScoreFormProps) {
             )}
             <Input
               placeholder="1"
-              label="Precio"
+              label={t('achievementByScoreForm.price') || ''}
               description='Este valor sera enviado a tu cuenta una vez el alumno alcance este logro'
               type='number'
               min={1}
@@ -145,7 +147,7 @@ export function AchievementByScoreForm(props: AchievementByScoreFormProps) {
           </div>
           <div className={styles['footer']}>
             <Button
-              title="Cancelar"
+              title={t('buttons.cancel')}
               color={ColorsButton.white}
               type={TypeButton.button}
               onClick={() => {
@@ -153,7 +155,7 @@ export function AchievementByScoreForm(props: AchievementByScoreFormProps) {
               }}
             />
             <Button
-              title="Guardar logro"
+              title={t('buttons.saveAchievement')}
               color={ColorsButton.secondary}
               type={TypeButton.submit}
               onClick={submitForm}

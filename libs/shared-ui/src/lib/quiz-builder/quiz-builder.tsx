@@ -17,6 +17,7 @@ import styles from './quiz-builder.module.scss';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { useCourseUtil } from 'libs/store/src';
+import { useTranslation } from 'react-i18next';
 /* eslint-disable-next-line */
 export interface QuizBuilderProps {
   onClose?: () => void;
@@ -32,6 +33,7 @@ export function QuizBuilder(props: QuizBuilderProps) {
   const [selectedTypeQuestion, setSelectedTypeQuestion] =
     useState<TypeQuestionQuiz>();
   const { translateQuizCategories } = useCourseUtil();
+  const { t } = useTranslation();
 
   const initialValues = {
     id: quiz?.id,
@@ -80,7 +82,7 @@ export function QuizBuilder(props: QuizBuilderProps) {
   const ContentQuizForm = ({ questions }: { questions: QuestionQuiz[] }) => (
     <>
       <div className={styles['questions']}>
-        <label> Preguntas</label>
+        <label> {t('quizBuilder.questions')}</label>
         {questions.map((question, index) => (
           <div className={`${styles['question-wrapper']}`} key={index}>
             <div className={`${styles['question']}`}>
@@ -263,7 +265,7 @@ export function QuizBuilder(props: QuizBuilderProps) {
       <div className={`${styles['content']} ${className}`}>
         <form className={styles['form']}>
           <Input
-            label="Nombre del test"
+            label={t('quizBuilder.title') || ''}
             name="name"
             placeholder="Agrega un nombre"
             onChange={formik.handleChange}

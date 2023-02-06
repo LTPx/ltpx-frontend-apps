@@ -172,6 +172,127 @@ export const es = {
     start: 'EMPEZAR',
     courses: 'VER CURSOS',
     register: 'Registrarme',
-    signIn: 'Iniciar sesión'
+    signIn: 'Iniciar sesión',
+    newCourse: 'Nuevo Curso',
+    saveDraft: 'Guardar Borrador',
+    sendReview: 'Guardar Borrador',
+    cancel: 'Cancelar',
+    save: 'Guardar',
+    saveClass: 'Guardar clases',
+    updateInformation: 'Actualizar Información',
+    addNow:'Agregar Ahora',
+    addContent: '+ Agregar otro contenido',
+    saveContent: 'Guardar contenido',
+    config: 'Configurar Ahora',
+    test: 'Crear Nuevo Test',
+    addQuestion: 'Agregar Pregunta',
+    updateQuestion: 'Actualizar pregunta',
+    addAchievement: 'Crear un logro',
+    addNewAchievement: 'Agregar nuevo logro',
+    saveAchievement: 'Guardar logro'
+  },
+  teacherCourse : {
+    categories: {
+      all: 'Todos',
+      draff: 'Borradores',
+      publish: 'Publicados',
+      review: 'En Revision',
+    }
+  },
+  teacherEditCourse : {
+    linksEditCourse: {
+      details: 'Detalles',
+      contents: 'Contenidos',
+      quiz: 'Test',
+      achievement: 'Logros',
+      sessions: 'Sesiones'
+    },
+  },
+  courseInformation: {
+    title: 'Portada del curso',
+    name: 'Nombre del curso',
+    description:'Descripción del curso',
+    category:'Categoría',
+    level: 'Nivel',
+    language: 'Idioma',
+    learn_goals: 'Que aprenderán los estudiantes?',
+    requirements: 'Requerimientos',
+  },
+  courseContents: {
+    title:'Contenidos',
+    subtitle:'Puedes agregar contenidos que sirvan de apoyo para tus estudiantes',
+  },
+  courseContentForm: {
+    title:'Agregar Contenido',
+    subtitle:'Titulo',
+    description:'Descripción',
+  },
+  courseQuizzes: {
+    title:'Tests',
+    subtitle: 'Evalúa a tus estudiantes creando tests',
+    text:'Crear test'
+  },
+  quizBuilder: {
+    title: 'Nombre del test',
+    questions: 'Preguntas',
+  },
+  quizFormConditional: {
+    question: 'Pregunta',
+    description: 'Descripción (opcional)',
+    true: 'Verdadera',
+    false: 'Falsa',
+    correct: 'correcta'
+  },
+  quizFormMultipleOptions: {
+    question: 'Pregunta',
+    description: 'Descripción (opcional)',
+    answer: 'Respuestas',
+    addAnswer: ' + Nueva respuesta'
+  },
+  quizFormAnswer: {
+    question: 'Pregunta',
+    description: 'Descripción (opcional)',
+    text: 'Al estudiante le aparecerá un campo de texto para responder esta pregunta'
+  },
+  courseAchievements: {
+    title:'Logros',
+    subtitle: 'El estudiante alcanzara logros al superar ciertas reglas',
+    text: 'Agrega logros que los estudiantes puedan alcanzar'
+  },
+  achievementByQuizzesForm: {
+    title:'Titulo del logro',
+    quiz:'Que test debe aprobar',
+    titleImage:'Selecciona la imagen que obtendrá al cumplir el logro',
+    price: 'Precio'
+  },
+  achievementByScoreForm: {
+    title:'Titulo del logro',
+    quiz:'Que test debe aprobar',
+    score:'Que calificación debe obtener entre (10 - 100)',
+    titleImage:'Selecciona la imagen que obtendrá al cumplir el logro',
+    price: 'Precio'
+  },
+  achievementTaskForm: {
+    title:'Titulo del logro',
+    task:'Sube la tarea debe cumplir el alumno (.pdf)',
+    titleImage:'Selecciona la imagen que obtendrá al cumplir el logro',
+    price: 'Precio'
+  },
+  courseClassroom: {
+    title:'Sesiones',
+    subtitle: 'Establece horarios y fechas para reunirte con tus estudiantes',
+    text:'Elige la opción que mejor se acople para este curso'
+  },
+  courseClasses: {
+    title: 'Selecciona una opción',
+    subtitle: 'Crear Clase'
+  },
+  classroomForm: {
+    title: 'Las clases serán obligatorias?',
+    text: 'Solo en caso que las clases sean necesarias para aprobar este curso',
+    classSize: 'Tamaño de la clase',
+    durationClasses: 'Duración de la clases',
+    dateClasses: 'Las clases serán en estas fechas',
+    newDate: ' + Nueva Fecha'
   }
 }

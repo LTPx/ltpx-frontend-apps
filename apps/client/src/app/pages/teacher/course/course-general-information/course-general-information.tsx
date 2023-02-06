@@ -10,6 +10,7 @@ import {
 } from '@ltpx-frontend-apps/shared-ui';
 import { useCourse, useCourseUtil } from '@ltpx-frontend-apps/store';
 import { useFormik } from 'formik';
+import { useTranslation } from 'react-i18next';
 import * as Yup from 'yup';
 import { ResponseRequest } from '../../teacher-edit-course/teacher-edit-course';
 import styles from './course-general-information.module.scss';
@@ -43,7 +44,9 @@ export function CourseGeneralInformation(props: CourseGeneralInformationProps) {
     onSubmit,
   } = props;
   const { categories, languages, levels } = useCourseUtil();
-  const { course, updateCourse } = useCourse();
+  const { updateCourse } = useCourse();
+  const { t } = useTranslation();
+
   const formik = useFormik({
     initialValues: {
       title: title,
@@ -60,21 +63,23 @@ export function CourseGeneralInformation(props: CourseGeneralInformationProps) {
     }),
     onSubmit: async (formData) => {
       try {
-        const  isFile = typeof formData.cover !== 'string';
-        if (!isFile) { // could be a url img
-          delete formData.cover
+        const isFile = typeof formData.cover !== 'string';
+        if (!isFile) {
+          // could be a url img
+          delete formData.cover;
         }
         const { data } = await updateCourse(formData);
-        onSubmit && onSubmit({
-          success: true,
-          data
-        });
+        onSubmit &&
+          onSubmit({
+            success: true,
+            data,
+          });
       } catch (error) {
-        onSubmit && onSubmit({
-          success: false,
-          error
-        });
-
+        onSubmit &&
+          onSubmit({
+            success: false,
+            error,
+          });
       }
     },
   });
@@ -82,7 +87,7 @@ export function CourseGeneralInformation(props: CourseGeneralInformationProps) {
   return (
     <form className={styles['container']} onSubmit={formik.handleSubmit}>
       <section className={styles['text']}>
-        <h3>Portada del curso</h3>
+        <h3>{t('courseInformation.title')}</h3>
         <div className={styles['upload-media']}>
           <FileUpload
             image={cover}
@@ -95,7 +100,7 @@ export function CourseGeneralInformation(props: CourseGeneralInformationProps) {
       </section>
       <div className={styles['text']}>
         <Input
-          label="Nombre del curso"
+          label={t('courseInformation.title') || ''}
           placeholder="Evita nombres confusos"
           name="title"
           onChange={formik.handleChange}
@@ -104,7 +109,7 @@ export function CourseGeneralInformation(props: CourseGeneralInformationProps) {
           errorMessage={formik.errors.title}
         />
         <TextArea
-          label="Descripción del curso"
+          label={t('courseInformation.description') || ''}
           placeholder="Un breve resumen de lo que trata este curso"
           name="description"
           onChange={formik.handleChange}
@@ -115,17 +120,17 @@ export function CourseGeneralInformation(props: CourseGeneralInformationProps) {
       </div>
       <div className={styles['selects-form']}>
         <Select
-          label="Categoría"
+          label={t('courseInformation.category') || ''}
           options={categories}
           onChange={(option) => formik.setFieldValue('category', option.value)}
         />
         <Select
-          label="Nivel"
+          label={t('courseInformation.level') || ''}
           options={levels}
           onChange={(option) => formik.setFieldValue('level', option.value)}
         />
         <Select
-          label="Idioma"
+          label={t('courseInformation.language') || ''}
           options={languages}
           onChange={(option) => formik.setFieldValue('language', option.value)}
         />
@@ -133,7 +138,7 @@ export function CourseGeneralInformation(props: CourseGeneralInformationProps) {
       <div className={styles['text']}>
         <TextArea
           placeholder="Pueden se puntos claves del curso"
-          label="Que aprenderán los estudiantes?"
+          label={t('courseInformation.learn_goals') || ''}
           name="learn_goals"
           onChange={formik.handleChange}
           value={formik.values.learn_goals}
@@ -141,7 +146,7 @@ export function CourseGeneralInformation(props: CourseGeneralInformationProps) {
           rows={5}
         />
         <TextArea
-          label="Requerimientos"
+          label={t('courseInformation.requirements') || ''}
           placeholder="Los estudiantes necesitan algún recurso antes de tomar este curso"
           name="requirements"
           onChange={formik.handleChange}
@@ -151,9 +156,9 @@ export function CourseGeneralInformation(props: CourseGeneralInformationProps) {
         />
       </div>
       <div className={styles['footer']}>
-        <Button title="Cancelar" color={ColorsButton.white} />
+        <Button title={t('buttons.cancel')} color={ColorsButton.white} />
         <Button
-          title="Actualizar información"
+          title={t('buttons.updateInformation')}
           color={ColorsButton.secondary}
           type={TypeButton.submit}
         />

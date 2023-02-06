@@ -1,11 +1,13 @@
 import styles from './quiz-form-multiple-options.module.scss';
 import Icon from '../icon/icon';
 import Input from '../input/input';
+// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
 import { generateAlphabet } from 'libs/api/src/lib/utils';
 import Button, { ColorsButton, TypeButton } from '../button/button';
 import { FieldArray, Form, Formik } from 'formik';
 import * as Yup from 'yup';
 import { QuestionQuiz, TypeQuestionQuiz } from '@ltpx-frontend-apps/api';
+import { useTranslation } from 'react-i18next';
 
 /* eslint-disable-next-line */
 export interface QuizFormMultipleOptionsProps {
@@ -18,6 +20,7 @@ export interface QuizFormMultipleOptionsProps {
 
 export function QuizFormMultipleOptions(props: QuizFormMultipleOptionsProps) {
   const { onSubmit, onCancel, singleSelection, className, question } = props;
+  const { t } = useTranslation();
 
   const alphabetLetters = generateAlphabet();
 
@@ -61,7 +64,7 @@ export function QuizFormMultipleOptions(props: QuizFormMultipleOptionsProps) {
           <Form className={className || ''}>
             <div className={styles['fields']}>
               <Input
-                label={`Pregunta`}
+                label={t('quizFormMultipleOptions.question') || ''}
                 name="question"
                 placeholder="Formula tu pregunta"
                 value={values.question}
@@ -70,7 +73,7 @@ export function QuizFormMultipleOptions(props: QuizFormMultipleOptionsProps) {
                 errorMessage={errors.question}
               />
               <Input
-                label="Descripción (opcional)"
+                label={t('quizFormMultipleOptions.description') || ''}
                 name="description"
                 placeholder="Alguna observación antes de responder esta pregunta"
                 value={values.description}
@@ -78,7 +81,7 @@ export function QuizFormMultipleOptions(props: QuizFormMultipleOptionsProps) {
                 onBlur={handleBlur}
               />
               <br />
-              <label>Respuestas</label>
+              <label>{t('quizFormMultipleOptions.answer')}</label>
               <FieldArray
                 name="answers"
                 render={(arrayHelpers) => (
@@ -150,7 +153,7 @@ export function QuizFormMultipleOptions(props: QuizFormMultipleOptionsProps) {
                         })
                       }
                     >
-                      + Nueva respuesta
+                      {t('quizFormMultipleOptions.addAnswer')}
                     </div>
                   </div>
                 )}
@@ -158,7 +161,7 @@ export function QuizFormMultipleOptions(props: QuizFormMultipleOptionsProps) {
             </div>
             <div className={styles['footer']}>
               <Button
-                title="Cancelar"
+                title={t('buttons.cancel')}
                 color={ColorsButton.white}
                 type={TypeButton.button}
                 onClick={() => {
@@ -168,8 +171,8 @@ export function QuizFormMultipleOptions(props: QuizFormMultipleOptionsProps) {
               <Button
                 title={
                   question?.question
-                    ? 'Actualizar pregunta'
-                    : 'Agregar pregunta'
+                    ? t('buttons.updateQuestion')
+                    : t('buttons.addQuestion')
                 }
                 color={ColorsButton.secondary}
                 type={TypeButton.submit}

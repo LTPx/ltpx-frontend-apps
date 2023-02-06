@@ -1,12 +1,13 @@
+import { CourseModel } from "./course-interface";
+
 export interface CartItem {
-  course_id: number;
+  course: CourseModel;
   quantity: number;
-  price: number;
 }
 
 export interface CartModel {
   id: number;
-  courses: CartItem[];
+  items: CartItem[];
   created_at: string;
   updated_at: string;
 }

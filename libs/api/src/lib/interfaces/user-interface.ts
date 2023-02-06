@@ -1,3 +1,4 @@
+import { CartModel } from './cart-interface';
 import { StatusTeacherAccount } from './teacher-interface';
 
 export enum TypeAccounts {
@@ -51,6 +52,7 @@ export interface ICurrentUser {
   password: string;
   initial_register: TypeAccounts;
   teacher_account?: StatusTeacherAccount;
+  cart: CartModel
 }
 
 export interface IUserAccount {

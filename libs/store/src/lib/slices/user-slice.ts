@@ -57,12 +57,14 @@ export const createUserSlice: StateCreator<
   getCurrentUser: async ():Promise<TResponseLogin> => {
     try {
       const user = await getCurrentUser();
-      const { initial_register } =  user;
+      const { initial_register, cart } =  user;
+      const coursesInCart = cart.items.map((item)=> item.course);
       set({
         user: user,
         isAuthenticated: true,
         currentView: views[initial_register],
-        teacher_account: user.teacher_account
+        teacher_account: user.teacher_account,
+        coursesInCart: coursesInCart
       });
       return { isLogin: true, data: user };
     } catch (error) {

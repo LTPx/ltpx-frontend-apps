@@ -1,19 +1,8 @@
 import styles from './shopping-cart.module.scss';
 import { Button, ColorsButton, CourseCartItem } from '@ltpx-frontend-apps/shared-ui';
 import { useCart } from '@ltpx-frontend-apps/store';
-import { useCallback, useEffect } from 'react';
-
 export function ShoppingCart() {
-  const { getTotal, coursesInCart, _removeCourseCart, _getCart } = useCart();
-
-  // const fetchCart = useCallback(async () => {
-  //   const resp = await _getCart();
-  //   console.log('resp....: ', resp);
-  // }, []);
-
-  // useEffect(() => {
-  //   fetchCart();
-  // }, [fetchCart]);
+  const { getTotal, coursesInCart, _removeCourseCart } = useCart();
 
   const handleRemoveItem = (id: number) => {
     _removeCourseCart(id);
@@ -28,7 +17,7 @@ export function ShoppingCart() {
             <CourseCartItem
               key={index}
               id={product.id}
-              cover={product.cover}
+              cover={product.cover_url}
               category={product.category}
               title={product.title}
               price={product.price_cents}

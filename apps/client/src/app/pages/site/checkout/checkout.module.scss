@@ -42,11 +42,13 @@
     .checkout {
       display: flex;
       flex-direction: column;
+      gap: 1rem;
       max-width: 300px;
 
       .details {
         display: flex;
         flex-direction: column;
+        gap: 0.5rem;
 
         hr {
           width: 100%;

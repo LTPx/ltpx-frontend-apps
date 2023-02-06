@@ -20,7 +20,7 @@ export function ShoppingCart() {
               cover={product.cover_url}
               category={product.category}
               title={product.title}
-              price={product.price_cents}
+              price={product.price || 0}
               duration={0}
               lessons={0}
               stars={product.average_rating}

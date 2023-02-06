@@ -55,7 +55,7 @@ export function Checkout() {
             <hr className="solid" />
             <div className={styles['item']}>
               <div className={styles['item-text']}>
-                <h4>getTotal</h4>
+                <h4>Subtotal</h4>
               </div>
               <h4>${getTotal()}</h4>
             </div>
@@ -83,7 +83,9 @@ export function Checkout() {
             color={ColorsButton.primary}
             title='Pay'
             full={true}
-            link='/student/courses/learning'
+            onClick={()=>{
+              console.log('Pagar');
+            }}
           />
         </div>
       </div>

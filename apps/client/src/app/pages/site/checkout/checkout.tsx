@@ -1,24 +1,43 @@
-import { Button, ColorsButton } from '@ltpx-frontend-apps/shared-ui';
+import { Icon } from '@ltpx-frontend-apps/shared-ui';
 import { useCart } from '@ltpx-frontend-apps/store';
 import { NavLink } from 'react-router-dom';
 import PaypalCheckoutButton from '../../../components/paypal-checkout-button/paypal-checkout-button';
 import styles from './checkout.module.scss';
 
 export function Checkout() {
-  const { getTotal } = useCart();
+  const { getTotal, coursesInCart } = useCart();
 
   return (
     <div className={styles['container']}>
       <h1>Checkout</h1>
       <div className={styles['content']}>
         <div className={styles['payment-methods']}>
-          <h2>Métodos de Pago</h2>
+          <div className={styles['products']}>
+            {coursesInCart.map((course, index) => (
+              <div className={styles['product']} key={index}>
+                <img src={course.cover_url} alt="course" />
+                <div className="s">
+                  <h4>{course.title}</h4>
+                  <h5>${course.price}</h5>
+                </div>
+              </div>
+            ))}
+          </div>
+          <h3>Métodos de Pago</h3>
           <PaypalCheckoutButton
             product={{
-              description: 'Curso de programación avanzada para todos los niveles',
+              description:
+                'Curso de programación avanzada para todos los niveles',
               price: 5.99,
             }}
           />
+          <div className={styles['tip']}>
+            <Icon icon="mail" size={19}></Icon>
+            <h4>
+              Una vez realizado el pago enviaremos el recibo a tu correo
+              electrónico
+            </h4>
+          </div>
         </div>
         <div className={styles['checkout']}>
           <h3>Summary</h3>
@@ -64,14 +83,6 @@ export function Checkout() {
               </p>
             </NavLink>
           </div>
-          {/* <Button
-            color={ColorsButton.primary}
-            title="Pay"
-            full={true}
-            onClick={() => {
-              console.log('Pagar');
-            }}
-          /> */}
         </div>
       </div>
     </div>

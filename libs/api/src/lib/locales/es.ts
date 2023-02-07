@@ -86,7 +86,7 @@ export const es = {
   home: {
     cover: {
       title: 'Cursos de aprendizaje en línea',
-      subtitle: 'La tecnología está trayendo una ola masiva de educación sobre el aprendizaje de cosas de diferentes maneras',
+      subtitle: 'La tecnología está trayendo una ola masiva de educación sobre el aprendizaje en diferentes maneras',
     },
     popularCourse: {
       title: 'Cursos populares',
@@ -175,7 +175,7 @@ export const es = {
     signIn: 'Iniciar sesión',
     newCourse: 'Nuevo Curso',
     saveDraft: 'Guardar Borrador',
-    sendReview: 'Guardar Borrador',
+    sendReview: 'Enviar a revisión',
     cancel: 'Cancelar',
     save: 'Guardar',
     saveClass: 'Guardar clases',
@@ -189,7 +189,9 @@ export const es = {
     updateQuestion: 'Actualizar pregunta',
     addAchievement: 'Crear un logro',
     addNewAchievement: 'Agregar nuevo logro',
-    saveAchievement: 'Guardar logro'
+    saveAchievement: 'Guardar logro',
+    updateData: 'Actualizar mis datos',
+    sendRequest: 'Enviar Solicitud'
   },
   teacherCourse : {
     categories: {
@@ -294,5 +296,37 @@ export const es = {
     durationClasses: 'Duración de la clases',
     dateClasses: 'Las clases serán en estas fechas',
     newDate: ' + Nueva Fecha'
+  },
+  userAccountForm: {
+    title: 'Información General',
+    subTitle: 'Otra Información',
+    fullName: 'Nombre completo',
+    userName: 'Nombre de usuario',
+    email: 'Correo electrónico',
+    phone: 'Teléfono',
+    country: 'País',
+    city: 'Ciudad',
+    address: 'Dirección',
+    birth: 'Fecha de Nacimiento'
+  },
+  teacherApply: {
+    title: 'Aplicar para maestro en OpenMind',
+    text: 'Por favor llena esta solicitud de registro y en periodo de 24 a 48h te enviaremos un correo electrónico con la respuesta a tu petición, una vez enviada no se podrá modificar ',
+    saveText: 'Por favor asegúrate que toda la información este correcta asi nos ayudaras a que el proceso sea lo mas rápido posible'
+  },
+  applyTeacherForm: {
+    title: 'Datos Personales',
+    subtitle: 'Formación Académica',
+    name: 'Nombre Legal',
+    phone: 'Teléfono',
+    national_id: 'Documento de identificación (.jpg, .png)',
+    national_id_front: 'Parte delantera',
+    national_id_back: 'Parte trasera',
+    country: 'País de residencia',
+    city: 'Ciudad de residencia',
+    experience: 'Experiencia Laboral (Opcional)',
+    degrees: 'Títulos académicos',
+    degrees_files: 'Adjuntar títulos (.pdf)',
+    police_record: 'Record policial',
   }
 }

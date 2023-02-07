@@ -4,6 +4,7 @@ import {
   CategoryCard,
   ColorsButton,
   CourseCard,
+  NewsCard,
 } from '@ltpx-frontend-apps/shared-ui';
 import { useTranslation } from 'react-i18next';
 import { NavLink } from 'react-router-dom';
@@ -55,6 +56,32 @@ export function Home(props: HomeProps) {
       icon: 'wallet',
       title: t('course_categories.finance'),
       description: 'Over 100 courses',
+    },
+  ];
+  const news = [
+    {
+      image:
+        'https://images.unsplash.com/photo-1661956602116-aa6865609028?ixlib=rb-4.0.3&ixid=MnwxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=800&q=60',
+      name: t('Ricardo Capa'),
+      date: '08 June, 2021',
+      title: 'The Best Destinations to Begin Your Round the World Trip',
+      link: '/blog/what-is-openmind',
+    },
+    {
+      image:
+        'https://images.unsplash.com/photo-1661956602116-aa6865609028?ixlib=rb-4.0.3&ixid=MnwxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=800&q=60',
+      name: t('Ricardo Capa'),
+      date: '08 June, 2021',
+      title: 'The Best Destinations to Begin Your Round the World Trip',
+      link: '/blog/how-openmind-works'
+    },
+    {
+      image:
+        'https://images.unsplash.com/photo-1661956602116-aa6865609028?ixlib=rb-4.0.3&ixid=MnwxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=800&q=60',
+      name: t('Ricardo Capa'),
+      date: '08 June, 2021',
+      title: 'The Best Destinations to Begin Your Round the World Trip',
+      link: '/blog/ethics-manual-for-teaching'
     },
   ];
 
@@ -124,6 +151,29 @@ export function Home(props: HomeProps) {
               key={index}
               title={category.title}
               description={category.description}
+            />
+          ))}
+        </div>
+      </div>
+      <div className={styles['news-container']}>
+        <div className={styles['title-news']}>
+          <div className={styles['text-news']}>
+            <h1>Aprende sobre OpenMind</h1>
+            <h4>Descubra su programa perfecto en nuestros cursos.</h4>
+          </div>
+          <div className={styles['link']}>
+            <NavLink to="/blog"> Ir a Blog </NavLink>
+          </div>
+        </div>
+        <div className={styles['news-content']}>
+          {news.map((item, index) => (
+            <NewsCard
+              key={index}
+              image={item.image}
+              name={item.name}
+              date={item.date}
+              title={item.title}
+              link={item.link}
             />
           ))}
         </div>

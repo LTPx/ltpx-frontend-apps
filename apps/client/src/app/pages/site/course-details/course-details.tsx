@@ -18,6 +18,8 @@ import { Dialog } from 'evergreen-ui';
 import { useCart, useSite, useUser } from '@ltpx-frontend-apps/store';
 import { useCallback, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import { useCourseUtil } from '@ltpx-frontend-apps/store';
+import { useTranslation } from 'react-i18next';
 
 export function CourseDetails() {
   const [openModal, setOpenModal] = useState(false);
@@ -29,6 +31,9 @@ export function CourseDetails() {
   const { _getSiteCourse } = useSite();
   const id = parseInt(courseId || '');
   const navigate = useNavigate();
+  const { t } = useTranslation();
+  const { translateLanguage, translateLevel, translateCategory } =
+    useCourseUtil();
 
   const fetchCourse = useCallback(async () => {
     const { success, data, error } = await _getSiteCourse(id);
@@ -116,15 +121,21 @@ export function CourseDetails() {
                 </div>
                 <div className={styles['items']}>
                   <div className={styles['item']}>
-                    <label htmlFor="creator">Instructor</label>
+                    <label>
+                      {t('coursesDetails.teacherInformation.instructor')}
+                    </label>
                     <h5>{course?.teacher?.fullname}</h5>
                   </div>
                   <div className={styles['item']}>
-                    <label htmlFor="creator">Categories</label>
-                    <h5>{course?.course.category}</h5>
+                    <label>
+                      {t('coursesDetails.teacherInformation.categories')}
+                    </label>
+                    <h5>{translateCategory(course?.course.category)}</h5>
                   </div>
                   <div className={styles['item']}>
-                    <label htmlFor="creator">Review</label>
+                    <label>
+                      {t('coursesDetails.teacherInformation.review')}
+                    </label>
                     <div className={styles['rating']}>
                       <Rating stars={course?.course.average_rating || 0} />
                     </div>
@@ -190,8 +201,8 @@ export function CourseDetails() {
             achievements={course.course.achievements?.length || 0}
             lectures={course.course.contents.length}
             enrolled={course.course.enrollments_count}
-            language={course.course.language}
-            skillLevel={course.course.level}
+            language={translateLanguage(course.course.language)}
+            skillLevel={translateLevel(course.course.level)}
             image={course.course.cover_url}
             onClickBuy={addToCart}
             onClickEnroll={enrolled}

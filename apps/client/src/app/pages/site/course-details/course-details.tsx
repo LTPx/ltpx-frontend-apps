@@ -12,7 +12,9 @@ import {
   OverviewCourse,
   CourseContents,
 } from '@ltpx-frontend-apps/shared-ui';
+import { useCourseUtil } from '@ltpx-frontend-apps/store';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 import { useUser } from '../../../store';
 import styles from './course-details.module.scss';
@@ -23,8 +25,10 @@ export interface CourseDetailsProps {}
 export function CourseDetails(props: CourseDetailsProps) {
   const { courseId } = useParams();
   const { addCourseCart } = useUser();
+  const { t } = useTranslation();
   const courseDetails = buildCourseDetails();
   const [selectedTab, setSelectedTab] = useState(0);
+  const { translateLanguage , translateLevel} = useCourseUtil();
 
   const handleClick = (index: number) => {
     setSelectedTab(index);
@@ -78,15 +82,15 @@ export function CourseDetails(props: CourseDetailsProps) {
               </div>
               <div className={styles['items']}>
                 <div className={styles['item']}>
-                  <label htmlFor="creator">Instructor</label>
+                  <label htmlFor="creator">{t('coursesDetails.teacherInformation.instructor')}</label>
                   <h5>{courseDetails.instructor.name}</h5>
                 </div>
                 <div className={styles['item']}>
-                  <label htmlFor="creator">Categories</label>
+                  <label htmlFor="creator">{t('coursesDetails.teacherInformation.categories')}</label>
                   <h5>{courseDetails.course.category}</h5>
                 </div>
                 <div className={styles['item']}>
-                  <label htmlFor="creator">Review</label>
+                  <label htmlFor="creator">{t('coursesDetails.teacherInformation.review')}</label>
                   <div className={styles['rating']}>
                     <Rating stars={courseDetails.course.stars} />
                   </div>
@@ -149,8 +153,8 @@ export function CourseDetails(props: CourseDetailsProps) {
           achievements={courseDetails.course.achievements}
           lectures={courseDetails.course.lessons}
           enrolled={courseDetails.course.enrolled}
-          language={courseDetails.course.language}
-          skillLevel={courseDetails.course.skillLevel}
+          language={translateLanguage(courseDetails.course.language)}
+          skillLevel={translateLevel(courseDetails.course.skillLevel)}
           certificate={courseDetails.course.certificate}
           image={courseDetails.course.image}
           onClickBuy={addToCart}

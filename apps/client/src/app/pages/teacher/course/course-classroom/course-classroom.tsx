@@ -7,6 +7,7 @@ import {
 } from '@ltpx-frontend-apps/shared-ui';
 import { useCourse } from '@ltpx-frontend-apps/store';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { ResponseRequest } from '../../teacher-edit-course/teacher-edit-course';
 import styles from './course-classroom.module.scss';
 
@@ -20,6 +21,7 @@ export function CourseClassroom(props: CourseClassroomProps) {
   const [openModal, setOpenModal] = useState(false);
   const { course, addUpdateClassroom } = useCourse();
   const { classroom  } = course;
+  const { t } = useTranslation();
 
   const handleClassroom = async(classroom: any) => {
     try {
@@ -40,16 +42,16 @@ export function CourseClassroom(props: CourseClassroomProps) {
   return (
     <div className={styles['container']}>
       <div className={styles['header-text']}>
-        <h2>Sesiones</h2>
+        <h2>{t('courseClassroom.title')}</h2>
         <h4 className="muted">
-          Establece horarios y fechas para reunirte con tus estudiantes
+        {t('courseClassroom.subtitle')}
         </h4>
       </div>
       {!classroom && (
         <SetupCard
           icon={'cog'}
-          text={'Elige la opción que mejor se acople para este curso'}
-          titleButton={'Configurar Ahora'}
+          text={t('courseClassroom.text')}
+          titleButton={t('buttons.config') || ''}
           onClick={() => {
             setOpenModal(true);
           }}

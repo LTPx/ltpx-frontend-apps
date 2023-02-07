@@ -65,10 +65,10 @@ export function ApplyTeacherForm(props: ApplyTeacherFormProps) {
     <div className={styles['container']}>
       <form onSubmit={formik.handleSubmit}>
         <section>
-          <h2>Datos Personales</h2>
+          <h2>{t('applyTeacherForm.title')}</h2>
           <div className={styles['field-group']}>
             <Input
-              label="Nombre Legal"
+              label={t('applyTeacherForm.name') || ''}
               name="name"
               placeholder="Ingresa tu nombre"
               description="Ingrese su nombre legal completo"
@@ -84,7 +84,7 @@ export function ApplyTeacherForm(props: ApplyTeacherFormProps) {
               }
             />
             <Input
-              label="Teléfono"
+              label={t('applyTeacherForm.phone') || ''}
               name="phone"
               placeholder="Ejm: +59398473535"
               description="Este sera usando para contactarte en caso de ser necesario"
@@ -123,7 +123,7 @@ export function ApplyTeacherForm(props: ApplyTeacherFormProps) {
                       : null
                   }
                 />
-                <h5>Parte delantera</h5>
+                <h5>{t('applyTeacherForm.national_id_front')}</h5>
               </div>
               <div className={styles['file']}>
                 <FilesUploaded
@@ -139,13 +139,13 @@ export function ApplyTeacherForm(props: ApplyTeacherFormProps) {
                       : null
                   }
                 />
-                <h5>Parte trasera</h5>
+                <h5>{t('applyTeacherForm.national_id_back')}</h5>
               </div>
             </div>
           </div>
           <div className={styles['field-group']}>
             <Select
-              label="País de residencia"
+              label={t('applyTeacherForm.country') || ''}
               options={countries}
               onChange={(option) => {
                 formik.setFieldValue('country', option.text);
@@ -157,7 +157,7 @@ export function ApplyTeacherForm(props: ApplyTeacherFormProps) {
               }
             />
             <Input
-              label="Ciudad de residencia"
+              label={t('applyTeacherForm.city') || ''}
               name="city"
               placeholder="Guayaquil"
               onChange={(e: any) => {
@@ -173,7 +173,7 @@ export function ApplyTeacherForm(props: ApplyTeacherFormProps) {
             />
           </div>
           <FilesUploaded
-            label="Record policial"
+            label={t('applyTeacherForm.police_record') || ''}
             description={
               <div>
                 <p>
@@ -198,9 +198,9 @@ export function ApplyTeacherForm(props: ApplyTeacherFormProps) {
           />
         </section>
         <section>
-          <h2>Formación Académica</h2>
+          <h2>{t('applyTeacherForm.subtitle')}</h2>
           <TextArea
-            label="Títulos académicos"
+            label={t('applyTeacherForm.degrees') || ''}
             name="degrees"
             placeholder="Psicología: Universidad de Guayaquil, Mayo 12 2019"
             description="Enumere los títulos académicos, la capacitación profesional u otras certificaciones profesionales relevantes que posea. No requerimos títulos para enseñar en openmind; incluya cualquier cosa que nos ayude a aprender más sobre sus antecedentes."
@@ -211,7 +211,7 @@ export function ApplyTeacherForm(props: ApplyTeacherFormProps) {
             onBlur={formik.handleBlur}
             rows={10}
           />
-          <label>Adjuntar títulos (.pdf)</label>
+          <label>{t('applyTeacherForm.degrees_files')}</label>
           <div className={styles['file']}>
             <FilesUploaded
               className={styles['file-upload']}
@@ -228,7 +228,7 @@ export function ApplyTeacherForm(props: ApplyTeacherFormProps) {
             />
           </div>
           <TextArea
-            label="Experiencia Laboral (Opcional)"
+            label={t('applyTeacherForm.experience') || ''}
             name="experience"
             rows={10}
             description="Enumere toda la experiencia que tiene enseñando o trabajando con jóvenes, ya sea como profesional, voluntario o en su vida personal."
@@ -240,7 +240,7 @@ export function ApplyTeacherForm(props: ApplyTeacherFormProps) {
           />
           <Button
             className={styles['send-information']}
-            title="Enviar Solicitud"
+            title={t('buttons.sendRequest')}
             type={TypeButton.submit}
           />
         </section>

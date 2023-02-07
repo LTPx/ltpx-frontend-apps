@@ -4,11 +4,8 @@ import Input from '../input/input';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import Button, { ColorsButton, TypeButton } from '../button/button';
-import {
-  QuestionQuiz,
-  QuizParamsUi,
-  TypeQuestionQuiz,
-} from '@ltpx-frontend-apps/api';
+import { QuestionQuiz, TypeQuestionQuiz } from '@ltpx-frontend-apps/api';
+import { useTranslation } from 'react-i18next';
 
 /* eslint-disable-next-line */
 export interface QuizFormConditionalProps {
@@ -19,6 +16,8 @@ export interface QuizFormConditionalProps {
 
 export function QuizFormConditional(props: QuizFormConditionalProps) {
   const { onSubmit, onCancel, question } = props;
+  const { t } = useTranslation();
+
   const initialValues = {
     kind: TypeQuestionQuiz.conditional,
     question: question?.question || '',
@@ -61,7 +60,7 @@ export function QuizFormConditional(props: QuizFormConditionalProps) {
     <div className={styles['container']}>
       <form onSubmit={formik.handleSubmit}>
         <Input
-          label={`Pregunta`}
+          label={t('quizFormConditional.question') || ''}
           placeholder="Formula tu pregunta"
           value={formik.values.question}
           onChange={(e: any) => {
@@ -72,7 +71,7 @@ export function QuizFormConditional(props: QuizFormConditionalProps) {
           errorMessage={formik.errors.question}
         />
         <Input
-          label="Descripción (opcional)"
+          label={t('quizFormConditional.description') || ''}
           name="description"
           placeholder="Alguna observación antes de responder esta pregunta"
           value={formik.values.description}
@@ -83,7 +82,9 @@ export function QuizFormConditional(props: QuizFormConditionalProps) {
           {formik.values.answers.map((conditional, index) => (
             <div className={styles['conditional-container']} key={index}>
               <h4 className={styles['conditional']}>
-                {conditional.text === 'true' ? 'Verdadera' : 'Falsa'}
+                {conditional.text === 'true'
+                  ? t('quizFormConditional.true')
+                  : t('quizFormConditional.false')}
               </h4>
               <div
                 className={`${styles['checker']} ${
@@ -92,14 +93,14 @@ export function QuizFormConditional(props: QuizFormConditionalProps) {
                 onClick={() => markAsCorrect(conditional)}
               >
                 <Icon icon="check" size={15} />
-                <h4>correcta</h4>
+                <h4>{t('quizFormConditional.correct')}</h4>
               </div>
             </div>
           ))}
         </div>
         <div className={styles['footer']}>
           <Button
-            title="Cancelar"
+            title={t('buttons.cancel')}
             color={ColorsButton.white}
             type={TypeButton.button}
             onClick={() => {
@@ -108,7 +109,9 @@ export function QuizFormConditional(props: QuizFormConditionalProps) {
           />
           <Button
             title={
-              question?.question ? 'Actualizar pregunta' : 'Agregar pregunta'
+              question?.question
+                ? t('buttons.updateQuestion')
+                : t('buttons.addQuestion')
             }
             color={ColorsButton.secondary}
             type={TypeButton.submit}

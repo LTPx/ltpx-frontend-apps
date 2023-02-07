@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import Avatar, { AvatarSize } from '../avatar/avatar';
 import Icon from '../icon/icon';
 import styles from './teacher-overview.module.scss';
@@ -25,9 +26,10 @@ export function TeacherOverview(props: TeacherOverviewProps) {
     image,
     biography,
   } = props;
+  const { t } = useTranslation();
   return (
     <div className={styles['container']}>
-      <h3>About the teacher</h3>
+      <h3>{t('coursesDetails.teacherOverview.title')}</h3>
       <div className={styles['teacher-photo-container']}>
         <Avatar image={image} size={AvatarSize.large}></Avatar>
         <div className={styles['information-photo-container']}>
@@ -39,22 +41,22 @@ export function TeacherOverview(props: TeacherOverviewProps) {
         <div className={styles['review-information']}>
           <Icon className={styles['icon']} icon={'star'} size={18}></Icon>
           <h4>{rating}</h4>
-          <h4>teacher rating</h4>
+          <h4>{t('coursesDetails.teacherOverview.teacherRating')}</h4>
         </div>
         <div className={styles['review-information']}>
           <Icon className={styles['icon']} icon={'chat-dots'} size={18}></Icon>
           <h4>{reviews}</h4>
-          <h4>reviews</h4>
+          <h4>{t('coursesDetails.teacherOverview.reviews')}</h4>
         </div>
         <div className={styles['review-information']}>
           <Icon className={styles['icon']} icon={'user-group'} size={18}></Icon>
           <h4>{students}</h4>
-          <h4>students</h4>
+          <h4>{t('coursesDetails.teacherOverview.students')}</h4>
         </div>
         <div className={styles['review-information']}>
           <Icon className={styles['icon']} icon={'store'} size={18}></Icon>
           <h4>{courses}</h4>
-          <h4>courses</h4>
+          <h4>{t('coursesDetails.teacherOverview.courses')}</h4>
         </div>
       </div>
       <div className={styles['teacher-information-container']}>

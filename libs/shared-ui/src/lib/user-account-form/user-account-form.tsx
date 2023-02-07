@@ -7,6 +7,7 @@ import { IUserAccount } from '@ltpx-frontend-apps/api';
 import InputTextStatus, {
   StatusInputText,
 } from '../input-text-status/input-text-status';
+import { useTranslation } from 'react-i18next';
 /* eslint-disable-next-line */
 
 export interface UserAccountFormProps {
@@ -16,6 +17,8 @@ export interface UserAccountFormProps {
 
 export function UserAccountForm(props: UserAccountFormProps) {
   const { onSubmit, data } = props;
+  const { t } = useTranslation();
+
   const formik = useFormik({
     initialValues: {
       fullname: data?.fullname || '',
@@ -42,12 +45,12 @@ export function UserAccountForm(props: UserAccountFormProps) {
     <div className={styles['container']}>
       <form>
         <div className={styles['general']}>
-          <label>Información General</label>
+          <label>{t('userAccountForm.title')}</label>
           <div className={styles['general-grid']}>
             <div className={styles['fields']}>
               <div>
                 <Input
-                  label="Nombre completo"
+                  label={t('userAccountForm.fullName') || ''}
                   name="fullname"
                   placeholder="Carlos Huerta"
                   onChange={(e: any) => {
@@ -64,7 +67,7 @@ export function UserAccountForm(props: UserAccountFormProps) {
                 ) : null}
               </div>
               <Input
-                label="Nombre de usuario"
+                label={t('userAccountForm.userName') || ''}
                 name="username"
                 placeholder="carl"
                 onChange={(e: any) => {
@@ -75,7 +78,7 @@ export function UserAccountForm(props: UserAccountFormProps) {
               />
               <div>
                 <Input
-                  label="Correo electrónico"
+                  label={t('userAccountForm.email') || ''}
                   type="email"
                   name="email"
                   placeholder="myemail@example.com"
@@ -93,7 +96,7 @@ export function UserAccountForm(props: UserAccountFormProps) {
                 ) : null}
               </div>
               <Input
-                label="Teléfono"
+                label={t('userAccountForm.phone') || ''}
                 name="phone"
                 placeholder="0999999999"
                 onChange={(e: any) => {
@@ -106,11 +109,11 @@ export function UserAccountForm(props: UserAccountFormProps) {
           </div>
         </div>
         <div className={styles['general']}>
-          <label>Otra Información</label>
+          <label>{t('userAccountForm.subTitle')}</label>
           <div className={styles['general-grid']}>
             <div className={styles['fields']}>
               <Input
-                label="País"
+                label={t('userAccountForm.country') || ''}
                 name="country"
                 placeholder="Ecuador"
                 onChange={(e: any) => {
@@ -120,7 +123,7 @@ export function UserAccountForm(props: UserAccountFormProps) {
                 onBlur={formik.handleBlur}
               />
               <Input
-                label="Ciudad"
+                label={t('userAccountForm.city') || ''}
                 name="city"
                 placeholder="Guayaquil"
                 onChange={(e: any) => {
@@ -130,7 +133,7 @@ export function UserAccountForm(props: UserAccountFormProps) {
                 onBlur={formik.handleBlur}
               />
               <Input
-                label="Dirección"
+                label={t('userAccountForm.address') || ''}
                 name="address"
                 placeholder="Av Millares 29-12"
                 onChange={(e: any) => {
@@ -140,7 +143,7 @@ export function UserAccountForm(props: UserAccountFormProps) {
                 onBlur={formik.handleBlur}
               />
               <Input
-                label="Fecha de Nacimiento"
+                label={t('userAccountForm.birth') || ''}
                 name="birth"
                 placeholder="1996-12-21"
                 type="date"
@@ -156,7 +159,7 @@ export function UserAccountForm(props: UserAccountFormProps) {
         <div className={styles['form-submit']}>
           <Button
             color={ColorsButton.primary}
-            title="Actualizar mis datos"
+            title={t('buttons.updateData')}
             type={TypeButton.submit}
             onClick={formik.handleSubmit}
           />

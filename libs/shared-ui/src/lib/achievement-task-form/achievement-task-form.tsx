@@ -14,6 +14,7 @@ import * as Yup from 'yup';
 import InputTextStatus, {
   StatusInputText,
 } from '../input-text-status/input-text-status';
+import { useTranslation } from 'react-i18next';
 
 /* eslint-disable-next-line */
 export interface AchievementTaskFormProps {
@@ -25,6 +26,8 @@ export interface AchievementTaskFormProps {
 
 export function AchievementTaskForm(props: AchievementTaskFormProps) {
   const { onCancel, onSubmit, className, achievement } = props;
+  const { t } = useTranslation();
+
   const initialValues = {
     title: achievement?.title || '',
     image:  achievement?.image || '',
@@ -57,7 +60,7 @@ export function AchievementTaskForm(props: AchievementTaskFormProps) {
           <div className={styles['fields']}>
             <Input
               placeholder="Asigna un nombre interesante"
-              label="Titulo del logro"
+              label={t('achievementTaskForm.title')||''}
               value={values.title}
               onChange={handleChange}
               onBlur={handleBlur}
@@ -65,7 +68,7 @@ export function AchievementTaskForm(props: AchievementTaskFormProps) {
               errorMessage={errors.title}
             />
             <div className={styles['field-upload']}>
-              <label>Sube la tarea debe cumplir el alumno (.pdf)</label>
+              <label>{t('achievementTaskForm.task')}</label>
               <FilesUploaded
                 className={styles['uploader']}
                 type={TypeFile.pdf}
@@ -75,7 +78,7 @@ export function AchievementTaskForm(props: AchievementTaskFormProps) {
               />
             </div>
             <br />
-            <label>Selecciona la imagen que obtendrá al cumplir el logro</label>
+            <label>{t('achievementTaskForm.titleImage')}</label>
             <SelectImage
               selected={values.image}
               onChange={(img) => {
@@ -91,7 +94,7 @@ export function AchievementTaskForm(props: AchievementTaskFormProps) {
             )}
             <Input
               placeholder="1"
-              label="Precio"
+              label={t('achievementTaskForm.price')||''}
               description='Este valor sera enviado a tu cuenta una vez el alumno alcance este logro'
               type='number'
               min={1}
@@ -104,7 +107,7 @@ export function AchievementTaskForm(props: AchievementTaskFormProps) {
           </div>
           <div className={styles['footer']}>
             <Button
-              title="Cancelar"
+              title={t('buttons.cancel')}
               color={ColorsButton.white}
               type={TypeButton.button}
               onClick={() => {
@@ -112,7 +115,7 @@ export function AchievementTaskForm(props: AchievementTaskFormProps) {
               }}
             />
             <Button
-              title="Guardar logro"
+              title={t('buttons.saveAchievement')}
               color={ColorsButton.secondary}
               type={TypeButton.submit}
               onClick={submitForm}

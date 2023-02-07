@@ -14,6 +14,7 @@ import {
 import { useCourseUtil, useTeacher } from '@ltpx-frontend-apps/store';
 import { Dialog } from 'evergreen-ui';
 import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import styles from './teacher-courses.module.scss';
 
@@ -28,6 +29,7 @@ export function TeacherCourses(props: TeacherCoursesProps) {
   const { createCourse } = useTeacher();
   const { getPriceCourse } = useCourseUtil();
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   useEffect(() => {
     let mounted = true;
@@ -46,9 +48,10 @@ export function TeacherCourses(props: TeacherCoursesProps) {
   }, []);
 
   const categories = [
-    { value: 'all', text: 'Todos' },
-    { value: 'draff', text: 'Borradores' },
-    { value: 'pending', text: 'Pendientes' },
+    { value: 'all', text: t('teacherCourse.categories.all') },
+    { value: 'draff', text: t('teacherCourse.categories.draff') },
+    { value: 'publish', text: t('teacherCourse.categories.publish') },
+    { value: 'review', text: t('teacherCourse.categories.review') },
   ];
 
   const EmptyState = () => (
@@ -116,7 +119,7 @@ export function TeacherCourses(props: TeacherCoursesProps) {
           <InputSearch placeholder="Search course" />
           <Select options={categories} />
           <Button
-            title={'Nuevo Curso'}
+            title={t('buttons.newCourse')}
             color={ColorsButton.primary}
             onClick={() => {
               openNewCourse();

@@ -1,6 +1,7 @@
 import { Classroom, TeacherClassType } from '@ltpx-frontend-apps/api';
 import { Switch } from 'evergreen-ui';
 import { useFormik } from 'formik';
+import { useTranslation } from 'react-i18next';
 import Button, { TypeButton } from '../button/button';
 import SelectDates from '../select-dates/select-dates';
 import Select from '../select/select';
@@ -15,6 +16,7 @@ export interface ClassroomFormProps {
 
 export function ClassroomForm(props: ClassroomFormProps) {
   const { onSubmit, children, className } = props;
+  const { t } = useTranslation();
 
   const formik = useFormik({
     initialValues: {
@@ -74,11 +76,8 @@ export function ClassroomForm(props: ClassroomFormProps) {
       <section>
         <div className={`${styles['field-form']} ${styles['switch']}`}>
           <div>
-            <h4>Las clases serán obligatorias?</h4>
-            <p>
-              Solo en caso que las clases sean necesarias para aprobar este
-              curso
-            </p>
+            <h4>{t('classroomForm.title')}</h4>
+            <p>{t('classroomForm.text')}</p>
           </div>
           <Switch
             height={20}
@@ -89,7 +88,7 @@ export function ClassroomForm(props: ClassroomFormProps) {
           />
         </div>
         <div className={styles['field-form']}>
-          <label>Tamaño de la clase</label>
+          <label>{t('classroomForm.classSize')}</label>
           <div className={styles['range']}>
             De{' '}
             <Select
@@ -109,7 +108,7 @@ export function ClassroomForm(props: ClassroomFormProps) {
           </div>
         </div>
         <div className={styles['field-form']}>
-          <label>Duración de la clases</label>
+          <label>{t('classroomForm.durationClasses')}</label>
           <div className={styles['range']}>
             Cada clase durara{' '}
             <Select
@@ -129,7 +128,7 @@ export function ClassroomForm(props: ClassroomFormProps) {
           </div>
         </div>
         <div className={styles['field-form']}>
-          <label>Las clases serán en estas fechas</label>
+          <label>{t('classroomForm.dateClasses')}</label>
           <SelectDates
             onChange={(dates) => {
               formik.setFieldValue('dates', dates);
@@ -140,7 +139,7 @@ export function ClassroomForm(props: ClassroomFormProps) {
       <footer className={styles['buttons']}>
         {children}
         <Button
-          title="Guardar clases"
+          title={t('buttons.saveClass')}
           type={TypeButton.submit}
           onClick={formik.handleSubmit}
         />

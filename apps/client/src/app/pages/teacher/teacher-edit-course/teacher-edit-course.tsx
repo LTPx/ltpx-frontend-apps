@@ -23,14 +23,7 @@ import {
 import { useCallback, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import styles from './teacher-edit-course.module.scss';
-
-const linksEditCourse = [
-  { selected: true, text: 'Detalles' },
-  { selected: false, text: 'Contenidos' },
-  { selected: false, text: 'Tests' },
-  { selected: false, text: 'Logros' },
-  { selected: false, text: 'Sesiones' },
-];
+import { useTranslation } from 'react-i18next';
 
 export type ResponseRequest = {
   success: boolean;
@@ -48,7 +41,15 @@ export function TeacherEditCourse() {
   const { getCourse, course } = useCourse();
   const { _sendCourseToReview } = useTeacher();
   const { translateStatus } = useCourseUtil();
+  const { t } = useTranslation();
 
+  const linksEditCourse = [
+    { selected: true, text: t('teacherEditCourse.linksEditCourse.details') },
+    { selected: false, text: t('teacherEditCourse.linksEditCourse.contents') },
+    { selected: false, text: t('teacherEditCourse.linksEditCourse.quiz') },
+    { selected: false, text: t('teacherEditCourse.linksEditCourse.achievement') },
+    { selected: false, text: t('teacherEditCourse.linksEditCourse.sessions') },
+  ];
 
   const params = useParams();
   const { courseId } = params;
@@ -119,12 +120,12 @@ export function TeacherEditCourse() {
             <div className={styles['actions']}>
               <h5 className="muted">Creado: Diciembre 21 2022</h5>
               <Button
-                title="Guardar Borrador"
+                title={t('buttons.saveDraft')}
                 color={ColorsButton.accent}
                 link={'/teacher/courses/all'}
               />
               <Button
-                title="Enviar a revision"
+                title={t('buttons.sendReview')}
                 color={ColorsButton.primary}
                 type={TypeButton.submit}
                 onClick={() => {

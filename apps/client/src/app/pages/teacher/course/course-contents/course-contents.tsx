@@ -7,10 +7,9 @@ import {
   PanelAccordion,
   SetupCard,
 } from '@ltpx-frontend-apps/shared-ui';
-import {
-  useCourse
-} from '@ltpx-frontend-apps/store';
+import { useCourse } from '@ltpx-frontend-apps/store';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { ResponseRequest } from '../../teacher-edit-course/teacher-edit-course';
 import styles from './course-contents.module.scss';
 
@@ -27,49 +26,51 @@ export interface CourseContentsProps {
 
 export function CourseContents(props: CourseContentsProps) {
   const { onSubmit } = props;
-  const [ openModal, setOpenModal] = useState(false);
-  const [ contentEdit, setContentEdit] = useState<CourseContent>();
-  const [ indexContentEdit, setIndexContentEdit] = useState<number>();
+  const [openModal, setOpenModal] = useState(false);
+  const [contentEdit, setContentEdit] = useState<CourseContent>();
+  const [indexContentEdit, setIndexContentEdit] = useState<number>();
   const { course, addNewContent, updateContent, removeContent } = useCourse();
   const { contents } = course;
+  const { t } = useTranslation();
 
   const actionsContent = [
     {
       icon: 'pencil',
-      onClick: (data: any)=>{
+      onClick: (data: any) => {
         const { content, index } = data;
         setContentEdit(content);
         setIndexContentEdit(index);
         setOpenModal(true);
-      }
+      },
     },
     {
       icon: 'trash',
-      onClick: async(content: any)=>{
+      onClick: async (content: any) => {
         try {
           const { index } = content;
           const { data } = await removeContent(index);
           onSubmit &&
-          onSubmit({
-            success: true,
-            data: data,
-          });
+            onSubmit({
+              success: true,
+              data: data,
+            });
         } catch (error) {
           onSubmit &&
-          onSubmit({
-            success: false,
-            error: error,
-          });
+            onSubmit({
+              success: false,
+              error: error,
+            });
         }
-      }
-    }
+      },
+    },
   ];
 
   const saveContent = async (content: ContentCourse) => {
     try {
-      const { data } = indexContentEdit !== undefined
-        ? await updateContent(content, indexContentEdit)
-        : await addNewContent(content);
+      const { data } =
+        indexContentEdit !== undefined
+          ? await updateContent(content, indexContentEdit)
+          : await addNewContent(content);
       onSubmit &&
         onSubmit({
           success: true,
@@ -83,24 +84,22 @@ export function CourseContents(props: CourseContentsProps) {
           error: error,
         });
     }
-  }
+  };
 
   return (
     <div className={styles['contents']}>
       <div className={styles['header-text']}>
-        <h2>Contenidos</h2>
-        <h4 className="muted">
-          Puedes agregar contenidos que sirvan de apoyo para tus estudiantes
-        </h4>
+        <h2>{t('courseContents.title')}</h2>
+        <h4 className="muted">{t('courseContents.subtitle')}</h4>
       </div>
-      {contents.length <1 && (
+      {contents.length < 1 && (
         <SetupCard
           onClick={() => {
             setOpenModal(true);
           }}
           icon={'copy'}
           text={'Los contenidos son recursos de textos para tus estudiantes'}
-          titleButton={'Agregar Ahora'}
+          titleButton={t('buttons.addNow') || ''}
         />
       )}
       {contents.length >= 1 && (
@@ -110,14 +109,14 @@ export function CourseContents(props: CourseContentsProps) {
               title={content.title}
               text={content.description}
               key={index}
-              data={{content, index}}
+              data={{ content, index }}
               actions={actionsContent}
             >
               <pre>{content.description}</pre>
             </PanelAccordion>
           ))}
           <Button
-            title="+ Agregar otro contenido"
+            title={t('buttons.addContent')}
             onClick={() => {
               setOpenModal(true);
             }}
@@ -125,7 +124,7 @@ export function CourseContents(props: CourseContentsProps) {
           />
         </>
       )}
-      { openModal && (
+      {openModal && (
         <CourseContentForm
           content={contentEdit}
           open={openModal}

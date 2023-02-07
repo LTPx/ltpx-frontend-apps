@@ -44,8 +44,8 @@ const createRandomCourseDetail = () => (
       stars: faker.datatype.number(5),
       achievements: faker.datatype.number(5),
       enrolled: faker.datatype.number(15),
-      skillLevel: 'Expert',
-      language: 'English',
+      skillLevel: 'advance',
+      language: 'en',
       certificate: true,
       learn_goals: [`Learn: ${faker.commerce.product()}`, `Learn: ${faker.commerce.product()}`, `Learn: ${faker.commerce.product()}`],
       requirements: ['Good Internet', 'Free time', 'Laptop']

@@ -8,6 +8,7 @@ import InputTextStatus, {
   StatusInputText,
 } from '../input-text-status/input-text-status';
 import { NavLink } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 /* eslint-disable-next-line */
 export interface RegisterFormProps {
@@ -20,6 +21,7 @@ export interface RegisterFormProps {
 
 export function RegisterForm(props: RegisterFormProps) {
   const { onSubmit, termsAndConditions } = props;
+  const { t } = useTranslation();
 
   const formik = useFormik({
     initialValues: {
@@ -42,7 +44,7 @@ export function RegisterForm(props: RegisterFormProps) {
   return (
     <form className={styles['form']}>
       <Input
-        label="Nombre"
+        label={t('registerForm.name') || ''}
         type="text"
         name="fullname"
         placeholder="John Doe"
@@ -59,7 +61,7 @@ export function RegisterForm(props: RegisterFormProps) {
         />
       ) : null}
       <Input
-        label="Email"
+        label={t('registerForm.email') || ''}
         type="email"
         name="email"
         placeholder="myemail@example.com"
@@ -76,7 +78,7 @@ export function RegisterForm(props: RegisterFormProps) {
         />
       ) : null}
       <Input
-        label="Password"
+        label={t('registerForm.password') || ''}
         type="password"
         name="password"
         placeholder="********"
@@ -103,7 +105,7 @@ export function RegisterForm(props: RegisterFormProps) {
       <Button
         className={styles['btn-submit']}
         color={ColorsButton.primary}
-        title="Crear una cuenta"
+        title={t('buttons.register')}
         full={true}
         type={TypeButton.submit}
         onClick={formik.handleSubmit}

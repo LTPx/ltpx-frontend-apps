@@ -7,32 +7,53 @@ import {
 } from '@ltpx-frontend-apps/shared-ui';
 import { useSite } from '@ltpx-frontend-apps/store';
 import { useCallback, useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { NavLink } from 'react-router-dom';
 import styles from './home.module.scss';
 
 export function Home() {
   const [ courses, setCourses] = useState<CourseModel[]>([])
   const {_getPopularCourses } = useSite();
-  const popularCourses = buildCourses(8);
+  const { t } = useTranslation();
   const categories = [
-    { icon: 'desktop', title: 'Design', description: 'Over 960 courses' },
-    { icon: 'briefcase', title: 'Business', description: 'Over 600 courses' },
+    {
+      icon: 'desktop',
+      title: t('course_categories.design'),
+      description: 'Over 960 courses',
+    },
+    {
+      icon: 'briefcase',
+      title: t('course_categories.business'),
+      description: 'Over 600 courses',
+    },
     {
       icon: 'browser',
-      title: 'Software Development',
+      title: t('course_categories.software_development'),
       description: 'Over 320 courses',
     },
     {
       icon: 'user',
-      title: 'Personal Development',
+      title: t('course_categories.personal_development'),
       description: 'Over 180 courses',
     },
-    { icon: 'picture', title: 'Photography', description: 'Over 400 courses' },
-    { icon: 'guitar', title: 'Audio + Music', description: 'Over 250 courses' },
-    { icon: 'marketing', title: 'Marketing', description: 'Over 380 courses' },
+    {
+      icon: 'picture',
+      title: t('course_categories.photography'),
+      description: 'Over 400 courses',
+    },
+    {
+      icon: 'guitar',
+      title: t('course_categories.audio'),
+      description: 'Over 250 courses',
+    },
+    {
+      icon: 'marketing',
+      title: t('course_categories.marketing'),
+      description: 'Over 380 courses',
+    },
     {
       icon: 'wallet',
-      title: 'Finance Accounting',
+      title: t('course_categories.finance'),
       description: 'Over 100 courses',
     },
   ];
@@ -56,22 +77,19 @@ export function Home() {
         <div className={styles['cover']}>
           <div className={styles['info']}>
             <div className={styles['text']}>
-              <h1>Aprende desde cualquier lugar</h1>
-              <h4>
-                La tecnología está trayendo una ola masiva de educación sobre el aprendizaje
-                Cosas de diferentes maneras
-              </h4>
+              <h1>{t('home.cover.title')}</h1>
+              <h4>{t('home.cover.subtitle')}</h4>
             </div>
             <div className={styles['actions']}>
               <Button
                 color={ColorsButton.secondary}
-                title="REGISTRARME"
+                title={t('buttons.start')}
                 outline={true}
                 link="/register"
               />
               <Button
                 color={ColorsButton.primary}
-                title="VER CURSOS"
+                title={t('buttons.courses')}
                 link="/courses"
               />
             </div>
@@ -84,8 +102,8 @@ export function Home() {
       </div>
       <div className={styles['popular-courses-container']}>
         <div className={styles['text']}>
-          <h2>Cursos Populares</h2>
-          <h4 className="muted">Descubre y aprende en nuestros curso</h4>
+          <h2>{t('home.popularCourse.title')}</h2>
+          <h4>{t('home.popularCourse.subtitle')}</h4>
         </div>
         <div className={styles['popular-courses']}>
           {courses.map((course, index) => (
@@ -104,15 +122,13 @@ export function Home() {
           ))}
         </div>
         <div className={styles['link-browser']}>
-          <NavLink to="/courses">Ver todos</NavLink>
+          <NavLink to="/courses">{t('home.popularCourse.showAll')}</NavLink>
         </div>
       </div>
       <div className={styles['categories-container']}>
         <div className={styles['text-categories']}>
-          <h2>Trending Categories</h2>
-          <h4 className="muted">
-            Select your category and discover your perfect class
-          </h4>
+          <h2>{t('home.categories.title')}</h2>
+          <h4> {t('home.categories.subtitle')}</h4>
         </div>
         <div className={styles['category-content']}>
           {categories.map((category, index) => (

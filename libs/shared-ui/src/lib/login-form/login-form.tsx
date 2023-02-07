@@ -10,6 +10,7 @@ import {
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { ICredentials } from '@ltpx-frontend-apps/api';
+import { useTranslation } from 'react-i18next';
 
 /* eslint-disable-next-line */
 export interface LoginFormProps {
@@ -18,6 +19,7 @@ export interface LoginFormProps {
 
 export function LoginForm(props: LoginFormProps) {
   const { onSubmit } = props;
+  const { t } = useTranslation();
 
   const formik = useFormik({
     initialValues: {
@@ -38,7 +40,7 @@ export function LoginForm(props: LoginFormProps) {
   return (
     <form className={styles['form']}>
       <Input
-        label="Email"
+        label={t('login.email') || ''}
         type="email"
         name="email"
         placeholder="myemail@example.com"
@@ -55,7 +57,7 @@ export function LoginForm(props: LoginFormProps) {
         />
       ) : null}
       <Input
-        label="Password"
+        label={t('login.password') || ''}
         type="password"
         name="password"
         placeholder="********"
@@ -74,7 +76,7 @@ export function LoginForm(props: LoginFormProps) {
       <Button
         className={styles['btn-submit']}
         color={ColorsButton.primary}
-        title="Iniciar Sesión"
+        title={t('buttons.signIn')}
         full={true}
         type={TypeButton.submit}
         onClick={formik.handleSubmit}

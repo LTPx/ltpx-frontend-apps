@@ -1,6 +1,6 @@
 import { StateCreator } from 'zustand';
 import { StoreState } from '../store';
-import { addCourseCart, CourseModel, getCart } from '@ltpx-frontend-apps/api';
+import { addCourseCart, CourseModel, getCart, removeCourseCart } from '@ltpx-frontend-apps/api';
 
 export type TResponse = {
   success: boolean;
@@ -45,7 +45,7 @@ export const createCartSlice: StateCreator<StoreState, [], [], CartSlice> = (
   },
   _removeCourseCart: async (id: number) => {
     try {
-      const cart = await getCart();
+      const cart = await removeCourseCart(id);
       const coursesInCart = get().coursesInCart.filter(
         (course) => course.id !== id
       );

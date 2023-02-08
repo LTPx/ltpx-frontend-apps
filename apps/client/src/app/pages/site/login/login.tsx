@@ -35,7 +35,7 @@ export function Login(props: LoginProps) {
       }
       if (data.initial_register === TypeAccounts.teacher) {
         navigate('/teacher/dashboard');
-        window.location.reload();
+        // window.location.reload();
       }
     } else {
       setError(true);

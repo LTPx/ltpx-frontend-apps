@@ -9,6 +9,7 @@ export const AppRouter = () => {
   const [ isLoading, setIsLoading ] = useState(false);
   const { currentView, isAuthenticated, getCurrentUser } = useUser();
   const token = localStorage.getItem('auth_token');
+  // console.log('povatyqug@mailinator.com: ', currentView);
 
   const routers = {
     default: <SiteRoutes/>,
@@ -25,6 +26,9 @@ export const AppRouter = () => {
           setIsLoading(false)
         }, 1000);
       });
+    } else {
+      // setIsLoading(true);
+      console.log('currentView: ', currentView);
     }
     return () => {
 

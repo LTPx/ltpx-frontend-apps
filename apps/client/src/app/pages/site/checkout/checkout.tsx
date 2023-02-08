@@ -24,13 +24,15 @@ export function Checkout() {
             ))}
           </div>
           <h3>Métodos de Pago</h3>
-          <PaypalCheckoutButton
-            product={{
-              description:
-                'Curso de programación avanzada para todos los niveles',
-              price: 5.99,
-            }}
-          />
+          { coursesInCart.length && (
+            <PaypalCheckoutButton
+              product={{
+                description: coursesInCart[0].title,
+                price: coursesInCart[0].price || 0,
+                id: coursesInCart[0].id,
+              }}
+            />
+          )}
           <div className={styles['tip']}>
             <Icon icon="mail" size={19}></Icon>
             <h4>

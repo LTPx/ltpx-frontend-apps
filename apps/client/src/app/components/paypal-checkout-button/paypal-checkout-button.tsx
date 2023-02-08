@@ -6,12 +6,14 @@ import {
   SnackbarType,
 } from '@ltpx-frontend-apps/shared-ui';
 import { useState } from 'react';
+import { useSite } from '@ltpx-frontend-apps/store';
 
 /* eslint-disable-next-line */
 export interface PaypalCheckoutButtonProps {
   product: {
     description: string;
     price: number;
+    id: number;
   };
 }
 
@@ -23,10 +25,15 @@ type MessageCheckout = {
 export function PaypalCheckoutButton(props: PaypalCheckoutButtonProps) {
   const { product } = props;
   const [message, setMessage] = useState<MessageCheckout>();
+  const { _enrollUser } = useSite();
 
-  function handleApproved(orderId: string) {
+  async function handleApproved (orderId: string) {
+    await _enrollUser({
+      price: product.price,
+      course_id: product.id
+    })
     setMessage({
-      text: 'Gracias por tu compra',
+      text: `Gracias por tu compra id: ${orderId}`,
       kind: SnackbarType.success,
     });
   }
@@ -47,7 +54,7 @@ export function PaypalCheckoutButton(props: PaypalCheckoutButtonProps) {
           });
         }}
         onClick={(data, actions) => {
-          console.log('clicked...');
+          console.log('clicked...: ', data);
           //validations
           const ok = true;
           if (ok) {
@@ -60,6 +67,7 @@ export function PaypalCheckoutButton(props: PaypalCheckoutButtonProps) {
         }}
         onApprove={async (data, actions) => {
           const order = await actions.order?.capture();
+          console.log('order: ', order);
           console.log('data: ', data);
           if (order) {
             handleApproved(order.id);
@@ -89,6 +97,7 @@ export function PaypalCheckoutButton(props: PaypalCheckoutButtonProps) {
           title={message.text}
           kind={message.kind}
           onClose={()=> setMessage(undefined)}
+          duration={2000}
         />
       )}
     </div>

@@ -96,6 +96,11 @@ export const es = {
     categories: {
       title: 'Categorías de tendencia',
       subtitle: 'Seleccione su categoría y descubra su clase perfecta',
+    },
+    news: {
+      title: 'Aprende sobre OpenMind',
+      subtitle: 'Descubra su programa perfecto en nuestros cursos.',
+      link: 'Ir a Blog'
     }
   },
   allCourses: {

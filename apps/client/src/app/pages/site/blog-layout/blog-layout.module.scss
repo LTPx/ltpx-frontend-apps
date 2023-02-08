@@ -9,7 +9,7 @@
   padding: $size-lg-3 0;
 
   .breadcrumbs {
-    padding: 0.5rem 1rem;
+    padding: $size-sm-2 $size-md-1;
   }
 
   .content-wrapper {
@@ -22,7 +22,7 @@
     display: flex;
     flex-direction: column;
     line-height: $size-lg-1;
-    padding: 0 1rem;
+    padding: 0 $size-md-1;
 
     img {
       height: 22rem;
@@ -56,11 +56,26 @@
   .container {
     .content-wrapper {
       width: inherit;
-
       img {
         object-fit: cover;
         height: inherit;
       }
+    }
+  }
+}
+//tablet-responsive-vertical
+@media screen and (min-width: 560px) and (max-width: 850px) {
+  .container {
+    .content-wrapper {
+      width: 80%;
+    }
+  }
+}
+// tablet-responsive-horizontal
+@media screen and (min-width: 860px) and (max-width: 1224px) {
+  .container {
+    .content-wrapper {
+      width: 60%;
     }
   }
 }

@@ -30,7 +30,6 @@ export function HeaderApp(props: HeaderAppProps) {
     { title: t('header.home'), url: '/home' },
     { title: t('header.courses'), url: '/courses' },
     { title: t('header.beTeacher'), url: '/register-teacher' },
-    { title: t('header.blog'), url: '/blog' },
   ];
 
   const authLinks = [

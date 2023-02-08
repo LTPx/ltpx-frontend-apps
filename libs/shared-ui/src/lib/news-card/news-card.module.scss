@@ -7,7 +7,8 @@
   box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px,
       rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
   padding: 0.5rem;
-  max-width: 20rem;
+  height: 17rem;
+  // width: 20rem;
   cursor: pointer;
   &:hover {
     box-shadow: $card-shadow-strong;
@@ -36,5 +37,12 @@
     color: $text-color;
     font-weight: bold;
     padding-bottom: 1rem;
+    padding-top: 1rem;
+  }
+}
+//tablet-responsive-vertical
+@media screen and (min-width: 560px) and (max-width: 850px) {
+  .container {
+    width: 20rem;
   }
 }

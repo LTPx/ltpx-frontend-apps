@@ -22,7 +22,7 @@ export function NewsCard(props: NewsCardProps) {
       alt="img-news"
       loading="lazy"
     />
-    <div className={styles['description']}>
+    {/* <div className={styles['description']}>
       <div className={styles['item']}>
         <Icon icon={'user'} size={20} color={'#77838f'} />
         <h4>{name}</h4>
@@ -31,7 +31,7 @@ export function NewsCard(props: NewsCardProps) {
         <Icon icon={'calendar'} size={20} color={'#77838f'} />
         <h4>{date}</h4>
       </div>
-    </div>
+    </div> */}
     <h3>{title}</h3>
   </div>
   );

@@ -110,11 +110,15 @@
   align-items: center;
   padding: 5rem 0;
 
+  .newsCard {
+    height: 17rem;
+    width: 20rem;
+  }
   .title-news {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 40rem;
+    gap: 37rem;
     padding-bottom: 1.5rem;
     .text-news {
       h4 {
@@ -228,5 +232,23 @@
   }
   .categories-container {
     padding: 5rem 0;
+  }
+  .news-container{
+    .title-news {
+      gap: 15rem;
+    }
+    .news-content {
+      display: flex;
+      width: 42rem;
+      gap: 4rem;
+      overflow-x: auto;
+      box-sizing: border-box;
+      padding-bottom: 3rem;
+
+      .newsCard {
+        background-color: aqua;
+      }
+    }
+    
   }
 }

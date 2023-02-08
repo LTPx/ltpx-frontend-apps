@@ -6,9 +6,8 @@
   background-color: $white-color;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px,
       rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
-  padding: 0.5rem;
+  padding: $size-sm-2;
   height: 17rem;
-  // width: 20rem;
   cursor: pointer;
   &:hover {
     box-shadow: $card-shadow-strong;
@@ -21,12 +20,12 @@
   }
   .description {
     display: flex;
-    gap: 2rem;
-    padding: 1rem 0;
+    gap: $size-lg-1;
+    padding: $size-md-1 0;
     .item {
       display: flex;
       align-items: center;
-      gap: 0.5rem;
+      gap: $size-sm-2;
     }
     h4 {
       margin-bottom: 0;
@@ -36,8 +35,8 @@
   h3 {
     color: $text-color;
     font-weight: bold;
-    padding-bottom: 1rem;
-    padding-top: 1rem;
+    padding-bottom: $size-md-1;
+    padding-top: $size-md-1;
   }
 }
 //tablet-responsive-vertical

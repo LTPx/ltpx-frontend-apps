@@ -71,7 +71,7 @@ export function FilesUploaded(props: FilesUploadedProps) {
   return (
     <div className={`${styles['container']} ${label ? styles['with-label'] : ''}`}>
       {label && <label>{label}</label>}
-      {description && <p>{description}</p>}
+      {description && description}
       <div className={`${styles['content']} ${className}`}>
         <div className={styles['files-content']}>
           <div className={styles['file']}>

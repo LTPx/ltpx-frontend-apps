@@ -52,7 +52,7 @@ export interface ICurrentUser {
   password: string;
   initial_register: TypeAccounts;
   teacher_account?: StatusTeacherAccount;
-  cart: CartModel
+  cart?: CartModel
 }
 
 export interface IUserAccount {

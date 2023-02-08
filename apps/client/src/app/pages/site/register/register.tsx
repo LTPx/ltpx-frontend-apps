@@ -18,7 +18,7 @@ export function Register(props: RegisterProps) {
 
     if (isLogin) {
       navigate('/home');
-      window.location.reload();
+      // window.location.reload();
     } else {
       // setError(true);
     }

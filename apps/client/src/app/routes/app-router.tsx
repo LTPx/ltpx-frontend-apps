@@ -9,7 +9,6 @@ export const AppRouter = () => {
   const [ isLoading, setIsLoading ] = useState(false);
   const { currentView, isAuthenticated, getCurrentUser } = useUser();
   const token = localStorage.getItem('auth_token');
-  // console.log('povatyqug@mailinator.com: ', currentView);
 
   const routers = {
     default: <SiteRoutes/>,
@@ -17,6 +16,7 @@ export const AppRouter = () => {
     student: <StudentRoutes/>,
     teacher: <TeacherRoutes/>,
   };
+  const router = routers[currentView];
 
   useEffect(() => {
     if (token && !isAuthenticated && !isLoading) {
@@ -26,9 +26,6 @@ export const AppRouter = () => {
           setIsLoading(false)
         }, 1000);
       });
-    } else {
-      // setIsLoading(true);
-      console.log('currentView: ', currentView);
     }
     return () => {
 
@@ -36,6 +33,6 @@ export const AppRouter = () => {
   }, [])
 
   return (
-    isLoading ? <LoaderPage/> : routers[currentView]
+    isLoading ? <LoaderPage/> : router
   )
 }

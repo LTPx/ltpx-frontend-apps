@@ -58,14 +58,23 @@ export const createUserSlice: StateCreator<
     try {
       const user = await getCurrentUser();
       const { initial_register, cart } =  user;
-      const coursesInCart = cart.items.map((item)=> item.course);
-      set({
-        user: user,
-        isAuthenticated: true,
-        currentView: views[initial_register],
-        teacher_account: user.teacher_account,
-        coursesInCart: coursesInCart
-      });
+      if (cart) {
+        const coursesInCart = cart.items.map((item)=> item.course);
+        set({
+          user: user,
+          isAuthenticated: true,
+          currentView: views[initial_register],
+          teacher_account: user.teacher_account,
+          coursesInCart: coursesInCart
+        });
+      } else {
+        set({
+          user: user,
+          isAuthenticated: true,
+          currentView: views[initial_register],
+          teacher_account: user.teacher_account,
+        });
+      }
       return { isLogin: true, data: user };
     } catch (error) {
       set({
@@ -109,10 +118,11 @@ export const createUserSlice: StateCreator<
   register: async (params: IRegisterUser):Promise<TResponseLogin> => {
     try {
       const { user } = await registerUser(params);
+      const view = views[user.initial_register];
       set({
         user: user,
         isAuthenticated: true,
-        currentView: TypeViews.user
+        currentView: view
       });
       return { isLogin: true, data: user };
     } catch (error) {

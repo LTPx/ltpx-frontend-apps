@@ -12,7 +12,24 @@
   color: $text-gray-color;
   border-radius: 4px;
   cursor: pointer;
+  position: relative;
 
+  .header {
+    width: 4rem;
+    height: 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    img {
+      z-index: 0;
+      position: absolute;
+    }
+    .icon {
+      position: absolute;
+      z-index: 1;
+    }
+  }
   .title {
     color: $text-color;
     margin-top: $size-md-1;
@@ -27,7 +44,7 @@
   color: $primary-color;
   box-shadow: 0 0 15px #eaf0f6;
   transform: translateY(-5px);
-  transition: box-shadow .15s ease-in-out,transform .15s ease-in-out;
+  transition: box-shadow 0.15s ease-in-out, transform 0.15s ease-in-out;
   .title {
     color: $primary-color;
   }

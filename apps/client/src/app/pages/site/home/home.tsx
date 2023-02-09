@@ -18,44 +18,60 @@ export function Home(props: HomeProps) {
   const { t } = useTranslation();
   const categories = [
     {
+      id: 1,
       icon: 'desktop',
       title: t('course_categories.design'),
       description: 'Over 960 courses',
+      key: 'design',
     },
     {
+      id: 2,
       icon: 'briefcase',
       title: t('course_categories.business'),
       description: 'Over 600 courses',
+      key: 'business',
     },
     {
+      id: 3,
       icon: 'browser',
       title: t('course_categories.software_development'),
       description: 'Over 320 courses',
+      key: 'software_development',
     },
     {
+      id: 4,
       icon: 'user',
       title: t('course_categories.personal_development'),
       description: 'Over 180 courses',
+      key: 'personal_development',
     },
     {
+      id: 5,
       icon: 'picture',
       title: t('course_categories.photography'),
       description: 'Over 400 courses',
+      key: 'photography',
     },
     {
+      id: 6,
       icon: 'guitar',
       title: t('course_categories.audio'),
       description: 'Over 250 courses',
+      key: 'audio',
     },
     {
+      id: 7,
       icon: 'marketing',
       title: t('course_categories.marketing'),
       description: 'Over 380 courses',
+      key: 'marketing',
     },
     {
+      id: 8,
       icon: 'wallet',
       title: t('course_categories.finance'),
       description: 'Over 100 courses',
+      key: 'finance',
     },
   ];
   const news = [
@@ -136,7 +152,7 @@ export function Home(props: HomeProps) {
           ))}
         </div>
         <div className={styles['link-browser']}>
-          <NavLink to="/courses">{t('home.popularCourse.showAll')}</NavLink>
+          <NavLink to="/courses">{t('links.toAllCourses')}</NavLink>
         </div>
       </div>
       <div className={styles['categories-container']}>
@@ -151,6 +167,7 @@ export function Home(props: HomeProps) {
               key={index}
               title={category.title}
               description={category.description}
+              link={`/course/${category.key}/category`}
             />
           ))}
         </div>
@@ -162,7 +179,7 @@ export function Home(props: HomeProps) {
             <h4>{t('home.news.subtitle')}</h4>
           </div>
           <div className={styles['link']}>
-            <NavLink to="/blog"> {t('home.news.link')} </NavLink>
+            <NavLink to="/blog"> {t('links.toBlog')} </NavLink>
           </div>
         </div>
         <div className={styles['news-content']}>

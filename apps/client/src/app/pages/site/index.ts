@@ -10,3 +10,4 @@ export * from './register-teacher/register-teacher';
 export * from './forget-password/forget-password';
 export * from './page-404/page-404';
 export * from './about-us/about-us';
+export * from './courses-by-category/courses-by-category';

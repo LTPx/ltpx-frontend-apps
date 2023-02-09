@@ -105,10 +105,10 @@ export function CourseDetails() {
               <div className={styles['description-title']}>
                 <div className={styles['title']}>
                   <h1>{course.course.title}</h1>
-                  <h4 className="muted">
+                  {/* <h4 className="muted">
                     Looking how to increase your incomes and learn about new
                     digital money
-                  </h4>
+                  </h4> */}
                 </div>
               </div>
               <div className={styles['description-course']}>
@@ -197,7 +197,7 @@ export function CourseDetails() {
             </div>
           </div>
           <BuyCourseCard
-            price={10}
+            price={course.course.price_format}
             achievements={course.course.achievements?.length || 0}
             lectures={course.course.contents.length}
             enrolled={course.course.enrollments_count}

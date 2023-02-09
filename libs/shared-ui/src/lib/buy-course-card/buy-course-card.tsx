@@ -6,7 +6,7 @@ import styles from './buy-course-card.module.scss';
 /* eslint-disable-next-line */
 export interface BuyCourseCardProps {
   image: string;
-  price: number;
+  price: string;
   discount?: number;
   achievements: number;
   lectures: number;
@@ -41,7 +41,7 @@ export function BuyCourseCard(props: BuyCourseCardProps) {
         <div className={`${styles['summary']}`}>
           <div className={styles['price-promo']}>
             <div className={styles['price']}>
-              <h3>${price}</h3>
+              <h3>{price}</h3>
             </div>
             <div className={styles['discount']}>
               <span>{discount || 20}% descuento</span>

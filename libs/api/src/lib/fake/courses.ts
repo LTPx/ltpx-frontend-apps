@@ -18,6 +18,7 @@ const createRandomCourse = ():PublicCourse => (
     enrollments_count: 12,
     requirements: 'No one',
     price_currency: 'USD',
+    price_format: '$10.00',
     classroom: {
       condition: TeacherClassType.flexible,
       min: 1,

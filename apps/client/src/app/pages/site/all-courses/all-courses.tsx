@@ -61,7 +61,7 @@ export function AllCourses(props: AllCoursesProps) {
                 image={course.cover}
                 category={course.category}
                 title={course.title}
-                price={course.price_cents}
+                price={course.price_format}
                 duration={0}
                 lessons={0}
                 stars={course.average_rating}

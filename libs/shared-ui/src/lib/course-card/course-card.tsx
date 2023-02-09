@@ -8,7 +8,7 @@ export interface CourseCardProps {
   image?: string;
   category: string;
   title: string;
-  price: number;
+  price: string;
   duration?: number;
   lessons?: number;
   stars?: number;
@@ -45,7 +45,7 @@ export function CourseCard(props: CourseCardProps) {
             <Icon icon={'clock'} size={15} />
             {duration} min
           </div>
-          <div className={styles['info-item']}></div>${price}
+          <div className={styles['info-item']}></div>{price}
         </div>
       </div>
     </div>

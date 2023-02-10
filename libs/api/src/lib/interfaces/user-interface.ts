@@ -25,6 +25,7 @@ export interface UserResponse {
   fullname: string;
   email: string;
   initial_register: TypeAccounts;
+  initial_view: TypeViews;
   teacher_account?: StatusTeacherAccount;
 }
 
@@ -32,6 +33,7 @@ export interface UserStore {
   fullname: string;
   email: string;
   initial_register: TypeAccounts;
+  initial_view: TypeViews;
   teacher_account?: StatusTeacherAccount;
 }
 
@@ -51,6 +53,7 @@ export interface ICurrentUser {
   email: string;
   password: string;
   initial_register: TypeAccounts;
+  initial_view: TypeViews;
   teacher_account?: StatusTeacherAccount;
   cart?: CartModel
 }
@@ -85,4 +88,5 @@ export interface UserModel {
   address                :string;
   phone                  :string;
   initial_register       :TypeAccounts;
+  initial_vial           :TypeViews;
 }

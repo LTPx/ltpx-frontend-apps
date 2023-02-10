@@ -40,6 +40,9 @@ export * from './lib/api/site/enrollments-api';
 
 export * from './lib/api/user/payments-api';
 
+export * from './lib/api/student/student-courses-api';
+export * from './lib/api/student/student-payments-api';
+
 //constants
 export * from '../src/lib/constants/course-constants';
 export * from '../src/lib/constants/app-constants';

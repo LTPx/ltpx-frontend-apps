@@ -8,3 +8,4 @@ export * from './lib/hooks/useAdmin';
 export * from './lib/hooks/useSite';
 export * from './lib/hooks/useCart';
 export * from './lib/hooks/useSiteUtil';
+export * from './lib/hooks/useStudent';

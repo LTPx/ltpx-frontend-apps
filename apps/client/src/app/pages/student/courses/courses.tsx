@@ -2,6 +2,8 @@ import { UserCourseCard, UserCourseCardProps } from '@ltpx-frontend-apps/shared-
 import { NavLink } from 'react-router-dom';
 import styles from './courses.module.scss';
 import { faker } from '@faker-js/faker';
+import { useStudent } from '@ltpx-frontend-apps/store';
+import { useCallback, useEffect } from 'react';
 
 /* eslint-disable-next-line */
 
@@ -21,9 +23,22 @@ export interface CoursesProps {
   state: StateCourses;
 }
 
-// const cour =
 export function Courses(props: CoursesProps) {
   const { state } = props;
+  const { _getStudentCourses } = useStudent();
+
+  const fetchCourses = useCallback(async () => {
+    const { success, data, error } = await _getStudentCourses();
+    if (success) {
+      console.log('error: ', data);
+    } else {
+      console.log('error: ', error);
+    }
+  }, []);
+
+  useEffect(() => {
+    fetchCourses();
+  }, [fetchCourses]);
 
   const createRandomCourse = (): UserCourseCardProps => (
     {

@@ -1,11 +1,10 @@
+import styles from './header-app.module.scss';
 import {
-  Cart,
   Dropdown,
   Header,
   UserMenu,
 } from '@ltpx-frontend-apps/shared-ui';
-import { NavLink, useNavigate } from 'react-router-dom';
-import styles from './header-app.module.scss';
+import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useCart, useUser } from '@ltpx-frontend-apps/store';
 import { Avatar } from 'evergreen-ui';
@@ -33,16 +32,14 @@ export function HeaderApp() {
     { title: t('header.register'), url: '/register', accent: true },
   ];
 
-  const linksStudent = [{ title: 'My Dashboard', url: '/student/dashboard' }];
-
   const linksNotAccount = isAuthenticated
     ? mainLinks
     : mainLinks.concat(authLinks);
 
   const linksView = {
     default: linksNotAccount,
-    user: linksStudent,
-    student: linksStudent,
+    user: [],
+    student: [],
     teacher: [],
   };
 
@@ -53,27 +50,22 @@ export function HeaderApp() {
       <Header links={links}>
         <div className={styles['actions']}>
           {isAuthenticated && (
-            <>
-              <NavLink className="c" to={'cart'}>
-                <Cart amount={totalCourses}/>
-              </NavLink>
-              <Dropdown>
-                <Avatar name={user.fullname} size={35}/>
-                <UserMenu
-                  name={user.fullname}
-                  email={user.email}
-                  links={[
-                    {
-                      icon: 'log-out',
-                      text: 'Cerrar Session',
-                      onClick: () => {
-                        logoutSession();
-                      },
+            <Dropdown>
+              <Avatar name={user.fullname} size={35}/>
+              <UserMenu
+                name={user.fullname}
+                email={user.email}
+                links={[
+                  {
+                    icon: 'log-out',
+                    text: 'Cerrar Session',
+                    onClick: () => {
+                      logoutSession();
                     },
-                  ]}
-                />
-              </Dropdown>
-            </>
+                  },
+                ]}
+              />
+            </Dropdown>
           )}
         </div>
       </Header>

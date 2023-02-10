@@ -91,11 +91,14 @@ export const es = {
     popularCourse: {
       title: 'Cursos populares',
       subtitle: 'Descubra su programa perfecto en nuestros cursos',
-      showAll: 'Explorar todos los cursos'
     },
     categories: {
       title: 'Categorías de tendencia',
       subtitle: 'Seleccione su categoría y descubra su clase perfecta',
+    },
+    news: {
+      title: 'Aprende sobre OpenMind',
+      subtitle: 'Descubra su programa perfecto en nuestros cursos.',
     }
   },
   allCourses: {
@@ -192,6 +195,10 @@ export const es = {
     saveAchievement: 'Guardar logro',
     updateData: 'Actualizar mis datos',
     sendRequest: 'Enviar Solicitud'
+  },
+  links: {
+    toBlog: 'Ir a Blog',
+    toAllCourses: 'Explorar todos los cursos'
   },
   teacherCourse : {
     categories: {

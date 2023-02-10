@@ -1,6 +1,12 @@
 import { IUserAccount } from '@ltpx-frontend-apps/api';
-import { BannerNotification, UserAccountForm } from '@ltpx-frontend-apps/shared-ui';
 import { useTeacher } from '@ltpx-frontend-apps/store';
+import {
+  BannerNotification,
+  PaymentForm,
+  Tabs,
+  TeacherProfileForm,
+  UserAccountForm,
+} from '@ltpx-frontend-apps/shared-ui';
 import { useEffect, useState } from 'react';
 import styles from './teacher-account.module.scss';
 
@@ -16,8 +22,9 @@ export function TeacherAccount(props: TeacherAccountProps) {
       getProfile();
     }
   }, []);
+  const [selectedTab, setSelectedTab] = useState(0);
 
-  const clickFunction = async(data: IUserAccount) => {
+  const clickFunction = async (data: IUserAccount) => {
     const response = await updateProfile(data);
     if (response.success) {
       console.log(response);
@@ -26,16 +33,46 @@ export function TeacherAccount(props: TeacherAccountProps) {
       console.log(response.data);
     }
   };
+  const tabs = [
+    {
+      text: 'Perfil de Profesor',
+    },
+    {
+      text: 'Cuenta de Usuario',
+    },
+    {
+      text: 'Pagos',
+    },
+  ];
+  const handleClick = (index: number) => {
+    setSelectedTab(index);
+  };
 
   return (
     <div className={styles['container']}>
-      { showMessage && (
-        <BannerNotification onClickClose={()=>{setShowMessage(false)}}>
+      {showMessage && (
+        <BannerNotification
+          onClickClose={() => {
+            setShowMessage(false);
+          }}
+        >
           <h4>Tus datos se han actualizado</h4>
         </BannerNotification>
       )}
-      { profile && (
-        <UserAccountForm onSubmit={clickFunction} data={profile} />
+      {profile && (
+        <div>
+          <Tabs
+            className={styles['tabs']}
+            tabs={tabs}
+            isNav={false}
+            onClickTab={(option) => handleClick(option)}
+          />
+          {selectedTab === 0 && (
+            <UserAccountForm onSubmit={clickFunction} data={profile} />
+          )}
+          {selectedTab === 1 && <TeacherProfileForm />}
+          {selectedTab === 2 && <PaymentForm />}
+        </div>
       )}
     </div>
   );

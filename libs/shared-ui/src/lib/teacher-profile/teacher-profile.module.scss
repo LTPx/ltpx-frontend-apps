@@ -1,0 +1,49 @@
+@import '../../styles/styles.module.scss';
+
+.container {
+  .head-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    border-bottom: 1px solid $gray-color-200;
+    padding-bottom: 2rem;
+    .head-profile {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      padding: 1rem 0;
+      h1 {
+        font-weight: bold;
+      }
+      h3 {
+        color: $text-gray-color;
+      }
+    }
+    .social-networks {
+      display: flex;
+      gap: 1.5rem;
+      .icon {
+        cursor: pointer;
+      }
+    }
+  }
+  .information-content {
+    padding-top: 2rem;
+    width: 50%;
+    h2 {
+      font-weight: bold;
+    }
+    p {
+      padding-top: 0.5rem;
+    }
+  }
+  .information {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    .information-wrap {
+      width: 80%;
+    }
+  }
+}

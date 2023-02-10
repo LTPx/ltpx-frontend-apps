@@ -56,6 +56,12 @@
 //smartphones-responsive
 @media screen and (max-width: 550px) {
   .container {
+    .header {
+      img {
+        width: 150px;
+        height: 100px;
+      }
+    }
     .description {
       text-align: center;
       width: 10rem;

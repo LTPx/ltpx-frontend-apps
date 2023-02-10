@@ -4,12 +4,14 @@ export const useSite = () => {
   const {
     _getPopularCourses,
     _getSiteCourse,
-    _enrollUser
+    _enrollUser,
+    _registerPaymentCourse,
   } = useAppStore();
 
   return {
     _getPopularCourses,
     _getSiteCourse,
-    _enrollUser
+    _enrollUser,
+    _registerPaymentCourse,
   }
 }

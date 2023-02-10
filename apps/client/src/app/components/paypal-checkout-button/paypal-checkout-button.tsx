@@ -25,21 +25,31 @@ type MessageCheckout = {
 export function PaypalCheckoutButton(props: PaypalCheckoutButtonProps) {
   const { product } = props;
   const [message, setMessage] = useState<MessageCheckout>();
-  const { _enrollUser } = useSite();
+  const { _registerPaymentCourse } = useSite();
 
   async function handleApproved (orderId: string) {
-    await _enrollUser({
-      price: product.price,
-      course_id: product.id
+    const { success, error}  = await _registerPaymentCourse({
+      amount: product.price,
+      course_id: product.id,
+      payment_gateway: 'paypal',
+      receipt_id: orderId,
+      description: product.description
     })
-    setMessage({
-      text: `Gracias por tu compra id: ${orderId}`,
-      kind: SnackbarType.success,
-    });
+    if (success) {
+      setMessage({
+        text: `Gracias por tu compra id: ${orderId}`,
+        kind: SnackbarType.success,
+      });
+    } else {
+      console.log('error: ', error)
+    }
   }
 
   return (
     <div className={styles['container']}>
+      <button onClick={()=>{handleApproved('384848')}}>click test</button>
+      <br />
+      <br />
       <PayPalButtons
         createOrder={(data, actions) => {
           return actions.order.create({

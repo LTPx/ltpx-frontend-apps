@@ -4,6 +4,8 @@ import {
   enrollUser,
   getPopularCourses,
   NewEnrollmentParams,
+  NewUserCoursePaymentParams,
+  registerPaymentCourse,
   siteGetCourse,
 } from '@ltpx-frontend-apps/api';
 
@@ -17,6 +19,7 @@ export type SiteSlice = {
   _getPopularCourses: () => Promise<TResponse>;
   _getSiteCourse: (id: number) => Promise<TResponse>;
   _enrollUser: (params: NewEnrollmentParams) => Promise<TResponse>;
+  _registerPaymentCourse: (params: NewUserCoursePaymentParams) => Promise<TResponse>;
 };
 
 export const createSiteSlice: StateCreator<StoreState, [], [], SiteSlice> = (
@@ -43,6 +46,14 @@ export const createSiteSlice: StateCreator<StoreState, [], [], SiteSlice> = (
     try {
       const enrollment = await enrollUser(params);
       return { success: true, data: enrollment };
+    } catch (error) {
+      return { success: false, error };
+    }
+  },
+  _registerPaymentCourse: async (params): Promise<TResponse> => {
+    try {
+      const payment = await registerPaymentCourse(params);
+      return { success: true, data: payment };
     } catch (error) {
       return { success: false, error };
     }

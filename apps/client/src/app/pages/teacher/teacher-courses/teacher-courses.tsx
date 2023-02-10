@@ -74,7 +74,7 @@ export function TeacherCourses(props: TeacherCoursesProps) {
           percentageRate={0}
           percentageLearner={0}
           url={`/teacher/courses/edit/${course.id}`}
-          price={getPriceCourse(course.achievements || [])}
+          price={course.price}
           dropdownActions={[
             { text: 'Ver Curso',  icon: 'user-group', url: `/teacher/courses/${course.id}`},
             { text: 'Editar Curso',  icon: 'pencil', url: `/teacher/courses/edit/${course.id}`},

@@ -17,7 +17,6 @@ export function TeacherProfileForm(props: TeacherProfileFormProps) {
       nameTeacher: '',
       professionTeacher: '',
       biography: '',
-      img: '',
     },
     validationSchema: Yup.object({
       nameTeacher: Yup.string().required('Nombre es obligatorio'),

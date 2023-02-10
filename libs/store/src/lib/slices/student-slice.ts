@@ -3,6 +3,7 @@ import { StoreState } from '../store';
 import {
   getStudentCourses,
   getStudentPayments,
+  Purchase,
 } from '@ltpx-frontend-apps/api';
 
 export type TResponse = {
@@ -12,6 +13,7 @@ export type TResponse = {
 };
 
 export type StudentSlice = {
+  purchases: Purchase[];
   _getStudentPayments: () => Promise<TResponse>;
   _getStudentCourses: () => Promise<TResponse>;
 };
@@ -20,10 +22,12 @@ export const createStudentSlice: StateCreator<StoreState, [], [], StudentSlice> 
   set,
   get
 ) => ({
+  purchases: [],
   _getStudentPayments: async (): Promise<TResponse> => {
     try {
-      const payments = await getStudentPayments();
-      return { success: true, data: payments };
+      const purchases = await getStudentPayments();
+      set({purchases})
+      return { success: true, data: purchases };
     } catch (error) {
       return { success: false, error };
     }

@@ -1,10 +1,10 @@
 import { _http } from '../../http';
-import { UserCoursePaymentModel } from '../../interfaces/user-course-payment-interface';
+import { Purchase } from '../../interfaces/user-course-payment-interface';
 
 const http = _http;
 
 export const getStudentPayments = async () => {
-  return new Promise<UserCoursePaymentModel[]>((resolve, reject) => {
+  return new Promise<Purchase[]>((resolve, reject) => {
     http
       .get('api/v1/student/payments')
       .then((response) => {

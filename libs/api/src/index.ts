@@ -14,6 +14,7 @@ export * from './lib/interfaces/api-response-ui-interface';
 export * from './lib/interfaces/cart-interface';
 export * from './lib/interfaces/enrollment-interface';
 export * from './lib/interfaces/user-course-payment-interface';
+export * from './lib/interfaces/wallet-interface';
 
 //fake api
 export * from '../src/lib/fake/courses';
@@ -27,6 +28,7 @@ export * from './lib/api/teacher/courses-api';
 export * from './lib/api/teacher/teacher-api';
 export * from './lib/api/teacher/quiz-api';
 export * from './lib/api/teacher/achievements-api';
+export * from './lib/api/teacher/wallet-api';
 
 export * from './lib/api/admin/applications-api';
 export * from './lib/api/admin/users-api';

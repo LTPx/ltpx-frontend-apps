@@ -9,7 +9,6 @@ export function CoursesLayout(props: CoursesLayoutProps) {
   const tabs = [
     { text: 'Learning', url: 'learning'},
     { text: 'Finished', url: 'finished'},
-    { text: 'Favorites', url: 'favorites'},
   ];
 
   return (

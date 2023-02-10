@@ -17,6 +17,7 @@ import {
   LiveClass,
   Purchases,
   Settings,
+  StudentCourses,
 } from "../pages/student/index";
 
 export const StudentRoutes = () => {
@@ -80,9 +81,8 @@ export const StudentRoutes = () => {
           <Route path="dashboard" element={<Dashboard/>}/>
           <Route path="courses" element={<CoursesLayout/>}>
             <Route path="/student/courses" element={<Navigate replace to="learning" />} />
-            <Route path="learning" element={<Courses state={StateCourses.learning}/>} />
+            <Route path="learning" element={<StudentCourses />} />
             <Route path="finished" element={<Courses state={StateCourses.finished}/>} />
-            <Route path="favorites" element={<Courses state={StateCourses.favorites}/>} />
           </Route>
           <Route path="classes" element={<ClassesLayout/>}>
             <Route path="/student/classes" element={<Navigate replace to="week" />} />

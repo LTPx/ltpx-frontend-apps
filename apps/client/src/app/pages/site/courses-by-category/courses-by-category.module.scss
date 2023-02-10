@@ -38,7 +38,7 @@
 @media screen and (max-width: 550px) {
   .container {
     .content {
-      width: 80%;
+      width: 100%;
       padding: 0 0;
     }
     .search-course {
@@ -61,6 +61,6 @@
   .courses-by-category {
     display: flex;
     gap: 2rem !important;
-    justify-content:inherit !important;
+    justify-content: inherit !important;
   }
 }

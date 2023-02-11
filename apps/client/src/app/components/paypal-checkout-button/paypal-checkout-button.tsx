@@ -44,12 +44,8 @@ export function PaypalCheckoutButton(props: PaypalCheckoutButtonProps) {
       console.log('error: ', error)
     }
   }
-
   return (
     <div className={styles['container']}>
-      <button onClick={()=>{handleApproved('384848')}}>click test</button>
-      <br />
-      <br />
       <PayPalButtons
         createOrder={(data, actions) => {
           return actions.order.create({

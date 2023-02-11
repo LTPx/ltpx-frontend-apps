@@ -20,9 +20,11 @@ import { useCallback, useEffect, useState } from 'react';
 import { NavLink, useNavigate, useParams } from 'react-router-dom';
 import { useCourseUtil } from '@ltpx-frontend-apps/store';
 import { useTranslation } from 'react-i18next';
+import CheckoutForm from '../../../components/checkout-form/checkout-form';
 
 export function CourseDetails() {
   const [openModal, setOpenModal] = useState(false);
+  const [openEnrollModal, setOpenEnrollModal] = useState(false);
   const [selectedTab, setSelectedTab] = useState(0);
   const [course, setCourse] = useState<FullCourse>();
   const { courseId } = useParams();
@@ -66,7 +68,7 @@ export function CourseDetails() {
 
   const addToCart = () => {
     if (course && isAuthenticated) {
-      _addCourseCart(course.course);
+      // _addCourseCart(course.course);
     } else {
       setOpenModal(true);
     }
@@ -74,8 +76,9 @@ export function CourseDetails() {
 
   const enrolled = () => {
     if (course && isAuthenticated) {
-      _addCourseCart(course.course);
-      navigate('/cart');
+      setOpenEnrollModal(true);
+      // _addCourseCart(course.course);
+      // navigate('/cart');
     } else {
       setOpenModal(true);
     }
@@ -226,6 +229,15 @@ export function CourseDetails() {
             }}
           />
         </div>
+      </Dialog>
+      <Dialog
+        isShown={openEnrollModal}
+        hasFooter={false}
+        title='Checkout'
+        onCloseComplete={() => setOpenEnrollModal(false)}
+        width={'55vw'}
+      >
+        <CheckoutForm />
       </Dialog>
     </div>
   );

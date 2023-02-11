@@ -9,7 +9,7 @@ export interface CourseCartItemProps {
   cover?: string;
   category: string;
   title: string;
-  price: number;
+  price: string;
   duration?: number;
   lessons?: number;
   stars?: number;

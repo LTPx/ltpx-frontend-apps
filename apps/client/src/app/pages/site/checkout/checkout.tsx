@@ -28,7 +28,7 @@ export function Checkout() {
             <PaypalCheckoutButton
               product={{
                 description: coursesInCart[0].title,
-                price: coursesInCart[0].price || 0,
+                price: parseFloat(coursesInCart[0].price),
                 id: coursesInCart[0].id,
               }}
             />

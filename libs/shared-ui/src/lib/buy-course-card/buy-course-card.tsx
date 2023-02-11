@@ -41,19 +41,19 @@ export function BuyCourseCard(props: BuyCourseCardProps) {
         <div className={`${styles['summary']}`}>
           <div className={styles['price-promo']}>
             <div className={styles['price']}>
-              <h3>{price}</h3>
+              <h2>{price}</h2>
             </div>
-            <div className={styles['discount']}>
+            {/* <div className={styles['discount']}>
               <span>{discount || 20}% descuento</span>
-            </div>
+            </div> */}
           </div>
           <div className={styles['actions']}>
-            <Button
-              title={t('coursesDetails.buyCourseCard.buttons.buy')}
+            {/* <Button
+              title={t('coursesDetails.buyCourseCard.buttons.enroll')}
               color={ColorsButton.primary}
               onClick={onClickBuy}
               full={true}
-            />
+            /> */}
             <Button
               title={t('coursesDetails.buyCourseCard.buttons.enroll')}
               color={ColorsButton.secondary}

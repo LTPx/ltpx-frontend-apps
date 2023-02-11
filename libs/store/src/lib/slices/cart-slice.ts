@@ -23,7 +23,10 @@ export const createCartSlice: StateCreator<StoreState, [], [], CartSlice> = (
   coursesInCart: [],
   getTotal: () => {
     const courses = get().coursesInCart;
-    return courses.reduce((total, course) => total + (course.price || 0) , 0);
+    return courses.reduce((total, course) => {
+      const price = course.price || '';
+      return total + parseFloat(price)
+    }, 0.0);
   },
   _getCart: async () => {
     try {

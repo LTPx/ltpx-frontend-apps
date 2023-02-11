@@ -122,7 +122,7 @@ export const es = {
     buyCourseCard: {
       buttons: {
         buy: 'Comprar Ahora',
-        enroll: 'Inscribirme'
+        enroll: 'Inscribirme Ahora'
       },
       details: {
         achievement: 'Logros',

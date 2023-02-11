@@ -56,7 +56,7 @@ export interface CourseModel {
   enrollments_count: number;
   price_cents: number;
   price_format: string;
-  price?: number;
+  price: string;
   average_rating: number;
   approved: boolean;
   level: CourseLevel;

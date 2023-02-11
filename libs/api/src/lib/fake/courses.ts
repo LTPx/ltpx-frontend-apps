@@ -17,6 +17,7 @@ const createRandomCourse = ():PublicCourse => (
     learn_goals: `Learning: ${faker.commerce.productDescription()}`,
     enrollments_count: 12,
     requirements: 'No one',
+    price: faker.datatype.number({min: 1000, max: 5000}).toString(),
     price_currency: 'USD',
     price_format: '$10.00',
     classroom: {

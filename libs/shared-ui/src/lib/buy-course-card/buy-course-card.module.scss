@@ -43,6 +43,10 @@
       flex-direction: column;
       gap: $size-sm-2;
       margin: 10px 0;
+
+      button {
+        text-transform: uppercase;
+      }
     }
 
     .details {

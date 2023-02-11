@@ -14,7 +14,7 @@ export interface BuyCourseCardProps {
   language: string;
   skillLevel: string;
   certificate: boolean;
-  onClickBuy: () => void;
+  onClickBuy?: () => void;
   onClickEnroll: () => void;
 }
 

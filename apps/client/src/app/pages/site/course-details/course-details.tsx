@@ -66,19 +66,9 @@ export function CourseDetails() {
     setSelectedTab(index);
   };
 
-  const addToCart = () => {
-    if (course && isAuthenticated) {
-      // _addCourseCart(course.course);
-    } else {
-      setOpenModal(true);
-    }
-  };
-
   const enrolled = () => {
     if (course && isAuthenticated) {
       setOpenEnrollModal(true);
-      // _addCourseCart(course.course);
-      // navigate('/cart');
     } else {
       setOpenModal(true);
     }
@@ -209,7 +199,6 @@ export function CourseDetails() {
             language={translateLanguage(course.course.language)}
             skillLevel={translateLevel(course.course.level)}
             image={course.course.cover_url}
-            onClickBuy={addToCart}
             onClickEnroll={enrolled}
             certificate={true}
           />
@@ -237,7 +226,16 @@ export function CourseDetails() {
         onCloseComplete={() => setOpenEnrollModal(false)}
         width={'55vw'}
       >
-        <CheckoutForm />
+        { course && (
+          <CheckoutForm
+            product={{
+              description: course.course.title,
+              price: parseFloat(course.course.price),
+              id: course.course.id,
+              image: course.course.cover_url,
+            }}
+          />
+        )}
       </Dialog>
     </div>
   );

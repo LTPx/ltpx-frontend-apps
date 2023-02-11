@@ -59,18 +59,6 @@ export function PaypalCheckoutButton(props: PaypalCheckoutButtonProps) {
             ],
           });
         }}
-        onClick={(data, actions) => {
-          console.log('clicked...: ', data);
-          //validations
-          const ok = true;
-          if (ok) {
-            actions.resolve();
-            // return actions.resolve():
-          } else {
-            actions.reject();
-            // return actions.reject():
-          }
-        }}
         onApprove={async (data, actions) => {
           const order = await actions.order?.capture();
           console.log('order: ', order);

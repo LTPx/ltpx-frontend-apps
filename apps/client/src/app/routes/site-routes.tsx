@@ -1,5 +1,4 @@
-import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
-import { AppLayout } from '../layouts';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import {
   WhatIsOpenMind,
   LearningInOpenMind,
@@ -31,6 +30,7 @@ import {
   AboutUs,
   CoursesByCategory,
   TeacherProfilePage,
+  SiteLayout,
 } from '../pages/site/index';
 import TermsConditions from '../pages/site/terms-conditions/terms-conditions';
 
@@ -38,7 +38,7 @@ export const SiteRoutes = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route element={<AppLayout />}>
+        <Route element={<SiteLayout />}>
           <Route path="/" element={<Home />} />
           <Route path="/home" element={<Home />} />
           <Route path="/login" element={<Login />} />

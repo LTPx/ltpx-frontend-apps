@@ -11,39 +11,94 @@
     .head-profile {
       display: flex;
       flex-direction: column;
-      gap: 0.5rem;
-      padding: 1rem 0;
+      align-items: center;
+      gap: 1rem;
+      padding-bottom: 1rem;
       h1 {
         font-weight: bold;
       }
       h3 {
         color: $text-gray-color;
       }
-    }
-    .social-networks {
-      display: flex;
-      gap: 1.5rem;
-      .icon {
-        cursor: pointer;
+      .teacher-review-information {
+        display: flex;
+        gap: 1.5rem;
+        .review-information {
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+        }
       }
-    }
-  }
-  .information-content {
-    padding-top: 2rem;
-    width: 50%;
-    h2 {
-      font-weight: bold;
-    }
-    p {
-      padding-top: 0.5rem;
     }
   }
   .information {
     width: 100%;
     display: flex;
     justify-content: center;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid $gray-color-200;
     .information-wrap {
-      width: 80%;
+      display: grid;
+      grid-template-columns: 50% 50%;
+      width: 90%;
+      gap: 3rem;
+      .information-content {
+        padding-top: 2rem;
+        .show {
+          color: $primary-color;
+          text-decoration: underline;
+        }
+        h2 {
+          font-weight: bold;
+        }
+        p {
+          padding-top: 0.5rem;
+          line-height: 2rem;
+        }
+        .social-networks {
+          display: flex;
+          padding-top: 1.5rem;
+          gap: 1.5rem;
+          .icon {
+            cursor: pointer;
+          }
+        }
+      }
+      .video-content {
+        padding-top: 2rem;
+        h2 {
+          font-weight: bold;
+          padding-bottom: 0.5rem;
+        }
+        video {
+          object-fit: cover;
+        }
+      }
+    }
+  }
+  .courses {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+
+    h2 {
+      font-weight: bold;
+    }
+    .courses-content {
+      width: 90%;
+      padding-top: 2rem;
+    }
+    .courses-teacher {
+      padding: 2rem 0;
+      display: flex;
+      width: 100%;
+      flex-wrap: wrap;
+      gap: $size-md-1;
+      justify-content: center;
+      .course {
+        height: 20rem;
+        width: 16rem;
+      }
     }
   }
 }

@@ -43,7 +43,7 @@ export function PaymentForm(props: PaymentFormProps) {
 
   return (
     <div className={styles['container']}>
-      <form>
+      <form className={styles['form']}>
         <div className={styles['general']}>
         <label>Cuenta Bancaria</label>
           <div className={styles['bank-information']}>

@@ -10,6 +10,7 @@ import styles from './files-uploaded.module.scss';
 export enum TypeFile {
   image = 'image',
   pdf = 'pdf',
+  video = 'video',
 }
 
 export interface FilesUploadedProps {
@@ -42,11 +43,13 @@ export function FilesUploaded(props: FilesUploadedProps) {
   const filesTypes = {
     image: 'image/png, image/jpeg',
     pdf: 'application/pdf',
+    video: 'video/*'
   };
 
   const filesIcons = {
     image: 'image-outline',
     pdf: 'file-pdf',
+    video: 'videocam-outline',
   };
 
   const handleChange = (e: any) => {

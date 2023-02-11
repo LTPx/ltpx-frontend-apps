@@ -30,6 +30,7 @@ import {
   Page404,
   AboutUs,
   CoursesByCategory,
+  TeacherProfilePage,
 } from '../pages/site/index';
 import TermsConditions from '../pages/site/terms-conditions/terms-conditions';
 
@@ -94,7 +95,7 @@ export const SiteRoutes = () => {
             <Route path="social-media-policy" element={<SocialMediaPolicy />} />
           </Route>
           <Route path="/about" element={<AboutUs />} />
-          
+          <Route path="/teacher-profile" element={<TeacherProfilePage />} />
           <Route path="/course/:categoryId/category" element={<CoursesByCategory />} />
           <Route path="*" element={<Page404 />} />
         </Route>

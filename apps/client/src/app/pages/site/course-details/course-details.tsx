@@ -17,7 +17,7 @@ import {
 import { Dialog } from 'evergreen-ui';
 import { useCart, useSite, useUser } from '@ltpx-frontend-apps/store';
 import { useCallback, useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { NavLink, useNavigate, useParams } from 'react-router-dom';
 import { useCourseUtil } from '@ltpx-frontend-apps/store';
 import { useTranslation } from 'react-i18next';
 
@@ -113,11 +113,13 @@ export function CourseDetails() {
               </div>
               <div className={styles['description-course']}>
                 <div className={styles['avatar']}>
-                  <Avatar
-                    image={course?.teacher.image || ''}
-                    size={AvatarSize.medium}
-                    outline={true}
-                  />
+                  <NavLink to="/teacher-profile">
+                    <Avatar
+                      image={course?.teacher.image || ''}
+                      size={AvatarSize.medium}
+                      outline={true}
+                    />
+                  </NavLink>
                 </div>
                 <div className={styles['items']}>
                   <div className={styles['item']}>

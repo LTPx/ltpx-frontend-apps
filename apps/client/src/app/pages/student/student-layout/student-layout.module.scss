@@ -1,0 +1,52 @@
+@import "../../../../styles.scss";
+
+.header {
+  padding: 1rem 3.5rem;
+  grid-area: header;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  grid-template-rows: auto 1fr auto;
+  grid-template-areas:
+    "header header header"
+    "nav content content";
+  height: 100vh;
+}
+
+.teacher-actions {
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  gap: 2rem;
+}
+
+.content {
+  grid-area: content;
+  background-color: $background-gray-color;
+  padding: 3rem 4rem;
+}
+
+.navbar {
+  background-color: $white-color;
+  padding: 30px;
+  border-right: 1px solid #ebecef;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
+}
+
+.notification {
+  background-color: $blue-color-100;
+  border-radius: 100%;
+  padding: 0.5rem;
+}
+

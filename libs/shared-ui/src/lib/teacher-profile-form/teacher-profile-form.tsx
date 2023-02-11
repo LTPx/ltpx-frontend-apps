@@ -1,6 +1,8 @@
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import Button, { ColorsButton, TypeButton } from '../button/button';
+import FilesUploaded, { TypeFile } from '../files-uploaded/files-uploaded';
+import Icon from '../icon/icon';
 import InputTextStatus, {
   StatusInputText,
 } from '../input-text-status/input-text-status';
@@ -17,6 +19,12 @@ export function TeacherProfileForm(props: TeacherProfileFormProps) {
       nameTeacher: '',
       professionTeacher: '',
       biography: '',
+      profile_img: '',
+      video_presentation: '',
+      facebook_url: '',
+      twitter_url: '',
+      instagram_url: '',
+      linkedIn_url: '',
     },
     validationSchema: Yup.object({
       nameTeacher: Yup.string().required('Nombre es obligatorio'),
@@ -29,10 +37,10 @@ export function TeacherProfileForm(props: TeacherProfileFormProps) {
   });
   return (
     <div className={styles['container']}>
-      <form>
+      <form className={styles['form']}>
         <div className={styles['general']}>
-        <label>Información de Usuario</label>
-          <div className={styles['teacher-information']}>
+          <label>Información de Usuario</label>
+          <div className={styles['section']}>
             <div>
               <Input
                 label="Nombre"
@@ -72,6 +80,76 @@ export function TeacherProfileForm(props: TeacherProfileFormProps) {
                 />
               ) : null}
             </div>
+            <div className={styles['upload']}>
+              <label>Foto de Perfil (.jpg, .png)</label>
+              <FilesUploaded
+                className={styles['file-upload']}
+                type={TypeFile.image}
+                onChange={(value) => {
+                  formik.setFieldValue('profile_img', value);
+                }}
+              />
+            </div>
+            <div className={styles['upload']}>
+              <label>Video de Presentación publico</label>
+              <FilesUploaded
+                className={styles['file-upload']}
+                type={TypeFile.video}
+                onChange={(value) => {
+                  formik.setFieldValue('video_presentation', value);
+                }}
+              />
+            </div>
+          </div>
+          <h4 className={styles['social']}>
+            Vincula tus redes sociales para que los estudiantes conozcan mas
+            acerca de ti. (opcional)
+          </h4>
+          <div className={styles['section']}>
+            <Input
+              label="Facebook"
+              type="text"
+              name="facebook_url"
+              placeholder="Facebook URL... "
+              onChange={(e: any) => {
+                formik.handleChange(e);
+              }}
+              value={formik.values.facebook_url}
+              onBlur={formik.handleBlur}
+            />
+            <Input
+              label="Twitter"
+              type="text"
+              name="twitter_url"
+              placeholder="Twitter URL..."
+              onChange={(e: any) => {
+                formik.handleChange(e);
+              }}
+              value={formik.values.twitter_url}
+              onBlur={formik.handleBlur}
+            />
+            <Input
+              label="Instagram"
+              type="text"
+              name="instagram_url"
+              placeholder="Instagram URL..."
+              onChange={(e: any) => {
+                formik.handleChange(e);
+              }}
+              value={formik.values.instagram_url}
+              onBlur={formik.handleBlur}
+            />
+            <Input
+              label="LinkedIn"
+              type="text"
+              name="linkedIn_url"
+              placeholder="LinkedIn URL..."
+              onChange={(e: any) => {
+                formik.handleChange(e);
+              }}
+              value={formik.values.linkedIn_url}
+              onBlur={formik.handleBlur}
+            />
           </div>
           <TextArea
             label="Biografía"

@@ -1,3 +1,5 @@
+@import '../../styles/styles.module.scss';
+
 .container {
   display: flex;
   align-items: center;
@@ -30,7 +32,7 @@
 }
 
 .outline {
-  border: 4px solid #d7d6d6;
+  border: 4px solid $primary-color;
   border-radius: 50%;
 }
 

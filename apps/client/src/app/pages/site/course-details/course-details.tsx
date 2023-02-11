@@ -15,7 +15,7 @@ import {
 import { useCourseUtil } from '@ltpx-frontend-apps/store';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useParams } from 'react-router-dom';
+import { NavLink, useParams } from 'react-router-dom';
 import { useUser } from '../../../store';
 import styles from './course-details.module.scss';
 
@@ -28,7 +28,7 @@ export function CourseDetails(props: CourseDetailsProps) {
   const { t } = useTranslation();
   const courseDetails = buildCourseDetails();
   const [selectedTab, setSelectedTab] = useState(0);
-  const { translateLanguage , translateLevel} = useCourseUtil();
+  const { translateLanguage, translateLevel } = useCourseUtil();
 
   const handleClick = (index: number) => {
     setSelectedTab(index);
@@ -74,23 +74,30 @@ export function CourseDetails(props: CourseDetailsProps) {
             </div>
             <div className={styles['description-course']}>
               <div className={styles['avatar']}>
-                <Avatar
-                  image={courseDetails.instructor.image}
-                  size={AvatarSize.medium}
-                  outline={true}
-                />
+                <NavLink to="/teacher-profile">
+                  <Avatar
+                    image={courseDetails.instructor.image}
+                    size={AvatarSize.medium}
+                  />
+                </NavLink>
               </div>
               <div className={styles['items']}>
                 <div className={styles['item']}>
-                  <label htmlFor="creator">{t('coursesDetails.teacherInformation.instructor')}</label>
+                  <label htmlFor="creator">
+                    {t('coursesDetails.teacherInformation.instructor')}
+                  </label>
                   <h5>{courseDetails.instructor.name}</h5>
                 </div>
                 <div className={styles['item']}>
-                  <label htmlFor="creator">{t('coursesDetails.teacherInformation.categories')}</label>
+                  <label htmlFor="creator">
+                    {t('coursesDetails.teacherInformation.categories')}
+                  </label>
                   <h5>{courseDetails.course.category}</h5>
                 </div>
                 <div className={styles['item']}>
-                  <label htmlFor="creator">{t('coursesDetails.teacherInformation.review')}</label>
+                  <label htmlFor="creator">
+                    {t('coursesDetails.teacherInformation.review')}
+                  </label>
                   <div className={styles['rating']}>
                     <Rating stars={courseDetails.course.stars} />
                   </div>

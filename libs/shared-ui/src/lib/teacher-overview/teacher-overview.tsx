@@ -1,4 +1,5 @@
 import { useTranslation } from 'react-i18next';
+import { NavLink } from 'react-router-dom';
 import Avatar, { AvatarSize } from '../avatar/avatar';
 import Icon from '../icon/icon';
 import styles from './teacher-overview.module.scss';
@@ -31,7 +32,9 @@ export function TeacherOverview(props: TeacherOverviewProps) {
     <div className={styles['container']}>
       <h3>{t('coursesDetails.teacherOverview.title')}</h3>
       <div className={styles['teacher-photo-container']}>
-        <Avatar image={image} size={AvatarSize.large}></Avatar>
+        <NavLink to="/teacher-profile">
+          <Avatar image={image} size={AvatarSize.large} />
+        </NavLink>
         <div className={styles['information-photo-container']}>
           <h4>{name}</h4>
           <h3 className={styles['profession-teacher']}>{profession}</h3>

@@ -19,6 +19,7 @@ import {
   Settings,
   StudentCourses,
   StudentCourse,
+  StudentClasses,
 } from "../pages/student/index";
 
 export const StudentRoutes = () => {
@@ -86,12 +87,13 @@ export const StudentRoutes = () => {
             <Route path="finished" element={<Courses state={StateCourses.finished}/>} />
             <Route path=":courseId" element={<StudentCourse/>}/>
           </Route>
-          <Route path="classes" element={<ClassesLayout/>}>
+          <Route path="classes" element={<StudentClasses/>}/>
+          {/* <Route path="classes" element={<ClassesLayout/>}>
             <Route path="/student/classes" element={<Navigate replace to="week" />} />
             <Route path="week" element={<Classes/>}/>
             <Route path="calendar" element={<ClassesCalendar/>}/>
             <Route path=":classId" element={<LiveClass/>}/>
-          </Route>
+          </Route> */}
           <Route path="payments" element={<PaymentsLayout/>}>
             <Route path="/student/payments" element={<Navigate replace to="purchases" />} />
             <Route path="purchases" element={<Purchases/>}/>

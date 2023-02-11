@@ -6,6 +6,7 @@ export const useStudent = () => {
     enrolledCourses,
     _getStudentCourses,
     _getStudentPayments,
+    _getStudentClasses,
   } = useAppStore();
 
   return {
@@ -13,5 +14,6 @@ export const useStudent = () => {
     enrolledCourses,
     _getStudentCourses,
     _getStudentPayments,
+    _getStudentClasses,
   }
 }

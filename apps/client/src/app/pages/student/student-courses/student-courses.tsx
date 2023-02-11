@@ -27,7 +27,7 @@ export function StudentCourses(props: StudentCoursesProps) {
       <div className={styles['content']}>
         { enrolledCourses.map((course, index)=>(
           <NavLink key={index}
-            to={`/course/${course.id}/details`}
+            to={`/student/courses/${course.id}`}
             className={`${styles['link']} link-wrapper`}
           >
             <UserCourseCard

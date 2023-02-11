@@ -18,6 +18,7 @@ import {
   Purchases,
   Settings,
   StudentCourses,
+  StudentCourse,
 } from "../pages/student/index";
 
 export const StudentRoutes = () => {
@@ -83,6 +84,7 @@ export const StudentRoutes = () => {
             <Route path="/student/courses" element={<Navigate replace to="learning" />} />
             <Route path="learning" element={<StudentCourses />} />
             <Route path="finished" element={<Courses state={StateCourses.finished}/>} />
+            <Route path=":courseId" element={<StudentCourse/>}/>
           </Route>
           <Route path="classes" element={<ClassesLayout/>}>
             <Route path="/student/classes" element={<Navigate replace to="week" />} />

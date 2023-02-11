@@ -129,7 +129,7 @@ export const createTeacherSlice: StateCreator<
   },
   registerTeacher: async (params: IRegisterUser): Promise<TResponseLogin> => {
     try {
-      const { user } = await registerTeacher(params);
+      const user = await registerTeacher(params);
       set({
         user: user,
         isAuthenticated: true,

@@ -82,7 +82,7 @@ export const createUserSlice: StateCreator<
   },
   login: async (credentials: ICredentials):Promise<TResponseLogin> => {
     try {
-      const { user } = await loginUser(credentials);
+      const user = await loginUser(credentials);
       set({
         user: user,
         isAuthenticated: true,
@@ -96,7 +96,7 @@ export const createUserSlice: StateCreator<
   },
   loginAdmin: async (credentials: ICredentials):Promise<TResponseLogin> => {
     try {
-      const { user } = await loginAdmin(credentials);
+      const user = await loginAdmin(credentials);
       set({
         user: user,
         isAuthenticated: true,
@@ -110,7 +110,7 @@ export const createUserSlice: StateCreator<
   },
   register: async (params: IRegisterUser):Promise<TResponseLogin> => {
     try {
-      const { user } = await registerUser(params);
+      const user = await registerUser(params);
       const view = user.initial_view;
       set({
         user: user,

@@ -1,15 +1,10 @@
 import { setTokenAxios, _http } from "../http";
-import { ICurrentUser, IRegisterUser, UserResponse } from "../interfaces/user-interface";
+import { ICurrentUser, IRegisterUser } from "../interfaces/user-interface";
 const http = _http;
 
 export interface Credentials {
   email: string;
   password: string;
-}
-
-export interface IAuthSuccessResponse {
-  user: UserResponse;
-  message: string;
 }
 
 export const loginUser = (credentials: Credentials) => {
@@ -20,7 +15,7 @@ export const loginUser = (credentials: Credentials) => {
       password
     }
   };
-  return new Promise<IAuthSuccessResponse>((resolve, reject) => {
+  return new Promise<ICurrentUser>((resolve, reject) => {
     http
     .post('login', payload)
     .then((response) => {
@@ -41,7 +36,7 @@ export const loginAdmin = (credentials: Credentials) => {
       password
     }
   };
-  return new Promise<IAuthSuccessResponse>((resolve, reject) => {
+  return new Promise<ICurrentUser>((resolve, reject) => {
     http
     .post('login', payload) //TODO: validate in backend maybe another endpoint
     .then((response) => {
@@ -60,7 +55,7 @@ export const loginAdmin = (credentials: Credentials) => {
   });
 }
 
-export const registerUser = async(params: IRegisterUser):Promise<IAuthSuccessResponse> => {
+export const registerUser = async(params: IRegisterUser):Promise<ICurrentUser> => {
   const { email, password, fullname } = params;
   const payload = {
     user: {
@@ -69,7 +64,7 @@ export const registerUser = async(params: IRegisterUser):Promise<IAuthSuccessRes
       fullname
     }
   };
-  return new Promise<IAuthSuccessResponse>((resolve, reject) => {
+  return new Promise<ICurrentUser>((resolve, reject) => {
     http
     .post('register', payload)
     .then((response) => {
@@ -92,7 +87,7 @@ export const registerTeacher = async (account: IRegisterUser) => {
       initial_register: 'teacher'
     }
   };
-  return new Promise<IAuthSuccessResponse>((resolve, reject) => {
+  return new Promise<ICurrentUser>((resolve, reject) => {
     http
     .post('register', payload)
     .then((response) => {

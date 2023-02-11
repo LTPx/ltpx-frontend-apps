@@ -26,14 +26,14 @@ export function Login(props: LoginProps) {
     };
     const { isLogin, data } = await login(userAccount);
     if (isLogin) {
-      if (data.initial_register === TypeAccounts.user) {
+      if (data.initial_view === TypeAccounts.user) {
         navigate('/home');
       }
-      if (data.initial_register === TypeAccounts.student) {
+      if (data.initial_view === TypeAccounts.student) {
         navigate('/student/dashboard');
         window.location.reload();
       }
-      if (data.initial_register === TypeAccounts.teacher) {
+      if (data.initial_view === TypeAccounts.teacher) {
         navigate('/teacher/dashboard');
         window.location.reload();
       }

@@ -5,6 +5,7 @@ import {
   ColorsButton,
 } from '@ltpx-frontend-apps/shared-ui';
 import { useTeacher, useUser } from '@ltpx-frontend-apps/store';
+import WelcomeNewTeacher from '../../../components/welcome-new-teacher/welcome-new-teacher';
 import styles from './teacher-dashboard.module.scss';
 
 /* eslint-disable-next-line */
@@ -14,7 +15,7 @@ export function TeacherDashboard(props: TeacherDashboardProps) {
   const { user } = useUser();
   const { teacher_account } = useTeacher();
   return (
-    <div className={`${styles['container']} card`}>
+    <div className={`${styles['container']}`}>
       {teacher_account === StatusTeacherAccount.review && (
         <BannerNotification>
           <p>
@@ -25,25 +26,25 @@ export function TeacherDashboard(props: TeacherDashboardProps) {
         </BannerNotification>
       )}
       <h1>Bienvenido {user.fullname}</h1>
-      {user.teacher_account !== StatusTeacherAccount.approved && (
-        <>
-          <p>
-            Estás a solo unos pasos de enseñar. ¡Siga nuestra guía paso a paso
-            para comenzar!
-          </p>
-          <h2>Aplicar para enseñar en Openmind?</h2>
-          <h4>Llena esta solicitud para enseñar con nosotros</h4>
-          <Button
-            title={
-              teacher_account === StatusTeacherAccount.review
-                ? 'Revisar Solicitud'
-                : 'Aplicar Ahora'
-            }
-            color={ColorsButton.secondary}
-            link="/teacher/apply-teach"
-          />
-        </>
-      )}
+      <div className={styles['layout']}>
+        <div className={styles['content']}>
+          {user.teacher_account !== StatusTeacherAccount.approved && (
+            <WelcomeNewTeacher />
+          )}
+        </div>
+        <div className={styles['help-ads']}>
+          <div className={styles['card-join-discord']}>
+            <h3>Únete al grupo de discord</h3>
+            <h4>Únete a nuestra comunidad de profesores donde podrás encontrar noticias, hacer preguntas acerca del proceso de enseñar en Openmind</h4>
+            <Button title='Unirme' color={ColorsButton.white} full={true}/>
+          </div>
+          <div className={styles['card-teaching']}>
+            <h3>Enseñar en Openmind</h3>
+            <h4>Únete a nuestra comunidad de profesores donde podrás encontrar noticias, hacer preguntas acerca del proceso de enseñar en Openmind</h4>
+            <Button title='Aprender Mas' color={ColorsButton.secondary} full={true}/>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

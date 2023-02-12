@@ -24,7 +24,7 @@ export function TeacherAccount(props: TeacherAccountProps) {
   }, []);
   const [selectedTab, setSelectedTab] = useState(0);
 
-  const clickFunction = async (data: IUserAccount) => {
+  const updateUserAccount = async (data: IUserAccount) => {
     const response = await updateProfile(data);
     if (response.success) {
       console.log(response);
@@ -64,13 +64,12 @@ export function TeacherAccount(props: TeacherAccountProps) {
           <Tabs
             className={styles['tabs']}
             tabs={tabs}
-            isNav={false}
             onClickTab={(option) => handleClick(option)}
           />
-          {selectedTab === 0 && (
-            <UserAccountForm onSubmit={clickFunction} data={profile} />
+          {selectedTab === 0 && <TeacherProfileForm />}
+          {selectedTab === 1 && (
+            <UserAccountForm onSubmit={updateUserAccount} data={profile} />
           )}
-          {selectedTab === 1 && <TeacherProfileForm />}
           {selectedTab === 2 && <PaymentForm />}
         </div>
       )}

@@ -20,13 +20,17 @@ export function TeacherLayout() {
       url: 'courses',
     },
     {
+      title: t('dashboards.teacher.sessions'),
+      url: 'sessions',
+    },
+    {
       title: t('dashboards.teacher.earnings'),
       url: 'earnings',
     },
-    {
-      title: t('dashboards.teacher.account'),
-      url: 'account',
-    }
+    // {
+    //   title: t('dashboards.teacher.account'),
+    //   url: 'account',
+    // }
   ];
 
   const logoutSession = async () => {

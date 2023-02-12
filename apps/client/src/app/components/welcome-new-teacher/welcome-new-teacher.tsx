@@ -12,7 +12,7 @@ export function WelcomeNewTeacher(props: WelcomeNewTeacherProps) {
 
   return (
     <div className={styles['container']}>
-      <h4>Realiza estos pasos para empezar a trabajar con Openmind</h4>
+      <h4 className={styles['title']}>Realiza estos pasos para empezar a trabajar y generar ingresos</h4>
       <div className={`${styles['step']} ${styles['with-tag']}`}>
         <div className={styles['step-content-wrapper']}>
           <div className={styles['step-icon']}>

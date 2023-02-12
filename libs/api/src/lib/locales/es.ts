@@ -12,6 +12,7 @@ export const es = {
       dashboard: 'Dashboard',
       courses: 'Mis cursos',
       earnings: 'Ingresos',
+      sessions: 'Mis clases',
       account: 'Mi cuenta',
       notifications: 'Notificaciones',
     }

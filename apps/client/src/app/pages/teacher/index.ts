@@ -7,3 +7,4 @@ export * from './teacher-course-detail/teacher-course-detail';
 export * from './teacher-apply/teacher-apply';
 export * from './teacher-edit-course/teacher-edit-course';
 export * from './teacher-earnings/teacher-earnings';
+export * from './teacher-meetings-agenda/teacher-meetings-agenda';

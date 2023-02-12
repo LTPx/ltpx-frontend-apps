@@ -26,6 +26,7 @@ import {
   TeacherEarnings,
   TeacherEditCourse,
   TeacherLayout,
+  TeacherMeetingsAgenda,
 } from '../pages/teacher';
 import { ProtectedRoutesTeacher } from './guards/protected-routes-teacher/protected-routes-teacher';
 
@@ -46,6 +47,7 @@ export const TeacherRoutes = () => {
           <Route path="apply-teach" element={<TeacherApply />} />
           <Route path="account" element={<TeacherAccount />} />
           <Route path="earnings" element={<TeacherEarnings />} />
+          <Route path="sessions" element={<TeacherMeetingsAgenda />} />
           <Route path="courses" element={<ManageCourses />}>
             <Route
               path="/teacher/courses"

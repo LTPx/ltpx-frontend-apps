@@ -13,18 +13,18 @@ export interface TeacherDashboardProps {}
 
 export function TeacherDashboard(props: TeacherDashboardProps) {
   const { user } = useUser();
-  const { teacher_account } = useTeacher();
+  // const { teacher_account } = useTeacher();
   return (
     <div className={`${styles['container']}`}>
-      {teacher_account === StatusTeacherAccount.review && (
-        <BannerNotification>
+      {/* {teacher_account === StatusTeacherAccount.review && (
+        <BannerNotification onClickClose={()=>{}}>
           <p>
             Tu solicitud ha sido enviada, validaremos tus datos en un periodo
             máximo de 48h luego recibirás un correo con una respuesta de nuestro
             equipo
           </p>
         </BannerNotification>
-      )}
+      )} */}
       <h1>Bienvenido {user.fullname}</h1>
       <div className={styles['layout']}>
         <div className={styles['content']}>

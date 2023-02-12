@@ -1,23 +1,35 @@
-import { Button, Icon } from '@ltpx-frontend-apps/shared-ui';
-import { NavLink } from 'react-router-dom';
 import styles from './welcome-new-teacher.module.scss';
+import { Button, ColorsTag, Icon, Tag } from '@ltpx-frontend-apps/shared-ui';
+import { useTeacher } from '@ltpx-frontend-apps/store';
+import { NavLink } from 'react-router-dom';
+import { StatusTeacherAccount } from '@ltpx-frontend-apps/api';
 
 /* eslint-disable-next-line */
 export interface WelcomeNewTeacherProps {}
 
 export function WelcomeNewTeacher(props: WelcomeNewTeacherProps) {
+  const { teacher_account } = useTeacher();
+
   return (
     <div className={styles['container']}>
       <h4>Realiza estos pasos para empezar a trabajar con Openmind</h4>
-      <div className={styles['step']}>
-        <div className={styles['step-icon']}>
-          <Icon icon="file-alt" size={30} />
+      <div className={`${styles['step']} ${styles['with-tag']}`}>
+        <div className={styles['step-content-wrapper']}>
+          <div className={styles['step-icon']}>
+            <Icon icon="file-alt" size={30} />
+          </div>
+          <div className={styles['step-content']}>
+            <h4>Envía una solicitud para enseñar con nosotros </h4>
+            <p>Por favor envíanos tu información para trabajar con nosotros</p>
+            <Button
+              title={teacher_account === StatusTeacherAccount.review ? 'Revisar Solicitud' : 'Aplicar Ahora' }
+              link="/teacher/apply-teach"
+            />
+          </div>
         </div>
-        <div className={styles['step-content']}>
-          <h4>Envía una solicitud para enseñar con nosotros </h4>
-          <p>Por favor envíanos tu información para trabajar con nosotros</p>
-          <Button title="Aplicar Ahora" link="/teacher/apply-teach" />
-        </div>
+        {teacher_account === StatusTeacherAccount.review && (
+          <Tag text={'En revision'} color={ColorsTag.green}/>
+        )}
       </div>
       <div className={styles['step']}>
         <div className={styles['step-icon']}>

@@ -44,7 +44,13 @@ export function TeacherDashboard(props: TeacherDashboardProps) {
               noticias y hacer preguntas acerca del proceso de enseñar en
               Openmind
             </p>
-            <Button title="Unirme" color={ColorsButton.white} full={true} />
+            <a href="https://discord.gg/JU42n3fA" target={'_blank'}>
+              <Button
+                title="Unirme"
+                color={ColorsButton.white}
+                full={true}
+              />
+            </a>
           </div>
           <div className={styles['card-teaching']}>
             <h2>Enseñar en Openmind</h2>
@@ -57,7 +63,7 @@ export function TeacherDashboard(props: TeacherDashboardProps) {
               title="Aprender Mas"
               color={ColorsButton.secondary}
               full={true}
-              link='/teacher/blog'
+              link="/teacher/blog"
             />
           </div>
         </div>

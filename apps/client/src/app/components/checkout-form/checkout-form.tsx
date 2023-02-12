@@ -32,24 +32,26 @@ interface CheckoutFormProps {
 export function CheckoutForm(props: CheckoutFormProps) {
   const { product, onClose, onSuccess, onError, open } = props;
   const [orderCreated, setOrderCreated] = useState(false);
-  const [orderId, setOrderId] = useState<number>(-1);
+  const [orderId, setOrderId] = useState<number>();
   const [message, setMessage] = useState<MessageCheckout>();
   const [error, setError] = useState(false);
   const { _createPaymentOrder, _confirmUserPayment } = useSite();
 
   const confirmPayment = async (payment_id: string) => {
-    await _confirmUserPayment({
-      order_id: orderId,
-      payment_gateway: 'paypal',
-      receipt_id: payment_id,
-    });
-    setMessage({
-      text: `Gracias por tu compra id: ${payment_id}`,
-      kind: SnackbarType.success,
-    });
+    if (orderId) {
+      await _confirmUserPayment({
+        order_id: orderId,
+        payment_gateway: 'paypal',
+        receipt_id: payment_id,
+      });
+      setMessage({
+        text: `Gracias por tu compra id: ${payment_id}`,
+        kind: SnackbarType.success,
+      });
+    }
   };
 
-  const createOrder = useCallback(async () => {
+  const createOrGetOrder = useCallback(async () => {
     const { success, data, error } = await _createPaymentOrder({
       course_id: product.id,
       description: product.description,
@@ -57,6 +59,7 @@ export function CheckoutForm(props: CheckoutFormProps) {
     });
     if (success) {
       setOrderCreated(true);
+      setOrderId(data.id);
     } else {
       setError(true);
       onError(error);
@@ -64,8 +67,8 @@ export function CheckoutForm(props: CheckoutFormProps) {
   }, []);
 
   useEffect(() => {
-    createOrder();
-  }, [createOrder]);
+    createOrGetOrder();
+  }, [createOrGetOrder]);
 
   return (
     <Dialog

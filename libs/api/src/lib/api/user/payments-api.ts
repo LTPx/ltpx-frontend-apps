@@ -25,7 +25,7 @@ export const createPaymentOrder = async (
 export const updatePaymentOrder = async (payment: ConfirmUserPayment) => {
   return new Promise<UserCoursePaymentModel>((resolve, reject) => {
     http
-      .put(`api/v1/site/user_payments/${payment.order_id}`, payment)
+      .post(`api/v1/site/user_payments/${payment.order_id}/register_payment`, payment)
       .then((response) => {
         resolve(response.data);
       })

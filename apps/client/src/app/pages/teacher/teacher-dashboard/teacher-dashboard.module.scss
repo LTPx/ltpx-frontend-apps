@@ -1,7 +1,8 @@
 @import "../../../../styles.scss";
 
 .container {
-  // padding: 2rem 4rem;
+  min-width: 80vw;
+
   h1 {
     margin-bottom: 1rem;
   }
@@ -13,8 +14,10 @@
 
   .content {
     background-color: $white-color;
+    border-radius: 15px;
     flex-grow: 1;
     padding: 2rem;
+    box-shadow: $card-shadow-medium;
   }
 
   .help-ads {
@@ -29,7 +32,7 @@
       border-radius: 15px;
       color: $gray-color-100;
       box-shadow: $card-shadow-medium;
-      min-width: 16rem;
+      width: 16rem;
 
       h2 {
         padding-bottom: 1rem;
@@ -47,7 +50,7 @@
       border-radius: 15px;
       color: $gray-color;
       box-shadow: $card-shadow-medium;
-      min-width: 16rem;
+      width: 16rem;
 
       h2 {
         padding-bottom: 1rem;

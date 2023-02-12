@@ -25,7 +25,13 @@
 .content {
   grid-area: content;
   background-color: $background-gray-color;
-  padding: 3rem 14rem;
+  display: flex;
+  justify-content: center;
+
+  .render-content {
+    padding: 2rem 0;
+    max-width: 80vw;
+  }
 }
 
 .navbar {

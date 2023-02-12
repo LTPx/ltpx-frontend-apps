@@ -10,9 +10,10 @@ export const es = {
     },
     teacher: {
       dashboard: 'Dashboard',
-      courses: 'Cursos',
+      courses: 'Mis cursos',
       earnings: 'Ingresos',
-      account: 'Mi Cuenta',
+      account: 'Mi cuenta',
+      notifications: 'Notificaciones',
     }
   },
   header: {

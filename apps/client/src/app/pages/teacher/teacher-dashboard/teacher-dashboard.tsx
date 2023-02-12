@@ -55,9 +55,7 @@ export function TeacherDashboard(props: TeacherDashboardProps) {
           <div className={styles['card-teaching']}>
             <h2>Enseñar en Openmind</h2>
             <p>
-              Únete a nuestra comunidad de profesores donde podrás encontrar
-              noticias, hacer preguntas acerca del proceso de enseñar en
-              Openmind
+              Revisa nuestra blog donde encontraras todo la información de como funciona Openmind
             </p>
             <Button
               title="Aprender Mas"

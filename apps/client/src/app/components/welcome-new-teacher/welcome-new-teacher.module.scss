@@ -8,17 +8,53 @@
   .step {
     display: flex;
     gap: 1.5rem;
-    padding-bottom: 3rem;
+    padding: 1rem 0 2rem 0;
+    border-bottom: 1px solid $gray-color-200;
 
     .step-icon {
       display: flex;
+      color: $text-gray-color;
     }
 
     .step-content {
-      h4, p {
-        color: $gray-color;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+
+      h4 {
+        font-weight: 500;
       }
+
+      p, li {
+        color: $gray-color;
+        line-height: 1.5rem;
+        font-size: 14px;
+      }
+
+      ul {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 0.3rem;
+      }
+
+      li {
+        display: flex;
+        gap: 0.4rem;
+      }
+
+      ul li::before {
+        content: "\2022";
+        color: $primary-color;
+        font-size: 3rem;
+      }
+
+      a {
+        color: $primary-color-500;
+      }
+
       button {
+        width: max-content;
         margin-top: 1rem;
       }
     }

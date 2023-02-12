@@ -24,5 +24,17 @@ export interface Purchase {
 
 export type NewUserCoursePaymentParams = Omit<
   UserCoursePaymentModel,
-  'id' | 'user_id' | 'amount_cents' | 'created_at' | 'updated_at'
+  | 'id'
+  | 'user_id'
+  | 'receipt_id'
+  | 'payment_gateway'
+  | 'amount_cents'
+  | 'created_at'
+  | 'updated_at'
 >;
+
+export interface ConfirmUserPayment {
+  order_id: number;
+  payment_gateway: string;
+  receipt_id: string;
+}

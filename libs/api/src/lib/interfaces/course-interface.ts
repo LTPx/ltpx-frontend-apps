@@ -81,18 +81,20 @@ export interface Rating {
   reviewers: number;
 }
 
+export interface TeacherSummary {
+  id: string;
+  image: string;
+  biography: string;
+  fullname: string;
+  profession: string;
+  total_courses: number;
+  rating_average: number;
+  total_students: number;
+}
+
 export interface FullCourse {
   course: CourseModel;
-  teacher: {
-    id: string;
-    image: string;
-    biography: string;
-    fullname: string;
-    profession: string;
-    total_courses: number;
-    rating_average: number;
-    total_students: number;
-  };
+  teacher: TeacherSummary;
   comments: Comment[];
   ratings: Rating[];
 }

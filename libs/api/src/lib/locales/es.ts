@@ -197,7 +197,7 @@ export const es = {
     sendRequest: 'Enviar Solicitud'
   },
   links: {
-    toBlog: 'Ir a Blog',
+    toBlog: 'Ver mas artículos',
     toAllCourses: 'Explorar todos los cursos'
   },
   teacherCourse : {

@@ -1,5 +1,5 @@
 import styles from './course-details.module.scss';
-import { FullCourse, IRegisterUser } from '@ltpx-frontend-apps/api';
+import { IRegisterUser } from '@ltpx-frontend-apps/api';
 import {
   Avatar,
   AvatarSize,
@@ -26,21 +26,20 @@ export function CourseDetails() {
   const [openModal, setOpenModal] = useState(false);
   const [openEnrollModal, setOpenEnrollModal] = useState(false);
   const [selectedTab, setSelectedTab] = useState(0);
-  const [course, setCourse] = useState<FullCourse>();
   const { courseId } = useParams();
   const { isAuthenticated, register } = useUser();
-  const { _addCourseCart } = useCart();
-  const { _getSiteCourse } = useSite();
+  const { translateLanguage, translateLevel, translateCategory } =
+    useCourseUtil();
   const id = parseInt(courseId || '');
   const navigate = useNavigate();
   const { t } = useTranslation();
-  const { translateLanguage, translateLevel, translateCategory } =
-    useCourseUtil();
+  const { _getSiteCourse, currentFullCourse } = useSite();
+  const { course, teacher } = currentFullCourse;
 
   const fetchCourse = useCallback(async () => {
     const { success, data, error } = await _getSiteCourse(id);
     if (success) {
-      setCourse(data);
+      console.log('data: ', data);
     } else {
       console.log('error: ', error);
     }
@@ -50,9 +49,6 @@ export function CourseDetails() {
     const { isLogin, data } = await register(formData);
     if (isLogin) {
       navigate('/cart');
-      if (course) {
-        _addCourseCart(course.course);
-      }
     } else {
       console.log(data);
     }
@@ -67,7 +63,7 @@ export function CourseDetails() {
   };
 
   const enrolled = () => {
-    if (course && isAuthenticated) {
+    if (currentFullCourse && isAuthenticated) {
       setOpenEnrollModal(true);
     } else {
       setOpenModal(true);
@@ -91,13 +87,13 @@ export function CourseDetails() {
 
   return (
     <div className={styles['container']}>
-      {course && (
+      {course.id && (
         <div className={styles['course-details']}>
           <div className={styles['description-container']}>
             <div className={styles['description']}>
               <div className={styles['description-title']}>
                 <div className={styles['title']}>
-                  <h1>{course.course.title}</h1>
+                  <h1>{course.title}</h1>
                   {/* <h4 className="muted">
                     Looking how to increase your incomes and learn about new
                     digital money
@@ -108,7 +104,7 @@ export function CourseDetails() {
                 <div className={styles['avatar']}>
                   <NavLink to="/teacher-profile">
                     <Avatar
-                      image={course?.teacher.image || ''}
+                      image={teacher.image || ''}
                       size={AvatarSize.medium}
                       outline={true}
                     />
@@ -119,20 +115,20 @@ export function CourseDetails() {
                     <label>
                       {t('coursesDetails.teacherInformation.instructor')}
                     </label>
-                    <h5>{course?.teacher?.fullname}</h5>
+                    <h5>{teacher.fullname}</h5>
                   </div>
                   <div className={styles['item']}>
                     <label>
                       {t('coursesDetails.teacherInformation.categories')}
                     </label>
-                    <h5>{translateCategory(course?.course.category)}</h5>
+                    <h5>{translateCategory(course.category)}</h5>
                   </div>
                   <div className={styles['item']}>
                     <label>
                       {t('coursesDetails.teacherInformation.review')}
                     </label>
                     <div className={styles['rating']}>
-                      <Rating stars={course?.course.average_rating || 0} />
+                      <Rating stars={course.average_rating || 0} />
                     </div>
                   </div>
                 </div>
@@ -147,33 +143,33 @@ export function CourseDetails() {
                 <div className={styles['tabs-content']}>
                   {selectedTab === 0 && (
                     <OverviewCourse
-                      description={course?.course.description}
-                      goals={course?.course.learn_goals.split('\n')}
-                      requirements={course?.course.requirements.split('\n')}
+                      description={course.description}
+                      goals={course.learn_goals.split('\n')}
+                      requirements={course.requirements.split('\n')}
                     />
                   )}
                   {selectedTab === 1 && (
-                    <CourseContents contents={course?.course.contents || []} />
+                    <CourseContents contents={course.contents || []} />
                   )}
                   {selectedTab === 2 && (
                     <TeacherOverview
-                      name={course?.teacher.fullname || ''}
-                      profession={course?.teacher.profession || ''}
-                      rating={course?.teacher.rating_average || 0}
-                      reviews={course?.teacher.rating_average}
-                      students={course?.teacher.total_students}
+                      name={teacher.fullname || ''}
+                      profession={teacher.profession || ''}
+                      rating={teacher.rating_average || 0}
+                      reviews={teacher.rating_average}
+                      students={teacher.total_students}
                       courses={5}
-                      biography={course?.teacher.biography}
-                      image={course?.teacher.image}
+                      biography={teacher.biography}
+                      image={teacher.image}
                     />
                   )}
                   {selectedTab === 3 && (
                     <>
                       <RatingCourse
-                        ratings={course.ratings || []}
+                        ratings={currentFullCourse.ratings || []}
                       ></RatingCourse>
                       <div className={styles['comment-course']}>
-                        {course.comments.map((comment, index) => (
+                        {currentFullCourse.comments.map((comment, index) => (
                           <CommentCourse
                             reviewTitle={comment.title}
                             name={comment.name}
@@ -192,13 +188,13 @@ export function CourseDetails() {
             </div>
           </div>
           <BuyCourseCard
-            price={course.course.price_format}
-            achievements={course.course.achievements?.length || 0}
-            lectures={course.course.contents.length}
-            enrolled={course.course.enrollments_count}
-            language={translateLanguage(course.course.language)}
-            skillLevel={translateLevel(course.course.level)}
-            image={course.course.cover_url}
+            price={course.price_format}
+            achievements={course.achievements?.length || 0}
+            lectures={course.contents.length}
+            enrolled={course.enrollments_count}
+            language={translateLanguage(course.language)}
+            skillLevel={translateLevel(course.level)}
+            image={course.cover_url}
             onClickEnroll={enrolled}
             certificate={true}
           />
@@ -219,24 +215,26 @@ export function CourseDetails() {
           />
         </div>
       </Dialog>
-      <Dialog
-        isShown={openEnrollModal}
-        hasFooter={false}
-        title='Checkout'
-        onCloseComplete={() => setOpenEnrollModal(false)}
-        width={'55vw'}
-      >
-        { course && (
-          <CheckoutForm
-            product={{
-              description: course.course.title,
-              price: parseFloat(course.course.price),
-              id: course.course.id,
-              image: course.course.cover_url,
-            }}
-          />
-        )}
-      </Dialog>
+      { openEnrollModal && (
+        <CheckoutForm
+          open={openEnrollModal}
+          onClose={()=>{
+            setOpenEnrollModal(false);
+          }}
+          product={{
+            description: course.title,
+            price: parseFloat(course.price),
+            id: course.id,
+            image: course.cover_url,
+          }}
+          onSuccess={() => {
+            setOpenEnrollModal(false);
+          }}
+          onError={() => {
+            setOpenEnrollModal(false);
+          }}
+        />
+      )}
     </div>
   );
 }

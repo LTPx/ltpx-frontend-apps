@@ -2,16 +2,20 @@ import { useAppStore } from "../store";
 
 export const useSite = () => {
   const {
+    currentFullCourse,
     _getPopularCourses,
     _getSiteCourse,
-    _enrollUser,
-    _registerPaymentCourse,
+    _confirmUserPayment,
+    _createPaymentOrder,
+    _cancelUserPayment,
   } = useAppStore();
 
   return {
+    currentFullCourse,
     _getPopularCourses,
     _getSiteCourse,
-    _enrollUser,
-    _registerPaymentCourse,
+    _confirmUserPayment,
+    _createPaymentOrder,
+    _cancelUserPayment,
   }
 }

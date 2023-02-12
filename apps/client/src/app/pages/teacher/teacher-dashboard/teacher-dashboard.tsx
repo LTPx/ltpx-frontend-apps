@@ -34,12 +34,12 @@ export function TeacherDashboard(props: TeacherDashboardProps) {
         </div>
         <div className={styles['help-ads']}>
           <div className={styles['card-join-discord']}>
-            <h3>Únete al grupo de discord</h3>
+            <h2>Únete al grupo de discord</h2>
             <h4>Únete a nuestra comunidad de profesores donde podrás encontrar noticias, hacer preguntas acerca del proceso de enseñar en Openmind</h4>
             <Button title='Unirme' color={ColorsButton.white} full={true}/>
           </div>
           <div className={styles['card-teaching']}>
-            <h3>Enseñar en Openmind</h3>
+            <h2>Enseñar en Openmind</h2>
             <h4>Únete a nuestra comunidad de profesores donde podrás encontrar noticias, hacer preguntas acerca del proceso de enseñar en Openmind</h4>
             <Button title='Aprender Mas' color={ColorsButton.secondary} full={true}/>
           </div>

@@ -41,7 +41,7 @@ export function WelcomeNewTeacher(props: WelcomeNewTeacherProps) {
           <Icon icon="tools" size={30} />
         </div>
         <div className={styles['step-content']}>
-          <h3>Crea y publicar un curso</h3>
+          <h3>Crea y publica un curso</h3>
           <p>
             Crea tu primer curso, no te preocupes si no lo haces bien al primer
             intento nosotros te guiaremos en el proceso, una vez lo tengas lo

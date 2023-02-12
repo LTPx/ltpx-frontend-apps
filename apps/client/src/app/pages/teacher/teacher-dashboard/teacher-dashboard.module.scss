@@ -27,15 +27,20 @@
 
     .card-join-discord {
       text-align: center;
-      background-color: $green-color;
+      background-color: #404eed;
       padding: 1.5rem;
       border-radius: 15px;
       color: $gray-color-100;
       box-shadow: $card-shadow-medium;
       width: 16rem;
 
+      img {
+        width: 100%;
+        object-fit: cover;
+      }
+
       h2 {
-        padding-bottom: 1rem;
+        padding: 1rem 0;
       }
 
       button {
@@ -51,6 +56,10 @@
       color: $gray-color;
       box-shadow: $card-shadow-medium;
       width: 16rem;
+
+      img {
+        object-fit: cover;
+      }
 
       h2 {
         padding-bottom: 1rem;

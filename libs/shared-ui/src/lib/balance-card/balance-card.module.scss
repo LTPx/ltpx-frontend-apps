@@ -1,0 +1,25 @@
+@import '../../styles/styles.module.scss';
+
+.container {
+  width: 18rem;
+  background-color: $white-color;
+  .content {
+    display: flex;
+    flex-direction: column;
+    padding: $size-md-3 $size-md-3;
+    gap: $size-md-1;
+    border-radius: 4px;
+    box-shadow: $card-shadow-medium;
+    .type-content {
+      display: flex;
+      justify-content: space-between;
+      h4 {
+        color: $text-gray-color;
+      }
+      .link {
+        color: $primary-color;
+        cursor: pointer;
+      }
+    }
+  }
+}

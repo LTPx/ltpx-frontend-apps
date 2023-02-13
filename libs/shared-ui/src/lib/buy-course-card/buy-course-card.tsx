@@ -6,15 +6,15 @@ import styles from './buy-course-card.module.scss';
 /* eslint-disable-next-line */
 export interface BuyCourseCardProps {
   image: string;
-  price: number;
-  discount: number;
+  price: string;
+  discount?: number;
   achievements: number;
   lectures: number;
   enrolled: number;
   language: string;
   skillLevel: string;
   certificate: boolean;
-  onClickBuy: () => void;
+  onClickBuy?: () => void;
   onClickEnroll: () => void;
 }
 
@@ -41,19 +41,19 @@ export function BuyCourseCard(props: BuyCourseCardProps) {
         <div className={`${styles['summary']}`}>
           <div className={styles['price-promo']}>
             <div className={styles['price']}>
-              <h3>${price / 100}</h3>
+              <h2>{price}</h2>
             </div>
-            <div className={styles['discount']}>
-              <span>{discount}% off</span>
-            </div>
+            {/* <div className={styles['discount']}>
+              <span>{discount || 20}% descuento</span>
+            </div> */}
           </div>
           <div className={styles['actions']}>
-            <Button
-              title={t('coursesDetails.buyCourseCard.buttons.buy')}
+            {/* <Button
+              title={t('coursesDetails.buyCourseCard.buttons.enroll')}
               color={ColorsButton.primary}
               onClick={onClickBuy}
               full={true}
-            />
+            /> */}
             <Button
               title={t('coursesDetails.buyCourseCard.buttons.enroll')}
               color={ColorsButton.secondary}
@@ -102,7 +102,7 @@ export function BuyCourseCard(props: BuyCourseCardProps) {
                 <Icon icon={'file'} size={15} color="#888888"></Icon>
                 <h4>{t('coursesDetails.buyCourseCard.details.certificate')}</h4>
               </div>
-              <h4>{certificate ? 'Yes' : 'No'}</h4>
+              <h4>{certificate ? 'Si' : 'No'}</h4>
             </div>
           </div>
         </div>

@@ -1,4 +1,4 @@
-import Button from '../button/button';
+import Button, { ColorsButton } from '../button/button';
 import Icon from '../icon/icon';
 import Rating from '../rating/rating';
 import styles from './course-cart-item.module.scss';
@@ -9,7 +9,7 @@ export interface CourseCartItemProps {
   cover?: string;
   category: string;
   title: string;
-  price: number;
+  price: string;
   duration?: number;
   lessons?: number;
   stars?: number;
@@ -60,9 +60,10 @@ export function CourseCartItem(props: CourseCartItemProps) {
       <div className={styles['price-actions']}>
         <div className={styles['actions']}>
           <Button
-            title='Remove'
+            title='Eliminar'
             onClick={() => {onClickRemove(id)}}
             outline={true}
+            color={ColorsButton.secondary}
           />
           {/* <Button
             title='♥ Add to Favorites'

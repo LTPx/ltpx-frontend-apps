@@ -4,9 +4,9 @@ import {
   LearnersTable,
   Tabs,
 } from '@ltpx-frontend-apps/shared-ui';
+import { useCourseUtil } from '@ltpx-frontend-apps/store';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { useCourse } from '../../../store';
 import styles from './teacher-course-detail.module.scss';
 
 const tabs = [
@@ -51,7 +51,7 @@ export interface TeacherCourseDetailProps {}
 export function TeacherCourseDetail(props: TeacherCourseDetailProps) {
   const [course, setCourse] = useState<TeacherCourse>();
   const [selectedTab, setSelectedTab] = useState(0);
-  const { translateCategory, translateLanguage, translateLevel, translateStatus } = useCourse();
+  const { translateCategory, translateLanguage, translateLevel, translateStatus } = useCourseUtil();
 
   const handleClick = (index: number) => {
     setSelectedTab(index);

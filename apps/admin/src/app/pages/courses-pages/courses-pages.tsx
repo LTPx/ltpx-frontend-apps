@@ -7,8 +7,7 @@ import styles from './courses-pages.module.scss';
 export function CoursesPages() {
   const { _getPendingReviewCourses, courses, _getApprovedCourses } =
     useAdmin();
-  const { translateCategory } =
-    useCourseUtil();
+  const { translateCategory } = useCourseUtil();
   const tabs = [{ text: 'Pendientes' }, { text: 'Aprobados' }];
 
   const fetchPending = useCallback(async () => {

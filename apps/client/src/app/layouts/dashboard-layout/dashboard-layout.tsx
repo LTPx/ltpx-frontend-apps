@@ -21,7 +21,9 @@ export function DashboardLayout(props: DashboardLayoutProps) {
 
   return (
     <div className={styles['container']}>
-      <HeaderApp/>
+      <div className={styles['header']}>
+        <HeaderApp/>
+      </div>
       <div className={styles['navbar']}>
         <Nav links={links}/>
       </div>

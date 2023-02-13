@@ -15,6 +15,13 @@
   cursor: pointer;
 }
 
+.button-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem
+}
+
 .btn:hover {
   color: #272c33;
   text-decoration: none

@@ -16,7 +16,9 @@ export const useTeacher = () => {
     createAchievement,
     getCourse,
     currentCourse,
+    wallet,
     _sendCourseToReview,
+    _getWallet,
   } = useAppStore();
 
   return {
@@ -34,6 +36,8 @@ export const useTeacher = () => {
     createQuiz,
     createAchievement,
     getCourse,
+    wallet,
     _sendCourseToReview,
+    _getWallet,
   }
 }

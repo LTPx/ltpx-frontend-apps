@@ -10,6 +10,10 @@
   height: 100vh;
 }
 
+.header {
+  grid-area: header;
+}
+
 .content {
   grid-area: content;
   background-color: $background-gray-color;

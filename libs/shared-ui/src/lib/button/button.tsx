@@ -1,4 +1,5 @@
 import { NavLink } from 'react-router-dom';
+import Icon from '../icon/icon';
 import css from './button.module.scss';
 
 export enum TypeButton {
@@ -25,7 +26,7 @@ export interface ButtonProps {
   outline?: boolean;
   full?: boolean;
   link?: string;
-  ref?: any;
+  icon?: string;
 }
 
 export function Button(props: ButtonProps) {
@@ -39,7 +40,7 @@ export function Button(props: ButtonProps) {
     outline,
     full,
     link,
-    ref,
+    icon,
     ...other
   } = props;
 
@@ -69,7 +70,9 @@ export function Button(props: ButtonProps) {
         onMouseDown={(event)=>{event.preventDefault()}}
         {...other}
       >
-        {title}
+        <div className={css['button-content']}>
+          { icon && ( <Icon icon={icon} size={15} />)} {title}
+        </div>
       </button>
     );
   };

@@ -1,4 +1,4 @@
-import { buildCourses } from '@ltpx-frontend-apps/api';
+import { buildCourses, CourseModel } from '@ltpx-frontend-apps/api';
 import {
   Button,
   CategoryCard,
@@ -6,15 +6,15 @@ import {
   CourseCard,
   NewsCard,
 } from '@ltpx-frontend-apps/shared-ui';
+import { useSite } from '@ltpx-frontend-apps/store';
+import { useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { NavLink } from 'react-router-dom';
 import styles from './home.module.scss';
 
-/* eslint-disable-next-line */
-export interface HomeProps {}
-
-export function Home(props: HomeProps) {
-  const popularCourses = buildCourses(8);
+export function Home() {
+  const [ courses, setCourses] = useState<CourseModel[]>([])
+  const {_getPopularCourses } = useSite();
   const { t } = useTranslation();
   const categories = [
     {
@@ -101,6 +101,19 @@ export function Home(props: HomeProps) {
     },
   ];
 
+  const fetchPopularCourse = useCallback(async () => {
+    const { success , data, error} = await _getPopularCourses();
+    if ( success ) {
+      setCourses(data);
+    } else {
+      console.log('error: ', error);
+    }
+  }, []);
+
+  useEffect(() => {
+    fetchPopularCourse();
+  }, [fetchPopularCourse]);
+
   return (
     <div className={styles['container']}>
       <div className={styles['main-cover']}>
@@ -136,13 +149,13 @@ export function Home(props: HomeProps) {
           <h4>{t('home.popularCourse.subtitle')}</h4>
         </div>
         <div className={styles['popular-courses']}>
-          {popularCourses.map((course, index) => (
+          {courses.map((course, index) => (
             <div className={styles['course']} key={index}>
               <CourseCard
-                image={course.cover}
+                image={course.cover_url}
                 category={course.category}
                 title={course.title}
-                price={course.price_cents}
+                price={course.price_format}
                 duration={0}
                 lessons={0}
                 stars={course.average_rating}

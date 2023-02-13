@@ -22,6 +22,8 @@ import {
   createQuiz,
   createAchievement,
   sendCourseToReview,
+  getWallet,
+  WalletModel,
 } from '@ltpx-frontend-apps/api';
 import { StateCreator } from 'zustand';
 import { StoreState } from '../store';
@@ -68,6 +70,7 @@ export type TeacherSlice = {
   profile: IUserAccount | null;
   newQuiz: QuizModel | null;
   currentCourse: TeacherCourse;
+  wallet: WalletModel;
   applyTeach: (params: ApplyTeachApiParams) => Promise<any>;
   getApplicationTeach: () => Promise<any>;
   registerTeacher: (params: IRegisterUser) => Promise<TResponseLogin>;
@@ -79,6 +82,7 @@ export type TeacherSlice = {
   createAchievement: (params: NewAchievementParams) => Promise<TResponse>;
   getCourse: (id: number) => Promise<TResponse>;
   _sendCourseToReview: (id: number) => Promise<TResponse>;
+  _getWallet: () => Promise<TResponse>;
 };
 
 export const createTeacherSlice: StateCreator<
@@ -92,6 +96,7 @@ export const createTeacherSlice: StateCreator<
   profile: null,
   newQuiz: null,
   currentCourse: {} as TeacherCourse,
+  wallet: {} as WalletModel,
   applyTeach: async (params: ApplyTeachApiParams): Promise<TResponseApply> => {
     try {
       const application = await applyToTeach(params);
@@ -124,7 +129,7 @@ export const createTeacherSlice: StateCreator<
   },
   registerTeacher: async (params: IRegisterUser): Promise<TResponseLogin> => {
     try {
-      const { user } = await registerTeacher(params);
+      const user = await registerTeacher(params);
       set({
         user: user,
         isAuthenticated: true,
@@ -209,5 +214,14 @@ export const createTeacherSlice: StateCreator<
     } catch (error) {
       return { success: false, data: error };
     }
-  }
+  },
+  _getWallet: async () => {
+    try {
+      const wallet = await getWallet();
+      set({wallet});
+      return { success: true, data: wallet };
+    } catch (error) {
+      return { success: false, data: error };
+    }
+  },
 });

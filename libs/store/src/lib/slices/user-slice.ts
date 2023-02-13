@@ -1,7 +1,6 @@
 import { StateCreator } from 'zustand';
 import { StoreState } from '../store';
 import {
-  PublicCourse,
   ICredentials,
   IRegisterUser,
   loginUser,
@@ -11,8 +10,7 @@ import {
   UserResponse,
   TypeViews,
   UserStore,
-  TypeAccounts,
-  loginAdmin
+  loginAdmin,
 } from '@ltpx-frontend-apps/api';
 
 type TResponseLogin = {
@@ -23,25 +21,20 @@ type TResponseLogin = {
 export type UserSlice = {
   user: UserStore;
   isAuthenticated: boolean;
-  cart: {
-    courses: PublicCourse[];
-  };
   currentView: TypeViews,
   getCurrentUser: () => Promise<TResponseLogin>;
   login: (credentials: ICredentials) => Promise<TResponseLogin>;
   loginAdmin: (credentials: ICredentials) => Promise<TResponseLogin>;
   register: (params: IRegisterUser) => Promise<TResponseLogin>;
   logout: () => void;
-  addCourseCart: (course: PublicCourse) => void;
-  removeCourseCart: (id: number) => void;
 };
 
-const views = {
-  user: TypeViews.default,
-  teacher: TypeViews.teacher,
-  student: TypeViews.student,
-  admin: TypeViews.default,
-}
+// const views = {
+//   user: TypeViews.default,
+//   teacher: TypeViews.teacher,
+//   student: TypeViews.student,
+//   admin: TypeViews.default,
+// }
 //TODO: save current view locally to avoid show 404 page on reload page
 // const viewString = localStorage.getItem('view_app') || TypeViews.default;
 // const currentView: TypeViews = (<any>TypeViews)[viewString];
@@ -53,31 +46,35 @@ export const createUserSlice: StateCreator<
   [],
   UserSlice
 > = (set) => ({
-  user: {
-    fullname: '',
-    email: '',
-    initial_register: TypeAccounts.user
-  },
+  user: {} as UserStore,
   isAuthenticated: false,
-  cart: {
-    courses: [],
-  },
   currentView: TypeViews.default,
   getCurrentUser: async ():Promise<TResponseLogin> => {
     try {
       const user = await getCurrentUser();
-      const { initial_register } =  user;
-      set({
-        user: user,
-        isAuthenticated: true,
-        currentView: views[initial_register],
-        teacher_account: user.teacher_account
-      });
+      const { initial_view, cart } =  user;
+      if (cart) {
+        const coursesInCart = cart.items.map((item)=> item.course);
+        set({
+          user: user,
+          isAuthenticated: true,
+          currentView: initial_view,
+          teacher_account: user.teacher_account,
+          coursesInCart: coursesInCart
+        });
+      } else {
+        set({
+          user: user,
+          isAuthenticated: true,
+          currentView: initial_view,
+          teacher_account: user.teacher_account,
+        });
+      }
       return { isLogin: true, data: user };
     } catch (error) {
       set({
         isAuthenticated: false,
-        currentView: views.user
+        currentView: TypeViews.user
       });
       localStorage.clear();
       return { isLogin: false, data: error };
@@ -85,12 +82,11 @@ export const createUserSlice: StateCreator<
   },
   login: async (credentials: ICredentials):Promise<TResponseLogin> => {
     try {
-      const { user } = await loginUser(credentials);
-      const view = views[user.initial_register];
+      const user = await loginUser(credentials);
       set({
         user: user,
         isAuthenticated: true,
-        currentView: view
+        currentView: user.initial_view
       });
       // localStorage.setItem('view_app', view);
       return { isLogin: true, data: user };
@@ -100,12 +96,11 @@ export const createUserSlice: StateCreator<
   },
   loginAdmin: async (credentials: ICredentials):Promise<TResponseLogin> => {
     try {
-      const { user } = await loginAdmin(credentials);
-      const view = views[user.initial_register];
+      const user = await loginAdmin(credentials);
       set({
         user: user,
         isAuthenticated: true,
-        currentView: view
+        currentView: user.initial_view
       });
       // localStorage.setItem('view_app', view);
       return { isLogin: true, data: user };
@@ -115,11 +110,12 @@ export const createUserSlice: StateCreator<
   },
   register: async (params: IRegisterUser):Promise<TResponseLogin> => {
     try {
-      const { user } = await registerUser(params);
+      const user = await registerUser(params);
+      const view = user.initial_view;
       set({
         user: user,
         isAuthenticated: true,
-        currentView: TypeViews.user
+        currentView: view
       });
       return { isLogin: true, data: user };
     } catch (error) {
@@ -135,16 +131,4 @@ export const createUserSlice: StateCreator<
       console.log(error);
     }
   },
-  addCourseCart: (course: PublicCourse) =>
-    set((state) => ({
-      cart: {
-        courses: state.cart.courses.concat([course]),
-      },
-    })),
-  removeCourseCart: (id: number) =>
-    set((state) => ({
-      cart: {
-        courses: state.cart.courses.filter((course) => course.id !== id),
-      },
-    })),
 });

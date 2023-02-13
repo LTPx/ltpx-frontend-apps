@@ -1,9 +1,8 @@
 import styles from './register.module.scss';
-// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
 import { RegisterForm } from '@ltpx-frontend-apps/shared-ui';
 import { useNavigate } from 'react-router-dom';
-import { useUser } from '../../../store';
 import { IRegisterUser } from '@ltpx-frontend-apps/api';
+import { useUser } from '@ltpx-frontend-apps/store';
 import { useTranslation } from 'react-i18next';
 
 /* eslint-disable-next-line */
@@ -16,9 +15,10 @@ export function Register(props: RegisterProps) {
 
   const onSubmitForm = async (formData: IRegisterUser) => {
     const { isLogin, data } = await register(formData);
+
     if (isLogin) {
-      navigate('/student/dashboard');
-      window.location.reload();
+      navigate('/home');
+      // window.location.reload();
     } else {
       // setError(true);
     }

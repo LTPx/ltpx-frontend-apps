@@ -1,9 +1,8 @@
-// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
+import styles from './register-teacher.module.scss';
 import { RegisterForm } from '@ltpx-frontend-apps/shared-ui';
 import { useNavigate } from 'react-router-dom';
-import styles from './register-teacher.module.scss';
-import { useTeacher } from '../../../store';
 import { IRegisterUser } from '@ltpx-frontend-apps/api';
+import { useTeacher } from '@ltpx-frontend-apps/store';
 import { useTranslation } from 'react-i18next';
 
 /* eslint-disable-next-line */

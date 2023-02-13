@@ -1,12 +1,34 @@
+import { useTeacher } from '@ltpx-frontend-apps/store';
+import { useCallback, useEffect } from 'react';
 import styles from './teacher-earnings.module.scss';
 
-/* eslint-disable-next-line */
-export interface TeacherEarningsProps {}
+export function TeacherEarnings() {
+  const { _getWallet, wallet } = useTeacher();
 
-export function TeacherEarnings(props: TeacherEarningsProps) {
+  const fetchWallet = useCallback(async () => {
+    const { success, data, error } = await _getWallet();
+    if (success) {
+      console.log('error: ', data);
+    } else {
+      console.log('error: ', error);
+    }
+  }, []);
+
+  useEffect(() => {
+    fetchWallet();
+  }, [fetchWallet]);
+
   return (
     <div className={styles['container']}>
-      <h1>Welcome to TeacherEarnings!</h1>
+      <h1>Mis Ingresos</h1>
+      <div className="card">
+        { wallet.id && (
+          <>
+            <h4>Total de ventas: {wallet.total_earnings}</h4>
+            <h4>Saldo disponible para retirar: {wallet.balance_available_withdraw}</h4>
+          </>
+        )}
+      </div>
     </div>
   );
 }

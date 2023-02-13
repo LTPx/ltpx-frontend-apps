@@ -40,7 +40,7 @@
     .information-wrap {
       display: grid;
       grid-template-columns: 50% 50%;
-      width: 90%;
+      width: 70%;
       gap: 3rem;
       .information-content {
         padding-top: 2rem;
@@ -85,7 +85,7 @@
       font-weight: bold;
     }
     .courses-content {
-      width: 90%;
+      width: 70%;
       padding-top: 2rem;
     }
     .courses-teacher {
@@ -94,7 +94,6 @@
       width: 100%;
       flex-wrap: wrap;
       gap: $size-md-1;
-      justify-content: center;
       .course {
         height: 20rem;
         width: 16rem;

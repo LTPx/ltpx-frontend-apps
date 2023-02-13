@@ -5,9 +5,6 @@ export const useUser = () => {
     user,
     currentView,
     isAuthenticated,
-    addCourseCart,
-    removeCourseCart,
-    cart,
     logout,
     login,
     loginAdmin,
@@ -17,8 +14,6 @@ export const useUser = () => {
   } = useAppStore();
 
   return {
-    products: cart.courses,
-    totalProducts: cart.courses.length,
     isTeacher: user.initial_register === 'teacher',
     user,
     currentView,
@@ -28,8 +23,6 @@ export const useUser = () => {
     registerTeacher,
     getCurrentUser,
     isAuthenticated,
-    addCourseCart,
-    removeCourseCart,
     logout
   }
 }

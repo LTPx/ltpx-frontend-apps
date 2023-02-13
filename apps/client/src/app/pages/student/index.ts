@@ -8,3 +8,7 @@ export * from './purchases/purchases';
 export * from './settings/settings';
 export * from './user-classes/user-classes';
 export * from './courses/courses';
+export * from './student-courses/student-courses';
+export * from './student-course/student-course';
+export * from './student-classes/student-classes';
+export * from './student-layout/student-layout';

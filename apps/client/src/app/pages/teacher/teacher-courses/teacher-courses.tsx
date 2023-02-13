@@ -11,12 +11,11 @@ import {
   Select,
   TeacherCourseCard,
 } from '@ltpx-frontend-apps/shared-ui';
-import { useCourseUtil } from '@ltpx-frontend-apps/store';
+import { useCourseUtil, useTeacher } from '@ltpx-frontend-apps/store';
 import { Dialog } from 'evergreen-ui';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
-import { useTeacher } from '../../../store';
 import styles from './teacher-courses.module.scss';
 
 const placeholderImage =
@@ -75,7 +74,7 @@ export function TeacherCourses(props: TeacherCoursesProps) {
           percentageRate={0}
           percentageLearner={0}
           url={`/teacher/courses/edit/${course.id}`}
-          price={getPriceCourse(course.achievements || [])}
+          price={course.price}
           dropdownActions={[
             { text: 'Ver Curso',  icon: 'user-group', url: `/teacher/courses/${course.id}`},
             { text: 'Editar Curso',  icon: 'pencil', url: `/teacher/courses/edit/${course.id}`},

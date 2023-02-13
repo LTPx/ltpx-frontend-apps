@@ -10,9 +10,11 @@ export const es = {
     },
     teacher: {
       dashboard: 'Dashboard',
-      courses: 'Cursos',
+      courses: 'Mis cursos',
       earnings: 'Ingresos',
-      account: 'Mi Cuenta',
+      sessions: 'Mis clases',
+      account: 'Mi cuenta',
+      notifications: 'Notificaciones',
     }
   },
   header: {
@@ -122,7 +124,7 @@ export const es = {
     buyCourseCard: {
       buttons: {
         buy: 'Comprar Ahora',
-        enroll: 'Inscribirme'
+        enroll: 'Inscribirme Ahora'
       },
       details: {
         achievement: 'Logros',
@@ -197,7 +199,7 @@ export const es = {
     sendRequest: 'Enviar Solicitud'
   },
   links: {
-    toBlog: 'Ir a Blog',
+    toBlog: 'Ver mas artículos',
     toAllCourses: 'Explorar todos los cursos'
   },
   teacherCourse : {

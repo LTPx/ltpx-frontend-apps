@@ -1,3 +1,4 @@
+import { useCourseUtil } from '@ltpx-frontend-apps/store';
 import { NavLink } from 'react-router-dom';
 import Icon from '../icon/icon';
 import styles from './course-card.module.scss';
@@ -7,7 +8,7 @@ export interface CourseCardProps {
   image?: string;
   category: string;
   title: string;
-  price: number;
+  price: string;
   duration?: number;
   lessons?: number;
   stars?: number;
@@ -15,13 +16,17 @@ export interface CourseCardProps {
 }
 
 export function CourseCard(props: CourseCardProps) {
-  const { image, category, title, price, duration, lessons, stars, link } = props;
+  const { image, category, title, price, duration, lessons, stars, link } =
+    props;
+  const { translateCategory } = useCourseUtil();
 
   const Card = () => (
     <div className={styles['container']}>
-      <img loading='lazy' src={image} alt="" />
+      <img loading="lazy" src={image} alt="" />
       <div className={styles['content']}>
-        <span className={styles['category']}>{category}</span>
+        <span className={styles['category']}>
+          {translateCategory(category)}
+        </span>
         <h3 className={styles['title']}>{title}</h3>
         <div className="stars">
           {Array.from(Array(stars).keys()).map((number, index) => (
@@ -34,13 +39,13 @@ export function CourseCard(props: CourseCardProps) {
         <div className={styles['info']}>
           <div className={styles['info-item']}>
             <Icon icon={'university'} size={15} />
-            {lessons} lessons
+            {lessons} lecciones
           </div>
           <div className={styles['info-item']}>
             <Icon icon={'clock'} size={15} />
             {duration} min
           </div>
-          <div className={styles['info-item']}></div>${price}
+          <div className={styles['info-item']}></div>{price}
         </div>
       </div>
     </div>

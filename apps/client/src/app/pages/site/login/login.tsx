@@ -1,5 +1,4 @@
 import styles from './login.module.scss';
-// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
 import {
   BannerNotification,
   BannerType,
@@ -8,7 +7,7 @@ import {
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { ICredentials, TypeAccounts } from '@ltpx-frontend-apps/api';
-import { useUser } from '../../../store';
+import { useUser } from '@ltpx-frontend-apps/store';
 import { useTranslation } from 'react-i18next';
 
 /* eslint-disable-next-line */
@@ -27,13 +26,17 @@ export function Login(props: LoginProps) {
     };
     const { isLogin, data } = await login(userAccount);
     if (isLogin) {
-      if (data.initial_register === TypeAccounts.student) {
+      if (data.initial_view === TypeAccounts.user) {
+        navigate('/home');
+      }
+      if (data.initial_view === TypeAccounts.student) {
         navigate('/student/dashboard');
+        window.location.reload();
       }
-      if (data.initial_register === TypeAccounts.teacher) {
+      if (data.initial_view === TypeAccounts.teacher) {
         navigate('/teacher/dashboard');
+        window.location.reload();
       }
-      window.location.reload();
     } else {
       setError(true);
     }

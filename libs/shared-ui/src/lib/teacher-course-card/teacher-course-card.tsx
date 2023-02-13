@@ -17,7 +17,7 @@ export interface TeacherCourseCardProps {
   percentageRate: number;
   percentageLearner: number;
   url: string;
-  price?: number;
+  price?: string;
   dropdownActions?: MenuItem[];
 }
 

@@ -40,8 +40,7 @@ export const loginAdmin = (credentials: Credentials) => {
     http
     .post('login', payload) //TODO: validate in backend maybe another endpoint
     .then((response) => {
-      const { user } = response.data;
-      const { initial_register } = user;
+      const { initial_register } = response.data;
       if(initial_register === 'admin') {
         setTokenAxios(response.headers);
       } else {

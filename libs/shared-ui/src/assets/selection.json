@@ -1701,6 +1701,22 @@
         "width": 1024
       },
       "properties": { "name": "linkedin" }
+    },
+    {
+      "icon": {
+        "paths": ["M129 513l384 384v-224h384v-320h-384v-224z"],
+        "attrs": [],
+        "width": 1024
+      },
+      "properties": { "name": "arrow-left-a" }
+    },
+    {
+      "icon": {
+        "paths": ["M897 513l-384-384v224h-384v320h384v224z"],
+        "attrs": [],
+        "width": 1024
+      },
+      "properties": { "name": "arrow-right-a" }
     }
   ]
 }

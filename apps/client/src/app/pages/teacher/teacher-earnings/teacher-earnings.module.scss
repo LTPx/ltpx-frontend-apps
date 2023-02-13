@@ -1,7 +1,23 @@
-/*
- * Replace this with your own classes
- *
- * e.g.
- * .container {
- * }
-*/
+@import "../../../../styles.scss";
+
+.container {
+  width: 65vw;
+  .title {
+    padding: $size-lg-1 0;
+  }
+  .cards-balance {
+    display: flex;
+    justify-content: space-between;
+  }
+  .content-earning {
+    background-color: $white-color;
+    padding: $size-lg-1 $size-lg-1;
+    display: flex;
+  }
+  .transaction-content {
+    display: flex;
+    flex-direction: column;
+    gap: $size-md-1;
+    width: 100%;
+  }
+}

@@ -20,5 +20,17 @@
       background: $gray-color-100;
       color: $gray-color;
     }
+    &.tag-orange {
+      background: $orange-color-100;
+      color: $orange-color;
+    }
+    &.tag-blue {
+      background: $blue-color-100;
+      color: $blue-color;
+    }
+    &.tag-red {
+      background: $red-color-100;
+      color: $red-color;
+    }
   }
 }

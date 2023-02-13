@@ -1,3 +1,5 @@
+export * from './lib/transaction-row/transaction-row';
+export * from './lib/balance-card/balance-card';
 export * from './lib/teacher-profile-form/teacher-profile-form';
 export * from './lib/teacher-profile/teacher-profile';
 export * from './lib/payment-form/payment-form';

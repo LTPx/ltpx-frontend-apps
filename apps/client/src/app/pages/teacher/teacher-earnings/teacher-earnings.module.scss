@@ -1,19 +1,23 @@
 @import "../../../../styles.scss";
 
 .container {
-  width: 65vw;
+  width: 60vw;
+
   .title {
     padding: $size-lg-1 0;
   }
+
   .cards-balance {
     display: flex;
     justify-content: space-between;
   }
+
   .content-earning {
     background-color: $white-color;
     padding: $size-lg-1 $size-lg-1;
     display: flex;
   }
+
   .transaction-content {
     display: flex;
     flex-direction: column;

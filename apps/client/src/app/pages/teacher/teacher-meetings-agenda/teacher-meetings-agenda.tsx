@@ -35,7 +35,7 @@ export function TeacherMeetingsAgenda() {
   return (
     <div className={styles['container']}>
       <div className={`${styles['content']} card`}>
-        <h1>Clases de hoy</h1>
+        <h2 className={styles['title']}>Clases de esta semana</h2>
         <div className={styles['meetings']}>
           {classes.map((item, index) => (
             <div className={styles['meeting-row']} key={index}>

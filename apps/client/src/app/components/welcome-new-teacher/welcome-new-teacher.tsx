@@ -12,15 +12,15 @@ export function WelcomeNewTeacher(props: WelcomeNewTeacherProps) {
 
   return (
     <div className={styles['container']}>
-      <h4 className={styles['title']}>Realiza estos pasos para empezar a trabajar y generar ingresos</h4>
+      <h4 className={styles['title']}>Realiza estos pasos para empezar a enseñar</h4>
       <div className={`${styles['step']} ${styles['with-tag']}`}>
         <div className={styles['step-content-wrapper']}>
           <div className={styles['step-icon']}>
             <Icon icon="file-alt" size={30} />
           </div>
           <div className={styles['step-content']}>
-            <h4>Envía una solicitud para enseñar con nosotros </h4>
-            <p>Por favor envíanos tu información para trabajar con nosotros</p>
+            <h4>Envía una solicitud </h4>
+            <p>Por favor envíanos tu información y experiencia laboral para trabajar con nosotros</p>
             <Button
               title={teacher_account === StatusTeacherAccount.review ? 'Revisar Solicitud' : 'Aplicar Ahora' }
               link="/teacher/apply-teach"

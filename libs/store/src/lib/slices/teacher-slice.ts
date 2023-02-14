@@ -24,6 +24,8 @@ import {
   sendCourseToReview,
   getWallet,
   WalletModel,
+  getTeacherClassesMonth,
+  MeetingDate,
 } from '@ltpx-frontend-apps/api';
 import { StateCreator } from 'zustand';
 import { StoreState } from '../store';
@@ -71,6 +73,7 @@ export type TeacherSlice = {
   newQuiz: QuizModel | null;
   currentCourse: TeacherCourse;
   wallet: WalletModel;
+  meetings: MeetingDate[];
   applyTeach: (params: ApplyTeachApiParams) => Promise<any>;
   getApplicationTeach: () => Promise<any>;
   registerTeacher: (params: IRegisterUser) => Promise<TResponseLogin>;
@@ -83,6 +86,7 @@ export type TeacherSlice = {
   getCourse: (id: number) => Promise<TResponse>;
   _sendCourseToReview: (id: number) => Promise<TResponse>;
   _getWallet: () => Promise<TResponse>;
+  _getClassrooms: () => Promise<TResponse>;
 };
 
 export const createTeacherSlice: StateCreator<
@@ -97,6 +101,7 @@ export const createTeacherSlice: StateCreator<
   newQuiz: null,
   currentCourse: {} as TeacherCourse,
   wallet: {} as WalletModel,
+  meetings: [],
   applyTeach: async (params: ApplyTeachApiParams): Promise<TResponseApply> => {
     try {
       const application = await applyToTeach(params);
@@ -220,6 +225,22 @@ export const createTeacherSlice: StateCreator<
       const wallet = await getWallet();
       set({wallet});
       return { success: true, data: wallet };
+    } catch (error) {
+      return { success: false, data: error };
+    }
+  },
+  _getClassrooms: async () => {
+    try {
+      const classrooms = await getTeacherClassesMonth();
+      // const meetings = classrooms.reduce((all, classroom) => {
+      //   return classroom.meetings.map(()=>{
+      //     return {
+
+      //     }
+      //   });
+      // }, [])
+      // set({ meetings: []});
+      return { success: true, data: classrooms };
     } catch (error) {
       return { success: false, data: error };
     }

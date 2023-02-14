@@ -20,18 +20,13 @@ export function TeacherEarnings() {
     }
   }, []);
 
-  // useEffect(() => {
-  //   fetchWallet();
-  // }, [fetchWallet]);
+  useEffect(() => {
+    fetchWallet();
+  }, [fetchWallet]);
 
   const balance = [
     {
-      mount: '$ 20.3',
-      text: 'Total de Ventas',
-      link: '',
-    },
-    {
-      mount: '$ 10.45',
+      mount: '$ 1.45',
       text: 'Saldo disponible',
       link: '',
     },
@@ -76,6 +71,13 @@ export function TeacherEarnings() {
   return (
     <div className={styles['container']}>
       <div className={styles['cards-balance']}>
+        { wallet.id && (
+          <BalanceCard
+            balance={wallet.total_earnings}
+            text={'Total de ventas'}
+            link={'/'}
+          />
+        )}
         {balance.map((element, index) => (
           <BalanceCard
             balance={element.mount}

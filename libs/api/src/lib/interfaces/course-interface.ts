@@ -143,3 +143,21 @@ export const CLASSROOMS = {
   none: CLASSROOM_NONE,
   classes: CLASSROOM_NONE,
 };
+
+export interface MeetingDate {
+  date: string;
+  day_number: string;
+  start_time: string;
+  end_time: string;
+  month: string;
+}
+
+export interface ClassroomClasses {
+  course_id: number,
+  title: string;
+  type: TeacherClassType;
+  min_participants: number;
+  max_participants: number;
+  duration: number;
+  meetings: MeetingDate[];
+}

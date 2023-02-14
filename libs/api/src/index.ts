@@ -29,6 +29,7 @@ export * from './lib/api/teacher/teacher-api';
 export * from './lib/api/teacher/quiz-api';
 export * from './lib/api/teacher/achievements-api';
 export * from './lib/api/teacher/wallet-api';
+export * from './lib/api/teacher/teacher-classes-api';
 
 export * from './lib/api/admin/applications-api';
 export * from './lib/api/admin/users-api';

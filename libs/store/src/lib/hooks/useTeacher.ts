@@ -19,6 +19,7 @@ export const useTeacher = () => {
     wallet,
     _sendCourseToReview,
     _getWallet,
+    _getClassrooms,
   } = useAppStore();
 
   return {
@@ -39,5 +40,6 @@ export const useTeacher = () => {
     wallet,
     _sendCourseToReview,
     _getWallet,
+    _getClassrooms,
   }
 }

@@ -2,6 +2,10 @@
 
 .card {
   background-color: $white-color;
-  box-shadow: $card-shadow-soft;
+  box-shadow: $card-shadow-medium;
+}
+
+.add-space-bottom {
+  margin-bottom: 1rem;
 }
 

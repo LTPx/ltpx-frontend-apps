@@ -27,8 +27,7 @@ export function ManageCourses(props: ManageCoursesProps) {
 
   return (
     <div className={styles['container']}>
-      <h2>Cursos</h2>
-      <h5>Administración de cursos</h5>
+      {/* <h2>Cursos</h2> */}
       {/* <div className={styles['breadcrumbs']}>
         { breadcrumbs.map((breadcrumb, index)=>(
           <div className={styles['breadcrumb']} key={index}>
@@ -39,7 +38,7 @@ export function ManageCourses(props: ManageCoursesProps) {
           </div>
         ))}
       </div> */}
-      <div className={`${styles['content']} card`}>
+      <div className={`${styles['content']}`}>
         <Outlet/>
       </div>
     </div>

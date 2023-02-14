@@ -212,16 +212,16 @@ export const es = {
   },
   teacherEditCourse : {
     linksEditCourse: {
-      details: 'Detalles',
+      details: 'Datos Generales',
       contents: 'Contenidos',
-      quiz: 'Test',
+      quiz: 'Tests',
       achievement: 'Logros',
       sessions: 'Sesiones'
     },
   },
   courseInformation: {
-    title: 'Portada del curso',
-    name: 'Nombre del curso',
+    cover: 'Portada del curso',
+    title: 'Nombre del curso',
     description:'Descripción del curso',
     category:'Categoría',
     level: 'Nivel',

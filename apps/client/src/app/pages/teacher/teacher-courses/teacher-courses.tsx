@@ -76,8 +76,16 @@ export function TeacherCourses(props: TeacherCoursesProps) {
           url={`/teacher/courses/edit/${course.id}`}
           price={course.price}
           dropdownActions={[
-            { text: 'Ver Curso',  icon: 'user-group', url: `/teacher/courses/${course.id}`},
-            { text: 'Editar Curso',  icon: 'pencil', url: `/teacher/courses/edit/${course.id}`},
+            {
+              text: 'Ver Curso',
+              icon: 'user-group',
+              url: `/teacher/courses/${course.id}`,
+            },
+            {
+              text: 'Editar Curso',
+              icon: 'pencil',
+              url: `/teacher/courses/edit/${course.id}`,
+            },
           ]}
         />
       ))}
@@ -113,23 +121,27 @@ export function TeacherCourses(props: TeacherCoursesProps) {
 
   return (
     <div className={`${styles['container']}`}>
-      <div className={`${styles['filters-container']}`}>
-        <h4>{courses.length} Cursos en total</h4>
-        <div className={styles['filters']}>
-          <InputSearch placeholder="Search course" />
-          <Select options={categories} />
-          <Button
-            title={t('buttons.newCourse')}
-            color={ColorsButton.primary}
-            onClick={() => {
-              openNewCourse();
-            }}
-          />
+      <h1 className='add-space-bottom'>Mis Cursos</h1>
+      <div className="card">
+        <div className={`${styles['filters-container']} `}>
+          <h4>{courses.length} Cursos en total</h4>
+          <div className={styles['filters']}>
+            <InputSearch placeholder="Search course" />
+            <Select options={categories} />
+            <Button
+              title={t('buttons.newCourse')}
+              color={ColorsButton.primary}
+              onClick={() => {
+                openNewCourse();
+              }}
+            />
+          </div>
+        </div>
+        <div className={`${styles['courses-container']}`}>
+          <MyCourses />
         </div>
       </div>
-      <div className={`${styles['courses-container']}`}>
-        <MyCourses />
-      </div>
+
       <Dialog
         isShown={openModal}
         hasFooter={false}

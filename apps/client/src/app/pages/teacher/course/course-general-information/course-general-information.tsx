@@ -87,7 +87,7 @@ export function CourseGeneralInformation(props: CourseGeneralInformationProps) {
   return (
     <form className={styles['container']} onSubmit={formik.handleSubmit}>
       <section className={styles['text']}>
-        <h3>{t('courseInformation.title')}</h3>
+        <h3>{t('courseInformation.cover')}</h3>
         <div className={styles['upload-media']}>
           <FileUpload
             image={cover}

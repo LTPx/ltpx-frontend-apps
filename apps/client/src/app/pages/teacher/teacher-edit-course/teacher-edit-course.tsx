@@ -3,6 +3,7 @@ import {
   Button,
   ColorsButton,
   ColorsTag,
+  Icon,
   Snackbar,
   SnackbarPosition,
   SnackbarType,
@@ -107,38 +108,47 @@ export function TeacherEditCourse() {
 
   return (
     <div className={styles['container']}>
-      {course.id && (
-        <div className={styles['container']}>
-          <div className={styles['header']}>
-            <div className={styles['title']}>
-              <h3>{course.title}</h3>
-              <Tag
-                text={translateStatus(course.status)}
-                color={
-                  course.status === CourseStatus.publish
-                    ? ColorsTag.green
-                    : ColorsTag.gray
-                }
-                icon={course.status === CourseStatus.publish ? 'globe' : 'edit'}
-              />
-            </div>
-            <div className={styles['actions']}>
-              <h5 className="muted">Creado: Diciembre 21 2022</h5>
-              <Button
-                title={t('buttons.saveDraft')}
-                color={ColorsButton.accent}
-                link={'/teacher/courses/all'}
-              />
-              <Button
-                title={t('buttons.sendReview')}
-                color={ColorsButton.primary}
-                type={TypeButton.submit}
-                onClick={() => {
-                  handleSendToReview();
-                }}
-              />
+      <div className={styles['header']}>
+        <div className={styles['title-content']}>
+          <div className={styles['details']}>
+            <h1>{course.title}</h1>
+          </div>
+          <div className={styles['details']}>
+            <Tag
+              text={translateStatus(course.status)}
+              color={
+                course.status === CourseStatus.publish
+                  ? ColorsTag.green
+                  : ColorsTag.gray
+              }
+              icon={course.status === CourseStatus.publish ? 'globe' : 'edit'}
+            />
+            <div className={styles['details']}>
+              <Icon icon="calendar-days" size={18} />
+              <h5>Creado: {course.created_at}</h5>
             </div>
           </div>
+        </div>
+        <div className={styles['actions']}>
+          <Button
+            title={t('buttons.sendReview')}
+            color={ColorsButton.secondary}
+            type={TypeButton.submit}
+            outline={true}
+            icon='rocket'
+            onClick={() => {
+              handleSendToReview();
+            }}
+          />
+          <Button
+            title={t('buttons.saveDraft')}
+            color={ColorsButton.primary}
+            link={'/teacher/courses/all'}
+          />
+        </div>
+      </div>
+      {course.id && (
+        <div className={`${styles['container']} card`}>
           <div className={styles['content']}>
             <Tabs
               tabs={linksEditCourse}

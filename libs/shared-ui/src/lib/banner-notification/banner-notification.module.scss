@@ -5,6 +5,7 @@
   justify-content: space-between;
   gap: $size-md-1;
   padding: $size-md-1 $size-lg-1;
+  border-radius: 6px;
 
   svg {
     cursor: pointer;
@@ -25,5 +26,17 @@
 
   &.info {
     background-color: $blue-color-100;
+  }
+
+  &.white {
+    background-color: $white-color;
+  }
+
+  &.primary {
+    background-color: $primary-color;
+  }
+
+  &.secondary {
+    background-color: $secondary-color;
   }
 }

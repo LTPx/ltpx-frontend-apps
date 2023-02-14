@@ -69,6 +69,7 @@ export function TeacherCourses(props: TeacherCoursesProps) {
           status={course.status || CourseStatus.draft}
           image={course.cover_url || placeholderImage}
           title={course.title}
+          description={course.description}
           learners={course.enrollments_count || 0}
           category={course.category}
           percentageRate={0}
@@ -76,8 +77,16 @@ export function TeacherCourses(props: TeacherCoursesProps) {
           url={`/teacher/courses/edit/${course.id}`}
           price={course.price}
           dropdownActions={[
-            { text: 'Ver Curso',  icon: 'user-group', url: `/teacher/courses/${course.id}`},
-            { text: 'Editar Curso',  icon: 'pencil', url: `/teacher/courses/edit/${course.id}`},
+            {
+              text: 'Ver Curso',
+              icon: 'user-group',
+              url: `/teacher/courses/${course.id}`,
+            },
+            {
+              text: 'Editar Curso',
+              icon: 'pencil',
+              url: `/teacher/courses/edit/${course.id}`,
+            },
           ]}
         />
       ))}

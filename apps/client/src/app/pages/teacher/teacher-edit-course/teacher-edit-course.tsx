@@ -1,6 +1,4 @@
-import {
-  CourseStatus,
-} from '@ltpx-frontend-apps/api';
+import { CourseStatus } from '@ltpx-frontend-apps/api';
 import {
   Button,
   ColorsButton,
@@ -12,7 +10,11 @@ import {
   Tag,
   TypeButton,
 } from '@ltpx-frontend-apps/shared-ui';
-import { useCourse, useCourseUtil, useTeacher } from '@ltpx-frontend-apps/store';
+import {
+  useCourse,
+  useCourseUtil,
+  useTeacher,
+} from '@ltpx-frontend-apps/store';
 import {
   CourseAchievements,
   CourseClassroom,
@@ -32,11 +34,11 @@ export type ResponseRequest = {
 };
 
 export function TeacherEditCourse() {
-  const [ indexSelectedView, setIndexSelectedView ] = useState(0);
-  const [ notification, setNotification ] = useState({
+  const [indexSelectedView, setIndexSelectedView] = useState(0);
+  const [notification, setNotification] = useState({
     show: false,
     kind: SnackbarType.success,
-    text: ''
+    text: '',
   });
   const { getCourse, course } = useCourse();
   const { _sendCourseToReview } = useTeacher();
@@ -47,7 +49,10 @@ export function TeacherEditCourse() {
     { selected: true, text: t('teacherEditCourse.linksEditCourse.details') },
     { selected: false, text: t('teacherEditCourse.linksEditCourse.contents') },
     { selected: false, text: t('teacherEditCourse.linksEditCourse.quiz') },
-    { selected: false, text: t('teacherEditCourse.linksEditCourse.achievement') },
+    {
+      selected: false,
+      text: t('teacherEditCourse.linksEditCourse.achievement'),
+    },
     { selected: false, text: t('teacherEditCourse.linksEditCourse.sessions') },
   ];
 
@@ -70,35 +75,35 @@ export function TeacherEditCourse() {
       setNotification((prevState) => ({
         ...prevState,
         show: true,
-        text: 'Tus cambios han sido guardados'
-      }))
+        text: 'Tus cambios han sido guardados',
+      }));
     } else {
       setNotification((prevState) => ({
         ...prevState,
         show: true,
         text: 'Ha ocurrido un error',
-        kind: SnackbarType.error
-      }))
+        kind: SnackbarType.error,
+      }));
     }
   };
 
-  const handleSendToReview =async () => {
+  const handleSendToReview = async () => {
     const { success } = await _sendCourseToReview(course.id);
     if (success) {
       setNotification((prevState) => ({
         ...prevState,
         show: true,
-        text: 'Tu curso ha sido enviado a revision'
-      }))
+        text: 'Tu curso ha sido enviado a revision',
+      }));
     } else {
       setNotification((prevState) => ({
         ...prevState,
         show: true,
         text: 'Ha ocurrido un error',
-        kind: SnackbarType.error
-      }))
+        kind: SnackbarType.error,
+      }));
     }
-  }
+  };
 
   return (
     <div className={styles['container']}>
@@ -189,8 +194,8 @@ export function TeacherEditCourse() {
           open={notification.show}
           title={notification.text}
           kind={notification.kind}
-          onClose={()=>{
-            setNotification( (prevState) => ({
+          onClose={() => {
+            setNotification((prevState) => ({
               ...prevState,
               show: false,
             }));

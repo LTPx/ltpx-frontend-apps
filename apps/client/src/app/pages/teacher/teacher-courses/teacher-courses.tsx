@@ -69,6 +69,7 @@ export function TeacherCourses(props: TeacherCoursesProps) {
           status={course.status || CourseStatus.draft}
           image={course.cover_url || placeholderImage}
           title={course.title}
+          description={course.description}
           learners={course.enrollments_count || 0}
           category={course.category}
           percentageRate={0}

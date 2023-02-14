@@ -30,8 +30,6 @@ export function TeacherCourseCard(props: TeacherCourseCardProps) {
     title,
     learners,
     category,
-    percentageRate,
-    percentageLearner,
     description,
     url,
     price,
@@ -40,7 +38,9 @@ export function TeacherCourseCard(props: TeacherCourseCardProps) {
 
   return (
     <div className={styles['container']}>
-      <img className={styles['course-img']} src={image} alt="" />
+      <div className={styles['course-img']}>
+        <img src={image} alt="" />
+      </div>
       <div className={styles['content']}>
         <div className={styles['head-content']}>
           <div className={styles['head']}>
@@ -68,9 +68,9 @@ export function TeacherCourseCard(props: TeacherCourseCardProps) {
         </div>
         <div className={styles['information-course']}>
           <NavLink to={url}>
-            <h4>{title}</h4>
+            <h3 className={styles['title']}>{title}</h3>
           </NavLink>
-          <h4>{description.substring(0, 150)}....</h4>
+          <p>{description ? `${description.substring(0, 250)}...` : ''}</p>
           <div className={`${styles['describe']} ${styles['end']}`}>
             <h4 className={styles['accent']}>${price}</h4>
           </div>

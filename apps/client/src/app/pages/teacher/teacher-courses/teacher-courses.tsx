@@ -6,6 +6,7 @@ import {
 import {
   Button,
   ColorsButton,
+  EmptyState,
   InputSearch,
   NewCourseForm,
   Select,
@@ -54,13 +55,6 @@ export function TeacherCourses(props: TeacherCoursesProps) {
     { value: 'review', text: t('teacherCourse.categories.review') },
   ];
 
-  const EmptyState = () => (
-    <div className={styles['empty-state']}>
-      <h4>Aun no has creado ningún curso</h4>
-      <h5>porque no empezamos creado uno</h5>
-    </div>
-  );
-
   const CoursesList = () => (
     <div className={styles['courses']}>
       {courses.map((course, index) => (
@@ -95,7 +89,7 @@ export function TeacherCourses(props: TeacherCoursesProps) {
 
   const MyCourses = () => (
     <div className={styles['courses']}>
-      {courses.length ? <CoursesList /> : <EmptyState />}
+      <CoursesList />
     </div>
   );
 
@@ -122,26 +116,49 @@ export function TeacherCourses(props: TeacherCoursesProps) {
 
   return (
     <div className={`${styles['container']}`}>
-      <h1 className='add-space-bottom'>Mis Cursos</h1>
-      <div className="card">
-        <div className={`${styles['filters-container']} `}>
-          <h4>{courses.length} Cursos en total</h4>
-          <div className={styles['filters']}>
-            <InputSearch placeholder="Search course" />
-            <Select options={categories} />
+      {courses.length === 0 ? (
+        <EmptyState
+          img={'../../../../assets/images/empty-states/no-courses.svg'}
+          title={'Vamos a crear un curso'}
+          description={
+            'Crea tu primer curso, no te preocupes si no lo haces bien al primer intento, puedes editarlo e ir mejorandolo ademas nosotros te guiaremos en el proceso, '
+          }
+        >
+          <div className={`${styles['button-empty-state']}`}>
             <Button
-              title={t('buttons.newCourse')}
+              title={'Crear mi primer curso'}
               color={ColorsButton.primary}
+              icon="plus"
               onClick={() => {
                 openNewCourse();
               }}
             />
           </div>
-        </div>
-        <div className={`${styles['courses-container']}`}>
-          <MyCourses />
-        </div>
-      </div>
+        </EmptyState>
+      ) : (
+        <>
+          <h1 className="add-space-bottom">Mis Cursos</h1>
+          <div className="card">
+            <div className={`${styles['filters-container']} `}>
+              <h4>{courses.length} Cursos en total</h4>
+              <div className={styles['filters']}>
+                <InputSearch placeholder="Search course" />
+                <Select options={categories} />
+                <Button
+                  title={t('buttons.newCourse')}
+                  color={ColorsButton.primary}
+                  onClick={() => {
+                    openNewCourse();
+                  }}
+                />
+              </div>
+            </div>
+            <div className={`${styles['courses-container']}`}>
+              <MyCourses />
+            </div>
+          </div>
+        </>
+      )}
 
       <Dialog
         isShown={openModal}

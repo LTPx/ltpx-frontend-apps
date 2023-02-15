@@ -1,3 +1,4 @@
+export * from './lib/empty-state/empty-state';
 export * from './lib/transaction-row/transaction-row';
 export * from './lib/balance-card/balance-card';
 export * from './lib/teacher-profile-form/teacher-profile-form';

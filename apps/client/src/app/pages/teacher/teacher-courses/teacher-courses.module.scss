@@ -1,4 +1,4 @@
-@import "../../../../styles.scss";
+@import '../../../../styles.scss';
 
 .empty-state {
   display: flex;
@@ -8,7 +8,9 @@
 }
 
 .container {
-
+  .button-empty-state {
+    padding-top: 1rem;
+  }
   .title {
     margin-bottom: 1rem;
   }
@@ -39,5 +41,3 @@
     }
   }
 }
-
-

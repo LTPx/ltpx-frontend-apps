@@ -1,0 +1,25 @@
+@import '../../styles/styles.module.scss';
+
+.container {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  .content {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    gap: $size-sm-2;
+    .image {
+      width: 15rem;
+      height: 15rem;
+    }
+    .title {
+      font-weight: 500;
+    }
+    .description {
+      color: $text-gray-color;
+      max-width: 40rem;
+    }
+  }
+}

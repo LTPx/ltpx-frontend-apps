@@ -20,6 +20,8 @@ export const useTeacher = () => {
     _sendCourseToReview,
     _getWallet,
     _getClassrooms,
+    _getCourses,
+    loadingTeacherApi,
   } = useAppStore();
 
   return {
@@ -41,5 +43,7 @@ export const useTeacher = () => {
     _sendCourseToReview,
     _getWallet,
     _getClassrooms,
+    _getCourses,
+    loadingTeacherApi,
   }
 }

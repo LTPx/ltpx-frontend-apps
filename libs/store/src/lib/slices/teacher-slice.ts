@@ -26,6 +26,7 @@ import {
   WalletModel,
   getTeacherClassesMonth,
   MeetingDate,
+  getTeacherCourses,
 } from '@ltpx-frontend-apps/api';
 import { StateCreator } from 'zustand';
 import { StoreState } from '../store';
@@ -67,6 +68,7 @@ type TResponse = {
 };
 
 export type TeacherSlice = {
+  loadingTeacherApi: boolean;
   teacher_account: StatusTeacherAccount;
   application: ApplicationTeach | null;
   profile: IUserAccount | null;
@@ -87,6 +89,7 @@ export type TeacherSlice = {
   _sendCourseToReview: (id: number) => Promise<TResponse>;
   _getWallet: () => Promise<TResponse>;
   _getClassrooms: () => Promise<TResponse>;
+  _getCourses: () => Promise<TResponse>;
 };
 
 export const createTeacherSlice: StateCreator<
@@ -95,6 +98,7 @@ export const createTeacherSlice: StateCreator<
   [],
   TeacherSlice
 > = (set, get) => ({
+  loadingTeacherApi: false,
   teacher_account: StatusTeacherAccount.unapplied,
   application: null,
   profile: null,
@@ -232,17 +236,24 @@ export const createTeacherSlice: StateCreator<
   _getClassrooms: async () => {
     try {
       const classrooms = await getTeacherClassesMonth();
-      // const meetings = classrooms.reduce((all, classroom) => {
-      //   return classroom.meetings.map(()=>{
-      //     return {
-
-      //     }
-      //   });
-      // }, [])
-      // set({ meetings: []});
       return { success: true, data: classrooms };
     } catch (error) {
       return { success: false, data: error };
     }
   },
+  _getCourses: async () => {
+    return callApi(getTeacherCourses, set);
+  },
 });
+
+const callApi = async (promiseFn: any, set: any):Promise<TResponse> => {
+  set({loadingTeacherApi: true});
+  try {
+    const response = await promiseFn();
+    set({loadingTeacherApi: false});
+    return { success: true, data: response };
+  } catch (error) {
+    set({loadingTeacherApi: false});
+    return { success: false, data: error };
+  }
+}

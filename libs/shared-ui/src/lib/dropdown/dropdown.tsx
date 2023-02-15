@@ -1,41 +1,17 @@
-import { ReactElement, useEffect, useRef } from 'react';
+import { Popover } from 'evergreen-ui';
 import styles from './dropdown.module.scss';
+import { ReactElement } from 'react';
 
-/* eslint-disable-next-line */
 export interface DropdownProps {
   children: ReactElement[];
 }
 
 export function Dropdown(props: DropdownProps) {
-  const mainElement = useRef<HTMLDivElement | null>(null);
-  const content = useRef<HTMLDivElement | null>(null);
   const { children } = props;
-
-  useEffect(() => {
-    if (mainElement.current?.offsetWidth) {
-      setPosition();
-    }
-    return () => {
-    }
-  }, [mainElement])
-
-  const setPosition = () => {
-    const width = mainElement?.current?.offsetWidth || 0;
-    const widthContent = content?.current?.offsetWidth || 0;
-    if (content.current) {
-      content.current.style.left = `-${widthContent - width}px`;
-    }
-  }
-
   return (
-    <div className={styles['container']}>
-      <div className={styles['main-element']} ref={mainElement}>
-        {children[0]}
-      </div>
-      <div className={styles['content']} ref={content}>
-        {children[1]}
-      </div>
-    </div>
+    <Popover bringFocusInside content={children[0]}>
+      <div className={styles['trigger']}>{children[1]}</div>
+    </Popover>
   );
 }
 

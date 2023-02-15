@@ -1,7 +1,6 @@
 import { CourseStatus } from '@ltpx-frontend-apps/api';
 import { useTranslation } from 'react-i18next';
 import { NavLink } from 'react-router-dom';
-import Dropdown from '../dropdown/dropdown';
 import Icon from '../icon/icon';
 import Menu, { MenuItem } from '../menu/menu';
 import Tag, { ColorsTag } from '../tag/tag';
@@ -61,9 +60,15 @@ export function TeacherCourseCard(props: TeacherCourseCardProps) {
               <Icon icon={'user'} size={10}></Icon> {learners} Estudiantes
             </h5>
           </div>
-            <Menu items={dropdownActions || []}>
-              <Icon icon={'ellipsis-horizontal-outline'} size={15} />
+          {dropdownActions && (
+            <Menu items={dropdownActions}>
+              <Icon
+                icon={'ellipsis-horizontal-outline'}
+                size={15}
+                className={styles['icon-button']}
+              />
             </Menu>
+          )}
         </div>
         <div className={styles['information-course']}>
           <NavLink to={url}>

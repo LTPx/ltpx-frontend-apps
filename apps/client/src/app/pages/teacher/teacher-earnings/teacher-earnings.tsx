@@ -1,5 +1,8 @@
 import {
   BalanceCard,
+  Button,
+  ColorsButton,
+  EmptyState,
   TransactionRow,
   TransactionStatus,
   TransactionType,
@@ -10,7 +13,8 @@ import styles from './teacher-earnings.module.scss';
 
 export function TeacherEarnings() {
   const { _getWallet, wallet } = useTeacher();
-
+  const showEmptyState = true;
+  const existTransaction = true;
   const fetchWallet = useCallback(async () => {
     const { success, data, error } = await _getWallet();
     if (success) {
@@ -70,46 +74,58 @@ export function TeacherEarnings() {
 
   return (
     <div className={styles['container']}>
-      <div className={styles['cards-balance']}>
-        { wallet.id && (
-          <BalanceCard
-            balance={wallet.total_earnings}
-            text={'Total de ventas'}
-            link={'/'}
-          />
-        )}
-        {balance.map((element, index) => (
-          <BalanceCard
-            balance={element.mount}
-            key={index}
-            text={element.text}
-            link={element.link}
-          />
-        ))}
-      </div>
-      <h2 className={styles['title']}>Ultimas Transacciones</h2>
-      <div className={styles['content-earning']}>
-        <div className={styles['transaction-content']}>
-          {transaction.map((element, index) => (
-            <TransactionRow
-              key={index}
-              date={element.date}
-              balance={element.balance}
-              status={element.state}
-              descriptionTransaction={element.descriptionTransaction}
-              transaction={element.transaction}
+      {showEmptyState ? (
+        <EmptyState
+          img="../../../../assets/images/empty-states/set-bank-account.svg"
+          title="Pagos en Openmind"
+          description="Para recibir pagos primero debes agregar una cuenta bancaria, openmind te depositara cada vez que alguien compre uno de tus cursos"
+        >
+          <div className={`${styles['button-empty-state']}`}>
+            <Button
+              title={'Agregar mi cuenta bancaria'}
+              color={ColorsButton.primary}
+              icon="plus"
+              link={'/teacher/account'}
             />
-          ))}
+          </div>
+        </EmptyState>
+      ) : (
+        <div className={styles['content']}>
+          <div className={styles['cards-balance']}>
+            {balance.map((element, index) => (
+              <BalanceCard
+                balance={element.mount}
+                key={index}
+                text={element.text}
+                link={element.link}
+              />
+            ))}
+          </div>
+          <h2 className={styles['title']}>Ultimas Transacciones</h2>
+          <div className={styles['content-earning']}>
+            {existTransaction ? (
+              <EmptyState
+                img="../../../../assets/images/empty-states/money-transfer.svg"
+                title="Transacciones"
+                description="Todas tus transacciones serán visibles en esta sección"
+              />
+            ) : (
+              <div className={styles['transaction-content']}>
+                {transaction.map((element, index) => (
+                  <TransactionRow
+                    key={index}
+                    date={element.date}
+                    balance={element.balance}
+                    status={element.state}
+                    descriptionTransaction={element.descriptionTransaction}
+                    transaction={element.transaction}
+                  />
+                ))}
+              </div>
+            )}
+          </div>
         </div>
-      </div>
-      {/* <div className="card">
-        { wallet.id && (
-          <>
-            <h4>Total de ventas: {wallet.total_earnings}</h4>
-            <h4>Saldo disponible para retirar: {wallet.balance_available_withdraw}</h4>
-          </>
-        )}
-      </div> */}
+      )}
     </div>
   );
 }

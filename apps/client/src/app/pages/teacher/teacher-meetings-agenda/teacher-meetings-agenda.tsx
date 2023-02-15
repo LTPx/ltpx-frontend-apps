@@ -93,12 +93,10 @@ export function TeacherMeetingsAgenda() {
                         {
                           text: 'Iniciar Clase',
                           icon: 'video-outline',
-                          onClick: () => {
-                            console.log('click start class');
-                          },
+                          url: '/teacher/live-meeting'
                         },
                         {
-                          text: 'Reagendar clase',
+                          text: 'Reagendar Clase',
                           icon: 'clock',
                           onClick: () => {
                             console.log('click re agendar');

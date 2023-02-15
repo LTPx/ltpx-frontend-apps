@@ -28,6 +28,7 @@ import {
   TeacherLayout,
   TeacherMeetingsAgenda,
 } from '../pages/teacher';
+import VideoMeetingLive from '../video/video-meeting-live/video-meeting-live';
 import { ProtectedRoutesTeacher } from './guards/protected-routes-teacher/protected-routes-teacher';
 
 export const TeacherRoutes = () => {
@@ -48,6 +49,7 @@ export const TeacherRoutes = () => {
           <Route path="account" element={<TeacherAccount />} />
           <Route path="earnings" element={<TeacherEarnings />} />
           <Route path="sessions" element={<TeacherMeetingsAgenda />} />
+          <Route path="live-meeting" element={<VideoMeetingLive />} />
           <Route path="courses" element={<ManageCourses />}>
             <Route
               path="/teacher/courses"

@@ -1,11 +1,6 @@
 @import '../../styles/styles.module.scss';
 
-.container {
-  box-sizing: border-box;
-  min-width: 2rem;
-  background: $white-color;
-  border: 1px solid #e7e7ec;
-  border-radius: 4px;
+.items {
   display: flex;
   flex-direction: column;
 
@@ -15,8 +10,6 @@
     gap: $size-sm-3;
     color: $text-gray-color;
     padding: 0.5rem 1rem;
-    min-width: 8rem;
-    cursor: pointer;
 
     &:hover {
       color: $text-color;
@@ -30,4 +23,8 @@
     gap: $size-sm-3;
     flex-grow: 1;
   }
+}
+
+.trigger {
+  cursor: pointer;
 }

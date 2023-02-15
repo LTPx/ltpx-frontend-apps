@@ -61,10 +61,9 @@ export function TeacherCourseCard(props: TeacherCourseCardProps) {
               <Icon icon={'user'} size={10}></Icon> {learners} Estudiantes
             </h5>
           </div>
-          <Dropdown>
-            <Icon icon={'ellipsis-horizontal-outline'} size={15} />
-            <Menu items={dropdownActions || []} />
-          </Dropdown>
+            <Menu items={dropdownActions || []}>
+              <Icon icon={'ellipsis-horizontal-outline'} size={15} />
+            </Menu>
         </div>
         <div className={styles['information-course']}>
           <NavLink to={url}>

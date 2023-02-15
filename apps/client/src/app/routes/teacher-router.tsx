@@ -60,7 +60,10 @@ export const TeacherRoutes = () => {
           <Route path="blog" element={<BlogLayout />}>
             <Route path="/teacher/blog" element={<BlogHome />} />
             <Route path="home" element={<BlogHome />} />
-            <Route path="teacher/blog/what-is-openmind" element={<WhatIsOpenMind />} />
+            <Route
+              path="teacher/blog/what-is-openmind"
+              element={<WhatIsOpenMind />}
+            />
             <Route
               path="learning-in-openmind"
               element={<LearningInOpenMind />}

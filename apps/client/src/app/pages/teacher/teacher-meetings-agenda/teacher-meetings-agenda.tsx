@@ -78,6 +78,20 @@ export function TeacherMeetingsAgenda() {
                       date={''}
                       participants={item.max_participants}
                       key={indexMeeting}
+                      dateMonth={meeting.month}
+                      dayNumber={meeting.day_number}
+                      dropdownActions={[
+                        {
+                          text: 'Ver Curso',
+                          icon: 'user-group',
+                          url: `/teacher/courses/${1}`,
+                        },
+                        {
+                          text: 'Editar Curso',
+                          icon: 'pencil',
+                          url: `/teacher/courses/edit/${1}`,
+                        },
+                      ]}
                     />
                   ))}
                 </div>

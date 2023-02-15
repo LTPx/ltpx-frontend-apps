@@ -1,4 +1,10 @@
-import { Icon } from '@ltpx-frontend-apps/shared-ui';
+import {
+  Dropdown,
+  Icon,
+  Menu,
+  MenuItem,
+} from '@ltpx-frontend-apps/shared-ui';
+import { ReactElement } from 'react';
 import styles from './schedule-class-row.module.scss';
 
 export enum StatusClass {
@@ -6,17 +12,19 @@ export enum StatusClass {
   completed = 'completed',
   upcoming = 'upcoming',
 }
-/* eslint-disable-next-line */
+
 export interface ScheduleClassRowProps {
   title: string;
   duration: string | number;
   status?: StatusClass;
   date: string;
-  date_month?: string;
-  day_number?: string;
-  start_time?: string;
-  end_time?: string;
+  dateMonth?: string;
+  dayNumber?: string;
+  startTime?: string;
+  endTime?: string;
   participants: number;
+  children?: ReactElement;
+  dropdownActions?: MenuItem[];
 }
 
 export function ScheduleClassRow(props: ScheduleClassRowProps) {
@@ -25,37 +33,46 @@ export function ScheduleClassRow(props: ScheduleClassRowProps) {
     duration,
     status,
     date,
-    date_month,
-    start_time,
-    end_time,
-    day_number,
+    dateMonth,
+    startTime,
+    endTime,
+    dayNumber,
     participants,
+    children,
+    dropdownActions,
   } = props;
+
   return (
     <div className={styles['meeting-row']}>
       <div className={styles['date']}>
-        <h5>{date_month}</h5>
-        <h3>{day_number}</h3>
-        <h5>
-          {start_time} - {end_time}
-        </h5>
+        <h5>{dateMonth}</h5>
+        <h3>{dayNumber}</h3>
+        {/* <h5>{startTime} - {endTime}</h5> */}
       </div>
       <div className={styles['information']}>
         <div className={styles['details']}>
           <h4>{title}</h4>
           <div className={styles['details-items']}>
             <div className={styles['details-item']}>
-              <Icon icon="user-group" size={18} />
+              <Icon icon="user-group" size={18} color="#10b981" />
               <h5>{participants} Participantes</h5>
             </div>
             <div className={styles['details-item']}>
-              <Icon icon="clock" size={18} />
+              <Icon icon="clock" size={18} color="#fbbf24" />
               <h5>{duration} min</h5>
             </div>
           </div>
         </div>
         <div className={styles['actions']}>
-          {/* <Button title="Iniciar clase" icon="desktop" /> */}
+          {children}
+          {dropdownActions && (
+            <Dropdown>
+              <div className={styles['icon-button']}>
+                <Icon icon={'ellipsis-horizontal-outline'} size={15} />
+              </div>
+              <Menu items={dropdownActions} />
+            </Dropdown>
+          )}
         </div>
       </div>
     </div>

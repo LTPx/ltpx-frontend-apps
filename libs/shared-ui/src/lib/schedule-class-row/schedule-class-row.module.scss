@@ -1,0 +1,46 @@
+
+@import '../../styles/core/colors';
+
+.meeting-row {
+  display: flex;
+  gap: 1rem;
+
+  .date {
+    padding: 0.5rem 0;
+    text-align: center;
+    background-color: $gray-color-200;
+    border-radius: 5px;
+    min-width: 8rem;
+
+    h3 {
+      font-weight: 500;
+    }
+  }
+
+  .information {
+    display: flex;
+    justify-content: space-between;
+    gap: 4rem;
+    flex-grow: 1;
+
+    .details {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+
+      h4 {
+        font-weight: 500;
+      }
+    }
+
+    .details-items {
+      display: flex;
+      gap: 1rem;
+
+      .details-item {
+        display: flex;
+        gap: 0.5rem;
+      }
+    }
+  }
+}

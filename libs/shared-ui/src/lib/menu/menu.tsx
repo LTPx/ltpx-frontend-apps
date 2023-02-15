@@ -25,16 +25,16 @@ export function Menu(props: MenuProps) {
       position={Position.BOTTOM_RIGHT}
       content={
         <MenuLib>
-          <div className={styles['items']}>
+          <div className={styles['menu-items']}>
             {items.map((item, key) => (
-              <div className={styles['item']} key={key}>
+              <div className={styles['menu-item-wrapper']} key={key}>
                 {item.url ? (
-                  <NavLink to={item.url}>
+                  <NavLink to={item.url} className={styles['menu-item']}>
                     {item.icon && <Icon icon={item.icon} size={18} />}
                     <h4>{item.text}</h4>
                   </NavLink>
                 ) : (
-                  <div
+                  <div className={styles['menu-item']}
                     onClick={() => {
                       item.onClick && item.onClick();
                     }}

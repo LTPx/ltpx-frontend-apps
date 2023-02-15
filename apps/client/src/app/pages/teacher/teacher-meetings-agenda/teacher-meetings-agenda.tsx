@@ -82,14 +82,18 @@ export function TeacherMeetingsAgenda() {
                       dayNumber={meeting.day_number}
                       dropdownActions={[
                         {
-                          text: 'Ver Curso',
-                          icon: 'user-group',
-                          url: `/teacher/courses/${1}`,
+                          text: 'Iniciar Clase',
+                          icon: 'video-outline',
+                          onClick: () => {
+                            console.log('click start class');
+                          }
                         },
                         {
-                          text: 'Editar Curso',
-                          icon: 'pencil',
-                          url: `/teacher/courses/edit/${1}`,
+                          text: 'Reagendar clase',
+                          icon: 'clock',
+                          onClick: () => {
+                            console.log('click re agendar');
+                          }
                         },
                       ]}
                     />

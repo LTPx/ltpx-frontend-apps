@@ -1522,7 +1522,7 @@
         ],
         "width": 1024
       },
-      "properties": { "name": "videocam-outline" }
+      "properties": { "name": "video-outline" }
     },
     {
       "icon": {

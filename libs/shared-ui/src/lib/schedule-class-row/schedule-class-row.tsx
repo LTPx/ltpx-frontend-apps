@@ -1,9 +1,4 @@
-import {
-  Dropdown,
-  Icon,
-  Menu,
-  MenuItem,
-} from '@ltpx-frontend-apps/shared-ui';
+import { Icon, MenuItem, Menu} from '@ltpx-frontend-apps/shared-ui';
 import { ReactElement } from 'react';
 import styles from './schedule-class-row.module.scss';
 
@@ -66,12 +61,13 @@ export function ScheduleClassRow(props: ScheduleClassRowProps) {
         <div className={styles['actions']}>
           {children}
           {dropdownActions && (
-            <Dropdown>
-              <div className={styles['icon-button']}>
-                <Icon icon={'ellipsis-horizontal-outline'} size={15} />
-              </div>
-              <Menu items={dropdownActions} />
-            </Dropdown>
+            <Menu items={dropdownActions}>
+              <Icon
+                icon={'ellipsis-horizontal-outline'}
+                size={15}
+                className={styles['icon-button']}
+              />
+            </Menu>
           )}
         </div>
       </div>

@@ -84,23 +84,22 @@ export function TeacherMeetingsAgenda() {
               ))}
             </div>
             <div className={styles['side']}>
+              <div
+                className={`${styles['create-a-meeting']} card with-padding`}
+              >
+                <h3>Nueva Clase</h3>
+                <p>
+                  Algunos cursos incluyen clases personalizadas, aquí puedes
+                  agendar nuevas clases
+                </p>
+                <Button
+                  title="Agendar Nueva Clase"
+                  icon="plus"
+                  color={ColorsButton.secondary}
+                />
+              </div>
               <div className={styles['calendar']}></div>
             </div>
-          </div>
-          <div className={styles['side']}>
-            <div className={`${styles['create-a-meeting']} card with-padding`}>
-              <h3>Nueva Clase</h3>
-              <p>
-                Algunos cursos incluyen clases personalizadas, aquí puedes
-                agendar nuevas clases
-              </p>
-              <Button
-                title="Agendar Nueva Clase"
-                icon="plus"
-                color={ColorsButton.secondary}
-              />
-            </div>
-            <div className={styles['calendar']}></div>
           </div>
         </div>
       )}

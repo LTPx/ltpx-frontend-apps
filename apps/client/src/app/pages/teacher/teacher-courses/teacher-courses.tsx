@@ -28,7 +28,6 @@ export function TeacherCourses(props: TeacherCoursesProps) {
   const [courses, setCourses] = useState<TeacherCourse[]>([]);
   const [openModal, setOpenModal] = useState(false);
   const { createCourse } = useTeacher();
-  const { getPriceCourse } = useCourseUtil();
   const navigate = useNavigate();
   const { t } = useTranslation();
 

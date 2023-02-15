@@ -38,6 +38,11 @@
   gap: 1rem;
 }
 
+.meeting {
+  padding-bottom: 1rem;
+  border-bottom: 1px solid $gray-color-200;
+}
+
 .create-a-meeting {
   text-align: center;
   max-width: 18rem;

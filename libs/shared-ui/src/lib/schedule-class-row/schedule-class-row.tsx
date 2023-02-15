@@ -20,6 +20,7 @@ export interface ScheduleClassRowProps {
   participants: number;
   children?: ReactElement;
   dropdownActions?: MenuItem[];
+  className?: string;
 }
 
 export function ScheduleClassRow(props: ScheduleClassRowProps) {
@@ -35,10 +36,11 @@ export function ScheduleClassRow(props: ScheduleClassRowProps) {
     participants,
     children,
     dropdownActions,
+    className,
   } = props;
 
   return (
-    <div className={styles['meeting-row']}>
+    <div className={`${styles['meeting-row']} ${className}`}>
       <div className={styles['date']}>
         <h5>{dateMonth}</h5>
         <h3>{dayNumber}</h3>

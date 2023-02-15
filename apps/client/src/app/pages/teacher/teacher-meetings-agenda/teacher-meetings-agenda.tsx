@@ -51,7 +51,7 @@ export function TeacherMeetingsAgenda() {
       ) : (
         <div className={styles['main-container']}>
           <h1 className="add-space-bottom">Mis Clases</h1>
-          <BannerNotification
+          {/* <BannerNotification
             className={styles['course-notification']}
             type={BannerType.white}
           >
@@ -65,14 +65,23 @@ export function TeacherMeetingsAgenda() {
               </div>
               <Button title="Contactar alumno via chat" icon="chat-dots" />
             </div>
-          </BannerNotification>
+          </BannerNotification> */}
           <div className={styles['container']}>
             <div className={`${styles['content']} card`}>
+              {/* <div className="c">
+                <h4>Agendar una nueva clase</h4>
+                <Button
+                  title="Agendar Nueva Clase"
+                  icon="plus"
+                  color={ColorsButton.secondary}
+                />
+              </div> */}
               <h2 className={styles['title']}>Clases de esta semana</h2>
               {classroomClasses.map((item, index) => (
                 <div className={styles['meetings']} key={index}>
                   {item.meetings.map((meeting, indexMeeting) => (
                     <ScheduleClassRow
+                      className={styles['meeting']}
                       title={`Clase ${indexMeeting + 1}: ${item.title}`}
                       duration={item.duration}
                       date={''}
@@ -86,14 +95,14 @@ export function TeacherMeetingsAgenda() {
                           icon: 'video-outline',
                           onClick: () => {
                             console.log('click start class');
-                          }
+                          },
                         },
                         {
                           text: 'Reagendar clase',
                           icon: 'clock',
                           onClick: () => {
                             console.log('click re agendar');
-                          }
+                          },
                         },
                       ]}
                     />

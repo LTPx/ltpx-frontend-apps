@@ -19,6 +19,8 @@ import EthicsManualForTeaching from '../pages/site/blog/ethics-manual-for-teachi
 import {
   ManageCourses,
   TeacherAccount,
+  TeacherAccountLayout,
+  TeacherAccountProfile,
   TeacherApply,
   TeacherCourseDetail,
   TeacherCourses,
@@ -46,7 +48,6 @@ export const TeacherRoutes = () => {
         >
           <Route path="dashboard" element={<TeacherDashboard />} />
           <Route path="apply-teach" element={<TeacherApply />} />
-          <Route path="account" element={<TeacherAccount />} />
           <Route path="earnings" element={<TeacherEarnings />} />
           <Route path="sessions" element={<TeacherMeetingsAgenda />} />
           <Route path="live-meeting" element={<VideoMeetingLive />} />
@@ -59,6 +60,12 @@ export const TeacherRoutes = () => {
             <Route path="all" element={<TeacherCourses />} />
             <Route path="edit/:courseId" element={<TeacherEditCourse />} />
           </Route>
+          <Route path="account" element={<TeacherAccountLayout />}>
+            <Route path="/teacher/account" element={<TeacherAccountProfile />} />
+            <Route path="account-form" element={<TeacherAccount />} />
+            <Route path="account-profile" element={<TeacherAccountProfile />} />
+          </Route>
+
           <Route path="blog" element={<BlogLayout />}>
             <Route path="/teacher/blog" element={<BlogHome />} />
             <Route path="home" element={<BlogHome />} />

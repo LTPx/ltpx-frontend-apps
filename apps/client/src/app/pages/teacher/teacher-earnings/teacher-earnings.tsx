@@ -85,7 +85,7 @@ export function TeacherEarnings() {
               title={'Agregar mi cuenta bancaria'}
               color={ColorsButton.primary}
               icon="plus"
-              link={'/teacher/account'}
+              link={'/teacher/account/account-form'}
             />
           </div>
         </EmptyState>

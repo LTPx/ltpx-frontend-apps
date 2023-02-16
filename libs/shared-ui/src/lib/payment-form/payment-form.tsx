@@ -45,7 +45,7 @@ export function PaymentForm(props: PaymentFormProps) {
     <div className={styles['container']}>
       <form className={styles['form']}>
         <div className={styles['general']}>
-        <label>Cuenta Bancaria</label>
+          <label>Cuenta Bancaria</label>
           <div className={styles['bank-information']}>
             <div>
               <Input
@@ -167,6 +167,12 @@ export function PaymentForm(props: PaymentFormProps) {
             </div>
           </div>
           <div className={styles['btn-submit']}>
+            <Button
+              color={ColorsButton.white}
+              outline={true}
+              title="Cancelar"
+              link={'/teacher/account/account-profile'}
+            />
             <Button
               color={ColorsButton.primary}
               title="Guardar"

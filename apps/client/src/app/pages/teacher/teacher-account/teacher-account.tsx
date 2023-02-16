@@ -2,6 +2,7 @@ import { IUserAccount } from '@ltpx-frontend-apps/api';
 import { useTeacher } from '@ltpx-frontend-apps/store';
 import {
   BannerNotification,
+  ChangePasswordForm,
   PaymentForm,
   Tabs,
   TeacherProfileForm,
@@ -41,8 +42,11 @@ export function TeacherAccount(props: TeacherAccountProps) {
       text: 'Cuenta de Usuario',
     },
     {
-      text: 'Pagos',
+      text: 'Cuenta Bancaria',
     },
+    {
+      text: 'Cambiar Contraseña',
+    }
   ];
   const handleClick = (index: number) => {
     setSelectedTab(index);
@@ -71,6 +75,7 @@ export function TeacherAccount(props: TeacherAccountProps) {
             <UserAccountForm onSubmit={updateUserAccount} data={profile} />
           )}
           {selectedTab === 2 && <PaymentForm />}
+          {selectedTab === 3 && <ChangePasswordForm />}
         </div>
       )}
     </div>

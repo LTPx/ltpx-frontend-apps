@@ -1,7 +1,7 @@
 export interface SessionModel {
   id: number;
-  user_id: string;
-  course_id: string;
+  user_id: number;
+  course_id: number;
   available_spaces: number;
   call_time_min: number;
   public: boolean;
@@ -11,9 +11,9 @@ export interface SessionModel {
   updated_at: string;
 }
 
-export type NewSessionParams = Omit<
+export type NewCourseSessionParams = Omit<
   SessionModel,
-  'user_id' | 'created_at' | 'updated_at' | 'id'
+  'user_id' | 'created_at' | 'updated_at' | 'id' | 'public' | 'course_id'
 >;
 
 export type EditSessionParams = Omit<

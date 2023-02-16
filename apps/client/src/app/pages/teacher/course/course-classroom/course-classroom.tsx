@@ -1,4 +1,8 @@
-import { CLASSROOMS } from '@ltpx-frontend-apps/api';
+import {
+  Classroom,
+  CLASSROOMS,
+  TeacherClassType,
+} from '@ltpx-frontend-apps/api';
 import {
   ClassroomView,
   CourseClasses,
@@ -19,33 +23,30 @@ export interface CourseClassroomProps {
 export function CourseClassroom(props: CourseClassroomProps) {
   const { onSubmit } = props;
   const [openModal, setOpenModal] = useState(false);
-  const { course, addUpdateClassroom } = useCourse();
-  const { classroom  } = course;
+  const { course, _addCourseSession } = useCourse();
+  const { classroom } = course;
   const { t } = useTranslation();
 
-  const handleClassroom = async(classroom: any) => {
-    try {
-      const { data } = await addUpdateClassroom(classroom);
-      onSubmit && onSubmit({
-        success: true,
-        data: data
+  const handleClassroom = async (classroom: Classroom) => {
+    const { success, data, error } = await _addCourseSession({
+      available_spaces: classroom.max,
+      call_time_min: classroom.call_time_min,
+      private_sessions: classroom.condition === TeacherClassType.flexible,
+      meetings: classroom.meetings,
+    });
+    onSubmit &&
+      onSubmit({
+        success,
+        data,
+        error,
       });
-
-    } catch (error) {
-      onSubmit && onSubmit({
-        success: false,
-        error: error
-      });
-    }
   };
 
   return (
     <div className={styles['container']}>
       <div className={styles['header-text']}>
         <h2>{t('courseClassroom.title')}</h2>
-        <h4 className="muted">
-        {t('courseClassroom.subtitle')}
-        </h4>
+        <h4 className="muted">{t('courseClassroom.subtitle')}</h4>
       </div>
       {!classroom && (
         <SetupCard
@@ -63,6 +64,7 @@ export function CourseClassroom(props: CourseClassroomProps) {
           setOpenModal(false);
         }}
         onSave={(classroom) => {
+          console.log('classroom: ', classroom);
           handleClassroom(classroom);
         }}
       />

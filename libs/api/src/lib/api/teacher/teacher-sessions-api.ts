@@ -1,9 +1,9 @@
 import { _http } from '../../http';
-import { EditSessionParams, NewSessionParams, SessionModel } from '../../interfaces/session-interface';
+import { EditSessionParams, NewCourseSessionParams, SessionModel } from '../../interfaces/session-interface';
 
 const http = _http;
 
-export const createSession = async (quiz: NewSessionParams) => {
+export const createCourseSession = async (quiz: NewCourseSessionParams) => {
   return new Promise<SessionModel>((resolve, reject) => {
     http
       .post('api/v1/teacher/course_sessions', quiz)

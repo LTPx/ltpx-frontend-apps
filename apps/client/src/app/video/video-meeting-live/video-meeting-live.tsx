@@ -1,43 +1,35 @@
 // import VideoMeeting from '../video-meeting/video-meeting';
 import styles from './video-meeting-live.module.scss';
 import { VideoSDKMeeting } from "@videosdk.live/rtc-js-prebuilt";
-// import * as VideoSDKMeeting from "@videosdk.live/rtc-js-prebuilt/dist";
-
-import { useEffect } from 'react';
+import { Button } from '@ltpx-frontend-apps/shared-ui';
 /* eslint-disable-next-line */
 export interface VideoMeetingLiveProps {}
 
 export function VideoMeetingLive(props: VideoMeetingLiveProps) {
-  useEffect(() => {
+  function handleCall() {
     const config = {
-      name: "Demo User",
-      meetingId: "milkyway",
-      apiKey: "<API KEY>",
-
-      containerId: null,
-
+      name: "Test User",
+      meetingId: "pruf-s3yq-j760",
+      apiKey: process.env.NX_VIDEOSDK_TOKEN,
+      redirectOnLeave: "http://localhost:4200/teacher/sessions",
+      containerId: 'video-container',
       micEnabled: true,
-      webcamEnabled: true,
+      webcamEnabled: false,
       participantCanToggleSelfWebcam: true,
       participantCanToggleSelfMic: true,
-
       chatEnabled: true,
       screenShareEnabled: true,
-
-      /*
-
-     Other Feature Properties
-
-      */
     };
 
     const meeting = new VideoSDKMeeting();
     meeting.init(config);
-  }, []);
+  }
 
   return (
     <div className={styles['container']}>
       {/* <VideoMeeting/> */}
+      <Button title='Join' onClick={handleCall}/>
+      <div id="video-container" className={styles['video-container']}></div>
     </div>
   );
 }

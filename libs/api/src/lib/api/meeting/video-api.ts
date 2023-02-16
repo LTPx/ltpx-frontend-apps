@@ -21,7 +21,6 @@ export const getToken = async (VIDEOSDK_TOKEN?: string) => {
 
 export const createMeeting = async ({ token }:{token: any}) => {
   const url = `${API_BASE_URL}/v2/rooms`;
-  debugger
   const options = {
     method: "POST",
     headers: { Authorization: token, "Content-Type": "application/json" },

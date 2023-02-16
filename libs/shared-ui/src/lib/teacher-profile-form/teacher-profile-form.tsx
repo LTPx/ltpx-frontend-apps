@@ -171,6 +171,12 @@ export function TeacherProfileForm(props: TeacherProfileFormProps) {
           ) : null}
           <div className={styles['btn-submit']}>
             <Button
+              color={ColorsButton.white}
+              outline={true}
+              title="Cancelar"
+              link={'/teacher/account/account-profile'}
+            />
+            <Button
               color={ColorsButton.primary}
               title="Guardar"
               type={TypeButton.submit}

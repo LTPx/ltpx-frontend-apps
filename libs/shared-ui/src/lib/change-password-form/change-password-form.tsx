@@ -10,7 +10,7 @@ import InputTextStatus, {
 
 /* eslint-disable-next-line */
 export interface ChangePasswordFormProps {
-  onSubmit: (data: INewPassword) => void;
+  onSubmit?: (data: INewPassword) => void;
 }
 
 export function ChangePasswordForm(props: ChangePasswordFormProps) {
@@ -23,7 +23,9 @@ export function ChangePasswordForm(props: ChangePasswordFormProps) {
       confirmPassword: '',
     },
     validationSchema: Yup.object({
-      currentPassword: Yup.string().required('Contraseña actual es obligatoria'),
+      currentPassword: Yup.string().required(
+        'Contraseña actual es obligatoria'
+      ),
       newPassword: Yup.string().required('Nueva contraseña es requerida'),
       confirmPassword: Yup.string().test(
         'Las contraseñas coinciden',
@@ -34,7 +36,7 @@ export function ChangePasswordForm(props: ChangePasswordFormProps) {
       ),
     }),
     onSubmit: (data) => {
-      onSubmit(data);
+      console.log(data);
     },
   });
 
@@ -94,13 +96,18 @@ export function ChangePasswordForm(props: ChangePasswordFormProps) {
             />
           ) : null}
         </div>
-        <div className={styles['form-submit']}>
+        <div className={styles['btn-submit']}>
+          <Button
+            color={ColorsButton.white}
+            outline={true}
+            title="Cancelar"
+            link={'/teacher/account/account-profile'}
+          />
           <Button
             color={ColorsButton.primary}
             title="Cambiar contraseña"
             type={TypeButton.submit}
             onClick={formik.handleSubmit}
-            full={true}
           />
         </div>
       </form>

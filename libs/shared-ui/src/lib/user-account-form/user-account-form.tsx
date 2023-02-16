@@ -158,6 +158,12 @@ export function UserAccountForm(props: UserAccountFormProps) {
         </div>
         <div className={styles['form-submit']}>
           <Button
+              color={ColorsButton.white}
+              outline={true}
+              title="Cancelar"
+              link={'/teacher/account/account-profile'}
+            />
+          <Button
             color={ColorsButton.primary}
             title={t('buttons.updateData')}
             type={TypeButton.submit}

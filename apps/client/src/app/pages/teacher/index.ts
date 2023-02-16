@@ -8,3 +8,5 @@ export * from './teacher-apply/teacher-apply';
 export * from './teacher-edit-course/teacher-edit-course';
 export * from './teacher-earnings/teacher-earnings';
 export * from './teacher-meetings-agenda/teacher-meetings-agenda';
+export * from './teacher-account-layout/teacher-account-layout';
+export * from './teacher-account-profile/teacher-account-profile';

@@ -6,7 +6,7 @@ import {
   CourseCard,
   NewsCard,
 } from '@ltpx-frontend-apps/shared-ui';
-import { useSite } from '@ltpx-frontend-apps/store';
+import { useSite, useUser } from '@ltpx-frontend-apps/store';
 import { useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { NavLink } from 'react-router-dom';
@@ -15,6 +15,7 @@ import styles from './home.module.scss';
 export function Home() {
   const [ courses, setCourses] = useState<CourseModel[]>([])
   const {_getPopularCourses } = useSite();
+  const { isAuthenticated } = useUser();
   const { t } = useTranslation();
   const categories = [
     {
@@ -124,12 +125,14 @@ export function Home() {
               <h4>{t('home.cover.subtitle')}</h4>
             </div>
             <div className={styles['actions']}>
-              <Button
-                color={ColorsButton.secondary}
-                title={t('buttons.start')}
-                outline={true}
-                link="/register"
-              />
+              {!isAuthenticated && (
+                <Button
+                  color={ColorsButton.secondary}
+                  title={t('buttons.start')}
+                  outline={true}
+                  link="/register"
+                />
+              )}
               <Button
                 color={ColorsButton.primary}
                 title={t('buttons.courses')}

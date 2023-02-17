@@ -20,6 +20,7 @@ const createRandomCourse = ():PublicCourse => (
     price: faker.datatype.number({min: 1000, max: 5000}).toString(),
     price_currency: 'USD',
     price_format: '$10.00',
+    course_session_id: 12,
     classroom: {
       condition: TeacherClassType.flexible,
       min: 1,

@@ -67,6 +67,7 @@ export interface CourseModel {
   classroom: Classroom;
   quizzes?: QuizModel[];
   achievements?: AchievementModel[];
+  course_session_id: number;
 }
 
 export interface Comment {

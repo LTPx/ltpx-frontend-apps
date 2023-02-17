@@ -224,7 +224,7 @@ export function CourseDetails() {
           product={{
             description: course.title,
             price: parseFloat(course.price),
-            id: course.id,
+            id: course.course_session_id,
             image: course.cover_url,
           }}
           onSuccess={() => {

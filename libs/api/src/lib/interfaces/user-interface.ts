@@ -35,6 +35,7 @@ export interface UserStore {
   initial_register: TypeAccounts;
   initial_view: TypeViews;
   teacher_account?: StatusTeacherAccount;
+  id: number;
 }
 
 export interface IRegisterUser {
@@ -49,13 +50,14 @@ export interface ICredentials {
 }
 
 export interface ICurrentUser {
+  id: number;
   fullname: string;
   email: string;
   password: string;
   initial_register: TypeAccounts;
   initial_view: TypeViews;
   teacher_account?: StatusTeacherAccount;
-  cart?: CartModel
+  cart?: CartModel;
 }
 
 export interface IUserAccount {

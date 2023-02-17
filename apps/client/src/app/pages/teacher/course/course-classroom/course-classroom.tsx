@@ -9,7 +9,7 @@ import {
   InformationCard,
   SetupCard,
 } from '@ltpx-frontend-apps/shared-ui';
-import { useCourse } from '@ltpx-frontend-apps/store';
+import { useCourse, useUser } from '@ltpx-frontend-apps/store';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ResponseRequest } from '../../teacher-edit-course/teacher-edit-course';
@@ -24,15 +24,18 @@ export function CourseClassroom(props: CourseClassroomProps) {
   const { onSubmit } = props;
   const [openModal, setOpenModal] = useState(false);
   const { course, _addCourseSession } = useCourse();
+  const { user } = useUser();
   const { classroom } = course;
   const { t } = useTranslation();
 
   const handleClassroom = async (classroom: Classroom) => {
     const { success, data, error } = await _addCourseSession({
-      available_spaces: classroom.max,
+      max_participants: classroom.max,
       call_time_min: classroom.call_time_min,
-      private_sessions: classroom.condition === TeacherClassType.flexible,
-      meetings: classroom.meetings,
+      private_sessions: classroom.condition === TeacherClassType.customize,
+      meetings_attributes: classroom.meetings.map((date)=>{
+        return { start_date: date, host_user_id: user.id }
+      }),
     });
     onSubmit &&
       onSubmit({

@@ -1,12 +1,14 @@
+import { MeetingNestedModel } from "./meeting-interface";
+
 export interface SessionModel {
   id: number;
   user_id: number;
   course_id: number;
-  available_spaces: number;
+  max_participants: number;
   call_time_min: number;
   public: boolean;
   private_sessions: boolean;
-  meetings: string[];
+  meetings_attributes: MeetingNestedModel[];
   created_at: string;
   updated_at: string;
 }

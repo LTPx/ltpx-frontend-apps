@@ -14,6 +14,10 @@ export interface MeetingModel {
   created_at: string;
   updated_at: string;
 }
+export interface MeetingNestedModel {
+  host_user_id: number;
+  start_date: string;
+}
 
 export type NewMeetingParams = Omit<
   MeetingModel,

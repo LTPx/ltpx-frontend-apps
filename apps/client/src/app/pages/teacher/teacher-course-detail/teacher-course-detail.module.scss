@@ -3,6 +3,15 @@
 .container {
   padding: $size-lg-3 5rem;
 
+  .head {
+    display: flex;
+    align-items: center;
+    margin-bottom: 2rem;
+    justify-content: space-between;
+    .title {
+      align-items: baseline;
+    }
+  }
   .cover {
     height: 20rem;
     display: flex;
@@ -15,19 +24,15 @@
       border-radius: 5px;
     }
   }
-
-  .course-details {
-    margin-top: $size-md-1;
-  }
-
-  p {
-    color: $text-gray-color;
+  .course-content {
+    margin-top: 1rem;
   }
 }
 
 .basic-info {
   display: flex;
   gap: $size-sm-2;
+  padding: 1rem 0;
 
   .noted {
     padding: $size-sm-1 $size-sm-2;
@@ -39,17 +44,6 @@
     &.status {
       background-color: $green-color-100;
       color: $green-color;
-    }
-  }
-}
-
-.tab-content {
-  .course-contents {
-    display: flex;
-
-    .tabs-contents {
-      width: 15rem;
-      border-right: 1px solid #d4d4d4;
     }
   }
 }

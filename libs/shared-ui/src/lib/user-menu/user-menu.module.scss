@@ -37,11 +37,15 @@
       color: $text-gray-color;
       cursor: pointer;
       min-width: 10rem;
-
+      a {
+        color: $text-gray-color;
+      }
+      a:hover {
+        color: $text-color;
+      }
       &:hover {
         color: $text-color;
       }
     }
   }
-
 }

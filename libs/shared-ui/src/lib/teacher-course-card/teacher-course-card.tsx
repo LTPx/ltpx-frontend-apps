@@ -53,11 +53,10 @@ export function TeacherCourseCard(props: TeacherCourseCardProps) {
               icon={status === CourseStatus.publish ? 'globe' : 'edit'}
             />
             <h5>
-              <Icon icon={'box-unpacked'} size={10}></Icon>{' '}
               {t(`course_categories.${category}`)}
             </h5>
             <h5>
-              <Icon icon={'user'} size={10}></Icon> {learners} Estudiantes
+              <Icon icon={'user'} size={13}></Icon> {learners} Estudiantes
             </h5>
           </div>
           {dropdownActions && (

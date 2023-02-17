@@ -148,7 +148,6 @@ export function TeacherMeetingsAgenda() {
                   color={ColorsButton.secondary}
                 />
               </div>
-              <div className={styles['calendar']}></div>
             </div>
           </div>
         </div>

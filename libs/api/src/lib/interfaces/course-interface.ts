@@ -1,4 +1,5 @@
 import { AchievementModel } from './achievement-interface';
+import { MeetingModel } from './meeting-interface';
 import { QuizModel } from './quiz-interface';
 import { PartialWithRequired } from './util';
 
@@ -159,5 +160,5 @@ export interface ClassroomClasses {
   min_participants: number;
   max_participants: number;
   duration: number;
-  meetings: MeetingDate[];
+  meetings: MeetingModel[];
 }

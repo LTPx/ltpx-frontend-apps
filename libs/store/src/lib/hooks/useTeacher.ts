@@ -2,6 +2,7 @@ import { useAppStore } from "../store";
 
 export const useTeacher = () => {
   const {
+    loadingTeacherApi,
     teacher_account,
     registerTeacher,
     applyTeach,
@@ -21,10 +22,11 @@ export const useTeacher = () => {
     _getWallet,
     _getClassrooms,
     _getCourses,
-    loadingTeacherApi,
+    _getMeetingRoomId,
   } = useAppStore();
 
   return {
+    loadingTeacherApi,
     course: currentCourse,
     teacher_account,
     registerTeacher,
@@ -44,6 +46,6 @@ export const useTeacher = () => {
     _getWallet,
     _getClassrooms,
     _getCourses,
-    loadingTeacherApi,
+    _getMeetingRoomId,
   }
 }

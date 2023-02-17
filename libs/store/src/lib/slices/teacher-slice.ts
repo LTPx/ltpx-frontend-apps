@@ -27,6 +27,7 @@ import {
   getTeacherClassesMonth,
   MeetingDate,
   getTeacherCourses,
+  getMeetingRoomId,
 } from '@ltpx-frontend-apps/api';
 import { StateCreator } from 'zustand';
 import { StoreState } from '../store';
@@ -90,6 +91,7 @@ export type TeacherSlice = {
   _getWallet: () => Promise<TResponse>;
   _getClassrooms: () => Promise<TResponse>;
   _getCourses: () => Promise<TResponse>;
+  _getMeetingRoomId: (id: number) => Promise<TResponse>;
 };
 
 export const createTeacherSlice: StateCreator<
@@ -244,12 +246,16 @@ export const createTeacherSlice: StateCreator<
   _getCourses: async () => {
     return callApi(getTeacherCourses, set);
   },
+  _getMeetingRoomId: async (id) => {
+    const params = id;
+    return callApi(getMeetingRoomId, set, params);
+  },
 });
 
-const callApi = async (promiseFn: any, set: any):Promise<TResponse> => {
+const callApi = async (promiseFn: any, set: any, params?: any):Promise<TResponse> => {
   set({loadingTeacherApi: true});
   try {
-    const response = await promiseFn();
+    const response = await promiseFn(params);
     set({loadingTeacherApi: false});
     return { success: true, data: response };
   } catch (error) {

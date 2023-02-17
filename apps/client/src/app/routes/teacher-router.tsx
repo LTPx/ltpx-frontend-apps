@@ -50,7 +50,7 @@ export const TeacherRoutes = () => {
           <Route path="apply-teach" element={<TeacherApply />} />
           <Route path="earnings" element={<TeacherEarnings />} />
           <Route path="sessions" element={<TeacherMeetingsAgenda />} />
-          <Route path="live-meeting" element={<VideoMeetingLive />} />
+          <Route path="live-meeting/:roomId" element={<VideoMeetingLive />} />
           <Route path="courses" element={<ManageCourses />}>
             <Route
               path="/teacher/courses"

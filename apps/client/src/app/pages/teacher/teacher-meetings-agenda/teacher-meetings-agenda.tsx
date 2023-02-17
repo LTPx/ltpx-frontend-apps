@@ -10,13 +10,15 @@ import {
 } from '@ltpx-frontend-apps/shared-ui';
 import { useTeacher } from '@ltpx-frontend-apps/store';
 import { useCallback, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styles from './teacher-meetings-agenda.module.scss';
 
 export function TeacherMeetingsAgenda() {
   const [classroomClasses, setClassroomClasses] = useState<ClassroomClasses[]>(
     []
   );
-  const { _getClassrooms } = useTeacher();
+  const { _getClassrooms, _getMeetingRoomId } = useTeacher();
+  const navigate = useNavigate();
 
   const fetchClasses = useCallback(async () => {
     const { success, data, error } = await _getClassrooms();
@@ -31,6 +33,20 @@ export function TeacherMeetingsAgenda() {
   useEffect(() => {
     fetchClasses();
   }, [fetchClasses]);
+
+  const handleInitMeeting = async(meetingId: number, roomId: string) => {
+    if (roomId) {
+      console.log('redirect');
+      navigate(`/teacher/live-meeting/${roomId}`);
+    } else {
+      const { success, data, error } = await _getMeetingRoomId(meetingId);
+      if (success) {
+        console.log('data: ', data);
+      } else {
+        console.log('error: ', error);
+      }
+    }
+  }
 
   return (
     <div className={styles['container']}>
@@ -93,7 +109,10 @@ export function TeacherMeetingsAgenda() {
                         {
                           text: 'Iniciar Clase',
                           icon: 'video-outline',
-                          url: '/teacher/live-meeting'
+                          onClick: () => {
+                            console.log('meeting: ', meeting);
+                            handleInitMeeting(meeting.id, meeting.meeting_id)
+                          },
                         },
                         {
                           text: 'Reagendar Clase',

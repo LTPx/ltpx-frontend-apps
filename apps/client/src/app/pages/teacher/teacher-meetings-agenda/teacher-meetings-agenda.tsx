@@ -8,6 +8,7 @@ import {
   Icon,
   ScheduleClassRow,
   RescheduleMeetingForm,
+  Loader,
 } from '@ltpx-frontend-apps/shared-ui';
 import { useTeacher } from '@ltpx-frontend-apps/store';
 import { useCallback, useEffect, useState } from 'react';
@@ -19,7 +20,7 @@ export function TeacherMeetingsAgenda() {
     []
   );
   const [openModal, setOpenModal] = useState(false);
-  const { _getClassrooms, _getMeetingRoomId } = useTeacher();
+  const { _getClassrooms, _getMeetingRoomId, loadingTeacherApi } = useTeacher();
   const navigate = useNavigate();
 
   const fetchClasses = useCallback(async () => {
@@ -52,7 +53,10 @@ export function TeacherMeetingsAgenda() {
 
   return (
     <div className={styles['container']}>
-      {classroomClasses.length === 0 ? (
+      {loadingTeacherApi && (
+        <Loader />
+      )}
+      {classroomClasses.length === 0 && loadingTeacherApi === false ? (
         <EmptyState
           img="../../../../assets/images/empty-states/class.svg"
           title="Clases en Openmind"

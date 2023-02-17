@@ -7,6 +7,7 @@ import {
   ColorsButton,
   EmptyState,
   InputSearch,
+  Loader,
   NewCourseForm,
   Select,
   TeacherCourseCard,
@@ -111,7 +112,10 @@ export function TeacherCourses(props: TeacherCoursesProps) {
 
   return (
     <div className={`${styles['container']}`}>
-      {courses.length === 0 && (
+      {loadingTeacherApi && (
+        <Loader />
+      )}
+      {courses.length === 0 && loadingTeacherApi === false && (
         <EmptyState
           img={'../../../../assets/images/empty-states/no-courses.svg'}
           title={'Vamos a crear un curso'}
@@ -131,7 +135,7 @@ export function TeacherCourses(props: TeacherCoursesProps) {
           </div>
         </EmptyState>
       )}
-      {courses.length > 0 && (
+      {courses.length > 0 && loadingTeacherApi === false && (
         <>
           <h1 className="add-space-bottom">Mis Cursos</h1>
           <div className="card">

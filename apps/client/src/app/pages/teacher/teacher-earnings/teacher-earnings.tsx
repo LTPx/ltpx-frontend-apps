@@ -13,29 +13,30 @@ import styles from './teacher-earnings.module.scss';
 
 export function TeacherEarnings() {
   const { _getWallet, wallet } = useTeacher();
-  const showEmptyState = true;
-  const existTransaction = true;
+  const NoTransactions = true;
   const fetchWallet = useCallback(async () => {
-    const { success, data, error } = await _getWallet();
-    if (success) {
-      console.log('error: ', data);
-    } else {
-      console.log('error: ', error);
+    if (wallet.id) {
+      const { success, data, error } = await _getWallet();
+      if (success) {
+        console.log('error: ', data);
+      } else {
+        console.log('error: ', error);
+      }
     }
   }, []);
 
   useEffect(() => {
     fetchWallet();
-  }, [fetchWallet]);
+  }, []);
 
   const balance = [
     {
-      mount: '$ 1.45',
+      mount: '$0',
       text: 'Saldo disponible',
       link: '',
     },
     {
-      mount: '$ 5.0',
+      mount: '$0',
       text: 'Pago pendiente',
       link: '',
     },
@@ -74,7 +75,7 @@ export function TeacherEarnings() {
 
   return (
     <div className={styles['container']}>
-      {showEmptyState ? (
+      {!wallet.id ? (
         <EmptyState
           img="../../../../assets/images/empty-states/set-bank-account.svg"
           title="Pagos en Openmind"
@@ -92,6 +93,10 @@ export function TeacherEarnings() {
       ) : (
         <div className={styles['content']}>
           <div className={styles['cards-balance']}>
+            <BalanceCard
+              balance={wallet.total_earnings}
+              text='Total por ventas'
+            />
             {balance.map((element, index) => (
               <BalanceCard
                 balance={element.mount}
@@ -103,7 +108,7 @@ export function TeacherEarnings() {
           </div>
           <h2 className={styles['title']}>Ultimas Transacciones</h2>
           <div className={styles['content-earning']}>
-            {existTransaction ? (
+            {NoTransactions ? (
               <EmptyState
                 img="../../../../assets/images/empty-states/money-transfer.svg"
                 title="Transacciones"

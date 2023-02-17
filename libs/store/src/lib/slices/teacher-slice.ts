@@ -102,7 +102,7 @@ export const createTeacherSlice: StateCreator<
   [],
   TeacherSlice
 > = (set, get) => ({
-  loadingTeacherApi: false,
+  loadingTeacherApi: true,
   teacher_account: StatusTeacherAccount.unapplied,
   application: null,
   profile: null,
@@ -238,12 +238,7 @@ export const createTeacherSlice: StateCreator<
     }
   },
   _getClassrooms: async () => {
-    try {
-      const classrooms = await getTeacherClassesMonth();
-      return { success: true, data: classrooms };
-    } catch (error) {
-      return { success: false, data: error };
-    }
+    return callApi(getTeacherClassesMonth, set);
   },
   _getCourses: async () => {
     return callApi(getTeacherCourses, set);

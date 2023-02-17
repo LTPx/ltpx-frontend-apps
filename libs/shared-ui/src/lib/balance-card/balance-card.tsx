@@ -5,7 +5,7 @@ import styles from './balance-card.module.scss';
 export interface BalanceCardProps {
   balance: string;
   text: string;
-  link: string;
+  link?: string;
 }
 
 export function BalanceCard(props: BalanceCardProps) {
@@ -17,9 +17,11 @@ export function BalanceCard(props: BalanceCardProps) {
         <h2>{balance}</h2>
         <div className={styles['type-content']}>
           <h4>{text}</h4>
-          <NavLink to={link}>
-            <h4 className={styles['link']}>Detalles</h4>
-          </NavLink>
+          {link && (
+            <NavLink to={link}>
+              <h4 className={styles['link']}>Detalles</h4>
+            </NavLink>
+          )}
         </div>
       </div>
     </div>

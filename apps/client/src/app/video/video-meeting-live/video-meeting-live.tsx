@@ -21,7 +21,7 @@ export function VideoMeetingLive(props: VideoMeetingLiveProps) {
       if  (success) {
         handleCall(data.meeting_id);
       } else {
-        setIsValid(true)
+        setIsValid(success)
       }
       console.log('resp....: ', data);
     }
@@ -29,7 +29,7 @@ export function VideoMeetingLive(props: VideoMeetingLiveProps) {
 
   useEffect(() => {
     fetchData();
-  }, [fetchData]);
+  }, []);
 
   function handleCall(roomId: string) {
     const config = {
@@ -37,7 +37,7 @@ export function VideoMeetingLive(props: VideoMeetingLiveProps) {
       meetingId: roomId,
       apiKey: process.env.NX_VIDEOSDK_TOKEN,
       redirectOnLeave: "http://localhost:4200/teacher/sessions",
-      containerId: 'video-container',
+      // containerId: 'video-container',
       micEnabled: true,
       webcamEnabled: false,
       participantCanToggleSelfWebcam: true,

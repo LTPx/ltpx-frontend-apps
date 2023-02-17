@@ -99,7 +99,7 @@ export function RescheduleMeetingForm(props: RescheduleMeetingFormProps) {
           />
           <Button
             color={ColorsButton.primary}
-            title="Reprogramar lección"
+            title="Reagendar"
             type={TypeButton.submit}
             onClick={formik.handleSubmit}
           />

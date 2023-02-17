@@ -7,6 +7,7 @@ import {
   EmptyState,
   Icon,
   ScheduleClassRow,
+  RescheduleMeetingForm,
 } from '@ltpx-frontend-apps/shared-ui';
 import { useTeacher } from '@ltpx-frontend-apps/store';
 import { useCallback, useEffect, useState } from 'react';
@@ -17,6 +18,7 @@ export function TeacherMeetingsAgenda() {
   const [classroomClasses, setClassroomClasses] = useState<ClassroomClasses[]>(
     []
   );
+  const [openModal, setOpenModal] = useState(false);
   const { _getClassrooms, _getMeetingRoomId } = useTeacher();
   const navigate = useNavigate();
 
@@ -34,7 +36,7 @@ export function TeacherMeetingsAgenda() {
     fetchClasses();
   }, [fetchClasses]);
 
-  const handleInitMeeting = async(meetingId: number, roomId: string) => {
+  const handleInitMeeting = async (meetingId: number, roomId: string) => {
     if (roomId) {
       console.log('redirect');
       navigate(`/teacher/live-meeting/${meetingId}/${roomId}`);
@@ -46,7 +48,7 @@ export function TeacherMeetingsAgenda() {
         console.log('error: ', error);
       }
     }
-  }
+  };
 
   return (
     <div className={styles['container']}>
@@ -111,14 +113,14 @@ export function TeacherMeetingsAgenda() {
                           icon: 'video-outline',
                           onClick: () => {
                             console.log('meeting: ', meeting);
-                            handleInitMeeting(meeting.id, meeting.meeting_id)
+                            handleInitMeeting(meeting.id, meeting.meeting_id);
                           },
                         },
                         {
                           text: 'Reagendar Clase',
                           icon: 'clock',
                           onClick: () => {
-                            console.log('click re agendar');
+                            setOpenModal(true);
                           },
                         },
                       ]}
@@ -146,6 +148,17 @@ export function TeacherMeetingsAgenda() {
             </div>
           </div>
         </div>
+      )}
+      {openModal && (
+        <RescheduleMeetingForm
+          open={openModal}
+          titleClass="Clase 1: Aprende lenguaje de señales en 5 sesiones"
+          date="06 Feb"
+          time="10:00 - 10:30"
+          onClose={() => {
+            setOpenModal(false);
+          }}
+        />
       )}
     </div>
   );

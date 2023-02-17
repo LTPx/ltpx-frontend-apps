@@ -53,7 +53,7 @@ export function CheckoutForm(props: CheckoutFormProps) {
 
   const createOrGetOrder = useCallback(async () => {
     const { success, data, error } = await _createPaymentOrder({
-      course_id: product.id,
+      course_session_id: product.id,
       description: product.description,
       amount: product.price,
     });

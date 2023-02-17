@@ -72,11 +72,6 @@ export function StudentLayout() {
       <Header links={[]} className={styles['header']}>
         <div className={styles['teacher-actions']}>
           <Dropdown>
-            <div className={styles['avatar']}>
-              <Avatar name={user.fullname} size={40} color='green'/>
-              <h4>{user.fullname}</h4>
-              <Icon icon='caret-down' size={18}/>
-            </div>
             <UserMenu
               name={user.fullname}
               email={user.email}
@@ -93,6 +88,11 @@ export function StudentLayout() {
                 }
               ]}
             />
+            <div className={styles['avatar']}>
+              <Avatar name={user.fullname} size={40} color='green'/>
+              <h4>{user.fullname}</h4>
+              <Icon icon='caret-down' size={18}/>
+            </div>
           </Dropdown>
         </div>
       </Header>

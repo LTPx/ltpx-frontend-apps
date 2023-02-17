@@ -37,7 +37,7 @@ export function TeacherMeetingsAgenda() {
   const handleInitMeeting = async(meetingId: number, roomId: string) => {
     if (roomId) {
       console.log('redirect');
-      navigate(`/teacher/live-meeting/${roomId}`);
+      navigate(`/teacher/live-meeting/${meetingId}/${roomId}`);
     } else {
       const { success, data, error } = await _getMeetingRoomId(meetingId);
       if (success) {

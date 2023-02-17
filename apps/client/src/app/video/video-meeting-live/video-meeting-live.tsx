@@ -1,15 +1,40 @@
-// import VideoMeeting from '../video-meeting/video-meeting';
 import styles from './video-meeting-live.module.scss';
 import { VideoSDKMeeting } from "@videosdk.live/rtc-js-prebuilt";
-import { Button } from '@ltpx-frontend-apps/shared-ui';
+import { useTeacher, useUser } from '@ltpx-frontend-apps/store';
+import { useParams } from 'react-router-dom';
+import { useCallback, useEffect, useState } from 'react';
 /* eslint-disable-next-line */
 export interface VideoMeetingLiveProps {}
 
 export function VideoMeetingLive(props: VideoMeetingLiveProps) {
-  function handleCall() {
+  const [isValid, setIsValid] = useState(false);
+  const { user } = useUser();
+  const { _validateMeetingRoomId } = useTeacher();
+  const { roomId, meetingId } = useParams();
+  console.log('roomId: ', roomId);
+  console.log('user: ', user.fullname);
+
+  const fetchData = useCallback(async () => {
+    if (meetingId && roomId) {
+      const meetId = parseInt(meetingId || '');
+      const { success, data } = await _validateMeetingRoomId(meetId, roomId);
+      if  (success) {
+        handleCall(data.meeting_id);
+      } else {
+        setIsValid(true)
+      }
+      console.log('resp....: ', data);
+    }
+  }, []);
+
+  useEffect(() => {
+    fetchData();
+  }, [fetchData]);
+
+  function handleCall(roomId: string) {
     const config = {
-      name: "Test User",
-      meetingId: "pruf-s3yq-j760",
+      name: user.fullname,
+      meetingId: roomId,
       apiKey: process.env.NX_VIDEOSDK_TOKEN,
       redirectOnLeave: "http://localhost:4200/teacher/sessions",
       containerId: 'video-container',
@@ -27,8 +52,6 @@ export function VideoMeetingLive(props: VideoMeetingLiveProps) {
 
   return (
     <div className={styles['container']}>
-      {/* <VideoMeeting/> */}
-      <Button title='Join' onClick={handleCall}/>
       <div id="video-container" className={styles['video-container']}></div>
     </div>
   );

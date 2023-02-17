@@ -28,6 +28,7 @@ import {
   MeetingDate,
   getTeacherCourses,
   getMeetingRoomId,
+  validateMeetingRoomId,
 } from '@ltpx-frontend-apps/api';
 import { StateCreator } from 'zustand';
 import { StoreState } from '../store';
@@ -92,6 +93,7 @@ export type TeacherSlice = {
   _getClassrooms: () => Promise<TResponse>;
   _getCourses: () => Promise<TResponse>;
   _getMeetingRoomId: (id: number) => Promise<TResponse>;
+  _validateMeetingRoomId: (id: number, roomId: string) => Promise<TResponse>;
 };
 
 export const createTeacherSlice: StateCreator<
@@ -249,6 +251,14 @@ export const createTeacherSlice: StateCreator<
   _getMeetingRoomId: async (id) => {
     const params = id;
     return callApi(getMeetingRoomId, set, params);
+  },
+  _validateMeetingRoomId: async (meetingId, roomId) => {
+    try {
+      const meeting = await validateMeetingRoomId(meetingId, roomId);
+      return { success: true, data: meeting };
+    } catch (error) {
+      return { success: false, data: error };
+    }
   },
 });
 

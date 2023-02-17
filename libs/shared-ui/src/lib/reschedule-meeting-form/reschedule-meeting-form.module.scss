@@ -6,21 +6,21 @@
   height: 100%;
   justify-content: space-between;
   .form {
-    padding: 1.5rem;
+    padding: $size-md-3;
     h1 {
-      padding-bottom: 1rem;
+      padding-bottom: $size-md-1;
     }
     .head {
       color: $text-gray-color;
-      padding-bottom: 1rem;
+      padding-bottom: $size-md-1;
 
       .class-information {
         display: flex;
-        gap: 4rem;
-        padding-top: 1rem;
+        gap: $size-lg-4;
+        padding-top: $size-md-1;
         .item {
           display: flex;
-          gap: 1rem;
+          gap: $size-md-1;
           color: $text-gray-color;
         }
       }
@@ -30,7 +30,7 @@
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    gap: 1rem;
-    padding: 1rem 1.5rem;
+    gap: $size-md-1;
+    padding: $size-md-1 $size-md-3;
   }
 }

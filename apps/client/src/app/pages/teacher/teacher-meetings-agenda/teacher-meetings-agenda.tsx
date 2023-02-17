@@ -44,7 +44,7 @@ export function TeacherMeetingsAgenda() {
 
   return (
     <div className={styles['container']}>
-      {!showEmptyState ? (
+      {showEmptyState ? (
         <EmptyState
           img="../../../../assets/images/empty-states/class.svg"
           title="Clases en Openmind"

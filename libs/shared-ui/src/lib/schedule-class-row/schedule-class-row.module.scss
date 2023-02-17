@@ -1,0 +1,55 @@
+
+@import '../../styles/core/colors';
+
+.meeting-row {
+  display: flex;
+  gap: 1rem;
+
+  .date {
+    padding: 0.5rem 1.5rem;
+    background-color: $gray-color-100;
+    border-radius: 5px;
+
+    h3 {
+      font-weight: 500;
+    }
+  }
+
+  .information {
+    display: flex;
+    justify-content: space-between;
+    gap: 4rem;
+    flex-grow: 1;
+
+    .details {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+
+      h4 {
+        font-weight: 500;
+      }
+    }
+
+    .details-items {
+      display: flex;
+      gap: 1rem;
+
+      .details-item {
+        display: flex;
+        gap: 0.5rem;
+      }
+    }
+  }
+}
+
+.actions {
+  .icon-button {
+    padding: 0.2rem;
+    background-color: $gray-color-100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+}

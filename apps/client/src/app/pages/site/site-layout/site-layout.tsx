@@ -43,7 +43,6 @@ export function SiteLayout() {
         <div className={styles['user-actions']}>
           {isAuthenticated && (
             <Dropdown>
-              <Avatar name={user.fullname} size={35}/>
               <UserMenu
                 name={user.fullname}
                 email={user.email}
@@ -57,6 +56,7 @@ export function SiteLayout() {
                   },
                 ]}
               />
+              <Avatar name={user.fullname} size={35}/>
             </Dropdown>
           )}
         </div>

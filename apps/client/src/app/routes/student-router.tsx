@@ -22,6 +22,7 @@ import {
   StudentClasses,
   StudentLayout,
 } from '../pages/student/index';
+import VideoMeetingLive from '../video/video-meeting-live/video-meeting-live';
 
 export const StudentRoutes = () => {
   return (
@@ -43,6 +44,9 @@ export const StudentRoutes = () => {
             <Route path=":courseId" element={<StudentCourse />} />
           </Route>
           <Route path="classes" element={<StudentClasses />} />
+          <Route path="classes" element={<StudentClasses />} />
+          <Route path="live-meeting/:meetingId/:roomId" element={<VideoMeetingLive />} />
+
           {/* <Route path="classes" element={<ClassesLayout/>}>
             <Route path="/student/classes" element={<Navigate replace to="week" />} />
             <Route path="week" element={<Classes/>}/>

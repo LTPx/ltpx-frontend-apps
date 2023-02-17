@@ -49,7 +49,7 @@ export function FilesUploaded(props: FilesUploadedProps) {
   const filesIcons = {
     image: 'image-outline',
     pdf: 'file-pdf',
-    video: 'videocam-outline',
+    video: 'video-outline',
   };
 
   const handleChange = (e: any) => {

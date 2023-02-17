@@ -44,10 +44,6 @@ export function TeacherLayout() {
       <Header links={links} className={styles['header']}>
         <div className={styles['teacher-actions']}>
           <Dropdown>
-            <div className={styles['avatar']}>
-              <Avatar name={user.fullname} size={40} color='green'/>
-              <Icon icon='caret-down' size={18}/>
-            </div>
             <UserMenu
               name={user.fullname}
               email={user.email}
@@ -64,6 +60,10 @@ export function TeacherLayout() {
                 }
               ]}
             />
+            <div className={styles['avatar']}>
+              <Avatar name={user.fullname} size={40} color='green'/>
+              <Icon icon='caret-down' size={18}/>
+            </div>
           </Dropdown>
         </div>
       </Header>

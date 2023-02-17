@@ -24,6 +24,11 @@ import {
   sendCourseToReview,
   getWallet,
   WalletModel,
+  getTeacherClassesMonth,
+  MeetingDate,
+  getTeacherCourses,
+  getMeetingRoomId,
+  validateMeetingRoomId,
 } from '@ltpx-frontend-apps/api';
 import { StateCreator } from 'zustand';
 import { StoreState } from '../store';
@@ -65,12 +70,14 @@ type TResponse = {
 };
 
 export type TeacherSlice = {
+  loadingTeacherApi: boolean;
   teacher_account: StatusTeacherAccount;
   application: ApplicationTeach | null;
   profile: IUserAccount | null;
   newQuiz: QuizModel | null;
   currentCourse: TeacherCourse;
   wallet: WalletModel;
+  meetings: MeetingDate[];
   applyTeach: (params: ApplyTeachApiParams) => Promise<any>;
   getApplicationTeach: () => Promise<any>;
   registerTeacher: (params: IRegisterUser) => Promise<TResponseLogin>;
@@ -83,6 +90,10 @@ export type TeacherSlice = {
   getCourse: (id: number) => Promise<TResponse>;
   _sendCourseToReview: (id: number) => Promise<TResponse>;
   _getWallet: () => Promise<TResponse>;
+  _getClassrooms: () => Promise<TResponse>;
+  _getCourses: () => Promise<TResponse>;
+  _getMeetingRoomId: (id: number) => Promise<TResponse>;
+  _validateMeetingRoomId: (id: number, roomId: string) => Promise<TResponse>;
 };
 
 export const createTeacherSlice: StateCreator<
@@ -91,12 +102,14 @@ export const createTeacherSlice: StateCreator<
   [],
   TeacherSlice
 > = (set, get) => ({
+  loadingTeacherApi: false,
   teacher_account: StatusTeacherAccount.unapplied,
   application: null,
   profile: null,
   newQuiz: null,
   currentCourse: {} as TeacherCourse,
   wallet: {} as WalletModel,
+  meetings: [],
   applyTeach: async (params: ApplyTeachApiParams): Promise<TResponseApply> => {
     try {
       const application = await applyToTeach(params);
@@ -224,4 +237,39 @@ export const createTeacherSlice: StateCreator<
       return { success: false, data: error };
     }
   },
+  _getClassrooms: async () => {
+    try {
+      const classrooms = await getTeacherClassesMonth();
+      return { success: true, data: classrooms };
+    } catch (error) {
+      return { success: false, data: error };
+    }
+  },
+  _getCourses: async () => {
+    return callApi(getTeacherCourses, set);
+  },
+  _getMeetingRoomId: async (id) => {
+    const params = id;
+    return callApi(getMeetingRoomId, set, params);
+  },
+  _validateMeetingRoomId: async (meetingId, roomId) => {
+    try {
+      const meeting = await validateMeetingRoomId(meetingId, roomId);
+      return { success: true, data: meeting };
+    } catch (error) {
+      return { success: false, data: error };
+    }
+  },
 });
+
+const callApi = async (promiseFn: any, set: any, params?: any):Promise<TResponse> => {
+  set({loadingTeacherApi: true});
+  try {
+    const response = await promiseFn(params);
+    set({loadingTeacherApi: false});
+    return { success: true, data: response };
+  } catch (error) {
+    set({loadingTeacherApi: false});
+    return { success: false, data: error };
+  }
+}

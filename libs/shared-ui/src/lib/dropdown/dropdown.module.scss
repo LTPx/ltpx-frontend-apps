@@ -1,22 +1,3 @@
-@import "../../styles/styles.module.scss";
-
-.container {
-  position: relative;
-
-  &:hover {
-    .content {
-      visibility: inherit;
-      z-index: 10;
-    }
-  }
-
-  .main-element {
-
-  }
-
-  .content {
-    box-shadow: $card-shadow-medium;
-    position: absolute;
-    visibility: hidden;
-  }
+.trigger {
+  cursor: pointer;
 }

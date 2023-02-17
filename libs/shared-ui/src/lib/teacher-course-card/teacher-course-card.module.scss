@@ -67,3 +67,12 @@
     font-weight: 500;
   }
 }
+
+
+.icon-button {
+  padding: 0.2rem;
+  background-color: $gray-color-100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

@@ -1,6 +1,6 @@
 export interface UserCoursePaymentModel {
   id: number;
-  course_id: number;
+  course_session_id: number;
   user_id: number;
   description: string;
   receipt_id: string;
@@ -13,7 +13,7 @@ export interface UserCoursePaymentModel {
 
 export interface Purchase {
   id: number;
-  course_id: number;
+  course_session_id: number;
   description: string;
   payment_gateway: string;
   amount: number;

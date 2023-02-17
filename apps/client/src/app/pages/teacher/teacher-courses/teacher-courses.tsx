@@ -1,6 +1,5 @@
 import {
   TeacherCourse,
-  getTeacherCourses,
   CourseStatus,
 } from '@ltpx-frontend-apps/api';
 import {
@@ -14,7 +13,7 @@ import {
 } from '@ltpx-frontend-apps/shared-ui';
 import { useCourseUtil, useTeacher } from '@ltpx-frontend-apps/store';
 import { Dialog } from 'evergreen-ui';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import styles from './teacher-courses.module.scss';
@@ -27,26 +26,22 @@ export interface TeacherCoursesProps {}
 export function TeacherCourses(props: TeacherCoursesProps) {
   const [courses, setCourses] = useState<TeacherCourse[]>([]);
   const [openModal, setOpenModal] = useState(false);
-  const { createCourse } = useTeacher();
-  const { getPriceCourse } = useCourseUtil();
+  const { createCourse, _getCourses, loadingTeacherApi } = useTeacher();
   const navigate = useNavigate();
   const { t } = useTranslation();
 
-  useEffect(() => {
-    let mounted = true;
-    try {
-      getTeacherCourses().then((courses) => {
-        if (mounted) {
-          setCourses(courses);
-        }
-      });
-    } catch (error) {
+  const fetchDataCourses = useCallback(async () => {
+    const { success, data, error } = await _getCourses();
+    if (success) {
+      setCourses(data);
+    } else {
       console.log(error);
     }
-    return () => {
-      mounted = false;
-    };
   }, []);
+
+  useEffect(() => {
+    fetchDataCourses();
+  }, [fetchDataCourses]);
 
   const categories = [
     { value: 'all', text: t('teacherCourse.categories.all') },
@@ -116,7 +111,7 @@ export function TeacherCourses(props: TeacherCoursesProps) {
 
   return (
     <div className={`${styles['container']}`}>
-      {courses.length === 0 ? (
+      {courses.length === 0 && (
         <EmptyState
           img={'../../../../assets/images/empty-states/no-courses.svg'}
           title={'Vamos a crear un curso'}
@@ -135,7 +130,8 @@ export function TeacherCourses(props: TeacherCoursesProps) {
             />
           </div>
         </EmptyState>
-      ) : (
+      )}
+      {courses.length > 0 && (
         <>
           <h1 className="add-space-bottom">Mis Cursos</h1>
           <div className="card">
@@ -159,7 +155,6 @@ export function TeacherCourses(props: TeacherCoursesProps) {
           </div>
         </>
       )}
-
       <Dialog
         isShown={openModal}
         hasFooter={false}

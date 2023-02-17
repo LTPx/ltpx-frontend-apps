@@ -20,14 +20,14 @@ export function SelectDates(props: SelectDatesProps) {
   const addNewDate = () => {
     setDates([...dates, today]);
     onChange && onChange(dates);
-  }
+  };
 
   const removeForm = (index: number) => {
     const copyDates = [...dates];
     copyDates.splice(index, 1);
     setDates(copyDates);
     onChange && onChange(dates);
-  }
+  };
 
   const handleDateChange = (data: any, index: number) => {
     const copyDates = [...dates];
@@ -35,23 +35,28 @@ export function SelectDates(props: SelectDatesProps) {
     setDates(copyDates);
     onChange && onChange(dates);
     console.log(copyDates);
-  }
+  };
 
   return (
     <div className={styles['container']}>
-      { dates.map((date, index)=>(
+      {dates.map((date, index) => (
         <div className={styles['date-item']} key={index}>
           <Input
             type="datetime-local"
             name={name}
             value={date}
-            min={dates[index-1] || today}
-            onChange={(e:any)=>{handleDateChange(e, index)}}
+            min={dates[index - 1] || today}
+            onChange={(e: any) => {
+              handleDateChange(e, index);
+            }}
           />
-          <Icon icon='close' size={18} onClick={() => removeForm(index)}/>
+          <Icon icon="close" size={18} onClick={() => removeForm(index)} />
         </div>
       ))}
-      <h4 className={styles['add-date']} onClick={addNewDate}> + Nueva Fecha</h4>
+      <h4 className={styles['add-date']} onClick={addNewDate}>
+        {' '}
+        + Nueva Fecha
+      </h4>
     </div>
   );
 }

@@ -3,7 +3,9 @@ import {
   ColorsButton,
   EmptyState,
   Icon,
+  RescheduleMeetingForm,
 } from '@ltpx-frontend-apps/shared-ui';
+import { useState } from 'react';
 import styles from './teacher-meetings-agenda.module.scss';
 
 const classes = [
@@ -38,6 +40,7 @@ const classes = [
 
 export function TeacherMeetingsAgenda() {
   const showEmptyState = true;
+  const [openModal, setOpenModal] = useState(false);
 
   return (
     <div className={styles['container']}>
@@ -84,12 +87,27 @@ export function TeacherMeetingsAgenda() {
                       </div>
                     </div>
                     <div className={styles['actions']}>
-                      <Button title="Iniciar clase" icon="desktop" />
+                      <Button
+                        title="Iniciar clase"
+                        icon="desktop"
+                        onClick={() => {
+                          setOpenModal(true);
+                        }}
+                      />
                     </div>
                   </div>
                 </div>
               ))}
             </div>
+            <RescheduleMeetingForm
+              open={openModal}
+              titleClass="Clase 1: Aprende lenguaje de señales en 5 sesiones"
+              date="06 Feb"
+              time="10:00 - 10:30"
+              onClose={() => {
+                setOpenModal(false);
+              }}
+            />
           </div>
           <div className={styles['side']}>
             <div className={styles['calendar']}></div>

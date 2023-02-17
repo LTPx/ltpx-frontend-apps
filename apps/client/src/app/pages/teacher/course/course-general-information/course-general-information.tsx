@@ -156,8 +156,11 @@ export function CourseGeneralInformation(props: CourseGeneralInformationProps) {
         />
       </div>
       <div className={styles['footer']}>
-        <Button title={t('buttons.cancel')} color={ColorsButton.white}
-        link={'/teacher/courses/all'} />
+        <Button
+          title={t('buttons.cancel')}
+          color={ColorsButton.white}
+          link={'/teacher/courses/all'}
+        />
         <Button
           title={t('buttons.updateInformation')}
           color={ColorsButton.secondary}

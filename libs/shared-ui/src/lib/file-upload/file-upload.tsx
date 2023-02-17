@@ -38,11 +38,11 @@ export function FileUpload(props: FileUploadProps) {
         <h4>Se debe seleccionar archivos de tipo imagen o video</h4>
         {file ? (
           <h4 className={styles['upload-files']} onClick={handleClick}>
-            Cambiar Archivo
+            Cambiar Portada
           </h4>
         ) : (
           <h4 className={styles['upload-files']} onClick={handleClick}>
-            Seleccionar Archivo
+            Seleccionar Portada
           </h4>
         )}
       </div>

@@ -51,7 +51,7 @@ export function WelcomeNewTeacher(props: WelcomeNewTeacherProps) {
               inscribirse en tus clases.
             </li>
           </ul>
-          <NavLink to='/teacher/account'>
+          <NavLink to='/teacher/account/account-form'>
             Click aquí para actualizar tu perfil
           </NavLink>
         </div>

@@ -13,14 +13,22 @@ import {
   OverviewCourse,
   CourseContents,
   RegisterForm,
+  SnackbarType,
+  Snackbar,
+  SnackbarPosition,
 } from '@ltpx-frontend-apps/shared-ui';
 import { Dialog } from 'evergreen-ui';
-import { useCart, useSite, useUser } from '@ltpx-frontend-apps/store';
+import { useSite, useUser } from '@ltpx-frontend-apps/store';
 import { useCallback, useEffect, useState } from 'react';
 import { NavLink, useNavigate, useParams } from 'react-router-dom';
 import { useCourseUtil } from '@ltpx-frontend-apps/store';
 import { useTranslation } from 'react-i18next';
 import CheckoutForm from '../../../components/checkout-form/checkout-form';
+
+type MessageCheckout = {
+  text: string;
+  kind: SnackbarType;
+};
 
 export function CourseDetails() {
   const [openModal, setOpenModal] = useState(false);
@@ -35,6 +43,7 @@ export function CourseDetails() {
   const { t } = useTranslation();
   const { _getSiteCourse, currentFullCourse } = useSite();
   const { course, teacher } = currentFullCourse;
+  const [message, setMessage] = useState<MessageCheckout>();
 
   const fetchCourse = useCallback(async () => {
     const { success, data, error } = await _getSiteCourse(id);
@@ -48,7 +57,7 @@ export function CourseDetails() {
   const onSubmitForm = async (formData: IRegisterUser) => {
     const { isLogin, data } = await register(formData);
     if (isLogin) {
-      navigate('/cart');
+      window.location.reload();
     } else {
       console.log(data);
     }
@@ -229,10 +238,28 @@ export function CourseDetails() {
           }}
           onSuccess={() => {
             setOpenEnrollModal(false);
+            setMessage({
+              text: `Gracias por tu compra`,
+              kind: SnackbarType.success,
+            });
           }}
           onError={() => {
             setOpenEnrollModal(false);
+            setMessage({
+              text: `Ha ocurrido un error intenta mas tarde`,
+              kind: SnackbarType.error,
+            });
           }}
+        />
+      )}
+      {message && (
+        <Snackbar
+          open={true}
+          position={SnackbarPosition.centerBottom}
+          title={message.text}
+          kind={message.kind}
+          onClose={() => setMessage(undefined)}
+          duration={2000}
         />
       )}
     </div>

@@ -1,8 +1,5 @@
 import {
   Loader,
-  Snackbar,
-  SnackbarPosition,
-  SnackbarType,
 } from '@ltpx-frontend-apps/shared-ui';
 import { useSite } from '@ltpx-frontend-apps/store';
 import { Dialog } from 'evergreen-ui';
@@ -10,11 +7,6 @@ import { useCallback, useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import PaypalCheckoutButton from '../paypal-checkout-button/paypal-checkout-button';
 import styles from './checkout-form.module.scss';
-
-type MessageCheckout = {
-  text: string;
-  kind: SnackbarType;
-};
 
 interface CheckoutFormProps {
   product: {
@@ -33,7 +25,6 @@ export function CheckoutForm(props: CheckoutFormProps) {
   const { product, onClose, onSuccess, onError, open } = props;
   const [orderCreated, setOrderCreated] = useState(false);
   const [orderId, setOrderId] = useState<number>();
-  const [message, setMessage] = useState<MessageCheckout>();
   const [error, setError] = useState(false);
   const { _createPaymentOrder, _confirmUserPayment } = useSite();
 
@@ -43,10 +34,6 @@ export function CheckoutForm(props: CheckoutFormProps) {
         order_id: orderId,
         payment_gateway: 'paypal',
         receipt_id: payment_id,
-      });
-      setMessage({
-        text: `Gracias por tu compra id: ${payment_id}`,
-        kind: SnackbarType.success,
       });
     }
   };
@@ -68,7 +55,7 @@ export function CheckoutForm(props: CheckoutFormProps) {
 
   useEffect(() => {
     createOrGetOrder();
-  }, [createOrGetOrder]);
+  }, []);
 
   return (
     <Dialog
@@ -150,16 +137,6 @@ export function CheckoutForm(props: CheckoutFormProps) {
             {!error && <Loader></Loader>}
             {error && <h4>Ya estas inscrito a este curso</h4>}
           </div>
-        )}
-        {message && (
-          <Snackbar
-            open={true}
-            position={SnackbarPosition.top}
-            title={message.text}
-            kind={message.kind}
-            onClose={() => setMessage(undefined)}
-            duration={2000}
-          />
         )}
       </div>
     </Dialog>

@@ -1,4 +1,4 @@
-import { Dropdown, Header, Icon, Nav, NotificationList, UserMenu } from '@ltpx-frontend-apps/shared-ui';
+import { Dropdown, Header, Icon, UserMenu } from '@ltpx-frontend-apps/shared-ui';
 import { useUser } from '@ltpx-frontend-apps/store';
 import { Avatar } from 'evergreen-ui';
 import { useTranslation } from 'react-i18next';
@@ -49,9 +49,9 @@ export function TeacherLayout() {
               email={user.email}
               links={[
                 {
-                  icon: 'arrows-horizontal',
-                  text: 'Cambiar a Usuario',
-                  onClick: () => {console.log('switch to default view')}
+                  icon: 'user',
+                  text: 'Cuenta',
+                  url: '/teacher/account'
                 },
                 {
                   icon: 'log-out',

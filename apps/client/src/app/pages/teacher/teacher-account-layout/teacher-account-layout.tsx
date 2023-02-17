@@ -1,6 +1,6 @@
 import { Button } from '@ltpx-frontend-apps/shared-ui';
 import { Avatar } from 'evergreen-ui';
-import { Outlet } from 'react-router-dom';
+import { NavLink, Outlet } from 'react-router-dom';
 import styles from './teacher-account-layout.module.scss';
 
 /* eslint-disable-next-line */
@@ -11,7 +11,9 @@ export function TeacherAccountLayout(props: TeacherAccountLayoutProps) {
       <div className={styles['content']}>
         <div className={styles['profile']}>
           <div className={styles['general-information']}>
+          <NavLink to='/teacher/account'>
             <Avatar name={'Angel Capa'} size={150} />
+          </NavLink>
             <h3>Angel Capa</h3>
             <h4>email@example.com</h4>
             <div className={styles['btn']}>

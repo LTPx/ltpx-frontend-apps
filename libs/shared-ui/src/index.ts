@@ -1,4 +1,5 @@
 export * from './lib/schedule-class-row/schedule-class-row';
+export * from './lib/reschedule-meeting-form/reschedule-meeting-form';
 export * from './lib/empty-state/empty-state';
 export * from './lib/transaction-row/transaction-row';
 export * from './lib/balance-card/balance-card';

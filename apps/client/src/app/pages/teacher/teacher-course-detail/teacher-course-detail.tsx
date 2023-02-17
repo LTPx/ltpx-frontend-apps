@@ -1,18 +1,28 @@
-import { getTeacherCourse, TeacherCourse } from '@ltpx-frontend-apps/api';
 import {
+  CLASSROOMS,
+  getTeacherCourse,
+  TeacherCourse,
+} from '@ltpx-frontend-apps/api';
+import {
+  AchievementsList,
+  ClassroomView,
   CourseContents,
-  LearnersTable,
+  InformationCard,
+  OverviewCourse,
+  QuizzesList,
   Tabs,
 } from '@ltpx-frontend-apps/shared-ui';
 import { useCourseUtil } from '@ltpx-frontend-apps/store';
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { NavLink, useParams } from 'react-router-dom';
 import styles from './teacher-course-detail.module.scss';
 
 const tabs = [
+  { text: 'Detalles' },
   { text: 'Contenidos' },
-  { text: 'Estudiantes' },
-  { text: 'Estadísticas' },
+  { text: 'Test' },
+  { text: 'Logros' },
+  { text: 'Sesiones' },
 ];
 
 const users = [
@@ -51,7 +61,12 @@ export interface TeacherCourseDetailProps {}
 export function TeacherCourseDetail(props: TeacherCourseDetailProps) {
   const [course, setCourse] = useState<TeacherCourse>();
   const [selectedTab, setSelectedTab] = useState(0);
-  const { translateCategory, translateLanguage, translateLevel, translateStatus } = useCourseUtil();
+  const {
+    translateCategory,
+    translateLanguage,
+    translateLevel,
+    translateStatus,
+  } = useCourseUtil();
 
   const handleClick = (index: number) => {
     setSelectedTab(index);
@@ -80,18 +95,24 @@ export function TeacherCourseDetail(props: TeacherCourseDetailProps) {
   }, []);
 
   return (
-    <div className={styles['container']}>
+    <div className={`${styles['container']} card`}>
       {course && (
         <>
+          <div className={styles['head']}>
+            <h1 className={styles['title']}>{course.title}</h1>
+            <NavLink to={'/teacher/courses/all'}>
+              <h4>Ir a cursos</h4>
+            </NavLink>
+          </div>
           <div className={styles['cover']}>
             <img
+              alt="cover"
               src={
                 course.cover_url ||
                 'https://designshack.net/wp-content/uploads/placeholder-image-368x246.png'
               }
             ></img>
           </div>
-          <h1>{course.title}</h1>
           <div className={styles['basic-info']}>
             <span className={`${styles['noted']} ${styles['status']}`}>
               {translateStatus(course.status)}
@@ -106,19 +127,44 @@ export function TeacherCourseDetail(props: TeacherCourseDetailProps) {
               {translateLanguage(course.language)}
             </span>
           </div>
-          <div className={styles['about-course']}>
-            <h2>Acerca del curso</h2>
-            <p>{course.description}</p>
-          </div>
-          <div className={styles['course-details']}>
-            <Tabs
-              tabs={tabs}
-              isNav={false}
-              onClickTab={(option) => handleClick(option)}
-            />
-            {selectedTab === 0 && <CourseContents contents={course.contents || []} />}
-            {selectedTab === 1 && <LearnersTable users={users} />}
-            {selectedTab === 2 && <h1>Mostrar Estadísticas</h1>}
+          <Tabs
+            tabs={tabs}
+            isNav={false}
+            onClickTab={(option) => handleClick(option)}
+          />
+          <div className={styles['course-content']}>
+            {selectedTab === 0 && (
+              <OverviewCourse
+                description={course.description}
+                goals={course.learn_goals?.split('\n') || []}
+                requirements={course.requirements?.split('\n') || []}
+              />
+            )}
+            {selectedTab === 1 && (
+              <CourseContents contents={course.contents || []} />
+            )}
+            {selectedTab === 2 && (
+              <QuizzesList quizzes={course.quizzes || []} />
+            )}
+            {selectedTab === 3 && (
+              <AchievementsList achievements={course.achievements || []} />
+            )}
+            {selectedTab === 4 && course.classroom && (
+              <>
+                <InformationCard
+                  title={CLASSROOMS[course.classroom.condition].title}
+                  text={CLASSROOMS[course.classroom.condition].text}
+                  icon={CLASSROOMS[course.classroom.condition].icon}
+                  selected={true}
+                />
+                {course.classroom.meetings.length > 0 && (
+                  <ClassroomView
+                    classroom={course.classroom}
+                    className={styles['classroom-summary']}
+                  />
+                )}
+              </>
+            )}
           </div>
         </>
       )}

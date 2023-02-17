@@ -23,9 +23,7 @@ export function UserMenu(props: UserMenuProps) {
   return (
     <div className={styles['container']}>
       <div className={styles['head-content']}>
-        { image && (
-          <Avatar image={image} size={AvatarSize.medium}></Avatar>
-        )}
+        {image && <Avatar image={image} size={AvatarSize.medium}></Avatar>}
         <div className={styles['user']}>
           <h4>{name}</h4>
           <h5>{email}</h5>
@@ -33,7 +31,13 @@ export function UserMenu(props: UserMenuProps) {
       </div>
       <div className={styles['links']}>
         {links.map((link, index) => (
-          <div className={styles['link']} key={index} onClick={()=>{link.onClick && link.onClick()}}>
+          <div
+            className={styles['link']}
+            key={index}
+            onClick={() => {
+              link.onClick && link.onClick();
+            }}
+          >
             <Icon icon={link.icon} size={16}></Icon>
             {link.url ? (
               <NavLink to={link.url}>

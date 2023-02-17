@@ -8,7 +8,7 @@ export interface QuizzesListProps {
 }
 
 export function QuizzesList(props: QuizzesListProps) {
-  const { quizzes} = props;
+  const { quizzes } = props;
   return (
     <div className={styles['quizzes']}>
       {quizzes?.map((quiz, index) => (
@@ -21,13 +21,9 @@ export function QuizzesList(props: QuizzesListProps) {
             </div>
           </div>
           <div className={styles['actions']}>
-            <div
-              className={styles['action']}
-              onClick={() => {
-              }}
-            >
+            {/* <div className={styles['action']} onClick={() => {}}>
               <Icon icon="plus" size={15} />
-            </div>
+            </div> */}
           </div>
         </div>
       ))}

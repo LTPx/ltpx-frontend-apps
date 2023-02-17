@@ -35,22 +35,22 @@ export function StudentLayout() {
         size: 20,
       }
     },
-    {
-      title: t('dashboards.student.payments'),
-      url: 'payments',
-      icon: {
-        icon: 'wallet',
-        size: 20,
-      }
-    },
-    {
-      title: t('dashboards.student.settings'),
-      url: 'settings',
-      icon: {
-        icon: 'cog',
-        size: 20,
-      }
-    },
+    // {
+    //   title: t('dashboards.student.payments'),
+    //   url: 'payments',
+    //   icon: {
+    //     icon: 'wallet',
+    //     size: 20,
+    //   }
+    // },
+    // {
+    //   title: t('dashboards.student.settings'),
+    //   url: 'settings',
+    //   icon: {
+    //     icon: 'cog',
+    //     size: 20,
+    //   }
+    // },
     {
       title: t('dashboards.student.account'),
       url: 'account',
@@ -69,7 +69,7 @@ export function StudentLayout() {
 
   return (
     <div className={styles['container']}>
-      <Header links={[]} className={styles['header']}>
+      <Header links={links} className={styles['header']}>
         <div className={styles['teacher-actions']}>
           <Dropdown>
             <UserMenu
@@ -90,15 +90,11 @@ export function StudentLayout() {
             />
             <div className={styles['avatar']}>
               <Avatar name={user.fullname} size={40} color='green'/>
-              <h4>{user.fullname}</h4>
               <Icon icon='caret-down' size={18}/>
             </div>
           </Dropdown>
         </div>
       </Header>
-      <div className={styles['navbar']}>
-        <Nav links={links}/>
-      </div>
       <div className={styles['content']}>
         <Outlet />
       </div>

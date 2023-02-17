@@ -47,6 +47,7 @@ export function CheckoutForm(props: CheckoutFormProps) {
     if (success) {
       setOrderCreated(true);
       setOrderId(data.id);
+      onSuccess();
     } else {
       setError(true);
       onError(error);
@@ -75,7 +76,9 @@ export function CheckoutForm(props: CheckoutFormProps) {
                 onSuccessPayment={(order) => {
                   confirmPayment(order.id);
                 }}
-                onErrorPayment={() => {}}
+                onErrorPayment={(error) => {
+                  onError(error)
+                }}
               />
             </div>
             <div className={styles['summary-total-order']}>

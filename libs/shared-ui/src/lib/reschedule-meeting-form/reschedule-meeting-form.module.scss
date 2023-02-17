@@ -1,0 +1,36 @@
+@import '../../styles/styles.module.scss';
+
+.content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: space-between;
+  .form {
+    padding: 1.5rem;
+    h1 {
+      padding-bottom: 1rem;
+    }
+    .head {
+      color: $text-gray-color;
+      padding-bottom: 1rem;
+
+      .class-information {
+        display: flex;
+        gap: 4rem;
+        padding-top: 1rem;
+        .item {
+          display: flex;
+          gap: 1rem;
+          color: $text-gray-color;
+        }
+      }
+    }
+  }
+  .btn-submit {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 1rem;
+    padding: 1rem 1.5rem;
+  }
+}

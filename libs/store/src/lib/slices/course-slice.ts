@@ -42,6 +42,7 @@ export type CourseSlice = {
   updateQuiz: (quiz: EditQuizParams) => Promise<TResponse>;
   updateAchievement: (achievement: EditAchievementParams) => Promise<TResponse>;
   updateCourse: (course: CourseApiParams) => Promise<TResponse>;
+  cleanCourse: () => void;
   _addCourseSession: (params: NewCourseSessionParams) => Promise<TResponse>;
 };
 
@@ -229,4 +230,7 @@ export const createCourseSlice: StateCreator<
       return { success: false, data: error };
     }
   },
+  cleanCourse: () => {
+    set({course: {} as TeacherCourse})
+  }
 });

@@ -41,7 +41,7 @@ export function TeacherEditCourse() {
     kind: SnackbarType.success,
     text: '',
   });
-  const { getCourse, course } = useCourse();
+  const { getCourse, course, cleanCourse } = useCourse();
   const { _sendCourseToReview } = useTeacher();
   const { translateStatus } = useCourseUtil();
   const { t } = useTranslation();
@@ -145,6 +145,9 @@ export function TeacherEditCourse() {
             title={t('buttons.saveDraft')}
             color={ColorsButton.primary}
             link={'/teacher/courses/all'}
+            onClick={() => {
+              cleanCourse()
+            }}
           />
         </div>
       </div>

@@ -44,8 +44,11 @@ export function CourseGeneralInformation(props: CourseGeneralInformationProps) {
     onSubmit,
   } = props;
   const { categories, languages, levels } = useCourseUtil();
-  const { updateCourse } = useCourse();
+  const { updateCourse, cleanCourse } = useCourse();
   const { t } = useTranslation();
+
+  console.log('levels: ', levels);
+  console.log('level: ', level);
 
   const formik = useFormik({
     initialValues: {
@@ -121,16 +124,19 @@ export function CourseGeneralInformation(props: CourseGeneralInformationProps) {
       <div className={styles['selects-form']}>
         <Select
           label={t('courseInformation.category') || ''}
+          selected={category}
           options={categories}
           onChange={(option) => formik.setFieldValue('category', option.value)}
         />
         <Select
           label={t('courseInformation.level') || ''}
+          selected={level}
           options={levels}
           onChange={(option) => formik.setFieldValue('level', option.value)}
         />
         <Select
           label={t('courseInformation.language') || ''}
+          selected={language}
           options={languages}
           onChange={(option) => formik.setFieldValue('language', option.value)}
         />
@@ -160,6 +166,9 @@ export function CourseGeneralInformation(props: CourseGeneralInformationProps) {
           title={t('buttons.cancel')}
           color={ColorsButton.white}
           link={'/teacher/courses/all'}
+          onClick={()=>{
+            cleanCourse();
+          }}
         />
         <Button
           title={t('buttons.updateInformation')}

@@ -17,6 +17,7 @@ export const useCourse = () => {
     getCourse,
     loadedCourse,
     course,
+    cleanCourse,
   } = useAppStore();
 
   return {
@@ -35,6 +36,7 @@ export const useCourse = () => {
     getCourse,
     loadedCourse,
     course,
+    cleanCourse,
     quizzes: course.quizzes,
     achievements: course.achievements,
     classroom: course.classroom

@@ -1,4 +1,4 @@
-import { ICredentials, loginAdmin, TypeAccounts } from '@ltpx-frontend-apps/api';
+import { ICredentials } from '@ltpx-frontend-apps/api';
 import {
   BannerNotification,
   BannerType,

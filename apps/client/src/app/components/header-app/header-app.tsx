@@ -1,22 +1,17 @@
+import styles from './header-app.module.scss';
 import {
-  Avatar,
-  Cart,
   Dropdown,
   Header,
-  Icon,
   UserMenu,
 } from '@ltpx-frontend-apps/shared-ui';
-import { NavLink, useNavigate } from 'react-router-dom';
-import styles from './header-app.module.scss';
+import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { useUser } from '../../store';
+import { useCart, useUser } from '@ltpx-frontend-apps/store';
+import { Avatar } from 'evergreen-ui';
 
-/* eslint-disable-next-line */
-export interface HeaderAppProps {}
-
-export function HeaderApp(props: HeaderAppProps) {
-  const { user, logout, isAuthenticated, totalProducts, currentView } =
-    useUser();
+export function HeaderApp() {
+  const { user, logout, isAuthenticated, currentView } = useUser();
+  const { totalCourses } = useCart();
   const { t } = useTranslation();
   const navigate = useNavigate();
 
@@ -30,7 +25,6 @@ export function HeaderApp(props: HeaderAppProps) {
     { title: t('header.home'), url: '/home' },
     { title: t('header.courses'), url: '/courses' },
     { title: t('header.beTeacher'), url: '/register-teacher' },
-    { title: t('header.blog'), url: '/blog' },
   ];
 
   const authLinks = [
@@ -38,14 +32,14 @@ export function HeaderApp(props: HeaderAppProps) {
     { title: t('header.register'), url: '/register', accent: true },
   ];
 
-  const linksStudent = [{ title: 'My Dashboard', url: '/student/dashboard' }];
-
-  const linksNotAccount = mainLinks.concat(authLinks);
+  const linksNotAccount = isAuthenticated
+    ? mainLinks
+    : mainLinks.concat(authLinks);
 
   const linksView = {
     default: linksNotAccount,
-    user: linksStudent,
-    student: linksStudent,
+    user: [],
+    student: [],
     teacher: [],
   };
 
@@ -56,28 +50,22 @@ export function HeaderApp(props: HeaderAppProps) {
       <Header links={links}>
         <div className={styles['actions']}>
           {isAuthenticated && (
-            <>
-              <Icon icon="notification" size={22}></Icon>
-              <Dropdown>
-                <Avatar
-                  image="https://images.unsplash.com/photo-1669563306078-4c107b67d125?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=3387&q=80"
-                  dropdown-id={'menu'}
-                />
-                <UserMenu
-                  name={user.fullname}
-                  email={user.email}
-                  links={[
-                    {
-                      icon: 'log-out',
-                      text: 'Cerrar Session',
-                      onClick: () => {
-                        logoutSession();
-                      },
+            <Dropdown>
+              <Avatar name={user.fullname} size={35}/>
+              <UserMenu
+                name={user.fullname}
+                email={user.email}
+                links={[
+                  {
+                    icon: 'log-out',
+                    text: 'Cerrar Session',
+                    onClick: () => {
+                      logoutSession();
                     },
-                  ]}
-                />
-              </Dropdown>
-            </>
+                  },
+                ]}
+              />
+            </Dropdown>
           )}
         </div>
       </Header>

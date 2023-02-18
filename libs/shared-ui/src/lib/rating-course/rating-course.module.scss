@@ -4,7 +4,6 @@
   width: 100%;
   display: flex;
   flex-direction: column;
-  padding-top: $size-lg-3;
 
   h3 {
     color: $text-color;
@@ -25,6 +24,7 @@
     gap: $size-sm-2;
     padding: $size-md-1 $size-lg-1;
     border: 1px solid #d4d4d4;
+    text-align: center;
 
     h1 {
       color: $text-color;

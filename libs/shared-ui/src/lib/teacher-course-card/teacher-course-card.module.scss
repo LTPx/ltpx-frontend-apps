@@ -1,52 +1,55 @@
 @import '../../styles/styles.module.scss';
 
 .container {
+  display: flex;
   background-color: #fff;
-  width: 18rem;
-  height: auto;
+  width: 100%;
   border: 1px solid $gray-color-200;
-  box-shadow: $card-shadow-medium;
+  border-radius: 8px;
+  gap: 1rem;
 
-  .accent {
-    color: $green-color;
-    font-weight: 500;
-  }
+  .course-img {
+    width: 12.5rem;
+    height: 10rem;
 
-  .head-content {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: $size-sm-2;
-
-    .information {
-      display: flex;
-      gap: 0.5rem;
-      align-items: center;
+    img {
+      object-fit: cover;
+      width: 100%;
+      height: 100%;
+      border-top-left-radius: 8px;
+      border-bottom-left-radius: 8px;
     }
   }
 
   .content {
-    border: 1px solid $gray-color-200;
     display: flex;
+    width: 100%;
     flex-direction: column;
+    padding: 1rem 1rem 0;
 
-    img {
-      width: 100%;
-      height: 10rem;
-      object-fit: cover;
+    .head-content {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-bottom: $size-sm-2;
+
+      .head {
+        display: flex;
+        align-items: center;
+        gap: $size-md-3;
+        color: $text-gray-color;
+      }
     }
-
-    .information {
+    .information-course {
       display: flex;
       flex-direction: column;
-      padding: $size-md-1;
+
       h4 {
         padding-bottom: $size-sm-1;
       }
       .describe {
         display: flex;
         gap: $size-sm-3;
-        padding: 0.5rem 0;
 
         h5 {
           color: $gray-color-400;
@@ -59,34 +62,17 @@
     }
   }
 
-  .end-content {
-    display: flex;
-    justify-content: space-between;
-    .rate {
-      padding: $size-md-1;
-      border: 1px solid $gray-color-200;
-      width: 100%;
-      h5 {
-        color: $gray-color-400;
-        padding-bottom: $size-sm-1;
-      }
-      h4 {
-        display: flex;
-        align-items: center;
-        gap: $size-sm-1;
-      }
-    }
-
-    .course-no-yet {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: $gray-color-400;
-      width: 100%;
-      text-align: center;
-      border: 1px solid $gray-color-200;
-      padding: $size-lg-1;
-      gap: $size-sm-2;
-    }
+  .accent {
+    color: $green-color;
+    font-weight: 500;
   }
+}
+
+
+.icon-button {
+  padding: 0.2rem;
+  background-color: $gray-color-100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

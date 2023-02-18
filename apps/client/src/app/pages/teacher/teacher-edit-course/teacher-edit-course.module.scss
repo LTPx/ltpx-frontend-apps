@@ -1,13 +1,23 @@
 .container {
+  padding: 1rem;
+
   .header {
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    padding: 1rem;
+    align-items: baseline;
+    padding-bottom: 2rem;
 
-    .title {
+    .title-content {
       display: flex;
-      gap: 1rem;
+      flex-direction: column;
+      gap: 0.5rem;
+      max-width: 38rem;
+
+      .details {
+        display: flex;
+        gap: 0.5rem;
+        align-items: center;
+      }
     }
 
     h3 {
@@ -24,7 +34,7 @@
   .content {
     .section-content {
       flex-grow: 1;
-      padding: 2rem 8rem;
+      padding: 2rem;
 
       .section-gray {
         padding: 2rem 8rem;

@@ -17,7 +17,10 @@ const createRandomCourse = ():PublicCourse => (
     learn_goals: `Learning: ${faker.commerce.productDescription()}`,
     enrollments_count: 12,
     requirements: 'No one',
+    price: faker.datatype.number({min: 1000, max: 5000}).toString(),
     price_currency: 'USD',
+    price_format: '$10.00',
+    course_session_id: 12,
     classroom: {
       condition: TeacherClassType.flexible,
       min: 1,
@@ -27,6 +30,7 @@ const createRandomCourse = ():PublicCourse => (
     }
   }
 )
+
 
 const createRandomCourseDetail = () => (
   {
@@ -43,8 +47,8 @@ const createRandomCourseDetail = () => (
       stars: faker.datatype.number(5),
       achievements: faker.datatype.number(5),
       enrolled: faker.datatype.number(15),
-      skillLevel: 'Expert',
-      language: 'English',
+      skillLevel: 'advance',
+      language: 'en',
       certificate: true,
       learn_goals: [`Learn: ${faker.commerce.product()}`, `Learn: ${faker.commerce.product()}`, `Learn: ${faker.commerce.product()}`],
       requirements: ['Good Internet', 'Free time', 'Laptop']

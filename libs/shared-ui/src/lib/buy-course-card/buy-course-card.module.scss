@@ -8,7 +8,9 @@
     border: 1px solid $stroke-color;
 
     img {
-      width: 300px;
+      width: 19rem;
+      height: 10rem;
+      object-fit: cover;
     }
     .summary {
       padding: 15px;
@@ -41,6 +43,10 @@
       flex-direction: column;
       gap: $size-sm-2;
       margin: 10px 0;
+
+      button {
+        text-transform: uppercase;
+      }
     }
 
     .details {

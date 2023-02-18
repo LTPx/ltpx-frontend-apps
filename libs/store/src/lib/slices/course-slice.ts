@@ -17,6 +17,8 @@ import {
   EditAchievementParams,
   editAchievement,
   CourseApiParams,
+  NewCourseSessionParams,
+  createCourseSession,
 } from '@ltpx-frontend-apps/api';
 
 export type TResponse = {
@@ -40,6 +42,8 @@ export type CourseSlice = {
   updateQuiz: (quiz: EditQuizParams) => Promise<TResponse>;
   updateAchievement: (achievement: EditAchievementParams) => Promise<TResponse>;
   updateCourse: (course: CourseApiParams) => Promise<TResponse>;
+  cleanCourse: () => void;
+  _addCourseSession: (params: NewCourseSessionParams) => Promise<TResponse>;
 };
 
 export const createCourseSlice: StateCreator<
@@ -216,4 +220,17 @@ export const createCourseSlice: StateCreator<
       return { success: false, data: error };
     }
   },
+  _addCourseSession: async (params) => {
+    try {
+      const course = get().course;
+      const paramsWithId = { ...params, ...{ course_id: course.id } };
+      const session = await createCourseSession(paramsWithId);
+      return { success: true, data: session };
+    } catch (error) {
+      return { success: false, data: error };
+    }
+  },
+  cleanCourse: () => {
+    set({course: {} as TeacherCourse})
+  }
 });

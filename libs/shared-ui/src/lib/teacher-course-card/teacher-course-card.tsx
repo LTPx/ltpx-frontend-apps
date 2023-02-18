@@ -1,7 +1,6 @@
 import { CourseStatus } from '@ltpx-frontend-apps/api';
 import { useTranslation } from 'react-i18next';
 import { NavLink } from 'react-router-dom';
-import Dropdown from '../dropdown/dropdown';
 import Icon from '../icon/icon';
 import Menu, { MenuItem } from '../menu/menu';
 import Tag, { ColorsTag } from '../tag/tag';
@@ -16,8 +15,9 @@ export interface TeacherCourseCardProps {
   category: string;
   percentageRate: number;
   percentageLearner: number;
+  description: string;
   url: string;
-  price?: number;
+  price?: string;
   dropdownActions?: MenuItem[];
 }
 
@@ -29,75 +29,56 @@ export function TeacherCourseCard(props: TeacherCourseCardProps) {
     title,
     learners,
     category,
-    percentageRate,
-    percentageLearner,
+    description,
     url,
     price,
-    dropdownActions
+    dropdownActions,
   } = props;
 
   return (
     <div className={styles['container']}>
-      <div className={styles['head-content']}>
-        <div className={styles['information']}>
-          <Tag
-            text={t(`course_status.${status}`)}
-            color={
-              status === CourseStatus.publish ? ColorsTag.green : ColorsTag.gray
-            }
-            icon={status === CourseStatus.publish ? 'globe' : 'edit'}
-          />
-        </div>
-        <Dropdown>
-          <Icon icon={'ellipsis-horizontal-outline'} size={15} />
-          <Menu items={dropdownActions || []} />
-        </Dropdown>
+      <div className={styles['course-img']}>
+        <img src={image} alt="" />
       </div>
       <div className={styles['content']}>
-        <img src={image} alt="" />
-        <div className={styles['information']}>
-          <NavLink to={url}>
-            <h4>{title}</h4>
-          </NavLink>
-          <div className={styles['describe']}>
+        <div className={styles['head-content']}>
+          <div className={styles['head']}>
+            <Tag
+              text={t(`course_status.${status}`)}
+              color={
+                status === CourseStatus.publish
+                  ? ColorsTag.green
+                  : ColorsTag.white
+              }
+              icon={status === CourseStatus.publish ? 'globe' : 'edit'}
+            />
+            <Tag
+              text={t(`course_categories.${category}`)}
+              color={ColorsTag.gray}
+            />
             <h5>
-              <Icon icon={'user'} size={10}></Icon> {learners} Estudiantes
-            </h5>
-            <h5>
-              <Icon icon={'box-unpacked'} size={10}></Icon>{' '}
-              {t(`course_categories.${category}`)}
+              <Icon icon={'user'} size={13}></Icon> {learners} Estudiantes
             </h5>
           </div>
+          {dropdownActions && (
+            <Menu items={dropdownActions}>
+              <Icon
+                icon={'ellipsis-horizontal-outline'}
+                size={15}
+                className={styles['icon-button']}
+              />
+            </Menu>
+          )}
+        </div>
+        <div className={styles['information-course']}>
+          <NavLink to={url}>
+            <h3 className={styles['title']}>{title}</h3>
+          </NavLink>
+          <p>{description ? `${description.substring(0, 250)}...` : ''}</p>
           <div className={`${styles['describe']} ${styles['end']}`}>
             <h4 className={styles['accent']}>${price}</h4>
           </div>
         </div>
-      </div>
-      <div className={styles['end-content']}>
-        {learners > 0 ? (
-          <>
-            <div className={styles['rate']}>
-              <h5>Completion rate</h5>
-              <h4>
-                <Icon icon="check-circle" size={15}></Icon>
-                {percentageRate}%
-              </h4>
-            </div>
-            <div className={styles['rate']}>
-              <h5>Completion rate</h5>
-              <h4>
-                <Icon icon="heart" size={15}></Icon>
-                {percentageLearner}%
-              </h4>
-            </div>
-          </>
-        ) : (
-          // <div className={styles['course-no-yet']}>
-          //   <Icon icon="browser" size={15}></Icon>
-          //   <h5>Este curso no tiene metricas aun</h5>
-          // </div>
-          <></>
-        )}
       </div>
     </div>
   );

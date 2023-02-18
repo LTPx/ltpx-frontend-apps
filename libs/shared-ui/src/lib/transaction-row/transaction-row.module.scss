@@ -1,0 +1,36 @@
+@import '../../styles/styles.module.scss';
+
+.container {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1.5fr 1fr;
+  padding-bottom: $size-md-1;
+  border-bottom: 1px solid $gray-color-200;
+
+  .type-transaction {
+    display: flex;
+    gap: $size-md-3;
+  }
+
+  .icon {
+    padding: $size-sm-3;
+    border-radius: 8px;
+
+    &.deposit {
+      background-color: $green-color-100;
+      color: $green-color;
+    }
+    &.withdrawal {
+      background-color: $orange-color-100;
+      color: $orange-color;
+    }
+  }
+
+  .item {
+    display: flex;
+    flex-direction: column;
+    .text {
+      padding-top: 0.12rem;
+      color: $text-gray-color;
+    }
+  }
+}

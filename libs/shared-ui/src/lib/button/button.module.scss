@@ -12,7 +12,26 @@
   border: 1px solid transparent;
   padding: .75rem 1rem;
   border-radius: .25rem;
-  cursor: pointer;
+}
+
+.btn:disabled,
+.btn[disabled]{
+  background-color: $gray-color-300;
+  color: $text-gray-color;
+  cursor: not-allowed;
+  border: none;
+}
+
+.btn[disabled]:hover{
+  background-color: $gray-color-300;
+  color: $text-gray-color;
+}
+
+.button-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem
 }
 
 .btn:hover {

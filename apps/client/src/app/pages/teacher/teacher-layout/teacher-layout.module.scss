@@ -7,11 +7,11 @@
 
 .container {
   display: grid;
-  grid-template-columns: 260px 1fr;
+  grid-template-columns: 1fr;
   grid-template-rows: auto 1fr auto;
   grid-template-areas:
     "header header header"
-    "nav content content";
+    "content content content";
   height: 100vh;
 }
 
@@ -25,7 +25,13 @@
 .content {
   grid-area: content;
   background-color: $background-gray-color;
-  padding: 3rem 4rem;
+  display: flex;
+  justify-content: center;
+
+  .render-content {
+    padding: 3rem 0;
+    max-width: 80vw;
+  }
 }
 
 .navbar {

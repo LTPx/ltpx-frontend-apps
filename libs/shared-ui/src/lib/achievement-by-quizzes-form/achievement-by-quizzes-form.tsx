@@ -12,6 +12,7 @@ import {
   TypeAchievement,
 } from '@ltpx-frontend-apps/api';
 import InputTextStatus, { StatusInputText } from '../input-text-status/input-text-status';
+import { useTranslation } from 'react-i18next';
 
 /* eslint-disable-next-line */
 export interface AchievementByQuizzesFormProps {
@@ -26,6 +27,7 @@ export interface AchievementByQuizzesFormProps {
 export function AchievementByQuizzesForm(props: AchievementByQuizzesFormProps) {
   const { onSubmit, onCancel, singleSelection, quizzes, className, achievement } = props;
   const ids = achievement?.settings.map((setting)=> setting.entity_id) || [];
+  const { t } = useTranslation();
 
   const initialValues = {
     title: achievement?.title || '',
@@ -76,7 +78,7 @@ export function AchievementByQuizzesForm(props: AchievementByQuizzesFormProps) {
           <div className={styles['fields']}>
             <Input
               placeholder="Asigna un nombre interesante"
-              label="Titulo del logro"
+              label={t('achievementByQuizzesForm.title')||''}
               value={values.title}
               onChange={handleChange}
               onBlur={handleBlur}
@@ -84,7 +86,7 @@ export function AchievementByQuizzesForm(props: AchievementByQuizzesFormProps) {
               errorMessage={errors.title}
             />
             <br />
-            <label>Que test debe aprobar</label>
+            <label>{t('achievementByQuizzesForm.quiz')}</label>
             <div className={styles['quizzes']}>
               {values.settings.map((setting, index) => (
                 <div className={`${styles['quiz']} ${setting.selected ? styles['selected'] : ''}`} key={index}
@@ -93,6 +95,7 @@ export function AchievementByQuizzesForm(props: AchievementByQuizzesFormProps) {
                       `settings[${index}].selected`,
                       !setting.selected
                     );
+                    // console.log(setting);
                   }}
                 >
                   <h4>{setting.text}</h4>
@@ -100,7 +103,7 @@ export function AchievementByQuizzesForm(props: AchievementByQuizzesFormProps) {
               ))}
             </div>
             <br />
-            <label>Selecciona la imagen que obtendrá al cumplir el logro</label>
+            <label>{t('achievementByQuizzesForm.titleImage')}</label>
             <SelectImage
               selected={values.image}
               onChange={(img) => {
@@ -116,7 +119,7 @@ export function AchievementByQuizzesForm(props: AchievementByQuizzesFormProps) {
             )}
             <Input
               placeholder="1"
-              label="Precio"
+              label={t('achievementByQuizzesForm.price')||''}
               description='Este valor sera enviado a tu cuenta una vez el alumno alcance este logro'
               type='number'
               min={1}
@@ -129,7 +132,7 @@ export function AchievementByQuizzesForm(props: AchievementByQuizzesFormProps) {
           </div>
           <div className={styles['footer']}>
             <Button
-              title="Cancelar"
+              title={t('buttons.cancel')}
               color={ColorsButton.white}
               type={TypeButton.button}
               onClick={() => {
@@ -137,7 +140,7 @@ export function AchievementByQuizzesForm(props: AchievementByQuizzesFormProps) {
               }}
             />
             <Button
-              title="Guardar logro"
+              title={t('buttons.saveAchievement')}
               color={ColorsButton.secondary}
               type={TypeButton.submit}
               onClick={submitForm}

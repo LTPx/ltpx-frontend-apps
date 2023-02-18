@@ -8,6 +8,7 @@ import {
 } from '@ltpx-frontend-apps/shared-ui';
 import { useCourse } from '@ltpx-frontend-apps/store';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { ResponseRequest } from '../../teacher-edit-course/teacher-edit-course';
 import styles from './course-quizzes.module.scss';
 
@@ -22,6 +23,7 @@ export function CourseQuizzes(props: CourseQuizzesProps) {
   const [ showForm, setShowForm ] = useState(false);
   const { course, removeQuiz, addNewQuiz, updateQuiz } = useCourse();
   const { quizzes } = course;
+  const { t } = useTranslation();
 
   const handleSaveQuiz = async (quiz: QuizParamsUi) => {
     try {
@@ -65,8 +67,8 @@ export function CourseQuizzes(props: CourseQuizzesProps) {
   return (
     <div className="quiz-section">
       <div className={styles['header-text']}>
-        <h2>Tests</h2>
-        <h4 className="muted">Evalúa a tus estudiantes creando tests</h4>
+        <h2>{t('courseQuizzes.title')}</h2>
+        <h4 className="muted">{t('courseQuizzes.subtitle')}</h4>
       </div>
       {!showForm && (
         <div className={styles['quizzes']}>
@@ -108,13 +110,13 @@ export function CourseQuizzes(props: CourseQuizzesProps) {
             setShowForm(true);
           }}
           icon={'paper-outline'}
-          text={'Crear test'}
-          titleButton={'Configurar Ahora'}
+          text={t('courseQuizzes.text')}
+          titleButton={t('buttons.config')||''}
         />
       )}
       {!showForm && quizzes && quizzes.length > 0 && (
         <Button
-          title="Crear Nuevo Test"
+          title={t('buttons.test')}
           className={styles['add-button']}
           color={ColorsButton.accent}
           onClick={() => {
@@ -136,7 +138,7 @@ export function CourseQuizzes(props: CourseQuizzesProps) {
             }}
           />
           <Button
-            title="Cancelar"
+            title={t('buttons.cancel')}
             className={styles['add-button']}
             color={ColorsButton.accent}
             onClick={() => {

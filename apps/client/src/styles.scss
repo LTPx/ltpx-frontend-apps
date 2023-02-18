@@ -2,6 +2,15 @@
 
 .card {
   background-color: $white-color;
-  box-shadow: $card-shadow-soft;
+  box-shadow: $card-shadow-medium;
+  border-radius: 15px;
+
+  &.with-padding {
+    padding: 1rem;
+  }
+}
+
+.add-space-bottom {
+  margin-bottom: 1rem;
 }
 

@@ -1,4 +1,5 @@
 import { AchievementModel } from './achievement-interface';
+import { MeetingModel } from './meeting-interface';
 import { QuizModel } from './quiz-interface';
 import { PartialWithRequired } from './util';
 
@@ -55,6 +56,8 @@ export interface CourseModel {
   contents_count: number;
   enrollments_count: number;
   price_cents: number;
+  price_format: string;
+  price: string;
   average_rating: number;
   approved: boolean;
   level: CourseLevel;
@@ -64,6 +67,38 @@ export interface CourseModel {
   classroom: Classroom;
   quizzes?: QuizModel[];
   achievements?: AchievementModel[];
+  course_session_id: number;
+}
+
+export interface Comment {
+  name: string;
+  image: string;
+  title: string;
+  comment: string;
+  date: string;
+}
+
+export interface Rating {
+  stars: number;
+  reviewers: number;
+}
+
+export interface TeacherSummary {
+  id: string;
+  image: string;
+  biography: string;
+  fullname: string;
+  profession: string;
+  total_courses: number;
+  rating_average: number;
+  total_students: number;
+}
+
+export interface FullCourse {
+  course: CourseModel;
+  teacher: TeacherSummary;
+  comments: Comment[];
+  ratings: Rating[];
 }
 
 export type PublicCourse = Omit<
@@ -73,10 +108,7 @@ export type PublicCourse = Omit<
 
 export type TeacherCourse = Omit<CourseModel, 'user_id' | 'cover'>;
 
-export type CourseApiParams = PartialWithRequired<
-  TeacherCourse,
-  'title'
->;
+export type CourseApiParams = PartialWithRequired<TeacherCourse, 'title'>;
 
 export const CLASSROOM_MANDATORY = {
   value: TeacherClassType.mandatory,
@@ -112,4 +144,22 @@ export const CLASSROOMS = {
   customize: CLASSROOM_CUSTOMIZE,
   none: CLASSROOM_NONE,
   classes: CLASSROOM_NONE,
+};
+
+export interface MeetingDate {
+  date: string;
+  day_number: string;
+  start_time: string;
+  end_time: string;
+  month: string;
+}
+
+export interface ClassroomClasses {
+  course_id: number,
+  title: string;
+  type: TeacherClassType;
+  min_participants: number;
+  max_participants: number;
+  duration: number;
+  meetings: MeetingModel[];
 }

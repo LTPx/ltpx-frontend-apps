@@ -1,3 +1,5 @@
+import { useStudent } from '@ltpx-frontend-apps/store';
+import { useCallback, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import styles from './purchases.module.scss';
 
@@ -5,54 +7,47 @@ import styles from './purchases.module.scss';
 export interface PurchasesProps {}
 
 export function Purchases(props: PurchasesProps) {
+  const { _getStudentPayments, purchases } = useStudent();
+
+  const fetchPayments = useCallback(async () => {
+    const { success, data, error } = await _getStudentPayments();
+    if (success) {
+      console.log('data: ', data);
+    } else {
+      console.log('error: ', error);
+    }
+  }, []);
+
+  useEffect(() => {
+    fetchPayments();
+  }, [fetchPayments]);
+
   return (
     <div className={`${styles['container']}`}>
-      <h2>My Purchases </h2>
+      <h2>Mis compras </h2>
       <br />
       <table>
         <thead>
           <tr>
-            <th>Course</th>
-            <th>Date</th>
-            <th>Payment Method</th>
+            <th>Curso</th>
+            <th>Fecha de compra</th>
+            <th>Método de pago</th>
             <th>Total</th>
-            <th>Invoice</th>
+            <th>Factura</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>Frontend Master Design</td>
-            <td>3 November 2022</td>
-            <td>PayPhone</td>
-            <td>$39.99</td>
-            <td>
-              <NavLink to='/student/payments/invoice'>
-                See details
-              </NavLink>
-            </td>
-          </tr>
-          <tr>
-            <td>Backend Master design</td>
-            <td>13 November 2022</td>
-            <td>Credit Card</td>
-            <td>$29.99</td>
-            <td>
-              <NavLink to='/student/payments/invoice'>
-                See details
-              </NavLink>
-            </td>
-          </tr>
-          <tr>
-            <td>UI/UX Master design</td>
-            <td>13 December 2022</td>
-            <td>Stripe</td>
-            <td>$19.99</td>
-            <td>
-              <NavLink to='/student/payments/invoice'>
-                See details
-              </NavLink>
-            </td>
-          </tr>
+          {purchases.map((purchase, index) => (
+            <tr key={index}>
+              <td>{purchase.description}</td>
+              <td>{purchase.purchase_date}</td>
+              <td>{purchase.payment_gateway}</td>
+              <td>{purchase.amount_format}</td>
+              <td>
+                <NavLink to="/student/payments/invoice">See details</NavLink>
+              </td>
+            </tr>
+          ))}
         </tbody>
       </table>
     </div>

@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import ProgressBar from '../progress-bar/progress-bar';
 import Rating from '../rating/rating';
 import styles from './rating-course.module.scss';
@@ -50,14 +51,15 @@ export function RatingCourse(props: RatingCourseProps) {
   };
 
   const options = buildOptions();
+  const { t } = useTranslation();
 
   return (
     <div className={styles['container']}>
-      <h3>Student feedback</h3>
+      <h3>{t('coursesDetails.ratingCourse.title')}</h3>
       <div className={styles['content']}>
         <div className={styles['total-rating']}>
           <h1>{calculateScore().toFixed(2)}</h1>
-          <h4>Course rating</h4>
+          <h4>{t('coursesDetails.ratingCourse.ratingCourse')}</h4>
           <Rating stars={roundStars(calculateScore())}></Rating>
         </div>
         <div className={styles['rating-content']}>

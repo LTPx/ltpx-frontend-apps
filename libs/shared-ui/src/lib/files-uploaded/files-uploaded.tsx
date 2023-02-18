@@ -10,6 +10,7 @@ import styles from './files-uploaded.module.scss';
 export enum TypeFile {
   image = 'image',
   pdf = 'pdf',
+  video = 'video',
 }
 
 export interface FilesUploadedProps {
@@ -42,11 +43,13 @@ export function FilesUploaded(props: FilesUploadedProps) {
   const filesTypes = {
     image: 'image/png, image/jpeg',
     pdf: 'application/pdf',
+    video: 'video/*'
   };
 
   const filesIcons = {
     image: 'image-outline',
     pdf: 'file-pdf',
+    video: 'video-outline',
   };
 
   const handleChange = (e: any) => {
@@ -71,7 +74,7 @@ export function FilesUploaded(props: FilesUploadedProps) {
   return (
     <div className={`${styles['container']} ${label ? styles['with-label'] : ''}`}>
       {label && <label>{label}</label>}
-      {description && <p>{description}</p>}
+      {description && description}
       <div className={`${styles['content']} ${className}`}>
         <div className={styles['files-content']}>
           <div className={styles['file']}>

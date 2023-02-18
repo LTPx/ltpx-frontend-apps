@@ -1,4 +1,5 @@
 import { Footer } from '@ltpx-frontend-apps/shared-ui';
+import { useTranslation } from 'react-i18next';
 import { Outlet } from 'react-router-dom';
 import HeaderApp from '../../components/header-app/header-app';
 import styles from './app-layout.module.scss';
@@ -6,22 +7,20 @@ import styles from './app-layout.module.scss';
 /* eslint-disable-next-line */
 export interface AppLayoutProps {}
 
-const companyLinks = [
-  { text: 'Our Company', url: '/company' },
-  { text: 'About us', url: '/about' },
-  { text: 'Contact us', url: '/contact' },
-  { text: 'Community', url: '/community' },
-  { text: 'Blog', url: '/blog' },
-];
-
-const supportLinks = [
-  { text: 'Documentation', url: '/documentation' },
-  { text: 'Forums', url: '/forums' },
-  { text: 'Language Packs', url: '/languages' },
-  { text: 'Release', url: '/release' },
-];
+// const supportLinks = [
+//   { text: 'Documentation', url: '/documentation' },
+//   { text: 'Forums', url: '/forums' },
+//   { text: 'Language Packs', url: '/languages' },
+//   { text: 'Release', url: '/release' },
+// ];
 
 export function AppLayout(props: AppLayoutProps) {
+  const { t } = useTranslation();
+  const companyLinks = [
+    { text: t('footer.about'), url: '/about' },
+    { text: t('footer.contact'), url: '/contact' },
+    { text: t('footer.blog'), url: '/blog' },
+  ];
   return (
     <div className={styles['layout']}>
       <div className={styles['header']}>
@@ -31,7 +30,7 @@ export function AppLayout(props: AppLayoutProps) {
         <Outlet />
       </div>
       <div className={styles['footer']}>
-        <Footer companyLinks={companyLinks} supportLinks={supportLinks} />
+        <Footer companyLinks={companyLinks}/>
       </div>
     </div>
   );

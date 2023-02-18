@@ -1,12 +1,17 @@
-import { CLASSROOMS } from '@ltpx-frontend-apps/api';
+import {
+  Classroom,
+  CLASSROOMS,
+  TeacherClassType,
+} from '@ltpx-frontend-apps/api';
 import {
   ClassroomView,
   CourseClasses,
   InformationCard,
   SetupCard,
 } from '@ltpx-frontend-apps/shared-ui';
-import { useCourse } from '@ltpx-frontend-apps/store';
+import { useCourse, useUser } from '@ltpx-frontend-apps/store';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { ResponseRequest } from '../../teacher-edit-course/teacher-edit-course';
 import styles from './course-classroom.module.scss';
 
@@ -18,38 +23,39 @@ export interface CourseClassroomProps {
 export function CourseClassroom(props: CourseClassroomProps) {
   const { onSubmit } = props;
   const [openModal, setOpenModal] = useState(false);
-  const { course, addUpdateClassroom } = useCourse();
-  const { classroom  } = course;
+  const { course, _addCourseSession } = useCourse();
+  const { user } = useUser();
+  const { classroom } = course;
+  const { t } = useTranslation();
 
-  const handleClassroom = async(classroom: any) => {
-    try {
-      const { data } = await addUpdateClassroom(classroom);
-      onSubmit && onSubmit({
-        success: true,
-        data: data
+  const handleClassroom = async (classroom: Classroom) => {
+    const { success, data, error } = await _addCourseSession({
+      max_participants: classroom.max,
+      call_time_min: classroom.call_time_min,
+      private_sessions: classroom.condition === TeacherClassType.customize,
+      meetings_attributes: classroom.meetings.map((date)=>{
+        return { start_date: date, host_user_id: user.id }
+      }),
+    });
+    onSubmit &&
+      onSubmit({
+        success,
+        data,
+        error,
       });
-
-    } catch (error) {
-      onSubmit && onSubmit({
-        success: false,
-        error: error
-      });
-    }
   };
 
   return (
     <div className={styles['container']}>
       <div className={styles['header-text']}>
-        <h2>Sesiones</h2>
-        <h4 className="muted">
-          Establece horarios y fechas para reunirte con tus estudiantes
-        </h4>
+        <h2>{t('courseClassroom.title')}</h2>
+        <h4 className="muted">{t('courseClassroom.subtitle')}</h4>
       </div>
       {!classroom && (
         <SetupCard
           icon={'cog'}
-          text={'Elige la opción que mejor se acople para este curso'}
-          titleButton={'Configurar Ahora'}
+          text={t('courseClassroom.text')}
+          titleButton={t('buttons.config') || ''}
           onClick={() => {
             setOpenModal(true);
           }}
@@ -61,6 +67,7 @@ export function CourseClassroom(props: CourseClassroomProps) {
           setOpenModal(false);
         }}
         onSave={(classroom) => {
+          console.log('classroom: ', classroom);
           handleClassroom(classroom);
         }}
       />

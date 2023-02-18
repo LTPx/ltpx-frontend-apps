@@ -12,14 +12,14 @@ export interface SelectProps {
   options: Array<OptionSelect>;
   label?: string;
   onChange?: (selectedOption: OptionSelect) => void;
-  selected?: OptionSelect;
+  selected?: string;
   className?: string;
   errorMessage?: string | null;
 }
 
 export function Select(props: SelectProps) {
   const { options, label, onChange, selected, className, errorMessage } = props;
-  const initialSelectedOption = selected?.value || options[0].value;
+  const initialSelectedOption = selected || options[0].value;
   const [selectedOption, setSelectedOption] = useState(initialSelectedOption)
 
   const handleChange = (e:any) => {

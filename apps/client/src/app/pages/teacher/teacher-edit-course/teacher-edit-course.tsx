@@ -1,10 +1,9 @@
-import {
-  CourseStatus,
-} from '@ltpx-frontend-apps/api';
+import { CourseStatus } from '@ltpx-frontend-apps/api';
 import {
   Button,
   ColorsButton,
   ColorsTag,
+  Icon,
   Snackbar,
   SnackbarPosition,
   SnackbarType,
@@ -12,7 +11,11 @@ import {
   Tag,
   TypeButton,
 } from '@ltpx-frontend-apps/shared-ui';
-import { useCourse, useCourseUtil, useTeacher } from '@ltpx-frontend-apps/store';
+import {
+  useCourse,
+  useCourseUtil,
+  useTeacher,
+} from '@ltpx-frontend-apps/store';
 import {
   CourseAchievements,
   CourseClassroom,
@@ -23,14 +26,7 @@ import {
 import { useCallback, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import styles from './teacher-edit-course.module.scss';
-
-const linksEditCourse = [
-  { selected: true, text: 'Detalles' },
-  { selected: false, text: 'Contenidos' },
-  { selected: false, text: 'Tests' },
-  { selected: false, text: 'Logros' },
-  { selected: false, text: 'Sesiones' },
-];
+import { useTranslation } from 'react-i18next';
 
 export type ResponseRequest = {
   success: boolean;
@@ -39,16 +35,27 @@ export type ResponseRequest = {
 };
 
 export function TeacherEditCourse() {
-  const [ indexSelectedView, setIndexSelectedView ] = useState(0);
-  const [ notification, setNotification ] = useState({
+  const [indexSelectedView, setIndexSelectedView] = useState(0);
+  const [notification, setNotification] = useState({
     show: false,
     kind: SnackbarType.success,
-    text: ''
+    text: '',
   });
-  const { getCourse, course } = useCourse();
+  const { getCourse, course, cleanCourse } = useCourse();
   const { _sendCourseToReview } = useTeacher();
   const { translateStatus } = useCourseUtil();
+  const { t } = useTranslation();
 
+  const linksEditCourse = [
+    { selected: true, text: t('teacherEditCourse.linksEditCourse.details') },
+    { selected: false, text: t('teacherEditCourse.linksEditCourse.contents') },
+    { selected: false, text: t('teacherEditCourse.linksEditCourse.quiz') },
+    {
+      selected: false,
+      text: t('teacherEditCourse.linksEditCourse.achievement'),
+    },
+    { selected: false, text: t('teacherEditCourse.linksEditCourse.sessions') },
+  ];
 
   const params = useParams();
   const { courseId } = params;
@@ -61,7 +68,7 @@ export function TeacherEditCourse() {
 
   useEffect(() => {
     fetchData();
-  }, [fetchData]);
+  }, []);
 
   const showAndConfigNotification = async (response: ResponseRequest) => {
     const { success, data, error } = response;
@@ -69,70 +76,83 @@ export function TeacherEditCourse() {
       setNotification((prevState) => ({
         ...prevState,
         show: true,
-        text: 'Tus cambios han sido guardados'
-      }))
+        text: 'Tus cambios han sido guardados',
+      }));
     } else {
       setNotification((prevState) => ({
         ...prevState,
         show: true,
         text: 'Ha ocurrido un error',
-        kind: SnackbarType.error
-      }))
+        kind: SnackbarType.error,
+      }));
     }
   };
 
-  const handleSendToReview =async () => {
+  const handleSendToReview = async () => {
     const { success } = await _sendCourseToReview(course.id);
     if (success) {
       setNotification((prevState) => ({
         ...prevState,
         show: true,
-        text: 'Tu curso ha sido enviado a revision'
-      }))
+        text: 'Tu curso ha sido enviado a revision',
+      }));
     } else {
       setNotification((prevState) => ({
         ...prevState,
         show: true,
         text: 'Ha ocurrido un error',
-        kind: SnackbarType.error
-      }))
+        kind: SnackbarType.error,
+      }));
     }
-  }
+  };
 
   return (
     <div className={styles['container']}>
-      {course.id && (
-        <div className={styles['container']}>
-          <div className={styles['header']}>
-            <div className={styles['title']}>
-              <h3>{course.title}</h3>
-              <Tag
-                text={translateStatus(course.status)}
-                color={
-                  course.status === CourseStatus.publish
-                    ? ColorsTag.green
-                    : ColorsTag.gray
-                }
-                icon={course.status === CourseStatus.publish ? 'globe' : 'edit'}
-              />
-            </div>
-            <div className={styles['actions']}>
-              <h5 className="muted">Creado: Diciembre 21 2022</h5>
-              <Button
-                title="Guardar Borrador"
-                color={ColorsButton.accent}
-                link={'/teacher/courses/all'}
-              />
-              <Button
-                title="Enviar a revision"
-                color={ColorsButton.primary}
-                type={TypeButton.submit}
-                onClick={() => {
-                  handleSendToReview();
-                }}
-              />
+      <div className={styles['header']}>
+        <div className={styles['title-content']}>
+          <div className={styles['details']}>
+            <h1>{course.title}</h1>
+          </div>
+          <div className={styles['details']}>
+            <Tag
+              text={translateStatus(course.status)}
+              color={
+                course.status === CourseStatus.publish
+                  ? ColorsTag.green
+                  : ColorsTag.gray
+              }
+              icon={course.status === CourseStatus.publish ? 'globe' : 'edit'}
+            />
+            <div className={styles['details']}>
+              <Icon icon="calendar-days" size={18} />
+              <h5>Creado: {course.created_at}</h5>
             </div>
           </div>
+        </div>
+        <div className={styles['actions']}>
+          <Button
+            title={t('buttons.sendReview')}
+            color={ColorsButton.secondary}
+            type={TypeButton.submit}
+            outline={true}
+            icon='rocket'
+            onClick={() => {
+              handleSendToReview();
+            }}
+            disabled={course.status === CourseStatus.publish}
+          />
+          <Button
+            title={t('buttons.saveDraft')}
+            color={ColorsButton.primary}
+            link={'/teacher/courses/all'}
+            onClick={() => {
+              cleanCourse()
+            }}
+          />
+        </div>
+      </div>
+      {course.id && (
+        <div className={`${styles['container']} card`}>
           <div className={styles['content']}>
             <Tabs
               tabs={linksEditCourse}
@@ -188,8 +208,8 @@ export function TeacherEditCourse() {
           open={notification.show}
           title={notification.text}
           kind={notification.kind}
-          onClose={()=>{
-            setNotification( (prevState) => ({
+          onClose={() => {
+            setNotification((prevState) => ({
               ...prevState,
               show: false,
             }));

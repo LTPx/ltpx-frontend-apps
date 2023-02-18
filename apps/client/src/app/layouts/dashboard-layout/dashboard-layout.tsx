@@ -1,7 +1,6 @@
-import { Icon, Nav } from '@ltpx-frontend-apps/shared-ui';
-import { Outlet, useNavigate } from 'react-router-dom';
+import { Nav } from '@ltpx-frontend-apps/shared-ui';
+import { Outlet } from 'react-router-dom';
 import HeaderApp from '../../components/header-app/header-app';
-import { useUser } from '../../store';
 import styles from './dashboard-layout.module.scss';
 
 export interface DashboardLink {
@@ -22,7 +21,9 @@ export function DashboardLayout(props: DashboardLayoutProps) {
 
   return (
     <div className={styles['container']}>
-      <HeaderApp/>
+      <div className={styles['header']}>
+        <HeaderApp/>
+      </div>
       <div className={styles['navbar']}>
         <Nav links={links}/>
       </div>

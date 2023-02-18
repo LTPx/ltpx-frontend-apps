@@ -5,6 +5,10 @@ import styles from './tag.module.scss';
 export enum ColorsTag {
   green = 'green',
   gray = 'gray',
+  orange = 'orange',
+  blue = 'blue',
+  red = 'red',
+  white = 'white',
 }
 
 export interface TagProps {
@@ -19,6 +23,10 @@ export function Tag(props: TagProps) {
   const colorsTags = {
     green: `${styles['tag-green']}`,
     gray: `${styles['tag-gray']}`,
+    orange: `${styles['tag-orange']}`,
+    blue: `${styles['tag-blue']}`,
+    red: `${styles['tag-red']}`,
+    white: `${styles['tag-white']}`,
   };
   const selectedColor = colorsTags[color || ColorsTag.gray];
 

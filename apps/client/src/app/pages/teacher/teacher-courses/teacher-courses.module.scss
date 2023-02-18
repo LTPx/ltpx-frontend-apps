@@ -1,4 +1,4 @@
-@import "../../../../styles.scss";
+@import '../../../../styles.scss';
 
 .empty-state {
   display: flex;
@@ -8,6 +8,12 @@
 }
 
 .container {
+  .button-empty-state {
+    padding-top: 1rem;
+  }
+  .title {
+    margin-bottom: 1rem;
+  }
 
   .filters-container {
     display: flex;
@@ -29,10 +35,9 @@
 
     .courses {
       display: flex;
+      width: 100%;
       gap: 1.5rem;
       flex-wrap: wrap;
     }
   }
 }
-
-

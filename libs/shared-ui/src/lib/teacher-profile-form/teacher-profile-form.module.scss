@@ -1,0 +1,32 @@
+@import '../../styles/styles.module.scss';
+.form {
+  background-color: $white-color;
+  padding: $size-md-1 $size-lg-3;
+}
+.general {
+  margin-top: $size-lg-1;
+  .social {
+    padding-top: 1rem;
+    color: $text-gray-color;
+  }
+}
+.section {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  gap: 0.1rem $size-md-1;
+}
+.btn-submit {
+  margin-top: $size-md-1;
+  display: flex;
+  justify-content: end;
+  gap: 1rem;
+}
+.file-upload {
+  padding: $size-md-1 $size-md-3;
+}
+.upload {
+  padding-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap:0.5rem;
+}

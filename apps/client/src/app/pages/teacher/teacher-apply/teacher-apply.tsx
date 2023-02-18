@@ -12,9 +12,10 @@ import {
 } from '@ltpx-frontend-apps/api';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useTeacher } from '../../../store';
 import styles from './teacher-apply.module.scss';
 import { Dialog } from 'evergreen-ui';
+import { useTeacher } from '@ltpx-frontend-apps/store';
+import { useTranslation } from 'react-i18next';
 
 /* eslint-disable-next-line */
 export interface TeacherApplyProps {}
@@ -26,6 +27,7 @@ export function TeacherApply(props: TeacherApplyProps) {
   const [application, setApplication] = useState<ApplicationTeach>();
   const { applyTeach, teacher_account, getApplicationTeach } = useTeacher();
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   useEffect(() => {
     if (!application) {
@@ -59,18 +61,14 @@ export function TeacherApply(props: TeacherApplyProps) {
   return (
     <div className={`${styles['container']} card`}>
       <div className={`${styles['header']}`}>
-        <h1>Aplicar para maestro en OpenMind</h1>
+        <h1>{t('teacherApply.title')}</h1>
       </div>
       {application?.status === StatusTeacherAccount.review && (
         <ApplicationView application={application} />
       )}
       {teacher_account === StatusTeacherAccount.unapplied && (
         <>
-          <p className={`${styles['text']}`}>
-            Por favor llena esta solicitud de registro y en periodo de 24 a 48h
-            te enviaremos un correo electrónico con la respuesta a tu petición,
-            una vez enviada no se podrá modificar
-          </p>
+          <p className={`${styles['text']}`}>{t('teacherApply.text')}</p>
           <ApplyTeacherForm
             onSubmitForm={(data: ApplyTeachApiParams) => {
               setOpenConfirmationModal(true);
@@ -88,20 +86,17 @@ export function TeacherApply(props: TeacherApplyProps) {
         <div className={styles['dialog-confirm']}>
           {!saving && (
             <>
-              <h4>
-                Por favor asegúrate que toda la información este correcta asi
-                nos ayudaras a que el proceso sea lo mas rápido posible
-              </h4>
+              <h4>{t('teacherApply.saveText')}</h4>
               <div className={styles['footer']}>
                 <Button
-                  title="Cancelar"
+                  title={t('buttons.cancel')}
                   color={ColorsButton.white}
                   onClick={() => {
                     setOpenConfirmationModal(false);
                   }}
                 />
                 <Button
-                  title="Enviar a revision"
+                  title={t('buttons.sendReview')}
                   onClick={() => {
                     handleSubmit();
                   }}

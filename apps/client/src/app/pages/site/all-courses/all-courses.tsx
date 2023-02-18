@@ -1,46 +1,70 @@
-import { buildCourses } from '@ltpx-frontend-apps/api';
-import { CourseCard } from '@ltpx-frontend-apps/shared-ui';
 import styles from './all-courses.module.scss';
+import { CourseModel } from '@ltpx-frontend-apps/api';
+import { CourseCard } from '@ltpx-frontend-apps/shared-ui';
 import { InputSearch } from '@ltpx-frontend-apps/shared-ui';
 import { Select } from '@ltpx-frontend-apps/shared-ui';
+import { useTranslation } from 'react-i18next';
+import { useSite } from '@ltpx-frontend-apps/store';
+import { useCallback, useEffect, useState } from 'react';
 
 /* eslint-disable-next-line */
 export interface AllCoursesProps {}
-const popularCourses = buildCourses(12);
-const categories = [
-  { value: 'design', text: 'Design' },
-  { value: 'business', text: 'Business' },
-  { value: 'software-development', text: 'Software Development' },
-  { value: 'personal-development', text: 'Personal Development' },
-  { value: 'photography', text: 'Photography' },
-  { value: 'audio', text: 'Audio + Music' },
-  { value: 'marketing', text: 'Marketing' },
-  { value: 'finance', text: 'Finance Accounting' },
-];
-
-const sortByOptions = [
-  { value: 'price', text: 'Price' },
-  { value: 'level', text: 'level' },
-  { value: 'rating', text: 'Rating' },
-];
 
 export function AllCourses(props: AllCoursesProps) {
+  const [courses, setCourses] = useState<CourseModel[]>([]);
+  const { _getPopularCourses } = useSite();
+  const { t } = useTranslation();
+  const categories = [
+    { value: 'design', text: t('course_categories.design') },
+    { value: 'business', text: t('course_categories.business') },
+    {
+      value: 'software-development',
+      text: t('course_categories.software_development'),
+    },
+    {
+      value: 'personal-development',
+      text: t('course_categories.personal_development'),
+    },
+    { value: 'photography', text: t('course_categories.photography') },
+    { value: 'audio', text: t('course_categories.audio') },
+    { value: 'marketing', text: t('course_categories.marketing') },
+    { value: 'finance', text: t('course_categories.finance') },
+  ];
+  const sortByOptions = [
+    { value: 'price', text: t('allCourses.filters.price') },
+    { value: 'level', text: t('allCourses.filters.level') },
+    { value: 'rating', text: t('allCourses.filters.rating') },
+  ];
+
+  const fetchPopularCourse = useCallback(async () => {
+    const { success, data, error } = await _getPopularCourses();
+    if (success) {
+      setCourses(data);
+    } else {
+      console.log('error: ', error);
+    }
+  }, []);
+
+  useEffect(() => {
+    fetchPopularCourse();
+  }, []);
+
   return (
     <div className={styles['container']}>
       <div className={styles['cover']}>
         <div>
-          <h1>Find a class or course</h1>
-          <h4>Explore and learn new things</h4>
+          <h1>{t('allCourses.cover.title')}</h1>
+          <h4>{t('allCourses.cover.subtitle')}</h4>
         </div>
         <InputSearch
           className={styles['search-responsive']}
-          placeholder="Search Our Courses"
+          placeholder="Buscar cursos"
         />
       </div>
       <div className={styles['courses-container']}>
         <div className={styles['filters-container']}>
           <div className={styles['text']}>
-            We found 123 courses available for you
+            Encontramos 20 cursos disponibles para ti
           </div>
           <div className={styles['filters']}>
             <Select options={categories} />
@@ -48,13 +72,13 @@ export function AllCourses(props: AllCoursesProps) {
           </div>
         </div>
         <div className={styles['courses']}>
-          {popularCourses.map((course, index) => (
+          {courses.map((course, index) => (
             <div className={styles['course']} key={index}>
               <CourseCard
-                image={course.cover}
+                image={course.cover_url}
                 category={course.category}
                 title={course.title}
-                price={course.price_cents}
+                price={course.price_format}
                 duration={0}
                 lessons={0}
                 stars={course.average_rating}

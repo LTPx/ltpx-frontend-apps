@@ -9,6 +9,7 @@ import {
   ColorsButton,
   Dropdown,
   Icon,
+  Menu,
   SetupCard,
 } from '@ltpx-frontend-apps/shared-ui';
 import { useCourse } from '@ltpx-frontend-apps/store';
@@ -34,19 +35,27 @@ export function CourseAchievements(props: CourseAchievementsProps) {
 
   const achievementsForms = [
     {
-      kind: TypeAchievement.multiple,
+      onClick: () => {
+        setShowAchievementType(TypeAchievement.multiple);
+      },
       text: 'Cuando el alumno apruebe varios tests',
     },
     {
-      kind: TypeAchievement.single,
+      onClick: () => {
+        setShowAchievementType(TypeAchievement.single);
+      },
       text: 'Cuando el alumno apruebe un test',
     },
     {
-      kind: TypeAchievement.score,
+      onClick: () => {
+        setShowAchievementType(TypeAchievement.score);
+      },
       text: 'Por calificación',
     },
     {
-      kind: TypeAchievement.task,
+      onClick: () => {
+        setShowAchievementType(TypeAchievement.task);
+      },
       text: 'Al cumplir una tarea',
     },
   ];
@@ -96,24 +105,12 @@ export function CourseAchievements(props: CourseAchievementsProps) {
     className?: string;
     title: string;
   }) => (
-    <Dropdown>
-      <div className={styles['select-questions']}>
-        <Button title={title} className={className} color={color} />
-      </div>
-      <div className={`${styles['menu']} card`}>
-        {achievementsForms.map((form, index) => (
-          <div
-            className={styles['menu-option']}
-            key={index}
-            onClick={() => {
-              setShowAchievementType(form.kind);
-            }}
-          >
-            <h4>{form.text}</h4>
-          </div>
-        ))}
-      </div>
-    </Dropdown>
+    <div className={styles['achievement-btn']}>
+    <Menu items={achievementsForms}>
+      <Button title={'Agregar Logro'} />
+    </Menu>
+    </div>
+
   );
 
   return (

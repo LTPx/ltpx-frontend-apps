@@ -4,8 +4,9 @@ import {
   TypeQuestionQuiz,
 } from '@ltpx-frontend-apps/api';
 import {
-  Dropdown,
   Icon,
+  Menu,
+  MenuItem,
   QuizFormAnswer,
   QuizFormMultipleOptions,
 } from '@ltpx-frontend-apps/shared-ui';
@@ -34,7 +35,32 @@ export function QuizBuilder(props: QuizBuilderProps) {
     useState<TypeQuestionQuiz>();
   const { translateQuizCategories } = useCourseUtil();
   const { t } = useTranslation();
-
+  const type_question = [
+    {
+      text: 'Condicional',
+      onClick: () => {
+        setSelectedTypeQuestion(TypeQuestionQuiz.conditional);
+      },
+    },
+    {
+      text: 'Selección Multiple',
+      onClick: () => {
+        setSelectedTypeQuestion(TypeQuestionQuiz.multiple);
+      },
+    },
+    {
+      text: 'Una sola elección',
+      onClick: () => {
+        setSelectedTypeQuestion(TypeQuestionQuiz.single);
+      },
+    },
+    {
+      text: 'Respuesta de usuario',
+      onClick: () => {
+        setSelectedTypeQuestion(TypeQuestionQuiz.answer);
+      },
+    },
+  ];
   const initialValues = {
     id: quiz?.id,
     name: quiz?.name || '',
@@ -144,46 +170,11 @@ export function QuizBuilder(props: QuizBuilderProps) {
       )}
       {!selectedTypeQuestion && (
         <div className={styles['control-questions']}>
-          <Dropdown>
-            <div className={styles['select-questions']}>
-              <h4>Nueva Pregunta</h4>
-              <Icon icon="caret-down" size={18} />
-            </div>
-            <div className={`${styles['menu']} card`}>
-              <div
-                className={styles['menu-option']}
-                onClick={() => {
-                  setSelectedTypeQuestion(TypeQuestionQuiz.conditional);
-                }}
-              >
-                Condicional
-              </div>
-              <div
-                className={styles['menu-option']}
-                onClick={() => {
-                  setSelectedTypeQuestion(TypeQuestionQuiz.multiple);
-                }}
-              >
-                Selección Multiple
-              </div>
-              <div
-                className={styles['menu-option']}
-                onClick={() => {
-                  setSelectedTypeQuestion(TypeQuestionQuiz.single);
-                }}
-              >
-                Una sola elección
-              </div>
-              <div
-                className={styles['menu-option']}
-                onClick={() => {
-                  setSelectedTypeQuestion(TypeQuestionQuiz.answer);
-                }}
-              >
-                Respuesta de usuario
-              </div>
-            </div>
-          </Dropdown>
+          <Menu items={type_question}>
+            <Button title={'Agregar Pregunta'} 
+            color={ColorsButton.secondary}
+            icon='plus'/>
+          </Menu>
         </div>
       )}
       {!selectedTypeQuestion && formik.values.questions.length > 0 && (

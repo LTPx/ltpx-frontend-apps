@@ -95,6 +95,7 @@ export function AchievementByQuizzesForm(props: AchievementByQuizzesFormProps) {
                       `settings[${index}].selected`,
                       !setting.selected
                     );
+                    // console.log(setting);
                   }}
                 >
                   <h4>{setting.text}</h4>

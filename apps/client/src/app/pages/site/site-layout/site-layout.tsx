@@ -33,8 +33,8 @@ export function SiteLayout() {
 
   const companyLinks = [
     { text: t('footer.about'), url: '/about' },
-    { text: t('footer.contact'), url: '/contact' },
     { text: t('footer.blog'), url: '/blog' },
+    { text: "Términos y condiciones", url: '/terms-and-conditions' },
   ];
 
   return (

@@ -51,6 +51,11 @@
       margin-right: 3px;
     }
   }
+
+  .price {
+    color: $green-color;
+    font-weight: 500;
+  }
 }
 @media screen and (max-width: 500px) {
   .container-wrapper {

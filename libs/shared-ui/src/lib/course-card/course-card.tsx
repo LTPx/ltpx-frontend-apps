@@ -27,7 +27,7 @@ export function CourseCard(props: CourseCardProps) {
         <span className={styles['category']}>
           {translateCategory(category)}
         </span>
-        <h3 className={styles['title']}>{title}</h3>
+        <h4 className={styles['title']}>{title}</h4>
         <div className="stars">
           {Array.from(Array(stars).keys()).map((number, index) => (
             <Icon key={index} icon={'star'} size={15} color="#eab308" />
@@ -39,13 +39,15 @@ export function CourseCard(props: CourseCardProps) {
         <div className={styles['info']}>
           <div className={styles['info-item']}>
             <Icon icon={'university'} size={15} />
-            {lessons} lecciones
+            {lessons} logros
           </div>
-          <div className={styles['info-item']}>
+          {/* <div className={styles['info-item']}>
             <Icon icon={'clock'} size={15} />
             {duration} min
+          </div> */}
+          <div className={styles['price']}>
+            {price}
           </div>
-          <div className={styles['info-item']}></div>{price}
         </div>
       </div>
     </div>

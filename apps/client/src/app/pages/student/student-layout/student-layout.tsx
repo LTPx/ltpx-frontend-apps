@@ -96,7 +96,9 @@ export function StudentLayout() {
         </div>
       </Header>
       <div className={styles['content']}>
-        <Outlet />
+        <div className={styles['render-content']}>
+          <Outlet />
+        </div>
       </div>
     </div>
   );

@@ -39,12 +39,11 @@ export function TeacherMeetingsAgenda() {
 
   const handleInitMeeting = async (meetingId: number, roomId: string) => {
     if (roomId) {
-      console.log('redirect');
       navigate(`/teacher/live-meeting/${meetingId}/${roomId}`);
     } else {
       const { success, data, error } = await _getMeetingRoomId(meetingId);
       if (success) {
-        console.log('data: ', data);
+        navigate(`/teacher/live-meeting/${meetingId}/${data.meeting_id}`);
       } else {
         console.log('error: ', error);
       }

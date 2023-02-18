@@ -4,9 +4,12 @@ import { useTeacher, useUser } from '@ltpx-frontend-apps/store';
 import { useParams } from 'react-router-dom';
 import { useCallback, useEffect, useState } from 'react';
 /* eslint-disable-next-line */
-export interface VideoMeetingLiveProps {}
+export interface VideoMeetingLiveProps {
+  redirectUrl: string;
+}
 
 export function VideoMeetingLive(props: VideoMeetingLiveProps) {
+  const { redirectUrl } = props;
   const [isValid, setIsValid] = useState(false);
   const { user } = useUser();
   const { _validateMeetingRoomId } = useTeacher();
@@ -36,7 +39,7 @@ export function VideoMeetingLive(props: VideoMeetingLiveProps) {
       name: user.fullname,
       meetingId: roomId,
       apiKey: process.env.NX_VIDEOSDK_TOKEN,
-      redirectOnLeave: "http://localhost:4200/teacher/sessions",
+      redirectOnLeave: redirectUrl,
       // containerId: 'video-container',
       micEnabled: true,
       webcamEnabled: false,
@@ -52,7 +55,9 @@ export function VideoMeetingLive(props: VideoMeetingLiveProps) {
 
   return (
     <div className={styles['container']}>
-      <div id="video-container" className={styles['video-container']}></div>
+      <div id="video-container" className={styles['video-container']}>
+        <h2>Estamos conectándote a la sala.....</h2>
+      </div>
     </div>
   );
 }

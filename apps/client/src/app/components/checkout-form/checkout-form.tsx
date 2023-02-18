@@ -4,7 +4,7 @@ import {
 import { useSite } from '@ltpx-frontend-apps/store';
 import { Dialog } from 'evergreen-ui';
 import { useCallback, useEffect, useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import PaypalCheckoutButton from '../paypal-checkout-button/paypal-checkout-button';
 import styles from './checkout-form.module.scss';
 
@@ -27,14 +27,18 @@ export function CheckoutForm(props: CheckoutFormProps) {
   const [orderId, setOrderId] = useState<number>();
   const [error, setError] = useState(false);
   const { _createPaymentOrder, _confirmUserPayment } = useSite();
-
+  const navigate = useNavigate();
   const confirmPayment = async (payment_id: string) => {
     if (orderId) {
-      await _confirmUserPayment({
+      const { success } = await _confirmUserPayment({
         order_id: orderId,
         payment_gateway: 'paypal',
         receipt_id: payment_id,
       });
+      if (success) {
+        navigate('/');
+        window.location.reload();
+      }
     }
   };
 
@@ -47,7 +51,6 @@ export function CheckoutForm(props: CheckoutFormProps) {
     if (success) {
       setOrderCreated(true);
       setOrderId(data.id);
-      onSuccess();
     } else {
       setError(true);
       onError(error);

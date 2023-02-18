@@ -1,20 +1,18 @@
 import { ClassroomClasses } from '@ltpx-frontend-apps/api';
-import { ScheduleClassRow } from '@ltpx-frontend-apps/shared-ui';
-import { useStudent, useTeacher } from '@ltpx-frontend-apps/store';
+import { Button, ScheduleClassRow } from '@ltpx-frontend-apps/shared-ui';
+import { useStudent } from '@ltpx-frontend-apps/store';
 import { useCallback, useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import styles from './student-classes.module.scss';
 
 export function StudentClasses() {
-  const [classroomClasses, setClassroomClasses] = useState<ClassroomClasses[]>([]);
+  const [classroomClasses, setClassroomClasses] = useState<ClassroomClasses[]>(
+    []
+  );
   const { _getStudentClasses } = useStudent();
-  const { _getMeetingRoomId } = useTeacher();
-  const navigate = useNavigate();
 
   const fetchClasses = useCallback(async () => {
     const { success, data, error } = await _getStudentClasses();
     if (success) {
-      console.log('data: ', data);
       setClassroomClasses(data);
     } else {
       console.log('error: ', error);
@@ -25,22 +23,13 @@ export function StudentClasses() {
     fetchClasses();
   }, [fetchClasses]);
 
-  const handleInitMeeting = async(meetingId: number, roomId: string) => {
-    if (roomId) {
-      console.log('redirect');
-      navigate(`/student/live-meeting/${meetingId}/${roomId}`);
-    } else {
-      const { success, data, error } = await _getMeetingRoomId(meetingId);
-      if (success) {
-        console.log('data: ', data);
-      } else {
-        console.log('error: ', error);
-      }
-    }
-  }
-
   return (
-    <div className={styles['container']}>
+    <div className={`${styles['container']} card with-padding`}>
+      <h2 className="">Clases de este mes</h2>
+      <h5 className="add-space-bottom muted">
+        Una vez el profesor inicie la clase se habilitara un link para que te
+        unas
+      </h5>
       {classroomClasses.map((item, index) => (
         <div className={styles['meetings']} key={index}>
           {item.meetings.map((meeting, indexMeeting) => (
@@ -53,17 +42,22 @@ export function StudentClasses() {
               key={indexMeeting}
               dateMonth={meeting.month}
               dayNumber={meeting.day_number}
-              dropdownActions={[
-                {
-                  text: 'Iniciar Clase',
-                  icon: 'video-outline',
-                  onClick: () => {
-                    console.log('meeting: ', meeting);
-                    handleInitMeeting(meeting.id, meeting.meeting_id);
-                  },
-                }
-              ]}
-            />
+              startTime={meeting.start_time}
+            >
+              {meeting.meeting_id ? (
+                <Button
+                  title={`Unirme Ahora`}
+                  outline={true}
+                  link={`/student/live-meeting/${meeting.id}/${meeting.meeting_id}`}
+                />
+              ) : (
+                <Button
+                  title="No ha iniciado aun"
+                  outline={true}
+                  disabled={true}
+                />
+              )}
+            </ScheduleClassRow>
           ))}
         </div>
       ))}

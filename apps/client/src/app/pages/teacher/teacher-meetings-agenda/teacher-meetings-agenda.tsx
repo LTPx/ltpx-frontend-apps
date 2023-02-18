@@ -110,6 +110,7 @@ export function TeacherMeetingsAgenda() {
                       key={indexMeeting}
                       dateMonth={meeting.month}
                       dayNumber={meeting.day_number}
+                      startTime={meeting.start_time}
                       dropdownActions={[
                         {
                           text: 'Iniciar Clase',

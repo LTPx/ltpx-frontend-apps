@@ -48,13 +48,14 @@ export function TeacherCourseCard(props: TeacherCourseCardProps) {
               color={
                 status === CourseStatus.publish
                   ? ColorsTag.green
-                  : ColorsTag.gray
+                  : ColorsTag.white
               }
               icon={status === CourseStatus.publish ? 'globe' : 'edit'}
             />
-            <h5>
-              {t(`course_categories.${category}`)}
-            </h5>
+            <Tag
+              text={t(`course_categories.${category}`)}
+              color={ColorsTag.gray}
+            />
             <h5>
               <Icon icon={'user'} size={13}></Icon> {learners} Estudiantes
             </h5>

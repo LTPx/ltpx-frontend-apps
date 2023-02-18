@@ -15,13 +15,11 @@ export function TeacherEarnings() {
   const { _getWallet, wallet } = useTeacher();
   const NoTransactions = true;
   const fetchWallet = useCallback(async () => {
-    if (wallet.id) {
-      const { success, data, error } = await _getWallet();
-      if (success) {
-        console.log('error: ', data);
-      } else {
-        console.log('error: ', error);
-      }
+    const { success, data, error } = await _getWallet();
+    if (success) {
+      console.log('error: ', data);
+    } else {
+      console.log('error: ', error);
     }
   }, []);
 

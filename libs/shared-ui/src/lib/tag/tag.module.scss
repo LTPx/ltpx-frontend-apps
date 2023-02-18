@@ -6,7 +6,6 @@
     align-items: center;
     justify-content: center;
     padding: 1px 16px;
-    max-width: 7rem;
     height: 30px;
     border-radius: 4px;
     gap: 0.5rem;
@@ -31,6 +30,11 @@
     &.tag-red {
       background: $red-color-100;
       color: $red-color;
+    }
+    &.tag-white {
+      background: $white-color;
+      color: $text-gray-color;
+      border: 1px solid $gray-color-200;
     }
   }
 }

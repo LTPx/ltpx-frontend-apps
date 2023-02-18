@@ -24,6 +24,7 @@ import {
   TeacherApply,
   TeacherCourseDetail,
   TeacherCourses,
+  TeacherCourseStudents,
   TeacherDashboard,
   TeacherEarnings,
   TeacherEditCourse,
@@ -57,6 +58,7 @@ export const TeacherRoutes = () => {
               element={<Navigate replace to="all" />}
             />
             <Route path=":courseId" element={<TeacherCourseDetail />} />
+            <Route path=":courseId/students" element={<TeacherCourseStudents />} />
             <Route path="all" element={<TeacherCourses />} />
             <Route path="edit/:courseId" element={<TeacherEditCourse />} />
           </Route>

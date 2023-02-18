@@ -10,3 +10,4 @@ export * from './teacher-earnings/teacher-earnings';
 export * from './teacher-meetings-agenda/teacher-meetings-agenda';
 export * from './teacher-account-layout/teacher-account-layout';
 export * from './teacher-account-profile/teacher-account-profile';
+export * from './teacher-course-students/teacher-course-students';

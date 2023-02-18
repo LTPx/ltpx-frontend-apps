@@ -68,14 +68,19 @@ export function TeacherCourses(props: TeacherCoursesProps) {
           price={course.price}
           dropdownActions={[
             {
-              text: 'Ver Curso',
-              icon: 'user-group',
-              url: `/teacher/courses/${course.id}`,
-            },
-            {
               text: 'Editar Curso',
               icon: 'pencil',
               url: `/teacher/courses/edit/${course.id}`,
+            },
+            {
+              text: 'Ver Curso',
+              icon: 'eye',
+              url: `/teacher/courses/${course.id}`,
+            },
+            {
+              text: 'Ver Estudiantes',
+              icon: 'user-group',
+              url: `/teacher/courses/${course.id}/students`,
             },
           ]}
         />

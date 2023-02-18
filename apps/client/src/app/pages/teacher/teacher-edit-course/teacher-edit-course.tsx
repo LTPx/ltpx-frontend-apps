@@ -68,7 +68,7 @@ export function TeacherEditCourse() {
 
   useEffect(() => {
     fetchData();
-  }, [fetchData]);
+  }, []);
 
   const showAndConfigNotification = async (response: ResponseRequest) => {
     const { success, data, error } = response;
@@ -139,6 +139,7 @@ export function TeacherEditCourse() {
             onClick={() => {
               handleSendToReview();
             }}
+            disabled={course.status === CourseStatus.publish}
           />
           <Button
             title={t('buttons.saveDraft')}

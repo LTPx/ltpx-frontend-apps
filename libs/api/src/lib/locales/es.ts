@@ -32,7 +32,7 @@ export const es = {
     contact: 'Contáctenos',
     terms: 'Términos y condiciones',
     policy: 'Política de privacidad',
-    copyright: 'Copyright © 2022 Creative Layers Todos los derechos reservados'
+    copyright: 'Copyright © 2023 Todos los derechos reservados'
   },
   course_categories: {
     design: 'Diseño',

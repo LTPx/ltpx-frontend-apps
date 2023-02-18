@@ -10,11 +10,10 @@ export interface FooterLink {
 }
 export interface FooterProps {
   companyLinks: Array<FooterLink>;
-  supportLinks?: Array<FooterLink>;
 }
 
 export function Footer(props: FooterProps) {
-  const { companyLinks, supportLinks } = props;
+  const { companyLinks } = props;
   const { t } = useTranslation();
   return (
     <div className={styles['container']}>
@@ -24,29 +23,60 @@ export function Footer(props: FooterProps) {
             <Brand negativeSpace={true} />
           </div>
           <div className={styles['information-one']}>
-            <p>Calle de Covarrubias y 142301 Ravenswood, Madrid - Spain.</p>
-            <h4>123 456 7890</h4>
-            <h4>support@ltpx.com</h4>
+            {/* <p>Calle de Covarrubias y 142301 Ravenswood, Madrid - Spain.</p> */}
+            <div className={styles['icon-contact']}>
+              <Icon icon={'whatsapp'} size={17} />
+              <h4>
+                <a target="_blank" href="https://wa.me/message/Y5P6BHULTPA2B1">
+                  +34 633 752203
+                </a>
+              </h4>
+            </div>
+            <div className={styles['icon-contact']}>
+              <Icon icon={'mail'} size={17} />
+              <h4>
+              <a target="_blank" href="mailto:mail@growopenminds.com">
+                mail@growopenminds.com
+                </a>
+                </h4>
+            </div>
           </div>
           <div className={styles['social-networks']}>
-            <Icon
-              className={styles['social']}
-              icon="facebook"
-              size={20}
-              color="white"
-            />
-            <Icon
-              className={styles['social']}
-              icon="instagram"
-              size={20}
-              color="white"
-            />
-            <Icon
-              className={styles['social']}
-              icon="twitter"
-              size={20}
-              color="white"
-            />
+            <a target="_blank" href="https://www.facebook.com/growmoi">
+              <Icon
+                className={styles['social']}
+                icon="facebook"
+                size={20}
+                color="white"
+              />
+            </a>
+            <a target="_blank" href="https://www.instagram.com/growmoi/">
+              <Icon
+                className={styles['social']}
+                icon="instagram"
+                size={20}
+                color="white"
+              />
+            </a>
+            <a target="_blank" href="https://twitter.com/GrowMoi">
+              <Icon
+                className={styles['social']}
+                icon="twitter"
+                size={20}
+                color="white"
+              />
+            </a>
+            <a
+              target="_blank"
+              href="https://www.linkedin.com/company/moiaprendizajesocial/"
+            >
+              <Icon
+                className={styles['social']}
+                icon="linkedin"
+                size={20}
+                color="white"
+              />
+            </a>
           </div>
         </div>
         <div className={styles['site-links']}>
@@ -71,8 +101,6 @@ export function Footer(props: FooterProps) {
       <div className={styles['footer-end']}>
         <div className={styles['information-end-container']}>
           <h5>{t('footer.copyright')}</h5>
-          <h5>{t('footer.terms')}</h5>
-          <h5>{t('footer.policy')}</h5>
         </div>
       </div>
     </div>

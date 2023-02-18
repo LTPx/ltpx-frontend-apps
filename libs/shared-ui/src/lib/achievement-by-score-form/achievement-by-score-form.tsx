@@ -98,6 +98,7 @@ export function AchievementByScoreForm(props: AchievementByScoreFormProps) {
                         );
                       }
                     })
+                    console.log(setting);
                   }}
                 >
                   <h4>{setting.text}</h4>

@@ -45,7 +45,7 @@ export const StudentRoutes = () => {
           </Route>
           <Route path="classes" element={<StudentClasses />} />
           <Route path="classes" element={<StudentClasses />} />
-          <Route path="live-meeting/:meetingId/:roomId" element={<VideoMeetingLive />} />
+          <Route path="live-meeting/:meetingId/:roomId" element={<VideoMeetingLive redirectUrl='http://localhost:4200/student/classes'/>} />
 
           {/* <Route path="classes" element={<ClassesLayout/>}>
             <Route path="/student/classes" element={<Navigate replace to="week" />} />

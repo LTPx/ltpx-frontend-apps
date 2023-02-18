@@ -42,10 +42,11 @@ export function StudentClasses() {
               key={indexMeeting}
               dateMonth={meeting.month}
               dayNumber={meeting.day_number}
+              startTime={meeting.start_time}
             >
               {meeting.meeting_id ? (
                 <Button
-                  title={`Unirme Ahora ${meeting.meeting_id}`}
+                  title={`Unirme Ahora`}
                   outline={true}
                   link={`/student/live-meeting/${meeting.id}/${meeting.meeting_id}`}
                 />

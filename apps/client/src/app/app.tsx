@@ -4,6 +4,7 @@ import { PayPalScriptProvider } from '@paypal/react-paypal-js';
 
 export function App() {
   const PAYPAL_ID = process.env.NX_PAYPAL_ID_CLIENT || '';
+  console.log('process.env: ', process.env);
 
   return (
     <PayPalScriptProvider

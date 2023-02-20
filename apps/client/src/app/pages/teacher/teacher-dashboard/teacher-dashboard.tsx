@@ -3,6 +3,7 @@ import {
   BannerNotification,
   Button,
   ColorsButton,
+  NoticeCard,
 } from '@ltpx-frontend-apps/shared-ui';
 import { useTeacher, useUser } from '@ltpx-frontend-apps/store';
 import WelcomeNewTeacher from '../../../components/welcome-new-teacher/welcome-new-teacher';
@@ -33,37 +34,32 @@ export function TeacherDashboard(props: TeacherDashboardProps) {
           )}
         </div>
         <div className={styles['help-ads']}>
-          <div className={styles['card-join-discord']}>
-            <img
-              src="../../../../assets/images/discord-group.jpg"
-              alt="discord-group"
-            />
-            <h2>Comunidad en discord</h2>
-            <p>
-              Únete a nuestra comunidad de profesores donde podrás encontrar
-              noticias y hacer preguntas acerca del proceso de enseñar en
-              Openmind
-            </p>
+          <NoticeCard
+            className={styles['card-join-discord']}
+            title={'Comunidad en discord'}
+            image={'../../../../assets/images/discord-group.jpg'}
+            description={
+              'Únete a nuestra comunidad de profesores donde podrás encontrar noticias y hacer preguntas acerca del proceso de enseñar en Openmind'
+            }
+          >
             <a href="https://discord.gg/JU42n3fA" target={'_blank'}>
-              <Button
-                title="Unirme"
-                color={ColorsButton.white}
-                full={true}
-              />
+              <Button title="Unirme" color={ColorsButton.white} full={true} />
             </a>
-          </div>
-          <div className={styles['card-teaching']}>
-            <h2>Enseñar en Openmind</h2>
-            <p>
-              Revisa nuestra blog donde encontraras todo la información de como funciona Openmind
-            </p>
+          </NoticeCard>
+          <NoticeCard
+            className={styles['card-teaching']}
+            title={'Enseñar en Openmind'}
+            description={
+              'Revisa nuestra blog donde encontraras todo la información de como funciona Openmind'
+            }
+          >
             <Button
               title="Aprender Mas"
               color={ColorsButton.secondary}
               full={true}
               link="/teacher/blog"
             />
-          </div>
+          </NoticeCard>
         </div>
       </div>
     </div>

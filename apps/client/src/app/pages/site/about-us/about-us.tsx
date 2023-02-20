@@ -27,7 +27,6 @@ export function AboutUs(props: AboutUsProps) {
             />
           </div>
         </div>
-        <ContentDescription />
       </div>
     </div>
   );

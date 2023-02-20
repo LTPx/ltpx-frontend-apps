@@ -1,0 +1,24 @@
+@import '../../styles/styles.module.scss';
+
+.content {
+  text-align: center;
+  background-color: $white-color;
+  padding: 1.5rem;
+  border-radius: 15px;
+  color: $text-gray-color;
+  box-shadow: $card-shadow-medium;
+  width: 16rem;
+
+  img {
+    width: 100%;
+    object-fit: cover;
+  }
+
+  h2 {
+    padding: 1rem 0;
+  }
+
+  button {
+    margin-top: 2rem;
+  }
+}

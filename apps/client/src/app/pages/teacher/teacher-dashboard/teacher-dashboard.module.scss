@@ -1,4 +1,4 @@
-@import "../../../../styles.scss";
+@import '../../../../styles.scss';
 
 .container {
   min-width: 80vw;
@@ -25,50 +25,16 @@
     flex-direction: column;
     gap: 3rem;
 
-    .card-join-discord {
-      text-align: center;
-      background-color: #404eed;
-      padding: 1.5rem;
-      border-radius: 15px;
-      color: $gray-color-100;
-      box-shadow: $card-shadow-medium;
-      width: 16rem;
-
-      img {
-        width: 100%;
-        object-fit: cover;
-      }
-
-      h2 {
-        padding: 1rem 0;
-      }
-
-      button {
-        margin-top: 2rem;
-      }
-    }
-
     .card-teaching {
-      text-align: center;
       background-color: $white-color;
-      padding: 1.5rem;
-      border-radius: 15px;
       color: $gray-color;
-      box-shadow: $card-shadow-medium;
-      width: 16rem;
-
-      img {
-        object-fit: cover;
-      }
-
       h2 {
-        padding-bottom: 1rem;
         color: $secondary-color;
       }
-
-      button {
-        margin-top: 2rem;
-      }
+    }
+    .card-join-discord {
+      background-color: #404eed;
+      color: $gray-color-100;
     }
   }
 }

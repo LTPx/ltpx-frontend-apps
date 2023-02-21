@@ -16,6 +16,7 @@ import {
   SnackbarType,
   Snackbar,
   SnackbarPosition,
+  CourseDateCard,
 } from '@ltpx-frontend-apps/shared-ui';
 import { Dialog } from 'evergreen-ui';
 import { useSite, useUser } from '@ltpx-frontend-apps/store';
@@ -92,6 +93,18 @@ export function CourseDetails() {
     {
       text: 'Reseñas',
     },
+  ];
+  const courseDate = [
+    {
+      title: 'Proxima el viernes 21 de Febrero',
+      description: 'Reuniones una vez por semana (Miércoles)',
+      time:'8:30 - 9:20 PM'
+    },
+    {
+      title: 'Proxima el viernes 21 de Febrero',
+      description: 'Reuniones una vez por semana (Miércoles)',
+      time:'8:30 - 9:20 PM'
+    }
   ];
 
   return (
@@ -195,6 +208,16 @@ export function CourseDetails() {
                 </div>
               </div>
             </div>
+            <div className={styles['course-date']}>
+              {courseDate.map((course, index) => (
+                <CourseDateCard
+                  key={index}
+                  title={course.title}
+                  description={course.description}
+                  time={course.time}
+                />
+              ))}
+            </div>
           </div>
           <BuyCourseCard
             price={course.price_format}
@@ -224,10 +247,10 @@ export function CourseDetails() {
           />
         </div>
       </Dialog>
-      { openEnrollModal && (
+      {openEnrollModal && (
         <CheckoutForm
           open={openEnrollModal}
-          onClose={()=>{
+          onClose={() => {
             setOpenEnrollModal(false);
           }}
           product={{

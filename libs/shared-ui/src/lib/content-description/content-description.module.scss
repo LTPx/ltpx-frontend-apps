@@ -1,12 +1,13 @@
 @import '../../styles/styles.module.scss';
 
 .container {
-  background-color: #f7f7f7;;
+  background-color: #f0fdf8;
   width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   padding: 5rem 0;
+  line-height: 1.5rem;
   .head {
     display: flex;
     flex-direction: column;
@@ -35,7 +36,8 @@
       }
       h5 {
         color: $text-gray-color;
-        width: 200px;
+        width: 250px;
+        padding-top: 0.5rem;
       }
     }
     .item-one {
@@ -92,5 +94,12 @@
         padding: $size-md-3;
       }
     }
+  }
+}
+//smartphones-responsive
+@media screen and (max-width: 550px) {
+  .content {
+    flex-direction: column;
+    gap: 2rem !important;
   }
 }

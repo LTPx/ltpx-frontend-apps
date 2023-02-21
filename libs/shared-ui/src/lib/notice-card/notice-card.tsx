@@ -15,7 +15,7 @@ export function NoticeCard(props: NoticeCardProps) {
   const { image, title, description, children, className } = props;
   return (
     <div className={`${styles['content']} ${className}`}>
-      <img src={image} />
+      {image && (<img src={image} />)}
       <h2>{title}</h2>
       <p>{description}</p>
       {children}

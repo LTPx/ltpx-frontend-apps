@@ -80,7 +80,7 @@ export function TeacherCourses(props: TeacherCoursesProps) {
             {
               text: 'Ver Estudiantes',
               icon: 'user-group',
-              url: `/teacher/courses/${course.id}/students`,
+              url: `/teacher/courses/${course.course_session_id}/students`,
             },
           ]}
         />

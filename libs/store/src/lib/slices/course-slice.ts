@@ -19,6 +19,7 @@ import {
   CourseApiParams,
   NewCourseSessionParams,
   createCourseSession,
+  getCourseStudents,
 } from '@ltpx-frontend-apps/api';
 
 export type TResponse = {
@@ -44,6 +45,7 @@ export type CourseSlice = {
   updateCourse: (course: CourseApiParams) => Promise<TResponse>;
   cleanCourse: () => void;
   _addCourseSession: (params: NewCourseSessionParams) => Promise<TResponse>;
+  _getCourseStudents: (courseSessionId: number) => Promise<TResponse>;
 };
 
 export const createCourseSlice: StateCreator<
@@ -231,6 +233,14 @@ export const createCourseSlice: StateCreator<
     }
   },
   cleanCourse: () => {
-    set({course: {} as TeacherCourse})
-  }
+    set({ course: {} as TeacherCourse });
+  },
+  _getCourseStudents: async (id) => {
+    try {
+      const students = await getCourseStudents(id);
+      return { success: true, data: students };
+    } catch (error) {
+      return { success: false, data: error };
+    }
+  },
 });

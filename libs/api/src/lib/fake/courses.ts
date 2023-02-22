@@ -14,6 +14,7 @@ const createRandomCourse = ():PublicCourse => (
     level: CourseLevel.begging,
     language: CourseLanguage.en,
     contents: [],
+    quizzes: [],
     learn_goals: `Learning: ${faker.commerce.productDescription()}`,
     enrollments_count: 12,
     requirements: 'No one',

@@ -10,3 +10,4 @@ export * from './student-courses/student-courses';
 export * from './student-course/student-course';
 export * from './student-classes/student-classes';
 export * from './student-layout/student-layout';
+export * from './student-quiz/student-quiz';

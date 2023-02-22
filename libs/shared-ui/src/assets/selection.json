@@ -1749,7 +1749,7 @@
         "width": 1024
       },
       "properties": { "name": "pencil-square" }
-    }, 
+    },
     {
       "icon": {
         "paths": [
@@ -1759,6 +1759,16 @@
         "width": 1024
       },
       "properties": { "name": "whatsapp" }
+    },
+    {
+      "icon": {
+        "paths": [
+          "M224 896a32 32 0 0 1-32-32V160a32 32 0 0 1 47.4-28l640 352a32 32 0 0 1 0 56l-640 352A32 32 0 0 1 224 896Z"
+        ],
+        "attrs": [],
+        "width": 1024
+      },
+      "properties": {"name": "play-filled"}
     }
   ]
 }

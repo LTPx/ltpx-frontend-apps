@@ -13,10 +13,11 @@ import { useTranslation } from 'react-i18next';
 export interface UserAccountFormProps {
   onSubmit: (data: IUserAccount) => void;
   data?: IUserAccount | null;
+  url?: string;
 }
 
 export function UserAccountForm(props: UserAccountFormProps) {
-  const { onSubmit, data } = props;
+  const { onSubmit, data, url} = props;
   const { t } = useTranslation();
 
   const formik = useFormik({
@@ -161,7 +162,7 @@ export function UserAccountForm(props: UserAccountFormProps) {
               color={ColorsButton.white}
               outline={true}
               title="Cancelar"
-              link={'/teacher/account/account-profile'}
+              link={url}
             />
           <Button
             color={ColorsButton.primary}

@@ -1,3 +1,6 @@
+export * from './lib/new-class-form/new-class-form';
+export * from './lib/session-form/session-form';
+export * from './lib/course-date-card/course-date-card';
 export * from './lib/notice-card/notice-card';
 export * from './lib/schedule-class-row/schedule-class-row';
 export * from './lib/reschedule-meeting-form/reschedule-meeting-form';

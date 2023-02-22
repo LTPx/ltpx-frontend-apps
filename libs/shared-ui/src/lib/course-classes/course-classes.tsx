@@ -7,9 +7,9 @@ import {
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import Button, { ColorsButton } from '../button/button';
-import ClassroomForm from '../classroom-form/classroom-form';
 import Drawer from '../drawer/drawer';
 import GroupSelectOptionCard from '../group-select-option-card/group-select-option-card';
+import SessionForm from '../session-form/session-form';
 import styles from './course-classes.module.scss';
 
 const classesOptions = [
@@ -36,11 +36,11 @@ export function CourseClasses(props: CourseClassesProps) {
     TeacherClassType.none
   );
   const { t } = useTranslation();
-  const [openClassroom, setOpenClassroom] = useState(false);
+  const [openSession, setOpenSession] = useState(false);
 
   const handleSelectedOption = (option: any) => {
     if (option === 'classes') {
-      setOpenClassroom(true);
+      setOpenSession(true);
     }
     setSelectedTypeClass(option);
   };
@@ -52,7 +52,7 @@ export function CourseClasses(props: CourseClassesProps) {
     } else {
       onSave && onSave({ ...classroom, ...{ condition: selectedTypeClass } });
     }
-    setOpenClassroom(false);
+    setOpenSession(false);
     onClose && onClose();
   };
 
@@ -101,7 +101,13 @@ export function CourseClasses(props: CourseClassesProps) {
           </div>
         </div>
       </Drawer>
-      <Drawer open={openClassroom}>
+      <SessionForm
+        open={openSession}
+        onClose={() => {
+          setOpenSession(false);
+        }}
+      />
+      {/* <Drawer open={openClassroom}>
         <div className={styles['content']}>
           <h2>{t('courseClasses.subtitle')}</h2>
           <ClassroomForm
@@ -119,7 +125,7 @@ export function CourseClasses(props: CourseClassesProps) {
             />
           </ClassroomForm>
         </div>
-      </Drawer>
+      </Drawer> */}
     </div>
   );
 }

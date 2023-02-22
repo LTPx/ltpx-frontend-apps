@@ -1,5 +1,4 @@
 import { Routes, Route, BrowserRouter, Navigate } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
 import {
   ClassesLayout,
   CoursesLayout,
@@ -9,9 +8,6 @@ import {
 import {
   Account,
   ClassesCalendar,
-  Classes,
-  Courses,
-  StateCourses,
   Dashboard,
   Invoice,
   LiveClass,
@@ -31,22 +27,14 @@ export const StudentRoutes = () => {
         <Route path="/" element={<Navigate replace to="student/dashboard" />} />
         <Route path="student" element={<StudentLayout />}>
           <Route path="dashboard" element={<Dashboard />} />
-          <Route path="courses" element={<CoursesLayout />}>
-            <Route
-              path="/student/courses"
-              element={<Navigate replace to="learning" />}
-            />
-            <Route path="learning" element={<StudentCourses />} />
-            <Route
-              path="finished"
-              element={<Courses state={StateCourses.finished} />}
-            />
-            <Route path=":courseId" element={<StudentCourse />} />
-          </Route>
+          <Route path="courses" element={<StudentCourses />} />
+          <Route path="courses/:courseId" element={<StudentCourse />} />
           <Route path="classes" element={<StudentClasses />} />
           <Route path="classes" element={<StudentClasses />} />
-          <Route path="live-meeting/:meetingId/:roomId" element={<VideoMeetingLive redirectUrl='/student/classes'/>} />
-
+          <Route
+            path="live-meeting/:meetingId/:roomId"
+            element={<VideoMeetingLive redirectUrl="/student/classes" />}
+          />
           {/* <Route path="classes" element={<ClassesLayout/>}>
             <Route path="/student/classes" element={<Navigate replace to="week" />} />
             <Route path="week" element={<Classes/>}/>

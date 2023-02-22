@@ -20,7 +20,7 @@ export function StudentCourses(props: StudentCoursesProps) {
 
   useEffect(() => {
     fetchCourses();
-  }, [fetchCourses]);
+  }, []);
 
   return (
     <div className={`${styles['container']}`}>

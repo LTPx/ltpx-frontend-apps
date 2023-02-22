@@ -4,6 +4,7 @@ import {
   Classroom,
   CourseModel,
   getStudentClasses,
+  getStudentCourse,
   getStudentCourses,
   getStudentPayments,
   Purchase,
@@ -18,9 +19,11 @@ export type TResponse = {
 export type StudentSlice = {
   purchases: Purchase[];
   enrolledCourses: CourseModel[];
+  enrolledCourse: CourseModel;
   studentClasses: Classroom[];
   _getStudentPayments: () => Promise<TResponse>;
   _getStudentCourses: () => Promise<TResponse>;
+  _getStudentCourse: (courseId: number) => Promise<TResponse>;
   _getStudentClasses: () => Promise<TResponse>;
 };
 
@@ -30,6 +33,7 @@ export const createStudentSlice: StateCreator<StoreState, [], [], StudentSlice> 
 ) => ({
   purchases: [],
   enrolledCourses: [],
+  enrolledCourse: {} as CourseModel,
   studentClasses: [],
   _getStudentPayments: async (): Promise<TResponse> => {
     try {
@@ -45,6 +49,15 @@ export const createStudentSlice: StateCreator<StoreState, [], [], StudentSlice> 
       const courses = await getStudentCourses();
       set({enrolledCourses: courses});
       return { success: true, data: courses };
+    } catch (error) {
+      return { success: false, error };
+    }
+  },
+  _getStudentCourse: async (id): Promise<TResponse> => {
+    try {
+      const course = await getStudentCourse(id);
+      set({enrolledCourse: course});
+      return { success: true, data: course };
     } catch (error) {
       return { success: false, error };
     }

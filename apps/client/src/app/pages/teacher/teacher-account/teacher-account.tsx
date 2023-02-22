@@ -72,10 +72,10 @@ export function TeacherAccount(props: TeacherAccountProps) {
           />
           {selectedTab === 0 && <TeacherProfileForm />}
           {selectedTab === 1 && (
-            <UserAccountForm onSubmit={updateUserAccount} data={profile} />
+            <UserAccountForm url='/teacher/account/account-profile' onSubmit={updateUserAccount} data={profile} />
           )}
           {selectedTab === 2 && <PaymentForm />}
-          {selectedTab === 3 && <ChangePasswordForm />}
+          {selectedTab === 3 && <ChangePasswordForm url='/teacher/account/account-profile'  />}
         </div>
       )}
     </div>

@@ -17,6 +17,8 @@ import {
   StudentCourse,
   StudentClasses,
   StudentLayout,
+  StudentAccountLayout,
+  StudentAccountProfile,
 } from '../pages/student/index';
 import VideoMeetingLive from '../video/video-meeting-live/video-meeting-live';
 
@@ -50,7 +52,11 @@ export const StudentRoutes = () => {
             <Route path="invoice" element={<Invoice />} />
           </Route>
           <Route path="settings" element={<Settings />} />
-          <Route path="account" element={<Account />} />
+          {/* <Route path="account" element={<Account />} /> */}
+          <Route path="account" element={<StudentAccountLayout />}>
+            <Route path="/student/account" element={<StudentAccountProfile />} />
+            <Route path="account-form" element={<Account />} />
+          </Route>
         </Route>
       </Routes>
     </BrowserRouter>

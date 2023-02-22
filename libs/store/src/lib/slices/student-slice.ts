@@ -7,7 +7,9 @@ import {
   getStudentCourse,
   getStudentCourses,
   getStudentPayments,
+  getStudentQuiz,
   Purchase,
+  QuizModel,
 } from '@ltpx-frontend-apps/api';
 
 export type TResponse = {
@@ -21,10 +23,12 @@ export type StudentSlice = {
   enrolledCourses: CourseModel[];
   enrolledCourse: CourseModel;
   studentClasses: Classroom[];
+  currentQuiz: QuizModel;
   _getStudentPayments: () => Promise<TResponse>;
   _getStudentCourses: () => Promise<TResponse>;
   _getStudentCourse: (courseId: number) => Promise<TResponse>;
   _getStudentClasses: () => Promise<TResponse>;
+  _getStudentQuiz: (quizId: number) => Promise<TResponse>;
 };
 
 export const createStudentSlice: StateCreator<StoreState, [], [], StudentSlice> = (
@@ -35,6 +39,7 @@ export const createStudentSlice: StateCreator<StoreState, [], [], StudentSlice> 
   enrolledCourses: [],
   enrolledCourse: {} as CourseModel,
   studentClasses: [],
+  currentQuiz: {} as QuizModel,
   _getStudentPayments: async (): Promise<TResponse> => {
     try {
       const purchases = await getStudentPayments();
@@ -67,6 +72,15 @@ export const createStudentSlice: StateCreator<StoreState, [], [], StudentSlice> 
       const classes = await getStudentClasses();
       set({studentClasses: classes});
       return { success: true, data: classes };
+    } catch (error) {
+      return { success: false, error };
+    }
+  },
+  _getStudentQuiz: async (id): Promise<TResponse> => {
+    try {
+      const quiz = await getStudentQuiz(id);
+      set({currentQuiz: quiz});
+      return { success: true, data: quiz };
     } catch (error) {
       return { success: false, error };
     }

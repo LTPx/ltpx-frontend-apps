@@ -1,4 +1,9 @@
-import { AchievementsList, Button, CourseContents, QuizzesList } from '@ltpx-frontend-apps/shared-ui';
+import {
+  AchievementsList,
+  Button,
+  CourseContents,
+  QuizzesList,
+} from '@ltpx-frontend-apps/shared-ui';
 import { useStudent } from '@ltpx-frontend-apps/store';
 import { useCallback, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
@@ -28,7 +33,7 @@ export function StudentCourse(props: StudentCourseProps) {
 
   const handleStartTest = () => {
     console.log('start');
-  }
+  };
 
   return (
     <div className={styles['container']}>
@@ -36,11 +41,21 @@ export function StudentCourse(props: StudentCourseProps) {
       <br />
       <div className="card with-padding">
         <CourseContents contents={enrolledCourse.contents || []} />
-        <QuizzesList quizzes={enrolledCourse.quizzes || []}>
-          <div className="actions">
-            <Button title='Empezar test' icon='play-filled' onClick={handleStartTest}/>
-          </div>
-        </QuizzesList>
+        {enrolledCourse.quizzes?.length > 0 && (
+          <>
+            <QuizzesList quizzes={enrolledCourse.quizzes}>
+              <div className="actions">
+                <Button
+                  title="Empezar test"
+                  icon="play-filled"
+                  onClick={handleStartTest}
+                  link={`/student/quiz/${enrolledCourse.quizzes[0].id}`}
+                />
+              </div>
+            </QuizzesList>
+          </>
+        )}
+
         <br />
         <AchievementsList achievements={enrolledCourse.achievements || []} />
       </div>

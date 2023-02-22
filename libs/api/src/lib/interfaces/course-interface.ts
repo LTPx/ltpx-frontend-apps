@@ -65,7 +65,7 @@ export interface CourseModel {
   status: CourseStatus;
   contents: ContentCourse[];
   classroom: Classroom;
-  quizzes?: QuizModel[];
+  quizzes: QuizModel[];
   achievements?: AchievementModel[];
   course_session_id: number;
 }

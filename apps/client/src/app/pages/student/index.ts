@@ -12,5 +12,5 @@ export * from './student-classes/student-classes';
 export * from './student-layout/student-layout';
 export * from './student-account-profile/student-account-profile';
 export * from './student-account-layout/student-account-layout';
-
+export * from './student-quiz/student-quiz';
 

@@ -1,3 +1,4 @@
+import { CourseContents } from '@ltpx-frontend-apps/shared-ui';
 import { useStudent } from '@ltpx-frontend-apps/store';
 import { useCallback, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
@@ -28,6 +29,7 @@ export function StudentCourse(props: StudentCourseProps) {
   return (
     <div className={styles['container']}>
       <h1>Welcome to StudentCourse!</h1>
+      <CourseContents contents={enrolledCourse.contents || []} />
     </div>
   );
 }

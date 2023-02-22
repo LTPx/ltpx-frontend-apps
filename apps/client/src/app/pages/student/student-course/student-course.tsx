@@ -41,16 +41,21 @@ export function StudentCourse(props: StudentCourseProps) {
       <br />
       <div className="card with-padding">
         <CourseContents contents={enrolledCourse.contents || []} />
-        <QuizzesList quizzes={enrolledCourse.quizzes || []}>
-          <div className="actions">
-            <Button
-              title="Empezar test"
-              icon="play-filled"
-              onClick={handleStartTest}
-              link={`/student/quiz/${enrolledCourse.quizzes[0].id}`}
-            />
-          </div>
-        </QuizzesList>
+        {enrolledCourse.quizzes?.length > 0 && (
+          <>
+            <QuizzesList quizzes={enrolledCourse.quizzes}>
+              <div className="actions">
+                <Button
+                  title="Empezar test"
+                  icon="play-filled"
+                  onClick={handleStartTest}
+                  link={`/student/quiz/${enrolledCourse.quizzes[0].id}`}
+                />
+              </div>
+            </QuizzesList>
+          </>
+        )}
+
         <br />
         <AchievementsList achievements={enrolledCourse.achievements || []} />
       </div>

@@ -139,7 +139,7 @@ export function TeacherEditCourse() {
             onClick={() => {
               handleSendToReview();
             }}
-            disabled={course.status === CourseStatus.publish}
+            disabled={course.status !== CourseStatus.draft}
           />
           <Button
             title={t('buttons.saveDraft')}

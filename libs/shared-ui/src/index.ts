@@ -1,3 +1,4 @@
+export * from './lib/profile-user/profile-user'; 
 export * from './lib/new-class-form/new-class-form';
 export * from './lib/session-form/session-form';
 export * from './lib/course-date-card/course-date-card';

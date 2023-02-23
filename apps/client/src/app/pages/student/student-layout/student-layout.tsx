@@ -25,14 +25,14 @@ export function StudentLayout() {
         size: 20,
       },
     },
-    {
-      title: t('dashboards.student.courses'),
-      url: 'courses',
-      icon: {
-        icon: 'university',
-        size: 20,
-      },
-    },
+    // {
+    //   title: t('dashboards.student.courses'),
+    //   url: 'courses',
+    //   icon: {
+    //     icon: 'university',
+    //     size: 20,
+    //   },
+    // },
     {
       title: t('dashboards.student.classes'),
       url: 'classes',

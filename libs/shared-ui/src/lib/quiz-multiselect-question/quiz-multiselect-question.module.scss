@@ -1,0 +1,40 @@
+@import '../../styles/styles.module.scss';
+
+.container {
+  h3 {
+    font-weight: 500;
+  }
+
+  p {
+    color: $text-gray-color;
+  }
+
+  .answers {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 1rem;
+
+    .answer {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem;
+      border: 1px solid $text-gray-color;
+      border-radius: 5px;
+      cursor: pointer;
+
+      &:hover {
+        background-color: $gray-color-100;
+      }
+
+      &.check {
+        border-color: $green-color;
+        background-color: $green-color-100;
+        svg{
+          color: $green-color;
+        }
+      }
+    }
+  }
+}

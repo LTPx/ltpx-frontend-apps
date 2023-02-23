@@ -49,13 +49,12 @@ export function StudentCourse(props: StudentCourseProps) {
                   title="Empezar test"
                   icon="play-filled"
                   onClick={handleStartTest}
-                  link={`/student/quiz/${enrolledCourse.quizzes[0].id}`}
+                  link={`/student/quiz/${enrolledCourse.quizzes[1].id}`}
                 />
               </div>
             </QuizzesList>
           </>
         )}
-
         <br />
         <AchievementsList achievements={enrolledCourse.achievements || []} />
       </div>

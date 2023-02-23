@@ -38,7 +38,7 @@ export interface QuestionQuiz {
   answers: Answer[];
 }
 
-interface Answer {
+export interface Answer {
   text: string;
   correct: boolean;
 }

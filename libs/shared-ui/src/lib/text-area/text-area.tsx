@@ -29,6 +29,7 @@ export function TextArea(props: TextAreaProps) {
     description,
     placeholder,
     errorMessage,
+    cols,
     ...other
   } = props;
   return (
@@ -39,6 +40,7 @@ export function TextArea(props: TextAreaProps) {
         className={styles['textarea-container']}
         placeholder={placeholder}
         onChange={(e) => onChange && onChange(e)}
+        cols={cols}
         {...other}
       />
       { errorMessage && (

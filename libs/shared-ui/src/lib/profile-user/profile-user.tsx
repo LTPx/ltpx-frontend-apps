@@ -6,8 +6,8 @@ import styles from './profile-user.module.scss';
 /* eslint-disable-next-line */
 export interface ProfileUserProps {
   name: string;
-  profession: string;
-  rating: number;
+  profession?: string;
+  rating?: number;
   biography: string;
 }
 
@@ -15,7 +15,6 @@ export function ProfileUser(props: ProfileUserProps) {
   const {
     name,
     profession,
-    rating,
     biography,
   } = props;
   return (
@@ -32,7 +31,6 @@ export function ProfileUser(props: ProfileUserProps) {
           <div className={styles['information']}>
             <h3>{name}</h3>
             <h4>{profession}</h4>
-            <Rating stars={rating}></Rating>
           </div>
         </div>
         <div className={styles['description-profile']}>

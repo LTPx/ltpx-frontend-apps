@@ -1,27 +1,40 @@
+@import '../../styles/styles.module.scss';
+
 .container {
   background-color: #fff;
-  max-width: 250px;
-  padding: 20px;
-  border: 1px solid #f7f7f7;
+  width: 400px;
+  border: 1px solid $gray-color-300;
+  border-radius: 8px;
 
+  .warp-content {
+    display: grid;
+    grid-template-columns: 35% 65%;
+    padding: $size-sm-2;
+    gap: $size-sm-2;
+    align-items: center;
+
+  }
   img {
     width: 100%;
-    width: 210px;
-    height: 120px;
+    height: 130px;
+    object-fit: cover;
+    border-radius: 8px;
   }
 }
 
 .content {
   display: flex;
   flex-direction: column;
-
+  gap: $size-sm-2;
+  padding: $size-sm-2;
   .date {
     font-size: 12px;
-    color: #c7c7c7;
+    color: $text-gray-color
   }
 
   .title {
     font-weight: bold;
+    color: $text-color;
   }
 }
 

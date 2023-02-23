@@ -1,3 +1,6 @@
+export * from './lib/quiz-answer-question/quiz-answer-question';
+export * from './lib/quiz-multiselect-question/quiz-multiselect-question';
+export * from './lib/quiz-conditional-question/quiz-conditional-question';
 export * from './lib/new-class-form/new-class-form';
 export * from './lib/session-form/session-form';
 export * from './lib/course-date-card/course-date-card';

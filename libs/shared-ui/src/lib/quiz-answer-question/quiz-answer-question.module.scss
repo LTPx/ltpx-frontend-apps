@@ -1,0 +1,15 @@
+@import '../../styles/styles.module.scss';
+
+.container {
+  h3 {
+    font-weight: 500;
+  }
+
+  p {
+    color: $text-gray-color;
+  }
+
+  .options {
+    margin-top: 1rem;
+  }
+}

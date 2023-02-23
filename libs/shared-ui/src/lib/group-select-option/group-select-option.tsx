@@ -5,6 +5,7 @@ import Icon from '../icon/icon';
 /* eslint-disable-next-line */
 export interface OptionSelectGroup {
   text: string;
+  value?: string;
 }
 
 export interface GroupSelectOptionProps {

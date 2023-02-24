@@ -1,6 +1,7 @@
 import {
   ColorsCounterCard,
   CourseCounterCard,
+  QuizProgressCard,
   UserCourseCard,
 } from '@ltpx-frontend-apps/shared-ui';
 import { useUser } from '@ltpx-frontend-apps/store';
@@ -9,6 +10,7 @@ import { NavLink } from 'react-router-dom';
 import styles from './dashboard.module.scss';
 import { useStudent } from '@ltpx-frontend-apps/store';
 import { useCallback, useEffect } from 'react';
+import { CourseStatus } from '@ltpx-frontend-apps/api';
 
 /* eslint-disable-next-line */
 export interface DashboardProps {}

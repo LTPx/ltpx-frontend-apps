@@ -1,3 +1,4 @@
+import { ReactElement } from 'react';
 import Button, { ColorsButton } from '../button/button';
 import styles from './quiz-score.module.scss';
 
@@ -5,26 +6,24 @@ import styles from './quiz-score.module.scss';
 export interface QuizScoreProps {
   totalScore: number;
   message: string;
+  img: string;
+  children?: ReactElement;
 }
 
 export function QuizScore(props: QuizScoreProps) {
-  const { totalScore, message } = props;
+  const { totalScore, message, img, children } = props;
 
   return (
     <div className={styles['container']}>
       <div className={styles['head-score']}>
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR83K5rBkgtaRL7Or_WNwxAzS_wy-8DaGDMKA&usqp=CAU"></img>
+        <img src={img}></img>
       </div>
       <div className={styles['content']}>
         <h1>{totalScore}</h1>
-        <h4>Your total Score</h4>
-        <h4 className={styles['message']}>{message}</h4>
+        <h3>Tu puntuación total</h3>
+        <h3 className={styles['message']}>{message}</h3>
       </div>
-      <Button
-        className={styles['button']}
-        title={'Back to Home'}
-        color={ColorsButton.secondary}
-      />
+      {children}
     </div>
   );
 }

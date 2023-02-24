@@ -5,7 +5,9 @@
   width: 400px;
   border: 1px solid $gray-color-300;
   border-radius: 8px;
-
+  &:hover {
+    box-shadow: $card-shadow-medium;
+  }
   .warp-content {
     display: grid;
     grid-template-columns: 35% 65%;
@@ -37,4 +39,5 @@
     color: $text-color;
   }
 }
+
 

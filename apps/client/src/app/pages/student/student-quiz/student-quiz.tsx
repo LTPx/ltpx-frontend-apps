@@ -5,9 +5,11 @@ import {
   QuizAnswerQuestion,
   QuizConditionalQuestion,
   QuizMultiselectQuestion,
+  QuizScore,
 } from '@ltpx-frontend-apps/shared-ui';
 import { useStudent } from '@ltpx-frontend-apps/store';
-import { useCallback, useEffect } from 'react';
+import { Dialog } from 'evergreen-ui';
+import { useCallback, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import styles from './student-quiz.module.scss';
 
@@ -19,6 +21,10 @@ export function StudentQuiz(props: StudentQuizProps) {
   const params = useParams();
   const { quizId } = params;
   const id = parseInt(quizId || '');
+  const [openModal, setOpenModal] = useState(false);
+  const handleRequest = () => {
+    setOpenModal(true);
+  };
 
   const fetchQuiz = useCallback(async () => {
     const { success, data, error } = await _getStudentQuiz(id);
@@ -86,10 +92,38 @@ export function StudentQuiz(props: StudentQuizProps) {
               color={ColorsButton.white}
               outline={true}
             />
-            <Button title="Finalizar test" />
+            <Button
+              title="Finalizar test"
+              onClick={() => {
+                handleRequest();
+              }}
+            />
           </div>
         </div>
       )}
+      <Dialog
+        isShown={openModal}
+        hasFooter={false}
+        hasHeader={false}
+        onCloseComplete={() => setOpenModal(false)}
+        width={'30vw'}
+      >
+        <QuizScore
+          totalScore={10}
+          message={'Felicitaciones'}
+          img={
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR83K5rBkgtaRL7Or_WNwxAzS_wy-8DaGDMKA&usqp=CAU'
+          }
+        >
+          <div className={styles['btn-quiz-score']}>
+            <Button
+              title={'Regresar'}
+              color={ColorsButton.secondary}
+              link={`/student/dashboard`}
+            />
+          </div>
+        </QuizScore>
+      </Dialog>
     </div>
   );
 }

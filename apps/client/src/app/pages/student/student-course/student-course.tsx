@@ -1,11 +1,12 @@
 import {
-  AchievementsList,
-  Button,
+  AchievementCard,
   CourseContents,
-  QuizzesList,
+  CourseDateCard,
+  QuizStudentCard,
+  Tabs,
 } from '@ltpx-frontend-apps/shared-ui';
 import { useStudent } from '@ltpx-frontend-apps/store';
-import { useCallback, useEffect } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import styles from './student-course.module.scss';
 
@@ -17,6 +18,7 @@ export function StudentCourse(props: StudentCourseProps) {
   const params = useParams();
   const { courseId } = params;
   const id = parseInt(courseId || '');
+  const [selectedTab, setSelectedTab] = useState(0);
 
   const fetchCourse = useCallback(async () => {
     const { success, data, error } = await _getStudentCourse(id);
@@ -35,27 +37,78 @@ export function StudentCourse(props: StudentCourseProps) {
     console.log('start');
   };
 
+  const tabs = [
+    { text: 'Curso' },
+    { text: 'Test' },
+    { text: 'Logros' },
+    { text: 'Clases' },
+  ];
+  const handleClick = (index: number) => {
+    setSelectedTab(index);
+  };
+
   return (
     <div className={styles['container']}>
       <h1>Curso: {enrolledCourse.title}</h1>
       <br />
       <div className="card with-padding">
-        <CourseContents contents={enrolledCourse.contents || []} />
-        {enrolledCourse.quizzes?.map((quiz, index)=>(
-          <div className="quiz" key={index}>
-            <h4>{quiz.name}</h4>
-            <div className="actions">
-              <Button
-                title="Empezar test"
-                icon="play-filled"
-                onClick={handleStartTest}
-                link={`/student/quiz/${quiz.id}`}
-              />
+        <Tabs
+          tabs={tabs}
+          isNav={false}
+          onClickTab={(option) => handleClick(option)}
+        />
+        <div className={styles['tabs-content']}>
+          {selectedTab === 0 && (
+            <div className={styles['contents-course']}>
+              <h2 className={styles['title-content']}>Sobre el Curso</h2>
+              <p className={styles['about-course']}>
+                {enrolledCourse.description}
+              </p>
+              <h3 className={styles['subtitle-content']}>Contenidos</h3>
+              <CourseContents contents={enrolledCourse.contents || []} />
             </div>
-          </div>
-        ))}
-        <br />
-        <AchievementsList achievements={enrolledCourse.achievements || []} />
+          )}
+          {selectedTab === 1 && (
+            <div className={styles['quizzes-content']}>
+              {enrolledCourse.quizzes?.map((quiz, index) => (
+                <div className={styles['quiz']} key={index}>
+                  <QuizStudentCard
+                    title={quiz.name}
+                    totalQuestions={quiz.questions.length}
+                    onClick={handleStartTest}
+                    url={`/student/quiz/${quiz.id}`}
+                  />
+                </div>
+              ))}
+            </div>
+          )}
+          {selectedTab === 2 && (
+            <div className={styles['achievements-content']}>
+              {enrolledCourse.achievements?.map((achievement, index) => (
+                <AchievementCard
+                  key={index}
+                  image={achievement.image}
+                  text={achievement.title}
+                />
+              ))}
+            </div>
+          )}
+          {selectedTab === 3 && (
+            <div className={styles['course-date']}>
+              {enrolledCourse.sessions[0].meetings.map((meeting, index) => (
+                <CourseDateCard
+                  className={styles['course-class']}
+                  key={index}
+                  title={'Reunion ' + (index + 1)}
+                  description={
+                    'Fecha: ' + meeting.month + ' - ' + meeting.day_number
+                  }
+                  time={'Hora: ' + meeting.end_time}
+                />
+              ))}
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );

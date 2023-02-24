@@ -50,7 +50,7 @@ export function SessionForm(props: SessionFormProps) {
       }}
     >
       <form className={styles['form']}>
-        <section>
+        <section className={styles['section']}>
           <h2>Configurar Sesiones</h2>
           <div className={styles['field-form']}>
             <Input

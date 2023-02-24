@@ -39,6 +39,9 @@ export interface Classroom {
   call_time_min: number;
   meetings: string[];
 }
+export interface Session {
+  meetings: MeetingModel[];
+}
 
 export interface CourseModel {
   id: number;
@@ -62,6 +65,7 @@ export interface CourseModel {
   approved: boolean;
   level: CourseLevel;
   language: CourseLanguage;
+  sessions: Session[];
   status: CourseStatus;
   contents: ContentCourse[];
   classroom: Classroom;

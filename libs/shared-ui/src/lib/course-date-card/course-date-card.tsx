@@ -6,16 +6,17 @@ export interface CourseDateCardProps {
   title: string;
   description: string;
   time: string;
+  className?: string;
 }
 
 export function CourseDateCard(props: CourseDateCardProps) {
-  const {title, time, description } = props;
+  const { title, time, description, className } = props;
   return (
-      <div className={styles['content']}>
-        <h3>{title}</h3>
-        <h4 className={styles['description']}>{description}</h4>
-        <h4 className={styles['time']}>{time}</h4>
-      </div>
+    <div className={`${styles['content']} ${className}`}>
+      <h3>{title}</h3>
+      <h4 className={styles['description']}>{description}</h4>
+      <h4 className={styles['time']}>{time}</h4>
+    </div>
   );
 }
 

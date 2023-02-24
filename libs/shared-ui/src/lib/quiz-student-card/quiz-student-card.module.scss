@@ -1,0 +1,28 @@
+@import '../../styles/styles.module.scss';
+.container {
+  border: 1px solid $gray-color-200;
+  border-radius: 8px;
+  display: grid;
+  grid-template-columns: 10% 70% 20%;
+  align-items: center;
+  padding: $size-md-1 $size-sm-2;
+
+  .row-icon {
+    display: flex;
+    justify-content: center;
+  }
+  .row-info {
+    display: flex;
+    flex-direction: column;
+    .total-questions {
+      color: $text-gray-color;
+    }
+  }
+  .row-btn {
+    display: flex;
+    justify-content: center;
+    .btn {
+      padding: $size-sm-2;
+    }
+  }
+}

@@ -24,11 +24,11 @@ export function QuizFormConditional(props: QuizFormConditionalProps) {
     description: question?.description || '',
     answers: question?.answers || [
       {
-        text: 'Verdadera',
+        text: 'true',
         correct: false,
       },
       {
-        text: 'Falsa',
+        text: 'false',
         correct: false,
       },
     ],
@@ -47,11 +47,11 @@ export function QuizFormConditional(props: QuizFormConditionalProps) {
     const { text, correct } = conditional;
     formik.setFieldValue(
       `answers[0].correct`,
-      text === 'Verdadera' ? !correct : correct
+      text === 'true' ? !correct : correct
     );
     formik.setFieldValue(
       `answers[1].correct`,
-      text === 'Verdadera' ? correct : !correct
+      text === 'true' ? correct : !correct
     );
   };
 

@@ -1,6 +1,11 @@
+@import '../../../../styles.scss';
+.btn-quiz-score {
+  display: flex;
+  justify-content: center;
+  padding-top: $size-md-2;
+}
 .container {
   width: 60vw;
-
   .header {
     display: flex;
     justify-content: space-between;

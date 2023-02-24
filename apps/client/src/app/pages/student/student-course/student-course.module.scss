@@ -1,3 +1,41 @@
+@import '../../../../styles.scss';
+
 .container {
-  width: 80vw;
+  width: 60vw;
+}
+.tabs-content {
+  padding-top: $size-lg-1;
+  .quizzes-content {
+    display: flex;
+    flex-direction: column;
+    gap: $size-md-1;
+  }
+  .achievements-content {
+    display: flex;
+    gap: $size-lg-1;
+    flex-wrap: wrap;
+  }
+  .course-date {
+    display: flex;
+    gap: $size-md-3;
+    flex-wrap: wrap;
+    .course-class {
+      padding: $size-md-1;
+      width: 9rem;
+      border: 1px solid $gray-color-300;
+      border-radius: 8px;
+    }
+  }
+}
+.contents-course {
+  .title-content {
+    padding-bottom: $size-sm-2;
+  }
+  .about-course {
+    line-height: $size-lg-1;
+    padding-bottom: $size-md-1;
+  }
+  .subtitle-content {
+    padding-bottom: $size-sm-3;
+  }
 }

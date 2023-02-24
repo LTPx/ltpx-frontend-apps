@@ -1,8 +1,6 @@
 import { CourseStatus } from '@ltpx-frontend-apps/api';
 import { NavLink } from 'react-router-dom';
-import Dropdown from '../dropdown/dropdown';
 import Icon from '../icon/icon';
-import Menu from '../menu/menu';
 import Tag, { ColorsTag } from '../tag/tag';
 import styles from './quiz-card.module.scss';
 

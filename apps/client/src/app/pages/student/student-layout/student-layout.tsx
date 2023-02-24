@@ -18,8 +18,24 @@ export function StudentLayout() {
 
   const links = [
     {
+      title: t('header.home'),
+      url: '/home',
+      icon: {
+        icon: 'store',
+        size: 20,
+      },
+    },
+    {
+      title: t('header.courses'),
+      url: '/courses',
+      icon: {
+        icon: 'store',
+        size: 20,
+      },
+    },
+    {
       title: t('dashboards.student.dashboard'),
-      url: 'dashboard',
+      url: '/student/dashboard',
       icon: {
         icon: 'store',
         size: 20,
@@ -35,7 +51,7 @@ export function StudentLayout() {
     // },
     {
       title: t('dashboards.student.classes'),
-      url: 'classes',
+      url: '/student/classes',
       icon: {
         icon: 'desktop',
         size: 20,

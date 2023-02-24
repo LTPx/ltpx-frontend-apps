@@ -5,6 +5,7 @@ import {
   DashboardLayout,
   PaymentsLayout,
 } from '../layouts/index';
+import { AllCourses, CourseDetails, Home } from '../pages/site';
 import {
   Account,
   ClassesCalendar,
@@ -27,7 +28,11 @@ export const StudentRoutes = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Navigate replace to="student/dashboard" />} />
+        <Route path="/" element={<StudentLayout />}>
+          <Route path="/home" element={<Home />} />
+          <Route path="/courses" element={<AllCourses />} />
+          <Route path="/course/:courseId/details" element={<CourseDetails />} />
+        </Route>
         <Route path="student" element={<StudentLayout />}>
           <Route path="dashboard" element={<Dashboard />} />
           <Route path="courses" element={<StudentCourses />} />

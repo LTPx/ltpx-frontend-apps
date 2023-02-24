@@ -1,0 +1,31 @@
+@import '../../styles/styles.module.scss';
+
+.field-form {
+  margin-top: $size-md-3;
+
+  .range {
+    margin-top: $size-sm-2;
+    display: flex;
+    gap: $size-md-1;
+    align-items: center;
+    background-color: #f9fafb;
+    padding: $size-md-1 $size-lg-1;
+    border: 1px solid #d4d4d4;
+  }
+
+  &.switch {
+    display: flex;
+    justify-content: space-between;
+
+    p {
+      font-size: 14px;
+      color: $text-gray-color;
+    }
+  }
+}
+
+.buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: $size-md-1;
+}

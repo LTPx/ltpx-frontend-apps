@@ -1,0 +1,51 @@
+@import '../../styles/styles.module.scss';
+
+.container {
+  &.with-label {
+    margin-top: 1rem;
+  }
+
+  p {
+    font-size: 14px;
+    color: $text-gray-color-medium;
+    margin-bottom: 0.5rem;
+  }
+}
+
+.content {
+  background-color: $white-color;
+  border: 1px dashed $stroke-color;
+
+  .files-content {
+    display: flex;
+    justify-content: space-between;
+    gap: $size-sm-2;
+
+    .file {
+      display: flex;
+      gap: $size-md-1;
+      align-items: center;
+      h4 {
+        color: $text-gray-color;
+        margin-top: 0;
+        font-size: 0.875rem;
+      }
+      .send-file {
+        cursor: pointer;
+        text-decoration: underline;
+        color: $secondary-color;
+      }
+    }
+    input {
+      display: none;
+    }
+    .buttons {
+      display: flex;
+      gap: $size-md-1;
+
+      .btn {
+        font-size: $size-sm-3;
+      }
+    }
+  }
+}

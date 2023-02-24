@@ -1,54 +1,57 @@
+import Button, { ColorsButton } from '../button/button';
 import Icon from '../icon/icon';
+import Rating from '../rating/rating';
 import styles from './course-cart-item.module.scss';
 
 /* eslint-disable-next-line */
 export interface CourseCartItemProps {
-  image: string;
+  id: number;
+  cover?: string;
   category: string;
   title: string;
-  price: number;
-  duration: number;
-  lessons: number;
-  stars: number;
+  price: string;
+  duration?: number;
+  lessons?: number;
+  stars?: number;
   children?: any;
+  onClickRemove?: any;
 }
 
 export function CourseCartItem(props: CourseCartItemProps) {
   const {
-    image,
+    id,
+    cover,
     category,
     title,
     price,
     duration,
     lessons,
     stars,
-    children
+    children,
+    onClickRemove
   } = props;
+
+  const totalStarts = stars || 0;
 
   return (
     <div className={styles['container']}>
       <div className={styles['card-item']}>
-        <img src={image} alt="course-item" />
+        <img src={cover} alt="course-item" />
         <div className={styles['content']}>
           <span className={styles['category']}>
             {category}
           </span>
           <h3 className={styles['title']}>{title}</h3>
-          <div className="stars">
-            {Array.from(Array(stars).keys()).map((number, index)=>(
-              <Icon key={index} icon={'star'} size={15} color='#eab308'/>
-            ))}
-            {Array.from(Array(5 - stars).keys()).map((number, index)=>(
-              <Icon icon={'star'} size={15} color='#888888'/>
-            ))}
+          <div className={styles['stars-rating']}>
+            <Rating stars={totalStarts} />
           </div>
           <div className={styles['info']}>
             <div className={styles['info-item']}>
-              <Icon icon={'university'} size={15}/>
+              <Icon icon={'university'} size={15} />
               {lessons} lessons
             </div>
             <div className={styles['info-item']}>
-              <Icon icon={'clock'} size={15}/>
+              <Icon icon={'clock'} size={15} />
               {duration} min
             </div>
           </div>
@@ -56,12 +59,21 @@ export function CourseCartItem(props: CourseCartItemProps) {
       </div>
       <div className={styles['price-actions']}>
         <div className={styles['actions']}>
-          <h4>Remove</h4>
-          <h4>Add to favorites</h4>
+          <Button
+            title='Eliminar'
+            onClick={() => {onClickRemove(id)}}
+            outline={true}
+            color={ColorsButton.secondary}
+          />
+          {/* <Button
+            title='♥ Add to Favorites'
+            onClick={onClickRemove}
+            outline={true}
+          /> */}
           {children}
         </div>
         <div className={styles['price']}>
-          <h4>${price}</h4>
+          <h3>${price}</h3>
         </div>
       </div>
     </div>

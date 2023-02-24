@@ -1,0 +1,21 @@
+@import "../../styles/styles.module.scss";
+
+.form {
+  padding: 1rem 1rem 2rem;
+
+  .text {
+    h5 {
+      color: $text-gray-color;
+    }
+  }
+
+  button {
+    margin-top: 1rem;
+  }
+}
+
+.footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+}

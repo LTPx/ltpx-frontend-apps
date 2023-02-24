@@ -1,0 +1,33 @@
+@import '../../styles/styles.module.scss';
+
+.menu-items {
+  display: flex;
+  flex-direction: column;
+
+  .menu-item {
+    display: flex;
+    align-items: center;
+    gap: $size-sm-3;
+    color: $text-gray-color;
+    padding: 0.75rem 1rem;
+    cursor: pointer;
+
+    &:hover {
+      color: $text-color;
+      background-color: $gray-color-100;
+    }
+  }
+
+  a {
+    display: flex;
+    align-items: center;
+    gap: $size-sm-3;
+    flex-grow: 1;
+    color: $text-gray-color;
+  }
+}
+
+.trigger {
+  cursor: pointer;
+  display: inline;
+}

@@ -1,0 +1,16 @@
+@import '../../../../styles.scss';
+
+.container {
+  display: flex;
+  justify-content: center;
+  margin-top: $size-lg-1;
+}
+
+.content {
+  max-width: 30rem;
+}
+@media screen and (max-width: 500px) {
+  .content {
+    width: 75%;
+  }
+}

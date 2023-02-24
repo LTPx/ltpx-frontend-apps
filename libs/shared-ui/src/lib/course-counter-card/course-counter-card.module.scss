@@ -1,0 +1,49 @@
+@import '../../styles/styles.module.scss';
+
+.container {
+  width: 260px;
+  height: 90px;
+  background: $white-color;
+  border-radius: 15px;
+  box-shadow: $card-shadow-medium;
+  display: flex;
+  padding: $size-sm-2 $size-sm-2;
+  align-items: center;
+
+  .content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: $size-lg-3;
+    width: 100%;
+  }
+
+  .counter {
+    .card {
+      font-weight: 450;
+      font-size: 35px;
+      &.card-green {
+        color: $green-color;
+      }
+      &.card-orange {
+        color: $orange-color;
+      }
+      &.card-blue {
+        color: $blue-color;
+      }
+      &.card-red {
+        color: $red-color;
+      }
+      &.card-white {
+        color: $text-gray-color;
+      }
+    }
+  }
+
+  .description {
+    width: 8rem;
+    h3 {
+      color: $text-gray-color;
+    }
+  }
+}

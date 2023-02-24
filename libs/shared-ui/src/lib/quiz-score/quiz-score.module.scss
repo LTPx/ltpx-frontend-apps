@@ -1,0 +1,49 @@
+@import '../../styles/styles.module.scss';
+
+.container {
+  max-width: 25rem;
+  box-sizing: border-box;
+  background: $white-color;
+  border: 1px solid #e7e7ec;
+  box-shadow: $card-shadow-medium;
+  border-radius: 4px;
+  padding: $size-lg-3;
+  max-height: 30rem;
+
+  .head-score {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: $size-lg-1;
+    img {
+      width: 150px;
+      height: 150px;
+    }
+  }
+
+  .content {
+    display: flex;
+    flex-direction: column;
+    gap: $size-sm-2;
+    align-items: center;
+
+    h1 {
+      color: $text-color;
+      font-weight: bold;
+    }
+    h4 {
+      color: $text-gray-color;
+    }
+
+    .message {
+      color: $text-color;
+      text-align: center;
+    }
+  }
+
+  .button {
+    display: flex;
+    justify-content: center;
+    padding-top: $size-md-3;
+  }
+}

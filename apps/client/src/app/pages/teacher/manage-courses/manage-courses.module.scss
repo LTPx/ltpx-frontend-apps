@@ -1,0 +1,15 @@
+.content {
+  width: 70vw;
+}
+
+.breadcrumbs {
+  display: flex;
+
+  .breadcrumb {
+    display: flex;
+
+    p {
+      margin: 0 0.5rem;;
+    }
+  }
+}

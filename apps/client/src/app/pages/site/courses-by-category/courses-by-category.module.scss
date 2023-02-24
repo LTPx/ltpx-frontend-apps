@@ -1,0 +1,66 @@
+@import '../../../../styles.scss';
+
+.container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  .content {
+    width: 80%;
+    padding: 0 10rem;
+  }
+  .title {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    text-align: center;
+    padding: 5rem 0;
+  }
+  .search-course {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .courses-by-category {
+    padding: 3rem 0;
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+    gap: $size-md-1;
+    justify-content: center;
+    .course {
+      height: 20rem;
+      width: 16rem;
+    }
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .container {
+    .content {
+      width: 100%;
+      padding: 0 0;
+    }
+    .search-course {
+      flex-direction: column;
+      gap: 1rem;
+      align-items: center;
+    }
+  }
+}
+@media screen and (min-width: 560px) and (max-width: 850px) {
+  .container {
+    .content {
+      padding: 0 0;
+    }
+  }
+}
+
+//tablet-responsive-horizontal
+@media screen and (min-width: 860px) and (max-width: 1224px) {
+  .courses-by-category {
+    display: flex;
+    gap: 2rem !important;
+    justify-content: inherit !important;
+  }
+}

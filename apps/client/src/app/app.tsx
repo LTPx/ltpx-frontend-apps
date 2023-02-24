@@ -1,10 +1,16 @@
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-
-import ApplicationRoutes from './routes/routes';
+import { AppRouter } from './routes/app-router';
+import { PayPalScriptProvider } from '@paypal/react-paypal-js';
 
 export function App() {
+  const PAYPAL_ID = process.env.NX_PAYPAL_ID_CLIENT || '';
+
   return (
-    <ApplicationRoutes />
+    <PayPalScriptProvider
+      options={{ 'client-id': PAYPAL_ID, currency: 'USD', locale: 'es_EC' }}
+    >
+      <AppRouter />
+    </PayPalScriptProvider>
   );
 }
 

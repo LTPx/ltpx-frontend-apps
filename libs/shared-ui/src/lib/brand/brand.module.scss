@@ -1,0 +1,19 @@
+@import '../../styles/styles.module.scss';
+.container {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+
+  p {
+    font-size: $size-md-2;
+    color: $secondary-color;
+    font-weight: 500;
+  }
+
+  &.negative {
+    p {
+      color: #fff;
+    }
+  }
+}
+

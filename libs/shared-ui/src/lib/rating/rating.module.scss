@@ -1,8 +1,13 @@
-.stars {
+.stars-container {
   display: flex;
   align-items: normal;
 
+  .starts {
+    display: flex;
+    align-items: normal;
+  }
+
   h5 {
-    margin-left: 5px;
+    margin: 0 0 0 0.5rem;
   }
 }

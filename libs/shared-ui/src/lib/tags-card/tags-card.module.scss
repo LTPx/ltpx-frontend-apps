@@ -1,0 +1,24 @@
+@import '../../styles/styles.module.scss';
+
+.container {
+  box-sizing: border-box;
+  max-width: 400px;
+  height: auto;
+  border: 1px solid #e7e7ec;
+  box-shadow: $card-shadow-medium;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  padding: $size-md-3;
+
+  h3 {
+    color: $text-color;
+  }
+
+  .tags-content {
+    padding: $size-md-1;
+    display: flex;
+    flex-wrap: wrap;
+    gap: $size-md-1;
+  }
+}

@@ -16,7 +16,8 @@
     "baseUrl": ".",
     "paths": {
       "@ltpx-frontend-apps/api": ["libs/api/src/index.ts"],
-      "@ltpx-frontend-apps/shared-ui": ["libs/shared-ui/src/index.ts"]
+      "@ltpx-frontend-apps/shared-ui": ["libs/shared-ui/src/index.ts"],
+      "@ltpx-frontend-apps/store": ["libs/store/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

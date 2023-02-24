@@ -4,7 +4,7 @@ import Tabs from './tabs';
 
 describe('Tabs', () => {
   it('should render successfully', () => {
-    const { baseElement } = render(<Tabs />);
+    const { baseElement } = render(<Tabs tabs={[]} />);
     expect(baseElement).toBeTruthy();
   });
 });

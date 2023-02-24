@@ -1,17 +1,17 @@
-.container {
+@import '../../styles/styles.module.scss';
+
+.input-component {
   margin-top: 1rem;
 }
 
 .input-container {
   position: relative;
-  margin-top: 0.5rem;
   display: flex;
 }
 
-.label {
-  font-weight: 600;
+.description {
+  color: $text-gray-color;
   font-size: 0.875rem;
-  line-height: 1.5;
 }
 
 .addon {
@@ -43,34 +43,33 @@
 
 .input-box {
   padding: 0.5rem 0.75rem;
-  background-color: #fff;
+  background-color: $white-color;
   background-clip: padding-box;
-  border: 1px solid #edf0f2;
+  border: 1px solid $stroke-color;
   border-radius: 0.25rem;
   box-shadow: inset 0 1px 1px rgb(39 44 51 / 8%);
 
   display: block;
   width: 100%;
-  height: calc(1em + 1rem + 2px);
-  font-size: .8125rem;
-  font-weight: 400;
-  line-height: 1.5;
-  color: #272c33;
+  height: 2rem;
   transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+
+  &.with-label {
+    margin-top: 0.5rem;
+  }
 }
 
 .input-box:focus {
-  color: #272c33;
-  outline: 0
+  outline: 0;
 }
 
 .input-box:focus {
-  background-color: #fff;
-  border-color: #fff;
-  box-shadow: inset 0 1px 1px rgba(39,44,51,.075),0 0 0 1px #5567ff;
+  background-color: $white-color;
+  border-color: $white-color;
+  box-shadow: inset 0 1px 1px rgba(39,44,51,.075),0 0 0 1px $primary-color;
 }
 
 .input-box::placeholder {
-  color: #949595;
+  color: $gray-color-400;
   opacity: 1
 }

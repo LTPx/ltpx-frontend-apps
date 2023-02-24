@@ -1,0 +1,129 @@
+@import './_colors.scss';
+@import './_fonts.scss';
+
+html {
+  // -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  color: $text-color;
+  font-size: 16px;
+  font-family: $system-font;
+  // -webkit-font-smoothing: antialiased;
+  // -moz-osx-font-smoothing: grayscale;
+}
+
+blockquote,
+dd,
+dl,
+figure,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+hr,
+p,
+label,
+pre {
+  margin: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 400;
+}
+
+h1 {
+  font-size: 2rem;
+}
+
+h2 {
+  font-size: 1.5rem;
+}
+
+h3 {
+  font-size: 1.25rem;
+}
+
+h4 {
+  font-size: 1rem;
+}
+
+h5 {
+  font-size: 0.875rem;
+}
+
+h6 {
+  font-size: 0.5rem;
+}
+
+p {
+  font-size: 1rem;
+}
+
+// @media screen and (max-width: 500px) {
+//   h1 {
+//     font-size: 3rem;
+//   }
+
+//   h2 {
+//     font-size: 2.25rem;
+//   }
+
+//   h3 {
+//     font-size: 1.80rem;
+//   }
+
+//   h4 {
+//     font-size: 1.5rem;
+//   }
+
+//   h5 {
+//     font-size: 1.10rem;
+//   }
+
+//   h6 {
+//     font-size: 0.75rem;
+//   }
+
+//   p {
+//     font-size: 1.5rem;
+//   }
+//   }
+
+ul,
+li {
+  padding: 0;
+  margin: 0;
+  // list-style: none;
+}
+
+a {
+  text-decoration: none;
+  // color: inherit;
+}
+
+a:focus,
+span:focus,
+div:focus {
+  outline: none;
+}
+
+label {
+  font-weight: 500;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+
+pre {
+  white-space: break-spaces;
+  font-family: $system-font;
+}

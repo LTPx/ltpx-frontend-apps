@@ -1,0 +1,47 @@
+@import '../../styles/styles.module.scss';
+
+.container {
+  form {
+    background-color: $white-color;
+    padding: $size-md-1 $size-lg-3;
+  }
+
+  .title {
+    display: flex;
+    flex-direction: column;
+    gap: $size-sm-2;
+    padding-bottom: $size-lg-3;
+    h3 {
+      color: $text-color;
+    }
+
+    h4 {
+      color: $text-gray-color;
+    }
+  }
+
+  .general-grid {
+    display: flex;
+    flex-direction: column;
+    gap: $size-lg-3;
+
+    .form-field {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: $size-lg-3;
+
+      .question {
+        margin-top: $size-md-1;
+      }
+
+      .options {
+        max-width: 8rem;
+      }
+    }
+  }
+  .form-submit {
+    margin-top: $size-md-1;
+    display: flex;
+    justify-content: baseline;
+  }
+}

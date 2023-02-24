@@ -1,4 +1,5 @@
 import Icon from '../icon/icon';
+import InputTextStatus, { StatusInputText } from '../input-text-status/input-text-status';
 import css from './input.module.scss';
 
 /* eslint-disable-next-line */
@@ -25,6 +26,10 @@ export interface InputProps {
   onBlur?: any,
   onKeyDown?: any,
   addonInput?: AddonSymbolInput;
+  description?: string;
+  min?: any;
+  max?: any;
+  errorMessage?: string | null;
 }
 
 export function Input(props: InputProps) {
@@ -34,6 +39,10 @@ export function Input(props: InputProps) {
     onKeyDown,
     label,
     addonInput,
+    description,
+    min,
+    max,
+    errorMessage,
     ...other
   } = props;
 
@@ -56,15 +65,22 @@ export function Input(props: InputProps) {
   }
 
   return (
-    <div className={css['container']}>
-      <label className={css['label']}>{label}</label>
+    <div className={`${css['input-component']} ${className}`}>
+      {label && (
+        <label>{label}</label>
+      )}
+      { description && (
+        <p className={css['description']}>{description}</p>
+      )}
       <div className={`${css['input-container']}`}>
         { addonInput && addonInput.position === 'left' && (
           <AddonSymbol text={addonInput.text} position={Position.left}/>
         )}
         <input
-          className={`${css['input-box']} ${inputClassesPosition}`}
+          className={`${css['input-box']} ${inputClassesPosition} ${label ? css['with-label'] : ''}`}
           {...other}
+          min={min}
+          max={max}
           onChange={e => onChange && onChange(e)}
           onKeyDown={e => onKeyDown && onKeyDown(e)}
         />
@@ -72,6 +88,12 @@ export function Input(props: InputProps) {
           <AddonSymbol text={addonInput.text} position={Position.right} icon={addonInput.icon}/>
         )}
       </div>
+      { errorMessage && (
+        <InputTextStatus
+          status={StatusInputText.error}
+          text={errorMessage}
+        />
+      )}
     </div>
   );
 }

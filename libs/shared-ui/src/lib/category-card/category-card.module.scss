@@ -1,0 +1,70 @@
+@import '../../styles/styles.module.scss';
+
+.container {
+  background-color: $white-color;
+  width: 15rem;
+  padding: $size-md-3;
+  border: 1px solid #d4d4d4;
+  box-shadow: $card-shadow-medium;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: $text-gray-color;
+  border-radius: 4px;
+  cursor: pointer;
+  position: relative;
+
+  .header {
+    width: 4rem;
+    height: 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    img {
+      z-index: 0;
+      position: absolute;
+    }
+    .icon {
+      position: absolute;
+      z-index: 1;
+    }
+  }
+  .title {
+    color: $text-color;
+    margin-top: $size-md-1;
+    margin-bottom: $size-sm-2;
+  }
+
+  .description {
+    color: $text-gray-color;
+  }
+}
+.container:hover {
+  color: $primary-color;
+  box-shadow: 0 0 15px #eaf0f6;
+  transform: translateY(-5px);
+  transition: box-shadow 0.15s ease-in-out, transform 0.15s ease-in-out;
+  .title {
+    color: $primary-color;
+  }
+  .description {
+    color: $primary-color;
+  }
+}
+
+//smartphones-responsive
+@media screen and (max-width: 550px) {
+  .container {
+    .header {
+      img {
+        width: 150px;
+        height: 100px;
+      }
+    }
+    .description {
+      text-align: center;
+      width: 10rem;
+    }
+  }
+}

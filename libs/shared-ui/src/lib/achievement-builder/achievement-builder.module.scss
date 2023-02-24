@@ -1,0 +1,18 @@
+@import '../../styles/styles.module.scss';
+
+.achievement-form {
+  padding: 1rem 2rem;
+  border: 1px solid $stroke-color;
+  margin-top: 2rem;
+}
+
+.achievements {
+  display: flex;
+  gap: 1rem;
+
+  .achievement {
+    padding: 1rem;
+    background-color: $gray-color-100;
+    cursor: pointer;
+  }
+}

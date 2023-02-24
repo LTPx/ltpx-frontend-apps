@@ -1,0 +1,49 @@
+@import '../../styles/styles.module.scss';
+
+.container {
+  box-sizing: border-box;
+  background: #ffffff;
+  border: 1px solid #e7e7ec;
+  box-shadow: $card-shadow-medium;
+  border-radius: 4px;
+  padding: 1rem;
+  min-width: 16rem;
+
+  h3 {
+    padding-bottom: 1.5rem;
+    color: $text-color;
+  }
+
+  .notifications {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 1rem;
+    padding-bottom: 1rem;
+
+    .information {
+      display: flex;
+      flex-direction: column;
+      text-align: start;
+
+      h4 {
+        color: $text-gray-color;
+        padding-bottom: 0.5rem;
+      }
+
+      h5 {
+        color: $text-gray-color-medium;
+      }
+    }
+    .status {
+      width: 10px;
+      height: 10px;
+      background-color: $primary-color;
+      border-radius: 100%;
+      margin-left: 0.5rem;
+
+      &.read {
+        background-color: $white-color;
+      }
+    }
+  }
+}

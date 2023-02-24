@@ -1,0 +1,30 @@
+.container {
+
+  .header-text {
+    margin-bottom: 2rem;
+
+    h2, h4 {
+      margin: 0;
+    }
+  }
+
+  .selects-form {
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    margin-top: 1rem;
+  }
+
+  .upload-media {
+    height: 20rem;
+    margin-top: 1rem;
+    background-color: #f7f7f7;
+  }
+
+  .footer {
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-end;
+    padding: 1.5rem 0;
+  }
+}

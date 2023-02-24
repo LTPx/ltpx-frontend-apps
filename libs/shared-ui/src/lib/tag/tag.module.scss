@@ -1,0 +1,40 @@
+@import '../../styles/styles.module.scss';
+
+.container {
+  .tag {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1px 16px;
+    height: 30px;
+    border-radius: 4px;
+    gap: 0.5rem;
+
+    &.tag-green {
+      background: $green-color-100;
+      color: $green-color;
+    }
+
+    &.tag-gray {
+      background: $gray-color-100;
+      color: $gray-color;
+    }
+    &.tag-orange {
+      background: $orange-color-100;
+      color: $orange-color;
+    }
+    &.tag-blue {
+      background: $blue-color-100;
+      color: $blue-color;
+    }
+    &.tag-red {
+      background: $red-color-100;
+      color: $red-color;
+    }
+    &.tag-white {
+      background: $white-color;
+      color: $text-gray-color;
+      border: 1px solid $gray-color-200;
+    }
+  }
+}

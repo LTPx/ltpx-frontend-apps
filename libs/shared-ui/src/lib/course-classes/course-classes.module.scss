@@ -1,0 +1,36 @@
+.content {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  justify-content: space-between;
+
+  h2 {
+    padding: 1rem;
+  }
+
+  .options {
+    padding: 2rem;
+  }
+}
+
+.footer {
+  display: flex;
+  justify-content: end;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.classroom {
+  display: flex;
+  height: 96%;
+  flex-direction: column;
+  justify-content: space-between;
+
+  section {
+    padding: 0 2rem;
+  }
+
+  footer {
+    padding: 1rem;
+  }
+}

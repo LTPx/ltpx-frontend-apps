@@ -1,57 +1,67 @@
+import { useCourseUtil } from '@ltpx-frontend-apps/store';
+import { NavLink } from 'react-router-dom';
 import Icon from '../icon/icon';
 import styles from './course-card.module.scss';
 
 /* eslint-disable-next-line */
 export interface CourseCardProps {
-  image: string;
+  image?: string;
   category: string;
   title: string;
-  price: number;
-  duration: number;
-  lessons: number;
-  stars: number;
+  price: string;
+  duration?: number;
+  lessons?: number;
+  stars?: number;
+  link?: string;
 }
 
 export function CourseCard(props: CourseCardProps) {
-  const {
-    image,
-    category,
-    title,
-    price,
-    duration,
-    lessons,
-    stars
-  } = props;
+  const { image, category, title, price, duration, lessons, stars, link } =
+    props;
+  const { translateCategory } = useCourseUtil();
 
-  return (
+  const Card = () => (
     <div className={styles['container']}>
-      <img src={image} alt="" />
+      <img loading="lazy" src={image} alt="" />
       <div className={styles['content']}>
         <span className={styles['category']}>
-          {category}
+          {translateCategory(category)}
         </span>
-        <h3 className={styles['title']}>{title}</h3>
+        <h4 className={styles['title']}>{title}</h4>
         <div className="stars">
-          {Array.from(Array(stars).keys()).map((number, index)=>(
-            <Icon key={index} icon={'star'} size={15} color='#eab308'/>
+          {Array.from(Array(stars).keys()).map((number, index) => (
+            <Icon key={index} icon={'star'} size={15} color="#eab308" />
           ))}
-          {Array.from(Array(5 - stars).keys()).map((number, index)=>(
-            <Icon icon={'star'} size={15} color='#888888'/>
+          {Array.from(Array(5 - (stars || 0)).keys()).map((number, index) => (
+            <Icon key={index} icon={'star'} size={15} color="#888888" />
           ))}
         </div>
         <div className={styles['info']}>
           <div className={styles['info-item']}>
-            <Icon icon={'university'} size={15}/>
-            {lessons} lessons
+            <Icon icon={'university'} size={15} />
+            {lessons} logros
           </div>
-          <div className={styles['info-item']}>
-            <Icon icon={'clock'} size={15}/>
+          {/* <div className={styles['info-item']}>
+            <Icon icon={'clock'} size={15} />
             {duration} min
+          </div> */}
+          <div className={styles['price']}>
+            {price}
           </div>
-          <div className={styles['info-item']}></div>
-          ${price}
         </div>
       </div>
+    </div>
+  );
+
+  return (
+    <div className={styles['container-wrapper']}>
+      {link ? (
+        <NavLink to={link}>
+          <Card />
+        </NavLink>
+      ) : (
+        <Card />
+      )}
     </div>
   );
 }

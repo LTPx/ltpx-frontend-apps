@@ -1,0 +1,30 @@
+@import '../../styles/styles.module.scss';
+
+.container {
+  form {
+    background-color: $white-color;
+    padding: $size-md-1 $size-lg-3;
+  }
+
+  .form-submit {
+    margin-top: $size-md-1;
+    display: flex;
+    justify-content: end;
+    gap: 1rem;
+  }
+
+  .general {
+    margin-top: $size-lg-1;
+  }
+
+  .general-grid {
+    display: grid;
+    gap: $size-md-1;
+  }
+
+  .fields {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    gap: 0.1rem $size-md-1;
+  }
+}

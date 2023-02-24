@@ -1,0 +1,45 @@
+.container {
+  padding: 1rem;
+
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding-bottom: 2rem;
+
+    .title-content {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      max-width: 38rem;
+
+      .details {
+        display: flex;
+        gap: 0.5rem;
+        align-items: center;
+      }
+    }
+
+    h3 {
+      font-weight: 500;
+    }
+
+    .actions {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+  }
+
+  .content {
+    .section-content {
+      flex-grow: 1;
+      padding: 2rem;
+
+      .section-gray {
+        padding: 2rem 8rem;
+        background-color: #f9fafb;
+      }
+    }
+  }
+}

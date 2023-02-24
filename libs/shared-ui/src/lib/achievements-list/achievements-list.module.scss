@@ -1,0 +1,60 @@
+@import '../../styles/styles.module.scss';
+
+.achievements {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+
+  .achievement {
+    display: flex;
+    justify-content: space-between;
+    border: 1px solid $gray-color-200;
+    padding: 1rem;
+
+    .summary {
+      display: flex;
+      gap: 1rem;
+
+      img {
+        width: 40px;
+      }
+    }
+
+    .actions {
+      display: flex;
+      gap: 0.5rem;
+
+      .action {
+        display: flex;
+        align-items: center;
+        padding: 0 1rem;
+
+        h5 {
+          color: $green-color;
+          font-weight: 500;
+        }
+      }
+    }
+
+    h4 {
+      font-weight: 500;
+    }
+
+    h5 {
+      color: $text-gray-color;
+    }
+  }
+}
+
+.settings {
+  display: flex;
+  flex-direction: column;
+
+  .setting {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem;
+    border: 1px solid $gray-color-200;
+    color: $gray-color;
+  }
+}

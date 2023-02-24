@@ -1,0 +1,14 @@
+@import '../../styles/styles.module.scss';
+
+.container {
+  .status {
+    &.status-error {
+      color: $red-color;
+      margin-top: $size-sm-1;
+    }
+    &.status-success {
+      color: $green-color;
+      margin-top: $size-sm-1;
+    }
+  }
+}

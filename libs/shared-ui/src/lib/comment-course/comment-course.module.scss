@@ -1,0 +1,55 @@
+@import '../../styles/styles.module.scss';
+
+.container {
+  display: flex;
+  // width: 100%;
+  padding-top: $size-lg-3;
+  padding-bottom: $size-lg-3;
+
+  .avatar-content {
+    padding: $size-md-1;
+  }
+
+  .comment-content {
+    padding: $size-md-1;
+    .head {
+      display: flex;
+      justify-content: space-between;
+
+      h3 {
+        color: $text-color;
+      }
+    }
+
+    .review-title {
+      padding-bottom: $size-sm-2;
+      font-style: oblique;
+      color: $text-gray-color;
+      display: flex;
+      justify-content: space-between;
+      padding-right: $size-md-1;
+    }
+    .comment {
+      font-size: 14px;
+      color: $text-gray-color;
+      text-align: justify;
+    }
+  }
+}
+
+//smartphones-responsive
+@media screen and (max-width: 550px) {
+  .container{
+    width: 100%;
+    padding-top: $size-lg-1;
+    padding-bottom: $size-lg-2;
+    height: 18rem;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
+  .comment-content {
+    padding: 0;
+    width: 15rem;
+  }
+}

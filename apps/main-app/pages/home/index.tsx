@@ -59,7 +59,7 @@ export function Home(props: HomeProps) {
             </div>
           </div>
           <img
-            src="../../../../assets/images/illustration-cover.svg"
+            src="../../public/images/illustration-cover.svg"
             alt="cover"
           />
         </div>

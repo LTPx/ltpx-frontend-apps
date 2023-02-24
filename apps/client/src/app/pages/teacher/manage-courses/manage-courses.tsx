@@ -1,12 +1,11 @@
 import { useEffect, useState } from 'react';
-import { NavLink, Outlet, useLocation } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 import styles from './manage-courses.module.scss';
 /* eslint-disable-next-line */
 export interface ManageCoursesProps {}
 
 export function ManageCourses(props: ManageCoursesProps) {
   const [breadcrumbs, setBreadcrumbs] = useState<any[]>([]);
-  const location = useLocation();
 
   useEffect(() => {
     let mounted = true;

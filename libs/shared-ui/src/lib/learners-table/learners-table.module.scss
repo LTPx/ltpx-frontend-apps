@@ -15,17 +15,17 @@
   }
 }
 
-table {
+.table {
   border-collapse: collapse;
   width: 100%;
 }
 
-thead {
+.thead {
   background-color: $secondary-color;
   color: $white-color;
 }
 
-tbody {
+.tbody {
   color: $text-gray-color;
 
   tr {
@@ -35,12 +35,12 @@ tbody {
   }
 }
 
-td,
-th {
+.td,
+.th {
   text-align: left;
   padding: 20px;
 }
 
-tr:nth-child(even) {
+.tr:nth-child(even) {
   background-color: $background-gray-color;
 }

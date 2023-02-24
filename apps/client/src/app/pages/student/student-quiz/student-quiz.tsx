@@ -82,11 +82,11 @@ export function StudentQuiz(props: StudentQuizProps) {
           </div>
           <div className={styles['footer']}>
             <Button
-              title="Anterior"
+              title="Cancelar"
               color={ColorsButton.white}
               outline={true}
             />
-            <Button title="Siguiente" />
+            <Button title="Finalizar test" />
           </div>
         </div>
       )}

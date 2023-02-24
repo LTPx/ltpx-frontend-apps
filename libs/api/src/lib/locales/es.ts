@@ -246,6 +246,8 @@ export const es = {
   quizBuilder: {
     title: 'Nombre del test',
     questions: 'Preguntas',
+    total_questions_to_approved: 'Preguntas Aprobadas',
+    tip: 'Cuantas preguntas debe acertar el estudiante para aprobar este test'
   },
   quizFormConditional: {
     question: 'Pregunta',

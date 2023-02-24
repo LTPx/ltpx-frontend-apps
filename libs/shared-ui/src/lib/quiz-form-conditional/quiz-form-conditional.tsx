@@ -24,16 +24,15 @@ export function QuizFormConditional(props: QuizFormConditionalProps) {
     description: question?.description || '',
     answers: question?.answers || [
       {
-        text: 'true',
+        text: 'Verdadera',
         correct: false,
       },
       {
-        text: 'false',
+        text: 'Falsa',
         correct: false,
       },
     ],
   };
-  console.log('initialValues: ', initialValues);
   const formik = useFormik({
     initialValues: initialValues,
     validationSchema: Yup.object({
@@ -48,11 +47,11 @@ export function QuizFormConditional(props: QuizFormConditionalProps) {
     const { text, correct } = conditional;
     formik.setFieldValue(
       `answers[0].correct`,
-      text === 'true' ? !correct : correct
+      text === 'Verdadera' ? !correct : correct
     );
     formik.setFieldValue(
       `answers[1].correct`,
-      text === 'true' ? correct : !correct
+      text === 'Verdadera' ? correct : !correct
     );
   };
 

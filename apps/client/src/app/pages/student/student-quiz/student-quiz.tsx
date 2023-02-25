@@ -18,6 +18,7 @@ export interface StudentQuizProps {}
 
 export function StudentQuiz(props: StudentQuizProps) {
   const { _getStudentQuiz, currentQuiz } = useStudent();
+  
   const params = useParams();
   const { quizId } = params;
   const id = parseInt(quizId || '');
@@ -91,6 +92,7 @@ export function StudentQuiz(props: StudentQuizProps) {
               title="Cancelar"
               color={ColorsButton.white}
               outline={true}
+              link={`/student/dashboard`}
             />
             <Button
               title="Finalizar test"

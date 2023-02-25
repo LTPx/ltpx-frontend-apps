@@ -2,22 +2,28 @@
 .container {
   border: 1px solid $gray-color-200;
   border-radius: 8px;
-  display: grid;
-  grid-template-columns: 10% 70% 20%;
+  display: flex;
+  justify-content: space-between;
   align-items: center;
-  padding: $size-md-1 $size-sm-2;
+  padding: $size-md-1 2rem;
 
-  .row-icon {
+  .buttons-review {
     display: flex;
-    justify-content: center;
+    gap: 1rem;
   }
-  .row-info {
+  .row {
     display: flex;
-    flex-direction: column;
-    .total-questions {
-      color: $text-gray-color;
+    align-items: center;
+    gap: 1.5rem;
+    .row-info {
+      display: flex;
+      flex-direction: column;
+      .total-questions {
+        color: $text-gray-color;
+      }
     }
   }
+
   .row-btn {
     display: flex;
     justify-content: center;

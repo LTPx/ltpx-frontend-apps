@@ -77,6 +77,7 @@ export function StudentCourse(props: StudentCourseProps) {
                     totalQuestions={quiz.questions.length}
                     onClick={handleStartTest}
                     url={`/student/quiz/${quiz.id}`}
+                    urlReviewQuiz={`/student/quiz-review/${quiz.id}`}
                   />
                 </div>
               ))}

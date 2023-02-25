@@ -1,7 +1,8 @@
-import { Answer } from '@ltpx-frontend-apps/api';
-import GroupSelectOption, { OptionSelectGroup } from '../group-select-option/group-select-option';
-import Icon from '../icon/icon';
 import styles from './quiz-multiselect-question.module.scss';
+import { Answer, UserAnswer } from '@ltpx-frontend-apps/api';
+import GroupSelectOption from '../group-select-option/group-select-option';
+import Icon from '../icon/icon';
+import { useState } from 'react';
 
 /* eslint-disable-next-line */
 export interface QuizMultiselectQuestionProps {
@@ -9,10 +10,20 @@ export interface QuizMultiselectQuestionProps {
   description?: string;
   answers: Answer[];
   multiple?: boolean;
+  onChange?: (answers: UserAnswer[]) => void;
 }
 
 export function QuizMultiselectQuestion(props: QuizMultiselectQuestionProps) {
-  const { title, description, answers, multiple } = props;
+  const { title, description, answers, multiple, onChange } = props;
+  const answersForm = answers.map((answer) => {
+    return {
+      text: answer.text,
+      selected: false,
+      question_id: answer.question_id || 1,
+      answer_id: answer.id || 1
+    };
+  });
+  const [answersUi, setAnswersUi] = useState(answersForm);
 
   return (
     <div className={styles['container']}>
@@ -20,23 +31,49 @@ export function QuizMultiselectQuestion(props: QuizMultiselectQuestionProps) {
       <p>{description}</p>
       <div className={styles['answers']}>
         {multiple &&
-          answers.map((answer, index) => (
+          answersUi.map((answer, index) => (
             <div
               className={`${styles['answer']} ${
-                answer.correct ? styles['check'] : ''
+                answer.selected ? styles['check'] : ''
               }`}
               key={index}
+              onClick={() => {
+                const answers = answersUi.map((answerUi) => {
+                  return {
+                    ...answerUi,
+                    ...{
+                      selected:
+                        answer.answer_id === answerUi.answer_id
+                          ? !answerUi.selected
+                          : answerUi.selected,
+                    },
+                  };
+                });
+                setAnswersUi(answers);
+                onChange && onChange(answers.filter((answer) => answer.selected));
+              }}
             >
               <Icon
-                icon={answer.correct ? 'checkbox' : 'un-checkbox'}
+                icon={answer.selected ? 'checkbox' : 'un-checkbox'}
                 size={20}
               />
               <h4>{answer.text}</h4>
             </div>
           ))}
-        {!multiple &&
-          <GroupSelectOption options={answers} onChange={()=>{}} />
-        }
+        {!multiple && (
+          <GroupSelectOption
+            options={answers}
+            onChange={(answer) => {
+              onChange &&
+                onChange([
+                  {
+                    answer_id: answer.id,
+                    question_id: answer.question_id,
+                  },
+                ]);
+            }}
+          />
+        )}
       </div>
     </div>
   );

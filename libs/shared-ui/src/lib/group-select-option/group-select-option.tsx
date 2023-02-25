@@ -10,7 +10,7 @@ export interface OptionSelectGroup {
 
 export interface GroupSelectOptionProps {
   options: OptionSelectGroup[];
-  onChange: (option: OptionSelectGroup) => void;
+  onChange: (option: any) => void;
   className?: string;
 }
 

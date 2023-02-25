@@ -44,4 +44,12 @@ export interface QuestionQuiz {
 export interface Answer {
   text: string;
   correct: boolean;
+  id?: number; //should update all components support id
+  question_id?: number; //should update all components support id
+}
+
+export interface UserAnswer {
+  text?: string;
+  answer_id: number;
+  question_id: number;
 }

@@ -58,6 +58,10 @@ export function StudentQuiz(props: StudentQuizProps) {
                     <QuizConditionalQuestion
                       title={question.question}
                       description={question.description}
+                      answers={question.answers}
+                      onChange={(answer)=>{
+                        console.log(answer);
+                      }}
                     />
                   )}
                   {question.kind === TypeQuestionQuiz.multiple && (
@@ -66,6 +70,9 @@ export function StudentQuiz(props: StudentQuizProps) {
                       description={question.description}
                       answers={question.answers}
                       multiple={true}
+                      onChange={(answers)=>{
+                        console.log(answers);
+                      }}
                     />
                   )}
                   {question.kind === TypeQuestionQuiz.single && (
@@ -74,6 +81,9 @@ export function StudentQuiz(props: StudentQuizProps) {
                       description={question.description}
                       answers={question.answers}
                       multiple={false}
+                      onChange={(answers)=>{
+                        console.log(answers);
+                      }}
                     />
                   )}
                   {question.kind === TypeQuestionQuiz.answer && (

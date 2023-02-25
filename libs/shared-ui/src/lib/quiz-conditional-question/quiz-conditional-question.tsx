@@ -1,4 +1,4 @@
-import { Answer } from '@ltpx-frontend-apps/api';
+import { Answer, UserAnswer } from '@ltpx-frontend-apps/api';
 import GroupSelectOption from '../group-select-option/group-select-option';
 import styles from './quiz-conditional-question.module.scss';
 
@@ -7,7 +7,7 @@ export interface QuizConditionalQuestionProps {
   title: string;
   description?: string;
   answers: Answer[];
-  onChange?: (answer: Partial<Answer>) => void;
+  onChange?: (answer: UserAnswer) => void;
 }
 
 export function QuizConditionalQuestion(props: QuizConditionalQuestionProps) {

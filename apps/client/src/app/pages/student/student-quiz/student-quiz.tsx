@@ -1,4 +1,4 @@
-import { TypeQuestionQuiz } from '@ltpx-frontend-apps/api';
+import { TypeQuestionQuiz, UserAnswer } from '@ltpx-frontend-apps/api';
 import {
   Button,
   ColorsButton,
@@ -17,6 +17,7 @@ import styles from './student-quiz.module.scss';
 export interface StudentQuizProps {}
 
 export function StudentQuiz(props: StudentQuizProps) {
+  const [answers, setAnswers] = useState<UserAnswer[]>([]);
   const { _getStudentQuiz, currentQuiz } = useStudent();
   const params = useParams();
   const { quizId } = params;
@@ -46,8 +47,8 @@ export function StudentQuiz(props: StudentQuizProps) {
           <div className={styles['header']}>
             <h2>{currentQuiz.name}</h2>
             <div className={styles['progress-quiz']}>
-              <p>Progreso</p>
-              <h3>1 / {currentQuiz.questions.length}</h3>
+              <p>Total de Preguntas</p>
+              <h3>{currentQuiz.questions.length}</h3>
             </div>
           </div>
           <div className={styles['content']}>
@@ -61,6 +62,7 @@ export function StudentQuiz(props: StudentQuizProps) {
                       answers={question.answers}
                       onChange={(answer)=>{
                         console.log(answer);
+                        setAnswers(answers.concat([answer]));
                       }}
                     />
                   )}
@@ -72,6 +74,7 @@ export function StudentQuiz(props: StudentQuizProps) {
                       multiple={true}
                       onChange={(answers)=>{
                         console.log(answers);
+                        setAnswers(answers.concat(answers));
                       }}
                     />
                   )}
@@ -83,6 +86,7 @@ export function StudentQuiz(props: StudentQuizProps) {
                       multiple={false}
                       onChange={(answers)=>{
                         console.log(answers);
+                        setAnswers(answers.concat(answers));
                       }}
                     />
                   )}

@@ -1,5 +1,5 @@
 import { _http } from '../../http';
-import { QuizModel } from '../../interfaces/quiz-interface';
+import { QuizModel, UserAnswer } from '../../interfaces/quiz-interface';
 
 const http = _http;
 
@@ -15,3 +15,17 @@ export const getStudentQuiz = async (id: number) => {
       });
   });
 };
+export const studentEvaluateQuiz = async (id: number, answers: UserAnswer[]) => {
+  const params = { id, answers };
+  return new Promise<any>((resolve, reject) => {
+    http
+      .post(`api/v1/student/quiz_results`, params)
+      .then((response) => {
+        resolve(response.data);
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
+};
+

@@ -10,6 +10,8 @@ import {
   getStudentQuiz,
   Purchase,
   QuizModel,
+  studentEvaluateQuiz,
+  UserAnswer,
 } from '@ltpx-frontend-apps/api';
 
 export type TResponse = {
@@ -29,6 +31,7 @@ export type StudentSlice = {
   _getStudentCourse: (courseId: number) => Promise<TResponse>;
   _getStudentClasses: () => Promise<TResponse>;
   _getStudentQuiz: (quizId: number) => Promise<TResponse>;
+  _evaluateQuiz: (quizId: number, answers: UserAnswer[]) => Promise<TResponse>;
 };
 
 export const createStudentSlice: StateCreator<StoreState, [], [], StudentSlice> = (
@@ -80,6 +83,14 @@ export const createStudentSlice: StateCreator<StoreState, [], [], StudentSlice> 
     try {
       const quiz = await getStudentQuiz(id);
       set({currentQuiz: quiz});
+      return { success: true, data: quiz };
+    } catch (error) {
+      return { success: false, error };
+    }
+  },
+  _evaluateQuiz: async (id, answers): Promise<TResponse> => {
+    try {
+      const quiz = await studentEvaluateQuiz(id, answers);
       return { success: true, data: quiz };
     } catch (error) {
       return { success: false, error };

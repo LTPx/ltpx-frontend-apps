@@ -52,4 +52,5 @@ export interface UserAnswer {
   text?: string;
   answer_id: number;
   question_id: number;
+  user_id?: number;
 }

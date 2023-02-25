@@ -1,4 +1,4 @@
-import { TypeQuestionQuiz, UserAnswer } from '@ltpx-frontend-apps/api';
+import { Answer, TypeQuestionQuiz, UserAnswer } from '@ltpx-frontend-apps/api';
 import {
   Button,
   ColorsButton,
@@ -18,13 +18,31 @@ export interface StudentQuizProps {}
 
 export function StudentQuiz(props: StudentQuizProps) {
   const [answers, setAnswers] = useState<UserAnswer[]>([]);
-  const { _getStudentQuiz, currentQuiz } = useStudent();
+  const { _getStudentQuiz, _evaluateQuiz, currentQuiz } = useStudent();
   const params = useParams();
   const { quizId } = params;
   const id = parseInt(quizId || '');
   const [openModal, setOpenModal] = useState(false);
-  const handleRequest = () => {
-    setOpenModal(true);
+  const uniqueIds: number[] = [];
+  const filterAnswers = (answers: UserAnswer[]) => {
+    return answers.filter(element => {
+      const id = element.answer_id;
+      const isDuplicate = uniqueIds.includes(id);
+      if (!isDuplicate) {
+        uniqueIds.push(id);
+        return true;
+      }
+      return false;
+    });
+  }
+
+
+  const handleRequest = async() => {
+    console.log('answers: ', answers);
+    const answersFilter = filterAnswers(answers);
+    console.log(answersFilter);
+    // await _evaluateQuiz(id, answersFilter);
+    // setOpenModal(true);
   };
 
   const fetchQuiz = useCallback(async () => {
@@ -60,9 +78,8 @@ export function StudentQuiz(props: StudentQuizProps) {
                       title={question.question}
                       description={question.description}
                       answers={question.answers}
-                      onChange={(answer)=>{
-                        console.log(answer);
-                        setAnswers(answers.concat([answer]));
+                      onChange={(answerSelected)=>{
+                        setAnswers(answers.concat([answerSelected]));
                       }}
                     />
                   )}
@@ -72,9 +89,9 @@ export function StudentQuiz(props: StudentQuizProps) {
                       description={question.description}
                       answers={question.answers}
                       multiple={true}
-                      onChange={(answers)=>{
+                      onChange={(answersSelected)=>{
                         console.log(answers);
-                        setAnswers(answers.concat(answers));
+                        setAnswers(answers.concat(answersSelected));
                       }}
                     />
                   )}
@@ -84,9 +101,9 @@ export function StudentQuiz(props: StudentQuizProps) {
                       description={question.description}
                       answers={question.answers}
                       multiple={false}
-                      onChange={(answers)=>{
-                        console.log(answers);
-                        setAnswers(answers.concat(answers));
+                      onChange={(answersSelected)=>{
+                        console.log(answersSelected);
+                        setAnswers(answers.concat(answersSelected));
                       }}
                     />
                   )}

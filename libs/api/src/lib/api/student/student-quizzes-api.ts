@@ -16,7 +16,7 @@ export const getStudentQuiz = async (id: number) => {
   });
 };
 export const studentEvaluateQuiz = async (id: number, answers: UserAnswer[]) => {
-  const params = { id, answers };
+  const params = { quiz_id: id, user_answers_attributes: answers };
   return new Promise<any>((resolve, reject) => {
     http
       .post(`api/v1/student/quiz_results`, params)

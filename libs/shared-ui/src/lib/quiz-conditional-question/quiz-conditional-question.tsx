@@ -21,7 +21,10 @@ export function QuizConditionalQuestion(props: QuizConditionalQuestionProps) {
         <GroupSelectOption
           options={answers}
           onChange={(option) => {
-            onChange && onChange(option);
+            onChange && onChange({
+              answer_id: option.id,
+              question_id: option.question_id,
+            });
           }}
         />
       </div>

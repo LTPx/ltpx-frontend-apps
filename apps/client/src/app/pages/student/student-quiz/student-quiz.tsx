@@ -7,7 +7,7 @@ import {
   QuizMultiselectQuestion,
   QuizScore,
 } from '@ltpx-frontend-apps/shared-ui';
-import { useStudent } from '@ltpx-frontend-apps/store';
+import { useStudent, useUser } from '@ltpx-frontend-apps/store';
 import { Dialog } from 'evergreen-ui';
 import { useCallback, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
@@ -23,6 +23,8 @@ export function StudentQuiz(props: StudentQuizProps) {
   const { quizId } = params;
   const id = parseInt(quizId || '');
   const [openModal, setOpenModal] = useState(false);
+  const { user } = useUser();
+
   const uniqueIds: number[] = [];
   const filterAnswers = (answers: UserAnswer[]) => {
     return answers.filter(element => {
@@ -39,9 +41,11 @@ export function StudentQuiz(props: StudentQuizProps) {
 
   const handleRequest = async() => {
     console.log('answers: ', answers);
-    const answersFilter = filterAnswers(answers);
+    const answersFilter = filterAnswers(answers).map((answer)=> {
+      return {...answer, ...{user_id: user.id}};
+    });
     console.log(answersFilter);
-    // await _evaluateQuiz(id, answersFilter);
+    await _evaluateQuiz(id, answersFilter);
     // setOpenModal(true);
   };
 

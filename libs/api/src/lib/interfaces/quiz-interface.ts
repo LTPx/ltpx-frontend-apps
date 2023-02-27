@@ -66,3 +66,16 @@ export interface QuizResult {
   created_at: string;
   updated_at: string;
 }
+
+export interface QuizStudent {
+  id: number;
+  user_id: number;
+  course_id: number;
+  name: string;
+  total_questions: number;
+  quizzes_results_ids: number[];
+  last_quiz_result: {
+    id: number,
+    score: number
+  }
+}

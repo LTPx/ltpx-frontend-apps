@@ -9,6 +9,7 @@ import { useStudent } from '@ltpx-frontend-apps/store';
 import { useCallback, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import styles from './student-course.module.scss';
+import StudentCourseQuizzes from './tabs/student-course-quizzes';
 
 /* eslint-disable-next-line */
 export interface StudentCourseProps {}
@@ -69,19 +70,7 @@ export function StudentCourse(props: StudentCourseProps) {
             </div>
           )}
           {selectedTab === 1 && (
-            <div className={styles['quizzes-content']}>
-              {enrolledCourse.quizzes?.map((quiz, index) => (
-                <div className={styles['quiz']} key={index}>
-                  <QuizStudentCard
-                    title={quiz.name}
-                    totalQuestions={quiz.questions.length}
-                    onClick={handleStartTest}
-                    url={`/student/course/${enrolledCourse.id}/quiz/${quiz.id}`}
-                    urlReviewQuiz={`/student/quiz-review/${quiz.id}`}
-                  />
-                </div>
-              ))}
-            </div>
+            <StudentCourseQuizzes courseId={enrolledCourse.id}/>
           )}
           {selectedTab === 2 && (
             <div className={styles['achievements-content']}>

@@ -1,10 +1,10 @@
 import { _http } from '../../http';
-import { QuizModel, QuizResult, UserAnswer } from '../../interfaces/quiz-interface';
+import { QuizModel, QuizResult, QuizStudent, UserAnswer } from '../../interfaces/quiz-interface';
 
 const http = _http;
 
 export const getStudentQuizzes = async (courseId: number) => {
-  return new Promise<QuizModel[]>((resolve, reject) => {
+  return new Promise<QuizStudent[]>((resolve, reject) => {
     http
       .get(`/api/v1/student/courses/${courseId}/quizzes`)
       .then((response) => {
@@ -20,6 +20,19 @@ export const getStudentQuiz = async (courseId: number, quizId: number) => {
   return new Promise<QuizModel>((resolve, reject) => {
     http
       .get(`/api/v1/student/courses/${courseId}/quizzes/${quizId}`)
+      .then((response) => {
+        resolve(response.data);
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
+};
+
+export const getStudentQuizResult = async (quizId: number) => {
+  return new Promise<QuizModel>((resolve, reject) => {
+    http
+      .get(`api/v1/student/quiz_results/${quizId}`)
       .then((response) => {
         resolve(response.data);
       })

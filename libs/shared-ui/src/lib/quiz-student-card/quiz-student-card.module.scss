@@ -24,9 +24,11 @@
     }
   }
 
-  .row-btn {
+  .row-buttons {
     display: flex;
     justify-content: center;
+    gap: 1rem;
+
     .btn {
       padding: $size-sm-2;
     }

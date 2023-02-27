@@ -8,13 +8,14 @@ import styles from './student-review-quiz.module.scss';
 export interface StudentReviewQuizProps {}
 
 export function StudentReviewQuiz(props: StudentReviewQuizProps) {
-  const { _getStudentQuiz, currentQuiz } = useStudent();
+  const { _getStudentQuizResult, currentQuiz } = useStudent();
   const params = useParams();
-  const { quizId } = params;
+  const { courseId, quizId } = params;
   const id = parseInt(quizId || '');
 
   const fetchQuiz = useCallback(async () => {
-    const { success, data, error } = await _getStudentQuiz(12,id);
+    console.log('id: ', id);
+    const { success, data, error } = await _getStudentQuizResult(id);
     if (success) {
       console.log('data: ', data);
     } else {
@@ -28,7 +29,7 @@ export function StudentReviewQuiz(props: StudentReviewQuizProps) {
 
   return (
     <div className={styles['container']}>
-      { currentQuiz.id && <QuizView quiz={currentQuiz}/> }
+      {/* { currentQuiz.id && <QuizView quiz={currentQuiz}/> } */}
     </div>
   );
 }

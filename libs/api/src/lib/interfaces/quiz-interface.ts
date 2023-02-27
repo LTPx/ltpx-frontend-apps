@@ -54,3 +54,15 @@ export interface UserAnswer {
   question_id: number;
   user_id?: number;
 }
+
+export interface QuizResult {
+  id: number;
+  quiz_id: number;
+  user_id: number;
+  score: number;
+  total_correct_answer: number;
+  total_incorrect_answer: number;
+  total_no_answer: number;
+  created_at: string;
+  updated_at: string;
+}

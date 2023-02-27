@@ -14,7 +14,7 @@ export function StudentReviewQuiz(props: StudentReviewQuizProps) {
   const id = parseInt(quizId || '');
 
   const fetchQuiz = useCallback(async () => {
-    const { success, data, error } = await _getStudentQuiz(id);
+    const { success, data, error } = await _getStudentQuiz(12,id);
     if (success) {
       console.log('data: ', data);
     } else {

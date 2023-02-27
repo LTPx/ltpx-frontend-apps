@@ -39,7 +39,7 @@ export const StudentRoutes = () => {
           <Route path="courses" element={<StudentCourses />} />
           <Route path="courses/:courseId" element={<StudentCourse />} />
           <Route path="classes" element={<StudentClasses />} />
-          <Route path="quiz/:quizId" element={<StudentQuiz/>} />
+          <Route path="course/:courseId/quiz/:quizId" element={<StudentQuiz/>} />
           <Route path="quiz-review/:quizId" element={<StudentReviewQuiz/>} />
           <Route
             path="live-meeting/:meetingId/:roomId"

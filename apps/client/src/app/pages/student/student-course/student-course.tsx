@@ -76,7 +76,7 @@ export function StudentCourse(props: StudentCourseProps) {
                     title={quiz.name}
                     totalQuestions={quiz.questions.length}
                     onClick={handleStartTest}
-                    url={`/student/quiz/${quiz.id}`}
+                    url={`/student/course/${enrolledCourse.id}/quiz/${quiz.id}`}
                     urlReviewQuiz={`/student/quiz-review/${quiz.id}`}
                   />
                 </div>

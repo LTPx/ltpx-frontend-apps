@@ -20,8 +20,10 @@ export function StudentQuiz(props: StudentQuizProps) {
   const [answers, setAnswers] = useState<UserAnswer[]>([]);
   const { _getStudentQuiz, _evaluateQuiz, currentQuiz } = useStudent();
   const params = useParams();
-  const { quizId } = params;
+  const { quizId, courseId } = params;
   const id = parseInt(quizId || '');
+  const course_id = parseInt(courseId || '');
+
   const [openModal, setOpenModal] = useState(false);
   const [score, setScore] = useState<number>(0);
   const { user } = useUser();
@@ -55,7 +57,7 @@ export function StudentQuiz(props: StudentQuizProps) {
   };
 
   const fetchQuiz = useCallback(async () => {
-    const { success, data, error } = await _getStudentQuiz(id);
+    const { success, data, error } = await _getStudentQuiz(course_id, id);
     if (success) {
       console.log('data: ', data);
     } else {
@@ -130,7 +132,7 @@ export function StudentQuiz(props: StudentQuizProps) {
               title="Cancelar"
               color={ColorsButton.white}
               outline={true}
-              link={`/student/dashboard`}
+              link={`/student/courses/${courseId}`}
             />
             <Button
               title="Finalizar test"

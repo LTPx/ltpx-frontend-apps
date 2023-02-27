@@ -1,17 +1,14 @@
 import { Routes, Route, BrowserRouter, Navigate } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
 import {
   ClassesLayout,
   CoursesLayout,
   DashboardLayout,
   PaymentsLayout,
 } from '../layouts/index';
+import { AllCourses, CourseDetails, Home } from '../pages/site';
 import {
   Account,
   ClassesCalendar,
-  Classes,
-  Courses,
-  StateCourses,
   Dashboard,
   Invoice,
   LiveClass,
@@ -21,6 +18,10 @@ import {
   StudentCourse,
   StudentClasses,
   StudentLayout,
+  StudentAccountLayout,
+  StudentAccountProfile,
+  StudentQuiz,
+  StudentReviewQuiz,
 } from '../pages/student/index';
 import VideoMeetingLive from '../video/video-meeting-live/video-meeting-live';
 
@@ -28,25 +29,22 @@ export const StudentRoutes = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Navigate replace to="student/dashboard" />} />
+        <Route path="/" element={<StudentLayout />}>
+          <Route path="/home" element={<Home />} />
+          <Route path="/courses" element={<AllCourses />} />
+          <Route path="/course/:courseId/details" element={<CourseDetails />} />
+        </Route>
         <Route path="student" element={<StudentLayout />}>
           <Route path="dashboard" element={<Dashboard />} />
-          <Route path="courses" element={<CoursesLayout />}>
-            <Route
-              path="/student/courses"
-              element={<Navigate replace to="learning" />}
-            />
-            <Route path="learning" element={<StudentCourses />} />
-            <Route
-              path="finished"
-              element={<Courses state={StateCourses.finished} />}
-            />
-            <Route path=":courseId" element={<StudentCourse />} />
-          </Route>
+          <Route path="courses" element={<StudentCourses />} />
+          <Route path="courses/:courseId" element={<StudentCourse />} />
           <Route path="classes" element={<StudentClasses />} />
-          <Route path="classes" element={<StudentClasses />} />
-          <Route path="live-meeting/:meetingId/:roomId" element={<VideoMeetingLive redirectUrl='http://localhost:4200/student/classes'/>} />
-
+          <Route path="quiz/:quizId" element={<StudentQuiz/>} />
+          <Route path="quiz-review/:quizId" element={<StudentReviewQuiz/>} />
+          <Route
+            path="live-meeting/:meetingId/:roomId"
+            element={<VideoMeetingLive redirectUrl="/student/classes" />}
+          />
           {/* <Route path="classes" element={<ClassesLayout/>}>
             <Route path="/student/classes" element={<Navigate replace to="week" />} />
             <Route path="week" element={<Classes/>}/>
@@ -62,7 +60,11 @@ export const StudentRoutes = () => {
             <Route path="invoice" element={<Invoice />} />
           </Route>
           <Route path="settings" element={<Settings />} />
-          <Route path="account" element={<Account />} />
+          {/* <Route path="account" element={<Account />} /> */}
+          <Route path="account" element={<StudentAccountLayout />}>
+            <Route path="/student/account" element={<StudentAccountProfile />} />
+            <Route path="account-form" element={<Account />} />
+          </Route>
         </Route>
       </Routes>
     </BrowserRouter>

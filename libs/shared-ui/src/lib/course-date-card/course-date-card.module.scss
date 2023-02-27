@@ -1,0 +1,22 @@
+@import '../../styles/styles.module.scss';
+
+.content {
+  display: flex;
+  flex-direction: column;
+  padding: $size-md-3;
+  width: 12rem;
+  // box-shadow: $card-shadow-medium;
+  border-radius: 15px;
+  border: 1.5px solid $primary-color;
+
+  h3 {
+    padding-bottom: $size-sm-2;
+  }
+  .description {
+    color: $text-gray-color;
+  }
+  .time {
+    color: $text-gray-color;
+  }
+  
+}

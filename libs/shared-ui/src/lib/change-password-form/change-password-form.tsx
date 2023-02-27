@@ -11,10 +11,11 @@ import InputTextStatus, {
 /* eslint-disable-next-line */
 export interface ChangePasswordFormProps {
   onSubmit?: (data: INewPassword) => void;
+  url?: string;
 }
 
 export function ChangePasswordForm(props: ChangePasswordFormProps) {
-  const { onSubmit } = props;
+  const { onSubmit, url } = props;
 
   const formik = useFormik({
     initialValues: {
@@ -101,7 +102,7 @@ export function ChangePasswordForm(props: ChangePasswordFormProps) {
             color={ColorsButton.white}
             outline={true}
             title="Cancelar"
-            link={'/teacher/account/account-profile'}
+            link={url}
           />
           <Button
             color={ColorsButton.primary}

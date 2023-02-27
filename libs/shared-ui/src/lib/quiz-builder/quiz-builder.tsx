@@ -6,7 +6,6 @@ import {
 import {
   Icon,
   Menu,
-  MenuItem,
   QuizFormAnswer,
   QuizFormMultipleOptions,
 } from '@ltpx-frontend-apps/shared-ui';
@@ -65,12 +64,14 @@ export function QuizBuilder(props: QuizBuilderProps) {
     id: quiz?.id,
     name: quiz?.name || '',
     questions: quiz?.questions || [],
+    total_questions_to_approved: quiz?.total_questions_to_approved || 1,
   };
 
   const formik = useFormik({
     initialValues: initialValues,
     validationSchema: Yup.object({
       name: Yup.string().required('Necesitas agregar un nombre'),
+      total_questions_to_approved: Yup.number().required('Necesitas definir el numero de preguntas'),
     }),
     onSubmit: (quiz) => {
       onSubmit && onSubmit(quiz);
@@ -171,7 +172,7 @@ export function QuizBuilder(props: QuizBuilderProps) {
       {!selectedTypeQuestion && (
         <div className={styles['control-questions']}>
           <Menu items={type_question}>
-            <Button title={'Agregar Pregunta'} 
+            <Button title={'Agregar Pregunta'}
             color={ColorsButton.secondary}
             icon='plus'/>
           </Menu>
@@ -263,6 +264,17 @@ export function QuizBuilder(props: QuizBuilderProps) {
             value={formik.values.name}
             onBlur={formik.handleBlur}
             errorMessage={formik.errors.name}
+          />
+          <Input
+            label={t('quizBuilder.total_questions_to_approved') || ''}
+            description={t('quizBuilder.tip') || ''}
+            name="total_questions_to_approved"
+            placeholder="Todas"
+            type='number'
+            onChange={formik.handleChange}
+            value={formik.values.total_questions_to_approved}
+            onBlur={formik.handleBlur}
+            errorMessage={formik.errors.total_questions_to_approved}
           />
         </form>
         <ContentQuizForm questions={formik.values.questions} />

@@ -5,11 +5,12 @@ import Icon from '../icon/icon';
 /* eslint-disable-next-line */
 export interface OptionSelectGroup {
   text: string;
+  value?: string;
 }
 
 export interface GroupSelectOptionProps {
   options: OptionSelectGroup[];
-  onChange: (option: OptionSelectGroup) => void;
+  onChange: (option: any) => void;
   className?: string;
 }
 

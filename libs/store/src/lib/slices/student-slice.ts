@@ -4,9 +4,14 @@ import {
   Classroom,
   CourseModel,
   getStudentClasses,
+  getStudentCourse,
   getStudentCourses,
   getStudentPayments,
+  getStudentQuiz,
   Purchase,
+  QuizModel,
+  studentEvaluateQuiz,
+  UserAnswer,
 } from '@ltpx-frontend-apps/api';
 
 export type TResponse = {
@@ -18,10 +23,15 @@ export type TResponse = {
 export type StudentSlice = {
   purchases: Purchase[];
   enrolledCourses: CourseModel[];
+  enrolledCourse: CourseModel;
   studentClasses: Classroom[];
+  currentQuiz: QuizModel;
   _getStudentPayments: () => Promise<TResponse>;
   _getStudentCourses: () => Promise<TResponse>;
+  _getStudentCourse: (courseId: number) => Promise<TResponse>;
   _getStudentClasses: () => Promise<TResponse>;
+  _getStudentQuiz: (quizId: number) => Promise<TResponse>;
+  _evaluateQuiz: (quizId: number, answers: UserAnswer[]) => Promise<TResponse>;
 };
 
 export const createStudentSlice: StateCreator<StoreState, [], [], StudentSlice> = (
@@ -30,7 +40,9 @@ export const createStudentSlice: StateCreator<StoreState, [], [], StudentSlice> 
 ) => ({
   purchases: [],
   enrolledCourses: [],
+  enrolledCourse: {} as CourseModel,
   studentClasses: [],
+  currentQuiz: {} as QuizModel,
   _getStudentPayments: async (): Promise<TResponse> => {
     try {
       const purchases = await getStudentPayments();
@@ -49,11 +61,37 @@ export const createStudentSlice: StateCreator<StoreState, [], [], StudentSlice> 
       return { success: false, error };
     }
   },
+  _getStudentCourse: async (id): Promise<TResponse> => {
+    try {
+      const course = await getStudentCourse(id);
+      set({enrolledCourse: course});
+      return { success: true, data: course };
+    } catch (error) {
+      return { success: false, error };
+    }
+  },
   _getStudentClasses: async (): Promise<TResponse> => {
     try {
       const classes = await getStudentClasses();
       set({studentClasses: classes});
       return { success: true, data: classes };
+    } catch (error) {
+      return { success: false, error };
+    }
+  },
+  _getStudentQuiz: async (id): Promise<TResponse> => {
+    try {
+      const quiz = await getStudentQuiz(id);
+      set({currentQuiz: quiz});
+      return { success: true, data: quiz };
+    } catch (error) {
+      return { success: false, error };
+    }
+  },
+  _evaluateQuiz: async (id, answers): Promise<TResponse> => {
+    try {
+      const quiz = await studentEvaluateQuiz(id, answers);
+      return { success: true, data: quiz };
     } catch (error) {
       return { success: false, error };
     }

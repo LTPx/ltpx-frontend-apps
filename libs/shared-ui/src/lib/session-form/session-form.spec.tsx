@@ -1,10 +1,10 @@
 import { render } from '@testing-library/react';
 
-import Classes from './classes';
+import SessionForm from './session-form';
 
-describe('Classes', () => {
+describe('SessionForm', () => {
   it('should render successfully', () => {
-    const { baseElement } = render(<Classes />);
+    const { baseElement } = render(<SessionForm />);
     expect(baseElement).toBeTruthy();
   });
 });

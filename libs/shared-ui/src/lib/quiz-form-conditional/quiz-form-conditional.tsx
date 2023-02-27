@@ -33,7 +33,6 @@ export function QuizFormConditional(props: QuizFormConditionalProps) {
       },
     ],
   };
-  console.log('initialValues: ', initialValues);
   const formik = useFormik({
     initialValues: initialValues,
     validationSchema: Yup.object({

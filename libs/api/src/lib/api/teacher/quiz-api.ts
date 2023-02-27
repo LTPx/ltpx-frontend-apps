@@ -4,9 +4,17 @@ import { EditQuizParams, NewQuizParams, QuizModel } from '../../interfaces/quiz-
 const http = _http;
 
 export const createQuiz = async (quiz: NewQuizParams) => {
+  //TODO: update in submit
+  const { questions } = quiz;
+  const questionsFormat = questions.map((question)=>{
+    const { answers } = question;
+    const questionFormat = {...question, ...{answers_attributes: answers}}
+    return questionFormat
+  })
+  const newQuiz = {...quiz, ...{questions_attributes: questionsFormat}};
   return new Promise<QuizModel>((resolve, reject) => {
     http
-      .post('api/v1/teacher/quizzes', quiz)
+      .post('api/v1/teacher/quizzes', newQuiz)
       .then((response) => {
         resolve(response.data);
       })
@@ -18,9 +26,18 @@ export const createQuiz = async (quiz: NewQuizParams) => {
 
 export const editQuiz = async (quiz: EditQuizParams) => {
   const { id } = quiz;
+    //TODO: update in submit
+    const { questions } = quiz;
+    const questionsFormat = questions.map((question)=>{
+      const { answers } = question;
+      const questionFormat = {...question, ...{answers_attributes: answers}}
+      return questionFormat
+    })
+  const editQuiz = {...quiz, ...{questions_attributes: questionsFormat}};
+  debugger
   return new Promise<QuizModel>((resolve, reject) => {
     http
-      .put(`api/v1/teacher/quizzes/${id}`, quiz)
+      .put(`api/v1/teacher/quizzes/${id}`, editQuiz)
       .then((response) => {
         resolve(response.data);
       })

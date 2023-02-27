@@ -3,6 +3,7 @@ import {
   Button,
   CategoryCard,
   ColorsButton,
+  ContentDescription,
   CourseCard,
   NewsCard,
 } from '@ltpx-frontend-apps/shared-ui';
@@ -146,6 +147,7 @@ export function Home() {
           />
         </div>
       </div>
+      <ContentDescription />
       <div className={styles['popular-courses-container']}>
         <div className={styles['text']}>
           <h2>{t('home.popularCourse.title')}</h2>

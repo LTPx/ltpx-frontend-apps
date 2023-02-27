@@ -9,6 +9,7 @@ import {
   ScheduleClassRow,
   RescheduleMeetingForm,
   Loader,
+  NewClassForm,
 } from '@ltpx-frontend-apps/shared-ui';
 import { useTeacher } from '@ltpx-frontend-apps/store';
 import { useCallback, useEffect, useState } from 'react';
@@ -20,6 +21,7 @@ export function TeacherMeetingsAgenda() {
     []
   );
   const [openModal, setOpenModal] = useState(false);
+  const [openClass, setOpenClass] = useState(false);
   const { _getClassrooms, _getMeetingRoomId, loadingTeacherApi } = useTeacher();
   const navigate = useNavigate();
 
@@ -146,6 +148,9 @@ export function TeacherMeetingsAgenda() {
                   title="Agendar Nueva Clase"
                   icon="plus"
                   color={ColorsButton.secondary}
+                  onClick= {() => {
+                    setOpenClass(true);
+                  }}
                 />
               </div>
             </div>
@@ -160,6 +165,14 @@ export function TeacherMeetingsAgenda() {
           time="10:00 - 10:30"
           onClose={() => {
             setOpenModal(false);
+          }}
+        />
+      )}
+      {openClass && (
+        <NewClassForm
+          open={openClass}
+          onClose={() => {
+            setOpenClass(false);
           }}
         />
       )}

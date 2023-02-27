@@ -15,3 +15,16 @@ export const getStudentCourses = async () => {
       });
   });
 };
+
+export const getStudentCourse = async (id: number) => {
+  return new Promise<CourseModel>((resolve, reject) => {
+    http
+      .get(`api/v1/student/courses/${id}`)
+      .then((response) => {
+        resolve(response.data);
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
+};

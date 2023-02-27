@@ -8,13 +8,16 @@ export enum TypeQuestionQuiz {
 }
 
 export interface QuizModel {
-  id: number; // ignore in new but not in edit
-  user_id: number;  //ignore in new/edit
-  course_id: number; //ignore in new
+  id: number;
+  user_id: number;
+  course_id: number;
   name: string;
   questions: QuestionQuiz[];
-  created_at: string; //ignore in new/edit
-  updated_at: string; //ignore in new/edit
+  time_minutes_to_answer?: number;
+  max_attempts?: number;
+  total_questions_to_approved?: number;
+  created_at: string;
+  updated_at: string;
 }
 
 export type NewQuizParams = Omit<
@@ -38,7 +41,16 @@ export interface QuestionQuiz {
   answers: Answer[];
 }
 
-interface Answer {
+export interface Answer {
   text: string;
   correct: boolean;
+  id?: number; //should update all components support id
+  question_id?: number; //should update all components support id
+}
+
+export interface UserAnswer {
+  text?: string;
+  answer_id: number;
+  question_id: number;
+  user_id?: number;
 }

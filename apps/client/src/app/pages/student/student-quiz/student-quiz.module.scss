@@ -1,0 +1,30 @@
+@import '../../../../styles.scss';
+.btn-quiz-score {
+  display: flex;
+  justify-content: center;
+  padding-top: $size-md-2;
+}
+.container {
+  width: 60vw;
+  .header {
+    display: flex;
+    justify-content: space-between;
+
+    p {
+      font-weight: 500;
+    }
+  }
+
+  .questions {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    padding: 1rem 0;
+  }
+}

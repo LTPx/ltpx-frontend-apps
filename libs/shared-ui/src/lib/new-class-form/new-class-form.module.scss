@@ -1,0 +1,27 @@
+@import '../../styles/styles.module.scss';
+
+.content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: space-between;
+  .form {
+    padding: $size-md-3;
+    h1 {
+      padding-bottom: $size-md-1;
+    }
+    .field-form {
+      margin-top: $size-md-3;
+      .select {
+        padding-top: $size-sm-2;
+      }
+    }
+  }
+  .btn-submit {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: $size-md-1;
+    padding: $size-md-1 $size-md-3;
+  }
+}

@@ -1,10 +1,10 @@
 import { render } from '@testing-library/react';
 
-import Courses from './courses';
+import StudentQuiz from './student-quiz';
 
-describe('Courses', () => {
+describe('StudentQuiz', () => {
   it('should render successfully', () => {
-    const { baseElement } = render(<Courses courses={[]} />);
+    const { baseElement } = render(<StudentQuiz />);
     expect(baseElement).toBeTruthy();
   });
 });

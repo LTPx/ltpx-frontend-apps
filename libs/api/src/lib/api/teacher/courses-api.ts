@@ -85,3 +85,16 @@ export const sendCourseToReview = async (id: number) => {
       });
   });
 };
+
+export const getCourseStudents = async (id: number) => {
+  return new Promise<TeacherCourse>((resolve, reject) => {
+    http
+      .get(`api/v1/teacher/course_sessions/${id}/students`)
+      .then((response) => {
+        resolve(response.data);
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
+};

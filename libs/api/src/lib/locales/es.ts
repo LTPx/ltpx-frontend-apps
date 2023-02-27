@@ -246,6 +246,8 @@ export const es = {
   quizBuilder: {
     title: 'Nombre del test',
     questions: 'Preguntas',
+    total_questions_to_approved: 'Preguntas Aprobadas',
+    tip: 'Cuantas preguntas debe acertar el estudiante para aprobar este test'
   },
   quizFormConditional: {
     question: 'Pregunta',
@@ -337,5 +339,9 @@ export const es = {
     degrees: 'Títulos académicos',
     degrees_files: 'Adjuntar títulos (.pdf)',
     police_record: 'Record policial',
+  },
+  boolean: {
+    true: 'Verdadero',
+    false: 'Falso'
   }
 }

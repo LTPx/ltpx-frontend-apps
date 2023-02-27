@@ -1,0 +1,43 @@
+@import '../../../../styles.scss';
+
+.container {
+  width: 80vw;
+  display: flex;
+  justify-content: center;
+  .content {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 30% 70%;
+    gap: $size-lg-3;
+  }
+  .profile {
+    .general-information {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: $size-sm-3;
+      padding: $size-md-3;
+      box-shadow: $card-shadow-medium;
+      background-color: $white-color;
+      h3 {
+        font-weight: 500;
+      }
+      h4 {
+        color: $text-gray-color;
+      }
+      .btn {
+        padding-top: $size-sm-2;
+      }
+
+      .button-edit {
+        padding: $size-sm-2 $size-md-1;
+        align-items: center;
+      }
+    }
+  }
+  .information {
+    box-shadow: $card-shadow-medium;
+    background-color: $white-color;
+  }
+}
+

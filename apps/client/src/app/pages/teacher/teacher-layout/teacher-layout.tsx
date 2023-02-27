@@ -50,8 +50,12 @@ export function TeacherLayout() {
               links={[
                 {
                   icon: 'user',
-                  text: 'Cuenta',
+                  text: 'Mi Cuenta',
                   url: '/teacher/account'
+                },
+                {
+                  icon: 'telephone',
+                  text: 'Contactar Soporte',
                 },
                 {
                   icon: 'log-out',

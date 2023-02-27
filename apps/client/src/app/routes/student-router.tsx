@@ -21,6 +21,7 @@ import {
   StudentAccountLayout,
   StudentAccountProfile,
   StudentQuiz,
+  StudentReviewQuiz,
 } from '../pages/student/index';
 import VideoMeetingLive from '../video/video-meeting-live/video-meeting-live';
 
@@ -39,6 +40,7 @@ export const StudentRoutes = () => {
           <Route path="courses/:courseId" element={<StudentCourse />} />
           <Route path="classes" element={<StudentClasses />} />
           <Route path="quiz/:quizId" element={<StudentQuiz/>} />
+          <Route path="quiz-review/:quizId" element={<StudentReviewQuiz/>} />
           <Route
             path="live-meeting/:meetingId/:roomId"
             element={<VideoMeetingLive redirectUrl="/student/classes" />}

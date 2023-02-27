@@ -1,3 +1,4 @@
+export * from './lib/quiz-view/quiz-view';
 export * from './lib/quiz-student-card/quiz-student-card';
 export * from './lib/profile-user/profile-user';
 export * from './lib/quiz-answer-question/quiz-answer-question';

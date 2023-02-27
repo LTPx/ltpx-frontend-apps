@@ -126,6 +126,7 @@ export function StudentQuiz(props: StudentQuizProps) {
               title="Cancelar"
               color={ColorsButton.white}
               outline={true}
+              link={`/student/dashboard`}
             />
             <Button
               title="Finalizar test"

@@ -47,6 +47,8 @@ export function VideoMeetingLive(props: VideoMeetingLiveProps) {
       participantCanToggleSelfMic: true,
       chatEnabled: true,
       screenShareEnabled: true,
+      pollEnabled: true,
+      whiteboardEnabled: true,
     };
 
     const meeting = new VideoSDKMeeting();

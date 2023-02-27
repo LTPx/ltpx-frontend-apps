@@ -1,4 +1,4 @@
-import { Answer, TypeQuestionQuiz, UserAnswer } from '@ltpx-frontend-apps/api';
+import { TypeQuestionQuiz, UserAnswer } from '@ltpx-frontend-apps/api';
 import {
   Button,
   ColorsButton,
@@ -23,6 +23,7 @@ export function StudentQuiz(props: StudentQuizProps) {
   const { quizId } = params;
   const id = parseInt(quizId || '');
   const [openModal, setOpenModal] = useState(false);
+  const [score, setScore] = useState<number>(0);
   const { user } = useUser();
 
   const uniqueIds: number[] = [];
@@ -45,8 +46,12 @@ export function StudentQuiz(props: StudentQuizProps) {
       return {...answer, ...{user_id: user.id}};
     });
     console.log(answersFilter);
-    await _evaluateQuiz(id, answersFilter);
-    // setOpenModal(true);
+    const { data, success, error } = await _evaluateQuiz(id, answersFilter);
+    if(success) {
+      setScore(data.score);
+      setOpenModal(true);
+    } else {
+    }
   };
 
   const fetchQuiz = useCallback(async () => {
@@ -67,7 +72,7 @@ export function StudentQuiz(props: StudentQuizProps) {
       {currentQuiz.id && (
         <div className={`${styles['quiz-container']} card with-padding`}>
           <div className={styles['header']}>
-            <h2>{currentQuiz.name}</h2>
+            <h1>{currentQuiz.name}</h1>
             <div className={styles['progress-quiz']}>
               <p>Total de Preguntas</p>
               <h3>{currentQuiz.questions.length}</h3>
@@ -94,7 +99,6 @@ export function StudentQuiz(props: StudentQuizProps) {
                       answers={question.answers}
                       multiple={true}
                       onChange={(answersSelected)=>{
-                        console.log(answers);
                         setAnswers(answers.concat(answersSelected));
                       }}
                     />
@@ -145,7 +149,7 @@ export function StudentQuiz(props: StudentQuizProps) {
         width={'30vw'}
       >
         <QuizScore
-          totalScore={10}
+          totalScore={score}
           message={'Felicitaciones'}
           img={
             'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR83K5rBkgtaRL7Or_WNwxAzS_wy-8DaGDMKA&usqp=CAU'

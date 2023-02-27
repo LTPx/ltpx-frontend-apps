@@ -339,5 +339,9 @@ export const es = {
     degrees: 'Títulos académicos',
     degrees_files: 'Adjuntar títulos (.pdf)',
     police_record: 'Record policial',
+  },
+  boolean: {
+    true: 'Verdadero',
+    false: 'Falso'
   }
 }

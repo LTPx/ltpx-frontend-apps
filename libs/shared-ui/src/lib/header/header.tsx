@@ -3,6 +3,7 @@ import { NavLink } from 'react-router-dom';
 import Brand from '../brand/brand';
 import { useState } from 'react';
 import Icon from '../icon/icon';
+import Drawer, { DrawerPosition } from '../drawer/drawer';
 
 /* eslint-disable-next-line */
 
@@ -15,55 +16,55 @@ export interface HeaderProps {
   children?: any;
   links: Array<LinkHeader>;
   className?: string;
+
 }
 
 export function Header(props: HeaderProps) {
   const { children, links, className } = props;
-  const [isOpen, setIsOpen] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
   const handleClick = () => {
-    setIsOpen(!isOpen);
+    setOpenModal(true);
   };
   return (
     <div className={`${styles['container-header']} ${className}`}>
       <div className={styles['header-responsive']}>
+        <div className={styles['brand']}>
+          <Brand link="/" />
+        </div>
         <div className={styles['panel-container']}>
           <div className={styles['navbar']} onClick={handleClick}>
-            {isOpen === false ? (
+            {openModal === false ? (
               <Icon icon={'menu'} size={40}></Icon>
             ) : (
               <Icon icon={'minus'} size={40}></Icon>
             )}
           </div>
-          <div
-            className={`${styles['panel']} ${
-              isOpen ? styles['open'] : styles['close']
-            }`}
+          <Drawer
+            open={openModal}
+            onClose={() => {
+              setOpenModal(false);
+            }}
+            width={180}
+            position={DrawerPosition.RIGHT}
           >
-            <div className={styles['close-option']}>
-              <Icon
-                icon={'close-circle-outline'}
-                size={35}
-                onClick={handleClick}
-              ></Icon>
-            </div>
             <div className={styles['navigate-content']}>
               {links.map((link, index) => (
-                <NavLink to={link.url} key={index}>
-                  <h4 className={`${styles['link-options']}`}>{link.title}</h4>
+                <NavLink
+                  to={link.url}
+                  key={index}
+                  onClick={() => {
+                    setOpenModal(false);
+                  }}
+                >
+                  <h3 className={`${styles['link-options']}`}>{link.title}</h3>
                 </NavLink>
               ))}
             </div>
-          </div>
-        </div>
-        <div className={styles['brand']}>
-          <Brand  link='/'/>
-        </div>
-        <div className={styles['shopping']}>
-          <Icon icon={'shopping-cart'} size={25}></Icon>
+          </Drawer>
         </div>
       </div>
       <div className={styles['main-action']}>
-        <Brand link='/'/>
+        <Brand link="/" />
       </div>
       <div className={styles['information']}>
         <div className={styles['links']}>

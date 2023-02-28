@@ -13,8 +13,8 @@
 .content {
   padding-top: $size-md-3;
   display: flex;
-  justify-content: flex-start;
-  gap: $size-md-1;
+  justify-content: center;
+  gap: 2rem;
 
   .total-rating {
     display: flex;
@@ -45,7 +45,7 @@
       padding-bottom: $size-md-1;
 
       .bar {
-        width: 200px;
+        width: 270px;
       }
     }
   }
@@ -54,7 +54,7 @@
 //smartphones-responsive
 @media screen and (max-width: 550px) {
   .container {
-    width: 85%;
+    width: 100%;
 
     h3 {
       text-align: center;
@@ -64,6 +64,7 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+      gap: 2rem;
       .total-rating {
         padding: $size-md-1 $size-lg-1;
       }
@@ -93,6 +94,17 @@
       .rating-bar {
         .bar {
           width: 250px;
+        }
+      }
+    }
+  }
+}
+@media screen and (min-width: 860px) and (max-width: 1224px) {
+  .content {
+    .rating-content {
+      .rating-bar {
+        .bar {
+          width: 150px;
         }
       }
     }

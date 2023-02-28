@@ -14,7 +14,6 @@ export interface QuizViewProps {
 
 export function QuizView(props: QuizViewProps) {
   const { quiz, userAnswers } = props;
-  const [selectedIndex, setSelectedIndex] = useState(-1);
   const answersIds = userAnswers.map((answer)=> answer.answer_id);
   console.log('answersIds: ', answersIds);
 
@@ -38,10 +37,10 @@ export function QuizView(props: QuizViewProps) {
                       <h3> {question.question} </h3>
                       <p>{question.description}</p>
                       <div className={styles['item']}>
-                        {question.answers.map((a, i) => (
+                        {question.answers.map((answer, i) => (
                           <div key={i}>
-                            {answersIds.includes(a.id || -1) ? (
-                              <h4 className={styles['selected']}>{a.text} </h4>
+                            {answersIds.includes(answer.id || -1) ? (
+                              <h4 className={styles['selected']}>{answer.text} </h4>
                             ) : (
                               <h4>{answer.text} </h4>
                             )}
@@ -55,10 +54,10 @@ export function QuizView(props: QuizViewProps) {
                       <h3> {question.question} </h3>
                       <p>{question.description}</p>
                       <div className={styles['item']}>
-                        {question.answers.map((a, i) => (
+                        {question.answers.map((answer, i) => (
                           <div key={i}>
-                            {answersIds.includes(a.id || -1) ? (
-                              <h4 className={styles['selected']}>{a.text} </h4>
+                            {answersIds.includes(answer.id || -1) ? (
+                              <h4 className={styles['selected']}>{answer.text} </h4>
                             ) : (
                               <h4>{answer.text} </h4>
                             )}
@@ -72,10 +71,10 @@ export function QuizView(props: QuizViewProps) {
                       <h3> {question.question} </h3>
                       <p>{question.description}</p>
                       <div className={styles['item']}>
-                        {question.answers.map((a, i) => (
+                        {question.answers.map((answer, i) => (
                           <div key={i}>
-                            {answersIds.includes(a.id || -1) ? (
-                              <h4 className={styles['selected']}>{a.text} </h4>
+                            {answersIds.includes(answer.id || -1) ? (
+                              <h4 className={styles['selected']}>{answer.text} </h4>
                             ) : (
                               <h4>{answer.text} </h4>
                             )}
@@ -88,8 +87,8 @@ export function QuizView(props: QuizViewProps) {
                     <div className={styles['answer']}>
                       <h3> {question.question} </h3>
                       <p>{question.description}</p>
-                      {question.answers.map((a, i) => (
-                        <p key={i}>Su respuesta fue: {a.text}</p>
+                      {question.answers.map((answer, i) => (
+                        <p key={i}>Su respuesta fue: {answer.text}</p>
                       ))}
                     </div>
                   )}

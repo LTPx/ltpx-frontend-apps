@@ -13,18 +13,18 @@ export function TeacherReviewQuiz(props: TeacherReviewQuizProps) {
   const { quizId } = params;
   const id = parseInt(quizId || '');
 
-  const fetchQuiz = useCallback(async () => {
-    const { success, data, error } = await _getStudentQuiz(21);
-    if (success) {
-      console.log('data: ', data);
-    } else {
-      console.log('error: ', error);
-    }
-  }, []);
+  // const fetchQuiz = useCallback(async () => {
+  //   const { success, data, error } = await _getStudentQuiz(21);
+  //   if (success) {
+  //     console.log('data: ', data);
+  //   } else {
+  //     console.log('error: ', error);
+  //   }
+  // }, []);
 
-  useEffect(() => {
-    fetchQuiz();
-  }, []);
+  // useEffect(() => {
+  //   fetchQuiz();
+  // }, []);
 
   return (
     <div className={styles['container']}>

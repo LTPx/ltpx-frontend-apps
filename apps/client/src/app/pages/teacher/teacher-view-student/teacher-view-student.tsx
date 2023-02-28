@@ -27,30 +27,20 @@ export function TeacherViewStudent(props: TeacherViewStudentProps) {
     fetchCourse();
   }, []);
 
-  const handleStartTest = () => {
-    console.log('start');
-  };
-
   return (
     <div className={styles['container']}>
       <h2>Perfil de: </h2>
       <div className={styles['content']}>
         <h4>Test dados por el estudiante</h4>
         <div className={styles['quizzes-content']}>
-              {enrolledCourse.quizzes?.map((quiz, index) => (
-                <div className={styles['quiz']} key={index}>
-                  <QuizStudentCard
-                    title={quiz.name}
-                    totalQuestions={quiz.questions.length}
-                    onClick={handleStartTest}
-                    url={`/student/quiz/${quiz.id}`}
-                    urlReviewQuiz={`/student/quiz-review/${quiz.id}`}
-                  />
-                </div>
-              ))}
+          {enrolledCourse.quizzes?.map((quiz, index) => (
+            <div className={styles['quiz']} key={index}>
+
             </div>
+          ))}
+        </div>
       </div>
-            {/* <TeacherReviewQuiz/> */}
+      {/* <TeacherReviewQuiz/> */}
     </div>
   );
 }

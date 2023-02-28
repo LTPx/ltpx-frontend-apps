@@ -54,3 +54,38 @@ export interface UserAnswer {
   question_id: number;
   user_id?: number;
 }
+
+export interface QuizResult {
+  id: number;
+  quiz_id: number;
+  user_id: number;
+  score: number;
+  total_correct_answer: number;
+  total_incorrect_answer: number;
+  total_no_answer: number;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface QuizResultSummary {
+  id: number;
+  quiz: QuizModel;
+  score: number;
+  user_answers: {
+    answer_id: number;
+    id: number
+  }[]
+}
+
+export interface QuizStudent {
+  id: number;
+  user_id: number;
+  course_id: number;
+  name: string;
+  total_questions: number;
+  quizzes_results_ids: number[];
+  last_quiz_result: {
+    id: number,
+    score: number
+  }
+}

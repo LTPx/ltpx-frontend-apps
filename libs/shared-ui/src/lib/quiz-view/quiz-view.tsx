@@ -5,10 +5,18 @@ import styles from './quiz-view.module.scss';
 /* eslint-disable-next-line */
 export interface QuizViewProps {
   quiz: QuizModel;
+  userAnswers: {
+    answer_id: number;
+    id: number;
+    text?: string;
+  }[]
 }
 
 export function QuizView(props: QuizViewProps) {
-  const { quiz } = props;
+  const { quiz, userAnswers } = props;
+  const [selectedIndex, setSelectedIndex] = useState(-1);
+  const answersIds = userAnswers.map((answer)=> answer.answer_id);
+  console.log('answersIds: ', answersIds);
 
   return (
     <div className={styles['container']}>
@@ -18,7 +26,7 @@ export function QuizView(props: QuizViewProps) {
             <h2>Revisión: {quiz.name}</h2>
             <div className={styles['progress-quiz']}>
               <p>Calificación</p>
-              <h3>1 / {quiz.questions.length}</h3>
+              {/* <h3>1 / {quiz.questions.length}</h3> */}
             </div>
           </div>
           <div className={styles['content']}>
@@ -30,12 +38,10 @@ export function QuizView(props: QuizViewProps) {
                       <h3> {question.question} </h3>
                       <p>{question.description}</p>
                       <div className={styles['item']}>
-                        {question.answers.map((answer) => (
-                          <div>
-                            {answer.correct == true ? (
-                              <h4 className={styles['selected']}>
-                                {answer.text}{' '}
-                              </h4>
+                        {question.answers.map((a, i) => (
+                          <div key={i}>
+                            {answersIds.includes(a.id || -1) ? (
+                              <h4 className={styles['selected']}>{a.text} </h4>
                             ) : (
                               <h4>{answer.text} </h4>
                             )}
@@ -49,12 +55,10 @@ export function QuizView(props: QuizViewProps) {
                       <h3> {question.question} </h3>
                       <p>{question.description}</p>
                       <div className={styles['item']}>
-                        {question.answers.map((answer) => (
-                          <div>
-                            {answer.correct == true ? (
-                              <h4 className={styles['selected']}>
-                                {answer.text}{' '}
-                              </h4>
+                        {question.answers.map((a, i) => (
+                          <div key={i}>
+                            {answersIds.includes(a.id || -1) ? (
+                              <h4 className={styles['selected']}>{a.text} </h4>
                             ) : (
                               <h4>{answer.text} </h4>
                             )}
@@ -68,12 +72,10 @@ export function QuizView(props: QuizViewProps) {
                       <h3> {question.question} </h3>
                       <p>{question.description}</p>
                       <div className={styles['item']}>
-                        {question.answers.map((answer) => (
-                          <div>
-                            {answer.correct == true ? (
-                              <h4 className={styles['selected']}>
-                                {answer.text}{' '}
-                              </h4>
+                        {question.answers.map((a, i) => (
+                          <div key={i}>
+                            {answersIds.includes(a.id || -1) ? (
+                              <h4 className={styles['selected']}>{a.text} </h4>
                             ) : (
                               <h4>{answer.text} </h4>
                             )}
@@ -86,8 +88,8 @@ export function QuizView(props: QuizViewProps) {
                     <div className={styles['answer']}>
                       <h3> {question.question} </h3>
                       <p>{question.description}</p>
-                      {question.answers.map((answer) => (
-                        <p>Su respuesta fue: {answer.text}</p>
+                      {question.answers.map((a, i) => (
+                        <p key={i}>Su respuesta fue: {a.text}</p>
                       ))}
                     </div>
                   )}

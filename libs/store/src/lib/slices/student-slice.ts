@@ -8,6 +8,8 @@ import {
   getStudentCourses,
   getStudentPayments,
   getStudentQuiz,
+  getStudentQuizResult,
+  getStudentQuizzes,
   Purchase,
   QuizModel,
   studentEvaluateQuiz,
@@ -30,7 +32,9 @@ export type StudentSlice = {
   _getStudentCourses: () => Promise<TResponse>;
   _getStudentCourse: (courseId: number) => Promise<TResponse>;
   _getStudentClasses: () => Promise<TResponse>;
-  _getStudentQuiz: (quizId: number) => Promise<TResponse>;
+  _getStudentQuizzes: (courseId: number) => Promise<TResponse>;
+  _getStudentQuiz: (courseId: number, quizId: number) => Promise<TResponse>;
+  _getStudentQuizResult: (quizResultId: number) => Promise<TResponse>;
   _evaluateQuiz: (quizId: number, answers: UserAnswer[]) => Promise<TResponse>;
 };
 
@@ -79,10 +83,26 @@ export const createStudentSlice: StateCreator<StoreState, [], [], StudentSlice> 
       return { success: false, error };
     }
   },
-  _getStudentQuiz: async (id): Promise<TResponse> => {
+  _getStudentQuizzes: async (courseId): Promise<TResponse> => {
     try {
-      const quiz = await getStudentQuiz(id);
+      const quizzes = await getStudentQuizzes(courseId);
+      return { success: true, data: quizzes };
+    } catch (error) {
+      return { success: false, error };
+    }
+  },
+  _getStudentQuiz: async (courseId, quizId): Promise<TResponse> => {
+    try {
+      const quiz = await getStudentQuiz(courseId, quizId);
       set({currentQuiz: quiz});
+      return { success: true, data: quiz };
+    } catch (error) {
+      return { success: false, error };
+    }
+  },
+  _getStudentQuizResult: async (id): Promise<TResponse> => {
+    try {
+      const quiz = await getStudentQuizResult(id);
       return { success: true, data: quiz };
     } catch (error) {
       return { success: false, error };

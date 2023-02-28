@@ -5,6 +5,7 @@ import styles from './quiz-answer-question.module.scss';
 export interface QuizAnswerQuestionProps {
   title: string;
   description?: string;
+
 }
 
 export function QuizAnswerQuestion(props: QuizAnswerQuestionProps) {
@@ -15,7 +16,9 @@ export function QuizAnswerQuestion(props: QuizAnswerQuestionProps) {
       <h3>{title}</h3>
       <p>{description}</p>
       <div className="options">
-        <TextArea placeholder='Cual es tu respuesta' rows={8}/>
+        <TextArea placeholder='Cual es tu respuesta' rows={8} onChange={(s: any)=>{
+          // console.log('hello', s.target.value);
+        }}/>
       </div>
     </div>
   );

@@ -1,12 +1,12 @@
+import styles from './quiz-view.module.scss';
 import { QuizModel, TypeQuestionQuiz } from '@ltpx-frontend-apps/api';
 import { useState } from 'react';
 import Button, { ColorsButton } from '../button/button';
-import Icon from '../icon/icon';
-import styles from './quiz-view.module.scss';
 
 /* eslint-disable-next-line */
 export interface QuizViewProps {
   quiz: QuizModel;
+  score: number;
   userAnswers: {
     answer_id: number;
     id: number;
@@ -15,7 +15,7 @@ export interface QuizViewProps {
 }
 
 export function QuizView(props: QuizViewProps) {
-  const { quiz, userAnswers } = props;
+  const { quiz, userAnswers, score } = props;
   const [selectedIndex, setSelectedIndex] = useState(-1);
   const answersIds = userAnswers.map((answer)=> answer.answer_id);
   console.log('answersIds: ', answersIds);
@@ -28,7 +28,7 @@ export function QuizView(props: QuizViewProps) {
             <h2>Revisión: {quiz.name}</h2>
             <div className={styles['progress-quiz']}>
               <p>Calificación</p>
-              {/* <h3>1 / {quiz.questions.length}</h3> */}
+              <h3>{score} / 100</h3>
             </div>
           </div>
           <div className={styles['content']}>

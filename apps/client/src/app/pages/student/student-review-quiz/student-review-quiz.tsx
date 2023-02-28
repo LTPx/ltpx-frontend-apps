@@ -31,7 +31,13 @@ export function StudentReviewQuiz(props: StudentReviewQuizProps) {
 
   return (
     <div className={styles['container']}>
-      { quizResult?.id && <QuizView quiz={quizResult.quiz} userAnswers={quizResult.user_answers}/> }
+      {quizResult?.id && (
+        <QuizView
+          quiz={quizResult.quiz}
+          userAnswers={quizResult.user_answers}
+          score={quizResult.score}
+        />
+      )}
     </div>
   );
 }

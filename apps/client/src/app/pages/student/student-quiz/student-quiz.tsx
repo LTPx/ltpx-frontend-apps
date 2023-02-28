@@ -78,12 +78,12 @@ export function StudentQuiz() {
   return (
     <div className={styles['container']}>
       {loaded && (
-        <form className={`${styles['quiz-container']} card with-padding`}>
+        <form className={`${styles['quiz-container']} card`}>
           <div className={styles['header']}>
             <h1>{currentQuiz.name}</h1>
             <div className={styles['progress-quiz']}>
-              <p>Total de Preguntas</p>
-              <h3>{currentQuiz.questions.length}</h3>
+              {/* <p>Total de Preguntas</p>
+              <h3>{currentQuiz.questions.length}</h3> */}
             </div>
           </div>
           <div className={styles['content']}>
@@ -92,6 +92,7 @@ export function StudentQuiz() {
                 <div className="question" key={index}>
                   {question.kind === TypeQuestionQuiz.conditional && (
                     <QuizConditionalQuestion
+                      number={index+1}
                       title={question.question}
                       description={question.description}
                       answers={question.answers}
@@ -104,6 +105,7 @@ export function StudentQuiz() {
                   )}
                   {question.kind === TypeQuestionQuiz.multiple && (
                     <QuizMultiselectQuestion
+                      number={index+1}
                       title={question.question}
                       description={question.description}
                       answers={question.answers}
@@ -118,6 +120,7 @@ export function StudentQuiz() {
                   )}
                   {question.kind === TypeQuestionQuiz.single && (
                     <QuizMultiselectQuestion
+                      number={index+1}
                       title={question.question}
                       description={question.description}
                       answers={question.answers}
@@ -131,10 +134,10 @@ export function StudentQuiz() {
                     />
                   )}
                   {question.kind === TypeQuestionQuiz.answer && (
-                    <div className="c">
-                      <h3>{question.question}</h3>
+                    <div className={styles['question']}>
+                      <h3>{index+1}. {question.question}</h3>
                       <TextArea
-                        placeholder="Cual es tu respuesta"
+                        placeholder="Escribe tu respuesta"
                         rows={8}
                         name={`answers[${index}].answers`}
                         onChange={(e: any) => {

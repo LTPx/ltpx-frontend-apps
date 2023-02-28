@@ -6,6 +6,7 @@ import { useState } from 'react';
 
 /* eslint-disable-next-line */
 export interface QuizMultiselectQuestionProps {
+  number?: number;
   title: string;
   description?: string;
   answers: AnswerModel[];
@@ -14,7 +15,7 @@ export interface QuizMultiselectQuestionProps {
 }
 
 export function QuizMultiselectQuestion(props: QuizMultiselectQuestionProps) {
-  const { title, description, answers, multiple, onChange } = props;
+  const { title, description, answers, multiple, number, onChange } = props;
   const answersForm = answers.map((answer) => {
     const { text, question_id, id } = answer;
     return {
@@ -39,7 +40,7 @@ export function QuizMultiselectQuestion(props: QuizMultiselectQuestionProps) {
 
   return (
     <div className={styles['container']}>
-      <h3>{title}</h3>
+      <h3>{number}. {title}</h3>
       <p>{description}</p>
       <div className={styles['answers']}>
         {multiple &&

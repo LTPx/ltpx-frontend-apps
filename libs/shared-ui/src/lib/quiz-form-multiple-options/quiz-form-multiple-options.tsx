@@ -49,6 +49,7 @@ export function QuizFormMultipleOptions(props: QuizFormMultipleOptionsProps) {
           ),
         })}
         onSubmit={(values) => {
+          console.log('values: ', values);
           // onSubmit && onSubmit(values);
         }}
       >

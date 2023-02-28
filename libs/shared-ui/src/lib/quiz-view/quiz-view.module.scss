@@ -1,31 +1,53 @@
 @import '../../styles/styles.module.scss';
 
 .container {
-
-  h3 {
-    font-weight: 450;
-  }
-  .question-test {
-    p {
-      padding-bottom: 0.75rem;
-    }
+  .quiz-container {
+    padding: 3rem;
   }
 }
+
 .header {
   display: flex;
   justify-content: space-between;
   padding-bottom: 1rem;
 
-  p {
-    font-weight: 500;
+  .quiz-info {
+    h2 {
+      font-weight: 500;
+    }
+
+    h4 {
+      color: $text-gray-color;
+    }
+  }
+
+  .quiz-score {
+    p {
+      color: $text-gray-color;
+    }
   }
 }
 
-.questions {
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
+.content {
+  margin-top: 2rem;
+
+  .questions {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+
+    .question-text {
+      padding-bottom: 0.75rem;
+      font-weight: 500;
+    }
+
+    .question-answer {
+      color: $text-gray-color;
+    }
+  }
 }
+
+
 
 .footer {
   display: flex;
@@ -37,9 +59,9 @@
 .selected {
   background-color: $green-color-100;
 }
-.item {
+
+.items {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-  padding-left: 1rem;
 }

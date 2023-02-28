@@ -21,10 +21,21 @@ export function QuizMultiselectQuestion(props: QuizMultiselectQuestionProps) {
       text,
       question_id,
       selected: false,
-      answer_id: id
+      answer_id: id,
     };
   });
   const [answersUi, setAnswersUi] = useState(answersForm);
+
+  const filterAnswers = (answers: any[]) => {
+    return answers
+      .filter((answer) => answer.selected)
+      .map((answer) => {
+        return {
+          answer_id: answer.answer_id,
+          question_id: answer.question_id,
+        };
+      });
+  };
 
   return (
     <div className={styles['container']}>
@@ -51,7 +62,7 @@ export function QuizMultiselectQuestion(props: QuizMultiselectQuestionProps) {
                   };
                 });
                 setAnswersUi(answers);
-                onChange && onChange(answers.filter((answer) => answer.selected));
+                onChange && onChange(filterAnswers(answers));
               }}
             >
               <Icon

@@ -2,48 +2,34 @@ import styles from './student-quiz.module.scss';
 import {
   QuestionQuiz,
   TypeQuestionQuiz,
-  UserAnswer,
 } from '@ltpx-frontend-apps/api';
 import {
   Button,
   ColorsButton,
-  QuizAnswerQuestion,
   QuizConditionalQuestion,
   QuizMultiselectQuestion,
   QuizScore,
   TextArea,
   TypeButton,
 } from '@ltpx-frontend-apps/shared-ui';
-import { useStudent, useUser } from '@ltpx-frontend-apps/store';
+import { useStudent } from '@ltpx-frontend-apps/store';
 import { Dialog } from 'evergreen-ui';
 import { useFormik } from 'formik';
 import { useCallback, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import * as Yup from 'yup';
 
 export function StudentQuiz() {
   const [answersForm, setAnswersForm] = useState({
     answers: [{ question: '', answers: [] }],
   });
   const [loaded, setLoaded] = useState(false);
-  const [answers, setAnswers] = useState<UserAnswer[]>([]);
   const { _getStudentQuiz, _evaluateQuiz, currentQuiz } = useStudent();
-  const params = useParams();
-  const { quizId, courseId } = params;
+  const { quizId, courseId } = useParams();
   const id = parseInt(quizId || '');
   const course_id = parseInt(courseId || '');
 
   const [openModal, setOpenModal] = useState(false);
   const [score, setScore] = useState<number>(0);
-  const { user } = useUser();
-
-  const handleRequest = async () => {
-    console.log('answers: ', answers);
-    // const answersFilter = filterAnswers(answers).map((answer)=> {
-    //   return {...answer, ...{user_id: user.id}};
-    // });
-    // console.log(answersFilter);
-  };
 
   const fetchQuiz = useCallback(async () => {
     const { success, data, error } = await _getStudentQuiz(course_id, id);
@@ -79,14 +65,13 @@ export function StudentQuiz() {
         },
         []
       );
-      console.log('user answers: ', answersFilter);
-      // const { data, success, error } = await _evaluateQuiz(id, answersFilter);
-      // if (success) {
-      //   setScore(data.score);
-      //   setOpenModal(true);
-      // } else {
-      //   console.log(error);
-      // }
+      const { data, success, error } = await _evaluateQuiz(id, answersFilter);
+      if (success) {
+        setScore(data.score);
+        setOpenModal(true);
+      } else {
+        console.log(error);
+      }
     },
   });
 

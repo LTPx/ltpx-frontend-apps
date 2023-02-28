@@ -71,6 +71,7 @@ export interface QuizResultSummary {
   id: number;
   quiz: QuizModel;
   score: number;
+  submitted_at: string;
   user_answers: {
     answer_id: number;
     id: number

@@ -33,7 +33,7 @@ export function TextArea(props: TextAreaProps) {
     ...other
   } = props;
   return (
-    <div className={styles['container']}>
+    <div className={`${styles['container']} ${className}`}>
       {label && <label className={styles['label']}>{label}</label>}
       {description && <p className={styles['description']}>{description}</p>}
       <textarea

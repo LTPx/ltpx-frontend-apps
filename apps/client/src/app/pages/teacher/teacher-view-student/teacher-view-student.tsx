@@ -1,23 +1,29 @@
-import TeacherReviewQuiz from '../teacher-review-quiz/teacher-review-quiz';
 import styles from './teacher-view-student.module.scss';
 import { useStudent } from '@ltpx-frontend-apps/store';
 import { useCallback, useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import { QuizStudentCard } from '@ltpx-frontend-apps/shared-ui';
+import { QuizStudent } from '@ltpx-frontend-apps/api';
+import {
+  Button,
+  ColorsButton,
+  QuizStudentCard,
+  TextArea,
+} from '@ltpx-frontend-apps/shared-ui';
+import { Dialog } from 'evergreen-ui';
 /* eslint-disable-next-line */
-export interface TeacherViewStudentProps {}
-
+export interface TeacherViewStudentProps {
+  courseId?: number;
+}
 export function TeacherViewStudent(props: TeacherViewStudentProps) {
-  const { _getStudentCourse, enrolledCourse } = useStudent();
-  const params = useParams();
-  const { courseId } = params;
-  const id = parseInt(courseId || '');
-  const [selectedTab, setSelectedTab] = useState(0);
+  const { courseId } = props;
+  const [quizzes, setQuizzes] = useState<QuizStudent[]>([]);
+  const { _getStudentQuizzes } = useStudent();
+  const [openModal, setOpenModal] = useState(false);
 
   const fetchCourse = useCallback(async () => {
-    const { success, data, error } = await _getStudentCourse(1);
+    const { success, data, error } = await _getStudentQuizzes(1);
     if (success) {
       console.log('data: ', data);
+      setQuizzes(data);
     } else {
       console.log('error: ', error);
     }
@@ -29,18 +35,56 @@ export function TeacherViewStudent(props: TeacherViewStudentProps) {
 
   return (
     <div className={styles['container']}>
-      <h2>Perfil de: </h2>
       <div className={styles['content']}>
-        <h4>Test dados por el estudiante</h4>
+        <h3 className={styles['subtitle']}>Test dados por el estudiante</h3>
         <div className={styles['quizzes-content']}>
-          {enrolledCourse.quizzes?.map((quiz, index) => (
-            <div className={styles['quiz']} key={index}>
-
+          {quizzes?.map((quiz, index) => (
+            <div key={index}>
+              <QuizStudentCard
+                title={quiz.name}
+                totalQuestions={quiz.total_questions}
+              >
+                <div className={styles['btn-test']}>
+                  <Button
+                    title="Calificar test"
+                    icon="play-filled"
+                    link={`/teacher/quiz-review/${quiz.id}`}
+                  />
+                  <Button
+                    title="Dar Feedback"
+                    color={ColorsButton.secondary}
+                    icon="play-filled"
+                    onClick={() => setOpenModal(true)}
+                  />
+                </div>
+              </QuizStudentCard>
             </div>
           ))}
         </div>
       </div>
-      {/* <TeacherReviewQuiz/> */}
+      <Dialog
+        isShown={openModal}
+        hasFooter={false}
+        title="Feedback"
+        onCloseComplete={() => setOpenModal(false)}
+        width={'40vw'}
+      >
+        <div className={styles['feedback']}>
+          <div className={styles['content-feed']}>
+            <TextArea className={styles['text-area']} rows={8} />
+          </div>
+          <div className={styles['footer']}>
+            <Button
+              color={ColorsButton.white}
+              onClick={() => {
+                setOpenModal(false);
+              }}
+              title={'Cancelar'}
+            />
+            <Button title={'Enviar'} />
+          </div>
+        </div>
+      </Dialog>
     </div>
   );
 }

@@ -1,0 +1,33 @@
+@import '../../styles/styles.module.scss';
+.container{
+  padding: 1.5rem;
+  box-shadow: $card-shadow-medium;
+  border-radius: 8px;
+  background-color: $white-color;
+  .head {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-bottom: 1rem;
+    gap: 0.5rem;
+    border-bottom: 1px solid $gray-color-200;
+    .title {
+      font-weight: 500;
+    }
+  }
+  .content {
+    padding-top: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 0.75rem;
+    }
+  .item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    .text {
+      color: $text-gray-color;
+    }
+  }
+}

@@ -1,0 +1,20 @@
+@import '../../../../styles.scss';
+
+.container {
+  width: 70vw;
+  h2 {
+    padding-bottom: 1rem;
+  }
+  .content {
+    background-color: $white-color;
+    border-radius: 15px;
+    flex-grow: 1;
+    padding: 2rem;
+    box-shadow: $card-shadow-medium;
+  }
+  .quizzes-content {
+    display: flex;
+    flex-direction: column;
+    gap: $size-md-1;
+  }
+}

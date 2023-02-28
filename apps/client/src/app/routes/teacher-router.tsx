@@ -30,6 +30,8 @@ import {
   TeacherEditCourse,
   TeacherLayout,
   TeacherMeetingsAgenda,
+  TeacherReviewQuiz,
+  TeacherViewStudent
 } from '../pages/teacher';
 import VideoMeetingLive from '../video/video-meeting-live/video-meeting-live';
 import { ProtectedRoutesTeacher } from './guards/protected-routes-teacher/protected-routes-teacher';
@@ -51,6 +53,8 @@ export const TeacherRoutes = () => {
           <Route path="apply-teach" element={<TeacherApply />} />
           <Route path="earnings" element={<TeacherEarnings />} />
           <Route path="sessions" element={<TeacherMeetingsAgenda />} />
+          <Route path="/teacher/view-student/:studentId" element={<TeacherViewStudent />} />
+          <Route path="/teacher/quiz-review/:quizId" element={<TeacherReviewQuiz />} />
           <Route path="live-meeting/:meetingId/:roomId" element={<VideoMeetingLive redirectUrl='/teacher/sessions'/>} />
           <Route path="courses" element={<ManageCourses />}>
             <Route

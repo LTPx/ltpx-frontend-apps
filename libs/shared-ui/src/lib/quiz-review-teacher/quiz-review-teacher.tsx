@@ -1,25 +1,30 @@
+import styles from './quiz-review-teacher.module.scss';
 import { QuizModel, TypeQuestionQuiz } from '@ltpx-frontend-apps/api';
 import Button, { ColorsButton } from '../button/button';
-import styles from './quiz-view.module.scss';
+import TextArea from '../text-area/text-area';
+import { useState } from 'react';
 
 /* eslint-disable-next-line */
-export interface QuizViewProps {
+export interface QuizReviewTeacherProps {
   quiz: QuizModel;
 }
 
-export function QuizView(props: QuizViewProps) {
+export function QuizReviewTeacher(props: QuizReviewTeacherProps) {
   const { quiz } = props;
+  const [style, setStyle] = useState('answer-content');
 
+  const correctAnswer = () => {
+    setStyle('answer-correct');
+  };
+  const errorAnswer = () => {
+    setStyle('answer-noCorrect');
+  };
   return (
     <div className={styles['container']}>
       {quiz.id && (
         <div className={`${styles['quiz-container']} card with-padding`}>
           <div className={styles['header']}>
-            <h2>Revisión: {quiz.name}</h2>
-            <div className={styles['progress-quiz']}>
-              <p>Calificación</p>
-              <h3>1 / {quiz.questions.length}</h3>
-            </div>
+            <h2>Test: {quiz.name}</h2>
           </div>
           <div className={styles['content']}>
             <div className={styles['questions']}>
@@ -30,8 +35,8 @@ export function QuizView(props: QuizViewProps) {
                       <h3> {question.question} </h3>
                       <p>{question.description}</p>
                       <div className={styles['item']}>
-                        {question.answers.map((answer) => (
-                          <div>
+                        {question.answers.map((answer, index) => (
+                          <div key={index}>
                             {answer.correct == true ? (
                               <h4 className={styles['selected']}>
                                 {answer.text}{' '}
@@ -49,8 +54,8 @@ export function QuizView(props: QuizViewProps) {
                       <h3> {question.question} </h3>
                       <p>{question.description}</p>
                       <div className={styles['item']}>
-                        {question.answers.map((answer) => (
-                          <div>
+                        {question.answers.map((answer, index) => (
+                          <div key={index}>
                             {answer.correct == true ? (
                               <h4 className={styles['selected']}>
                                 {answer.text}{' '}
@@ -68,8 +73,8 @@ export function QuizView(props: QuizViewProps) {
                       <h3> {question.question} </h3>
                       <p>{question.description}</p>
                       <div className={styles['item']}>
-                        {question.answers.map((answer) => (
-                          <div>
+                        {question.answers.map((answer, index) => (
+                          <div key={index}>
                             {answer.correct == true ? (
                               <h4 className={styles['selected']}>
                                 {answer.text}{' '}
@@ -86,20 +91,50 @@ export function QuizView(props: QuizViewProps) {
                     <div className={styles['answer']}>
                       <h3> {question.question} </h3>
                       <p>{question.description}</p>
-                      {question.answers.map((answer) => (
-                        <p>Su respuesta fue: {answer.text}</p>
-                      ))}
+                      <div className={styles[style]}>
+                        {question.answers && <p>Aquí estará la respuesta</p>}
+                      </div>
+                      <div className={styles['btn-to-rate']}>
+                        <h4>Esta respuesta es correcta?</h4>
+                        <div className={styles['btns']}>
+                          <Button
+                            className={styles['btn-correct']}
+                            title="Si"
+                            icon="check"
+                            color={ColorsButton.primary}
+                            outline={true}
+                            onClick={correctAnswer}
+                          />
+                          <Button
+                            className={styles['btn-correct']}
+                            title="No"
+                            icon="close"
+                            color={ColorsButton.secondary}
+                            outline={true}
+                            onClick={errorAnswer}
+                          />
+                        </div>
+                      </div>
                     </div>
                   )}
                 </div>
               ))}
             </div>
           </div>
+          <div className={styles['revision']}>
+            <h3>Observaciones Generales</h3>
+            <TextArea rows={6} />
+          </div>
           <div className={styles['footer']}>
             <Button
-              title="Regresar"
-              color={ColorsButton.secondary}
-              link={`/student/dashboard/`}
+              title="Cancelar"
+              color={ColorsButton.white}
+              link={`/teacher/dashboard/`}
+            />
+            <Button
+              title="Guardar"
+              color={ColorsButton.primary}
+              link={`/teacher/dashboard/`}
             />
           </div>
         </div>
@@ -108,4 +143,4 @@ export function QuizView(props: QuizViewProps) {
   );
 }
 
-export default QuizView;
+export default QuizReviewTeacher;

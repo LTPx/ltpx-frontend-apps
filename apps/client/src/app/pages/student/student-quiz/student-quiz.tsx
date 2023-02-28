@@ -53,6 +53,7 @@ export function StudentQuiz(props: StudentQuizProps) {
       setScore(data.score);
       setOpenModal(true);
     } else {
+      console.log(error);
     }
   };
 

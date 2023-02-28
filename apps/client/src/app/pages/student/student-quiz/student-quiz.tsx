@@ -1,4 +1,9 @@
-import { TypeQuestionQuiz, UserAnswer } from '@ltpx-frontend-apps/api';
+import styles from './student-quiz.module.scss';
+import {
+  QuestionQuiz,
+  TypeQuestionQuiz,
+  UserAnswer,
+} from '@ltpx-frontend-apps/api';
 import {
   Button,
   ColorsButton,
@@ -6,17 +11,21 @@ import {
   QuizConditionalQuestion,
   QuizMultiselectQuestion,
   QuizScore,
+  TextArea,
+  TypeButton,
 } from '@ltpx-frontend-apps/shared-ui';
 import { useStudent, useUser } from '@ltpx-frontend-apps/store';
 import { Dialog } from 'evergreen-ui';
+import { useFormik } from 'formik';
 import { useCallback, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import styles from './student-quiz.module.scss';
+import * as Yup from 'yup';
 
-/* eslint-disable-next-line */
-export interface StudentQuizProps {}
-
-export function StudentQuiz(props: StudentQuizProps) {
+export function StudentQuiz() {
+  const [answersForm, setAnswersForm] = useState({
+    answers: [{ question: '', answers: [] }],
+  });
+  const [loaded, setLoaded] = useState(false);
   const [answers, setAnswers] = useState<UserAnswer[]>([]);
   const { _getStudentQuiz, _evaluateQuiz, currentQuiz } = useStudent();
   const params = useParams();
@@ -28,39 +37,27 @@ export function StudentQuiz(props: StudentQuizProps) {
   const [score, setScore] = useState<number>(0);
   const { user } = useUser();
 
-  const uniqueIds: number[] = [];
-  const filterAnswers = (answers: UserAnswer[]) => {
-    return answers.filter(element => {
-      const id = element.answer_id;
-      const isDuplicate = uniqueIds.includes(id);
-      if (!isDuplicate) {
-        uniqueIds.push(id);
-        return true;
-      }
-      return false;
-    });
-  }
-
-
-  const handleRequest = async() => {
+  const handleRequest = async () => {
     console.log('answers: ', answers);
-    const answersFilter = filterAnswers(answers).map((answer)=> {
-      return {...answer, ...{user_id: user.id}};
-    });
-    console.log(answersFilter);
-    const { data, success, error } = await _evaluateQuiz(id, answersFilter);
-    if(success) {
-      setScore(data.score);
-      setOpenModal(true);
-    } else {
-      console.log(error);
-    }
+    // const answersFilter = filterAnswers(answers).map((answer)=> {
+    //   return {...answer, ...{user_id: user.id}};
+    // });
+    // console.log(answersFilter);
   };
 
   const fetchQuiz = useCallback(async () => {
     const { success, data, error } = await _getStudentQuiz(course_id, id);
     if (success) {
-      console.log('data: ', data);
+      const answers = data.questions.map((question: QuestionQuiz) => {
+        return {
+          question: question.question,
+          answers: [],
+        };
+      });
+      console.log('data quiz: ', data);
+      console.log('data answers: ', answers);
+      setLoaded(true);
+      setAnswersForm({ answers });
     } else {
       console.log('error: ', error);
     }
@@ -70,10 +67,33 @@ export function StudentQuiz(props: StudentQuizProps) {
     fetchQuiz();
   }, []);
 
+  const formik = useFormik({
+    initialValues: answersForm,
+    enableReinitialize: true,
+    onSubmit: async (fields) => {
+      console.log(fields);
+      const { answers } = fields;
+      const answersFilter = answers.reduce(
+        (userAnswers: any[], question: any) => {
+          return userAnswers.concat(question.answers);
+        },
+        []
+      );
+      console.log('user answers: ', answersFilter);
+      // const { data, success, error } = await _evaluateQuiz(id, answersFilter);
+      // if (success) {
+      //   setScore(data.score);
+      //   setOpenModal(true);
+      // } else {
+      //   console.log(error);
+      // }
+    },
+  });
+
   return (
     <div className={styles['container']}>
-      {currentQuiz.id && (
-        <div className={`${styles['quiz-container']} card with-padding`}>
+      {loaded && (
+        <form className={`${styles['quiz-container']} card with-padding`}>
           <div className={styles['header']}>
             <h1>{currentQuiz.name}</h1>
             <div className={styles['progress-quiz']}>
@@ -90,8 +110,10 @@ export function StudentQuiz(props: StudentQuizProps) {
                       title={question.question}
                       description={question.description}
                       answers={question.answers}
-                      onChange={(answerSelected)=>{
-                        setAnswers(answers.concat([answerSelected]));
+                      onChange={(answerSelected) => {
+                        formik.setFieldValue(`answers[${index}].answers`, [
+                          answerSelected,
+                        ]);
                       }}
                     />
                   )}
@@ -101,8 +123,11 @@ export function StudentQuiz(props: StudentQuizProps) {
                       description={question.description}
                       answers={question.answers}
                       multiple={true}
-                      onChange={(answersSelected)=>{
-                        setAnswers(answers.concat(answersSelected));
+                      onChange={(answersSelected) => {
+                        formik.setFieldValue(
+                          `answers[${index}].answers`,
+                          answersSelected
+                        );
                       }}
                     />
                   )}
@@ -112,17 +137,34 @@ export function StudentQuiz(props: StudentQuizProps) {
                       description={question.description}
                       answers={question.answers}
                       multiple={false}
-                      onChange={(answersSelected)=>{
-                        console.log(answersSelected);
-                        setAnswers(answers.concat(answersSelected));
+                      onChange={(answersSelected) => {
+                        formik.setFieldValue(
+                          `answers[${index}].answers`,
+                          answersSelected
+                        );
                       }}
                     />
                   )}
                   {question.kind === TypeQuestionQuiz.answer && (
-                    <QuizAnswerQuestion
-                      title={question.question}
-                      description={question.description}
-                    />
+                    <div className="c">
+                      <h3>{question.question}</h3>
+                      <TextArea
+                        placeholder="Cual es tu respuesta"
+                        rows={8}
+                        name={`answers[${index}].answers`}
+                        onChange={(e: any) => {
+                          const text = e.target.value;
+                          formik.setFieldValue(`answers[${index}].answers`, [
+                            {
+                              answer_id: question.answers[0].id,
+                              question_id: question.answers[0].question_id,
+                              text,
+                            },
+                          ]);
+                        }}
+                        onBlur={formik.handleBlur}
+                      />
+                    </div>
                   )}
                 </div>
               ))}
@@ -137,12 +179,11 @@ export function StudentQuiz(props: StudentQuizProps) {
             />
             <Button
               title="Finalizar test"
-              onClick={() => {
-                handleRequest();
-              }}
+              type={TypeButton.submit}
+              onClick={formik.handleSubmit}
             />
           </div>
-        </div>
+        </form>
       )}
       <Dialog
         isShown={openModal}

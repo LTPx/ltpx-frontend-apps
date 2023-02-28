@@ -1,7 +1,6 @@
 import styles from './quiz-form-multiple-options.module.scss';
 import Icon from '../icon/icon';
 import Input from '../input/input';
-// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
 import { generateAlphabet } from 'libs/api/src/lib/utils';
 import Button, { ColorsButton, TypeButton } from '../button/button';
 import { FieldArray, Form, Formik } from 'formik';
@@ -50,7 +49,7 @@ export function QuizFormMultipleOptions(props: QuizFormMultipleOptionsProps) {
           ),
         })}
         onSubmit={(values) => {
-          onSubmit && onSubmit(values);
+          // onSubmit && onSubmit(values);
         }}
       >
         {({

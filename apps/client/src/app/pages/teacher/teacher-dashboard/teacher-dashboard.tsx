@@ -61,7 +61,7 @@ export function TeacherDashboard(props: TeacherDashboardProps) {
               'Únete a nuestra comunidad de profesores donde podrás encontrar noticias y hacer preguntas acerca del proceso de enseñar en Openmind'
             }
           >
-            <a href="https://discord.gg/JU42n3fA" target={'_blank'}>
+            <a href="https://discord.gg/aUNfs6BuTB" target={'_blank'}>
               <Button title="Unirme" color={ColorsButton.white} full={true} />
             </a>
           </NoticeCard>

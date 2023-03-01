@@ -12,6 +12,10 @@ import {
   StudentSafetyPrivacy,
   StudentPrivacyGuide,
   RemovalOfTeachers,
+  HowCreateAClass,
+  GreatExperienceOpenMind,
+  GeneratingImpactOpportunities,
+  WhatMakesClassGoingOn,
 } from '../pages/site/blog';
 import BlogLayout from '../pages/site/blog-layout/blog-layout';
 import BlogHome from '../pages/site/blog/blog-home/blog-home';
@@ -89,10 +93,26 @@ export const SiteRoutes = () => {
               element={<StudentPrivacyGuide />}
             />
             <Route path="social-media-policy" element={<SocialMediaPolicy />} />
+            <Route path="how-create-a-class" element={<HowCreateAClass />} />
+            <Route
+              path="great-experience-openMind"
+              element={<GreatExperienceOpenMind />}
+            />
+            <Route
+              path="what-makes-class-going-on"
+              element={<WhatMakesClassGoingOn />}
+            />
+            <Route
+              path="generating-impact-opportunities"
+              element={<GeneratingImpactOpportunities />}
+            />
           </Route>
           <Route path="/about" element={<AboutUs />} />
           <Route path="/teacher-profile" element={<TeacherProfilePage />} />
-          <Route path="/course/:categoryId/category" element={<CoursesByCategory />} />
+          <Route
+            path="/course/:categoryId/category"
+            element={<CoursesByCategory />}
+          />
           <Route path="*" element={<Page404 />} />
         </Route>
       </Routes>

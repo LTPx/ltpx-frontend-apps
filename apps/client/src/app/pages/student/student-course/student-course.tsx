@@ -1,11 +1,11 @@
 import {
   AchievementCard,
+  AchievementDetailsCard,
   CourseContents,
   CourseDateCard,
-  QuizStudentCard,
   Tabs,
 } from '@ltpx-frontend-apps/shared-ui';
-import { useStudent } from '@ltpx-frontend-apps/store';
+import { useCourseUtil, useStudent } from '@ltpx-frontend-apps/store';
 import { useCallback, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import styles from './student-course.module.scss';
@@ -20,6 +20,7 @@ export function StudentCourse(props: StudentCourseProps) {
   const { courseId } = params;
   const id = parseInt(courseId || '');
   const [selectedTab, setSelectedTab] = useState(0);
+  const { translateAchievementType } = useCourseUtil();
 
   const fetchCourse = useCallback(async () => {
     const { success, data, error } = await _getStudentCourse(id);
@@ -70,17 +71,31 @@ export function StudentCourse(props: StudentCourseProps) {
             </div>
           )}
           {selectedTab === 1 && (
-            <StudentCourseQuizzes courseId={enrolledCourse.id}/>
+            <StudentCourseQuizzes courseId={enrolledCourse.id} />
           )}
           {selectedTab === 2 && (
             <div className={styles['achievements-content']}>
-              {enrolledCourse.achievements?.map((achievement, index) => (
-                <AchievementCard
-                  key={index}
-                  image={achievement.image}
-                  text={achievement.title}
+              <div className={styles['achievements-student']}>
+                <h4 className={styles['title-achievement']}>
+                  Logros Alcanzados
+                </h4>
+                <div className={styles['achievements']}>
+                  {enrolledCourse.achievements?.map((achievement, index) => (
+                    <AchievementCard
+                      key={index}
+                      image={achievement.image}
+                      text={achievement.title}
+                    />
+                  ))}
+                </div>
+              </div>
+              <div className={styles['all-achievements']}>
+                <h4>Como alcanzar los siguientes logros</h4>
+                <AchievementDetailsCard
+                  achievements={enrolledCourse.achievements || []}
+                  courseId={enrolledCourse.id}
                 />
-              ))}
+              </div>
             </div>
           )}
           {selectedTab === 3 && (

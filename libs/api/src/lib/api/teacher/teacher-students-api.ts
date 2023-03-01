@@ -1,5 +1,4 @@
 import { _http } from '../../http';
-import { SessionModel } from '../../interfaces/session-interface';
 
 const http = _http;
 

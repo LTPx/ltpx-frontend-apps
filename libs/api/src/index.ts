@@ -33,6 +33,7 @@ export * from './lib/api/teacher/wallet-api';
 export * from './lib/api/teacher/teacher-classes-api';
 export * from './lib/api/teacher/teacher-sessions-api';
 export * from './lib/api/teacher/teacher-meeting-api';
+export * from './lib/api/teacher/teacher-students-api';
 
 export * from './lib/api/admin/applications-api';
 export * from './lib/api/admin/users-api';

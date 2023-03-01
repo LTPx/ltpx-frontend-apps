@@ -46,7 +46,7 @@ export function TeacherCourseStudents(props: TeacherCourseStudentsProps) {
               <td>3/3</td>
               <td>1/3</td>
               <td>
-                <NavLink to={`/teacher/view-student/${student.student_id}`}>
+                <NavLink to={`/teacher/courses/${courseId}/student/${student.student_id}`}>
                   Ver Estudiante
                 </NavLink>
               </td>

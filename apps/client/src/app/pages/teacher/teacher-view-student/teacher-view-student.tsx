@@ -9,18 +9,20 @@ import {
   TextArea,
 } from '@ltpx-frontend-apps/shared-ui';
 import { Dialog } from 'evergreen-ui';
+import { useParams } from 'react-router-dom';
 /* eslint-disable-next-line */
 export interface TeacherViewStudentProps {
   courseId?: number;
 }
 export function TeacherViewStudent(props: TeacherViewStudentProps) {
-  const { courseId } = props;
   const [quizzes, setQuizzes] = useState<QuizStudent[]>([]);
   const { _getStudentQuizzes } = useStudent();
   const [openModal, setOpenModal] = useState(false);
+  const { courseId, studentId } = useParams();
 
   const fetchCourse = useCallback(async () => {
-    const { success, data, error } = await _getStudentQuizzes(1);
+    const id = parseInt(courseId || '');
+    const { success, data, error } = await _getStudentQuizzes(id);
     if (success) {
       console.log('data: ', data);
       setQuizzes(data);

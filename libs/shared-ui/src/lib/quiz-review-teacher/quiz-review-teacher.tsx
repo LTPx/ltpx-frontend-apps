@@ -128,26 +128,23 @@ export function QuizReviewTeacher(props: QuizReviewTeacherProps) {
                           </pre>
                         ))}
                       </div>
-                      <div className={styles['btn-to-rate']}>
-                        <h4>Esta respuesta es correcta?</h4>
-                        <div className={styles['btns']}>
-                          <Button
-                            className={styles['btn-correct']}
-                            title="Si"
-                            icon="check"
-                            color={ColorsButton.primary}
-                            outline={true}
-                            onClick={correctAnswer}
-                          />
-                          <Button
-                            className={styles['btn-correct']}
-                            title="No"
-                            icon="close"
-                            color={ColorsButton.secondary}
-                            outline={true}
-                            onClick={errorAnswer}
-                          />
-                        </div>
+                      <div className={styles['buttons-rate']}>
+                        <Button
+                          className={styles['btn-correct']}
+                          title="Es incorrecto"
+                          icon="close"
+                          color={ColorsButton.secondary}
+                          outline={true}
+                          onClick={errorAnswer}
+                        />
+                        <Button
+                          className={styles['btn-correct']}
+                          title="La respuesta es correcta"
+                          icon="check"
+                          color={ColorsButton.primary}
+                          outline={true}
+                          onClick={correctAnswer}
+                        />
                       </div>
                     </div>
                   )}
@@ -155,10 +152,11 @@ export function QuizReviewTeacher(props: QuizReviewTeacherProps) {
               ))}
             </div>
           </div>
-          <div className={styles['revision']}>
-            <TextArea rows={6}
-              label='Observaciones Generales'
-              description='Puedes agregar feedback en caso que el estudiante tenga un resultado negativo 😐 o felicitar al estudiante por alcanzar una nota alta 😃'
+          <div className={styles['feedback']}>
+            <TextArea
+              rows={6}
+              label="Observaciones Generales"
+              description="Puedes agregar feedback en caso que el estudiante tenga un resultado negativo 😐 o felicitar al estudiante por alcanzar una nota alta 😃"
             />
           </div>
           <div className={styles['footer']}>

@@ -1,17 +1,12 @@
 import styles from './header-app.module.scss';
-import {
-  Dropdown,
-  Header,
-  UserMenu,
-} from '@ltpx-frontend-apps/shared-ui';
+import { Dropdown, Header, UserMenu } from '@ltpx-frontend-apps/shared-ui';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { useCart, useUser } from '@ltpx-frontend-apps/store';
+import { useUser } from '@ltpx-frontend-apps/store';
 import { Avatar } from 'evergreen-ui';
 
 export function HeaderApp() {
   const { user, logout, isAuthenticated, currentView } = useUser();
-  const { totalCourses } = useCart();
   const { t } = useTranslation();
   const navigate = useNavigate();
 
@@ -51,7 +46,7 @@ export function HeaderApp() {
         <div className={styles['actions']}>
           {isAuthenticated && (
             <Dropdown>
-              <Avatar name={user.fullname} size={35}/>
+              <Avatar name={user.fullname} size={35} />
               <UserMenu
                 name={user.fullname}
                 email={user.email}

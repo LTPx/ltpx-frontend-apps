@@ -4,8 +4,10 @@ import {
   Button,
   ColorsButton,
   NoticeCard,
+  UpcomingClass,
 } from '@ltpx-frontend-apps/shared-ui';
 import { useTeacher, useUser } from '@ltpx-frontend-apps/store';
+import { NavLink } from 'react-router-dom';
 import WelcomeNewTeacher from '../../../components/welcome-new-teacher/welcome-new-teacher';
 import styles from './teacher-dashboard.module.scss';
 
@@ -34,6 +36,23 @@ export function TeacherDashboard(props: TeacherDashboardProps) {
           )}
         </div>
         <div className={styles['help-ads']}>
+          <div className={styles['classes']}>
+            <div className={styles['head']}>
+              <h3>Próxima Clase</h3>
+              <NavLink to={'/teacher/sessions'}>
+              <h5>Mostrar todas</h5>
+              </NavLink>
+            </div>
+            <div className={styles['upcoming-classes']}>
+              <UpcomingClass
+                titleClass={'Aprende acerca del universo'}
+                session={1}
+                date={'Viernes, 27 de Julio'}
+                time={'09:00 - 10:30 AM'}
+                learners={5}
+              />
+            </div>
+          </div>
           <NoticeCard
             className={styles['card-join-discord']}
             title={'Comunidad en discord'}

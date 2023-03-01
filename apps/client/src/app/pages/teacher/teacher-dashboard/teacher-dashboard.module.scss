@@ -7,7 +7,9 @@
     margin-bottom: 1rem;
   }
 }
-
+.upcoming-classes {
+  padding-top: 1rem;
+}
 .layout {
   display: flex;
   gap: 3rem;
@@ -24,6 +26,14 @@
     display: flex;
     flex-direction: column;
     gap: 3rem;
+
+    .classes {
+      .head {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+    }
 
     .card-teaching {
       background-color: $white-color;

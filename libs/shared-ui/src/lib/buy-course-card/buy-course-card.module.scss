@@ -111,3 +111,14 @@
     }
   }
 }
+@media screen and (min-width: 860px) and (max-width: 1224px) {
+  .container {
+    .buy-card {
+      img {
+        width: 16rem;
+        height: 10rem;
+        object-fit: cover;
+      }
+    }
+  }
+}

@@ -2,10 +2,12 @@ import { useAppStore } from '../store';
 
 export const useCourseStudents = () => {
   const {
-    _getCourseStudents
+    _getStudentsByCourse,
+    _getStudentQuizzesByCourse,
   } = useAppStore();
 
   return {
-    _getCourseStudents
+    _getStudentsByCourse,
+    _getStudentQuizzesByCourse,
   };
 };

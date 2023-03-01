@@ -10,11 +10,11 @@ import { useTranslation } from 'react-i18next';
 
 /* eslint-disable-next-line */
 export interface QuizFormMultipleOptionsProps {
+  question?: QuestionQuiz;
+  className?: string;
   singleSelection?: boolean;
   onSubmit?: (data: QuestionQuiz) => void;
-  className?: string;
   onCancel?: () => void;
-  question?: QuestionQuiz;
 }
 
 export function QuizFormMultipleOptions(props: QuizFormMultipleOptionsProps) {
@@ -31,10 +31,14 @@ export function QuizFormMultipleOptions(props: QuizFormMultipleOptionsProps) {
       {
         text: '',
         correct: false,
+        question_id: -1, //TODO: remove this, currently fails due to QuestionQuiz interface needs ids
+        id: -1
       },
       {
         text: '',
         correct: false,
+        question_id: -1,
+        id: -2
       },
     ],
   };
@@ -50,7 +54,7 @@ export function QuizFormMultipleOptions(props: QuizFormMultipleOptionsProps) {
         })}
         onSubmit={(values) => {
           console.log('values: ', values);
-          // onSubmit && onSubmit(values);
+          onSubmit && onSubmit(values);
         }}
       >
         {({

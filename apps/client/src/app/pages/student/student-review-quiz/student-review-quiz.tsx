@@ -10,8 +10,7 @@ export interface StudentReviewQuizProps {}
 export function StudentReviewQuiz(props: StudentReviewQuizProps) {
   const [quizResult, setQuizResult] = useState<QuizResultSummary>();
   const { _getStudentQuizResult } = useStudent();
-  const params = useParams();
-  const { courseId, quizId } = params;
+  const { courseId, quizId } = useParams();
   const id = parseInt(quizId || '');
 
   const fetchQuiz = useCallback(async () => {

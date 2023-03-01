@@ -1,4 +1,4 @@
-import { useCourse, useCourseStudents } from '@ltpx-frontend-apps/store';
+import { useCourseStudents } from '@ltpx-frontend-apps/store';
 import { useCallback, useEffect, useState } from 'react';
 import { NavLink, useParams } from 'react-router-dom';
 import styles from './teacher-course-students.module.scss';
@@ -7,14 +7,13 @@ import styles from './teacher-course-students.module.scss';
 export interface TeacherCourseStudentsProps {}
 
 export function TeacherCourseStudents(props: TeacherCourseStudentsProps) {
-  const { _getCourseStudents } = useCourseStudents();
+  const { _getStudentsByCourse } = useCourseStudents();
   const [students, setStudents] = useState<any[]>([]);
-  const params = useParams();
-  const { courseId } = params;
+  const { courseId } = useParams();
   const id = parseInt(courseId || '');
 
   const fetchData = useCallback(async () => {
-    const { success, data, error } = await _getCourseStudents(id);
+    const { success, data, error } = await _getStudentsByCourse(id);
     if (success) {
       setStudents(data);
     } else {

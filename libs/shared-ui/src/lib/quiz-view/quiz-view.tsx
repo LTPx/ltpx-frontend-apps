@@ -19,7 +19,6 @@ export interface QuizViewProps {
 export function QuizView(props: QuizViewProps) {
   const { quiz, userAnswers, score, submittedAt, children } = props;
   const answersIds = userAnswers.map((answer) => answer.answer_id);
-
   const foundAnswer = (answerId: number) => {
     return userAnswers.find((answer) => answer.answer_id == answerId);
   };

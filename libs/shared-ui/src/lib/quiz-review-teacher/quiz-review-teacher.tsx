@@ -2,97 +2,131 @@ import styles from './quiz-review-teacher.module.scss';
 import { QuizModel, TypeQuestionQuiz } from '@ltpx-frontend-apps/api';
 import Button, { ColorsButton } from '../button/button';
 import TextArea from '../text-area/text-area';
-import { useState } from 'react';
+import { ReactElement, useState } from 'react';
+import moment from 'moment';
+moment.locale('es');
 
 /* eslint-disable-next-line */
 export interface QuizReviewTeacherProps {
   quiz: QuizModel;
+  score: number;
+  submittedAt: string;
+  userAnswers: {
+    answer_id: number;
+    id: number;
+    text?: string;
+  }[];
+  children: ReactElement;
 }
 
 export function QuizReviewTeacher(props: QuizReviewTeacherProps) {
-  const { quiz } = props;
+  const { quiz, userAnswers, score, submittedAt, children } = props;
   const [style, setStyle] = useState('answer-content');
+  const answersIds = userAnswers.map((answer) => answer.answer_id);
+  const foundAnswer = (answerId: number) => {
+    return userAnswers.find((answer) => answer.answer_id == answerId);
+  };
 
   const correctAnswer = () => {
     setStyle('answer-correct');
   };
+
   const errorAnswer = () => {
     setStyle('answer-noCorrect');
   };
+
   return (
     <div className={styles['container']}>
       {quiz.id && (
-        <div className={`${styles['quiz-container']} card with-padding`}>
+        <div className={`${styles['quiz-container']} card`}>
           <div className={styles['header']}>
             <h2>Test: {quiz.name}</h2>
+            <h4>
+              Enviado: {moment(submittedAt).format('MMMM D YYYY, h:mm a')}
+            </h4>
           </div>
           <div className={styles['content']}>
             <div className={styles['questions']}>
               {quiz.questions.map((question, index) => (
                 <div className="question" key={index}>
                   {question.kind === TypeQuestionQuiz.conditional && (
-                    <div className={styles['question-test']}>
-                      <h3> {question.question} </h3>
+                    <>
+                      <h3 className={styles['question-text']}>
+                        {index + 1}. {question.question}
+                      </h3>
                       <p>{question.description}</p>
-                      <div className={styles['item']}>
-                        {question.answers.map((answer, index) => (
-                          <div key={index}>
-                            {answer.correct == true ? (
-                              <h4 className={styles['selected']}>
-                                {answer.text}{' '}
-                              </h4>
-                            ) : (
-                              <h4>{answer.text} </h4>
-                            )}
-                          </div>
+                      <div className={styles['items']}>
+                        {question.answers.map((answer, i) => (
+                          <p
+                            key={i}
+                            className={`${styles['question-answer']} ${
+                              answersIds.includes(answer.id || -1)
+                                ? styles['selected']
+                                : ''
+                            }`}
+                          >
+                            {answer.text}
+                          </p>
                         ))}
                       </div>
-                    </div>
+                    </>
                   )}
                   {question.kind === TypeQuestionQuiz.multiple && (
-                    <div className={styles['question-test']}>
-                      <h3> {question.question} </h3>
+                    <>
+                      <h3 className={styles['question-text']}>
+                        {index + 1}. {question.question}
+                      </h3>
                       <p>{question.description}</p>
-                      <div className={styles['item']}>
-                        {question.answers.map((answer, index) => (
-                          <div key={index}>
-                            {answer.correct == true ? (
-                              <h4 className={styles['selected']}>
-                                {answer.text}{' '}
-                              </h4>
-                            ) : (
-                              <h4>{answer.text} </h4>
-                            )}
-                          </div>
+                      <div className={styles['items']}>
+                        {question.answers.map((answer, i) => (
+                          <p
+                            key={i}
+                            className={`${styles['question-answer']} ${
+                              answersIds.includes(answer.id || -1)
+                                ? styles['selected']
+                                : ''
+                            }`}
+                          >
+                            {answer.text}
+                          </p>
                         ))}
                       </div>
-                    </div>
+                    </>
                   )}
                   {question.kind === TypeQuestionQuiz.single && (
-                    <div className={styles['question-test']}>
-                      <h3> {question.question} </h3>
+                    <>
+                      <h3 className={styles['question-text']}>
+                        {index + 1}. {question.question}
+                      </h3>
                       <p>{question.description}</p>
-                      <div className={styles['item']}>
-                        {question.answers.map((answer, index) => (
-                          <div key={index}>
-                            {answer.correct == true ? (
-                              <h4 className={styles['selected']}>
-                                {answer.text}{' '}
-                              </h4>
-                            ) : (
-                              <h4>{answer.text} </h4>
-                            )}
-                          </div>
+                      <div className={styles['items']}>
+                        {question.answers.map((answer, i) => (
+                          <p
+                            key={i}
+                            className={`${styles['question-answer']} ${
+                              answersIds.includes(answer.id || -1)
+                                ? styles['selected']
+                                : ''
+                            }`}
+                          >
+                            {answer.text}
+                          </p>
                         ))}
                       </div>
-                    </div>
+                    </>
                   )}
                   {question.kind === TypeQuestionQuiz.answer && (
                     <div className={styles['answer']}>
-                      <h3> {question.question} </h3>
-                      <p>{question.description}</p>
-                      <div className={styles[style]}>
-                        {question.answers && <p>Aquí estará la respuesta</p>}
+                      <div>
+                        <h3 className={styles['question-text']}>
+                          {index + 1}. {question.question}
+                        </h3>
+                        <p>{question.description}</p>
+                        {question.answers.map((answer, i) => (
+                          <pre className={styles['question-answer']} key={i}>
+                            {foundAnswer(answer.id)?.text}
+                          </pre>
+                        ))}
                       </div>
                       <div className={styles['btn-to-rate']}>
                         <h4>Esta respuesta es correcta?</h4>
@@ -122,8 +156,10 @@ export function QuizReviewTeacher(props: QuizReviewTeacherProps) {
             </div>
           </div>
           <div className={styles['revision']}>
-            <h3>Observaciones Generales</h3>
-            <TextArea rows={6} />
+            <TextArea rows={6}
+              label='Observaciones Generales'
+              description='Puedes agregar feedback en caso que el estudiante tenga un resultado negativo 😐 o felicitar al estudiante por alcanzar una nota alta 😃'
+            />
           </div>
           <div className={styles['footer']}>
             <Button

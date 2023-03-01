@@ -1,10 +1,9 @@
+import styles from './student-review-quiz.module.scss';
 import { QuizResultSummary } from '@ltpx-frontend-apps/api';
-import { QuizView } from '@ltpx-frontend-apps/shared-ui';
+import { Button, ColorsButton, QuizView } from '@ltpx-frontend-apps/shared-ui';
 import { useStudent } from '@ltpx-frontend-apps/store';
 import { useCallback, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import styles from './student-review-quiz.module.scss';
-
 /* eslint-disable-next-line */
 export interface StudentReviewQuizProps {}
 
@@ -31,7 +30,20 @@ export function StudentReviewQuiz(props: StudentReviewQuizProps) {
 
   return (
     <div className={styles['container']}>
-      { quizResult?.id && <QuizView quiz={quizResult.quiz} userAnswers={quizResult.user_answers}/> }
+      {quizResult?.id && (
+        <QuizView
+          quiz={quizResult.quiz}
+          userAnswers={quizResult.user_answers}
+          score={quizResult.score}
+          submittedAt={quizResult.submitted_at}
+        >
+          <Button
+            title="Regresar"
+            color={ColorsButton.secondary}
+            link={`/student/courses/${courseId}`}
+          />
+        </QuizView>
+      )}
     </div>
   );
 }

@@ -54,6 +54,22 @@ export const useBlog = () => {
       text: 'Seguridad y privacidad del alumno',
       url: '/blog/student-safety-privacy',
     },
+    {
+      text: 'Como crear una gran clase en Open Mind',
+      url: '/blog/how-create-a-class',
+    },
+    {
+      text: '¿Como asegurarse de entregar una gran experiencia en vivo en Open Mind?',
+      url: '/blog/great-experience-openMind',
+    },
+    {
+      text: 'Clases 1 a 1: Generando impacto y oportunidades',
+      url: '/blog/generating-impact-opportunities',
+    },
+    {
+      text: '¿Qué hace que una gran clase continua?',
+      url: '/blog/what-makes-class-going-on',
+    }
   ];
 
   const linksStudent = [

@@ -12,8 +12,28 @@
   }
   .achievements-content {
     display: flex;
+    flex-direction: column;
     gap: $size-lg-1;
     flex-wrap: wrap;
+    .achievements-student {
+      .title-achievement {
+        padding-bottom: 1.5rem;
+      }
+      .achievements {
+        display: flex;
+        gap: $size-lg-1;
+        flex-wrap: wrap;
+      }
+    }
+    .all-achievements {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      .test {
+        display: flex;
+        gap:1rem;
+      }
+    }
   }
   .course-date {
     display: flex;

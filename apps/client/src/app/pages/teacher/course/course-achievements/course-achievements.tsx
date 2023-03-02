@@ -1,6 +1,5 @@
 import {
-  EditAchievementParams,
-  NewAchievementParams,
+  AchievementParams,
   TypeAchievement,
 } from '@ltpx-frontend-apps/api';
 import {
@@ -25,7 +24,7 @@ export interface CourseAchievementsProps {
 export function CourseAchievements(props: CourseAchievementsProps) {
   const { onSubmit } = props;
   const [achievementEdit, setAchievementEdit] =
-    useState<EditAchievementParams>();
+    useState<AchievementParams>();
   const [showAchievementType, setShowAchievementType] =
     useState<TypeAchievement | null>();
   const { addNewAchievement, removeAchievement, updateAchievement, course } =
@@ -61,7 +60,7 @@ export function CourseAchievements(props: CourseAchievementsProps) {
   ];
 
   const handleSaveAchievement = async (
-    achievement: EditAchievementParams | NewAchievementParams
+    achievement: AchievementParams
   ) => {
     console.log('handleSaveAchievement: ', achievement);
     // try {

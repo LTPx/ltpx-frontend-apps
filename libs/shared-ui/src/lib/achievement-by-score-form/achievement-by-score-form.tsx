@@ -1,41 +1,52 @@
-import { AchievementsImages, EditAchievementParams, EntityAchievement, NewAchievementParams, QuizModel, TypeAchievement } from '@ltpx-frontend-apps/api';
+import styles from './achievement-by-score-form.module.scss';
+import {
+  AchievementsImages,
+  AchievementParams,
+  EntityAchievement,
+  QuizModel,
+  TypeAchievement,
+} from '@ltpx-frontend-apps/api';
 import { Form, Formik } from 'formik';
 import Button, { ColorsButton, TypeButton } from '../button/button';
 import Input from '../input/input';
 import SelectImage from '../select-image/select-image';
-import styles from './achievement-by-score-form.module.scss';
 import * as Yup from 'yup';
-import InputTextStatus, { StatusInputText } from '../input-text-status/input-text-status';
+import InputTextStatus, {
+  StatusInputText,
+} from '../input-text-status/input-text-status';
 import { useTranslation } from 'react-i18next';
 /* eslint-disable-next-line */
 export interface AchievementByScoreFormProps {
   quizzes: QuizModel[];
-  achievement?: EditAchievementParams;
+  achievement?: AchievementParams;
   onCancel?: () => void;
-  onSubmit?: (data: EditAchievementParams | NewAchievementParams) => void;
+  onSubmit?: (data: AchievementParams) => void;
   className?: string;
 }
 
 export function AchievementByScoreForm(props: AchievementByScoreFormProps) {
   const { quizzes, onCancel, onSubmit, className, achievement } = props;
-  const ids = achievement?.condition_quizzes_attributes.map((condition)=> condition.quiz_id) || [];
+  const ids =
+    achievement?.condition_quizzes_attributes.map(
+      (condition) => condition.quiz_id
+    ) || [];
   const { t } = useTranslation();
 
   const initialValues = {
     title: achievement?.title || '',
-    image:  achievement?.image || '',
-    price:  achievement?.price || 0,
-    settings: quizzes.map((quiz)=> {
+    image: achievement?.image || '',
+    price: achievement?.price || 0,
+    settings: quizzes.map((quiz) => {
       return {
         entity: EntityAchievement.quiz,
         text: quiz.name,
         entity_id: quiz.id,
         score: 0,
         selected: ids.includes(quiz.id),
-      }
+      };
     }),
     rule: TypeAchievement.score,
-    score: 10
+    score: 10,
   };
 
   return (
@@ -47,13 +58,17 @@ export function AchievementByScoreForm(props: AchievementByScoreFormProps) {
         score: Yup.number().required('Es necesario agregar una calificación'),
       })}
       onSubmit={(data) => {
-        const settings = data.settings.filter((setting) => {
-          return setting.selected
-        }).map((s)=> { return {...s, ...{score: data.score}}});
+        const settings = data.settings
+          .filter((setting) => {
+            return setting.selected;
+          })
+          .map((s) => {
+            return { ...s, ...{ score: data.score } };
+          });
         const formData = {
           ...data,
           ...{
-            settings: settings
+            settings: settings,
           },
         };
         console.log('formDataAchievement: ', formData);
@@ -72,7 +87,7 @@ export function AchievementByScoreForm(props: AchievementByScoreFormProps) {
           <div className={styles['fields']}>
             <Input
               placeholder="Asigna un nombre interesante"
-              label={t('achievementByScoreForm.title')||''}
+              label={t('achievementByScoreForm.title') || ''}
               value={values.title}
               onChange={handleChange}
               onBlur={handleBlur}
@@ -83,21 +98,22 @@ export function AchievementByScoreForm(props: AchievementByScoreFormProps) {
             <label>{t('achievementByScoreForm.quiz')}</label>
             <div className={styles['quizzes']}>
               {values.settings.map((setting, index) => (
-                <div className={`${styles['quiz']} ${setting.selected ? styles['selected'] : ''}`} key={index}
-                  onClick={()=>{
-                    values.settings.forEach((setting, i)=>{
+                <div
+                  className={`${styles['quiz']} ${
+                    setting.selected ? styles['selected'] : ''
+                  }`}
+                  key={index}
+                  onClick={() => {
+                    values.settings.forEach((setting, i) => {
                       if (index === i) {
                         setFieldValue(
                           `settings[${index}].selected`,
                           !setting.selected
                         );
                       } else {
-                        setFieldValue(
-                          `settings[${i}].selected`,
-                          false
-                        );
+                        setFieldValue(`settings[${i}].selected`, false);
                       }
-                    })
+                    });
                     console.log(setting);
                   }}
                 >
@@ -127,7 +143,7 @@ export function AchievementByScoreForm(props: AchievementByScoreFormProps) {
               }}
               images={AchievementsImages}
             />
-            { errors.image && (
+            {errors.image && (
               <InputTextStatus
                 status={StatusInputText.error}
                 text={errors.image}
@@ -136,8 +152,8 @@ export function AchievementByScoreForm(props: AchievementByScoreFormProps) {
             <Input
               placeholder="1"
               label={t('achievementByScoreForm.price') || ''}
-              description='Este valor sera enviado a tu cuenta una vez el alumno alcance este logro'
-              type='number'
+              description="Este valor sera enviado a tu cuenta una vez el alumno alcance este logro"
+              type="number"
               min={1}
               value={values.price}
               onChange={handleChange}

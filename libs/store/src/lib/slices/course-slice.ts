@@ -9,12 +9,11 @@ import {
   removeQuiz,
   removeAchievement,
   createAchievement,
-  NewAchievementParams,
+  AchievementParams,
   NewQuizParams,
   createQuiz,
   editQuiz,
   EditQuizParams,
-  EditAchievementParams,
   editAchievement,
   CourseApiParams,
   NewCourseSessionParams,
@@ -33,14 +32,14 @@ export type CourseSlice = {
   getCourse: (id: number) => Promise<TResponse>;
   addNewContent: (content: ContentCourse) => Promise<TResponse>;
   addNewQuiz: (quiz: NewQuizParams) => Promise<TResponse>;
-  addNewAchievement: (achievement: NewAchievementParams) => Promise<TResponse>;
+  addNewAchievement: (achievement: AchievementParams) => Promise<TResponse>;
   removeContent: (index: number) => Promise<TResponse>;
   removeQuiz: (id: number) => Promise<TResponse>;
   removeAchievement: (id: number) => Promise<TResponse>;
   addUpdateClassroom: (classroom: Classroom) => Promise<TResponse>;
   updateContent: (content: ContentCourse, index: number) => Promise<TResponse>;
   updateQuiz: (quiz: EditQuizParams) => Promise<TResponse>;
-  updateAchievement: (achievement: EditAchievementParams) => Promise<TResponse>;
+  updateAchievement: (achievement: AchievementParams, id:number) => Promise<TResponse>;
   updateCourse: (course: CourseApiParams) => Promise<TResponse>;
   cleanCourse: () => void;
   _addCourseSession: (params: NewCourseSessionParams) => Promise<TResponse>;
@@ -118,9 +117,7 @@ export const createCourseSlice: StateCreator<
       return { success: false, data: error };
     }
   },
-  addNewAchievement: async (
-    params: NewAchievementParams
-  ): Promise<TResponse> => {
+  addNewAchievement: async (params): Promise<TResponse> => {
     try {
       const course = get().course;
       const paramsCourseId = { ...params, ...{ course_id: course.id } };
@@ -190,13 +187,11 @@ export const createCourseSlice: StateCreator<
       return { success: true, data: error };
     }
   },
-  updateAchievement: async (
-    params: EditAchievementParams
-  ): Promise<TResponse> => {
+  updateAchievement: async (params, id): Promise<TResponse> => {
     try {
       const course = get().course;
       const paramsAchievementId = { ...params, ...{ course_id: course.id } };
-      const achievement = await editAchievement(paramsAchievementId);
+      const achievement = await editAchievement(paramsAchievementId, id);
       const achievements = course.achievements?.map((achievementStore) => {
         return achievementStore.id === achievement.id
           ? achievement

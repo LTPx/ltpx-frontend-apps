@@ -1,7 +1,6 @@
 import {
   AchievementsImages,
-  EditAchievementParams,
-  NewAchievementParams,
+  AchievementParams,
   TypeAchievement,
 } from '@ltpx-frontend-apps/api';
 import { Form, Formik } from 'formik';
@@ -18,9 +17,9 @@ import { useTranslation } from 'react-i18next';
 
 /* eslint-disable-next-line */
 export interface AchievementTaskFormProps {
-  achievement?: EditAchievementParams;
+  achievement?: AchievementParams;
   className?: string;
-  onSubmit?: (data: NewAchievementParams | EditAchievementParams) => void;
+  onSubmit?: (data:AchievementParams) => void;
   onCancel?: () => void;
 }
 

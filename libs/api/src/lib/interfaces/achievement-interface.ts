@@ -37,7 +37,7 @@ export interface AchievementModel {
   updated_at: string;
 }
 
-type AchievementParams = Omit<
+type AchievementBasicParams = Omit<
   AchievementModel,
   | 'id'
   | 'user_id'
@@ -50,17 +50,25 @@ type AchievementParams = Omit<
 >;
 
 type AchievementNestedAttributes = {
-  condition_quizzes_attributes: Prettify<PartialBy<ConditionByQuiz, 'min_score'>>[];
-  condition_tasks_attributes: Prettify<PartialBy<ConditionByTask, 'min_score'>>[];
+  condition_quizzes_attributes: Prettify<
+    PartialBy<ConditionByQuiz, 'min_score'>
+  >[];
+  condition_tasks_attributes: Prettify<
+    PartialBy<ConditionByTask, 'min_score'>
+  >[];
 };
 
-export type NewAchievementParams = Prettify<
-  AchievementParams & AchievementNestedAttributes
+export type AchievementParams = Prettify<
+  AchievementBasicParams & AchievementNestedAttributes
 >;
 
-export type EditAchievementParams = Prettify<
-  AchievementParams & AchievementNestedAttributes
->;
+// export type NewAchievementParams = Prettify<
+//   AchievementParams & AchievementNestedAttributes
+// >;
+
+// export type EditAchievementParams = Prettify<
+//   AchievementParams & AchievementNestedAttributes
+// >;
 
 // export type EditAchievementParams = Omit<
 //   AchievementModel,

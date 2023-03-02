@@ -5,16 +5,15 @@ import styles from './achievement-builder.module.scss';
 import {
   QuizModel,
   TypeAchievement,
-  NewAchievementParams,
-  EditAchievementParams,
+  AchievementParams,
 } from '@ltpx-frontend-apps/api';
 
 /* eslint-disable-next-line */
 export interface AchievementBuilderProps {
   quizzes: QuizModel[];
   typeAchievement?: TypeAchievement;
-  achievement?: EditAchievementParams;
-  onSubmit: (achievement: NewAchievementParams | EditAchievementParams) => void;
+  achievement?: AchievementParams;
+  onSubmit: (achievement: AchievementParams) => void;
   onCancel?: () => void;
 }
 

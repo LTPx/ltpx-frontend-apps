@@ -16,7 +16,7 @@ import {
   updateTeacherProfile,
   QuizModel,
   editCourse,
-  NewAchievementParams,
+  AchievementParams,
   TeacherCourse,
   getTeacherCourse,
   createQuiz,
@@ -86,7 +86,7 @@ export type TeacherSlice = {
   getProfile: () => Promise<TResponseProfile>;
   updateProfile: (params: IUserAccount) => Promise<TResponseUpdateProfile>;
   createQuiz: (params: any) => Promise<TResponse>;
-  createAchievement: (params: NewAchievementParams) => Promise<TResponse>;
+  createAchievement: (params: AchievementParams) => Promise<TResponse>;
   getCourse: (id: number) => Promise<TResponse>;
   _sendCourseToReview: (id: number) => Promise<TResponse>;
   _getWallet: () => Promise<TResponse>;

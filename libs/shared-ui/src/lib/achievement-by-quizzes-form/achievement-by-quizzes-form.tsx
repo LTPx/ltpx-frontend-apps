@@ -6,9 +6,8 @@ import { Form, Formik } from 'formik';
 import * as Yup from 'yup';
 import {
   AchievementsImages,
-  EditAchievementParams,
+  AchievementParams,
   EntityAchievement,
-  NewAchievementParams,
   QuizModel,
   TypeAchievement,
 } from '@ltpx-frontend-apps/api';
@@ -21,10 +20,10 @@ import { useTranslation } from 'react-i18next';
 export interface AchievementByQuizzesFormProps {
   className?: string;
   quizzes: QuizModel[];
-  achievement?: Omit<EditAchievementParams, 'id'>;
+  achievement?: AchievementParams;
   singleSelection?: boolean;
   onCancel?: () => void;
-  onSubmit: (data: NewAchievementParams | EditAchievementParams) => void;
+  onSubmit: (data: AchievementParams) => void;
 }
 
 export function AchievementByQuizzesForm(props: AchievementByQuizzesFormProps) {
@@ -87,8 +86,8 @@ export function AchievementByQuizzesForm(props: AchievementByQuizzesFormProps) {
           },
         };
         console.log('formDataAchievement: ', formData);
-          onSubmit(formData);
-        // const dd = achievement?.id ? formData as EditAchievementParams : formData as NewAchievementParams;
+        onSubmit(formData);
+        // const dd = achievement?.id ? formData as AchievementParams : formData as NewAchievementParams;
       }}
     >
       {({

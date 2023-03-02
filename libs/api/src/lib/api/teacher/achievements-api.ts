@@ -1,9 +1,9 @@
 import { _http } from '../../http';
-import { AchievementModel, EditAchievementParams, NewAchievementParams } from '../../interfaces/achievement-interface';
+import { AchievementModel, AchievementParams } from '../../interfaces/achievement-interface';
 
 const http = _http;
 
-export const createAchievement = async (quiz: NewAchievementParams) => {
+export const createAchievement = async (quiz: AchievementParams) => {
   return new Promise<AchievementModel>((resolve, reject) => {
     http
       .post('api/v1/teacher/achievements', quiz)
@@ -16,11 +16,10 @@ export const createAchievement = async (quiz: NewAchievementParams) => {
   });
 };
 
-export const editAchievement = async (achievement: EditAchievementParams) => {
-  // const { id } = achievement;
+export const editAchievement = async (achievement: AchievementParams, id: number) => {
   return new Promise<AchievementModel>((resolve, reject) => {
     http
-      .put(`api/v1/teacher/achievements/${3}`, achievement)
+      .put(`api/v1/teacher/achievements/${id}`, achievement)
       .then((response) => {
         resolve(response.data);
       })

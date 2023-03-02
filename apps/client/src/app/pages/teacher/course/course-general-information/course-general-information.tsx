@@ -47,9 +47,6 @@ export function CourseGeneralInformation(props: CourseGeneralInformationProps) {
   const { updateCourse, cleanCourse } = useCourse();
   const { t } = useTranslation();
 
-  console.log('levels: ', levels);
-  console.log('level: ', level);
-
   const formik = useFormik({
     initialValues: {
       title: title,

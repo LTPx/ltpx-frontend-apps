@@ -18,7 +18,7 @@ export interface AchievementByScoreFormProps {
 
 export function AchievementByScoreForm(props: AchievementByScoreFormProps) {
   const { quizzes, onCancel, onSubmit, className, achievement } = props;
-  const ids = achievement?.settings.map((setting)=> setting.entity_id) || [];
+  const ids = achievement?.condition_quizzes_attributes.map((condition)=> condition.quiz_id) || [];
   const { t } = useTranslation();
 
   const initialValues = {
@@ -57,7 +57,7 @@ export function AchievementByScoreForm(props: AchievementByScoreFormProps) {
           },
         };
         console.log('formDataAchievement: ', formData);
-        onSubmit && onSubmit(formData);
+        // onSubmit && onSubmit(formData);
       }}
     >
       {({

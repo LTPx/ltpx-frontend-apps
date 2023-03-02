@@ -5,9 +5,12 @@ import Button, { ColorsButton, TypeButton } from '../button/button';
 import { Form, Formik } from 'formik';
 import * as Yup from 'yup';
 import {
-  AchievementParamsUi,
+  AchievementParams,
   AchievementsImages,
+  ConditionByQuiz,
+  EditAchievementParams,
   EntityAchievement,
+  NewAchievementParams,
   QuizModel,
   TypeAchievement,
 } from '@ltpx-frontend-apps/api';
@@ -15,18 +18,21 @@ import InputTextStatus, {
   StatusInputText,
 } from '../input-text-status/input-text-status';
 import { useTranslation } from 'react-i18next';
+import { useState } from 'react';
 
 /* eslint-disable-next-line */
 export interface AchievementByQuizzesFormProps {
   className?: string;
   quizzes: QuizModel[];
-  achievement?: AchievementParamsUi;
+  achievement?: EditAchievementParams;
   singleSelection?: boolean;
   onCancel?: () => void;
-  onSubmit?: (data: AchievementParamsUi) => void;
+  onSubmit?: (data: NewAchievementParams | EditAchievementParams) => void;
 }
 
 export function AchievementByQuizzesForm(props: AchievementByQuizzesFormProps) {
+  const [isEditMode, setIsEditMode] = useState(false);
+  const { t } = useTranslation();
   const {
     onSubmit,
     onCancel,
@@ -35,8 +41,8 @@ export function AchievementByQuizzesForm(props: AchievementByQuizzesFormProps) {
     className,
     achievement,
   } = props;
-  const ids = achievement?.settings.map((setting) => setting.entity_id) || [];
-  const { t } = useTranslation();
+
+  const ids = achievement?.condition_quizzes_attributes.map((condition) => condition.quiz_id) || [];
 
   const initialValues = {
     title: achievement?.title || '',
@@ -56,6 +62,7 @@ export function AchievementByQuizzesForm(props: AchievementByQuizzesFormProps) {
         ? TypeAchievement.single
         : TypeAchievement.multiple,
   };
+  console.log('initialValues: ', initialValues);
 
   return (
     <Formik
@@ -72,12 +79,15 @@ export function AchievementByQuizzesForm(props: AchievementByQuizzesFormProps) {
               quiz_id: quiz.entity_id,
             };
           });
-        const formData = {
+          const {settings, ...formData} = { //remove settings
           ...data,
-          condition_quizzes_attributes,
+          ...{
+            condition_quizzes_attributes,
+            condition_tasks_attributes: [],
+          }
         };
         console.log('formDataAchievement: ', formData);
-        onSubmit && onSubmit(formData);
+        // onSubmit && onSubmit(formData);
       }}
     >
       {({

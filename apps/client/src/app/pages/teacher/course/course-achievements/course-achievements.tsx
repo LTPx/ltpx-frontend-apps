@@ -1,13 +1,12 @@
 import {
-  AchievementModel,
-  AchievementParamsUi,
+  EditAchievementParams,
+  NewAchievementParams,
   TypeAchievement,
 } from '@ltpx-frontend-apps/api';
 import {
   AchievementBuilder,
   Button,
   ColorsButton,
-  Dropdown,
   Icon,
   Menu,
   SetupCard,
@@ -25,7 +24,8 @@ export interface CourseAchievementsProps {
 
 export function CourseAchievements(props: CourseAchievementsProps) {
   const { onSubmit } = props;
-  const [achievementEdit, setAchievementEdit] = useState<AchievementModel>();
+  const [achievementEdit, setAchievementEdit] =
+    useState<EditAchievementParams>();
   const [showAchievementType, setShowAchievementType] =
     useState<TypeAchievement | null>();
   const { addNewAchievement, removeAchievement, updateAchievement, course } =
@@ -60,7 +60,10 @@ export function CourseAchievements(props: CourseAchievementsProps) {
     },
   ];
 
-  const handleSaveAchievement = async (achievement: AchievementParamsUi) => {
+  const handleSaveAchievement = async (
+    achievement: EditAchievementParams | NewAchievementParams
+  ) => {
+    console.log('handleSaveAchievement: ', achievement);
     try {
       const { data } = achievement.id
         ? await updateAchievement({ ...achievement, ...{ id: achievement.id } })
@@ -106,11 +109,10 @@ export function CourseAchievements(props: CourseAchievementsProps) {
     title: string;
   }) => (
     <div className={styles['achievement-btn']}>
-    <Menu items={achievementsForms}>
-      <Button title={'Agregar Logro'} />
-    </Menu>
+      <Menu items={achievementsForms}>
+        <Button title={'Agregar Logro'} />
+      </Menu>
     </div>
-
   );
 
   return (
@@ -134,7 +136,13 @@ export function CourseAchievements(props: CourseAchievementsProps) {
                 <div
                   className={styles['action']}
                   onClick={() => {
-                    setAchievementEdit(achievement);
+                    setAchievementEdit({
+                      ...achievement,
+                      ...{
+                        condition_quizzes_attributes: achievement.condition_quizzes,
+                        condition_tasks_attributes: achievement.condition_tasks
+                      }
+                    });
                     setShowAchievementType(achievement.rule);
                   }}
                 >

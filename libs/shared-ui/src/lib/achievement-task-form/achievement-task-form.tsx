@@ -1,6 +1,6 @@
 import {
-  AchievementModel,
   AchievementsImages,
+  EditAchievementParams,
   NewAchievementParams,
   TypeAchievement,
 } from '@ltpx-frontend-apps/api';
@@ -18,10 +18,10 @@ import { useTranslation } from 'react-i18next';
 
 /* eslint-disable-next-line */
 export interface AchievementTaskFormProps {
-  achievement?: AchievementModel;
+  achievement?: EditAchievementParams;
   className?: string;
+  onSubmit?: (data: NewAchievementParams | EditAchievementParams) => void;
   onCancel?: () => void;
-  onSubmit?: (data: NewAchievementParams) => void;
 }
 
 export function AchievementTaskForm(props: AchievementTaskFormProps) {
@@ -45,7 +45,7 @@ export function AchievementTaskForm(props: AchievementTaskFormProps) {
       })}
       onSubmit={(formData) => {
         console.log('formDataAchievement: ', formData);
-        onSubmit && onSubmit(formData);
+        // onSubmit && onSubmit(formData);
       }}
     >
       {({

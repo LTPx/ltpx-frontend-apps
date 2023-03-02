@@ -3,26 +3,28 @@ import AchievementByScoreForm from '../achievement-by-score-form/achievement-by-
 import AchievementTaskForm from '../achievement-task-form/achievement-task-form';
 import styles from './achievement-builder.module.scss';
 import {
-  AchievementModel,
   QuizModel,
   TypeAchievement,
-  AchievementParamsUi,
+  NewAchievementParams,
+  EditAchievementParams,
 } from '@ltpx-frontend-apps/api';
 
 /* eslint-disable-next-line */
 export interface AchievementBuilderProps {
   quizzes: QuizModel[];
   typeAchievement?: TypeAchievement;
-  achievement?: AchievementModel;
-  onSubmit?: (achievement: AchievementParamsUi) => void;
+  achievement?: EditAchievementParams;
+  onSubmit: (achievement: NewAchievementParams | EditAchievementParams) => void;
   onCancel?: () => void;
 }
 
 export function AchievementBuilder(props: AchievementBuilderProps) {
   const { onSubmit, onCancel, quizzes, typeAchievement, achievement } = props;
-  const saveNewAchievement = (achievementForm: AchievementParamsUi) => {
-    onSubmit && onSubmit({...achievementForm, ...{id: achievement?.id}});
+
+  const saveNewAchievement = (achievementForm: any) => {
+    onSubmit({...achievementForm, ...{id: achievement?.id}});
   };
+  console.log('achievement: ', achievement);
 
   return (
     <div className={styles['container']}>
@@ -63,7 +65,8 @@ export function AchievementBuilder(props: AchievementBuilderProps) {
             <AchievementTaskForm
               achievement={achievement}
               onSubmit={(data) => {
-                saveNewAchievement(data);
+                console.log('data: ', data);
+                // saveNewAchievement(data);
               }}
               onCancel={onCancel}
             />

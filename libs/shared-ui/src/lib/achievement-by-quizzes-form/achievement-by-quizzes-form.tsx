@@ -87,7 +87,6 @@ export function AchievementByQuizzesForm(props: AchievementByQuizzesFormProps) {
         };
         console.log('formDataAchievement: ', formData);
         onSubmit(formData);
-        // const dd = achievement?.id ? formData as AchievementParams : formData as NewAchievementParams;
       }}
     >
       {({

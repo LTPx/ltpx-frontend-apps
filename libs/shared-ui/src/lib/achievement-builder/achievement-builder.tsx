@@ -19,12 +19,6 @@ export interface AchievementBuilderProps {
 
 export function AchievementBuilder(props: AchievementBuilderProps) {
   const { onSubmit, onCancel, quizzes, typeAchievement, achievement } = props;
-
-  const saveNewAchievement = (achievementForm: any) => {
-    // onSubmit({...achievementForm, ...{id: achievement?.id}});
-  };
-  console.log('achievement: ', achievement);
-
   return (
     <div className={styles['container']}>
       {typeAchievement && (
@@ -33,9 +27,7 @@ export function AchievementBuilder(props: AchievementBuilderProps) {
             <AchievementByQuizzesForm
               achievement={achievement}
               quizzes={quizzes}
-              onSubmit={(data) => {
-                saveNewAchievement(data);
-              }}
+              onSubmit={onSubmit}
               onCancel={onCancel}
             />
           )}
@@ -44,9 +36,7 @@ export function AchievementBuilder(props: AchievementBuilderProps) {
               achievement={achievement}
               singleSelection={true}
               quizzes={quizzes}
-              onSubmit={(data) => {
-                saveNewAchievement(data);
-              }}
+              onSubmit={onSubmit}
               onCancel={onCancel}
             />
           )}
@@ -54,19 +44,14 @@ export function AchievementBuilder(props: AchievementBuilderProps) {
             <AchievementByScoreForm
               achievement={achievement}
               quizzes={quizzes}
-              onSubmit={(data) => {
-                saveNewAchievement(data);
-              }}
+              onSubmit={onSubmit}
               onCancel={onCancel}
             />
           )}
           {typeAchievement === TypeAchievement.task && (
             <AchievementTaskForm
               achievement={achievement}
-              onSubmit={(data) => {
-                console.log('data: ', data);
-                // saveNewAchievement(data);
-              }}
+              onSubmit={onSubmit}
               onCancel={onCancel}
             />
           )}

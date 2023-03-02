@@ -61,27 +61,3 @@ type AchievementNestedAttributes = {
 export type AchievementParams = Prettify<
   AchievementBasicParams & AchievementNestedAttributes
 >;
-
-// export type NewAchievementParams = Prettify<
-//   AchievementParams & AchievementNestedAttributes
-// >;
-
-// export type EditAchievementParams = Prettify<
-//   AchievementParams & AchievementNestedAttributes
-// >;
-
-// export type EditAchievementParams = Omit<
-//   AchievementModel,
-//   'user_id' | 'created_at' | 'updated_at' | 'course_id'
-// >;
-
-// export type AchievementParamsUi = Prettify<
-//   PartialBy<EditAchievementParams, 'id'>
-// >;
-
-export interface SettingAchievement {
-  entity: EntityAchievement;
-  entity_id: number;
-  score: number;
-  text: string;
-}

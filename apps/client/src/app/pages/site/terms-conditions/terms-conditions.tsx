@@ -61,6 +61,36 @@ export function TermsConditions(props: TermsConditionsProps) {
           Materiales se encuentra estrictamente prohibido sin nuestro
           consentimiento previo.
         </p>
+        <h4>Cursos Open Mind</h4>
+        <p>
+          Los cursos Open Mind están organizados alrededor de Logros
+          establecidos por los profesores que deberán ser aprobados por los
+          estudiantes para que los profesores reciban la remuneración acordada.
+          Las familias entregan el valor completo del curso a Open Mind que lo
+          sostiene por la duración del curso y lo entrega al profesor cuando
+          este cumple los objetivos establecidos en el curso. Las familias y
+          alumnos aceptan que una vez comprado el curso, es responsabilidad de
+          ellos coordinar con los profesores sesiones que hagan posible
+          conseguir los objetivos del curso. Una vez que se cumplen los
+          objetivos del curso, el profesor recibirá de parte de Open Mind los
+          valores previamente recibidos.
+        </p>
+        <p>
+          Las pruebas de aprendizaje que deberán completar los alumnos serán
+          validadas por los profesores y auditadas por Open Mind. También
+          estarán disponibles para la revisión de las familias y como parte de
+          los certificados que reciben los alumnos cuando completan la clase.
+        </p>
+        <h4>Devoluciones</h4>
+        <p>
+          En el caso de que el profesor no logre conseguir los objetivos
+          preestablecidos debido a que no ha dado su mejor esfuerzo creando
+          oportunidades para el alumno, el dinero entregado a Open Mind será
+          devuelto a las familias. Open Mind tendrá el criterio final sobre
+          cuándo se justifica una devolución o cuando debe ser realizado el pago
+          al profesor. Pueden existir tarifas de procesamiento asociadas a los
+          servicios de transferencia de valores que utiliza Open Mind.
+        </p>
         <h4>Contenido de Usuario</h4>
         <p>
           Algunas áreas de los Materiales facultarán a los usuarios a publicar

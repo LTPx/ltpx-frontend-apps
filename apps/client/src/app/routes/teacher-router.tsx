@@ -31,7 +31,7 @@ import {
   TeacherLayout,
   TeacherMeetingsAgenda,
   TeacherReviewQuiz,
-  TeacherViewStudent
+  TeacherViewStudent,
 } from '../pages/teacher';
 import VideoMeetingLive from '../video/video-meeting-live/video-meeting-live';
 import { ProtectedRoutesTeacher } from './guards/protected-routes-teacher/protected-routes-teacher';
@@ -53,6 +53,14 @@ export const TeacherRoutes = () => {
           <Route path="apply-teach" element={<TeacherApply />} />
           <Route path="earnings" element={<TeacherEarnings />} />
           <Route path="sessions" element={<TeacherMeetingsAgenda />} />
+          <Route
+            path="/teacher/quiz-review/:quizId"
+            element={<TeacherReviewQuiz />}
+          />
+          <Route
+            path="live-meeting/:meetingId/:roomId"
+            element={<VideoMeetingLive redirectUrl="/teacher/sessions" />}
+          />
           <Route path="/teacher/quiz-review/:quizId" element={<TeacherReviewQuiz />} />
           <Route path="live-meeting/:meetingId/:roomId" element={<VideoMeetingLive redirectUrl='/teacher/sessions'/>} />
           <Route path="courses" element={<ManageCourses />}>
@@ -67,11 +75,13 @@ export const TeacherRoutes = () => {
             <Route path="edit/:courseId" element={<TeacherEditCourse />} />
           </Route>
           <Route path="account" element={<TeacherAccountLayout />}>
-            <Route path="/teacher/account" element={<TeacherAccountProfile />} />
+            <Route
+              path="/teacher/account"
+              element={<TeacherAccountProfile />}
+            />
             <Route path="account-form" element={<TeacherAccount />} />
             <Route path="account-profile" element={<TeacherAccountProfile />} />
           </Route>
-
           <Route path="blog" element={<BlogLayout />}>
             <Route path="/teacher/blog" element={<BlogHome />} />
             <Route path="home" element={<BlogHome />} />

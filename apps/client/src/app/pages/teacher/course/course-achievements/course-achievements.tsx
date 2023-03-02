@@ -184,7 +184,7 @@ export function CourseAchievements(props: CourseAchievementsProps) {
       {showAchievementType && showAchievementType && (
         <AchievementBuilder
           quizzes={quizzes || []}
-          typeAchievement={showAchievementType}
+          type={showAchievementType}
           achievement={achievementEdit}
           onSubmit={(achievement) => {
             handleSaveAchievement(achievement);

@@ -11,19 +11,19 @@ import {
 /* eslint-disable-next-line */
 export interface AchievementBuilderProps {
   quizzes: QuizModel[];
-  typeAchievement?: TypeAchievement;
+  type?: TypeAchievement;
   achievement?: AchievementParams;
   onSubmit: (achievement: AchievementParams) => void;
   onCancel?: () => void;
 }
 
 export function AchievementBuilder(props: AchievementBuilderProps) {
-  const { onSubmit, onCancel, quizzes, typeAchievement, achievement } = props;
+  const { onSubmit, onCancel, quizzes, type, achievement } = props;
   return (
     <div className={styles['container']}>
-      {typeAchievement && (
+      {type && (
         <div className={styles['achievement-form']}>
-          {typeAchievement === TypeAchievement.multiple && (
+          {type === TypeAchievement.multiple && (
             <AchievementByQuizzesForm
               achievement={achievement}
               quizzes={quizzes}
@@ -31,7 +31,7 @@ export function AchievementBuilder(props: AchievementBuilderProps) {
               onCancel={onCancel}
             />
           )}
-          {typeAchievement === TypeAchievement.single && (
+          {type === TypeAchievement.single && (
             <AchievementByQuizzesForm
               achievement={achievement}
               singleSelection={true}
@@ -40,7 +40,7 @@ export function AchievementBuilder(props: AchievementBuilderProps) {
               onCancel={onCancel}
             />
           )}
-          {typeAchievement === TypeAchievement.score && (
+          {type === TypeAchievement.score && (
             <AchievementByScoreForm
               achievement={achievement}
               quizzes={quizzes}
@@ -48,7 +48,7 @@ export function AchievementBuilder(props: AchievementBuilderProps) {
               onCancel={onCancel}
             />
           )}
-          {typeAchievement === TypeAchievement.task && (
+          {type === TypeAchievement.task && (
             <AchievementTaskForm
               achievement={achievement}
               onSubmit={onSubmit}

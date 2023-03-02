@@ -34,7 +34,6 @@ export const editQuiz = async (quiz: EditQuizParams) => {
       return questionFormat
     })
   const editQuiz = {...quiz, ...{questions_attributes: questionsFormat}};
-  debugger
   return new Promise<QuizModel>((resolve, reject) => {
     http
       .put(`api/v1/teacher/quizzes/${id}`, editQuiz)

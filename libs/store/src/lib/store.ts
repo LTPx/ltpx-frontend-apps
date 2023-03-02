@@ -7,6 +7,7 @@ import { createSiteSlice, SiteSlice } from './slices/site-slice';
 import { createStudentSlice, StudentSlice } from './slices/student-slice';
 import { createTeacherSlice, TeacherSlice } from './slices/teacher-slice';
 import { createUserSlice, UserSlice } from './slices/user-slice';
+import { createCourseStudentsSlice, CourseStudentsSlice } from './slices/course-students-slice';
 
 export type StoreState = TeacherSlice &
   UserSlice &
@@ -14,7 +15,8 @@ export type StoreState = TeacherSlice &
   AdminSlice &
   SiteSlice &
   CartSlice &
-  StudentSlice;
+  StudentSlice &
+  CourseStudentsSlice;
 
 export const useAppStore = create<StoreState>()(
   devtools((...a) => {
@@ -26,6 +28,7 @@ export const useAppStore = create<StoreState>()(
       ...createSiteSlice(...a),
       ...createCartSlice(...a),
       ...createStudentSlice(...a),
+      ...createCourseStudentsSlice(...a),
     };
   })
 );

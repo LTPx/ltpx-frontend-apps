@@ -1,7 +1,6 @@
 import styles from './quiz-form-multiple-options.module.scss';
 import Icon from '../icon/icon';
 import Input from '../input/input';
-// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
 import { generateAlphabet } from 'libs/api/src/lib/utils';
 import Button, { ColorsButton, TypeButton } from '../button/button';
 import { FieldArray, Form, Formik } from 'formik';
@@ -11,11 +10,11 @@ import { useTranslation } from 'react-i18next';
 
 /* eslint-disable-next-line */
 export interface QuizFormMultipleOptionsProps {
+  question?: QuestionQuiz;
+  className?: string;
   singleSelection?: boolean;
   onSubmit?: (data: QuestionQuiz) => void;
-  className?: string;
   onCancel?: () => void;
-  question?: QuestionQuiz;
 }
 
 export function QuizFormMultipleOptions(props: QuizFormMultipleOptionsProps) {
@@ -32,10 +31,14 @@ export function QuizFormMultipleOptions(props: QuizFormMultipleOptionsProps) {
       {
         text: '',
         correct: false,
+        question_id: -1, //TODO: remove this, currently fails due to QuestionQuiz interface needs ids
+        id: -1
       },
       {
         text: '',
         correct: false,
+        question_id: -1,
+        id: -2
       },
     ],
   };
@@ -50,6 +53,7 @@ export function QuizFormMultipleOptions(props: QuizFormMultipleOptionsProps) {
           ),
         })}
         onSubmit={(values) => {
+          console.log('values: ', values);
           onSubmit && onSubmit(values);
         }}
       >

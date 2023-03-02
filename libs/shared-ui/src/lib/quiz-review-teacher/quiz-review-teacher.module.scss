@@ -1,62 +1,53 @@
 @import '../../styles/styles.module.scss';
 
 .container {
-  .btn-to-rate {
-    display: flex;
-    flex-direction: column;
-    justify-content: end;
-    gap: 1rem;
-    padding-top: 1rem;
-    h4 {
-      color: $text-gray-color;
-    }
-    .btns {
-      display: flex;
-      gap: 1rem;
-    }
-    .btn-correct {
-      padding: 0.5rem;
-
-    }
-  }
-  .answer-content {
-
-  }
-  .answer-correct {
-    background-color: $green-color-100;
-  }
-  .answer-noCorrect {
-    background-color: $red-color-100;;
-  }
-  .qualification-quiz {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  h3 {
-    font-weight: 450;
-  }
-  .question-test {
-    p {
-      padding-bottom: 0.75rem;
-    }
+  .quiz-container {
+    padding: 3rem;
   }
 }
+
 .header {
   display: flex;
   justify-content: space-between;
   padding-bottom: 1rem;
 
-  p {
-    font-weight: 500;
+  .quiz-info {
+    h2 {
+      font-weight: 500;
+    }
+
+    h4 {
+      color: $text-gray-color;
+    }
+  }
+
+  .quiz-score {
+    p {
+      color: $text-gray-color;
+    }
   }
 }
 
-.questions {
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
+.content {
+  margin-top: 2rem;
+
+  .questions {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+
+    .question-text {
+      padding-bottom: 0.75rem;
+      font-weight: 500;
+    }
+
+    .question-answer {
+      color: $text-gray-color;
+    }
+  }
 }
+
+
 
 .footer {
   display: flex;
@@ -65,15 +56,22 @@
   padding: 1rem 0;
 }
 
-.revision {
-  padding-top: 1rem;
-}
 .selected {
   background-color: $green-color-100;
 }
-.item {
+
+.items {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-  padding-left: 1rem;
+}
+
+.buttons-rate {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.feedback {
+  margin-top: 3rem;
 }

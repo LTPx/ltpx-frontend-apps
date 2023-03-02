@@ -6,12 +6,23 @@
     flex-direction: column;
     gap: $size-sm-2;
 
-    .options {
+    .option {
       display: flex;
-      align-items: center;
-      gap: $size-md-1;
+      align-items: flex-start;
+      gap: $size-sm-3;
       color: $text-gray-color;
       cursor: pointer;
+
+      &:hover {
+        p {
+          color: $text-color;
+        }
+      }
+
+      svg {
+        width: 22px;
+        min-width: 22px;
+      }
     }
   }
 }

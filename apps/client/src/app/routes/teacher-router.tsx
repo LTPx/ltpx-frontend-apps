@@ -2,7 +2,6 @@ import { Routes, Route, BrowserRouter, Navigate } from 'react-router-dom';
 import {
   AchievementPaymentSystem,
   EvaluateStudentsToReceivePayments,
-  HowCreateAClass,
   HowOpenMindWorks,
   LearningInOpenMind,
   LongTermPotentiation,
@@ -55,10 +54,6 @@ export const TeacherRoutes = () => {
           <Route path="earnings" element={<TeacherEarnings />} />
           <Route path="sessions" element={<TeacherMeetingsAgenda />} />
           <Route
-            path="/teacher/view-student/:studentId"
-            element={<TeacherViewStudent />}
-          />
-          <Route
             path="/teacher/quiz-review/:quizId"
             element={<TeacherReviewQuiz />}
           />
@@ -66,16 +61,16 @@ export const TeacherRoutes = () => {
             path="live-meeting/:meetingId/:roomId"
             element={<VideoMeetingLive redirectUrl="/teacher/sessions" />}
           />
+          <Route path="/teacher/quiz-review/:quizId" element={<TeacherReviewQuiz />} />
+          <Route path="live-meeting/:meetingId/:roomId" element={<VideoMeetingLive redirectUrl='/teacher/sessions'/>} />
           <Route path="courses" element={<ManageCourses />}>
             <Route
               path="/teacher/courses"
               element={<Navigate replace to="all" />}
             />
             <Route path=":courseId" element={<TeacherCourseDetail />} />
-            <Route
-              path=":courseId/students"
-              element={<TeacherCourseStudents />}
-            />
+            <Route path=":courseId/students" element={<TeacherCourseStudents />} />
+            <Route path=":courseId/student/:studentId" element={<TeacherViewStudent />} />
             <Route path="all" element={<TeacherCourses />} />
             <Route path="edit/:courseId" element={<TeacherEditCourse />} />
           </Route>

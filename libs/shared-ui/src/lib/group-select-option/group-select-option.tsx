@@ -28,18 +28,18 @@ export function GroupSelectOption(props: GroupSelectOptionProps) {
       <div className={styles['options-content']}>
         {options.map((option, index) => (
           <div
-            className={styles['options']}
+            className={styles['option']}
             onClick={() => {
               handleClick(index);
             }}
             key={index}
           >
             {selectedIndex === index ? (
-              <Icon icon={'circle-filled'} size={18} color={'#10b981'}></Icon>
+              <Icon icon={'circle-filled'} color={'#10b981'}></Icon>
             ) : (
-              <Icon icon={'circle-outline'} size={18}></Icon>
+              <Icon icon={'circle-outline'}></Icon>
             )}
-            <h4>{option.text}</h4>
+            <p>{option.text}</p>
           </div>
         ))}
       </div>

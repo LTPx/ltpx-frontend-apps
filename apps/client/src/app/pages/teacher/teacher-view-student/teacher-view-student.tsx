@@ -1,7 +1,7 @@
 import styles from './teacher-view-student.module.scss';
-import { useStudent } from '@ltpx-frontend-apps/store';
+import { useCourseStudents } from '@ltpx-frontend-apps/store';
 import { useCallback, useEffect, useState } from 'react';
-import { QuizStudent } from '@ltpx-frontend-apps/api';
+import { QuizResult } from '@ltpx-frontend-apps/api';
 import {
   Button,
   ColorsButton,
@@ -9,18 +9,21 @@ import {
   TextArea,
 } from '@ltpx-frontend-apps/shared-ui';
 import { Dialog } from 'evergreen-ui';
+import { useParams } from 'react-router-dom';
 /* eslint-disable-next-line */
 export interface TeacherViewStudentProps {
   courseId?: number;
 }
 export function TeacherViewStudent(props: TeacherViewStudentProps) {
-  const { courseId } = props;
-  const [quizzes, setQuizzes] = useState<QuizStudent[]>([]);
-  const { _getStudentQuizzes } = useStudent();
+  const [quizzes, setQuizzes] = useState<QuizResult[]>([]);
+  const { _getStudentQuizzesByCourse } = useCourseStudents();
   const [openModal, setOpenModal] = useState(false);
+  const { courseId, studentId } = useParams();
 
   const fetchCourse = useCallback(async () => {
-    const { success, data, error } = await _getStudentQuizzes(1);
+    const course_id = parseInt(courseId || '');
+    const student_id = parseInt(studentId || '');
+    const { success, data, error } = await _getStudentQuizzesByCourse(course_id, student_id);
     if (success) {
       console.log('data: ', data);
       setQuizzes(data);
@@ -42,7 +45,7 @@ export function TeacherViewStudent(props: TeacherViewStudentProps) {
             <div key={index}>
               <QuizStudentCard
                 title={quiz.name}
-                totalQuestions={quiz.total_questions}
+                totalQuestions={quiz.score}
               >
                 <div className={styles['btn-test']}>
                   <Button

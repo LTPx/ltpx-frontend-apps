@@ -64,23 +64,23 @@ export function CourseAchievements(props: CourseAchievementsProps) {
     achievement: EditAchievementParams | NewAchievementParams
   ) => {
     console.log('handleSaveAchievement: ', achievement);
-    try {
-      const { data } = achievement.id
-        ? await updateAchievement({ ...achievement, ...{ id: achievement.id } })
-        : await addNewAchievement(achievement);
-      onSubmit &&
-        onSubmit({
-          success: true,
-          data: data,
-        });
-      setShowAchievementType(null);
-    } catch (error) {
-      onSubmit &&
-        onSubmit({
-          success: false,
-          error: error,
-        });
-    }
+    // try {
+    //   const { data } = achievement.id
+    //     ? await updateAchievement({ ...achievement, ...{ id: achievement.id } })
+    //     : await addNewAchievement(achievement);
+    //   onSubmit &&
+    //     onSubmit({
+    //       success: true,
+    //       data: data,
+    //     });
+    //   setShowAchievementType(null);
+    // } catch (error) {
+    //   onSubmit &&
+    //     onSubmit({
+    //       success: false,
+    //       error: error,
+    //     });
+    // }
   };
 
   const handleRemoveAchievement = async (id: number) => {

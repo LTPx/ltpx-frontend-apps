@@ -5,9 +5,7 @@ import Button, { ColorsButton, TypeButton } from '../button/button';
 import { Form, Formik } from 'formik';
 import * as Yup from 'yup';
 import {
-  AchievementParams,
   AchievementsImages,
-  ConditionByQuiz,
   EditAchievementParams,
   EntityAchievement,
   NewAchievementParams,
@@ -18,20 +16,18 @@ import InputTextStatus, {
   StatusInputText,
 } from '../input-text-status/input-text-status';
 import { useTranslation } from 'react-i18next';
-import { useState } from 'react';
 
 /* eslint-disable-next-line */
 export interface AchievementByQuizzesFormProps {
   className?: string;
   quizzes: QuizModel[];
-  achievement?: EditAchievementParams;
+  achievement?: Omit<EditAchievementParams, 'id'>;
   singleSelection?: boolean;
   onCancel?: () => void;
-  onSubmit?: (data: NewAchievementParams | EditAchievementParams) => void;
+  onSubmit: (data: NewAchievementParams | EditAchievementParams) => void;
 }
 
 export function AchievementByQuizzesForm(props: AchievementByQuizzesFormProps) {
-  const [isEditMode, setIsEditMode] = useState(false);
   const { t } = useTranslation();
   const {
     onSubmit,
@@ -42,7 +38,10 @@ export function AchievementByQuizzesForm(props: AchievementByQuizzesFormProps) {
     achievement,
   } = props;
 
-  const ids = achievement?.condition_quizzes_attributes.map((condition) => condition.quiz_id) || [];
+  const ids =
+    achievement?.condition_quizzes_attributes.map(
+      (condition) => condition.quiz_id
+    ) || [];
 
   const initialValues = {
     title: achievement?.title || '',
@@ -79,15 +78,17 @@ export function AchievementByQuizzesForm(props: AchievementByQuizzesFormProps) {
               quiz_id: quiz.entity_id,
             };
           });
-          const {settings, ...formData} = { //remove settings
+        const { settings, ...formData } = {
+          //remove settings
           ...data,
           ...{
             condition_quizzes_attributes,
             condition_tasks_attributes: [],
-          }
+          },
         };
         console.log('formDataAchievement: ', formData);
-        // onSubmit && onSubmit(formData);
+          onSubmit(formData);
+        // const dd = achievement?.id ? formData as EditAchievementParams : formData as NewAchievementParams;
       }}
     >
       {({

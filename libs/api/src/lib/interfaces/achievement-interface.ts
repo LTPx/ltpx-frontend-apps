@@ -31,15 +31,15 @@ export interface AchievementModel {
   rule: TypeAchievement;
   image: string;
   price: number;
-  settings: SettingAchievement[];
   condition_quizzes: ConditionByQuiz[];
   condition_tasks: ConditionByTask[];
   created_at: string;
   updated_at: string;
 }
 
-type AchievementMandatoryParams = Omit<
+type AchievementParams = Omit<
   AchievementModel,
+  | 'id'
   | 'user_id'
   | 'course_id'
   | 'condition_tasks'
@@ -55,32 +55,21 @@ type AchievementNestedAttributes = {
 };
 
 export type NewAchievementParams = Prettify<
-  AchievementMandatoryParams & AchievementNestedAttributes
+  AchievementParams & AchievementNestedAttributes
 >;
 
 export type EditAchievementParams = Prettify<
-  AchievementMandatoryParams & AchievementNestedAttributes
+  AchievementParams & AchievementNestedAttributes
 >;
-
-export interface AchievementParams {
-  id: number;
-  course_id: number;
-  title: string;
-  rule: TypeAchievement;
-  image: string;
-  price: number;
-  condition_quizzes: ConditionByQuiz[];
-  condition_tasks: ConditionByTask[];
-}
 
 // export type EditAchievementParams = Omit<
 //   AchievementModel,
 //   'user_id' | 'created_at' | 'updated_at' | 'course_id'
 // >;
 
-export type AchievementParamsUi = Prettify<
-  PartialBy<EditAchievementParams, 'id'>
->;
+// export type AchievementParamsUi = Prettify<
+//   PartialBy<EditAchievementParams, 'id'>
+// >;
 
 export interface SettingAchievement {
   entity: EntityAchievement;

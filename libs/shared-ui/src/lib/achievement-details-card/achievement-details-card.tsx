@@ -1,13 +1,11 @@
-import {
-  AchievementParamsUi
-} from '@ltpx-frontend-apps/api';
+import { AchievementModel } from '@ltpx-frontend-apps/api';
 import { useCourseUtil } from '@ltpx-frontend-apps/store';
 import { NavLink } from 'react-router-dom';
 import styles from './achievement-details-card.module.scss';
 
 /* eslint-disable-next-line */
 export interface AchievementDetailsCardProps {
-  achievements: AchievementParamsUi[];
+  achievements: AchievementModel[];
   courseId?: number;
 }
 

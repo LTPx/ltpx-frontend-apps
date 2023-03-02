@@ -22,7 +22,7 @@ export function AchievementBuilder(props: AchievementBuilderProps) {
   const { onSubmit, onCancel, quizzes, typeAchievement, achievement } = props;
 
   const saveNewAchievement = (achievementForm: any) => {
-    onSubmit({...achievementForm, ...{id: achievement?.id}});
+    // onSubmit({...achievementForm, ...{id: achievement?.id}});
   };
   console.log('achievement: ', achievement);
 

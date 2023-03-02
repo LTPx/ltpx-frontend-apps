@@ -17,10 +17,10 @@ export const createAchievement = async (quiz: NewAchievementParams) => {
 };
 
 export const editAchievement = async (achievement: EditAchievementParams) => {
-  const { id } = achievement;
+  // const { id } = achievement;
   return new Promise<AchievementModel>((resolve, reject) => {
     http
-      .put(`api/v1/teacher/achievements/${id}`, achievement)
+      .put(`api/v1/teacher/achievements/${3}`, achievement)
       .then((response) => {
         resolve(response.data);
       })

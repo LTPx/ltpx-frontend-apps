@@ -1,3 +1,4 @@
+export * from './lib/task-form/task-form';
 export * from './lib/achievement-details-card/achievement-details-card';
 export * from './lib/upcoming-class/upcoming-class';
 export * from './lib/quiz-review-teacher/quiz-review-teacher';

@@ -11,6 +11,7 @@ export enum TypeFile {
   image = 'image',
   pdf = 'pdf',
   video = 'video',
+  all = 'all'
 }
 
 export interface FilesUploadedProps {
@@ -35,7 +36,7 @@ export function FilesUploaded(props: FilesUploadedProps) {
     multiple,
     label,
     errorMessage,
-    description
+    description,
   } = props;
   const [fileName, setFileName] = useState('');
   const elementRef = useRef<HTMLInputElement | null>(null);
@@ -43,13 +44,15 @@ export function FilesUploaded(props: FilesUploadedProps) {
   const filesTypes = {
     image: 'image/png, image/jpeg',
     pdf: 'application/pdf',
-    video: 'video/*'
+    video: 'video/*',
+    all: '/*'
   };
 
   const filesIcons = {
     image: 'image-outline',
     pdf: 'file-pdf',
     video: 'video-outline',
+    all: 'task-outline',
   };
 
   const handleChange = (e: any) => {

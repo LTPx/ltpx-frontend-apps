@@ -4,8 +4,9 @@ import {
   CourseContents,
   CourseDateCard,
   Tabs,
+  TaskStudentCard,
 } from '@ltpx-frontend-apps/shared-ui';
-import { useCourseUtil, useStudent } from '@ltpx-frontend-apps/store';
+import { useStudent } from '@ltpx-frontend-apps/store';
 import { useCallback, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import styles from './student-course.module.scss';
@@ -20,7 +21,6 @@ export function StudentCourse(props: StudentCourseProps) {
   const { courseId } = params;
   const id = parseInt(courseId || '');
   const [selectedTab, setSelectedTab] = useState(0);
-  const { translateAchievementType } = useCourseUtil();
 
   const fetchCourse = useCallback(async () => {
     const { success, data, error } = await _getStudentCourse(id);
@@ -41,9 +41,10 @@ export function StudentCourse(props: StudentCourseProps) {
 
   const tabs = [
     { text: 'Curso' },
+    { text: 'Clases' },
+    { text: 'Tareas' },
     { text: 'Test' },
     { text: 'Logros' },
-    { text: 'Clases' },
   ];
   const handleClick = (index: number) => {
     setSelectedTab(index);
@@ -71,9 +72,34 @@ export function StudentCourse(props: StudentCourseProps) {
             </div>
           )}
           {selectedTab === 1 && (
-            <StudentCourseQuizzes courseId={enrolledCourse.id} />
+            <div className={styles['course-date']}>
+              {enrolledCourse.sessions[0].meetings.map((meeting, index) => (
+                <CourseDateCard
+                  className={styles['course-class']}
+                  key={index}
+                  title={'Reunion ' + (index + 1)}
+                  description={
+                    'Fecha: ' + meeting.month + ' - ' + meeting.day_number
+                  }
+                  time={'Hora: ' + meeting.end_time}
+                />
+              ))}
+            </div>
           )}
           {selectedTab === 2 && (
+            <div className={styles['task-content']}>
+              <TaskStudentCard
+                title={'Matemáticas'}
+                description={
+                  'Se debe realizar las siguientes ecuaciones y entregar en formato pdf  '
+                }
+              />
+            </div>
+          )}
+          {selectedTab === 3 && (
+            <StudentCourseQuizzes courseId={enrolledCourse.id} />
+          )}
+          {selectedTab === 4 && (
             <div className={styles['achievements-content']}>
               <div className={styles['achievements-student']}>
                 <h4 className={styles['title-achievement']}>
@@ -96,21 +122,6 @@ export function StudentCourse(props: StudentCourseProps) {
                   courseId={enrolledCourse.id}
                 />
               </div>
-            </div>
-          )}
-          {selectedTab === 3 && (
-            <div className={styles['course-date']}>
-              {enrolledCourse.sessions[0].meetings.map((meeting, index) => (
-                <CourseDateCard
-                  className={styles['course-class']}
-                  key={index}
-                  title={'Reunion ' + (index + 1)}
-                  description={
-                    'Fecha: ' + meeting.month + ' - ' + meeting.day_number
-                  }
-                  time={'Hora: ' + meeting.end_time}
-                />
-              ))}
             </div>
           )}
         </div>

@@ -1,3 +1,5 @@
+export * from './lib/task-form-student/task-form-student';
+export * from './lib/task-student-card/task-student-card';
 export * from './lib/task-form/task-form';
 export * from './lib/achievement-details-card/achievement-details-card';
 export * from './lib/upcoming-class/upcoming-class';

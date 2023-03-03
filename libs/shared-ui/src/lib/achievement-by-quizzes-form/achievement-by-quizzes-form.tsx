@@ -115,20 +115,35 @@ export function AchievementByQuizzesForm(props: AchievementByQuizzesFormProps) {
             <br />
             <label>{t('achievementByQuizzesForm.quiz')}</label>
             <div className={styles['quizzes']}>
-              {values.quizzes.map((setting, index) => (
+              {values.quizzes.map((quiz, index) => (
                 <div
                   className={`${styles['quiz']} ${
-                    setting.selected ? styles['selected'] : ''
+                    quiz.selected ? styles['selected'] : ''
                   }`}
                   key={index}
                   onClick={() => {
+                    if (singleSelection) {
+                      values.quizzes.forEach((quiz, i) => {
+                        if (index === i) {
+                          setFieldValue(
+                            `quizzes[${index}].selected`,
+                            !quiz.selected
+                          );
+                        } else {
+                          setFieldValue(
+                            `quizzes[${i}].selected`,
+                            false
+                          );
+                        }
+                      });
+                    }
                     setFieldValue(
                       `quizzes[${index}].selected`,
-                      !setting.selected
+                      !quiz.selected
                     );
                   }}
                 >
-                  <h4>{setting.text}</h4>
+                  <h4>{quiz.text}</h4>
                 </div>
               ))}
             </div>

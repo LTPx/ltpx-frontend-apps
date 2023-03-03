@@ -2,7 +2,6 @@ import styles from './achievement-by-score-form.module.scss';
 import {
   AchievementsImages,
   AchievementParams,
-  EntityAchievement,
   QuizModel,
   TypeAchievement,
 } from '@ltpx-frontend-apps/api';

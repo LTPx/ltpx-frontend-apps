@@ -14,11 +14,13 @@ export enum EntityAchievement {
 }
 
 export interface ConditionByQuiz {
+  id: number;
   quiz_id: number;
   min_score: number;
 }
 
 export interface ConditionByTask {
+  id: number;
   quiz_id: number;
   min_score: number;
 }
@@ -51,10 +53,10 @@ type AchievementBasicParams = Omit<
 
 type AchievementNestedAttributes = {
   condition_quizzes_attributes: Prettify<
-    PartialBy<ConditionByQuiz, 'min_score'>
+    PartialBy<ConditionByQuiz, 'min_score' | 'id'>
   >[];
   condition_tasks_attributes: Prettify<
-    PartialBy<ConditionByTask, 'min_score'>
+    PartialBy<ConditionByTask, 'min_score' | 'id'>
   >[];
 };
 

@@ -1,5 +1,9 @@
 import styles from './course-achievements.module.scss';
-import { AchievementParams, TypeAchievement } from '@ltpx-frontend-apps/api';
+import {
+  AchievementModel,
+  AchievementParams,
+  TypeAchievement,
+} from '@ltpx-frontend-apps/api';
 import {
   AchievementBuilder,
   Button,
@@ -20,7 +24,7 @@ export interface CourseAchievementsProps {
 
 export function CourseAchievements(props: CourseAchievementsProps) {
   const { onSubmit } = props;
-  const [achievement, setAchievement] = useState<AchievementParams>();
+  const [achievement, setAchievement] = useState<AchievementModel>();
   const [selectedType, setSelectedType] = useState<TypeAchievement>();
   const { addNewAchievement, removeAchievement, updateAchievement, course } =
     useCourse();
@@ -54,12 +58,12 @@ export function CourseAchievements(props: CourseAchievementsProps) {
     },
   ];
 
-  const handleSaveAchievement = async (achievement: AchievementParams) => {
-    console.log('handleSaveAchievement: ', achievement);
+  const handleSaveAchievement = async (params: AchievementParams) => {
+    console.log('handleSaveAchievement: ', params);
     try {
       const { data } = achievement
-        ? await updateAchievement(achievement, 1)
-        : await addNewAchievement(achievement);
+        ? await updateAchievement(params, achievement.id)
+        : await addNewAchievement(params);
       onSubmit &&
         onSubmit({
           success: true,
@@ -179,7 +183,17 @@ export function CourseAchievements(props: CourseAchievementsProps) {
         <AchievementBuilder
           quizzes={quizzes || []}
           type={selectedType}
-          achievement={achievement}
+          achievement={
+            achievement
+              ? {
+                  ...achievement,
+                  ...{
+                    condition_quizzes_attributes: achievement.condition_quizzes,
+                    condition_tasks_attributes: achievement.condition_tasks,
+                  },
+                }
+              : undefined
+          }
           onSubmit={(achievement) => {
             handleSaveAchievement(achievement);
           }}

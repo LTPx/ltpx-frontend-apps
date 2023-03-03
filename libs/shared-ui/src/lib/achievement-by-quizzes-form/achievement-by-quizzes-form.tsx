@@ -7,7 +7,6 @@ import * as Yup from 'yup';
 import {
   AchievementsImages,
   AchievementParams,
-  EntityAchievement,
   QuizModel,
   TypeAchievement,
 } from '@ltpx-frontend-apps/api';
@@ -37,22 +36,30 @@ export function AchievementByQuizzesForm(props: AchievementByQuizzesFormProps) {
     achievement,
   } = props;
 
-  const ids =
-    achievement?.condition_quizzes_attributes.map(
+  const conditions = achievement ? achievement.condition_quizzes_attributes : [];
+  const quizzesIds = conditions.map(
       (condition) => condition.quiz_id
     ) || [];
+
+  function findConditionId(id:number) {
+    return conditions.find((condition) => {
+      return condition.quiz_id === id;
+    })?.id
+  }
 
   const initialValues = {
     title: achievement?.title || '',
     image: achievement?.image || '',
     price: achievement?.price || 0,
-    settings: quizzes.map((quiz) => {
+    quizzes: quizzes.map((quiz) => {
+      const conditionId = findConditionId(quiz.id);
+      console.log(conditionId);
       return {
-        entity: EntityAchievement.quiz,
         text: quiz.name,
-        entity_id: quiz.id,
-        score: 100,
-        selected: ids.includes(quiz.id),
+        id: quiz.id,
+        selected: quizzesIds.includes(quiz.id),
+        conditionId,
+        // score: 100, TODO: add score to approve
       };
     }),
     rule:
@@ -60,7 +67,6 @@ export function AchievementByQuizzesForm(props: AchievementByQuizzesFormProps) {
         ? TypeAchievement.single
         : TypeAchievement.multiple,
   };
-  console.log('initialValues: ', initialValues);
 
   return (
     <Formik
@@ -70,15 +76,16 @@ export function AchievementByQuizzesForm(props: AchievementByQuizzesFormProps) {
         image: Yup.string().required('Es necesario seleccionar una imagen'),
       })}
       onSubmit={(data) => {
-        const condition_quizzes_attributes = data.settings
+        const condition_quizzes_attributes = data.quizzes
           .filter((quiz) => quiz.selected)
           .map((quiz) => {
             return {
-              quiz_id: quiz.entity_id,
+              quiz_id: quiz.id,
+              id: quiz.conditionId
             };
           });
-        const { settings, ...formData } = {
-          //remove settings
+        const { quizzes, ...formData } = {
+          //remove quizzes
           ...data,
           ...{
             condition_quizzes_attributes,
@@ -111,7 +118,7 @@ export function AchievementByQuizzesForm(props: AchievementByQuizzesFormProps) {
             <br />
             <label>{t('achievementByQuizzesForm.quiz')}</label>
             <div className={styles['quizzes']}>
-              {values.settings.map((setting, index) => (
+              {values.quizzes.map((setting, index) => (
                 <div
                   className={`${styles['quiz']} ${
                     setting.selected ? styles['selected'] : ''
@@ -119,7 +126,7 @@ export function AchievementByQuizzesForm(props: AchievementByQuizzesFormProps) {
                   key={index}
                   onClick={() => {
                     setFieldValue(
-                      `settings[${index}].selected`,
+                      `quizzes[${index}].selected`,
                       !setting.selected
                     );
                     // console.log(setting);

@@ -80,10 +80,10 @@ export const es = {
     review: 'Revision',
   },
   achievements_types: {
-    multiple: 'Aprobar multiples test',
-    single: 'Aprobar un test',
-    task: 'Realizar una tarea',
-    score: 'Obtener un resultado',
+    multiple: 'Debes aprobar los siguientes test',
+    single: 'Debes aprobar el test',
+    task: 'Debes realizar una tarea',
+    score: 'Debes obtener un resultado',
   },
   home: {
     cover: {

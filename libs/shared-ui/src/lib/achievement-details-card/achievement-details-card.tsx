@@ -24,16 +24,16 @@ export function AchievementDetailsCard(props: AchievementDetailsCardProps) {
                 {achievement.title}
               </h4>
               <h4 className={styles['text']}>
-                Se debe: {translateAchievementType(achievement.rule)}
+                {translateAchievementType(achievement.rule)}
               </h4>
               <div className={styles['test']}>
-                {/* {achievement.settings.map((test, index) => (
-                  <NavLink className={styles['link-quiz']} to={`/student/course/${courseId}/quiz/${test.entity_id}`}>
-                    <h5 key={index} className={styles['quiz']}>
-                      {test.text}
+                {achievement.condition_quizzes.map((condition, index) => (
+                  <NavLink key={index} className={styles['link-quiz']} to={`/student/course/${courseId}/quiz/${condition.quiz_id}`}>
+                    <h5 className={styles['quiz']}>
+                      {condition.quiz_name}
                     </h5>
                   </NavLink>
-                ))} */}
+                ))}
               </div>
             </div>
           </div>

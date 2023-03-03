@@ -117,10 +117,10 @@ export function StudentCourse(props: StudentCourseProps) {
               </div>
               <div className={styles['all-achievements']}>
                 <h4>Como alcanzar los siguientes logros</h4>
-                {/* <AchievementDetailsCard
+                <AchievementDetailsCard
                   achievements={enrolledCourse.achievements || []}
                   courseId={enrolledCourse.id}
-                /> */}
+                />
               </div>
             </div>
           )}

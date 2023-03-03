@@ -17,12 +17,14 @@ export interface ConditionByQuiz {
   id: number;
   quiz_id: number;
   min_score: number;
+  _destroy?: boolean; //rails remove nested attributes
 }
 
 export interface ConditionByTask {
   id: number;
   quiz_id: number;
   min_score: number;
+  _destroy?: boolean; //rails remove nested attributes
 }
 
 export interface AchievementModel {

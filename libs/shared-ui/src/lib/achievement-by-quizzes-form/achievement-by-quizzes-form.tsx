@@ -53,7 +53,6 @@ export function AchievementByQuizzesForm(props: AchievementByQuizzesFormProps) {
     price: achievement?.price || 0,
     quizzes: quizzes.map((quiz) => {
       const conditionId = findConditionId(quiz.id);
-      console.log(conditionId);
       return {
         text: quiz.name,
         id: quiz.id,
@@ -77,11 +76,11 @@ export function AchievementByQuizzesForm(props: AchievementByQuizzesFormProps) {
       })}
       onSubmit={(data) => {
         const condition_quizzes_attributes = data.quizzes
-          .filter((quiz) => quiz.selected)
           .map((quiz) => {
             return {
               quiz_id: quiz.id,
-              id: quiz.conditionId
+              id: quiz.conditionId,
+              _destroy: !quiz.selected
             };
           });
         const { quizzes, ...formData } = {
@@ -92,7 +91,6 @@ export function AchievementByQuizzesForm(props: AchievementByQuizzesFormProps) {
             condition_tasks_attributes: [],
           },
         };
-        console.log('formDataAchievement: ', formData);
         onSubmit(formData);
       }}
     >

@@ -83,8 +83,7 @@ export function AchievementByQuizzesForm(props: AchievementByQuizzesFormProps) {
               _destroy: !quiz.selected
             };
           });
-        const { quizzes, ...formData } = {
-          //remove quizzes
+        const { quizzes, ...formData } = { //remove quizzes
           ...data,
           ...{
             condition_quizzes_attributes,
@@ -127,7 +126,6 @@ export function AchievementByQuizzesForm(props: AchievementByQuizzesFormProps) {
                       `quizzes[${index}].selected`,
                       !setting.selected
                     );
-                    // console.log(setting);
                   }}
                 >
                   <h4>{setting.text}</h4>

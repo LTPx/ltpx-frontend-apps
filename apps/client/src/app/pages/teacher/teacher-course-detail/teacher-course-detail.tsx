@@ -23,7 +23,6 @@ const tabs = [
   { text: 'Test' },
   { text: 'Logros' },
   { text: 'Sesiones' },
-  { text: 'Alumnos' },
 ];
 
 export function TeacherCourseDetail() {
@@ -133,9 +132,6 @@ export function TeacherCourseDetail() {
                 )}
               </>
             )}
-            {/* {selectedTab === 5 && course.classroom && (
-              <h1>Studiantes</h1>
-            )} */}
           </div>
         </>
       )}

@@ -1,6 +1,4 @@
 import {
-  AchievementCard,
-  AchievementDetailsCard,
   CourseContents,
   CourseDateCard,
   Tabs,
@@ -10,6 +8,7 @@ import { useStudent } from '@ltpx-frontend-apps/store';
 import { useCallback, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import styles from './student-course.module.scss';
+import StudentCourseAchievements from './tabs/student-course-achievements/student-course-achievements';
 import StudentCourseQuizzes from './tabs/student-course-quizzes';
 
 /* eslint-disable-next-line */
@@ -17,10 +16,9 @@ export interface StudentCourseProps {}
 
 export function StudentCourse(props: StudentCourseProps) {
   const { _getStudentCourse, enrolledCourse } = useStudent();
-  const params = useParams();
-  const { courseId } = params;
-  const id = parseInt(courseId || '');
   const [selectedTab, setSelectedTab] = useState(0);
+  const { courseId } = useParams();
+  const id = parseInt(courseId || '');
 
   const fetchCourse = useCallback(async () => {
     const { success, data, error } = await _getStudentCourse(id);
@@ -100,29 +98,7 @@ export function StudentCourse(props: StudentCourseProps) {
             <StudentCourseQuizzes courseId={enrolledCourse.id} />
           )}
           {selectedTab === 4 && (
-            <div className={styles['achievements-content']}>
-              <div className={styles['achievements-student']}>
-                <h4 className={styles['title-achievement']}>
-                  Logros Alcanzados
-                </h4>
-                <div className={styles['achievements']}>
-                  {enrolledCourse.achievements?.map((achievement, index) => (
-                    <AchievementCard
-                      key={index}
-                      image={achievement.image}
-                      text={achievement.title}
-                    />
-                  ))}
-                </div>
-              </div>
-              <div className={styles['all-achievements']}>
-                <h4>Como alcanzar los siguientes logros</h4>
-                <AchievementDetailsCard
-                  achievements={enrolledCourse.achievements || []}
-                  courseId={enrolledCourse.id}
-                />
-              </div>
-            </div>
+            <StudentCourseAchievements courseId={ parseInt(courseId || '')}/>
           )}
         </div>
       </div>

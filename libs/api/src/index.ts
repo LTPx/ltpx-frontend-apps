@@ -49,6 +49,7 @@ export * from './lib/api/student/student-courses-api';
 export * from './lib/api/student/student-payments-api';
 export * from './lib/api/student/student-classes-api';
 export * from './lib/api/student/student-quizzes-api';
+export * from './lib/api/student/student-achievements-api';
 
 export * from './lib/api/meeting/video-api';
 

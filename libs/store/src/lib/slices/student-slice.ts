@@ -3,6 +3,7 @@ import { StoreState } from '../store';
 import {
   Classroom,
   CourseModel,
+  getStudentAchievements,
   getStudentClasses,
   getStudentCourse,
   getStudentCourses,
@@ -36,6 +37,7 @@ export type StudentSlice = {
   _getStudentQuiz: (courseId: number, quizId: number) => Promise<TResponse>;
   _getStudentQuizResult: (quizResultId: number) => Promise<TResponse>;
   _evaluateQuiz: (quizId: number, answers: UserAnswer[]) => Promise<TResponse>;
+  _getStudentAchievements: (courseId: number) => Promise<TResponse>;
 };
 
 export const createStudentSlice: StateCreator<StoreState, [], [], StudentSlice> = (
@@ -112,6 +114,14 @@ export const createStudentSlice: StateCreator<StoreState, [], [], StudentSlice> 
     try {
       const quiz = await studentEvaluateQuiz(id, answers);
       return { success: true, data: quiz };
+    } catch (error) {
+      return { success: false, error };
+    }
+  },
+  _getStudentAchievements: async (courseId): Promise<TResponse> => {
+    try {
+      const achievements = await getStudentAchievements(courseId);
+      return { success: true, data: achievements };
     } catch (error) {
       return { success: false, error };
     }

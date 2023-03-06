@@ -50,9 +50,10 @@ export function TaskStudentCard(props: TaskStudentCardProps) {
         hasFooter={false}
         title={title}
         onCloseComplete={() => setOpenModal(false)}
-        width={'40vw'}
+        width={'50vw'}
       >
         <TaskFormStudent
+          description={description}
           onClose={() => setOpenModal(false)}
           onSubmit={(title) => {
             // onSubmit && onSubmit(data);

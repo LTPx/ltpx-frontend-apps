@@ -1,6 +1,11 @@
 @import '../../styles/styles.module.scss';
 
 .form {
+  .description-container {
+    .description {
+      color: $text-gray-color;
+    }
+  }
   .btn {
     display: flex;
     justify-content: flex-end;

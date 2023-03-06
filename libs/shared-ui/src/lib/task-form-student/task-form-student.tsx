@@ -11,21 +11,22 @@ import { useState } from 'react';
 
 /* eslint-disable-next-line */
 export interface TaskFormStudentProps {
+  description?: string;
   onClose?: () => void;
   onSubmit?: (title: string) => void;
 }
 
 export function TaskFormStudent(props: TaskFormStudentProps) {
-  const { onClose, onSubmit } = props;
+  const { description, onClose, onSubmit } = props;
   const [task, setTask] = useState('');
 
   const formik = useFormik({
     initialValues: {
       description: '',
-      file_task: null,
+      file: null,
     },
     validationSchema: Yup.object({
-      file_task: Yup.string().required('Archivo de Tarea es obligatorio'),
+      file: Yup.string().required('Archivo de Tarea es obligatorio'),
     }),
     onSubmit: (data) => {
       onSubmit && onSubmit(task);
@@ -34,12 +35,16 @@ export function TaskFormStudent(props: TaskFormStudentProps) {
   });
   return (
     <form className={styles['form']}>
+      <div className={styles['description-container']}>
+        <label>En que consiste la tarea</label>
+        <h4 className={styles['description']}>{description}</h4>
+      </div>
       <TextArea
-        label={'Descripción'}
+        label={'Agregar texto'}
         type="text"
         name="description"
-        rows={4}
-        placeholder="Agregar descripción sobre la tarea"
+        rows={8}
+        placeholder="Responde a la tarea"
         onChange={(e: any) => {
           formik.handleChange(e);
         }}
@@ -47,19 +52,19 @@ export function TaskFormStudent(props: TaskFormStudentProps) {
         onBlur={formik.handleBlur}
       />
       <div className={styles['field-upload']}>
-        <label>{'Subir Tarea'}</label>
+        <label>{'Subir algun archivo'}</label>
         <FilesUploaded
           className={styles['uploader']}
           type={TypeFile.all}
           onChange={(value) => {
-            formik.setFieldValue('file_task', value);
+            formik.setFieldValue('file', value);
             setTask(value.name);
           }}
         />
-        {formik.touched.file_task && formik.errors.file_task ? (
+        {formik.touched.file && formik.errors.file ? (
           <InputTextStatus
             status={StatusInputText.error}
-            text={formik.errors.file_task}
+            text={formik.errors.file}
           />
         ) : null}
       </div>
@@ -75,7 +80,7 @@ export function TaskFormStudent(props: TaskFormStudentProps) {
         <Button
           className={styles['btn-submit']}
           color={ColorsButton.primary}
-          title={'Guardar'}
+          title={'Enviar al profesor'}
           type={TypeButton.submit}
           onClick={formik.handleSubmit}
         />

@@ -69,7 +69,7 @@ export function StudentCourseAchievements(
       <div className={styles['all-achievements']}>
         <h4>Como alcanzar los siguientes logros</h4>
         {achievementsView !== undefined && (
-          <div className="d">
+          <div className="achievements">
             {achievementsView.course_achievements.map((achievement, index) => (
               <AchievementDetailsCard
                 key={index}

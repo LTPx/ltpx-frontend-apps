@@ -28,19 +28,22 @@ export function AchievementDetailsCard(props: AchievementDetailsCardProps) {
   return (
     <div className={styles['content']}>
       <div className={styles['achievement-content']}>
-        <img src={imageUrl} />
+        <img
+          className={`${
+            currentPoints === totalPoints ? styles['completed'] : styles['img']
+          }`}
+          src={imageUrl}
+        />
         <div className={styles['achievement']}>
           <h4 className={styles['title-achievement']}>{title}</h4>
-          <h4 className={styles['text']}>
-            {translateAchievementType(rule)}
-          </h4>
+          <h4 className={styles['text']}>{translateAchievementType(rule)}</h4>
           <div className={styles['test']}>
             {quizzes.map((quiz, index) => (
               <div key={index}>
                 {quiz.completed ? (
                   <div className={styles['link-quiz']}>
                     <h5 className={styles['quiz-completed']}>
-                      <Icon icon='check' color='#fff' size={14}/> {quiz.name}
+                      <Icon icon="check" color="#fff" size={14} /> {quiz.name}
                     </h5>
                   </div>
                 ) : (
@@ -50,7 +53,9 @@ export function AchievementDetailsCard(props: AchievementDetailsCardProps) {
                     to={quiz.url}
                   >
                     <h5 className={styles['quiz']}>{quiz.name}</h5>
-                    <h5 className={styles['quiz-points']}>{rule === TypeAchievement.score && `${quiz.points} pts`}</h5>
+                    <h5 className={styles['quiz-points']}>
+                      {rule === TypeAchievement.score && `${quiz.points} pts`}
+                    </h5>
                   </NavLink>
                 )}
               </div>

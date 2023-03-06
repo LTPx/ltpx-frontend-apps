@@ -82,8 +82,8 @@ export const es = {
   achievements_types: {
     multiple: 'Debes aprobar los siguientes test',
     single: 'Debes aprobar el test',
-    task: 'Debes realizar una tarea',
-    score: 'Debes obtener un resultado',
+    task: 'Debes realizar la tarea',
+    score: 'Debes obtener un resultado en los test',
   },
   home: {
     cover: {

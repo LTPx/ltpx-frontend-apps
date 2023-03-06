@@ -38,6 +38,7 @@
       .link-quiz {
         display: flex;
         gap: 0.25rem;
+        align-items: center;
       }
 
       .quiz {
@@ -56,7 +57,10 @@
         display: flex;
         align-items: center;
         gap: 0.5rem;
+      }
 
+      .quiz-points {
+        color: $text-gray-color;
       }
     }
 

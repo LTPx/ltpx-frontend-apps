@@ -77,7 +77,6 @@ export function AchievementByQuizzesForm(props: AchievementByQuizzesFormProps) {
         image: Yup.string().required('Es necesario seleccionar una imagen'),
       })}
       onSubmit={(data) => {
-        console.log(data);
         if (achievement) {
           const conditions = data.quizzes
             .map((quiz) => {
@@ -87,6 +86,7 @@ export function AchievementByQuizzesForm(props: AchievementByQuizzesFormProps) {
                 entity: EntityAchievement.quiz,
                 entity_id: quiz.id,
                 must_reach_value: 100,
+                description: quiz.text,
                 _destroy: !quiz.selected
               };
             });

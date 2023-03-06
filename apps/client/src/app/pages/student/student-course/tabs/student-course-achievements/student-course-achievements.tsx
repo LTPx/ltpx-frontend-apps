@@ -46,6 +46,7 @@ export function StudentCourseAchievements(
       return {
         url: `/student/course/${courseId}/quiz/${condition.entity_id}`,
         name: condition.description || '',
+        points: condition.must_reach_value,
         completed: ids.includes(condition.id)
       }
     })

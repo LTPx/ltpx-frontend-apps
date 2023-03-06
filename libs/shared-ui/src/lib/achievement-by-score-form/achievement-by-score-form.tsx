@@ -4,6 +4,7 @@ import {
   AchievementParams,
   QuizModel,
   TypeAchievement,
+  EntityAchievement,
 } from '@ltpx-frontend-apps/api';
 import { Form, Formik } from 'formik';
 import Button, { ColorsButton, TypeButton } from '../button/button';
@@ -19,16 +20,14 @@ export interface AchievementByScoreFormProps {
   quizzes: QuizModel[];
   achievement?: AchievementParams;
   onCancel?: () => void;
-  onSubmit?: (data: AchievementParams) => void;
+  onSubmit: (data: AchievementParams) => void;
   className?: string;
 }
 
 export function AchievementByScoreForm(props: AchievementByScoreFormProps) {
   const { quizzes, onCancel, onSubmit, className, achievement } = props;
   const { t } = useTranslation();
-  const conditions = achievement
-    ? achievement.conditions_attributes
-    : [];
+  const conditions = achievement ? achievement.conditions_attributes : [];
   const quizzesIds = conditions.map((condition) => condition.entity_id) || [];
 
   function findConditionId(id: number) {
@@ -51,7 +50,7 @@ export function AchievementByScoreForm(props: AchievementByScoreFormProps) {
       };
     }),
     rule: TypeAchievement.score,
-    score: 10,
+    score: conditions[0].must_reach_value || 10,
   };
 
   return (
@@ -63,22 +62,46 @@ export function AchievementByScoreForm(props: AchievementByScoreFormProps) {
         score: Yup.number().required('Es necesario agregar una calificación'),
       })}
       onSubmit={(data) => {
-        const condition_quizzes_attributes = data.quizzes.map((quiz) => {
-          return {
-            quiz_id: quiz.id,
-            id: quiz.conditionId,
-            min_score: data.score,
-            _destroy: !quiz.selected
+        if (achievement) {
+          const conditions = data.quizzes.map((quiz) => {
+            return {
+              id: quiz.conditionId,
+              points_to_assign: 100,
+              entity: EntityAchievement.quiz,
+              entity_id: quiz.id,
+              must_reach_value: data.score,
+              description: quiz.text,
+              _destroy: !quiz.selected,
+            };
+          });
+          const { quizzes, ...formData } = {
+            //remove quizzes
+            ...data,
+            ...{
+              conditions_attributes: conditions,
+            },
           };
-        });
-        const { quizzes, ...formData } = {
-          ...data,
-          ...{
-            condition_quizzes_attributes,
-            condition_tasks_attributes: [],
-          },
-        };
-        // onSubmit && onSubmit(formData);
+          onSubmit(formData);
+        } else {
+          const conditions = data.quizzes
+            .filter((quiz) => quiz.selected)
+            .map((quiz) => {
+              return {
+                points_to_assign: 100,
+                entity: EntityAchievement.quiz,
+                entity_id: quiz.id,
+                must_reach_value: data.score,
+                description: quiz.text,
+              };
+            });
+          const { quizzes, ...formData } = {
+            ...data,
+            ...{
+              conditions_attributes: conditions,
+            },
+          };
+          onSubmit && onSubmit(formData);
+        }
       }}
     >
       {({

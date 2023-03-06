@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { ReactElement, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import styles from './tabs.module.scss';
 
@@ -7,6 +7,7 @@ export interface Tab {
   text: string;
   selected?: boolean;
   url?: string;
+  children?: ReactElement;
 }
 
 export interface TabsProps {
@@ -23,33 +24,44 @@ export function Tabs(props: TabsProps) {
   const selectTab = (index: number) => {
     setIndexSelected(index);
     onClickTab && onClickTab(index);
-  }
+  };
 
-  const classPosition = vertical ? `${styles['container']} ${styles['vertical']}` : styles['container'];
+  const classPosition = vertical
+    ? `${styles['container']} ${styles['vertical']}`
+    : styles['container'];
 
   return (
-    <div className={`${classPosition} ${className || ''}` }>
-      {isNav && tabs.map((tab, index)=>(
-        <NavLink
-          key={index}
-          className={({ isActive }) =>
-            isActive ? `${styles['tab']} ${styles['selected']}` : `${styles['tab']}`
-          }
-          to={tab.url ? tab.url : ''}
-        >
-          <h4>{tab.text}</h4>
-        </NavLink>
-      ))}
-      {!isNav && tabs.map((tab, index)=>(
-        <div key={index}
-          className={
-            indexSelected === index ? `${styles['tab']} ${styles['selected']}` : `${styles['tab']}`
-          }
-          onClick={()=>{selectTab(index)}}
-        >
-          <h4>{tab.text}</h4>
-        </div>
-      ))}
+    <div className={`${classPosition} ${className || ''}`}>
+      {isNav &&
+        tabs.map((tab, index) => (
+          <NavLink
+            key={index}
+            className={({ isActive }) =>
+              isActive
+                ? `${styles['tab']} ${styles['selected']}`
+                : `${styles['tab']}`
+            }
+            to={tab.url ? tab.url : ''}
+          >
+            {tab.children ? tab.children : <h4>{tab.text}</h4>}
+          </NavLink>
+        ))}
+      {!isNav &&
+        tabs.map((tab, index) => (
+          <div
+            key={index}
+            className={
+              indexSelected === index
+                ? `${styles['tab']} ${styles['selected']}`
+                : `${styles['tab']}`
+            }
+            onClick={() => {
+              selectTab(index);
+            }}
+          >
+            {tab.children ? tab.children : <h4>{tab.text}</h4>}
+          </div>
+        ))}
     </div>
   );
 }

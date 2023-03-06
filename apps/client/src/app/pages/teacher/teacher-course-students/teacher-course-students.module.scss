@@ -1,3 +1,35 @@
+@import '../../../../styles.scss';
+
+.tab-options {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
 .container {
-  // width: 80vw;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  .title {
+    padding-bottom: 1rem;
+  }
+  .content {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 25% 75%;
+    gap: 1rem;
+  }
+  .all-students {
+    box-shadow: $card-shadow-medium;
+    background-color: $white-color;
+    height:fit-content;
+  }
+  .information {
+    box-shadow: $card-shadow-medium;
+    background-color: $white-color;
+  }
+  .student-tabs {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+  }
 }

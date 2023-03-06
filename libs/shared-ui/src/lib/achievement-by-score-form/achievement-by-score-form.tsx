@@ -50,7 +50,7 @@ export function AchievementByScoreForm(props: AchievementByScoreFormProps) {
       };
     }),
     rule: TypeAchievement.score,
-    score: conditions[0].must_reach_value || 10,
+    score: conditions[0]?.must_reach_value || 10,
   };
 
   return (

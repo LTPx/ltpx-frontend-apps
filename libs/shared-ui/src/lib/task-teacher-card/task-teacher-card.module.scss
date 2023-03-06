@@ -1,0 +1,50 @@
+@import '../../styles/styles.module.scss';
+.container {
+  border: 1px solid $gray-color-200;
+  border-radius: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: $size-md-1 2rem;
+
+  .buttons-review {
+    display: flex;
+    gap: 1rem;
+  }
+  .row {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    .row-info {
+      display: flex;
+      flex-direction: column;
+      .description {
+        color: $text-gray-color;
+      }
+    }
+  }
+
+  .row-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+
+    .btn {
+      padding: $size-sm-2;
+    }
+  }
+}
+.task {
+  display: flex;
+  flex-direction: column;
+  .task-content {
+
+  }
+  .footer {
+    display: flex;
+    justify-content: end;
+    padding-top: 1rem;
+    gap: 1rem;
+  }
+}
+

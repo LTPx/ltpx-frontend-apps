@@ -27,13 +27,13 @@ export function AchievementByScoreForm(props: AchievementByScoreFormProps) {
   const { quizzes, onCancel, onSubmit, className, achievement } = props;
   const { t } = useTranslation();
   const conditions = achievement
-    ? achievement.condition_quizzes_attributes
+    ? achievement.conditions_attributes
     : [];
-  const quizzesIds = conditions.map((condition) => condition.quiz_id) || [];
+  const quizzesIds = conditions.map((condition) => condition.entity_id) || [];
 
   function findConditionId(id: number) {
     return conditions.find((condition) => {
-      return condition.quiz_id === id;
+      return condition.entity_id === id;
     })?.id;
   }
 
@@ -78,7 +78,7 @@ export function AchievementByScoreForm(props: AchievementByScoreFormProps) {
             condition_tasks_attributes: [],
           },
         };
-        onSubmit && onSubmit(formData);
+        // onSubmit && onSubmit(formData);
       }}
     >
       {({

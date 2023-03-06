@@ -135,9 +135,6 @@ export function CourseAchievements(props: CourseAchievementsProps) {
                     setAchievement({
                       ...achievement,
                       ...{
-                        condition_quizzes_attributes:
-                          achievement.condition_quizzes,
-                        condition_tasks_attributes: achievement.condition_tasks,
                       },
                     });
                     setSelectedType(achievement.rule);
@@ -187,10 +184,6 @@ export function CourseAchievements(props: CourseAchievementsProps) {
             achievement
               ? {
                   ...achievement,
-                  ...{
-                    condition_quizzes_attributes: achievement.condition_quizzes,
-                    condition_tasks_attributes: achievement.condition_tasks,
-                  },
                 }
               : undefined
           }

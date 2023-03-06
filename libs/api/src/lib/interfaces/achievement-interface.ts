@@ -1,4 +1,4 @@
-import { PartialBy, Prettify } from './util';
+import { PartialWithRequired, Prettify } from './util';
 
 export enum TypeAchievement {
   multiple = 'multiple',
@@ -13,20 +13,14 @@ export enum EntityAchievement {
   content = 'content',
 }
 
-export interface ConditionByQuiz {
+export interface Condition {
   id: number;
-  quiz_id: number;
-  min_score: number;
-  _destroy?: boolean; //rails remove nested attributes
-  quiz_name?: string;
-}
-
-export interface ConditionByTask {
-  id: number;
-  quiz_id: number;
-  min_score: number;
-  _destroy?: boolean; //rails remove nested attributes
-  quiz_name?: string;
+  points_to_assign: number;
+  entity: EntityAchievement;
+  entity_id: number;
+  must_reach_value: number;
+  description?: string;
+  _destroy?: boolean; //rails needs destroy to remove nested attributes
 }
 
 export interface AchievementModel {
@@ -37,8 +31,8 @@ export interface AchievementModel {
   rule: TypeAchievement;
   image: string;
   price: number;
-  condition_quizzes: ConditionByQuiz[];
-  condition_tasks: ConditionByTask[];
+  conditions_attributes: Condition[];
+  points_needed: number;
   created_at: string;
   updated_at: string;
 }
@@ -48,22 +42,34 @@ type AchievementBasicParams = Omit<
   | 'id'
   | 'user_id'
   | 'course_id'
-  | 'condition_tasks'
-  | 'condition_quizzes'
+  | 'points_needed'
+  | 'conditions_attributes'
   | 'created_at'
   | 'updated_at'
   | 'settings'
 >;
 
-type AchievementNestedAttributes = {
-  condition_quizzes_attributes: Prettify<
-    PartialBy<ConditionByQuiz, 'min_score' | 'id'>
-  >[];
-  condition_tasks_attributes: Prettify<
-    PartialBy<ConditionByTask, 'min_score' | 'id'>
-  >[];
+type NewConditions = {
+  conditions_attributes: Prettify<
+    PartialWithRequired<
+      Condition,
+      'entity' | 'entity_id' | 'must_reach_value' | 'points_to_assign'
+    >[]
+  >;
 };
 
 export type AchievementParams = Prettify<
-  AchievementBasicParams & AchievementNestedAttributes
+  AchievementBasicParams & NewConditions
 >;
+
+export interface ConditionCompleted {
+  id: number;
+  points: number;
+  condition_id: number;
+  entity_id: number;
+}
+
+export interface AchievementsStudentResponse {
+  course_achievements: AchievementModel[];
+  conditions_completed: ConditionCompleted[];
+}

@@ -1,10 +1,10 @@
 import { _http } from '../../http';
-import { AchievementModel } from '../../interfaces/achievement-interface';
+import { AchievementsStudentResponse } from '../../interfaces/achievement-interface';
 
 const http = _http;
 
 export const getStudentAchievements = async (courseId: number) => {
-  return new Promise<AchievementModel[]>((resolve, reject) => {
+  return new Promise<AchievementsStudentResponse>((resolve, reject) => {
     http
       .get(`/api/v1/student/courses/${courseId}/achievements`)
       .then((response) => {

@@ -9,6 +9,8 @@ import {
   AchievementParams,
   QuizModel,
   TypeAchievement,
+  Condition,
+  EntityAchievement,
 } from '@ltpx-frontend-apps/api';
 import InputTextStatus, {
   StatusInputText,
@@ -36,14 +38,14 @@ export function AchievementByQuizzesForm(props: AchievementByQuizzesFormProps) {
     achievement,
   } = props;
 
-  const conditions = achievement ? achievement.condition_quizzes_attributes : [];
+  const conditions = achievement ? achievement.conditions_attributes : [];
   const quizzesIds = conditions.map(
-      (condition) => condition.quiz_id
+      (condition) => condition.entity_id
     ) || [];
 
   function findConditionId(id:number) {
     return conditions.find((condition) => {
-      return condition.quiz_id === id;
+      return condition.entity_id === id;
     })?.id
   }
 
@@ -75,22 +77,63 @@ export function AchievementByQuizzesForm(props: AchievementByQuizzesFormProps) {
         image: Yup.string().required('Es necesario seleccionar una imagen'),
       })}
       onSubmit={(data) => {
-        const condition_quizzes_attributes = data.quizzes
+        console.log(data);
+        if (achievement) {
+          const conditions = data.quizzes
+            .map((quiz) => {
+              return {
+                id: quiz.conditionId,
+                points_to_assign: 100,
+                entity: EntityAchievement.quiz,
+                entity_id: quiz.id,
+                must_reach_value: 100,
+                _destroy: !quiz.selected
+              };
+            });
+          const { quizzes, ...formData } = { //remove quizzes
+            ...data,
+            ...{
+              conditions_attributes: conditions,
+            },
+          };
+          onSubmit(formData);
+        } else {
+          const conditions = data.quizzes
+          .filter((quiz) => quiz.selected)
           .map((quiz) => {
             return {
-              quiz_id: quiz.id,
-              id: quiz.conditionId,
-              _destroy: !quiz.selected
+              points_to_assign: 100,
+              entity: EntityAchievement.quiz,
+              entity_id: quiz.id,
+              must_reach_value: 100,
+              description: quiz.text
             };
           });
-        const { quizzes, ...formData } = { //remove quizzes
-          ...data,
-          ...{
-            condition_quizzes_attributes,
-            condition_tasks_attributes: [],
-          },
-        };
-        onSubmit(formData);
+          const { quizzes, ...formData } = { //remove quizzes
+            ...data,
+            ...{ conditions_attributes: conditions },
+          };
+          onSubmit(formData);
+        }
+
+        // const condition_quizzes_attributes = data.quizzes
+        //   .map((quiz) => {
+        //     return {
+        //       quiz_id: quiz.id,
+        //       id: quiz.conditionId,
+        //       _destroy: !quiz.selected
+        //     };
+        //   });
+        // const { quizzes, ...formData } = { //remove quizzes
+        //   ...data,
+        //   ...{
+        //     condition_quizzes_attributes,
+        //     condition_tasks_attributes: [],
+        //   },
+        // };
+        // console.log('formData: ', data);
+
+        // onSubmit(formData);
       }}
     >
       {({

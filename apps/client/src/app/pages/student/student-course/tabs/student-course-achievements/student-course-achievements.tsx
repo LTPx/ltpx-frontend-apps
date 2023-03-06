@@ -41,10 +41,12 @@ export function StudentCourseAchievements(
   }
 
   function buildQuizzesLink(conditions: Condition[]) {
+    const ids = achievementsView?.conditions_completed.map(condition => condition.condition_id) || [];
     return conditions.map((condition)=>{
       return {
         url: `/student/course/${courseId}/quiz/${condition.entity_id}`,
-        name: condition.description || ''
+        name: condition.description || '',
+        completed: ids.includes(condition.id)
       }
     })
   }

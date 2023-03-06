@@ -1,6 +1,7 @@
 import { TypeAchievement } from '@ltpx-frontend-apps/api';
 import { useCourseUtil } from '@ltpx-frontend-apps/store';
 import { NavLink } from 'react-router-dom';
+import Icon from '../icon/icon';
 import styles from './achievement-details-card.module.scss';
 
 /* eslint-disable-next-line */
@@ -12,8 +13,9 @@ export interface AchievementDetailsCardProps {
   totalPoints: number;
   quizzes: {
     name: string;
-    url: string
-  }[]
+    url: string;
+    completed: boolean;
+  }[];
 }
 
 export function AchievementDetailsCard(props: AchievementDetailsCardProps) {
@@ -21,33 +23,39 @@ export function AchievementDetailsCard(props: AchievementDetailsCardProps) {
   const { translateAchievementType } = useCourseUtil();
 
   return (
-    <div className={styles['container']}>
-      <div className={styles['content']}>
-        <div className={styles['achievement-content']}>
-          <img src={imageUrl} />
-          <div className={styles['achievement']}>
-            <h4 className={styles['title-achievement']}>
-              {title}
-            </h4>
-            <h4 className={styles['text']}>
-              {translateAchievementType(rule)}
-            </h4>
-            <div className={styles['test']}>
-              {quizzes.map((quiz, index) => (
-                <NavLink key={index}
-                  className={styles['link-quiz']}
-                  to={quiz.url}>
-                  <h5 className={styles['quiz']}>
-                    {quiz.name}
-                  </h5>
-                </NavLink>
-              ))}
-            </div>
+    <div className={styles['content']}>
+      <div className={styles['achievement-content']}>
+        <img src={imageUrl} />
+        <div className={styles['achievement']}>
+          <h4 className={styles['title-achievement']}>{title}</h4>
+          <h4 className={styles['text']}>{translateAchievementType(rule)}</h4>
+          <div className={styles['test']}>
+            {quizzes.map((quiz, index) => (
+              <div key={index}>
+                {quiz.completed ? (
+                  <div className={styles['link-quiz']}>
+                    <h5 className={styles['quiz-completed']}>
+                      <Icon icon='check' color='#fff' size={14}/> {quiz.name}
+                    </h5>
+                  </div>
+                ) : (
+                  <NavLink
+                    key={index}
+                    className={styles['link-quiz']}
+                    to={quiz.url}
+                  >
+                    <h5 className={styles['quiz']}>{quiz.name}</h5>
+                  </NavLink>
+                )}
+              </div>
+            ))}
           </div>
         </div>
-        <div className={styles['score-content']}>
-          <h4>Progreso</h4>
-          <h4 className={styles['score-color']}> {currentPoints} / {totalPoints} </h4>
+      </div>
+      <div className={styles['score-content']}>
+        <h4>Progreso</h4>
+        <div className={styles['score-color']}>
+          {currentPoints} / <strong>{totalPoints}</strong>
         </div>
       </div>
     </div>

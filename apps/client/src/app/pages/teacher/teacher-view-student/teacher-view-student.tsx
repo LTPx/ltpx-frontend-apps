@@ -45,7 +45,7 @@ export function TeacherViewStudent(props: TeacherViewStudentProps) {
             <div key={index}>
               <QuizStudentCard
                 title={quiz.name}
-                totalQuestions={quiz.score}
+                text={`Resultado: ${quiz.score}`}
               >
                 <div className={styles['btn-test']}>
                   <Button

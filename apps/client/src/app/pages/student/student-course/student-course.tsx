@@ -9,7 +9,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import styles from './student-course.module.scss';
 import StudentCourseAchievements from './tabs/student-course-achievements/student-course-achievements';
-import StudentCourseQuizzes from './tabs/student-course-quizzes';
+import StudentCourseQuizzes from './tabs/student-course-quizzes/student-course-quizzes';
 
 /* eslint-disable-next-line */
 export interface StudentCourseProps {}

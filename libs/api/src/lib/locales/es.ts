@@ -193,7 +193,7 @@ export const es = {
     addQuestion: 'Agregar Pregunta',
     updateQuestion: 'Actualizar pregunta',
     addAchievement: 'Crear un logro',
-    addNewAchievement: 'Agregar nuevo logro',
+    _addAchievement: 'Agregar nuevo logro',
     saveAchievement: 'Guardar logro',
     updateData: 'Actualizar mis datos',
     sendRequest: 'Enviar Solicitud'

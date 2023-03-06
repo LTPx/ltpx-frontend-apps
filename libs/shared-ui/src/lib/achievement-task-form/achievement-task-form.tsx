@@ -2,6 +2,8 @@ import {
   AchievementsImages,
   AchievementParams,
   TypeAchievement,
+  NewTaskParams,
+  TaskModel,
 } from '@ltpx-frontend-apps/api';
 import { Form, Formik } from 'formik';
 import Button, { ColorsButton, TypeButton } from '../button/button';
@@ -18,6 +20,7 @@ import { SetStateAction, useState } from 'react';
 import { Dialog } from 'evergreen-ui';
 import TaskForm from '../task-form/task-form';
 import Icon from '../icon/icon';
+import { useCourse } from '@ltpx-frontend-apps/store';
 
 /* eslint-disable-next-line */
 export interface AchievementTaskFormProps {
@@ -31,7 +34,8 @@ export function AchievementTaskForm(props: AchievementTaskFormProps) {
   const { onCancel, onSubmit, className, achievement } = props;
   const { t } = useTranslation();
   const [openModal, setOpenModal] = useState(false);
-  const [task, setTask] = useState('');
+  const [task, setTask] = useState<TaskModel>();
+  const { _addTask, course } = useCourse();
 
   const initialValues = {
     title: achievement?.title || '',
@@ -41,6 +45,19 @@ export function AchievementTaskForm(props: AchievementTaskFormProps) {
     rule: TypeAchievement.task,
     settings: [],
   };
+
+  async function handleSaveTask (params: NewTaskParams) {
+    console.log('task params: ', params);
+    const {data, success, error } = await _addTask(course.id, params);
+    if (success) {
+      setTask(data);
+      console.log('data: ', data);
+    }else {
+      console.log('error: ', error);
+    }
+  }
+
+
   return (
     <>
       <Formik
@@ -77,11 +94,11 @@ export function AchievementTaskForm(props: AchievementTaskFormProps) {
                 <label className={styles['title-task']}>
                   {t('achievementTaskForm.task')}
                 </label>
-                {task !== '' ? (
+                {task ? (
                   <div className={styles['task-content']}>
                     <div className={styles['task']}>
                       <Icon icon={'book'} size={18} />
-                      <h4>Tarea: {task}</h4>
+                      <h4>Tarea: {task.title}</h4>
                     </div>
                     <div>
                       <Button
@@ -159,9 +176,10 @@ export function AchievementTaskForm(props: AchievementTaskFormProps) {
       >
         <TaskForm
           onClose={() => setOpenModal(false)}
-          onSubmit={(title) => {
+          onSubmit={(params) => {
+            handleSaveTask(params);
             // onSubmit && onSubmit(data);
-            setTask(title);
+            // setTask(title);
           }}
         />
       </Dialog>

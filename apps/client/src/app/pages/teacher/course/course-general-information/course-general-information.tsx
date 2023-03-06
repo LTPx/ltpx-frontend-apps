@@ -44,7 +44,7 @@ export function CourseGeneralInformation(props: CourseGeneralInformationProps) {
     onSubmit,
   } = props;
   const { categories, languages, levels } = useCourseUtil();
-  const { updateCourse, cleanCourse } = useCourse();
+  const { _updateCourse, cleanCourse } = useCourse();
   const { t } = useTranslation();
 
   const formik = useFormik({
@@ -68,7 +68,7 @@ export function CourseGeneralInformation(props: CourseGeneralInformationProps) {
           // could be a url img
           delete formData.cover;
         }
-        const { data } = await updateCourse(formData);
+        const { data } = await _updateCourse(formData);
         onSubmit &&
           onSubmit({
             success: true,

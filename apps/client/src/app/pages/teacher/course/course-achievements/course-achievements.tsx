@@ -26,7 +26,7 @@ export function CourseAchievements(props: CourseAchievementsProps) {
   const { onSubmit } = props;
   const [achievement, setAchievement] = useState<AchievementModel>();
   const [selectedType, setSelectedType] = useState<TypeAchievement>();
-  const { addNewAchievement, removeAchievement, updateAchievement, course } =
+  const { _addAchievement, _removeAchievement, _updateAchievement, course } =
     useCourse();
   const { achievements, quizzes } = course;
   const { t } = useTranslation();
@@ -62,8 +62,8 @@ export function CourseAchievements(props: CourseAchievementsProps) {
     console.log('handleSaveAchievement: ', params);
     try {
       const { data } = achievement
-        ? await updateAchievement(params, achievement.id)
-        : await addNewAchievement(params);
+        ? await _updateAchievement(params, achievement.id)
+        : await _addAchievement(params);
       onSubmit &&
         onSubmit({
           success: true,
@@ -81,7 +81,7 @@ export function CourseAchievements(props: CourseAchievementsProps) {
 
   const handleRemoveAchievement = async (id: number) => {
     try {
-      const { data } = await removeAchievement(id);
+      const { data } = await _removeAchievement(id);
       onSubmit &&
         onSubmit({
           success: true,
@@ -173,7 +173,7 @@ export function CourseAchievements(props: CourseAchievementsProps) {
         <ButtonAddAchievement
           color={ColorsButton.secondary}
           className={styles['add-button']}
-          title={t('buttons.addNewAchievement')}
+          title={t('buttons._addAchievement')}
         />
       )}
       {selectedType && selectedType && (

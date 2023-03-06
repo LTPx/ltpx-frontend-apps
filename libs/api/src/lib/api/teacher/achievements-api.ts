@@ -29,7 +29,7 @@ export const editAchievement = async (achievement: AchievementParams, id: number
   });
 };
 
-export const removeAchievement = async (id: number) => {
+export const _removeAchievement = async (id: number) => {
   return new Promise((resolve, reject) => {
     http
       .delete(`api/v1/teacher/achievements/${id}`)

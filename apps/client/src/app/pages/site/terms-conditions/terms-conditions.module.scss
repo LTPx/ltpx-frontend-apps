@@ -6,7 +6,6 @@
   display: flex;
   justify-content: center;
 
-
   .information {
     line-height: $size-lg-1;
     width: 65vw;
@@ -31,6 +30,14 @@
     h4 {
       padding-top: $size-md-1;
       font-weight: bold;
+    }
+  }
+}
+@media screen and (max-width: 500px) {
+  .container {
+    .information {
+      line-height: $size-lg-1;
+      width: 90%;
     }
   }
 }

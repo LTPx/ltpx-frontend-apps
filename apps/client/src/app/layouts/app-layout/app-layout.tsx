@@ -20,6 +20,7 @@ export function AppLayout(props: AppLayoutProps) {
     { text: t('footer.about'), url: '/about' },
     { text: t('footer.contact'), url: '/contact' },
     { text: t('footer.blog'), url: '/blog' },
+    { text: t('footer.blog'), url: '/FAQ' },
   ];
   return (
     <div className={styles['layout']}>

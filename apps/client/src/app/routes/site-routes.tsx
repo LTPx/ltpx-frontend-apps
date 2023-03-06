@@ -33,6 +33,7 @@ import {
   CoursesByCategory,
   TeacherProfilePage,
   SiteLayout,
+  FrequentlyAskedQuestions,
 } from '../pages/site/index';
 import TermsConditions from '../pages/site/terms-conditions/terms-conditions';
 
@@ -108,6 +109,7 @@ export const SiteRoutes = () => {
             />
           </Route>
           <Route path="/about" element={<AboutUs />} />
+          <Route path="/faq" element={<FrequentlyAskedQuestions />} />
           <Route path="/teacher-profile" element={<TeacherProfilePage />} />
           <Route
             path="/course/:categoryId/category"

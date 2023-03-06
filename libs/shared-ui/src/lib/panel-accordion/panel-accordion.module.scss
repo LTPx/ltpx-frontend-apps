@@ -54,6 +54,13 @@
     visibility: hidden;
     transition: max-height 0.2s ease-out;
 
+    ul {
+      li {
+      color: $text-gray-color;
+      margin-left: $size-lg-1;
+    }
+    }
+
     p {
       color: $text-gray-color;
     }

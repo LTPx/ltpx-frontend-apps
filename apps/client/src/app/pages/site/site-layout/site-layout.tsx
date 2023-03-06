@@ -35,6 +35,7 @@ export function SiteLayout() {
     { text: t('footer.about'), url: '/about' },
     { text: t('footer.blog'), url: '/blog' },
     { text: "Términos y condiciones", url: '/terms-and-conditions' },
+    { text: "Preguntas Frecuentes", url: '/faq' },
   ];
 
   return (

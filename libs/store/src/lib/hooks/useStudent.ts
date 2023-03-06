@@ -16,6 +16,8 @@ export const useStudent = () => {
     _getStudentQuizResult,
     _evaluateQuiz,
     _getStudentAchievements,
+    _getStudentTasks,
+    _getStudentTask,
   } = useAppStore();
 
   return {
@@ -33,5 +35,7 @@ export const useStudent = () => {
     _getStudentQuizResult,
     _evaluateQuiz,
     _getStudentAchievements,
+    _getStudentTasks,
+    _getStudentTask,
   }
 }

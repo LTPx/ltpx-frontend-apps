@@ -18,7 +18,7 @@ export function StudentCourseQuizzes(props: StudentCourseQuizzesProps) {
   const [ quizzes, setQuizzes ] = useState<QuizStudent[]>([]);
   const { _getStudentQuizzes } = useStudent();
 
-  const fetchCourse = useCallback(async () => {
+  const fetchQuizzes = useCallback(async () => {
     const { success, data, error } = await _getStudentQuizzes(courseId);
     if (success) {
       console.log('data: ', data);
@@ -29,7 +29,7 @@ export function StudentCourseQuizzes(props: StudentCourseQuizzesProps) {
   }, []);
 
   useEffect(() => {
-    fetchCourse();
+    fetchQuizzes();
   }, []);
 
   const handleStartTest = () => {

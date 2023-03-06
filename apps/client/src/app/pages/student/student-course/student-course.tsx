@@ -2,7 +2,6 @@ import {
   CourseContents,
   CourseDateCard,
   Tabs,
-  TaskStudentCard,
 } from '@ltpx-frontend-apps/shared-ui';
 import { useStudent } from '@ltpx-frontend-apps/store';
 import { useCallback, useEffect, useState } from 'react';
@@ -10,6 +9,7 @@ import { useParams } from 'react-router-dom';
 import styles from './student-course.module.scss';
 import StudentCourseAchievements from './tabs/student-course-achievements/student-course-achievements';
 import StudentCourseQuizzes from './tabs/student-course-quizzes/student-course-quizzes';
+import StudentCourseTasks from './tabs/student-course-tasks/student-course-tasks';
 
 /* eslint-disable-next-line */
 export interface StudentCourseProps {}
@@ -41,9 +41,15 @@ export function StudentCourse(props: StudentCourseProps) {
     { text: 'Curso' },
     { text: 'Clases' },
     { text: 'Tareas' },
-    { text: 'Test' },
+    { text: 'Tests' },
     { text: 'Logros' },
   ];
+
+  // { text: 'Curso', url: `/student/courses/${courseId}/?tab=curse` },
+  // { text: 'Clases', url: `/student/courses/${courseId}/?tab=classes` },
+  // { text: 'Tareas', url: `/student/courses/${courseId}/?tab=tasks` },
+  // { text: 'Tests', url: `/student/courses/${courseId}/?tab=quizzes` },
+  // { text: 'Logros', url: `/student/courses/${courseId}/?tab=achievements` },
   const handleClick = (index: number) => {
     setSelectedTab(index);
   };
@@ -85,20 +91,19 @@ export function StudentCourse(props: StudentCourseProps) {
             </div>
           )}
           {selectedTab === 2 && (
-            <div className={styles['task-content']}>
-              <TaskStudentCard
-                title={'Matemáticas'}
-                description={
-                  'Se debe realizar las siguientes ecuaciones y entregar en formato pdf  '
-                }
-              />
-            </div>
+            <StudentCourseTasks
+              courseId={enrolledCourse.id}
+            />
           )}
           {selectedTab === 3 && (
-            <StudentCourseQuizzes courseId={enrolledCourse.id} />
+            <StudentCourseQuizzes
+              courseId={enrolledCourse.id}
+            />
           )}
           {selectedTab === 4 && (
-            <StudentCourseAchievements courseId={ parseInt(courseId || '')}/>
+            <StudentCourseAchievements
+              courseId={ parseInt(courseId || '')}
+            />
           )}
         </div>
       </div>

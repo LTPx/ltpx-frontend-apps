@@ -68,3 +68,19 @@
     color: $green-color;
   }
 }
+
+.classes-container {
+  .classes-preview {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .edit-btn {
+    text-align: end;
+    margin-top: $size-md-1;
+    cursor: pointer;
+    color: $green-color;
+  }
+}
+

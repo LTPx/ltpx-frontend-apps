@@ -1,11 +1,13 @@
 import {
   Classroom,
   CLASSROOMS,
+  SessionParams,
   TeacherClassType,
 } from '@ltpx-frontend-apps/api';
 import {
   ClassroomView,
   CourseClasses,
+  CourseDateCard,
   InformationCard,
   SetupCard,
 } from '@ltpx-frontend-apps/shared-ui';
@@ -24,19 +26,12 @@ export function CourseClassroom(props: CourseClassroomProps) {
   const { onSubmit } = props;
   const [openModal, setOpenModal] = useState(false);
   const { course, _addCourseSession } = useCourse();
-  const { user } = useUser();
-  const { classroom } = course;
+  const { sessions } = course;
   const { t } = useTranslation();
+  console.log('classroom: ', sessions);
 
-  const handleClassroom = async (classroom: Classroom) => {
-    const { success, data, error } = await _addCourseSession({
-      max_participants: classroom.max,
-      call_time_min: classroom.call_time_min,
-      private_sessions: classroom.condition === TeacherClassType.customize,
-      meetings_attributes: classroom.meetings.map((date)=>{
-        return { start_date: date, host_user_id: user.id }
-      }),
-    });
+  const handleClassroom = async (params: SessionParams) => {
+    const { success, data, error } = await _addCourseSession(params);
     onSubmit &&
       onSubmit({
         success,
@@ -51,7 +46,7 @@ export function CourseClassroom(props: CourseClassroomProps) {
         <h2>{t('courseClassroom.title')}</h2>
         <h4 className="muted">{t('courseClassroom.subtitle')}</h4>
       </div>
-      {!classroom && (
+      {sessions.length === 0 && (
         <SetupCard
           icon={'cog'}
           text={t('courseClassroom.text')}
@@ -71,20 +66,21 @@ export function CourseClassroom(props: CourseClassroomProps) {
           handleClassroom(classroom);
         }}
       />
-      {classroom && (
-        <div className={styles['classroom-preview']}>
-          <InformationCard
-            title={CLASSROOMS[classroom.condition].title}
-            text={CLASSROOMS[classroom.condition].text}
-            icon={CLASSROOMS[classroom.condition].icon}
-            selected={true}
-          />
-          {classroom.meetings.length > 0 && (
-            <ClassroomView
-              classroom={classroom}
-              className={styles['classroom-summary']}
-            />
-          )}
+      {sessions && (
+        <div className={styles['classes-container']}>
+          <div className={styles['classes-preview']}>
+            {sessions[0].meetings.map((meeting, index) => (
+              <CourseDateCard
+                className={styles['course-class']}
+                key={index}
+                title={'Reunion ' + (index + 1)}
+                description={
+                  'Fecha: ' + meeting.month + ' - ' + meeting.day_number
+                }
+                time={'Hora: ' + meeting.end_time}
+              />
+            ))}
+          </div>
           <div
             className={styles['edit-btn']}
             onClick={() => {

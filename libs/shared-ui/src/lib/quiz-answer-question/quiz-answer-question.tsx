@@ -5,7 +5,6 @@ import styles from './quiz-answer-question.module.scss';
 export interface QuizAnswerQuestionProps {
   title: string;
   description?: string;
-
 }
 
 export function QuizAnswerQuestion(props: QuizAnswerQuestionProps) {

@@ -146,6 +146,11 @@ export function Home() {
             alt="cover"
           />
         </div>
+         <img
+            className={styles['image-cover']}
+            src="../../../../assets/images/bg_geometrik.svg"
+            alt="cover"
+          />
       </div>
       <ContentDescription />
       <div className={styles['popular-courses-container']}>

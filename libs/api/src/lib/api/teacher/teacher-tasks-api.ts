@@ -1,5 +1,5 @@
 import { _http } from '../../http';
-import { EditSessionParams, SessionModel } from '../../interfaces/session-interface';
+import { EditSessionParams, CourseSessionModel } from '../../interfaces/session-interface';
 import { NewTaskParams, TaskModel } from '../../interfaces/task-interface';
 
 const http = _http;
@@ -19,7 +19,7 @@ export const createTask = async (id: number, params: NewTaskParams) => {
 
 export const editTask = async (session: EditSessionParams) => {
   const { id } = session;
-  return new Promise<SessionModel>((resolve, reject) => {
+  return new Promise<CourseSessionModel>((resolve, reject) => {
     http
       .put(`api/v1/teacher/course_sessions/${id}`, session)
       .then((response) => {

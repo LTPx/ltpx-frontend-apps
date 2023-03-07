@@ -6,25 +6,38 @@ import SelectDates from '../select-dates/select-dates';
 import Select from '../select/select';
 import styles from './session-form.module.scss';
 import Input from '../input/input';
+import { SessionParams, TeacherClassType } from '@ltpx-frontend-apps/api';
+import { useUser } from '@ltpx-frontend-apps/store';
 
 /* eslint-disable-next-line */
 export interface SessionFormProps {
   open?: boolean;
   onClose?: () => void;
+  onSubmit?: (data: SessionParams) => void;
 }
 
 export function SessionForm(props: SessionFormProps) {
-  const { open, onClose } = props;
+  const { open, onClose, onSubmit } = props;
+  const { user } = useUser();
+
   const { t } = useTranslation();
   const formik = useFormik({
     initialValues: {
-      students: '',
+      max_participants: '',
       hour: '0',
       minutes: '30',
       dates: [],
     },
     onSubmit: (data) => {
-      console.log(data);
+      const formData = {
+        private_sessions: false,
+        max_participants: parseInt(data.max_participants),
+        call_time_min: parseInt(data.minutes) + parseInt(data.hour),
+        meetings_attributes: data.dates.map((date)=>{
+          return { start_date: date, host_user_id: user.id }
+        }),
+      };
+      onSubmit && onSubmit(formData);
     },
   });
   const hours = [
@@ -54,14 +67,15 @@ export function SessionForm(props: SessionFormProps) {
           <h2>Configurar Sesiones</h2>
           <div className={styles['field-form']}>
             <Input
-              label="Numero máximo de estudiantes en este curso"
+              label="Numero de estudiantes"
+              description='El numero máximo de personas que pueden tomaran este curso'
               type="number"
-              name="students"
-              placeholder="numero de estudiantes"
+              name="max_participants"
+              placeholder="12 estudiantes recomendado"
               onChange={(e: any) => {
                 formik.handleChange(e);
               }}
-              value={formik.values.students}
+              value={formik.values.max_participants}
               onBlur={formik.handleBlur}
             />
           </div>

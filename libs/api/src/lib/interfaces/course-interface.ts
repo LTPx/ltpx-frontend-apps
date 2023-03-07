@@ -1,6 +1,7 @@
 import { AchievementModel } from './achievement-interface';
 import { MeetingModel } from './meeting-interface';
 import { QuizModel } from './quiz-interface';
+import { CourseSession } from './session-interface';
 import { PartialWithRequired } from './util';
 
 export enum TeacherClassType {
@@ -65,7 +66,7 @@ export interface CourseModel {
   approved: boolean;
   level: CourseLevel;
   language: CourseLanguage;
-  sessions: Session[];
+  sessions: CourseSession[];
   status: CourseStatus;
   contents: ContentCourse[];
   classroom: Classroom;

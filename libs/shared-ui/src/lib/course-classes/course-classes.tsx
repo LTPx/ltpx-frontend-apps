@@ -2,6 +2,7 @@ import {
   Classroom,
   CLASSROOM_CUSTOMIZE,
   CLASSROOM_NONE,
+  SessionParams,
   TeacherClassType,
 } from '@ltpx-frontend-apps/api';
 import { useState } from 'react';
@@ -27,7 +28,7 @@ const classesOptions = [
 export interface CourseClassesProps {
   open?: boolean;
   onClose?: () => void;
-  onSave?: (classroom: Classroom) => void;
+  onSave?: (classroom: SessionParams) => void;
 }
 
 export function CourseClasses(props: CourseClassesProps) {
@@ -87,11 +88,10 @@ export function CourseClasses(props: CourseClassesProps) {
               onClick={() => {
                 onSave &&
                   onSave({
-                    condition: selectedTypeClass,
-                    max: 0,
-                    min: 0,
+                    private_sessions: true,
+                    max_participants: 0,
                     call_time_min: 0,
-                    meetings: [],
+                    meetings_attributes: [],
                   });
                 onClose && onClose();
               }}
@@ -105,6 +105,9 @@ export function CourseClasses(props: CourseClassesProps) {
         open={openSession}
         onClose={() => {
           setOpenSession(false);
+        }}
+        onSubmit={(data) => {
+          onSubmit(data);
         }}
       />
       {/* <Drawer open={openClassroom}>

@@ -1,6 +1,8 @@
+import { Tab, Tabs } from '@ltpx-frontend-apps/shared-ui';
 import { useCourseStudents } from '@ltpx-frontend-apps/store';
+import { Avatar } from 'evergreen-ui';
 import { useCallback, useEffect, useState } from 'react';
-import { NavLink, useParams } from 'react-router-dom';
+import { Outlet, useParams } from 'react-router-dom';
 import styles from './teacher-course-students.module.scss';
 
 /* eslint-disable-next-line */
@@ -8,16 +10,27 @@ export interface TeacherCourseStudentsProps {}
 
 export function TeacherCourseStudents(props: TeacherCourseStudentsProps) {
   const { _getStudentsByCourse } = useCourseStudents();
-  const [students, setStudents] = useState<any[]>([]);
+  const [loaded, setLoaded] = useState(false);
+  const [optionsTab, setOptionsTab] = useState<Tab[]>([]);
   const { courseId } = useParams();
   const id = parseInt(courseId || '');
 
   const fetchData = useCallback(async () => {
     const { success, data, error } = await _getStudentsByCourse(id);
     if (success) {
-      setStudents(data);
+      const students = data;
+      const options = students.map((student: any) => { //TODO: add interface student
+        return {
+          text: student.name,
+          url: `/teacher/courses/${courseId}/students/${student.student_id}`,
+          children: <TabStudent name={student.name} id={student.name.id} />,
+        };
+      });
+      setOptionsTab(options);
+      setLoaded(true);
     } else {
-      console.log('error: ', error);
+      setLoaded(true);
+      console.log(error);
     }
   }, []);
 
@@ -25,34 +38,31 @@ export function TeacherCourseStudents(props: TeacherCourseStudentsProps) {
     fetchData();
   }, []);
 
+  const TabStudent = ({ name, id }: { name: string; id: number }) => (
+    <div className={styles['tab-options']}>
+      <Avatar name={name} size={30} />
+      {name}
+    </div>
+  );
+
   return (
-    <div className={`${styles['container']} card with-padding`}>
-      <table>
-        <thead>
-          <tr>
-            <th>Nombre</th>
-            <th>Fecha de subscription</th>
-            <th>Tests</th>
-            <th>Logros</th>
-            <th>Acciones</th>
-          </tr>
-        </thead>
-        <tbody>
-          {students.map((student, index) => (
-            <tr key={index}>
-              <td className={styles['user-name']}>{student.name}</td>
-              <td>{student.enrolled_date}</td>
-              <td>3/3</td>
-              <td>1/3</td>
-              <td>
-                <NavLink to={`/teacher/courses/${courseId}/student/${student.student_id}`}>
-                  Ver Estudiante
-                </NavLink>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+    <div className={styles['container']}>
+      <h2 className={styles['title']}>Curso: {optionsTab.length}</h2>
+      <div className={styles['content']}>
+        <div className={styles['all-students']}>
+          {loaded && (
+            <Tabs
+              className={styles['tabs']}
+              tabs={optionsTab}
+              vertical={true}
+              isNav={true}
+            />
+          )}
+        </div>
+        <div className={styles['information']}>
+          <Outlet />
+        </div>
+      </div>
     </div>
   );
 }

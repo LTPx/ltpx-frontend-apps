@@ -1,0 +1,77 @@
+@import '../../styles/styles.module.scss';
+
+.container {
+  .quiz-container {
+    padding: 3rem;
+  }
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 1rem;
+
+  .quiz-info {
+    h2 {
+      font-weight: 500;
+    }
+
+    h4 {
+      color: $text-gray-color;
+    }
+  }
+
+  .quiz-score {
+    p {
+      color: $text-gray-color;
+    }
+  }
+}
+
+.content {
+  margin-top: 2rem;
+
+  .questions {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+
+    .question-text {
+      padding-bottom: 0.75rem;
+      font-weight: 500;
+    }
+
+    .question-answer {
+      color: $text-gray-color;
+    }
+  }
+}
+
+
+
+.footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  padding: 1rem 0;
+}
+
+.selected {
+  background-color: $green-color-100;
+}
+
+.items {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.buttons-rate {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.feedback {
+  margin-top: 3rem;
+}

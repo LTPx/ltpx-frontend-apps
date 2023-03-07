@@ -8,6 +8,7 @@
   // box-shadow: $card-shadow-medium;
   border-radius: 15px;
   border: 1.5px solid $primary-color;
+  line-height: 1.75rem;
 
   h3 {
     padding-bottom: $size-sm-2;
@@ -18,5 +19,12 @@
   .time {
     color: $text-gray-color;
   }
-  
+
+}
+//smartphones-responsive
+@media screen and (max-width: 550px) {
+
+  .description {
+    width: 10rem;
+  }
 }

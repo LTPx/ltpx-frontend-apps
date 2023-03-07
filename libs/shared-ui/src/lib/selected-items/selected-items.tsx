@@ -11,7 +11,7 @@ export interface ItemOption {
 export interface SelectedItemsProps {
   items: ItemOption[];
   onlyOneSelection?: boolean;
-  onChange?: (array: Array<string>) => void;
+  onChange?: (array: Array<any>) => void;
 }
 
 export function SelectedItems(props: SelectedItemsProps) {

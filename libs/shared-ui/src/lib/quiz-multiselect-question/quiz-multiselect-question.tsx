@@ -1,33 +1,46 @@
 import styles from './quiz-multiselect-question.module.scss';
-import { Answer, UserAnswer } from '@ltpx-frontend-apps/api';
+import { AnswerModel, UserAnswer } from '@ltpx-frontend-apps/api';
 import GroupSelectOption from '../group-select-option/group-select-option';
 import Icon from '../icon/icon';
 import { useState } from 'react';
 
 /* eslint-disable-next-line */
 export interface QuizMultiselectQuestionProps {
+  number?: number;
   title: string;
   description?: string;
-  answers: Answer[];
+  answers: AnswerModel[];
   multiple?: boolean;
   onChange?: (answers: UserAnswer[]) => void;
 }
 
 export function QuizMultiselectQuestion(props: QuizMultiselectQuestionProps) {
-  const { title, description, answers, multiple, onChange } = props;
+  const { title, description, answers, multiple, number, onChange } = props;
   const answersForm = answers.map((answer) => {
+    const { text, question_id, id } = answer;
     return {
-      text: answer.text,
+      text,
+      question_id,
       selected: false,
-      question_id: answer.question_id || 1,
-      answer_id: answer.id || 1
+      answer_id: id,
     };
   });
   const [answersUi, setAnswersUi] = useState(answersForm);
 
+  const filterAnswers = (answers: any[]) => {
+    return answers
+      .filter((answer) => answer.selected)
+      .map((answer) => {
+        return {
+          answer_id: answer.answer_id,
+          question_id: answer.question_id,
+        };
+      });
+  };
+
   return (
     <div className={styles['container']}>
-      <h3>{title}</h3>
+      <h3>{number}. {title}</h3>
       <p>{description}</p>
       <div className={styles['answers']}>
         {multiple &&
@@ -50,7 +63,7 @@ export function QuizMultiselectQuestion(props: QuizMultiselectQuestionProps) {
                   };
                 });
                 setAnswersUi(answers);
-                onChange && onChange(answers.filter((answer) => answer.selected));
+                onChange && onChange(filterAnswers(answers));
               }}
             >
               <Icon

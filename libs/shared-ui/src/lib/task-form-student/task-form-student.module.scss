@@ -1,0 +1,24 @@
+@import '../../styles/styles.module.scss';
+
+.form {
+  .description-container {
+    .description {
+      color: $text-gray-color;
+      margin-top: 0.5rem;
+    }
+  }
+  .btn {
+    display: flex;
+    justify-content: flex-end;
+    gap: $size-md-1;
+    padding: $size-md-3 0;
+  }
+  .field-upload {
+  margin-top: 1rem;
+
+  .uploader {
+    margin-top: 0.5rem;
+    padding: 0.5rem 1rem;
+  }
+}
+}

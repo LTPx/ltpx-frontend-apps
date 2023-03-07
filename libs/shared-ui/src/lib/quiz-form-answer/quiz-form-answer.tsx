@@ -20,7 +20,10 @@ export function QuizFormAnswer(props: QuizFormAnswerProps) {
     kind: TypeQuestionQuiz.answer,
     question: question?.question || '',
     description: question?.description || '',
-    answers: [],
+    answers: [{
+      text: '',
+      correct: false,
+    }],
   };
   const formik = useFormik({
     initialValues: initialValues,

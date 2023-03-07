@@ -3,68 +3,55 @@ import AchievementByScoreForm from '../achievement-by-score-form/achievement-by-
 import AchievementTaskForm from '../achievement-task-form/achievement-task-form';
 import styles from './achievement-builder.module.scss';
 import {
-  AchievementModel,
   QuizModel,
   TypeAchievement,
-  AchievementParamsUi,
+  AchievementParams,
 } from '@ltpx-frontend-apps/api';
 
 /* eslint-disable-next-line */
 export interface AchievementBuilderProps {
   quizzes: QuizModel[];
-  typeAchievement?: TypeAchievement;
-  achievement?: AchievementModel;
-  onSubmit?: (achievement: AchievementParamsUi) => void;
+  type?: TypeAchievement;
+  achievement?: AchievementParams;
+  onSubmit: (achievement: AchievementParams) => void;
   onCancel?: () => void;
 }
 
 export function AchievementBuilder(props: AchievementBuilderProps) {
-  const { onSubmit, onCancel, quizzes, typeAchievement, achievement } = props;
-  const saveNewAchievement = (achievementForm: AchievementParamsUi) => {
-    onSubmit && onSubmit({...achievementForm, ...{id: achievement?.id}});
-  };
-
+  const { onSubmit, onCancel, quizzes, type, achievement } = props;
   return (
     <div className={styles['container']}>
-      {typeAchievement && (
+      {type && (
         <div className={styles['achievement-form']}>
-          {typeAchievement === TypeAchievement.multiple && (
+          {type === TypeAchievement.multiple && (
             <AchievementByQuizzesForm
               achievement={achievement}
               quizzes={quizzes}
-              onSubmit={(data) => {
-                saveNewAchievement(data);
-              }}
+              onSubmit={onSubmit}
               onCancel={onCancel}
             />
           )}
-          {typeAchievement === TypeAchievement.single && (
+          {type === TypeAchievement.single && (
             <AchievementByQuizzesForm
               achievement={achievement}
               singleSelection={true}
               quizzes={quizzes}
-              onSubmit={(data) => {
-                saveNewAchievement(data);
-              }}
+              onSubmit={onSubmit}
               onCancel={onCancel}
             />
           )}
-          {typeAchievement === TypeAchievement.score && (
+          {type === TypeAchievement.score && (
             <AchievementByScoreForm
               achievement={achievement}
               quizzes={quizzes}
-              onSubmit={(data) => {
-                saveNewAchievement(data);
-              }}
+              onSubmit={onSubmit}
               onCancel={onCancel}
             />
           )}
-          {typeAchievement === TypeAchievement.task && (
+          {type === TypeAchievement.task && (
             <AchievementTaskForm
               achievement={achievement}
-              onSubmit={(data) => {
-                saveNewAchievement(data);
-              }}
+              onSubmit={onSubmit}
               onCancel={onCancel}
             />
           )}

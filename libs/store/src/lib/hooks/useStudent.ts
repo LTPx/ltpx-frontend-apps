@@ -11,8 +11,14 @@ export const useStudent = () => {
     _getStudentPayments,
     _getStudentClasses,
     _getStudentCourse,
+    _getStudentQuizzes,
     _getStudentQuiz,
+    _getStudentQuizResult,
     _evaluateQuiz,
+    _getStudentAchievements,
+    _getStudentTasks,
+    _getStudentTask,
+    _sendTask,
   } = useAppStore();
 
   return {
@@ -25,7 +31,13 @@ export const useStudent = () => {
     _getStudentPayments,
     _getStudentClasses,
     _getStudentCourse,
+    _getStudentQuizzes,
     _getStudentQuiz,
+    _getStudentQuizResult,
     _evaluateQuiz,
+    _getStudentAchievements,
+    _getStudentTasks,
+    _getStudentTask,
+    _sendTask,
   }
 }

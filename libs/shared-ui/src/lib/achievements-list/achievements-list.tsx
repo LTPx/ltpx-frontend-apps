@@ -1,11 +1,11 @@
-import { AchievementParamsUi } from '@ltpx-frontend-apps/api';
+import { AchievementModel } from '@ltpx-frontend-apps/api';
 import { useCourseUtil } from '@ltpx-frontend-apps/store';
 import Icon from '../icon/icon';
 import styles from './achievements-list.module.scss';
 
 /* eslint-disable-next-line */
 export interface AchievementsListProps {
-  achievements: AchievementParamsUi[];
+  achievements: AchievementModel[];
 }
 
 export function AchievementsList(props: AchievementsListProps) {
@@ -30,12 +30,12 @@ export function AchievementsList(props: AchievementsListProps) {
             </div>
           </div>
           <div className={styles['settings']}>
-            {achievement.settings?.map((setting, index) => (
+            {/* {achievement.settings?.map((setting, index) => (
               <div className={styles['setting']} key={index}>
                 <div className="s">Test: {setting.text}</div>
                 <div className="s">Puntaje necesario: {setting.score}/100 pts</div>
               </div>
-            ))}
+            ))} */}
           </div>
         </div>
       ))}

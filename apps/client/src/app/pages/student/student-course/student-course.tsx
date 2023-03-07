@@ -1,24 +1,24 @@
 import {
-  AchievementCard,
   CourseContents,
   CourseDateCard,
-  QuizStudentCard,
   Tabs,
 } from '@ltpx-frontend-apps/shared-ui';
 import { useStudent } from '@ltpx-frontend-apps/store';
 import { useCallback, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import styles from './student-course.module.scss';
+import StudentCourseAchievements from './tabs/student-course-achievements/student-course-achievements';
+import StudentCourseQuizzes from './tabs/student-course-quizzes/student-course-quizzes';
+import StudentCourseTasks from './tabs/student-course-tasks/student-course-tasks';
 
 /* eslint-disable-next-line */
 export interface StudentCourseProps {}
 
 export function StudentCourse(props: StudentCourseProps) {
   const { _getStudentCourse, enrolledCourse } = useStudent();
-  const params = useParams();
-  const { courseId } = params;
-  const id = parseInt(courseId || '');
   const [selectedTab, setSelectedTab] = useState(0);
+  const { courseId } = useParams();
+  const id = parseInt(courseId || '');
 
   const fetchCourse = useCallback(async () => {
     const { success, data, error } = await _getStudentCourse(id);
@@ -39,10 +39,17 @@ export function StudentCourse(props: StudentCourseProps) {
 
   const tabs = [
     { text: 'Curso' },
-    { text: 'Test' },
-    { text: 'Logros' },
     { text: 'Clases' },
+    { text: 'Tareas' },
+    { text: 'Tests' },
+    { text: 'Logros' },
   ];
+
+  // { text: 'Curso', url: `/student/courses/${courseId}/?tab=curse` },
+  // { text: 'Clases', url: `/student/courses/${courseId}/?tab=classes` },
+  // { text: 'Tareas', url: `/student/courses/${courseId}/?tab=tasks` },
+  // { text: 'Tests', url: `/student/courses/${courseId}/?tab=quizzes` },
+  // { text: 'Logros', url: `/student/courses/${courseId}/?tab=achievements` },
   const handleClick = (index: number) => {
     setSelectedTab(index);
   };
@@ -69,32 +76,6 @@ export function StudentCourse(props: StudentCourseProps) {
             </div>
           )}
           {selectedTab === 1 && (
-            <div className={styles['quizzes-content']}>
-              {enrolledCourse.quizzes?.map((quiz, index) => (
-                <div className={styles['quiz']} key={index}>
-                  <QuizStudentCard
-                    title={quiz.name}
-                    totalQuestions={quiz.questions.length}
-                    onClick={handleStartTest}
-                    url={`/student/quiz/${quiz.id}`}
-                    urlReviewQuiz={`/student/quiz-review/${quiz.id}`}
-                  />
-                </div>
-              ))}
-            </div>
-          )}
-          {selectedTab === 2 && (
-            <div className={styles['achievements-content']}>
-              {enrolledCourse.achievements?.map((achievement, index) => (
-                <AchievementCard
-                  key={index}
-                  image={achievement.image}
-                  text={achievement.title}
-                />
-              ))}
-            </div>
-          )}
-          {selectedTab === 3 && (
             <div className={styles['course-date']}>
               {enrolledCourse.sessions[0].meetings.map((meeting, index) => (
                 <CourseDateCard
@@ -108,6 +89,21 @@ export function StudentCourse(props: StudentCourseProps) {
                 />
               ))}
             </div>
+          )}
+          {selectedTab === 2 && (
+            <StudentCourseTasks
+              courseId={enrolledCourse.id}
+            />
+          )}
+          {selectedTab === 3 && (
+            <StudentCourseQuizzes
+              courseId={enrolledCourse.id}
+            />
+          )}
+          {selectedTab === 4 && (
+            <StudentCourseAchievements
+              courseId={ parseInt(courseId || '')}
+            />
           )}
         </div>
       </div>

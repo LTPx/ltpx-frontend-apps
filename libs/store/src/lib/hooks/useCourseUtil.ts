@@ -63,12 +63,6 @@ export const useCourseUtil = () => {
     translateLanguage,
     translateStatus,
     translateQuizCategories,
-    translateAchievementType,
-    getPriceCourse: (achievements: AchievementModel[]) => {
-      return achievements.reduce(
-        (accumulator, achievement) => accumulator + achievement.price,
-        0
-      );
-    },
+    translateAchievementType
   };
 };

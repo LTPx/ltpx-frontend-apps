@@ -38,14 +38,14 @@ export interface QuestionQuiz {
   question: string;
   description: string;
   kind: TypeQuestionQuiz;
-  answers: Answer[];
+  answers: AnswerModel[];
 }
 
-export interface Answer {
+export interface AnswerModel {
+  id: number;
   text: string;
   correct: boolean;
-  id?: number; //should update all components support id
-  question_id?: number; //should update all components support id
+  question_id: number;
 }
 
 export interface UserAnswer {
@@ -53,4 +53,41 @@ export interface UserAnswer {
   answer_id: number;
   question_id: number;
   user_id?: number;
+}
+
+export interface QuizResult {
+  id: number;
+  name: string;
+  quiz_id: number;
+  user_id: number;
+  score: number;
+  total_correct_answer: number;
+  total_incorrect_answer: number;
+  total_no_answer: number;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface QuizResultSummary {
+  id: number;
+  quiz: QuizModel;
+  score: number;
+  submitted_at: string;
+  user_answers: {
+    answer_id: number;
+    id: number
+  }[]
+}
+
+export interface QuizStudent {
+  id: number;
+  user_id: number;
+  course_id: number;
+  name: string;
+  total_questions: number;
+  quizzes_results_ids: number[];
+  last_quiz_result: {
+    id: number,
+    score: number
+  }
 }

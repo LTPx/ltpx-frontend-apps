@@ -10,3 +10,4 @@ export * from './page-404/page-404';
 export * from './about-us/about-us';
 export * from './courses-by-category/courses-by-category';
 export * from './teacher-profile-page/teacher-profile-page';
+export * from './frequently-asked-questions/frequently-asked-questions';

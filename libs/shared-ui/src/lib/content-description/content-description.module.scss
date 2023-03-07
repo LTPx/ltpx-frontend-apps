@@ -12,7 +12,7 @@
     display: flex;
     flex-direction: column;
     text-align: center;
-    h1 {
+    .title {
       padding-bottom: $size-md-1;
     }
     h4 {
@@ -101,5 +101,36 @@
   .content {
     flex-direction: column;
     gap: 2rem !important;
+  }
+  .container {
+    .head {
+      .title {
+        line-height: 3rem;
+      }
+    }
+  }
+}
+//tablet-responsive-vertical
+@media screen and (min-width: 560px) and (max-width: 850px) {
+  .content {
+    gap: 2rem !important;
+  }
+  .item-one {
+    width: 5px !important;
+    height: 5px !important;
+  }
+  .item-two {
+    width: 5px !important;
+    height: 5px !important;
+  }
+  .item-tree {
+    width: 5px !important;
+    height: 5px !important;
+  }
+}
+//tablet-responsive-horizontal
+@media screen and (min-width: 860px) and (max-width: 1224px) {
+  .content {
+    gap: 5rem !important;
   }
 }

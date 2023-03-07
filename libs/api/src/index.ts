@@ -16,6 +16,7 @@ export * from './lib/interfaces/enrollment-interface';
 export * from './lib/interfaces/user-course-payment-interface';
 export * from './lib/interfaces/wallet-interface';
 export * from './lib/interfaces/session-interface';
+export * from './lib/interfaces/task-interface';
 
 //fake api
 export * from '../src/lib/fake/courses';
@@ -34,6 +35,7 @@ export * from './lib/api/teacher/teacher-classes-api';
 export * from './lib/api/teacher/teacher-sessions-api';
 export * from './lib/api/teacher/teacher-meeting-api';
 export * from './lib/api/teacher/teacher-students-api';
+export * from './lib/api/teacher/teacher-tasks-api';
 
 export * from './lib/api/admin/applications-api';
 export * from './lib/api/admin/users-api';
@@ -49,6 +51,8 @@ export * from './lib/api/student/student-courses-api';
 export * from './lib/api/student/student-payments-api';
 export * from './lib/api/student/student-classes-api';
 export * from './lib/api/student/student-quizzes-api';
+export * from './lib/api/student/student-achievements-api';
+export * from './lib/api/student/student-tasks-api';
 
 export * from './lib/api/meeting/video-api';
 

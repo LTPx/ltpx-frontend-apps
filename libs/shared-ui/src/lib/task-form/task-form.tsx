@@ -8,11 +8,12 @@ import InputTextStatus, {
 import Input from '../input/input';
 import TextArea from '../text-area/text-area';
 import FilesUploaded, { TypeFile } from '../files-uploaded/files-uploaded';
+import { NewTaskParams } from '@ltpx-frontend-apps/api';
 
 /* eslint-disable-next-line */
 export interface TaskFormProps {
   onClose?: () => void;
-  onSubmit?: (title: string) => void;
+  onSubmit?: (task: NewTaskParams) => void;
 }
 
 export function TaskForm(props: TaskFormProps) {
@@ -25,11 +26,9 @@ export function TaskForm(props: TaskFormProps) {
     },
     validationSchema: Yup.object({
       title: Yup.string().required('Titulo de tarea es obligatorio'),
-      // file: Yup.string().required('Archivo es obligatorio'),
     }),
     onSubmit: (data) => {
-      // console.log(data);
-      onSubmit && onSubmit(data.title);
+      onSubmit && onSubmit(data);
       onClose && onClose();
     },
   });

@@ -4,18 +4,31 @@ import Icon from '../icon/icon';
 import styles from './task-student-card.module.scss';
 import { Dialog } from 'evergreen-ui';
 import TaskFormStudent from '../task-form-student/task-form-student';
+import { useStudent } from '@ltpx-frontend-apps/store';
+import { TaskStudent, TaskStudentResult } from '@ltpx-frontend-apps/api';
 
 /* eslint-disable-next-line */
 export interface TaskStudentCardProps {
   title: string;
   description: string;
+  id: number;
+  children?: ReactElement;
+  studentTask?: TaskStudentResult;
 }
 
 export function TaskStudentCard(props: TaskStudentCardProps) {
-  const { title, description } = props;
-  const [openModal, setOpenModal] = useState(false);
-  const [openPreview, setOpenPreview] = useState(false);
-  const [task, setTask] = useState('');
+  const { title, description, id, studentTask } = props;
+  const [ openModal, setOpenModal] = useState(false);
+  const {_sendTask } = useStudent();
+
+  async function handleSendTask(params: TaskStudent) {
+    const { data, success, error } = await _sendTask(params);
+    if (success) {
+      console.log('data: ', data);
+    } else {
+      console.log('error: ', error);
+    }
+  }
 
   return (
     <>
@@ -28,21 +41,15 @@ export function TaskStudentCard(props: TaskStudentCardProps) {
           </div>
         </div>
         <div className={styles['row-buttons']}>
-          {task === '' ? (
+          {studentTask === null &&
             <Button
               title="Entregar tarea"
               icon="pencil"
               onClick={() => setOpenModal(true)}
             />
-          ) : (
-            <Button
-              title="Preview tarea"
-              icon="eye"
-              color={ColorsButton.secondary}
-              outline={true}
-              onClick={() => setOpenPreview(true)}
-            />
-          )}
+          }
+          {studentTask?.answer && <h4>Esperando revision del docente</h4>}
+          {studentTask?.approved && <h4>Aprobado</h4>}
         </div>
       </div>
       <Dialog
@@ -50,24 +57,15 @@ export function TaskStudentCard(props: TaskStudentCardProps) {
         hasFooter={false}
         title={title}
         onCloseComplete={() => setOpenModal(false)}
-        width={'40vw'}
+        width={'50vw'}
       >
         <TaskFormStudent
+          description={description}
           onClose={() => setOpenModal(false)}
-          onSubmit={(title) => {
-            // onSubmit && onSubmit(data);
-            setTask(title);
+          onSubmit={(data) => {
+            handleSendTask({...data, ...{task_id: id}});
           }}
         />
-      </Dialog>
-      <Dialog
-        isShown={openPreview}
-        hasFooter={false}
-        title={'Tarea: ' + title}
-        onCloseComplete={() => setOpenPreview(false)}
-        width={'40vw'}
-      >
-        <h4>{task}</h4>
       </Dialog>
     </>
   );

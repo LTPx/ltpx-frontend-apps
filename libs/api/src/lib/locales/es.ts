@@ -80,10 +80,10 @@ export const es = {
     review: 'Revision',
   },
   achievements_types: {
-    multiple: 'Aprobar multiples test',
-    single: 'Aprobar un test',
-    task: 'Realizar una tarea',
-    score: 'Obtener un resultado',
+    multiple: 'Debes aprobar los siguientes test',
+    single: 'Debes aprobar el test',
+    task: 'Debes realizar la tarea',
+    score: 'Debes obtener un resultado en los test',
   },
   home: {
     cover: {
@@ -193,7 +193,7 @@ export const es = {
     addQuestion: 'Agregar Pregunta',
     updateQuestion: 'Actualizar pregunta',
     addAchievement: 'Crear un logro',
-    addNewAchievement: 'Agregar nuevo logro',
+    _addAchievement: 'Agregar nuevo logro',
     saveAchievement: 'Guardar logro',
     updateData: 'Actualizar mis datos',
     sendRequest: 'Enviar Solicitud'

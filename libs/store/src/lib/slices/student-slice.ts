@@ -3,6 +3,7 @@ import { StoreState } from '../store';
 import {
   Classroom,
   CourseModel,
+  getStudentAchievements,
   getStudentClasses,
   getStudentCourse,
   getStudentCourses,
@@ -10,9 +11,13 @@ import {
   getStudentQuiz,
   getStudentQuizResult,
   getStudentQuizzes,
+  getStudentTask,
+  getStudentTasks,
   Purchase,
   QuizModel,
   studentEvaluateQuiz,
+  studentSendTask,
+  TaskStudent,
   UserAnswer,
 } from '@ltpx-frontend-apps/api';
 
@@ -36,6 +41,10 @@ export type StudentSlice = {
   _getStudentQuiz: (courseId: number, quizId: number) => Promise<TResponse>;
   _getStudentQuizResult: (quizResultId: number) => Promise<TResponse>;
   _evaluateQuiz: (quizId: number, answers: UserAnswer[]) => Promise<TResponse>;
+  _getStudentAchievements: (courseId: number) => Promise<TResponse>;
+  _getStudentTasks: (courseId: number) => Promise<TResponse>;
+  _getStudentTask: (courseId: number, taskId: number) => Promise<TResponse>;
+  _sendTask: (params: TaskStudent) => Promise<TResponse>;
 };
 
 export const createStudentSlice: StateCreator<StoreState, [], [], StudentSlice> = (
@@ -112,6 +121,38 @@ export const createStudentSlice: StateCreator<StoreState, [], [], StudentSlice> 
     try {
       const quiz = await studentEvaluateQuiz(id, answers);
       return { success: true, data: quiz };
+    } catch (error) {
+      return { success: false, error };
+    }
+  },
+  _getStudentAchievements: async (courseId): Promise<TResponse> => {
+    try {
+      const achievements = await getStudentAchievements(courseId);
+      return { success: true, data: achievements };
+    } catch (error) {
+      return { success: false, error };
+    }
+  },
+  _getStudentTasks: async (courseId): Promise<TResponse> => {
+    try {
+      const tasks = await getStudentTasks(courseId);
+      return { success: true, data: tasks };
+    } catch (error) {
+      return { success: false, error };
+    }
+  },
+  _getStudentTask: async (courseId, taskId): Promise<TResponse> => {
+    try {
+      const task = await getStudentTask(courseId, taskId);
+      return { success: true, data: task };
+    } catch (error) {
+      return { success: false, error };
+    }
+  },
+  _sendTask: async (params): Promise<TResponse> => {
+    try {
+      const task = await studentSendTask(params);
+      return { success: true, data: task };
     } catch (error) {
       return { success: false, error };
     }

@@ -1,13 +1,13 @@
+import styles from './course-achievements.module.scss';
 import {
   AchievementModel,
-  AchievementParamsUi,
+  AchievementParams,
   TypeAchievement,
 } from '@ltpx-frontend-apps/api';
 import {
   AchievementBuilder,
   Button,
   ColorsButton,
-  Dropdown,
   Icon,
   Menu,
   SetupCard,
@@ -16,7 +16,6 @@ import { useCourse } from '@ltpx-frontend-apps/store';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ResponseRequest } from '../../teacher-edit-course/teacher-edit-course';
-import styles from './course-achievements.module.scss';
 
 /* eslint-disable-next-line */
 export interface CourseAchievementsProps {
@@ -25,10 +24,9 @@ export interface CourseAchievementsProps {
 
 export function CourseAchievements(props: CourseAchievementsProps) {
   const { onSubmit } = props;
-  const [achievementEdit, setAchievementEdit] = useState<AchievementModel>();
-  const [showAchievementType, setShowAchievementType] =
-    useState<TypeAchievement | null>();
-  const { addNewAchievement, removeAchievement, updateAchievement, course } =
+  const [achievement, setAchievement] = useState<AchievementModel>();
+  const [selectedType, setSelectedType] = useState<TypeAchievement>();
+  const { _addAchievement, _removeAchievement, _updateAchievement, course } =
     useCourse();
   const { achievements, quizzes } = course;
   const { t } = useTranslation();
@@ -36,41 +34,42 @@ export function CourseAchievements(props: CourseAchievementsProps) {
   const achievementsForms = [
     {
       onClick: () => {
-        setShowAchievementType(TypeAchievement.multiple);
+        setSelectedType(TypeAchievement.multiple);
       },
       text: 'Cuando el alumno apruebe varios tests',
     },
     {
       onClick: () => {
-        setShowAchievementType(TypeAchievement.single);
+        setSelectedType(TypeAchievement.single);
       },
       text: 'Cuando el alumno apruebe un test',
     },
     {
       onClick: () => {
-        setShowAchievementType(TypeAchievement.score);
+        setSelectedType(TypeAchievement.score);
       },
       text: 'Por calificación',
     },
     {
       onClick: () => {
-        setShowAchievementType(TypeAchievement.task);
+        setSelectedType(TypeAchievement.task);
       },
       text: 'Al cumplir una tarea',
     },
   ];
 
-  const handleSaveAchievement = async (achievement: AchievementParamsUi) => {
+  const handleSaveAchievement = async (params: AchievementParams) => {
+    console.log('handleSaveAchievement: ', params);
     try {
-      const { data } = achievement.id
-        ? await updateAchievement({ ...achievement, ...{ id: achievement.id } })
-        : await addNewAchievement(achievement);
+      const { data } = achievement
+        ? await _updateAchievement(params, achievement.id)
+        : await _addAchievement(params);
       onSubmit &&
         onSubmit({
           success: true,
           data: data,
         });
-      setShowAchievementType(null);
+      setSelectedType(undefined);
     } catch (error) {
       onSubmit &&
         onSubmit({
@@ -82,7 +81,7 @@ export function CourseAchievements(props: CourseAchievementsProps) {
 
   const handleRemoveAchievement = async (id: number) => {
     try {
-      const { data } = await removeAchievement(id);
+      const { data } = await _removeAchievement(id);
       onSubmit &&
         onSubmit({
           success: true,
@@ -105,12 +104,11 @@ export function CourseAchievements(props: CourseAchievementsProps) {
     className?: string;
     title: string;
   }) => (
-    <div className={styles['achievement-btn']}>
-    <Menu items={achievementsForms}>
-      <Button title={'Agregar Logro'} />
-    </Menu>
+    <div className={className}>
+      <Menu items={achievementsForms}>
+        <Button color={color} title={title} />
+      </Menu>
     </div>
-
   );
 
   return (
@@ -119,7 +117,7 @@ export function CourseAchievements(props: CourseAchievementsProps) {
         <h2>{t('courseAchievements.title')}</h2>
         <h4 className="muted">{t('courseAchievements.subtitle')}</h4>
       </div>
-      {!showAchievementType && (
+      {!selectedType && (
         <div className={styles['achievements']}>
           {achievements?.map((achievement, index) => (
             <div className={styles['achievement']} key={index}>
@@ -134,8 +132,12 @@ export function CourseAchievements(props: CourseAchievementsProps) {
                 <div
                   className={styles['action']}
                   onClick={() => {
-                    setAchievementEdit(achievement);
-                    setShowAchievementType(achievement.rule);
+                    setAchievement({
+                      ...achievement,
+                      ...{
+                      },
+                    });
+                    setSelectedType(achievement.rule);
                   }}
                 >
                   <Icon icon="pencil" size={15} />
@@ -153,10 +155,10 @@ export function CourseAchievements(props: CourseAchievementsProps) {
           ))}
         </div>
       )}
-      {!showAchievementType && achievements && achievements.length === 0 && (
+      {!selectedType && achievements && achievements.length === 0 && (
         <SetupCard
           onClick={() => {
-            setShowAchievementType(TypeAchievement.multiple);
+            setSelectedType(TypeAchievement.multiple);
           }}
           icon={'trophy'}
           text={t('courseAchievements.text')}
@@ -167,24 +169,30 @@ export function CourseAchievements(props: CourseAchievementsProps) {
           />
         </SetupCard>
       )}
-      {!showAchievementType && achievements && achievements.length > 0 && (
+      {!selectedType && achievements && achievements.length > 0 && (
         <ButtonAddAchievement
           color={ColorsButton.secondary}
           className={styles['add-button']}
-          title={t('buttons.addNewAchievement')}
+          title={t('buttons._addAchievement')}
         />
       )}
-      {showAchievementType && showAchievementType && (
+      {selectedType && selectedType && (
         <AchievementBuilder
           quizzes={quizzes || []}
-          typeAchievement={showAchievementType}
-          achievement={achievementEdit}
+          type={selectedType}
+          achievement={
+            achievement
+              ? {
+                  ...achievement,
+                }
+              : undefined
+          }
           onSubmit={(achievement) => {
             handleSaveAchievement(achievement);
           }}
           onCancel={() => {
-            setShowAchievementType(null);
-            setAchievementEdit(undefined);
+            setSelectedType(undefined);
+            setAchievement(undefined);
           }}
         />
       )}

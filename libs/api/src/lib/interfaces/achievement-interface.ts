@@ -1,4 +1,4 @@
-import { PartialBy } from "./util";
+import { PartialWithRequired, Prettify } from './util';
 
 export enum TypeAchievement {
   multiple = 'multiple',
@@ -13,6 +13,16 @@ export enum EntityAchievement {
   content = 'content',
 }
 
+export interface Condition {
+  id: number;
+  points_to_assign: number;
+  entity: EntityAchievement;
+  entity_id: number;
+  must_reach_value: number;
+  description?: string;
+  _destroy?: boolean; //rails needs destroy to remove nested attributes
+}
+
 export interface AchievementModel {
   id: number;
   user_id: number;
@@ -21,29 +31,45 @@ export interface AchievementModel {
   rule: TypeAchievement;
   image: string;
   price: number;
-  settings: SettingAchievement[];
+  conditions_attributes: Condition[];
+  points_needed: number;
   created_at: string;
   updated_at: string;
 }
 
-export type NewAchievementParams = Omit<
+type AchievementBasicParams = Omit<
   AchievementModel,
-  'user_id' | 'created_at' | 'updated_at' | 'id' | 'course_id'
+  | 'id'
+  | 'user_id'
+  | 'course_id'
+  | 'points_needed'
+  | 'conditions_attributes'
+  | 'created_at'
+  | 'updated_at'
+  | 'settings'
 >;
 
-export type EditAchievementParams = Omit<
-  AchievementModel,
-  'user_id' | 'created_at' | 'updated_at' | 'course_id'
+type NewConditions = {
+  conditions_attributes: Prettify<
+    PartialWithRequired<
+      Condition,
+      'entity' | 'entity_id' | 'must_reach_value' | 'points_to_assign'
+    >[]
+  >;
+};
+
+export type AchievementParams = Prettify<
+  AchievementBasicParams & NewConditions
 >;
 
-export type AchievementParamsUi = PartialBy<
-EditAchievementParams,
-  'id'
->;
-
-export interface SettingAchievement {
-  entity: EntityAchievement;
+export interface ConditionCompleted {
+  id: number;
+  points: number;
+  condition_id: number;
   entity_id: number;
-  score: number;
-  text: string;
+}
+
+export interface AchievementsStudentResponse {
+  course_achievements: AchievementModel[];
+  conditions_completed: ConditionCompleted[];
 }

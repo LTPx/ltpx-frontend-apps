@@ -18,8 +18,18 @@
     .row-info {
       display: flex;
       flex-direction: column;
+
       .total-questions {
         color: $text-gray-color;
+      }
+
+      .approved {
+        color: $green-color;
+      }
+
+      .no-approved {
+        color: $gray-color;
+        padding: 0.25rem;
       }
     }
   }

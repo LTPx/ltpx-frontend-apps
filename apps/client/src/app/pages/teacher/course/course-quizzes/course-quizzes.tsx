@@ -21,15 +21,15 @@ export function CourseQuizzes(props: CourseQuizzesProps) {
   const { onSubmit } = props;
   const [ quizEdit, setQuizEdit ] = useState<QuizModel>();
   const [ showForm, setShowForm ] = useState(false);
-  const { course, removeQuiz, addNewQuiz, updateQuiz } = useCourse();
+  const { course, _removeQuiz, _addQuiz, _updateQuiz } = useCourse();
   const { quizzes } = course;
   const { t } = useTranslation();
 
   const handleSaveQuiz = async (quiz: QuizParamsUi) => {
     try {
       const { data } = quiz.id
-        ? await updateQuiz({ ...quiz, ...{ id: quiz.id } })
-        : await addNewQuiz(quiz);
+        ? await _updateQuiz({ ...quiz, ...{ id: quiz.id } })
+        : await _addQuiz(quiz);
       onSubmit &&
         onSubmit({
           success: true,
@@ -48,7 +48,7 @@ export function CourseQuizzes(props: CourseQuizzesProps) {
 
   const handleRemoveQuiz = async (id: number) => {
     try {
-      const { data } =  await removeQuiz(id)
+      const { data } =  await _removeQuiz(id)
       onSubmit &&
         onSubmit({
           success: true,

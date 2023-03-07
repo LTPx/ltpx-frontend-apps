@@ -2,66 +2,60 @@ import styles from './task-form-student.module.scss';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import Button, { ColorsButton, TypeButton } from '../button/button';
-import InputTextStatus, {
-  StatusInputText,
-} from '../input-text-status/input-text-status';
 import TextArea from '../text-area/text-area';
 import FilesUploaded, { TypeFile } from '../files-uploaded/files-uploaded';
-import { useState } from 'react';
-
 /* eslint-disable-next-line */
 export interface TaskFormStudentProps {
+  description?: string;
   onClose?: () => void;
-  onSubmit?: (title: string) => void;
+  onSubmit?: (task: { answer: string, file: any}) => void;
 }
 
 export function TaskFormStudent(props: TaskFormStudentProps) {
-  const { onClose, onSubmit } = props;
-  const [task, setTask] = useState('');
+  const { description, onClose, onSubmit } = props;
 
   const formik = useFormik({
     initialValues: {
-      description: '',
-      file_task: null,
+      answer: '',
+      file: null,
     },
     validationSchema: Yup.object({
-      file_task: Yup.string().required('Archivo de Tarea es obligatorio'),
+      // file: Yup.string().required('Archivo de Tarea es obligatorio'),
     }),
     onSubmit: (data) => {
-      onSubmit && onSubmit(task);
+      onSubmit && onSubmit(data);
       onClose && onClose();
     },
   });
   return (
     <form className={styles['form']}>
+      <div className={styles['description-container']}>
+        <label>En que consiste la tarea</label>
+        <h4 className={styles['description']}>{description}</h4>
+      </div>
       <TextArea
-        label={'Descripción'}
+        label={'Agregar texto'}
         type="text"
-        name="description"
-        rows={4}
-        placeholder="Agregar descripción sobre la tarea"
+        name="answer"
+        rows={8}
+        placeholder="Responde a la tarea"
         onChange={(e: any) => {
           formik.handleChange(e);
         }}
-        value={formik.values.description}
+        value={formik.values.answer}
         onBlur={formik.handleBlur}
       />
       <div className={styles['field-upload']}>
-        <label>{'Subir Tarea'}</label>
+        <label>{'Subir archivo(s)'}</label>
         <FilesUploaded
+          multiple={true}
           className={styles['uploader']}
           type={TypeFile.all}
           onChange={(value) => {
-            formik.setFieldValue('file_task', value);
-            setTask(value.name);
+            formik.setFieldValue('file', value);
           }}
+          errorMessage={formik.errors.file}
         />
-        {formik.touched.file_task && formik.errors.file_task ? (
-          <InputTextStatus
-            status={StatusInputText.error}
-            text={formik.errors.file_task}
-          />
-        ) : null}
       </div>
       <div className={styles['btn']}>
         <Button
@@ -75,7 +69,7 @@ export function TaskFormStudent(props: TaskFormStudentProps) {
         <Button
           className={styles['btn-submit']}
           color={ColorsButton.primary}
-          title={'Guardar'}
+          title={'Enviar al profesor'}
           type={TypeButton.submit}
           onClick={formik.handleSubmit}
         />

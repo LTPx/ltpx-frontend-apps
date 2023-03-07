@@ -72,7 +72,7 @@ export function TeacherViewStudent(props: TeacherViewStudentProps) {
           <div className={styles['quizzes-content']}>
             {quizzes?.map((quiz, index) => (
               <div key={index}>
-                <QuizStudentCard title={quiz.name} totalQuestions={quiz.score}>
+                <QuizStudentCard title={quiz.name} text={`Resultado: ${quiz.score}`}>
                   <div className={styles['btn-test']}>
                     <Button
                       title="Calificar test"

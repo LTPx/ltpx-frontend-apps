@@ -1,3 +1,4 @@
+import styles from './student-course-quizzes.module.scss';
 import { QuizStudent } from '@ltpx-frontend-apps/api';
 import {
   Button,
@@ -17,7 +18,7 @@ export function StudentCourseQuizzes(props: StudentCourseQuizzesProps) {
   const [ quizzes, setQuizzes ] = useState<QuizStudent[]>([]);
   const { _getStudentQuizzes } = useStudent();
 
-  const fetchCourse = useCallback(async () => {
+  const fetchQuizzes = useCallback(async () => {
     const { success, data, error } = await _getStudentQuizzes(courseId);
     if (success) {
       console.log('data: ', data);
@@ -28,7 +29,7 @@ export function StudentCourseQuizzes(props: StudentCourseQuizzesProps) {
   }, []);
 
   useEffect(() => {
-    fetchCourse();
+    fetchQuizzes();
   }, []);
 
   const handleStartTest = () => {
@@ -36,12 +37,13 @@ export function StudentCourseQuizzes(props: StudentCourseQuizzesProps) {
   };
 
   return (
-    <div>
+    <div className={styles['container']}>
     {quizzes?.map((quiz, index) => (
       <div key={index}>
         <QuizStudentCard
           title={quiz.name}
-          totalQuestions={quiz.total_questions}
+          text={`Preguntas: ${quiz.total_questions}`}
+          approved={quiz.last_quiz_result.score >= 80}
         >
           {quiz.quizzes_results_ids.length === 0 ? (
             <Button
@@ -53,17 +55,19 @@ export function StudentCourseQuizzes(props: StudentCourseQuizzesProps) {
           <>
             <Button
               color={ColorsButton.secondary}
-              title="Revisar Test"
+              title="Mis respuestas"
               outline={true}
               icon="eye"
               link={`/student/course/${courseId}/quiz-review/${quiz.last_quiz_result.id}`}
             />
-            <Button
-              color={ColorsButton.primary}
-              title="Volver a Intentar"
-              icon="undo"
-              link={`/student/course/${courseId}/quiz/${quiz.id}`}
-            />
+            { quiz.last_quiz_result.score < 80 &&
+              <Button
+                color={ColorsButton.primary}
+                title="Volver a Intentar"
+                icon="undo"
+                link={`/student/course/${courseId}/quiz/${quiz.id}`}
+              />
+            }
           </>
         )}
         </QuizStudentCard>

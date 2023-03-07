@@ -30,11 +30,13 @@ export function StudentCourseTasks(props: StudentCourseTasksProps) {
 
   return (
     <div className={styles['tasks']}>
-      {tasks.map((task, index) => (
+      {tasks.length > 0 && tasks.map((task, index) => (
         <TaskStudentCard
           key={index}
           title={task.title}
           description={task.description}
+          studentTask={task.student_task}
+          id={task.id}
         />
       ))}
     </div>

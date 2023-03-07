@@ -2,34 +2,28 @@ import styles from './task-form-student.module.scss';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import Button, { ColorsButton, TypeButton } from '../button/button';
-import InputTextStatus, {
-  StatusInputText,
-} from '../input-text-status/input-text-status';
 import TextArea from '../text-area/text-area';
 import FilesUploaded, { TypeFile } from '../files-uploaded/files-uploaded';
-import { useState } from 'react';
-
 /* eslint-disable-next-line */
 export interface TaskFormStudentProps {
   description?: string;
   onClose?: () => void;
-  onSubmit?: (title: string) => void;
+  onSubmit?: (task: { answer: string, file: any}) => void;
 }
 
 export function TaskFormStudent(props: TaskFormStudentProps) {
   const { description, onClose, onSubmit } = props;
-  const [task, setTask] = useState('');
 
   const formik = useFormik({
     initialValues: {
-      description: '',
+      answer: '',
       file: null,
     },
     validationSchema: Yup.object({
-      file: Yup.string().required('Archivo de Tarea es obligatorio'),
+      // file: Yup.string().required('Archivo de Tarea es obligatorio'),
     }),
     onSubmit: (data) => {
-      onSubmit && onSubmit(task);
+      onSubmit && onSubmit(data);
       onClose && onClose();
     },
   });
@@ -42,31 +36,26 @@ export function TaskFormStudent(props: TaskFormStudentProps) {
       <TextArea
         label={'Agregar texto'}
         type="text"
-        name="description"
+        name="answer"
         rows={8}
         placeholder="Responde a la tarea"
         onChange={(e: any) => {
           formik.handleChange(e);
         }}
-        value={formik.values.description}
+        value={formik.values.answer}
         onBlur={formik.handleBlur}
       />
       <div className={styles['field-upload']}>
-        <label>{'Subir algun archivo'}</label>
+        <label>{'Subir archivo(s)'}</label>
         <FilesUploaded
+          multiple={true}
           className={styles['uploader']}
           type={TypeFile.all}
           onChange={(value) => {
             formik.setFieldValue('file', value);
-            setTask(value.name);
           }}
+          errorMessage={formik.errors.file}
         />
-        {formik.touched.file && formik.errors.file ? (
-          <InputTextStatus
-            status={StatusInputText.error}
-            text={formik.errors.file}
-          />
-        ) : null}
       </div>
       <div className={styles['btn']}>
         <Button

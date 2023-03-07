@@ -16,6 +16,8 @@ import {
   Purchase,
   QuizModel,
   studentEvaluateQuiz,
+  studentSendTask,
+  TaskStudent,
   UserAnswer,
 } from '@ltpx-frontend-apps/api';
 
@@ -42,6 +44,7 @@ export type StudentSlice = {
   _getStudentAchievements: (courseId: number) => Promise<TResponse>;
   _getStudentTasks: (courseId: number) => Promise<TResponse>;
   _getStudentTask: (courseId: number, taskId: number) => Promise<TResponse>;
+  _sendTask: (params: TaskStudent) => Promise<TResponse>;
 };
 
 export const createStudentSlice: StateCreator<StoreState, [], [], StudentSlice> = (
@@ -141,6 +144,14 @@ export const createStudentSlice: StateCreator<StoreState, [], [], StudentSlice> 
   _getStudentTask: async (courseId, taskId): Promise<TResponse> => {
     try {
       const task = await getStudentTask(courseId, taskId);
+      return { success: true, data: task };
+    } catch (error) {
+      return { success: false, error };
+    }
+  },
+  _sendTask: async (params): Promise<TResponse> => {
+    try {
+      const task = await studentSendTask(params);
       return { success: true, data: task };
     } catch (error) {
       return { success: false, error };

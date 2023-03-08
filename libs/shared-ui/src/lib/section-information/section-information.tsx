@@ -15,8 +15,8 @@ export function SectionInformation(props: SectionInformationProps) {
   return (
     <div className={`${styles['container']} ${className}`}>
       <div className={styles['content']}>
-        <h2 className={styles['title']}>{title}</h2>
-        <h4 className={styles['description']}>{description}</h4>
+        <h1 className={styles['title']}>{title}</h1>
+        <h3 className={styles['description']}>{description}</h3>
         {children}
       </div>
       <img src={imgUrl}/>

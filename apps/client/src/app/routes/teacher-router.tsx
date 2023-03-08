@@ -31,7 +31,6 @@ import {
   TeacherLayout,
   TeacherMeetingsAgenda,
   TeacherReviewQuiz,
-  TeacherViewStudent,
 } from '../pages/teacher';
 import VideoMeetingLive from '../video/video-meeting-live/video-meeting-live';
 import { ProtectedRoutesTeacher } from './guards/protected-routes-teacher/protected-routes-teacher';
@@ -79,10 +78,6 @@ export const TeacherRoutes = () => {
               path=":courseId/students"
               element={<TeacherCourseStudents />}
             >
-              <Route
-                  path=":studentId"
-                  element={<TeacherViewStudent />}
-                />
             </Route>
             <Route path="all" element={<TeacherCourses />} />
             <Route path="edit/:courseId" element={<TeacherEditCourse />} />

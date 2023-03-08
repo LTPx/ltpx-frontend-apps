@@ -6,6 +6,7 @@ import {
   ContentDescription,
   CourseCard,
   NewsCard,
+  SectionInformation,
 } from '@ltpx-frontend-apps/shared-ui';
 import { useSite, useUser } from '@ltpx-frontend-apps/store';
 import { useCallback, useEffect, useState } from 'react';
@@ -14,8 +15,8 @@ import { NavLink } from 'react-router-dom';
 import styles from './home.module.scss';
 
 export function Home() {
-  const [ courses, setCourses] = useState<CourseModel[]>([])
-  const {_getPopularCourses } = useSite();
+  const [courses, setCourses] = useState<CourseModel[]>([]);
+  const { _getPopularCourses } = useSite();
   const { isAuthenticated } = useUser();
   const { t } = useTranslation();
   const categories = [
@@ -104,8 +105,8 @@ export function Home() {
   ];
 
   const fetchPopularCourse = useCallback(async () => {
-    const { success , data, error} = await _getPopularCourses();
-    if ( success ) {
+    const { success, data, error } = await _getPopularCourses();
+    if (success) {
       setCourses(data);
     } else {
       console.log('error: ', error);
@@ -122,7 +123,7 @@ export function Home() {
         <div className={styles['cover']}>
           <div className={styles['info']}>
             <div className={styles['text']}>
-              <h1>{t('home.cover.title')}</h1>
+              <h1 className={styles['title']}>{t('home.cover.title')}</h1>
               <h4>{t('home.cover.subtitle')}</h4>
             </div>
             <div className={styles['actions']}>
@@ -146,17 +147,19 @@ export function Home() {
             alt="cover"
           />
         </div>
-         <img
-            className={styles['image-cover']}
-            src="../../../../assets/images/bg_geometrik.svg"
-            alt="cover"
-          />
+        <img
+          className={styles['image-cover']}
+          src="../../../../assets/images/bg_geometrik.svg"
+          alt="cover"
+        />
       </div>
       <ContentDescription />
       <div className={styles['popular-courses-container']}>
         <div className={styles['text']}>
-          <h2>{t('home.popularCourse.title')}</h2>
-          <h4>{t('home.popularCourse.subtitle')}</h4>
+          <h2 className={styles['title']}>{t('home.popularCourse.title')}</h2>
+          <h4 className={styles['subtitle']}>
+            {t('home.popularCourse.subtitle')}
+          </h4>
         </div>
         <div className={styles['popular-courses']}>
           {courses.map((course, index) => (
@@ -180,8 +183,8 @@ export function Home() {
       </div>
       <div className={styles['categories-container']}>
         <div className={styles['text-categories']}>
-          <h2>{t('home.categories.title')}</h2>
-          <h4> {t('home.categories.subtitle')}</h4>
+          <h2 className={styles['title']}>{t('home.categories.title')}</h2>
+          <h4 className={styles['subtitle']}> {t('home.categories.subtitle')}</h4>
         </div>
         <div className={styles['category-content']}>
           {categories.map((category, index) => (
@@ -198,8 +201,8 @@ export function Home() {
       <div className={styles['news-container']}>
         <div className={styles['title-news']}>
           <div className={styles['text-news']}>
-            <h1>{t('home.news.title')}</h1>
-            <h4>{t('home.news.subtitle')}</h4>
+            <h1 className={styles['title']}>{t('home.news.title')}</h1>
+            <h4 className={styles['subtitle']}>{t('home.news.subtitle')}</h4>
           </div>
           <div className={styles['link']}>
             <NavLink to="/blog"> {t('links.toBlog')} </NavLink>
@@ -220,6 +223,18 @@ export function Home() {
           ))}
         </div>
       </div>
+      <SectionInformation
+        className={styles['section-content']}
+        title={'Postula para Profesor'}
+        imgUrl={'../../../../assets/images/bg_shape.svg'}
+        description={
+          '¡Únete a nosotros y empieza a generar ingresos sin problemas!'
+        }
+      >
+        <div className={styles['btn']}>
+          <Button title={'Registrarme'} link={'/register-teacher'} />
+        </div>
+      </SectionInformation>
     </div>
   );
 }

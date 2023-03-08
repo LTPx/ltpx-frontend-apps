@@ -144,10 +144,11 @@ export function StudentQuiz() {
                           const text = e.target.value;
                           formik.setFieldValue(`answers[${index}].answers`, [
                             {
-                              answer_id: question.answers[0].id,
-                              question_id: question.answers[0].question_id,
-                              text,
+                              // answer_id: question.answers[0].id,
+                              // question_id: question.answers[0].question_id,
+                              // text,
                             },
+                            console.log('aqui' + question.answers[0])
                           ]);
                         }}
                         onBlur={formik.handleBlur}

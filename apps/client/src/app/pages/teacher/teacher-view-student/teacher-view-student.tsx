@@ -15,33 +15,34 @@ import { Dialog } from 'evergreen-ui';
 import { useParams } from 'react-router-dom';
 /* eslint-disable-next-line */
 export interface TeacherViewStudentProps {
-  courseId?: number;
+  studentId: number;
 }
 export function TeacherViewStudent(props: TeacherViewStudentProps) {
+  const {studentId} = props;
   const [quizzes, setQuizzes] = useState<QuizResult[]>([]);
   const { _getStudentQuizzesByCourse } = useCourseStudents();
   const [openModal, setOpenModal] = useState(false);
-  const { courseId, studentId } = useParams();
+  const { courseId } = useParams();
   const [selectedTab, setSelectedTab] = useState(0);
 
-  const fetchCourse = useCallback(async () => {
+  const fetchQuizzes = useCallback(async (id: number) => {
     const course_id = parseInt(courseId || '');
-    const student_id = parseInt(studentId || '');
     const { success, data, error } = await _getStudentQuizzesByCourse(
       course_id,
-      student_id
+      id
     );
     if (success) {
-      console.log('data: ', data);
+      console.log('data y: ', data);
       setQuizzes(data);
     } else {
       console.log('error: ', error);
     }
   }, []);
-
+ 
   useEffect(() => {
-    fetchCourse();
-  }, []);
+    console.log(studentId)
+    fetchQuizzes(studentId);
+  }, [studentId]);
 
   const tabs = [
     {

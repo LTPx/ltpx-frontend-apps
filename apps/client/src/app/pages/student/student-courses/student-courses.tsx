@@ -29,6 +29,7 @@ export function StudentCourses(props: StudentCoursesProps) {
         <div className={styles['content']}>
           {enrolledCourses.map((course, index) => (
             <UserCourseCard
+              key={index}
               image={course.cover_url}
               startDate={course.created_at}
               title={course.title}

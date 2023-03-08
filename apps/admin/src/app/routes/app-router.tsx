@@ -9,6 +9,8 @@ import Login from '../pages/login/login';
 import NewUserPage from '../pages/new-user-page/new-user-page';
 import SettingsAppPage from '../pages/settings-app-page/settings-app-page';
 import TeachersPage from '../pages/teachers-page/teachers-page';
+import PaymentsPage from '../pages/payments-page/payments-page';
+import PaymentsDetailsPage from '../pages/payments-details-page/payments-details-page'; 
 import UsersPage from '../pages/users-page/users-page';
 
 export const AppRouter = () => {
@@ -20,9 +22,11 @@ export const AppRouter = () => {
         <Route path="courses" element={<CoursesPages />} />
         <Route path="courses/:id" element={<CourseDetailsPage />} />
         <Route path="application/:id" element={<ApplicationDetailsPage />} />
+        <Route path="payments-details" element={<PaymentsDetailsPage />} />
         <Route path="settings" element={<SettingsAppPage />} />
         <Route path="dashboard" element={<DashboardPage />} />
         <Route path="learning-path" element={<LearningPathPage />} />
+        <Route path="payments" element={<PaymentsPage />} />
       </Route>
       <Route path="login" element={<Login />} />
       <Route path="new-user" element={<NewUserPage />} />

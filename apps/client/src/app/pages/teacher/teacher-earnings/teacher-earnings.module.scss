@@ -2,10 +2,13 @@
 
 .container {
   width: 60vw;
+
   .button-empty-state {
     padding-top: 1rem;
   }
-  .title {
+  .title-content {
+    display: flex;
+    justify-content: space-between;
     padding: $size-lg-1 0;
   }
 

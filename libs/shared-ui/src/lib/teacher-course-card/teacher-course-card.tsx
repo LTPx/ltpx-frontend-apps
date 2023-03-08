@@ -17,6 +17,7 @@ export interface TeacherCourseCardProps {
   percentageLearner: number;
   description: string;
   url: string;
+  urlStudents: string;
   price?: string;
   dropdownActions?: MenuItem[];
 }
@@ -33,6 +34,7 @@ export function TeacherCourseCard(props: TeacherCourseCardProps) {
     url,
     price,
     dropdownActions,
+    urlStudents,
   } = props;
 
   return (
@@ -57,7 +59,17 @@ export function TeacherCourseCard(props: TeacherCourseCardProps) {
               color={ColorsTag.gray}
             />
             <h5>
-              <Icon icon={'user'} size={13}></Icon> {learners} Estudiantes
+              {learners > 0 ? (
+                <NavLink className={styles['students-url']} to={urlStudents}>
+                  <Icon icon={'persons'} size={14}></Icon> {learners}{' '}
+                  <h5>Estudiantes</h5>
+                </NavLink>
+              ) : (
+                <div className={styles['students-icon']}>
+                  <Icon icon={'persons'} size={14}></Icon> {learners}{' '}
+                  <h5>Estudiantes</h5>
+                </div>
+              )}
             </h5>
           </div>
           {dropdownActions && (
@@ -74,7 +86,7 @@ export function TeacherCourseCard(props: TeacherCourseCardProps) {
           <NavLink to={url}>
             <h3 className={styles['title']}>{title}</h3>
           </NavLink>
-          <p>{description ? `${description.substring(0, 250)}...` : ''}</p>
+          <p>{description ? `${description.substring(0, 200)}...` : ''}</p>
           <div className={`${styles['describe']} ${styles['end']}`}>
             <h4 className={styles['accent']}>${price}</h4>
           </div>

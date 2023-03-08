@@ -17,6 +17,15 @@
       background-color: $gray-color-100;
     }
   }
+  .menu-item-disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+    display: flex;
+    align-items: center;
+    gap: $size-sm-3;
+    color: $text-gray-color;
+    padding: 0.75rem 1rem;
+  }
 
   a {
     display: flex;

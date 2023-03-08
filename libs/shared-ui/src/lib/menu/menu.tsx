@@ -9,6 +9,7 @@ export interface MenuItem {
   text: string;
   icon?: string;
   url?: string;
+  disabled?: boolean;
   onClick?: () => void;
 }
 
@@ -29,12 +30,24 @@ export function Menu(props: MenuProps) {
             {items.map((item, key) => (
               <div className={styles['menu-item-wrapper']} key={key}>
                 {item.url ? (
-                  <NavLink to={item.url} className={styles['menu-item']}>
-                    {item.icon && <Icon icon={item.icon} size={18} />}
-                    <h4>{item.text}</h4>
-                  </NavLink>
+                  <div>
+                    {item.disabled === true ? (
+                      <div
+                        className={styles['menu-item-disabled']}
+                      >
+                        {item.icon && <Icon icon={item.icon} size={18} />}
+                        <h4>{item.text}</h4>
+                      </div>
+                    ) : (
+                      <NavLink to={item.url} className={styles['menu-item']}>
+                        {item.icon && <Icon icon={item.icon} size={18} />}
+                        <h4>{item.text}</h4>
+                      </NavLink>
+                    )}
+                  </div>
                 ) : (
-                  <div className={styles['menu-item']}
+                  <div
+                    className={styles['menu-item']}
                     onClick={() => {
                       item.onClick && item.onClick();
                     }}

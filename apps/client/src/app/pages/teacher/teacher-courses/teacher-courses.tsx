@@ -1,7 +1,4 @@
-import {
-  TeacherCourse,
-  CourseStatus,
-} from '@ltpx-frontend-apps/api';
+import { TeacherCourse, CourseStatus } from '@ltpx-frontend-apps/api';
 import {
   Button,
   ColorsButton,
@@ -64,6 +61,7 @@ export function TeacherCourses(props: TeacherCoursesProps) {
           category={course.category}
           percentageRate={0}
           percentageLearner={0}
+          urlStudents={`/teacher/courses/${course.course_session_id}/students`}
           url={`/teacher/courses/edit/${course.id}`}
           price={course.price}
           dropdownActions={[
@@ -79,8 +77,9 @@ export function TeacherCourses(props: TeacherCoursesProps) {
             },
             {
               text: 'Ver Estudiantes',
-              icon: 'user-group',
+              icon: 'persons',
               url: `/teacher/courses/${course.course_session_id}/students`,
+              disabled: course.enrollments_count === 0,
             },
           ]}
         />
@@ -117,9 +116,7 @@ export function TeacherCourses(props: TeacherCoursesProps) {
 
   return (
     <div className={`${styles['container']}`}>
-      {loadingTeacherApi && (
-        <Loader />
-      )}
+      {loadingTeacherApi && <Loader />}
       {courses.length === 0 && loadingTeacherApi === false && (
         <EmptyState
           img={'../../../../assets/images/empty-states/no-courses.svg'}

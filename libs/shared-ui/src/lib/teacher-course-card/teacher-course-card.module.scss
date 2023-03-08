@@ -8,6 +8,18 @@
   border-radius: 8px;
   gap: 1rem;
 
+  .students-icon {
+    display: flex;
+    gap: 0.35rem;
+    align-items: center;
+  }
+  .students-url {
+    color: $green-color;
+    align-items: center;
+    display: flex;
+    gap: 0.35rem;
+  }
+
   .course-img {
     width: 12.5rem;
     height: 10rem;

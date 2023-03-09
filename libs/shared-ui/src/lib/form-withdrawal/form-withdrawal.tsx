@@ -1,5 +1,5 @@
 import { useFormik } from 'formik';
-import Button, { ColorsButton } from '../button/button';
+import Button, { ColorsButton, TypeButton } from '../button/button';
 import Input from '../input/input';
 import Select from '../select/select';
 import TextArea from '../text-area/text-area';
@@ -8,23 +8,25 @@ import * as Yup from 'yup';
 import InputTextStatus, {
   StatusInputText,
 } from '../input-text-status/input-text-status';
+import { WithdrawalParams } from '@ltpx-frontend-apps/api';
 
 /* eslint-disable-next-line */
 export interface FormWithdrawalProps {
   onClose?: () => void;
+  onSubmit: (data: WithdrawalParams) => void;
 }
 
 export function FormWithdrawal(props: FormWithdrawalProps) {
-  const { onClose } = props;
+  const { onClose, onSubmit } = props;
   const formik = useFormik({
     initialValues: {
-      name_bank: '',
-      withdrawal_amount: 0,
-      comment: '',
+      bank_account_number: '',
+      amount: 0,
+      note: '',
     },
     validationSchema: Yup.object({
-      name_bank: Yup.string().required('Se debe seleccionar el banco'),
-      withdrawal_amount: Yup
+      bank_account_number: Yup.string().required('Se debe seleccionar el banco'),
+      amount: Yup
       .number()
       .positive()
       .integer()
@@ -35,13 +37,14 @@ export function FormWithdrawal(props: FormWithdrawalProps) {
     onSubmit: (data) => {
       console.log(data);
       onClose && onClose();
+      onSubmit(data);
     },
   });
 
   const sortByOptions = [
-    { value: 'pichincha', text: 'Pichincha' },
-    { value: 'loja', text: 'Loja' },
-    { value: 'guayaquil', text: 'Guayaquil' },
+    { value: '11029293', text: 'Pichincha' },
+    { value: '11029293', text: 'Loja' },
+    { value: '11029293', text: 'Guayaquil' },
   ];
 
   return (
@@ -51,32 +54,32 @@ export function FormWithdrawal(props: FormWithdrawalProps) {
           label="Seleccionar banco"
           options={sortByOptions}
           onChange={(e) => {
-            formik.setFieldValue('name_bank', e.value);
+            formik.setFieldValue('bank_account_number', e.value);
           }}
         />
-        {formik.touched.name_bank && formik.errors.name_bank ? (
+        {formik.touched.bank_account_number && formik.errors.bank_account_number ? (
           <InputTextStatus
             status={StatusInputText.error}
-            text={formik.errors.name_bank}
+            text={formik.errors.bank_account_number}
           />
         ) : null}
         <Input
           label="Monto a retirar"
           type="number"
-          name="withdrawal_amount"
-          value={formik.values.withdrawal_amount}
+          name="amount"
+          value={formik.values.amount}
           onBlur={formik.handleBlur}
           onChange={(e: any) => {
             formik.handleChange(e);
           }}
-          errorMessage={formik.errors.withdrawal_amount}
+          errorMessage={formik.errors.amount}
         />
         <TextArea
           placeholder="Agrega comentario"
-          label="Comentario (Opcional)"
-          value={formik.values.comment}
+          label="Nota (Opcional)"
+          value={formik.values.note}
           onChange={formik.handleChange}
-          name="comment"
+          name="note"
           rows={3}
         />
       </div>
@@ -92,6 +95,7 @@ export function FormWithdrawal(props: FormWithdrawalProps) {
           title={'Solicitar Retiro'}
           color={ColorsButton.primary}
           onClick={formik.handleSubmit}
+          type={TypeButton.submit}
         />
       </div>
     </form>

@@ -24,6 +24,7 @@ export const useTeacher = () => {
     _getCourses,
     _getMeetingRoomId,
     _validateMeetingRoomId,
+    _makeWithdrawal,
   } = useAppStore();
 
   return {
@@ -49,5 +50,6 @@ export const useTeacher = () => {
     _getCourses,
     _getMeetingRoomId,
     _validateMeetingRoomId,
+    _makeWithdrawal,
   }
 }

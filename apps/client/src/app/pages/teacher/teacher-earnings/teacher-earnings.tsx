@@ -1,3 +1,4 @@
+import { WithdrawalParams } from '@ltpx-frontend-apps/api';
 import {
   BalanceCard,
   Button,
@@ -14,7 +15,7 @@ import { useCallback, useEffect, useState } from 'react';
 import styles from './teacher-earnings.module.scss';
 
 export function TeacherEarnings() {
-  const { _getWallet, wallet } = useTeacher();
+  const { _getWallet, wallet, _makeWithdrawal } = useTeacher();
   const [openModal, setOpenModal] = useState(false);
   const fetchWallet = useCallback(async () => {
     const { success, data, error } = await _getWallet();
@@ -28,6 +29,15 @@ export function TeacherEarnings() {
   useEffect(() => {
     fetchWallet();
   }, []);
+
+  async function handleWithdrawal(params: WithdrawalParams) {
+    const { success, data, error } = await _makeWithdrawal(params);
+    if(success) {
+      console.log('data: ', data);
+    } else {
+      console.log('error: ', error);
+    }
+  }
 
   return (
     <div className={styles['container']}>
@@ -54,11 +64,11 @@ export function TeacherEarnings() {
               text="Total por ventas"
             />
             <BalanceCard
-              balance={wallet.balance_available_withdraw}
+              balance={wallet.balance_available_withdrawal}
               text="Saldo disponible"
             />
             <BalanceCard
-              balance={wallet.balance_pending_withdraw}
+              balance={wallet.balance_pending_withdrawal}
               text="Pago pendiente"
             />
           </div>
@@ -97,7 +107,10 @@ export function TeacherEarnings() {
         onCloseComplete={() => setOpenModal(false)}
         width={'40vw'}
       >
-        <FormWithdrawal onClose={() => setOpenModal(false)} />
+        <FormWithdrawal
+          onClose={() => setOpenModal(false)}
+          onSubmit={(params)=> handleWithdrawal(params)}
+        />
       </Dialog>
     </div>
   );

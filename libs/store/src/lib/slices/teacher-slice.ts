@@ -29,6 +29,8 @@ import {
   getTeacherCourses,
   getMeetingRoomId,
   validateMeetingRoomId,
+  WithdrawalParams,
+  makeWithdrawal,
 } from '@ltpx-frontend-apps/api';
 import { StateCreator } from 'zustand';
 import { StoreState } from '../store';
@@ -94,6 +96,7 @@ export type TeacherSlice = {
   _getCourses: () => Promise<TResponse>;
   _getMeetingRoomId: (id: number) => Promise<TResponse>;
   _validateMeetingRoomId: (id: number, roomId: string) => Promise<TResponse>;
+  _makeWithdrawal: (params: WithdrawalParams) => Promise<TResponse>;
 };
 
 export const createTeacherSlice: StateCreator<
@@ -255,6 +258,14 @@ export const createTeacherSlice: StateCreator<
       return { success: false, data: error };
     }
   },
+  _makeWithdrawal: async (params) => {
+    try {
+      const withdrawal = await makeWithdrawal(params);
+      return { success: true, data: withdrawal };
+    } catch (error) {
+      return { success: false, error: error };
+    }
+  }
 });
 
 const callApi = async (promiseFn: any, set: any, params?: any):Promise<TResponse> => {

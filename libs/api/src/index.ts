@@ -17,6 +17,7 @@ export * from './lib/interfaces/user-course-payment-interface';
 export * from './lib/interfaces/wallet-interface';
 export * from './lib/interfaces/session-interface';
 export * from './lib/interfaces/task-interface';
+export * from './lib/interfaces/withdrawals-interfaces';
 
 //fake api
 export * from '../src/lib/fake/courses';
@@ -36,6 +37,7 @@ export * from './lib/api/teacher/teacher-sessions-api';
 export * from './lib/api/teacher/teacher-meeting-api';
 export * from './lib/api/teacher/teacher-students-api';
 export * from './lib/api/teacher/teacher-tasks-api';
+export * from './lib/api/teacher/withdrawals-api';
 
 export * from './lib/api/admin/applications-api';
 export * from './lib/api/admin/users-api';

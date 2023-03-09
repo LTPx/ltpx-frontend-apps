@@ -3,16 +3,19 @@ import {
   Button,
   ColorsButton,
   EmptyState,
+  FormWithdrawal,
   TransactionRow,
   TransactionStatus,
   TransactionType,
 } from '@ltpx-frontend-apps/shared-ui';
 import { useTeacher } from '@ltpx-frontend-apps/store';
-import { useCallback, useEffect } from 'react';
+import { Dialog } from 'evergreen-ui';
+import { useCallback, useEffect, useState } from 'react';
 import styles from './teacher-earnings.module.scss';
 
 export function TeacherEarnings() {
   const { _getWallet, wallet } = useTeacher();
+  const [openModal, setOpenModal] = useState(false);
   const NoTransactions = true;
   const fetchWallet = useCallback(async () => {
     const { success, data, error } = await _getWallet();
@@ -93,7 +96,7 @@ export function TeacherEarnings() {
           <div className={styles['cards-balance']}>
             <BalanceCard
               balance={wallet.total_earnings}
-              text='Total por ventas'
+              text="Total por ventas"
             />
             {balance.map((element, index) => (
               <BalanceCard
@@ -104,7 +107,10 @@ export function TeacherEarnings() {
               />
             ))}
           </div>
-          <h2 className={styles['title']}>Ultimas Transacciones</h2>
+          <div className={styles['title-content']}>
+            <h2 className={styles['title']}>Ultimas Transacciones</h2>
+            <Button title={'Retirar'} onClick={() => setOpenModal(true)} />
+          </div>
           <div className={styles['content-earning']}>
             {NoTransactions ? (
               <EmptyState
@@ -129,6 +135,15 @@ export function TeacherEarnings() {
           </div>
         </div>
       )}
+      <Dialog
+        isShown={openModal}
+        hasFooter={false}
+        title={'Hacer un retiro'}
+        onCloseComplete={() => setOpenModal(false)}
+        width={'40vw'}
+      >
+        <FormWithdrawal onClose={() => setOpenModal(false)} />
+      </Dialog>
     </div>
   );
 }

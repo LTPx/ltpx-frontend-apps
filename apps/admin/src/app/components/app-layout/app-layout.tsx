@@ -9,6 +9,7 @@ import { useUser } from '@ltpx-frontend-apps/store';
 import { useTranslation } from 'react-i18next';
 import { Outlet, useNavigate } from 'react-router-dom';
 import styles from './app-layout.module.scss';
+import { Avatar } from 'evergreen-ui';
 
 /* eslint-disable-next-line */
 export interface AppLayoutProps {}
@@ -67,6 +68,14 @@ export function AppLayout(props: AppLayoutProps) {
         size: 20,
       },
     },
+    {
+      title: 'Pagos',
+      url: '/admin/payments',
+      icon: {
+        icon: 'money',
+        size: 20,
+      },
+    },
   ];
 
   return (
@@ -84,7 +93,7 @@ export function AppLayout(props: AppLayoutProps) {
               {
                 icon: 'log-out',
                 text: 'Cerrar Session',
-                onClick: async() => {
+                onClick: async () => {
                   await logout();
                   navigate('/');
                 },

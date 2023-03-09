@@ -1,0 +1,14 @@
+.container {
+  background-color: #fff;
+  padding: 2rem 3rem;
+}
+
+table {
+  margin-top: 2rem;
+
+  .user-name {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+}

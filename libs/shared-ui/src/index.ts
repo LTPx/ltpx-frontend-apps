@@ -1,3 +1,4 @@
+export * from './lib/form-withdrawal/form-withdrawal';
 export * from './lib/section-information/section-information';
 export * from './lib/task-teacher-card/task-teacher-card';
 export * from './lib/task-form-student/task-form-student';

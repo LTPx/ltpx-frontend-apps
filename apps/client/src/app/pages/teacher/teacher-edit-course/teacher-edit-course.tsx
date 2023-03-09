@@ -89,7 +89,7 @@ export function TeacherEditCourse() {
   };
 
   const handleSendToReview = async () => {
-    const { success } = await _sendCourseToReview(course.id);
+    const { success, error } = await _sendCourseToReview(course.id);
     if (success) {
       setNotification((prevState) => ({
         ...prevState,
@@ -100,7 +100,7 @@ export function TeacherEditCourse() {
       setNotification((prevState) => ({
         ...prevState,
         show: true,
-        text: 'Ha ocurrido un error',
+        text: error,
         kind: SnackbarType.error,
       }));
     }
@@ -208,6 +208,7 @@ export function TeacherEditCourse() {
           open={notification.show}
           title={notification.text}
           kind={notification.kind}
+          duration={1500}
           onClose={() => {
             setNotification((prevState) => ({
               ...prevState,

@@ -66,7 +66,7 @@ type TResponseUpdateProfile = {
 type TResponse = {
   success: boolean;
   data?: any;
-  error?: Error;
+  error?: any;
 };
 
 export type TeacherSlice = {
@@ -195,7 +195,7 @@ export const createTeacherSlice: StateCreator<
       set({ currentCourse: courseUpdated });
       return { success: true, data: quiz };
     } catch (error) {
-      return { success: false, data: error };
+      return { success: false,  error: formatErrors(error) };
     }
   },
   createAchievement: async (params) => {
@@ -208,7 +208,7 @@ export const createTeacherSlice: StateCreator<
       set({ currentCourse: courseUpdated });
       return { success: true, data: achievement };
     } catch (error) {
-      return { success: false, data: error };
+      return { success: false, error: formatErrors(error) };
     }
   },
   getCourse: async (id: number) => {
@@ -225,7 +225,7 @@ export const createTeacherSlice: StateCreator<
       const course = await sendCourseToReview(id);
       return { success: true, data: course };
     } catch (error) {
-      return { success: false, data: error };
+      return { success: false, error: formatErrors(error) };
     }
   },
   _getWallet: async () => {
@@ -267,4 +267,8 @@ const callApi = async (promiseFn: any, set: any, params?: any):Promise<TResponse
     set({loadingTeacherApi: false});
     return { success: false, data: error };
   }
+}
+
+function formatErrors(error: any) {
+  return Object.values(error?.response?.data).join(', ');
 }

@@ -19,12 +19,12 @@ export interface TransactionRowProps {
   date: string;
   balance: string;
   status: TransactionStatus;
-  transaction: TransactionType;
-  descriptionTransaction: string;
+  type: TransactionType;
+  description: string;
 }
 
 export function TransactionRow(props: TransactionRowProps) {
-  const { date, balance, status, transaction, descriptionTransaction } = props;
+  const { date, balance, status, type, description } = props;
   const iconClass = {
     deposit: styles['deposit'],
     withdrawal: styles['withdrawal'],
@@ -52,7 +52,7 @@ export function TransactionRow(props: TransactionRowProps) {
 
   return (
     <div className={styles['container']}>
-      {transaction == TransactionType.payment ? (
+      {type == TransactionType.payment ? (
         <div className={styles['type-transaction']}>
           <Icon
             className={`${iconClass.deposit} ${styles['icon']}`}
@@ -61,7 +61,7 @@ export function TransactionRow(props: TransactionRowProps) {
           ></Icon>
           <div className={styles['item']}>
             <h4>Pago</h4>
-            <h4 className={styles['text']}>{descriptionTransaction}</h4>
+            <h4 className={styles['text']}>{description}</h4>
           </div>
         </div>
       ) : (
@@ -73,7 +73,7 @@ export function TransactionRow(props: TransactionRowProps) {
           ></Icon>
           <div className={styles['item']}>
             <h4>Retiro</h4>
-            <h4 className={styles['text']}>{descriptionTransaction}</h4>
+            <h4 className={styles['text']}>{description}</h4>
           </div>
         </div>
       )}

@@ -16,7 +16,6 @@ import styles from './teacher-earnings.module.scss';
 export function TeacherEarnings() {
   const { _getWallet, wallet } = useTeacher();
   const [openModal, setOpenModal] = useState(false);
-  const NoTransactions = true;
   const fetchWallet = useCallback(async () => {
     const { success, data, error } = await _getWallet();
     if (success) {
@@ -29,50 +28,6 @@ export function TeacherEarnings() {
   useEffect(() => {
     fetchWallet();
   }, []);
-
-  const balance = [
-    {
-      mount: '$0',
-      text: 'Saldo disponible',
-      link: '',
-    },
-    {
-      mount: '$0',
-      text: 'Pago pendiente',
-      link: '',
-    },
-  ];
-
-  const transaction = [
-    {
-      transaction: TransactionType.payment,
-      date: '7 de Sep, 2014',
-      balance: '$ 20.3',
-      state: TransactionStatus.completed,
-      descriptionTransaction: 'por logros',
-    },
-    {
-      transaction: TransactionType.withdrawal,
-      date: '8 de Sep, 2014',
-      balance: '$ 20.3',
-      state: TransactionStatus.in_progress,
-      descriptionTransaction: 'por servicios',
-    },
-    {
-      transaction: TransactionType.withdrawal,
-      date: '10 de Sep, 2014',
-      balance: '$ 20.3',
-      state: TransactionStatus.pending,
-      descriptionTransaction: 'por servicios',
-    },
-    {
-      transaction: TransactionType.payment,
-      date: '7 de Sep, 2014',
-      balance: '$ 20.3',
-      state: TransactionStatus.rejected,
-      descriptionTransaction: 'por logros',
-    },
-  ];
 
   return (
     <div className={styles['container']}>
@@ -98,21 +53,21 @@ export function TeacherEarnings() {
               balance={wallet.total_earnings}
               text="Total por ventas"
             />
-            {balance.map((element, index) => (
-              <BalanceCard
-                balance={element.mount}
-                key={index}
-                text={element.text}
-                link={element.link}
-              />
-            ))}
+            <BalanceCard
+              balance={wallet.balance_available_withdraw}
+              text="Saldo disponible"
+            />
+            <BalanceCard
+              balance={wallet.balance_pending_withdraw}
+              text="Pago pendiente"
+            />
           </div>
           <div className={styles['title-content']}>
             <h2 className={styles['title']}>Ultimas Transacciones</h2>
             <Button title={'Retirar'} onClick={() => setOpenModal(true)} />
           </div>
           <div className={styles['content-earning']}>
-            {NoTransactions ? (
+            {wallet.transactions.length === 0 ? (
               <EmptyState
                 img="../../../../assets/images/empty-states/money-transfer.svg"
                 title="Transacciones"
@@ -120,14 +75,14 @@ export function TeacherEarnings() {
               />
             ) : (
               <div className={styles['transaction-content']}>
-                {transaction.map((element, index) => (
+                {wallet.transactions.map((transaction, index) => (
                   <TransactionRow
                     key={index}
-                    date={element.date}
-                    balance={element.balance}
-                    status={element.state}
-                    descriptionTransaction={element.descriptionTransaction}
-                    transaction={element.transaction}
+                    date={transaction.date}
+                    balance={transaction.amount}
+                    status={TransactionStatus.completed}
+                    type={TransactionType.payment}
+                    description={transaction.description}
                   />
                 ))}
               </div>

@@ -81,26 +81,28 @@ export function AppLayout(props: AppLayoutProps) {
   return (
     <div className={styles['container']}>
       <Header className={styles['header']} links={[]}>
-        <Dropdown>
-          <div className={styles['avatar']}>
-            <h4>Administrador</h4>
-            <Icon icon="caret-down" size={18} />
-          </div>
-          <UserMenu
-            name={'admin'}
-            email={'email@example.com'}
-            links={[
-              {
-                icon: 'log-out',
-                text: 'Cerrar Session',
-                onClick: async () => {
-                  await logout();
-                  navigate('/');
+        <div className={styles['teacher-actions']}>
+          <Dropdown>
+            <UserMenu
+              name={'Admin System'}
+              email={'admin@example.com'}
+              links={[
+                {
+                  icon: 'log-out',
+                  text: 'Cerrar Session',
+                  onClick: async () => {
+                    await logout();
+                    navigate('/');
+                  },
                 },
-              },
-            ]}
-          />
-        </Dropdown>
+              ]}
+            />
+            <div className={styles['avatar']}>
+              <Avatar name={'Admin System'} size={40} color="green" />
+              <Icon icon="caret-down" size={18} />
+            </div>
+          </Dropdown>
+        </div>
       </Header>
       <div className={styles['navbar']}>
         <Nav links={links} />

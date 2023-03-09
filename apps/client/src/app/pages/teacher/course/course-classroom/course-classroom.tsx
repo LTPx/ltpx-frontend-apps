@@ -66,7 +66,7 @@ export function CourseClassroom(props: CourseClassroomProps) {
           handleClassroom(classroom);
         }}
       />
-      {sessions && (
+      {sessions.length > 0 && (
         <div className={styles['classes-container']}>
           <div className={styles['classes-preview']}>
             {sessions[0].meetings.map((meeting, index) => (

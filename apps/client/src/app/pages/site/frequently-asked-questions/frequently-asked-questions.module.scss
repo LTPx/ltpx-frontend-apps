@@ -4,6 +4,12 @@
   display: flex;
   align-items: center;
   flex-direction: column;
+  p {
+    padding: 1rem;
+  }
+  ul {
+    padding: 0 1rem;
+  }
 
   .section-content {
     .btn {

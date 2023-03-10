@@ -14,7 +14,6 @@
     border: none;
     text-align: left;
     outline: none;
-    transition: 0.2s;
     border: 1px solid $stroke-color;
     border-top-left-radius: 4px;
     border-top-right-radius: 4px;
@@ -47,28 +46,28 @@
     box-sizing: border-box;
     border: 1px solid $stroke-color;
     max-height: 0;
+    color: $text-gray-color;
     box-shadow: $card-shadow-medium;
     border-bottom-left-radius: 4px;
     border-bottom-right-radius: 4px;
     border-top: none;
-    visibility: hidden;
-    transition: max-height 0.2s ease-out;
-
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
     ul {
       li {
-      color: $text-gray-color;
-      margin-left: $size-lg-1;
+        color: $text-gray-color;
+        margin-left: $size-lg-1;
+      }
     }
-    }
-
     p {
       color: $text-gray-color;
     }
 
     &.open {
-      visibility: visible;
-      padding: $size-md-1;
-      max-height: 60rem;
+      color: $text-gray-color;
+      box-sizing: border-box;
+      max-height: 100rem;
+      transition: max-height 0.8s ease-out;
     }
   }
 }

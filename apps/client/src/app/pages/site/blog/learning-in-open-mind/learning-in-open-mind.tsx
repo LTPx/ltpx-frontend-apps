@@ -12,8 +12,7 @@ export function LearningInOpenMind(props: LearningInOpenMindProps) {
       />
       <div className={styles['information']}>
         <h1>
-          ¿Cual es el beneficio de aprender de manera más eficiente en Open
-          Mind?
+          ¿Cual es el beneficio de aprender de manera más eficiente en OpenMind?
         </h1>
         <p>
           El sistema de incentivos alineados con objetivos de aprendizaje
@@ -24,7 +23,7 @@ export function LearningInOpenMind(props: LearningInOpenMindProps) {
           máximo.
         </p>
         <p>
-          En poco tiempo, cuando Open Mind ofrezca cursos completos y pruebas de
+          En poco tiempo, cuando OpenMind ofrezca cursos completos y pruebas de
           equivalencia, teorizamos que el tiempo recuperado será muy
           significativo, permitiendo a los niños y jóvenes iniciar aprendizajes
           avanzados mucho más pronto.

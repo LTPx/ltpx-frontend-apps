@@ -8,7 +8,7 @@ export function ContentDescription(props: ContentDescriptionProps) {
   return (
     <div className={styles['container']}>
       <div className={styles['head']}>
-        <h1 className={styles['title']}>Por qué estudiar con Open Mind</h1>
+        <h1 className={styles['title']}>Por qué estudiar con OpenMind</h1>
         <h4>Descubre tu programa perfecto en nuestros cursos.</h4>
       </div>
       <div className={styles['content']}>

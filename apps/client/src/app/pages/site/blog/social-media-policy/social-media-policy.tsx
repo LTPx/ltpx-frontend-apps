@@ -13,11 +13,11 @@ export function SocialMediaPolicy() {
       <div className={styles['information']}>
         <h1>Política de redes sociales para maestros</h1>
         <h4>
-          Requisitos de Open Mind para el comportamiento de los maestros en las
+          Requisitos de OpenMind para el comportamiento de los maestros en las
           redes sociales.
         </h4>
         <p>
-          Cuando te unes a la comunidad de Open Mind, aceptas seguir nuestras
+          Cuando te unes a la comunidad de OpenMind, aceptas seguir nuestras
           políticas, incluidos los estándares de nuestra comunidad. Esas
           expectativas incluyen comunicaciones reflexivas y profesionales con
           nuestra comunidad (colegas, padres, niños), modelar el comportamiento
@@ -26,7 +26,7 @@ export function SocialMediaPolicy() {
         <p>
           Este contrato social para tratar a su comunidad con respeto, no
           termina cuando se quita el sombrero de maestro y cierra la sesión de
-          sus clases en Open Mind. Su contrato continúa con su uso de las redes
+          sus clases en OpenMind. Su contrato continúa con su uso de las redes
           sociales, blogs y otros foros en línea, en los que lo alentamos a que
           participe. Pueden brindar excelentes oportunidades para compartir
           recursos educativos, comercializar sus clases, conectarse en red y
@@ -34,16 +34,16 @@ export function SocialMediaPolicy() {
           ciertamente no le diremos cómo vivir su mejor vida como influencer o a
           qué grupos de Facebook unirse, le pedimos que continúe usando su mejor
           criterio y tenga en cuenta que su audiencia puede incluir a sus
-          compañeros de Open Mind, comunidad, y estudiantes.
+          compañeros de OpenMind, comunidad, y estudiantes.
         </p>
         <p>
           Debido a que nuestro objetivo es crear y salvaguardar nuestra
-          comunidad de confianza, la política de redes sociales de Open Mind
+          comunidad de confianza, la política de redes sociales de OpenMind
           establece parámetros, así como ejemplos específicos de comportamiento
           inaceptable en línea. ¡Estos comportamientos inapropiados no deberían
           ser noticia para usted! Aquí hay algunas reglas de oro que debe seguir
-          cuando participe en grupos afiliados a Open Mind y en cualquier foro
-          en línea:
+          cuando participe en grupos afiliados a OpenMind y en cualquier foro en
+          línea:
         </p>
         <ul>
           <li>
@@ -56,7 +56,7 @@ export function SocialMediaPolicy() {
           <li>
             <strong> Sea respetuoso:</strong> no haga comentarios despectivos o
             irrespetuosos sobre los estudiantes, los maestros, los padres o el
-            personal de Open Mind, incluso si no los identifica por su nombre.
+            personal de OpenMind, incluso si no los identifica por su nombre.
           </li>
           <li>
             <strong> Sea amable:</strong> no comparta contenido que contenga o
@@ -79,17 +79,17 @@ export function SocialMediaPolicy() {
           las redes sociales como público!
         </p>
         <p>
-          Si Open Mind se da cuenta de un comportamiento en línea (ya sea en un
-          foro afiliado a Open Mind o en una cuenta personal de redes sociales)
+          Si OpenMind se da cuenta de un comportamiento en línea (ya sea en un
+          foro afiliado a OpenMind o en una cuenta personal de redes sociales)
           que viola esta política o nuestros estándares comunitarios, podemos
-          eliminar a docentes de la plataforma. Además, Open Mind se reserva el
+          eliminar a docentes de la plataforma. Además, OpenMind se reserva el
           derecho de controlar y eliminar cualquier contenido publicado en un
-          foro afiliado a Open Mind por cualquier motivo.
+          foro afiliado a OpenMind por cualquier motivo.
         </p>
         <p>
           Si tiene inquietudes sobre el comportamiento en línea de otro miembro
           de la comunidad, informe a seguridad@growOpenMinds.com. Tenga en
-          cuenta que si bien Open Mind investigará y determinará un curso de
+          cuenta que si bien OpenMind investigará y determinará un curso de
           acción apropiado, no participaremos en discusiones sobre el resultado
           ni discutiremos ningún otro contexto en el que implementemos esta
           política.

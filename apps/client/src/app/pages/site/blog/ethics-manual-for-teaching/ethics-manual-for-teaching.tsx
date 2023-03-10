@@ -11,11 +11,11 @@ export function EthicsManualForTeaching() {
         src="https://images.unsplash.com/photo-1483546416237-76fd26bbcdd1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTZ8fG1hbnVhbHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=800&q=60"
       />
       <div className={styles['information']}>
-        <h1>Manual de ética para dar clases en Open Mind</h1>
+        <h1>Manual de ética para dar clases en OpenMind</h1>
         <h4>Normas comunitarias</h4>
-        <h4>Directrices para los miembros de Open Mind</h4>
+        <h4>Directrices para los miembros de OpenMind</h4>
         <p>
-          Open Mind es una comunidad abierta de estudiantes, padres y maestros.
+          OpenMind es una comunidad abierta de estudiantes, padres y maestros.
           Estamos conectados por la tecnología y unidos por el deseo de ayudar a
           los estudiantes a amar el aprendizaje. Todas nuestras clases son
           ofrecidas por profesores independientes, quienes determinan el
@@ -24,14 +24,14 @@ export function EthicsManualForTeaching() {
         <p>
           Si bien nuestra comunidad abierta es nuestra mayor fuente de
           fortaleza, también presenta desafíos. Para nosotros es importante que
-          Open Mind sea un espacio seguro para nuestros usuarios. Nuestros
+          OpenMind sea un espacio seguro para nuestros usuarios. Nuestros
           miembros deben tratarse entre sí sin sesgos ni prejuicios en todos los
           pilares de la diversidad, incluidos, entre otros, la raza, el origen
           étnico, la nacionalidad, la orientación sexual, la religión y la
           identidad de género. Aquí hay algunas pautas que les pedimos a
           nuestros miembros que observen.{' '}
           <strong>
-            Los miembros de Open Mind que no cumplan con estas pautas serán
+            Los miembros de OpenMind que no cumplan con estas pautas serán
             eliminados del sitio.
           </strong>
         </p>
@@ -62,7 +62,7 @@ export function EthicsManualForTeaching() {
             Mantenga todas las comunicaciones en nuestra plataforma; nunca
             proporcione información de contacto personal a los padres o alumnos
             para comunicaciones "fuera de la plataforma" o reuniones en persona
-            (prohibido a menos que sea un evento patrocinado por Open Mind).
+            (prohibido a menos que sea un evento patrocinado por OpenMind).
           </li>
           <li>
             Adhiérase a nuestra política de contenido de clase ofreciendo solo
@@ -77,7 +77,7 @@ export function EthicsManualForTeaching() {
         <ul>
           <li>
             Los alumnos solo deben asistir a clases bajo su propia inscripción,
-            como ellos mismos. La política de Open Mind no permite que un alumno
+            como ellos mismos. La política de OpenMind no permite que un alumno
             use la inscripción de su hermano o de otro alumno para asistir a
             clase.
           </li>
@@ -99,10 +99,10 @@ export function EthicsManualForTeaching() {
             por las diferentes opiniones.
           </li>
           <li>
-            Ayude a mantener Open Mind un espacio seguro para estudiantes,
+            Ayude a mantener OpenMind un espacio seguro para estudiantes,
             familias y maestros de todos los orígenes, creencias y ubicaciones.
             Con ese fin, te alentamos a leer nuestro artículo sobre el Código de
-            ética para dar clases en Open Mind.
+            ética para dar clases en OpenMind.
           </li>
         </ul>
         <h4>Código de conducta del alumno</h4>
@@ -124,7 +124,7 @@ export function EthicsManualForTeaching() {
             puestas.
           </li>
         </ul>
-        <h4>Código de conducta de Open Mind</h4>
+        <h4>Código de conducta de OpenMind</h4>
         <ul>
           <li>
             Damos la bienvenida a miembros de todos los orígenes, creencias y

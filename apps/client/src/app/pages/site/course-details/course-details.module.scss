@@ -108,6 +108,7 @@
     .tabs-content {
       display: flex;
       justify-content: center;
+      margin: 2rem 0 3rem 0 !important;
     }
   }
   .course-details {
@@ -143,6 +144,8 @@
         .items {
           display: flex;
           gap: 1rem;
+          text-align: center;
+          align-items: center;
         }
       }
 

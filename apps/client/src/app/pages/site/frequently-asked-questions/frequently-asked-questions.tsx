@@ -17,26 +17,26 @@ export function FrequentlyAskedQuestions(props: FrequentlyAskedQuestionsProps) {
         <NavLink className={styles['to-home']} to="/home">
           Ir a inicio
         </NavLink>
-        <h2 className={styles['subtitle']}>Openmind</h2>
+        <h2 className={styles['subtitle']}>OpenMind</h2>
         <PanelAccordion title={'1. ¿Qué es Open Mind y cómo funciona?'}>
           <p>
-            Open Mind es una plataforma de oferta de cursos y tutorías por parte
-            de profesores independientes. Open Mind ha sido construido sobre el
+            OpenMind es una plataforma de oferta de cursos y tutorías por parte
+            de profesores independientes. OpenMind ha sido construido sobre el
             protocolo de transferencia de aprendizaje LTP que hace que los
             profesores solo reciban los pagos acordados por el servicio una vez
             que cumplen los logros acordados. Las familias/estudiantes pagan el
-            valor completo del curso al inicio, pero Open Mind lo retiene y lo
+            valor completo del curso al inicio, pero OpenMind lo retiene y lo
             transfiere al profesor únicamente cuando se valida que el logro de
             aprendizaje ha sido conseguido.
           </p>
         </PanelAccordion>
         <PanelAccordion
           title={
-            '2. ¿Por qué es Open Mind mejor que otras plataformas de aprendizaje en línea?'
+            '2. ¿Por qué es OpenMind mejor que otras plataformas de aprendizaje en línea?'
           }
         >
           <p>
-            Open Mind es mejor que otras plataformas de aprendizaje porque
+            OpenMind es mejor que otras plataformas de aprendizaje porque
             gracias al protocolo de transferencia de aprendizaje LTP
           </p>
           <ul>
@@ -71,20 +71,20 @@ export function FrequentlyAskedQuestions(props: FrequentlyAskedQuestionsProps) {
             </li>
           </ul>
           <p>
-            De esta manera, Open Mind consigue mejores resultados a menor costo
+            De esta manera, OpenMind consigue mejores resultados a menor costo
             para las familias que otras plataformas de aprendizaje en línea y la
             educación tradicional.
           </p>
         </PanelAccordion>
-        <PanelAccordion title={'3. ¿Qué significa que Open Mind está en beta?'}>
+        <PanelAccordion title={'3. ¿Qué significa que OpenMind está en beta?'}>
           <p>
-            Open Mind es una plataforma en desarrollo. De momento estamos
+            OpenMind es una plataforma en desarrollo. De momento estamos
             lanzando la oferta de cursos grupales de apoyo al aprendizaje
             convencional y cursos independientes.
           </p>
         </PanelAccordion>
         <PanelAccordion
-          title={'4. ¿Se puede hacer un grado completo en Open Mind?'}
+          title={'4. ¿Se puede hacer un grado completo en OpenMind?'}
         >
           <p>
             En los próximos meses seguiremos mejorando la plataforma y agregando
@@ -93,7 +93,7 @@ export function FrequentlyAskedQuestions(props: FrequentlyAskedQuestionsProps) {
           </p>
         </PanelAccordion>
         <PanelAccordion
-          title={'5. ¿Puedo tomar varias clases al mismo tiempo en Open Mind?'}
+          title={'5. ¿Puedo tomar varias clases al mismo tiempo en OpenMind?'}
         >
           <p>
             Si. Organiza tu agenda y puedes tomar todas las clases que quieras.{' '}
@@ -101,24 +101,24 @@ export function FrequentlyAskedQuestions(props: FrequentlyAskedQuestionsProps) {
         </PanelAccordion>
         <PanelAccordion
           title={
-            '6. ¿Cómo verifican las credenciales de los docentes en Open Mind?'
+            '6. ¿Cómo verifican las credenciales de los docentes en OpenMind?'
           }
         >
           <p>
-            Todos los profesores que son aprobados para enseñar en Open Mind
+            Todos los profesores que son aprobados para enseñar en OpenMind
             deben proveer sus credenciales de educadores, diplomas y demostrar
             su experiencia y aptitudes. Además deben proveer su record policial
             actualizado.{' '}
           </p>
         </PanelAccordion>
         <PanelAccordion
-          title={'7. ¿Cómo protege Open Mind la seguridad de los alumnos?'}
+          title={'7. ¿Cómo protege OpenMind la seguridad de los alumnos?'}
         >
           <p>
             Nuestra principal preocupación es la seguridad de los alumnos, y
             abordamos esto de varias maneras, tal como se describe en nuestra
             política de seguridad. Este artículo describe su responsabilidad por
-            la seguridad como maestro en Open Mind. Por favor revise{' '}
+            la seguridad como maestro en OpenMind. Por favor revise{' '}
             <a href="/blog/student-safety-privacy">
               seguridad y privacidad del alumno
             </a>{' '}
@@ -128,11 +128,11 @@ export function FrequentlyAskedQuestions(props: FrequentlyAskedQuestionsProps) {
         </PanelAccordion>
         <PanelAccordion
           title={
-            '8. ¿Cómo controla Open Mind la calidad de los cursos ofrecidos?'
+            '8. ¿Cómo controla OpenMind la calidad de los cursos ofrecidos?'
           }
         >
           <p>
-            Todos los cursos que se publican en Open Mind son revisados y
+            Todos los cursos que se publican en OpenMind son revisados y
             aprobados por nuestro equipo pedagógico. La actividad dentro de los
             cursos puede ser auditada por nuestro personal para controlar la
             calidad del servicio provisto. En caso de no estar contento con la
@@ -144,14 +144,12 @@ export function FrequentlyAskedQuestions(props: FrequentlyAskedQuestionsProps) {
         </PanelAccordion>
         <h2 className={styles['subtitle-two']}>Pagos</h2>
         <PanelAccordion
-          title={
-            '9. ¿Cómo funciona el sistema de pago por logros de Open Mind?'
-          }
+          title={'9. ¿Cómo funciona el sistema de pago por logros de OpenMind?'}
         >
           <p>
-            Al comprar un curso en Open Mind, su costo no se entrega
+            Al comprar un curso en OpenMind, su costo no se entrega
             inmediatamente al profesor contratado. Los valores son guardados por
-            Open Mind y entregados a los profesores una vez que se comprueba que
+            OpenMind y entregados a los profesores una vez que se comprueba que
             los objetivos de aprendizaje han sido obtenidos.
             <br />
             Cada curso tiene una serie de logros, cada uno con un valor

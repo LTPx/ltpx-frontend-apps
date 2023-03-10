@@ -24,7 +24,7 @@ export function WhatMakesClassGoingOn(props: WhatMakesClassGoingOnProps) {
           dentro de un área temática. Dado que los alumnos pueden asistir a
           clases continuas durante muchas semanas a la vez, también brindan un
           excelente entorno para construir relaciones sólidas con las familias
-          de Open Mind.
+          de OpenMind.
           <br />
           Si está creando su primera clase continua o desea mejorar sus listados
           existentes, considere los siguientes consejos para diseñar excelentes
@@ -35,7 +35,7 @@ export function WhatMakesClassGoingOn(props: WhatMakesClassGoingOnProps) {
           No todas las clases están destinadas a un horario continuo. Muchos
           temas requieren la oportunidad de desarrollar la información aprendida
           en sesiones anteriores, y para estos debe explorar otros formatos de
-          clase en Open Mind. Si su tema se puede explorar con clases
+          clase en OpenMind. Si su tema se puede explorar con clases
           independientes o reuniones sociales, ¡entonces los cursos continuos
           pueden ser la opción perfecta! Algunos temas que funcionan bien para
           las clases en curso son:
@@ -89,7 +89,7 @@ export function WhatMakesClassGoingOn(props: WhatMakesClassGoingOnProps) {
           actividades generales o contenido presentará cada semana.
           <br />
           Para ayudarlo a visualizar cómo se ve una excelente lista de clases en
-          curso, veamos este ejemplo escrito por el equipo de Open Mind:
+          curso, veamos este ejemplo escrito por el equipo de OpenMind:
         </p>
         <h4>Título de la clase: Ciencias de la cocina, edades 10-12</h4>
         <p>
@@ -101,7 +101,7 @@ export function WhatMakesClassGoingOn(props: WhatMakesClassGoingOnProps) {
         </p>
         <p>
           Los estudiantes recibirán una lista de ingredientes cada semana
-          publicada en el aula de Open Mind, y juntos realizaremos experimentos
+          publicada en el aula de OpenMind, y juntos realizaremos experimentos
           seguros (¡pero a veces un poco complicados!) y evaluaremos los
           resultados que vemos. ¡Juntos, repasaremos los principios básicos de
           la química, practicaremos haciendo observaciones científicas y nos
@@ -162,7 +162,7 @@ export function WhatMakesClassGoingOn(props: WhatMakesClassGoingOnProps) {
         <h4>Consejos profesionales adicionales</h4>
         <p>
           <strong>Reuniones:</strong> dado que las reuniones en curso no tienen
-          un horario establecido de principio a fin, Open Mind no creará
+          un horario establecido de principio a fin, OpenMind no creará
           automáticamente horarios de reunión para usted. Deberá programar
           reuniones desde su panel de control (recomendamos programar con al
           menos un mes de anticipación).
@@ -183,10 +183,11 @@ export function WhatMakesClassGoingOn(props: WhatMakesClassGoingOnProps) {
           los padres para esa semana, será responsable de emitir los reembolsos
           a las familias inscritas.
           <br />
-          Obtenga más información sobre los pagos y reembolsos de clases <a href=''>(aquí)</a>.
-          <br/> 
-          <strong>Aula:</strong> los alumnos solo pueden ver las publicaciones de la
-          clase después de que se inscriban en un curso en curso, así que
+          Obtenga más información sobre los pagos y reembolsos de clases{' '}
+          <a href="">(aquí)</a>.
+          <br />
+          <strong>Aula:</strong> los alumnos solo pueden ver las publicaciones
+          de la clase después de que se inscriban en un curso en curso, así que
           asegúrese de volver a publicar cualquier anuncio importante cada
           semana. Su mensaje de bienvenida será visible para todos los alumnos,
           sin importar cuándo se inscriban.
@@ -196,7 +197,7 @@ export function WhatMakesClassGoingOn(props: WhatMakesClassGoingOnProps) {
           continuo, consulte este curso diseñado para ayudarlo a tener éxito en
           la creación de clases sobresalientes. Si una clase en curso no suena
           adecuada para su tema, explore los muchos otros formatos de clase
-          disponibles en Open Mind.
+          disponibles en OpenMind.
         </p>
       </div>
     </div>

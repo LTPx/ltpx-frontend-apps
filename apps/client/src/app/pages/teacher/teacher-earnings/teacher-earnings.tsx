@@ -67,11 +67,11 @@ export function TeacherEarnings() {
             />
             <BalanceCard
               balance={wallet.balance_available_withdrawal}
-              text="Saldo disponible"
+              text="Saldo en tu billetera"
             />
             <BalanceCard
               balance={wallet.balance_pending_withdrawal}
-              text="Pago pendiente"
+              text="Retiro pendiente"
             />
           </div>
           <div className={styles['title-content']}>

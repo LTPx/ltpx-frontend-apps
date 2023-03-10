@@ -1,12 +1,11 @@
 import { _http } from '../../http';
-import { ApplicationTeach, ApplyTeachApiParams, ApplyTeachModel } from '../../interfaces/teacher-interface';
-import { IUserAccount } from '../../interfaces/user-interface';
+import { ApplicationTeach, ApplyTeachApiParams, ApplyTeachModel, TeacherProfile } from '../../interfaces/teacher-interface';
 import { moveToFormData } from '../../utils';
 
 const http = _http;
 
 export const getTeacherProfile = async () => {
-  return new Promise<IUserAccount>((resolve, reject) => {
+  return new Promise<TeacherProfile>((resolve, reject) => {
     http
       .get('api/v1/teacher/profile')
       .then((response) => {
@@ -18,8 +17,8 @@ export const getTeacherProfile = async () => {
   });
 };
 
-export const updateTeacherProfile = async (teacher: IUserAccount) => {
-  return new Promise<IUserAccount>((resolve, reject) => {
+export const updateTeacherProfile = async (teacher: Partial<TeacherProfile>) => {
+  return new Promise<TeacherProfile>((resolve, reject) => {
     http
       .put('api/v1/teacher/update_profile', teacher)
       .then((response) => {

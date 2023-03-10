@@ -1,82 +1,93 @@
-import { useFormik } from 'formik';
-import * as Yup from 'yup';
+import styles from './teacher-profile-form.module.scss';
 import Button, { ColorsButton, TypeButton } from '../button/button';
 import FilesUploaded, { TypeFile } from '../files-uploaded/files-uploaded';
-import Icon from '../icon/icon';
 import InputTextStatus, {
   StatusInputText,
 } from '../input-text-status/input-text-status';
 import Input from '../input/input';
 import TextArea from '../text-area/text-area';
-import styles from './teacher-profile-form.module.scss';
-
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
+import { TeacherProfileParams } from '@ltpx-frontend-apps/api';
 /* eslint-disable-next-line */
-export interface TeacherProfileFormProps {}
+export interface TeacherProfileFormProps {
+  onSubmit: (params: TeacherProfileParams) => void;
+}
 
 export function TeacherProfileForm(props: TeacherProfileFormProps) {
+  const { onSubmit } = props;
   const formik = useFormik({
     initialValues: {
-      nameTeacher: '',
-      professionTeacher: '',
+      name: '',
+      skills: '',
       biography: '',
       profile_img: '',
       video_presentation: '',
       facebook_url: '',
       twitter_url: '',
       instagram_url: '',
-      linkedIn_url: '',
+      linkedin_url: '',
     },
     validationSchema: Yup.object({
-      nameTeacher: Yup.string().required('Nombre es obligatorio'),
-      professionTeacher: Yup.string().required('Profesión es obligatorio'),
+      name: Yup.string().required('Nombre es obligatorio'),
+      skills: Yup.string().required('Profesión es obligatorio'),
       biography: Yup.string().required('Biografía es obligatorio'),
     }),
     onSubmit: (data) => {
       console.log(data);
+      const social_networks = [
+        {name: 'facebook', url: data.facebook_url},
+        {name: 'twitter', url: data.twitter_url},
+        {name: 'instagram', url: data.instagram_url},
+        {name: 'linkedin', url: data.linkedin_url},
+      ];
+      onSubmit({...data, ...{social_networks}})
     },
   });
   return (
     <div className={styles['container']}>
       <form className={styles['form']}>
         <div className={styles['general']}>
-          <label>Información de Usuario</label>
+          {/* <h4>* Toda esta información sera publica en tu perfil como profesor</h4> */}
           <div className={styles['section']}>
             <div>
               <Input
-                label="Nombre"
+                label="Nombre publico"
+                description='Este sera el nombre que generara un link a tu perfil'
                 type="text"
-                name="nameTeacher"
-                placeholder="Ingrese su Nombre y Apellido"
+                name="name"
+                placeholder="Ejm: Luis Marisque"
                 onChange={(e: any) => {
                   formik.handleChange(e);
                 }}
-                value={formik.values.nameTeacher}
+                value={formik.values.name}
                 onBlur={formik.handleBlur}
               />
-              {formik.touched.nameTeacher && formik.errors.nameTeacher ? (
+              {formik.touched.name && formik.errors.name ? (
                 <InputTextStatus
                   status={StatusInputText.error}
-                  text={formik.errors.nameTeacher}
+                  text={formik.errors.name}
                 />
               ) : null}
             </div>
             <div>
               <Input
-                label="Profesión"
+                label="Especializaciones"
+                description='Tus habilidades en diferentes campos'
                 type="text"
-                name="professionTeacher"
-                placeholder="Ingresar su profesión"
+                name="skills"
+                placeholder="Profesor, Diseñador"
                 onChange={(e: any) => {
                   formik.handleChange(e);
                 }}
-                value={formik.values.professionTeacher}
+                value={formik.values.skills}
                 onBlur={formik.handleBlur}
               />
-              {formik.touched.professionTeacher &&
-              formik.errors.professionTeacher ? (
+              {formik.touched.skills &&
+              formik.errors.skills ? (
                 <InputTextStatus
                   status={StatusInputText.error}
-                  text={formik.errors.professionTeacher}
+                  text={formik.errors.skills}
                 />
               ) : null}
             </div>
@@ -142,12 +153,12 @@ export function TeacherProfileForm(props: TeacherProfileFormProps) {
             <Input
               label="LinkedIn"
               type="text"
-              name="linkedIn_url"
+              name="linkedin_url"
               placeholder="LinkedIn URL..."
               onChange={(e: any) => {
                 formik.handleChange(e);
               }}
-              value={formik.values.linkedIn_url}
+              value={formik.values.linkedin_url}
               onBlur={formik.handleBlur}
             />
           </div>

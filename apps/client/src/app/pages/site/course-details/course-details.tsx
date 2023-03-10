@@ -210,17 +210,19 @@ export function CourseDetails() {
                 </div>
               </div>
             </div>
-            <BuyCourseCard
-              price={course.price_format}
-              achievements={course.achievements?.length || 0}
-              lectures={course.contents.length}
-              enrolled={course.enrollments_count}
-              language={translateLanguage(course.language)}
-              skillLevel={translateLevel(course.level)}
-              image={course.cover_url}
-              onClickEnroll={enrolled}
-              certificate={true}
-            />
+            <div className={styles['buy-course-content']}>
+              <BuyCourseCard
+                price={course.price_format}
+                achievements={course.achievements?.length || 0}
+                lectures={course.contents.length}
+                enrolled={course.enrollments_count}
+                language={translateLanguage(course.language)}
+                skillLevel={translateLevel(course.level)}
+                image={course.cover_url}
+                onClickEnroll={enrolled}
+                certificate={true}
+              />
+            </div>
           </div>
         )}
         <h2 className={styles['title-date']}>Horarios de Clases</h2>

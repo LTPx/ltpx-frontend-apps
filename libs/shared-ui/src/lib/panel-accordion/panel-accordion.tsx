@@ -30,7 +30,7 @@ export function PanelAccordion(props: PanelAccordionProps) {
       <div className={styles['accordion']} onClick={handleClick}>
         <h4>{title}</h4>
         <div className={styles['actions']}>
-          { actions?.map((action, index)=>(
+          {actions?.map((action, index) => (
             <div
               key={index}
               className={styles['action']}

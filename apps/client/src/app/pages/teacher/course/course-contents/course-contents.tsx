@@ -112,7 +112,7 @@ export function CourseContents(props: CourseContentsProps) {
               data={{ content, index }}
               actions={actionsContent}
             >
-              <pre>{content.description}</pre>
+              <pre className={styles['text-content']}>{content.description}</pre>
             </PanelAccordion>
           ))}
           <Button

@@ -3,9 +3,10 @@
 .wrap {
   display: flex;
   justify-content: center;
+  width: 100%;
 }
 .container {
-  background-color: $white-color;
+  // background-color: $white-color;
   display: flex;
   flex-direction: column;
   width: 80%;
@@ -28,14 +29,17 @@
   gap: 1.5rem;
 }
 
-.course-details {
-  // padding: $size-lg-1 14rem;
+.buy-course-content {
   display: flex;
+  justify-content: center;
+}
+.course-details {
+  display: grid;
+  grid-template-columns: 70% 30%;
   width: 100%;
 
   .description {
     margin-right: 10rem;
-
     .description-title {
       padding-bottom: $size-md-1;
       h1 {

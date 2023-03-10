@@ -1,5 +1,5 @@
 import { Tab, Tabs } from '@ltpx-frontend-apps/shared-ui';
-import { useCourseStudents } from '@ltpx-frontend-apps/store';
+import { useCourse, useCourseStudents } from '@ltpx-frontend-apps/store';
 import { Avatar } from 'evergreen-ui';
 import { useCallback, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
@@ -18,7 +18,7 @@ export function TeacherCourseStudents(props: TeacherCourseStudentsProps) {
   const { courseId } = useParams();
   const id = parseInt(courseId || '');
 
-  const fetchData = useCallback(async () => {
+  const fetchStudents = useCallback(async () => {
     const { success, data, error } = await _getStudentsByCourse(id);
     if (success) {
       const students = data;
@@ -40,7 +40,7 @@ export function TeacherCourseStudents(props: TeacherCourseStudentsProps) {
   }, []);
 
   useEffect(() => {
-    fetchData();
+    fetchStudents();
   }, []);
 
   const TabStudent = ({ name, id }: { name: string; id: number }) => (
@@ -55,6 +55,10 @@ export function TeacherCourseStudents(props: TeacherCourseStudentsProps) {
       <h2 className={styles['title']}>Curso: {optionsTab.length}</h2>
       <div className={styles['content']}>
         <div className={styles['all-students']}>
+          <div className={styles['all-students-header']}>
+            <h3>Estudiantes</h3>
+            <h3>{ loaded ? students.length : 0}</h3>
+          </div>
           {loaded && (
             <Tabs
               className={styles['tabs']}

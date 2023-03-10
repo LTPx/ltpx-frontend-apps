@@ -1,3 +1,5 @@
+import styles from './teacher-earnings.module.scss';
+import { WithdrawalParams } from '@ltpx-frontend-apps/api';
 import {
   BalanceCard,
   Button,
@@ -11,11 +13,12 @@ import {
 import { useTeacher } from '@ltpx-frontend-apps/store';
 import { Dialog } from 'evergreen-ui';
 import { useCallback, useEffect, useState } from 'react';
-import styles from './teacher-earnings.module.scss';
+import { useMoment } from '../../../hooks/useMoment';
 
 export function TeacherEarnings() {
-  const { _getWallet, wallet } = useTeacher();
+  const { _getWallet, wallet, _makeWithdrawal } = useTeacher();
   const [openModal, setOpenModal] = useState(false);
+  const { formatDate } = useMoment();
   const fetchWallet = useCallback(async () => {
     const { success, data, error } = await _getWallet();
     if (success) {
@@ -28,6 +31,15 @@ export function TeacherEarnings() {
   useEffect(() => {
     fetchWallet();
   }, []);
+
+  async function handleWithdrawal(params: WithdrawalParams) {
+    const { success, data, error } = await _makeWithdrawal(params);
+    if(success) {
+      console.log('data: ', data);
+    } else {
+      console.log('error: ', error);
+    }
+  }
 
   return (
     <div className={styles['container']}>
@@ -54,12 +66,12 @@ export function TeacherEarnings() {
               text="Total por ventas"
             />
             <BalanceCard
-              balance={wallet.balance_available_withdraw}
-              text="Saldo disponible"
+              balance={wallet.balance_available_withdrawal}
+              text="Saldo en tu billetera"
             />
             <BalanceCard
-              balance={wallet.balance_pending_withdraw}
-              text="Pago pendiente"
+              balance={wallet.balance_pending_withdrawal}
+              text="Retiro pendiente"
             />
           </div>
           <div className={styles['title-content']}>
@@ -78,10 +90,10 @@ export function TeacherEarnings() {
                 {wallet.transactions.map((transaction, index) => (
                   <TransactionRow
                     key={index}
-                    date={transaction.date}
+                    date={formatDate(transaction.date)}
                     balance={transaction.amount}
                     status={TransactionStatus.completed}
-                    type={TransactionType.payment}
+                    type={transaction.credit ? TransactionType.payment : TransactionType.withdrawal}
                     description={transaction.description}
                   />
                 ))}
@@ -97,7 +109,10 @@ export function TeacherEarnings() {
         onCloseComplete={() => setOpenModal(false)}
         width={'40vw'}
       >
-        <FormWithdrawal onClose={() => setOpenModal(false)} />
+        <FormWithdrawal
+          onClose={() => setOpenModal(false)}
+          onSubmit={(params)=> handleWithdrawal(params)}
+        />
       </Dialog>
     </div>
   );

@@ -56,11 +56,11 @@ export function TransactionRow(props: TransactionRowProps) {
         <div className={styles['type-transaction']}>
           <Icon
             className={`${iconClass.deposit} ${styles['icon']}`}
-            icon={'arrow-right-a'}
+            icon={'money'}
             size={25}
           ></Icon>
           <div className={styles['item']}>
-            <h4>Pago</h4>
+            <h4>Deposito</h4>
             <h4 className={styles['text']}>{description}</h4>
           </div>
         </div>

@@ -1,5 +1,7 @@
+import { Position, Tooltip } from 'evergreen-ui';
 import { NavLink } from 'react-router-dom';
 import Icon from '../icon/icon';
+import Tag from '../tag/tag';
 import styles from './brand.module.scss';
 
 /* eslint-disable-next-line */
@@ -13,11 +15,20 @@ export function Brand(props: BrandProps) {
   const classSelected = negativeSpace ? styles['negative'] : '';
 
   const BrandComponent = () => (
-    <div className={`${styles['container']} ${classSelected}`}>
-    <Icon icon='pix' color='#00bdab' size={25}/>
-    <p>Openmind</p>
-  </div>
-  )
+    <div className={`${styles['container']}`}>
+      <div className={`${styles['brand']} ${classSelected}`}>
+        <Icon icon="pix" color="#00bdab" size={25} />
+        <p>OpenMind</p>
+      </div>
+      {!negativeSpace && (
+        <div className={styles['tag-status']}>
+          <Tooltip content="Estamos en una fase de prueba aun" position={Position.TOP}>
+            <h5>Beta</h5>
+          </Tooltip>
+        </div>
+      )}
+    </div>
+  );
 
   return (
     <>

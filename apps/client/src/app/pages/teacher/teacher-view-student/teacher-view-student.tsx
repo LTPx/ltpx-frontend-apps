@@ -1,7 +1,7 @@
 import styles from './teacher-view-student.module.scss';
 import { useCourseStudents } from '@ltpx-frontend-apps/store';
 import { useCallback, useEffect, useState } from 'react';
-import { QuizResult } from '@ltpx-frontend-apps/api';
+import { AchievementModel, QuizResult } from '@ltpx-frontend-apps/api';
 import {
   AchievementCard,
   Button,
@@ -20,7 +20,8 @@ export interface TeacherViewStudentProps {
 export function TeacherViewStudent(props: TeacherViewStudentProps) {
   const {studentId} = props;
   const [quizzes, setQuizzes] = useState<QuizResult[]>([]);
-  const { _getStudentQuizzesByCourse } = useCourseStudents();
+  const [ achievements, setAchievements] = useState<AchievementModel[]>([]);
+  const { _getStudentQuizzesByCourse, _getStudentAchievementsByCourse } = useCourseStudents();
   const [openModal, setOpenModal] = useState(false);
   const { courseId } = useParams();
   const [selectedTab, setSelectedTab] = useState(0);
@@ -38,11 +39,32 @@ export function TeacherViewStudent(props: TeacherViewStudentProps) {
       console.log('error: ', error);
     }
   }, []);
- 
+
+  const fetchAchievements = useCallback(async (id: number) => {
+    const course_id = parseInt(courseId || '');
+    const { success, data, error } = await _getStudentAchievementsByCourse(
+      course_id,
+      id
+    );
+    if (success) {
+      console.log('data y: ', data);
+      setAchievements(data);
+    } else {
+      console.log('error: ', error);
+    }
+  }, []);
+
   useEffect(() => {
-    console.log(studentId)
-    fetchQuizzes(studentId);
-  }, [studentId]);
+    if (selectedTab === 0) {
+
+    }
+    if (selectedTab === 1) {
+      fetchQuizzes(studentId);
+    }
+    if (selectedTab === 2) {
+      fetchAchievements(studentId);
+    }
+  }, [studentId, selectedTab]);
 
   const tabs = [
     {
@@ -95,7 +117,9 @@ export function TeacherViewStudent(props: TeacherViewStudentProps) {
       )}
       {selectedTab === 2 && (
         <div className={styles['achievements-student']}>
-          <AchievementCard image={''} text={''}/>
+          {achievements.length > 0 && achievements.map((achievement, index) => (
+            <AchievementCard key={index} image={achievement.image} text={achievement.title}/>
+          ))}
         </div>
       )}
       <Dialog

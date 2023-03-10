@@ -1,3 +1,4 @@
+import styles from './teacher-earnings.module.scss';
 import { WithdrawalParams } from '@ltpx-frontend-apps/api';
 import {
   BalanceCard,
@@ -12,11 +13,12 @@ import {
 import { useTeacher } from '@ltpx-frontend-apps/store';
 import { Dialog } from 'evergreen-ui';
 import { useCallback, useEffect, useState } from 'react';
-import styles from './teacher-earnings.module.scss';
+import { useMoment } from '../../../hooks/useMoment';
 
 export function TeacherEarnings() {
   const { _getWallet, wallet, _makeWithdrawal } = useTeacher();
   const [openModal, setOpenModal] = useState(false);
+  const { formatDate } = useMoment();
   const fetchWallet = useCallback(async () => {
     const { success, data, error } = await _getWallet();
     if (success) {
@@ -88,10 +90,10 @@ export function TeacherEarnings() {
                 {wallet.transactions.map((transaction, index) => (
                   <TransactionRow
                     key={index}
-                    date={transaction.date}
+                    date={formatDate(transaction.date)}
                     balance={transaction.amount}
                     status={TransactionStatus.completed}
-                    type={TransactionType.payment}
+                    type={transaction.credit ? TransactionType.payment : TransactionType.withdrawal}
                     description={transaction.description}
                   />
                 ))}

@@ -9,5 +9,6 @@ export interface WalletModel {
     amount: string;
     date: string;
     description: string;
+    credit: boolean;
   }[]
 }

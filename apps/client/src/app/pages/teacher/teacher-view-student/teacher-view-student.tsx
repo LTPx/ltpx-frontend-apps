@@ -6,6 +6,7 @@ import {
   AchievementCard,
   Button,
   ColorsButton,
+  EmptyState,
   QuizStudentCard,
   Tabs,
   TaskTeacherCard,
@@ -18,10 +19,12 @@ export interface TeacherViewStudentProps {
   studentId: number;
 }
 export function TeacherViewStudent(props: TeacherViewStudentProps) {
-  const {studentId} = props;
+  const { studentId } = props;
   const [quizzes, setQuizzes] = useState<QuizResult[]>([]);
   const { _getStudentQuizzesByCourse } = useCourseStudents();
   const [openModal, setOpenModal] = useState(false);
+  const exist = false;
+  // const [task, setLoaded] = useState(false);
   const { courseId } = useParams();
   const [selectedTab, setSelectedTab] = useState(0);
 
@@ -38,9 +41,9 @@ export function TeacherViewStudent(props: TeacherViewStudentProps) {
       console.log('error: ', error);
     }
   }, []);
- 
+
   useEffect(() => {
-    console.log(studentId)
+    console.log(studentId);
     fetchQuizzes(studentId);
   }, [studentId]);
 
@@ -53,7 +56,7 @@ export function TeacherViewStudent(props: TeacherViewStudentProps) {
     },
     {
       text: 'Logros',
-    }
+    },
   ];
   const handleClick = (index: number) => {
     setSelectedTab(index);
@@ -62,40 +65,85 @@ export function TeacherViewStudent(props: TeacherViewStudentProps) {
     <div className={styles['container']}>
       <Tabs tabs={tabs} onClickTab={(option) => handleClick(option)} />
       {selectedTab === 0 && (
-        <div className={styles['task-student']}>
-          <h4 className={styles['title-task']}>Tareas del estudiante: </h4>
-          <TaskTeacherCard title={'Matemáticas'} description={'entregada'} />
+        <div>
+          {exist === false ? (
+            <EmptyState
+              classNameImage={`${styles['image-empty']}`}
+              className={`${styles['image-content']}`}
+              icon={'task-outline'}
+              description={
+                'El estudiante aun no a completado una tarea'
+              }
+            />
+          ) : (
+            <div className={styles['task-student']}>
+              <h4 className={styles['title-task']}>Tareas del estudiante: </h4>
+              <TaskTeacherCard
+                title={'Matemáticas'}
+                description={'entregada'}
+              />
+            </div>
+          )}
         </div>
       )}
       {selectedTab === 1 && (
-        <div className={styles['content']}>
-          <h4 className={styles['subtitle']}>Test dados por el estudiante</h4>
-          <div className={styles['quizzes-content']}>
-            {quizzes?.map((quiz, index) => (
-              <div key={index}>
-                <QuizStudentCard title={quiz.name} text={`Resultado: ${quiz.score}`}>
-                  <div className={styles['btn-test']}>
-                    <Button
-                      title="Calificar test"
-                      icon="play-filled"
-                      link={`/teacher/quiz-review/${quiz.id}`}
-                    />
-                    <Button
-                      title="Dar Feedback"
-                      color={ColorsButton.secondary}
-                      icon="play-filled"
-                      onClick={() => setOpenModal(true)}
-                    />
+        <div>
+          {quizzes.length > 0 ? (
+            <div className={styles['content']}>
+              <h4 className={styles['subtitle']}>
+                Test dados por el estudiante
+              </h4>
+              <div className={styles['quizzes-content']}>
+                {quizzes?.map((quiz, index) => (
+                  <div key={index}>
+                    <QuizStudentCard
+                      title={quiz.name}
+                      text={`Resultado: ${quiz.score}`}
+                    >
+                      <div className={styles['btn-test']}>
+                        <Button
+                          title="Calificar test"
+                          icon="play-filled"
+                          link={`/teacher/quiz-review/${quiz.id}`}
+                        />
+                        <Button
+                          title="Dar Feedback"
+                          color={ColorsButton.secondary}
+                          icon="play-filled"
+                          onClick={() => setOpenModal(true)}
+                        />
+                      </div>
+                    </QuizStudentCard>
                   </div>
-                </QuizStudentCard>
+                ))}
               </div>
-            ))}
-          </div>
+            </div>
+          ) : (
+            <EmptyState
+              classNameImage={`${styles['image-empty']}`}
+              className={`${styles['image-content']}`}
+              icon={'quiz-outline'}
+              description={
+                'El estudiante aun no a completado un test.'
+              }
+            />
+          )}
         </div>
       )}
       {selectedTab === 2 && (
         <div className={styles['achievements-student']}>
-          <AchievementCard image={''} text={''}/>
+          {exist === false ? (
+            <EmptyState
+              classNameImage={`${styles['image-empty']}`}
+              className={`${styles['image-content']}`}
+              icon={'trophy'}
+              description={
+                'El estudiante aun no a alcanzado un logro. '
+              }
+            />
+          ) : (
+            <AchievementCard image={''} text={''} />
+          )}
         </div>
       )}
       <Dialog

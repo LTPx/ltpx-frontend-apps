@@ -5,11 +5,13 @@ export const useCourseStudents = () => {
     _getStudentsByCourse,
     _getStudentQuizzesByCourse,
     _getStudentAchievementsByCourse,
+    _getStudentTasksByCourse,
   } = useAppStore();
 
   return {
     _getStudentsByCourse,
     _getStudentQuizzesByCourse,
     _getStudentAchievementsByCourse,
+    _getStudentTasksByCourse,
   };
 };

@@ -20,6 +20,8 @@ export interface TaskModel {
 }
 
 export interface TaskStudent {
+  title?: string;
+  description?: string;
   task_id: number;
   answer: string;
   file?: any;

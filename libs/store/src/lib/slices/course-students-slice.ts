@@ -1,4 +1,9 @@
-import { teacherGetCourseStudents, teacherGetStudentQuizzes, teacherGetStudentAchievements } from '@ltpx-frontend-apps/api';
+import {
+  teacherGetCourseStudents,
+  teacherGetStudentQuizzes,
+  teacherGetStudentAchievements,
+  teacherGetStudentTasks,
+} from '@ltpx-frontend-apps/api';
 import { StateCreator } from 'zustand';
 import { StoreState } from '../store';
 
@@ -10,8 +15,18 @@ type TResponse = {
 
 export type CourseStudentsSlice = {
   _getStudentsByCourse: (courseId: number) => Promise<TResponse>;
-  _getStudentQuizzesByCourse: (courseId: number, studentId: number) => Promise<TResponse>;
-  _getStudentAchievementsByCourse: (courseId: number, studentId: number) => Promise<TResponse>;
+  _getStudentQuizzesByCourse: (
+    courseId: number,
+    studentId: number
+  ) => Promise<TResponse>;
+  _getStudentAchievementsByCourse: (
+    courseId: number,
+    studentId: number
+  ) => Promise<TResponse>;
+  _getStudentTasksByCourse: (
+    courseId: number,
+    studentId: number
+  ) => Promise<TResponse>;
 };
 
 export const createCourseStudentsSlice: StateCreator<
@@ -40,6 +55,14 @@ export const createCourseStudentsSlice: StateCreator<
     try {
       const quizzes = await teacherGetStudentAchievements(courseId, studentId);
       return { success: true, data: quizzes };
+    } catch (error) {
+      return { success: false, error };
+    }
+  },
+  _getStudentTasksByCourse: async (courseId, studentId) => {
+    try {
+      const tasks = await teacherGetStudentTasks(courseId, studentId);
+      return { success: true, data: tasks };
     } catch (error) {
       return { success: false, error };
     }

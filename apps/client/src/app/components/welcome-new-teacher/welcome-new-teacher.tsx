@@ -1,6 +1,6 @@
 import styles from './welcome-new-teacher.module.scss';
 import { Button, ColorsTag, Icon, Tag } from '@ltpx-frontend-apps/shared-ui';
-import { useTeacher } from '@ltpx-frontend-apps/store';
+import { useTeacher, useUser } from '@ltpx-frontend-apps/store';
 import { NavLink } from 'react-router-dom';
 import { StatusTeacherAccount } from '@ltpx-frontend-apps/api';
 
@@ -9,6 +9,7 @@ export interface WelcomeNewTeacherProps {}
 
 export function WelcomeNewTeacher(props: WelcomeNewTeacherProps) {
   const { teacher_account } = useTeacher();
+  const { user } = useUser();
 
   return (
     <div className={styles['container']}>

@@ -22,7 +22,7 @@ export function Brand(props: BrandProps) {
       </div>
       {!negativeSpace && (
         <div className={styles['tag-status']}>
-          <Tooltip content="Estamos en una fase de prueba aun" position={Position.TOP}>
+          <Tooltip content="Estamos en una fase de prueba aun por lo que podrías experimentar algunos errores" position={Position.TOP}>
             <h5>Beta</h5>
           </Tooltip>
         </div>

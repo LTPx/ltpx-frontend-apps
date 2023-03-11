@@ -35,6 +35,11 @@ export interface UserStore {
   initial_register: TypeAccounts;
   initial_view: TypeViews;
   teacher_account?: StatusTeacherAccount;
+  teacher?: {
+    id: number;
+    teacher_name: string;
+    bank_accounts: string;
+  },
   id: number;
 }
 

@@ -25,6 +25,7 @@
 
   .tag-status {
     flex: none;
+
     h5 {
       display: flex;
       align-items: center;
@@ -33,6 +34,7 @@
       border-radius: 10px;
       color: $secondary-color-300;
       min-width: 4rem;
+      font-weight: 500;
     }
   }
 }

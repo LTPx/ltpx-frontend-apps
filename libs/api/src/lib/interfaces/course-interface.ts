@@ -168,3 +168,8 @@ export interface ClassroomClasses {
   duration: number;
   meetings: MeetingModel[];
 }
+
+export interface Student {
+  name: string;
+  student_id: number;
+}

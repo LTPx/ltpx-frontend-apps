@@ -1,7 +1,11 @@
 import styles from './teacher-view-student.module.scss';
 import { useCourseStudents } from '@ltpx-frontend-apps/store';
 import { useCallback, useEffect, useState } from 'react';
-import { QuizResult } from '@ltpx-frontend-apps/api';
+import {
+  AchievementModel,
+  QuizResult,
+  TaskStudent,
+} from '@ltpx-frontend-apps/api';
 import {
   AchievementCard,
   Button,
@@ -21,7 +25,13 @@ export interface TeacherViewStudentProps {
 export function TeacherViewStudent(props: TeacherViewStudentProps) {
   const { studentId } = props;
   const [quizzes, setQuizzes] = useState<QuizResult[]>([]);
-  const { _getStudentQuizzesByCourse } = useCourseStudents();
+  const [achievements, setAchievements] = useState<AchievementModel[]>([]);
+  const [tasks, setTasks] = useState<TaskStudent[]>([]);
+  const {
+    _getStudentQuizzesByCourse,
+    _getStudentAchievementsByCourse,
+    _getStudentTasksByCourse,
+  } = useCourseStudents();
   const [openModal, setOpenModal] = useState(false);
   const exist = false;
   // const [task, setLoaded] = useState(false);
@@ -42,10 +52,45 @@ export function TeacherViewStudent(props: TeacherViewStudentProps) {
     }
   }, []);
 
+  const fetchAchievements = useCallback(async (id: number) => {
+    const course_id = parseInt(courseId || '');
+    const { success, data, error } = await _getStudentAchievementsByCourse(
+      course_id,
+      id
+    );
+    if (success) {
+      console.log('data y: ', data);
+      setAchievements(data);
+    } else {
+      console.log('error: ', error);
+    }
+  }, []);
+
+  const fetchTasks = useCallback(async (id: number) => {
+    const course_id = parseInt(courseId || '');
+    const { success, data, error } = await _getStudentTasksByCourse(
+      course_id,
+      id
+    );
+    if (success) {
+      console.log('data: ', data);
+      setTasks(data);
+    } else {
+      console.log('error: ', error);
+    }
+  }, []);
+
   useEffect(() => {
-    console.log(studentId);
-    fetchQuizzes(studentId);
-  }, [studentId]);
+    if (selectedTab === 0) {
+      fetchTasks(studentId);
+    }
+    if (selectedTab === 1) {
+      fetchQuizzes(studentId);
+    }
+    if (selectedTab === 2) {
+      fetchAchievements(studentId);
+    }
+  }, [studentId, selectedTab]);
 
   const tabs = [
     {

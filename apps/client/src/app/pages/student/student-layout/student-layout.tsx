@@ -10,6 +10,7 @@ import { useUser } from '@ltpx-frontend-apps/store';
 import { Avatar } from 'evergreen-ui';
 import { useTranslation } from 'react-i18next';
 import { Outlet, useNavigate } from 'react-router-dom';
+import avatar from './../../../../assets/images/avatars/avatar-1.svg'
 
 export function StudentLayout() {
   const { user, logout } = useUser();
@@ -18,8 +19,8 @@ export function StudentLayout() {
 
   const links = [
     {
-      title: t('header.home'),
-      url: '/home',
+      title: t('dashboards.student.dashboard'),
+      url: '/student/dashboard',
       icon: {
         icon: 'store',
         size: 20,
@@ -28,14 +29,6 @@ export function StudentLayout() {
     {
       title: t('header.courses'),
       url: '/courses',
-      icon: {
-        icon: 'store',
-        size: 20,
-      },
-    },
-    {
-      title: t('dashboards.student.dashboard'),
-      url: '/student/dashboard',
       icon: {
         icon: 'store',
         size: 20,
@@ -105,7 +98,7 @@ export function StudentLayout() {
               ]}
             />
             <div className={styles['avatar']}>
-              <Avatar name={user.fullname} size={40} color="green" />
+              <Avatar name={user.fullname} size={40} color="green" src={avatar}/>
               <Icon icon="caret-down" size={18} />
             </div>
           </Dropdown>

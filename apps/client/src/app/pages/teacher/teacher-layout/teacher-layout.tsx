@@ -4,6 +4,7 @@ import { Avatar } from 'evergreen-ui';
 import { useTranslation } from 'react-i18next';
 import { Outlet, useNavigate } from 'react-router-dom';
 import styles from './teacher-layout.module.scss';
+import avatar from './../../../../assets/images/avatars/avatar-3.svg'
 
 export function TeacherLayout() {
   const { user, logout } = useUser();
@@ -65,7 +66,7 @@ export function TeacherLayout() {
               ]}
             />
             <div className={styles['avatar']}>
-              <Avatar name={user.fullname} size={40} color='green'/>
+              <Avatar name={user.fullname} size={40} color='green' src={avatar}/>
               <Icon icon='caret-down' size={18}/>
             </div>
           </Dropdown>

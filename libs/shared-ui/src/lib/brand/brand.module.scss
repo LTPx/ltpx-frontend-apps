@@ -1,18 +1,38 @@
 @import '../../styles/styles.module.scss';
+
 .container {
   display: flex;
-  gap: 0.5rem;
   align-items: center;
+  gap: 0.5rem;
 
-  p {
-    font-size: $size-md-2;
-    color: $secondary-color;
-    font-weight: 500;
+  .brand {
+    display: flex;
+    gap: 0.5rem;
+    align-items: flex-start;
+
+    p {
+      font-size: $size-md-2;
+      color: $secondary-color;
+      font-weight: 500;
+    }
+
+    &.negative {
+      p {
+        color: #fff;
+      }
+    }
   }
 
-  &.negative {
-    p {
-      color: #fff;
+  .tag-status {
+    flex: none;
+    h5 {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: $orange-color;
+      border-radius: 10px;
+      color: $secondary-color-300;
+      min-width: 4rem;
     }
   }
 }

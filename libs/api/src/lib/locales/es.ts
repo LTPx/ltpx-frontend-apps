@@ -88,7 +88,7 @@ export const es = {
   home: {
     cover: {
       title: 'Cursos de aprendizaje en línea',
-      subtitle: 'La tecnología está trayendo una ola masiva de educación sobre el aprendizaje en diferentes maneras',
+      subtitle: 'La tecnología de OpenMind está liberando el potencial del aprendizaje en línea de varias maneras.',
     },
     popularCourse: {
       title: 'Cursos populares',

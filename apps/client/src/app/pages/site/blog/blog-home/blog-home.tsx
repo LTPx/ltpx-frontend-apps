@@ -3,19 +3,18 @@ import { useBlog } from '../useBlog';
 import styles from './blog-home.module.scss';
 
 export function BlogHome() {
-  const {
-    linksOpenMind,
-    linksStudent,
-    linksTeacher
-  } = useBlog();
+  const { linksOpenMind, linksStudent, linksTeacher } = useBlog();
 
   return (
     <div className={styles['content']}>
-      <img src="https://res.cloudinary.com/dslqbzdfy/image/upload/v1675456150/openmind/openmide-blog-bg_b8mstr.jpg" alt="cover" />
+      <img
+        src="https://res.cloudinary.com/dslqbzdfy/image/upload/v1675456150/openmind/openmide-blog-bg_b8mstr.jpg"
+        alt="cover"
+      />
       <div className={styles['information']}>
-        <h1>Bienvenido al blog de Openmind</h1>
+        <h1>Bienvenido al blog de OpenMind</h1>
         <p>
-          Un directorio rápido de los blogs más populares de Openmind acerca de
+          Un directorio rápido de los blogs más populares de OpenMind acerca de
           la educación en el hogar, planes de estudios, cómo complementar la
           educación de sus hijos y más.
           <br />
@@ -24,12 +23,12 @@ export function BlogHome() {
           recursos que necesitan.
         </p>
         <div className={styles['information-blog']}>
-          <h2>Openmind</h2>
-          <ul >
+          <h2>OpenMind</h2>
+          <ul>
             {linksOpenMind.map((link, key) => (
-                <li key={key}>
-                  <NavLink to={link.url}>{link.text}</NavLink>
-                </li>
+              <li key={key}>
+                <NavLink to={link.url}>{link.text}</NavLink>
+              </li>
             ))}
           </ul>
           <h2>Profesores</h2>

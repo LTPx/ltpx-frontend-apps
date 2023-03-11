@@ -20,15 +20,15 @@ export function StudentSafetyPrivacy() {
           Nuestra principal preocupación es la seguridad de los alumnos, y
           abordamos esto de varias maneras, tal como se describe en nuestra
           política de seguridad. Este artículo describe su responsabilidad por
-          la seguridad como maestro en Open Mind.
+          la seguridad como maestro en OpenMind.
         </p>
         <h4>Responsabilidad del maestro por la seguridad</h4>
         <p>
           Independientemente del tema que esté enseñando o del grupo de edad con
           el que esté trabajando, tiene la responsabilidad de crear un entorno
           de clase en línea seguro. Por esta razón, los docentes están obligados
-          a impartir todas las clases en vivo a través de la plataforma Open
-          Mind; bajo ninguna circunstancia las clases deben realizarse
+          a impartir todas las clases en vivo a través de la plataforma
+          OpenMind; bajo ninguna circunstancia las clases deben realizarse
           utilizando un código personal de Zoom u otros sitios de conferencias.
         </p>
         <p>
@@ -54,7 +54,7 @@ export function StudentSafetyPrivacy() {
         </p>
         <p>
           Como recordatorio, solo los niños de 3 a 18 años pueden tomar clases
-          en Open Mind. Nadie fuera de estos rangos de edad debe estar permitido
+          en OpenMind. Nadie fuera de estos rangos de edad debe estar permitido
           en clase a menos que un maestro pueda verificar su identidad y el
           estado del niño al comienzo de la clase. Si sospecha que un alumno no
           es un niño entre esas edades, retírelo del salón de clases e informe
@@ -140,12 +140,12 @@ export function StudentSafetyPrivacy() {
           activamente en el aula como estudiantes.
         </p>
         <p>
-          Recuerde, está en contra de las políticas de Open Mind que un padre
+          Recuerde, está en contra de las políticas de OpenMind que un padre
           escuche o vea la clase desde un dispositivo separado. Los maestros
           deben tener cuidado al admitir un segundo dispositivo de un solo
           alumno. Si ocurre un incidente relacionado con la seguridad durante
           una de sus clases o nota una actividad sospechosa, debe comunicarse
-          con la seguridad de Open Mind de inmediato para informarnos a
+          con la seguridad de OpenMind de inmediato para informarnos a
           seguridad@growopenminds.com.
         </p>
         <h4>Política de cámaras</h4>
@@ -153,11 +153,11 @@ export function StudentSafetyPrivacy() {
           Todos los alumnos deben registrarse visualmente en la clase en la
           cámara en todas y cada una de las clases. Sin embargo, una vez
           registrados, algunos alumnos pueden optar por apagar sus cámaras. Si
-          bien Open Mind no requiere que las cámaras estén en el registro
+          bien OpenMind no requiere que las cámaras estén en el registro
           anterior, seguimos alentando a todos los alumnos a interactuar con sus
           maestros y compañeros de clase al habilitar su video para una
           experiencia de calidad. Si bien muchos estudiantes pueden sentirse más
-          cómodos con sus cámaras apagadas, Open Mind les da a los maestros la
+          cómodos con sus cámaras apagadas, OpenMind les da a los maestros la
           opción de hacer sus propias reglas en el salón de clases. En ciertos
           casos, los maestros pueden optar por exigir que las cámaras estén
           habilitadas (por ejemplo: por necesidades académicas, preferencias de
@@ -191,11 +191,11 @@ export function StudentSafetyPrivacy() {
           Para los profesores que ofrecen clases sobre cualquier tipo de tema
           delicado, como se define en nuestra política de contenido de clase,
           les pedimos que tomen medidas adicionales para garantizar la seguridad
-          de sus alumnos. Open Mind tiene una política de tolerancia cero para
-          el discurso de odio, las muestras de comportamiento amenazante con
-          armas o el uso de alcohol/drogas restringidas/productos de tabaco por
-          parte de maestros o alumnos durante una clase Open Mind. El alcohol,
-          el tabaco, las drogas de cualquier tipo, las armas de fuego y los
+          de sus alumnos. OpenMind tiene una política de tolerancia cero para el
+          discurso de odio, las muestras de comportamiento amenazante con armas
+          o el uso de alcohol/drogas restringidas/productos de tabaco por parte
+          de maestros o alumnos durante una clase OpenMind. El alcohol, el
+          tabaco, las drogas de cualquier tipo, las armas de fuego y los
           materiales pornográficos nunca deben usarse ni promoverse en un salón
           de clases y están sujetos a remoción inmediata de la plataforma.
           Incluso las discusiones sobre dichos temas o el uso aprobado de
@@ -213,7 +213,7 @@ export function StudentSafetyPrivacy() {
           discusiones relacionadas con problemas personales de salud mental,
           como depresión, suicidio o abuso, en nuestra plataforma. Si un alumno
           inicia una conversación sobre un tema delicado, explique amablemente
-          que las clases en Open Mind no son el lugar apropiado para estas
+          que las clases en OpenMind no son el lugar apropiado para estas
           discusiones y redirija a sus alumnos a un nuevo tema. También se
           recomienda que envíe un correo electrónico a
           seguridad@growopenminds.com para que nuestro equipo pueda estar al
@@ -241,7 +241,7 @@ export function StudentSafetyPrivacy() {
         </p>
         <p>
           Le pedimos que comparta cualquier incidente preocupante con el
-          departamento de seguridad de Open Mind seguridad@growopenminds.com y
+          departamento de seguridad de OpenMind seguridad@growopenminds.com y
           trabajaremos con usted para resolverlo. Eso puede implicar ayudar a
           contactar a los padres/tutores legales del alumno, o simplemente
           ayudarlo a decidir cómo proceder.
@@ -250,13 +250,13 @@ export function StudentSafetyPrivacy() {
         <p>
           Si cree que un alumno puede estar en peligro inmediato, primero debe
           alentar al alumno a llamar a emergencias y, al mismo tiempo, debe
-          informar la situación al equipo de seguridad de Open Mind
+          informar la situación al equipo de seguridad de OpenMind
           seguridad@growopenminds.com. Además, si ve evidencia o escucha a su
-          alumno describir abuso o negligencia, Open Mind requiere que informe
-          de inmediato lo que ha presenciado a nuestro equipo de seguridad.
+          alumno describir abuso o negligencia, OpenMind requiere que informe de
+          inmediato lo que ha presenciado a nuestro equipo de seguridad.
         </p>
         <p>
-          Del mismo modo, Open Mind le solicita que también informe a nuestro
+          Del mismo modo, OpenMind le solicita que también informe a nuestro
           equipo de seguridad sobre cualquier conversación de un alumno que
           involucre autolesiones, ideas suicidas, comportamientos peligrosos o
           actos de agresión/violencia hacia otros.
@@ -320,7 +320,7 @@ export function StudentSafetyPrivacy() {
         <p>
           Además de no compartir información personal sobre sus alumnos, tampoco
           debe compartir ninguna información privada sobre sus clases fuera de
-          la plataforma ni combinar clases en Open Mind con otro foro. Esto
+          la plataforma ni combinar clases en OpenMind con otro foro. Esto
           incluye las voces de los estudiantes (audio), usar el nombre o
           apellido de los estudiantes o mostrar las caras de los estudiantes.
           Por ejemplo, no debe compartir nombres, fotos o videos de usted
@@ -349,18 +349,18 @@ export function StudentSafetyPrivacy() {
           puede enviar al alumno un chat privado para informarle lo que está a
           la vista de su cámara sin interrumpir la clase. Después de la clase,
           comuníquese con el padre/tutor legal del alumno en cuestión y el
-          equipo de seguridad de Open Mind seguridad@growopenminds.com. En los
-          casos en que se comprometa la privacidad del alumno, Open Mind puede
+          equipo de seguridad de OpenMind seguridad@growopenminds.com. En los
+          casos en que se comprometa la privacidad del alumno, OpenMind puede
           optar por eliminar una grabación.
         </p>
         <h4>Intercambio de información de contacto</h4>
         <p>
-          Debes mantener toda la comunicación en Open Mind. Eso significa nunca
+          Debes mantener toda la comunicación en OpenMind. Eso significa nunca
           compartir su información de contacto personal con los padres/tutores
           legales o alumnos. Además de mantener todas las comunicaciones en
-          nuestra plataforma, Open Mind prohíbe que los maestros y los
+          nuestra plataforma, OpenMind prohíbe que los maestros y los
           padres/familias se reúnan en persona, a menos que sea en un evento
-          patrocinado por Open Mind.
+          patrocinado por OpenMind.
         </p>
         <p>
           Es posible que los alumnos quieran mantenerse en contacto con sus
@@ -387,13 +387,13 @@ export function StudentSafetyPrivacy() {
         <p>
           Los maestros nunca pueden enviar enlaces de Zoom a los padres o
           alumnos, independientemente de si es a través de mensajes dentro de la
-          plataforma Open Mind (ni en la pestaña Conversaciones ni en la pestaña
+          plataforma OpenMind (ni en la pestaña Conversaciones ni en la pestaña
           Alumnos en el aula), ya que todas las reuniones de clase deben
           comenzar con el botón verde Iniciar reunión en vivo desde el lado del
           maestro por razones de seguridad. Enviar enlaces de videollamada a
-          través de mensajes de Open Mind (incluso para ayudar a un alumno a
-          acceder a la clase) viola la política de Open Mind y podría resultar
-          en la eliminación de la plataforma de Open Mind.
+          través de mensajes de OpenMind (incluso para ayudar a un alumno a
+          acceder a la clase) viola la política de OpenMind y podría resultar en
+          la eliminación de la plataforma de OpenMind.
         </p>
         <h4>Herramientas en línea</h4>
         <p>

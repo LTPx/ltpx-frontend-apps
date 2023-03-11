@@ -12,8 +12,7 @@ export function GreatExperienceOpenMind(props: GreatExperienceOpenMindProps) {
       />
       <div className={styles['information']}>
         <h1>
-          ¿Como asegurarse de entregar una gran experiencia en vivo en Open
-          Mind?
+          ¿Como asegurarse de entregar una gran experiencia en vivo en OpenMind?
         </h1>
         <p>
           Antes de su primera clase, siga los siguientes pasos para asegurarse
@@ -117,8 +116,8 @@ export function GreatExperienceOpenMind(props: GreatExperienceOpenMindProps) {
         </p>
         <h4>¡Emocionese!</h4>
         <p>
-          Si es un educador aprobado en Open Mind, ya nos ha demostrado que
-          tiene lo que se necesita para involucrar a los niños con sus pasiones
+          Si es un educador aprobado en OpenMind, ya nos ha demostrado que tiene
+          lo que se necesita para involucrar a los niños con sus pasiones
           compartidas e inspirar el amor por el aprendizaje. ¡Así que haz un
           plan, prepárate y entra allí! Tu primera clase de estudiantes está
           ansiosa por conocerte.

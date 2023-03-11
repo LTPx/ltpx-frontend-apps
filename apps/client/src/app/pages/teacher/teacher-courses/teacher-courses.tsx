@@ -17,7 +17,7 @@ import { useNavigate } from 'react-router-dom';
 import styles from './teacher-courses.module.scss';
 
 const placeholderImage =
-  'https://designshack.net/wp-content/uploads/placeholder-image-368x246.png';
+  '../../../../assets/images/placeholder-image.svg';
 /* eslint-disable-next-line */
 export interface TeacherCoursesProps {}
 

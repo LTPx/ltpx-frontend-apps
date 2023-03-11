@@ -83,7 +83,7 @@ export function Home() {
         'https://images.unsplash.com/photo-1488190211105-8b0e65b80b4e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OXx8b25saW5lJTIwY2xhc3Nlc3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=800&q=60',
       name: t('Openmind'),
       date: '08 June, 2021',
-      title: '¿Qué es Open Mind y que es el protocolo LTP?',
+      title: '¿Qué es OpenMind y que es el protocolo LTP?',
       link: '/blog/what-is-openmind',
     },
     {
@@ -91,7 +91,7 @@ export function Home() {
         'https://plus.unsplash.com/premium_photo-1661919585183-9656936b6fc1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NTR8fG1pbmR8ZW58MHx8MHx8&auto=format&fit=crop&w=800&q=60',
       name: t('Ricardo Capa'),
       date: '08 June, 2021',
-      title: '¿Cómo funciona Open Mind?',
+      title: '¿Cómo funcionaOpen Mind?',
       link: '/blog/how-openmind-works',
     },
     {
@@ -142,10 +142,7 @@ export function Home() {
               />
             </div>
           </div>
-          <img
-            src="../../../../assets/images/illustration-cover.svg"
-            alt="cover"
-          />
+          <img src="../../../../assets/images/illustration-cover.svg" alt="cover" />
         </div>
         <img
           className={styles['image-cover']}
@@ -184,7 +181,10 @@ export function Home() {
       <div className={styles['categories-container']}>
         <div className={styles['text-categories']}>
           <h2 className={styles['title']}>{t('home.categories.title')}</h2>
-          <h4 className={styles['subtitle']}> {t('home.categories.subtitle')}</h4>
+          <h4 className={styles['subtitle']}>
+            {' '}
+            {t('home.categories.subtitle')}
+          </h4>
         </div>
         <div className={styles['category-content']}>
           {categories.map((category, index) => (

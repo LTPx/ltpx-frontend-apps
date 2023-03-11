@@ -16,16 +16,16 @@ export function GeneratingImpactOpportunities(
         <h1>Clases 1 a 1: Generando impacto y oportunidades</h1>
         <p>
           Aprenda a brindar oportunidades de aprendizaje personalizadas que
-          aumenten sus inscripciones y el impacto en Open Mind.
+          aumenten sus inscripciones y el impacto en OpenMind.
           <br />
-          Muchas familias que usan Open Mind buscarán experiencias de
-          aprendizaje personalizadas para sus alumnos, además de clases
-          grupales. Al ofrecer clases 1 a 1, puede expandir su alcance como
-          educador y usar su experiencia para tener un impacto profundo en los
-          estudiantes individuales. Estos tipos de clases se pueden impartir
-          utilizando cualquier formato de clase, y tiene la oportunidad de
-          trabajar con las familias para encontrar el estilo de instrucción
-          adecuado para sus necesidades.
+          Muchas familias que usan OpenMind buscarán experiencias de aprendizaje
+          personalizadas para sus alumnos, además de clases grupales. Al ofrecer
+          clases 1 a 1, puede expandir su alcance como educador y usar su
+          experiencia para tener un impacto profundo en los estudiantes
+          individuales. Estos tipos de clases se pueden impartir utilizando
+          cualquier formato de clase, y tiene la oportunidad de trabajar con las
+          familias para encontrar el estilo de instrucción adecuado para sus
+          necesidades.
           <br />
           Los educadores que ofrecen clases 1 a 1 a menudo ven:
         </p>
@@ -134,13 +134,13 @@ export function GeneratingImpactOpportunities(
           5 estrellas que ayudan a hacer crecer su negocio.
         </p>
         <p>
-          Recuerde, siempre debe usar el aula de Open Mind para comunicarse con
+          Recuerde, siempre debe usar el aula de OpenMind para comunicarse con
           los padres o los alumnos, y todas las reuniones deben realizarse en la
-          plataforma Open Mind (incluso cuando trabaja 1 a 1).
+          plataforma OpenMind (incluso cuando trabaja 1 a 1).
         </p>
         <h4>Promoción de su clase 1 a 1</h4>
         <p>
-          Al agregar una clase 1 a 1 al mercado de Open Mind, considere cómo
+          Al agregar una clase 1 a 1 al mercado de OpenMind, considere cómo
           promocionará su listado a las familias y aumentará las inscripciones.
           <br />
           Para llegar a los nuevos alumnos que buscan clases de tutoría, incluya
@@ -151,8 +151,8 @@ export function GeneratingImpactOpportunities(
           una oportunidad 1 a 1.
           <br />
           Tómese el tiempo para comprender todo lo que hay que saber sobre las
-          clases de estilo 1 a 1 en Open Mind, ¡y luego comience a trabajar en
-          el desarrollo de un plan para sus propias experiencias de aprendizaje
+          clases de estilo 1 a 1 en OpenMind, ¡y luego comience a trabajar en el
+          desarrollo de un plan para sus propias experiencias de aprendizaje
           personalizadas!
         </p>
       </div>

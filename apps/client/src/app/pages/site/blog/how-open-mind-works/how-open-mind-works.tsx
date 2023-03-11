@@ -11,13 +11,13 @@ export function HowOpenMindWorks() {
         src="https://plus.unsplash.com/premium_photo-1661919585183-9656936b6fc1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NTR8fG1pbmR8ZW58MHx8MHx8&auto=format&fit=crop&w=800&q=60"
       />
       <div className={styles['information']}>
-        <h1>¿Cómo funciona Open Mind?</h1>
-        <h4>Open Mind tiene un par de funciones únicas:</h4>
+        <h1>¿Cómo funciona OpenMind?</h1>
+        <h4>OpenMind tiene un par de funciones únicas:</h4>
         <ol>
           <li>
-            Cuando contratas una clase en Open Mind, deberás pagar todo el valor
+            Cuando contratas una clase en OpenMind, deberás pagar todo el valor
             de la misma, sin embargo, este valor no es entregado al docente de
-            inmediato. Open Mind sostiene el valor hasta que el docente obtiene
+            inmediato. OpenMind sostiene el valor hasta que el docente obtiene
             los objetivos predeterminados para el curso y entrega el pago al
             docente una vez que él logra que el alumno consiga sus objetivos de
             aprendizaje. Esto hace que:
@@ -38,12 +38,12 @@ export function HowOpenMindWorks() {
             </ol>
           </li>
           <li>
-            Al completar una clase en Open Mind, el alumno recibirá
+            Al completar una clase en OpenMind, el alumno recibirá
             automáticamente un certificado de cumplimiento que incluye todas las
             actividades realizadas para obtener el mismo.
           </li>
           <li>
-            Open Mind provee un currículo guía que posiciona cada clase ofrecida
+            OpenMind provee un currículo guía que posiciona cada clase ofrecida
             en él. Los alumnos son libres de contratar cursos y docentes, o
             avanzar por sí mismos y solicitar validaciones únicamente cuando
             están listos para pasar al siguiente nivel.

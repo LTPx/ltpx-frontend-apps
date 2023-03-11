@@ -1,10 +1,14 @@
 @import '../../styles/styles.module.scss';
 
-.container {
+.rows {
   display: grid;
-  grid-template-columns: 1.5fr 1fr 1.5fr 1fr;
-  padding-bottom: $size-md-1;
+  grid-template-columns: 2fr 1fr 1.5fr;
+  padding: $size-md-1;
   border-bottom: 1px solid $gray-color-200;
+
+  &:hover {
+    background-color: #f7f7f7;
+  }
 
   .type-transaction {
     display: flex;
@@ -28,6 +32,19 @@
   .item {
     display: flex;
     flex-direction: column;
+
+    &.end {
+      align-items: end;
+    }
+
+    .payment {
+      color: $green-color;
+    }
+
+    .withdrawal {
+      color: $red-color-400;
+    }
+
     .text {
       padding-top: 0.12rem;
       color: $text-gray-color;

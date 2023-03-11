@@ -142,10 +142,7 @@ export function Home() {
               />
             </div>
           </div>
-          <img
-            src="../../../../assets/images/illustration-cover.svg"
-            alt="cover"
-          />
+          <img src="../../../../assets/images/illustration-cover.svg" alt="cover" />
         </div>
         <img
           className={styles['image-cover']}
@@ -184,7 +181,10 @@ export function Home() {
       <div className={styles['categories-container']}>
         <div className={styles['text-categories']}>
           <h2 className={styles['title']}>{t('home.categories.title')}</h2>
-          <h4 className={styles['subtitle']}> {t('home.categories.subtitle')}</h4>
+          <h4 className={styles['subtitle']}>
+            {' '}
+            {t('home.categories.subtitle')}
+          </h4>
         </div>
         <div className={styles['category-content']}>
           {categories.map((category, index) => (

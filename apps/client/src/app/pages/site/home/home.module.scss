@@ -17,12 +17,12 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: $size-md-1;
+    // gap: $size-md-1;
     position: relative;
     z-index: 1;
     img {
       padding-top: $size-lg-4;
-      max-width: 25rem;
+      max-width: 45rem;
     }
   }
 }
@@ -110,7 +110,6 @@
       padding-top: 0.25rem;
       color: $text-gray-color;
     }
-
   }
   h4 {
     margin-top: 0px;
@@ -259,7 +258,7 @@
     .cover {
       img {
         padding-top: $size-lg-4;
-        width: 20rem;
+        width: 25rem;
         padding-bottom: $size-lg-4;
       }
       .text {
@@ -286,6 +285,11 @@
 }
 //tablet-responsive-horizontal
 @media screen and (min-width: 860px) and (max-width: 1224px) {
+  .cover {
+    img {
+      width: 35rem;
+    }
+  }
   .news-container {
     .title-news {
       gap: 20rem;

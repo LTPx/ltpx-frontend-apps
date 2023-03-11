@@ -12,10 +12,10 @@ export function WhatIsOpenMind() {
       />
       <div className={styles['information']}>
         <h1>
-          ¿Qué es Open Mind, que es el protocolo LTP y porque debo usarlos?
+          ¿Qué es OpenMind, que es el protocolo LTP y porque debo usarlos?
         </h1>
         <p>
-          Open Mind es el nombre del marketplace que construimos sobre el
+          OpenMind es el nombre del marketplace que construimos sobre el
           protocolo de transferencia de aprendizaje LTP. LTP significa Learning
           Transfer Protocol, Learning Through Play y Long Term Potentiation; los
           tres conceptos que el protocolo hace posible. Ha sido creado para:
@@ -56,22 +56,22 @@ export function WhatIsOpenMind() {
           </li>
         </ol>
         <p>
-          Al usar Open Mind como docente podrás crear tus propios cursos y dar
+          Al usar OpenMind como docente podrás crear tus propios cursos y dar
           clases fácilmente a alumnos de todo el mundo. Tu rol como docente en
-          Open Mind varía levemente del que tienes en una escuela tradicional.
+          OpenMind varía levemente del que tienes en una escuela tradicional.
           Tus pagos no dependen de cumplir un cierto número de horas, sino de
           validar que tus alumnos han cumplido sus objetivos preestablecidos.
-          Open Mind promociona tus clases y los docentes con las mejores
+          OpenMind promociona tus clases y los docentes con las mejores
           calificaciones y resultados serán promocionados aún más. Si tus clases
           tienen alta demanda, podrás subir su costo, tener más alumnos y ganar
           más dinero. Tus resultados dependen de la calidad de tu trabajo y nada
           más.
         </p>
         <p>
-          Al usar Open Mind como alumno podrás avanzar a tu propio ritmo,
-          asistir a clases grupales en línea, consultar a tu docente de manera
-          ilimitada y obtener tus objetivos a tu propia velocidad. No estarás
-          obligado a ir al ritmo del más lento ni a aprender cosas inútiles. Tu
+          Al usar OpenMind como alumno podrás avanzar a tu propio ritmo, asistir
+          a clases grupales en línea, consultar a tu docente de manera ilimitada
+          y obtener tus objetivos a tu propia velocidad. No estarás obligado a
+          ir al ritmo del más lento ni a aprender cosas inútiles. Tu
           representante sólo pagará al docente una vez que cumplas tus objetivos
           motivando de esa manera al docente a enfocarse en lo que más importa;
           tu éxito. Podrás ver tus objetivos desde el inicio y completarlos a tu

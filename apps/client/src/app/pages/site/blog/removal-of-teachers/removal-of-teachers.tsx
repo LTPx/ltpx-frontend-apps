@@ -13,15 +13,16 @@ export function RemovalOfTeachers(props: RemovalOfTeachersProps) {
       <div className={styles['information']}>
         <h1>Restricción y remoción de maestros</h1>
         <h4>
-          ¿Cómo abordamos la actividad que no cumple con los estándares de Open
-          Mind?
+          ¿Cómo abordamos la actividad que no cumple con los estándares de
+          OpenMind?
         </h4>
         <p>
-          A veces restringimos la actividad de un maestro en la plataforma Open
-          Mind o lo eliminamos por completo. Ese es un resultado inusual, y no
-          tomamos esa decisión a la ligera. Los maestros que han sido eliminados
-          por violar nuestros términos de servicio y/o normas comunitarias no
-          son elegibles para volver a postularse a la plataforma.
+          A veces restringimos la actividad de un maestro en la plataforma
+          OpenMind o lo eliminamos por completo. Ese es un resultado inusual, y
+          no tomamos esa decisión a la ligera. Los maestros que han sido
+          eliminados por violar nuestros términos de servicio y/o normas
+          comunitarias no son elegibles para volver a postularse a la
+          plataforma.
         </p>
         <p>
           Entendemos que incluso los mejores maestros recibirán malas
@@ -35,8 +36,8 @@ export function RemovalOfTeachers(props: RemovalOfTeachersProps) {
         <ul>
           <li>
             Usar una cuenta personal de Zoom (u otra plataforma de video) para
-            impartir clases en vivo, en lugar de pasar por la plataforma Open
-            Mind
+            impartir clases en vivo, en lugar de pasar por la plataforma
+            OpenMind
           </li>
           <li>
             Infringir nuestras políticas de gestión de inscripción, incluidas,
@@ -84,7 +85,7 @@ export function RemovalOfTeachers(props: RemovalOfTeachersProps) {
           </li>
           <li>
             Solicitar cuotas de inscripción de las familias para que se paguen
-            fuera de la plataforma Open Mind
+            fuera de la plataforma OpenMind
           </li>
           <li>
             Intentar eludir nuestro proceso para usar herramientas de terceros y
@@ -99,7 +100,7 @@ export function RemovalOfTeachers(props: RemovalOfTeachersProps) {
             o los comentarios sobre otras clases.
           </li>
           <li>
-            Jugar con el sistema de evaluación de Open Mind de cualquier manera,
+            Jugar con el sistema de evaluación de OpeMind de cualquier manera,
             como (pero no limitado a):
             <ul>
               <li>Inflar artificialmente las evaluaciones.</li>
@@ -116,8 +117,7 @@ export function RemovalOfTeachers(props: RemovalOfTeachersProps) {
           </li>
           <li>No renovar su verificación de antecedentes anual.</li>
           <li>
-            No mantener una buena relación de trabajo con el equipo de Open
-            Mind.
+            No mantener una buena relación de trabajo con el equipo de Ope Mind.
           </li>
           <li>Otro comportamiento poco profesional.</li>
           <li>
@@ -126,9 +126,9 @@ export function RemovalOfTeachers(props: RemovalOfTeachersProps) {
           </li>
         </ul>
         <p>
-          Cuando tenemos inquietudes sobre la actividad de un maestro en Open
-          Mind, las compartimos con el maestro. En la mayoría de los casos, se
-          advertirá a los maestros antes de retirarlos. Sin embargo, nos
+          Cuando tenemos inquietudes sobre la actividad de un maestro en
+          OpenMind, las compartimos con el maestro. En la mayoría de los casos,
+          se advertirá a los maestros antes de retirarlos. Sin embargo, nos
           reservamos el derecho de tomar las medidas que consideremos
           apropiadas, incluida la destitución de los maestros sin previo aviso,
           especialmente en casos de una violación flagrante de las normas de
@@ -164,11 +164,11 @@ export function RemovalOfTeachers(props: RemovalOfTeachersProps) {
             </ul>
           </li>
           <li>
-            Usar recursos o contactos de la plataforma Open Mind para realizar
-            negocios personales no relacionados con Open Mind.
+            Usar recursos o contactos de la plataforma OpenMind para realizar
+            negocios personales no relacionados con OpenMind.
           </li>
           <li>
-            Combinación de clases de Open Mind con otras clases fuera de la
+            Combinación de clases de OpenMind con otras clases fuera de la
             plataforma de terceros.
           </li>
           <li>
@@ -181,18 +181,18 @@ export function RemovalOfTeachers(props: RemovalOfTeachersProps) {
           </li>
           <li>
             Participar en contacto inapropiado con un alumno o padre dentro o
-            fuera de la plataforma Open Mind.
+            fuera de la plataforma OpenMind.
           </li>
           <li>Proporcionar materiales o enlaces inapropiados a los alumnos.</li>
           <li>
             Otorgar acceso o compartir la contraseña de la cuenta de enseñanza
-            de uno a alguien que Open Mind no le dio permiso oficialmente para
+            de uno a alguien que OpenMind no le dio permiso oficialmente para
             hacerlo.
           </li>
           <li>
-            Romper los estándares de tolerancia cero de Open Mind con respecto
-            al uso de armas, alcohol, drogas, tabaco o materiales pornográficos
-            en clase.
+            Romper los estándares de tolerancia cero de OpenMind con respecto al
+            uso de armas, alcohol, drogas, tabaco o materiales pornográficos en
+            clase.
           </li>
         </ul>
         <p>
@@ -203,7 +203,7 @@ export function RemovalOfTeachers(props: RemovalOfTeachersProps) {
           eliminado de la lista únicamente debido a la inactividad, simplemente
           envíe sus clases para su aprobación nuevamente.
           <br />
-          Open Mind tiene la discreción exclusiva de eliminar maestros o clases
+          OpenMind tiene la discreción exclusiva de eliminar maestros o clases
           de la plataforma, con o sin previo aviso.
         </p>
       </div>

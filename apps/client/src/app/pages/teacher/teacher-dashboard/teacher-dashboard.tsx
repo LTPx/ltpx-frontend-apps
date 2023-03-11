@@ -36,7 +36,7 @@ export function TeacherDashboard(props: TeacherDashboardProps) {
           )}
         </div>
         <div className={styles['help-ads']}>
-          <div className={styles['classes']}>
+          {/* <div className={styles['classes']}>
             <div className={styles['head']}>
               <h3>Próxima Clase</h3>
               <NavLink to={'/teacher/sessions'}>
@@ -52,13 +52,13 @@ export function TeacherDashboard(props: TeacherDashboardProps) {
                 learners={5}
               />
             </div>
-          </div>
+          </div> */}
           <NoticeCard
             className={styles['card-join-discord']}
             title={'Comunidad en discord'}
             image={'../../../../assets/images/discord-group.jpg'}
             description={
-              'Únete a nuestra comunidad de profesores donde podrás encontrar noticias y hacer preguntas acerca del proceso de enseñar en Openmind'
+              'Únete a nuestra comunidad de profesores donde podrás encontrar noticias y hacer preguntas acerca del proceso de enseñar en OpenMind'
             }
           >
             <a href="https://discord.gg/aUNfs6BuTB" target={'_blank'}>
@@ -67,9 +67,9 @@ export function TeacherDashboard(props: TeacherDashboardProps) {
           </NoticeCard>
           <NoticeCard
             className={styles['card-teaching']}
-            title={'Enseñar en Openmind'}
+            title={'Enseñar en OpenMind'}
             description={
-              'Revisa nuestra blog donde encontraras todo la información de como funciona Openmind'
+              'Revisa nuestra blog donde encontraras todo la información de como funciona OpenMind'
             }
           >
             <Button

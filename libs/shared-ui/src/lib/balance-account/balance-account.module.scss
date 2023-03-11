@@ -1,0 +1,26 @@
+@import '../../styles/styles.module.scss';
+
+.container {
+  background-color: $white-color;
+  border-radius: 10px;
+  padding: 2rem;
+
+  .balance-text {
+    margin-bottom: 1rem;
+  }
+
+  .balances-container {
+    display: flex;
+  }
+
+  .balances {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+}
+
+.custom-balance-card {
+  background-color: $white-color-100;
+  border-radius: 10px;
+}

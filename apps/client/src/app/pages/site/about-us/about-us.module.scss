@@ -10,7 +10,7 @@
     .mission {
       display: flex;
       justify-content: center;
-      gap: $size-lg-3;
+      gap: 5rem;
       align-items: center;
       width: 100%;
       padding: 5rem 0;
@@ -20,7 +20,7 @@
           padding-bottom: $size-md-1;
         }
         p {
-          width: 25rem;
+          width: 30rem;
           color: $text-gray-color;
         }
       }
@@ -52,6 +52,30 @@
       img {
         width: 300px !important;
         height: 200px !important;
+      }
+    }
+  }
+}
+//tablet-responsive-vertical
+@media screen and (min-width: 560px) and (max-width: 850px) {
+  .container {
+    align-items: center;
+  }
+  .content {
+    width: 85% !important;
+  }
+  .mission {
+    flex-direction: column-reverse;
+    gap: 3rem !important;
+    .mission-text {
+      p {
+        width: inherit !important;
+      }
+    }
+    .mission-image {
+      img {
+        width: 320px !important;
+        height: 220px !important;
       }
     }
   }

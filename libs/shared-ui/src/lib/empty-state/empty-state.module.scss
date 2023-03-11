@@ -10,6 +10,20 @@
     text-align: center;
     align-items: center;
     gap: $size-sm-2;
+    .icon-content {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .icon {
+      z-index: 0;
+      position: absolute;
+      color: $primary-color-400;
+      .image-icon {
+        z-index: 1;
+        position: absolute;
+      }
+    }
     .image {
       width: 15rem;
       height: 15rem;

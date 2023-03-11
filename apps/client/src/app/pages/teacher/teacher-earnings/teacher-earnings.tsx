@@ -1,6 +1,7 @@
 import styles from './teacher-earnings.module.scss';
 import { WithdrawalParams } from '@ltpx-frontend-apps/api';
 import {
+  BalanceAccount,
   BalanceCard,
   Button,
   ColorsButton,
@@ -34,7 +35,7 @@ export function TeacherEarnings() {
 
   async function handleWithdrawal(params: WithdrawalParams) {
     const { success, data, error } = await _makeWithdrawal(params);
-    if(success) {
+    if (success) {
       console.log('data: ', data);
     } else {
       console.log('error: ', error);
@@ -60,25 +61,22 @@ export function TeacherEarnings() {
         </EmptyState>
       ) : (
         <div className={styles['content']}>
-          <div className={styles['cards-balance']}>
-            <BalanceCard
-              balance={wallet.total_earnings}
-              text="Total por ventas"
+          <div className={styles['balance-info']}>
+            <BalanceAccount
+              balanceWithdrawal={wallet.balance_pending_withdrawal}
+              balanceAvailable={wallet.balance_available_withdrawal}
             />
-            <BalanceCard
-              balance={wallet.balance_available_withdrawal}
-              text="Saldo en tu billetera"
-            />
-            <BalanceCard
-              balance={wallet.balance_pending_withdrawal}
-              text="Retiro pendiente"
-            />
+            <div className={styles['withdrawal-form']}>
+              <h2>Retiros</h2>
+              <Button
+                title={'Retirar'}
+                full={true}
+                onClick={() => setOpenModal(true)}
+              />
+              <h5>* Para realizar un retiro debes tener al menos $20 en tu balance disponible</h5>
+            </div>
           </div>
-          <div className={styles['title-content']}>
-            <h2 className={styles['title']}>Ultimas Transacciones</h2>
-            <Button title={'Retirar'} onClick={() => setOpenModal(true)} />
-          </div>
-          <div className={styles['content-earning']}>
+          <div className={styles['transactions-container']}>
             {wallet.transactions.length === 0 ? (
               <EmptyState
                 img="../../../../assets/images/empty-states/money-transfer.svg"
@@ -86,14 +84,19 @@ export function TeacherEarnings() {
                 description="Todas tus transacciones serán visibles en esta sección"
               />
             ) : (
-              <div className={styles['transaction-content']}>
+              <div className={styles['transactions']}>
+                <h2 className={styles['title']}>Ultimas Transacciones</h2>
                 {wallet.transactions.map((transaction, index) => (
                   <TransactionRow
                     key={index}
                     date={formatDate(transaction.date)}
-                    balance={transaction.amount}
+                    amount={transaction.amount}
                     status={TransactionStatus.completed}
-                    type={transaction.credit ? TransactionType.payment : TransactionType.withdrawal}
+                    type={
+                      transaction.credit
+                        ? TransactionType.payment
+                        : TransactionType.withdrawal
+                    }
                     description={transaction.description}
                   />
                 ))}
@@ -111,7 +114,7 @@ export function TeacherEarnings() {
       >
         <FormWithdrawal
           onClose={() => setOpenModal(false)}
-          onSubmit={(params)=> handleWithdrawal(params)}
+          onSubmit={(params) => handleWithdrawal(params)}
         />
       </Dialog>
     </div>

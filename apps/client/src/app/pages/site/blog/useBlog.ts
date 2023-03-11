@@ -5,10 +5,10 @@ export const useBlog = () => {
 
   const linksOpenMind = [
     {
-      text: '¿Qué es Openmind, que es el protocolo LTP y porque debo usarlos?',
+      text: '¿Qué es OpenMind, que es el protocolo LTP y porque debo usarlos?',
       url: '/blog/what-is-openmind',
     },
-    { text: '¿Cómo funciona Openmind?',
+    { text: '¿Cómo funciona OpenMind?',
       url: '/blog/how-openmind-works'
     },
     {
@@ -16,7 +16,7 @@ export const useBlog = () => {
       url: '/blog/learning-in-openmind',
     },
     {
-      text: '¿Cómo funciona el sistema de cobro por logros de Openmind?',
+      text: '¿Cómo funciona el sistema de cobro por logros de OpenMind?',
       url: '/blog/achievement-payment-system',
     },
     {
@@ -27,7 +27,7 @@ export const useBlog = () => {
 
   const linksTeacher = [
     {
-      text: 'Manual de ética para dar clases en la plataforma Openmind',
+      text: 'Manual de ética para dar clases en la plataforma OpenMind',
       url: '/blog/ethics-manual-for-teaching',
     },
     {
@@ -47,7 +47,7 @@ export const useBlog = () => {
       url: '/blog/social-media-policy',
     },
     {
-      text: ' ¿Como evaluar a mis alumnos para recibir pagos en Openmind?',
+      text: ' ¿Como evaluar a mis alumnos para recibir pagos en OpenMind?',
       url: '/blog/evaluate-to-receive-payments',
     },
     {
@@ -55,11 +55,11 @@ export const useBlog = () => {
       url: '/blog/student-safety-privacy',
     },
     {
-      text: 'Como crear una gran clase en Open Mind',
+      text: 'Como crear una gran clase en OpenMind',
       url: '/blog/how-create-a-class',
     },
     {
-      text: '¿Como asegurarse de entregar una gran experiencia en vivo en Open Mind?',
+      text: '¿Como asegurarse de entregar una gran experiencia en vivo en OpenMind?',
       url: '/blog/great-experience-openMind',
     },
     {

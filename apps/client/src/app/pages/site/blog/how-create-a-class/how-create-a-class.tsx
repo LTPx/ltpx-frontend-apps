@@ -11,21 +11,21 @@ export function HowCreateAClass(props: HowCreateAClassProps) {
         src="https://images.unsplash.com/photo-1604872441539-ef1db9b25f92?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTd8fGV4YW18ZW58MHx8MHx8&auto=format&fit=crop&w=800&q=60"
       />
       <div className={styles['information']}>
-        <h1>¿Como crear una gran clase en Open Mind?</h1>
+        <h1>¿Como crear una gran clase en OpenMind?</h1>
         <p>
           Ya sea Ud. un educador nuevo o alguien que haya enseñado durante
           muchos años, siempre hay espacio para actualizar sus habilidades,
           agregar nuevos elementos y mejorar su desempeño como educador
-          emprendedor en Open Mind. Presentar un producto de calidad y su
+          emprendedor en OpenMind. Presentar un producto de calidad y su
           enseñanza, son fundamentales para que los alumnos regresen.
           <br />
           Con eso en mente, reunimos algunas posibles respuestas a la pregunta:
-          ¿Qué hace que una clase en Open Mind sea excelente?
+          ¿Qué hace que una clase en OpenMind sea excelente?
         </p>
         <h4>Asegúrate de que tu clase coincida con su descripción</h4>
         <p>
           Cuando compras algo, esperas obtener lo que pagaste, ¿verdad? No es
-          diferente para los padres de Open Mind. Asegúrate de que lo que pones
+          diferente para los padres de OpenMind. Asegúrate de que lo que pones
           en la descripción de la clase o en el video promocional del curso,
           esté en la clase que impartes. No solo debes proporcionar un producto
           de calidad, sino que también deseas evitar que los padres escriban una
@@ -179,11 +179,11 @@ export function HowCreateAClass(props: HowCreateAClassProps) {
           actividad de seguimiento o una hoja de trabajo que describa cómo
           practicar en casa o usar más los materiales. Esta información se puede
           incluir en un mensaje de agradecimiento a las familias a través de la
-          plataforma Open Mind.
+          plataforma OpenMind.
         </p>
         <h4>Pruebas</h4>
         <p>
-          Las pruebas ocupan un lugar principal en Open Mind. Al ser utilizadas
+          Las pruebas ocupan un lugar principal en OpenMind. Al ser utilizadas
           para comprobar el avance y desarrollo de habilidades de los alumnos,
           es muy importante crear pruebas lo suficientemente difíciles e
           interesantes para desafiar a los alumnos sin impedirles el progreso
@@ -193,7 +193,7 @@ export function HowCreateAClass(props: HowCreateAClassProps) {
           Una prueba debe comprobar sin lugar a duda que el estudiante ha
           logrado dominar el concepto tratado. Una forma de lograr esto es
           utilizar varios tipos de pregunta para verificar el desarrollo de su
-          conocimiento. En Open Mind, puedes elegir entre preguntas de opción
+          conocimiento. En OpenMind, puedes elegir entre preguntas de opción
           múltiple, verdadero o falso, respuesta abierta o incluso trabajos que
           los estudiantes deben subir como proyectos especiales.
         </p>
@@ -208,14 +208,14 @@ export function HowCreateAClass(props: HowCreateAClassProps) {
         </p>
         <h4>Diseñando un currículo para el aprendizaje en línea</h4>
         <p>
-          La base del éxito de cualquier educador en Open Mind es un plan de
+          La base del éxito de cualquier educador en OpenMind es un plan de
           estudios de alta calidad que ayude a los alumnos a lograr objetivos
           claros, desarrollar habilidades en un área y disfrutar de sus
           pasiones. Diseñar un currículo de clases en línea presenta desafíos y
           oportunidades únicos para los educadores que buscan crear una
           experiencia de aprendizaje excepcional. Exploremos algunas formas de
           mejorar su plan de estudios en línea y ofrecer una excelente clase
-          virtual en Open Mind.
+          virtual en OpenMind.
         </p>
         <h4>Prepárese para el aprendizaje virtual</h4>
         <p>
@@ -340,7 +340,7 @@ export function HowCreateAClass(props: HowCreateAClassProps) {
         </p>
         <h4>Conéctese con todos los estudiantes</h4>
         <p>
-          Los mejores planes de estudios en Open Mind incluyen lecciones y
+          Los mejores planes de estudios en OpenMind incluyen lecciones y
           actividades que sirven a todo tipo de estudiantes. Con esto, queremos
           decir que cada plan de sesión refleja los esfuerzos del educador para
           interactuar con estudiantes con diferentes habilidades y antecedentes.

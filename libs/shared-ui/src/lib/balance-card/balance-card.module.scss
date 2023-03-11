@@ -1,18 +1,37 @@
 @import '../../styles/styles.module.scss';
 
 .container {
-  width: 17rem;
+  display: flex;
+  gap: 1rem;
+  width: 14rem;
   background-color: $white-color;
+  padding: 1.5rem;
+
+  .icon {
+    svg {
+      background-color: $green-color-100;
+      color: $green-color;
+      padding: 0.75rem;
+      border-radius: 10px;
+    }
+
+    &.debit {
+      svg {
+        background-color: $orange-color-200;
+        color: $orange-color;
+      }
+    }
+  }
+
   .content {
     display: flex;
     flex-direction: column;
-    padding: $size-md-3 $size-md-3;
-    gap: $size-md-1;
     border-radius: 4px;
-    box-shadow: $card-shadow-medium;
+
     .type-content {
       display: flex;
       justify-content: space-between;
+
       h4 {
         color: $text-gray-color;
       }

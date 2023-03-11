@@ -13,7 +13,7 @@ export function StudentPrivacyGuide() {
       <div className={styles['information']}>
         <h1>Guía de privacidad del alumno</h1>
         <p>
-          Open Mind se toma muy en serio la privacidad, ¡y tú también deberías
+          OpenMind se toma muy en serio la privacidad, ¡y tú también deberías
           hacerlo!
           <br />
           ¡Estamos muy emocionados de que te hayas unido a nuestra comunidad!
@@ -34,7 +34,7 @@ export function StudentPrivacyGuide() {
         </p>
         <h4>¿Qué información recopilamos de sus adultos de confianza?</h4>
         <p>
-          Cuando tu adulto de confianza crea una cuenta en Open Mind, nos brinda
+          Cuando tu adulto de confianza crea una cuenta en OpenMind, nos brinda
           información sobre ti, como tu nombre y tu edad. También pueden
           compartir otra información sobre ti. Tu(s) adulto(s) de confianza
           también pueden enviar por correo electrónico cualquier pregunta o
@@ -43,20 +43,20 @@ export function StudentPrivacyGuide() {
         </p>
         <h4>¿Qué información recopilamos de ti?</h4>
         <p>
-          Una vez que te registres en tu clase de Open Mind, puedes ingresar a
-          tu propio espacio de aprendizaje y conectarte con otros alumnos de tu
+          Una vez que te registres en tu clase de OpenMind, puedes ingresar a tu
+          propio espacio de aprendizaje y conectarte con otros alumnos de tu
           clase, así como con tu maestro. Cuando estás en tu espacio de
           aprendizaje, puedes crear y compartir cosas como mensajes privados,
           publicaciones, comentarios y otras cosas. Durante la clase, las cosas
           que haces y dices se muestran en vivo y se graban en video, solo con
-          estar en clase. También obtenemos datos sobre cómo usas Open Mind,
-          como las nuevas clases que consultas o las palabras que usas cuando
-          busca nuevas clases.
+          estar en clase. También obtenemos datos sobre cómo usas OpenMind, como
+          las nuevas clases que consultas o las palabras que usas cuando busca
+          nuevas clases.
         </p>
         <h4>¿Cómo usamos tu información?</h4>
         <p>
           Usamos la información que tú y tus adultos de confianza nos brindan
-          para ayudar a mantener Open Mind seguro y mejorar Open Mind para ti y
+          para ayudar a mantener OpenMind seguro y mejorar OpenMind para ti y
           todos los demás. Por ejemplo, grabamos sus clases para asegurarnos de
           que la clase transcurrió sin problemas; también queremos que puedas
           ver la grabación después de clase si te perdiste la clase o
@@ -81,7 +81,7 @@ export function StudentPrivacyGuide() {
           Podemos compartir su información si tus adultos de confianza dicen que
           está bien, o si es necesario debido a la ley. <br />
           Tus adultos de confianza pueden ver qué clases te gustan y la
-          información que compartes en Open Mind. Por ejemplo, los adultos de
+          información que compartes en OpenMind. Por ejemplo, los adultos de
           confianza pueden ver los mensajes privados entre tu y tu maestro.
         </p>
       </div>

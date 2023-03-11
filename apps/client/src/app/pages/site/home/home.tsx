@@ -232,7 +232,7 @@ export function Home() {
         }
       >
         <div className={styles['btn']}>
-          <Button title={'Registrarme'} link={'/register-teacher'} />
+          <Button title={'Registrarme Ahora'} link={'/register-teacher'} />
         </div>
       </SectionInformation>
     </div>

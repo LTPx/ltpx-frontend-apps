@@ -4,6 +4,7 @@
   width: 100%;
   height: 30rem;
   position: relative;
+
   .image-cover {
     object-fit: cover;
     padding: 1rem 0;
@@ -40,14 +41,15 @@
   display: flex;
   gap: $size-md-1;
 }
+
 .section-content {
-  background-color: #f7f7f7;
+  background-color: $white-color;
   .btn {
     padding-top: 1.5rem;
   }
 }
 .popular-courses-container {
-  background-color: $white-color;
+  background-color: $white-color-100;
   width: 100%;
   box-sizing: border-box;
   display: flex;

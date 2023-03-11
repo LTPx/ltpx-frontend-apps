@@ -1,12 +1,13 @@
 import { _http } from '../../http';
 import { AchievementModel } from '../../interfaces/achievement-interface';
+import { CourseModel, Student } from '../../interfaces/course-interface';
 import { QuizResult } from '../../interfaces/quiz-interface';
 import { TaskStudent } from '../../interfaces/task-interface';
 
 const http = _http;
 
 export const teacherGetCourseStudents = async (courseId: number) => {
-  return new Promise<any>((resolve, reject) => {
+  return new Promise<{course: CourseModel, students: Student[]}>((resolve, reject) => {
     http
       .get(`api/v1/teacher/course_sessions/${courseId}/students`)
       .then((response) => {

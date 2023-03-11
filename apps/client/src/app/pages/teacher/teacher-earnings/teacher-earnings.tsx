@@ -2,7 +2,6 @@ import styles from './teacher-earnings.module.scss';
 import { WithdrawalParams } from '@ltpx-frontend-apps/api';
 import {
   BalanceAccount,
-  BalanceCard,
   Button,
   ColorsButton,
   EmptyState,

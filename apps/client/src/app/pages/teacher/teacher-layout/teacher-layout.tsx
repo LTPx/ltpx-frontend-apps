@@ -51,7 +51,7 @@ export function TeacherLayout() {
               links={[
                 {
                   icon: 'user',
-                  text: 'Mi Cuenta',
+                  text: 'Perfil de profesor',
                   url: '/teacher/account'
                 },
                 {

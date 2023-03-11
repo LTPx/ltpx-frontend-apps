@@ -18,6 +18,10 @@
   .content {
     padding: 2rem;
     flex-grow: 1;
+
+    .title {
+      margin-bottom: 1.5em;
+    }
   }
 
   .side {

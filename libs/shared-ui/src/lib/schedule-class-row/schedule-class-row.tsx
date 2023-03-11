@@ -52,7 +52,7 @@ export function ScheduleClassRow(props: ScheduleClassRowProps) {
           <div className={styles['details-items']}>
             <div className={styles['details-item']}>
               <Icon icon="user-group" size={18} color="#10b981" />
-              <h5>{participants} Participantes</h5>
+              <h5>0/{participants} Participantes</h5>
             </div>
             {/* <div className={styles['details-item']}>
               <Icon icon="clock" size={18} color="#fbbf24" />

@@ -16,8 +16,7 @@ import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import styles from './teacher-courses.module.scss';
 
-const placeholderImage =
-  '../../../../assets/images/placeholder-image.svg';
+const placeholderImage = '../../../../assets/images/placeholder-image.svg';
 /* eslint-disable-next-line */
 export interface TeacherCoursesProps {}
 
@@ -93,12 +92,6 @@ export function TeacherCourses(props: TeacherCoursesProps) {
     </div>
   );
 
-  const PendingApprove = () => (
-    <div className={styles['courses']}>
-      <h4>No hay cursos pendientes de revision</h4>
-    </div>
-  );
-
   const openNewCourse = () => {
     setOpenModal(true);
   };
@@ -116,49 +109,50 @@ export function TeacherCourses(props: TeacherCoursesProps) {
 
   return (
     <div className={`${styles['container']}`}>
-      {loadingTeacherApi && <Loader />}
-      {courses.length === 0 && loadingTeacherApi === false && (
-        <EmptyState
-          img={'../../../../assets/images/empty-states/no-courses.svg'}
-          title={'Vamos a crear un curso'}
-          description={
-            'Crea tu primer curso, no te preocupes si no lo haces bien al primer intento, puedes editarlo e ir mejorandolo ademas nosotros te guiaremos en el proceso, '
-          }
-        >
-          <div className={`${styles['button-empty-state']}`}>
-            <Button
-              title={'Crear mi primer curso'}
-              color={ColorsButton.primary}
-              icon="plus"
-              onClick={() => {
-                openNewCourse();
-              }}
-            />
-          </div>
-        </EmptyState>
-      )}
-      {courses.length > 0 && loadingTeacherApi === false && (
+      {loadingTeacherApi ? (
+        <Loader />
+      ) : (
         <>
-          <h1 className="add-space-bottom">Mis Cursos</h1>
-          <div className="card">
-            <div className={`${styles['filters-container']} `}>
-              <h4>{courses.length} Cursos en total</h4>
-              <div className={styles['filters']}>
-                <InputSearch placeholder="Search course" />
-                <Select options={categories} />
+          {courses.length === 0 ? (
+            <EmptyState
+              img={'../../../../assets/images/empty-states/no-courses.svg'}
+              title={'Vamos a crear un curso'}
+              description={
+                'Crea tu primer curso, no te preocupes si no lo haces bien al primer intento, puedes editarlo e ir mejorandolo ademas nosotros te guiaremos en el proceso, '
+              }
+            >
+              <div className={`${styles['button-empty-state']}`}>
                 <Button
-                  title={t('buttons.newCourse')}
+                  title={'Crear mi primer curso'}
                   color={ColorsButton.primary}
+                  icon="plus"
                   onClick={() => {
                     openNewCourse();
                   }}
                 />
               </div>
+            </EmptyState>
+          ) : (
+            <div className="card">
+              <div className={`${styles['filters-container']} `}>
+                <h3>Mis Cursos: {courses.length} </h3>
+                <div className={styles['filters']}>
+                  {/* <InputSearch placeholder="Buscar Curso" /> */}
+                  <Select options={categories} />
+                  <Button
+                    title={t('buttons.newCourse')}
+                    color={ColorsButton.primary}
+                    onClick={() => {
+                      openNewCourse();
+                    }}
+                  />
+                </div>
+              </div>
+              <div className={`${styles['courses-container']}`}>
+                <MyCourses />
+              </div>
             </div>
-            <div className={`${styles['courses-container']}`}>
-              <MyCourses />
-            </div>
-          </div>
+          )}
         </>
       )}
       <Dialog

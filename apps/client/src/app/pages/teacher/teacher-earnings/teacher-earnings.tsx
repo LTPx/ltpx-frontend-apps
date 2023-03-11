@@ -11,13 +11,14 @@ import {
   TransactionStatus,
   TransactionType,
 } from '@ltpx-frontend-apps/shared-ui';
-import { useTeacher } from '@ltpx-frontend-apps/store';
+import { useTeacher, useUser } from '@ltpx-frontend-apps/store';
 import { Dialog } from 'evergreen-ui';
 import { useCallback, useEffect, useState } from 'react';
 import { useMoment } from '../../../hooks/useMoment';
 
 export function TeacherEarnings() {
   const { _getWallet, wallet, _makeWithdrawal } = useTeacher();
+  const { user } = useUser();
   const [openModal, setOpenModal] = useState(false);
   const { formatDate } = useMoment();
   const fetchWallet = useCallback(async () => {
@@ -113,6 +114,7 @@ export function TeacherEarnings() {
         width={'40vw'}
       >
         <FormWithdrawal
+          banks={user.teacher?.bank_accounts || []}
           onClose={() => setOpenModal(false)}
           onSubmit={(params) => handleWithdrawal(params)}
         />

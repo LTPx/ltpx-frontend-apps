@@ -7,17 +7,19 @@ export enum StatusTeacherAccount {
   unapplied = 'unapplied',
 }
 
+export interface BankAccount {
+  bank_name: string;
+  owner_account_name: string;
+  national_id: string;
+  bank_account_number: string;
+  type_account: string;
+}
+
 export interface TeacherProfile {
   teacher_name: string;
   biography: string;
   social_networks: { name: string; url: string }[];
-  bank_accounts: {
-    bank_name: string;
-    owner_account_name: string;
-    national_id: string;
-    bank_account_number: string;
-    type_account: string;
-  }[];
+  bank_accounts: BankAccount[];
   national_id: string;
   status_account: StatusTeacherAccount;
 }

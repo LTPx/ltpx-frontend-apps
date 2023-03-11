@@ -8,16 +8,18 @@ import * as Yup from 'yup';
 import InputTextStatus, {
   StatusInputText,
 } from '../input-text-status/input-text-status';
-import { WithdrawalParams } from '@ltpx-frontend-apps/api';
+import { BankAccount, WithdrawalParams } from '@ltpx-frontend-apps/api';
 
 /* eslint-disable-next-line */
 export interface FormWithdrawalProps {
+  banks: BankAccount[];
   onClose?: () => void;
   onSubmit: (data: WithdrawalParams) => void;
 }
 
 export function FormWithdrawal(props: FormWithdrawalProps) {
-  const { onClose, onSubmit } = props;
+  const { onClose, onSubmit, banks } = props;
+
   const formik = useFormik({
     initialValues: {
       bank_account_number: '',
@@ -41,19 +43,21 @@ export function FormWithdrawal(props: FormWithdrawalProps) {
     },
   });
 
-  const sortByOptions = [
-    { value: '11029293', text: 'Pichincha' },
-    { value: '11029293', text: 'Loja' },
-    { value: '11029293', text: 'Guayaquil' },
-  ];
+  const banksOption = banks.map((bank, index)=>{
+    return {
+      value: bank.bank_account_number,
+      text: `${bank.bank_name}: ${bank.bank_account_number}`
+    }
+  });
 
   return (
     <form className={styles['form-withdraw']}>
       <div className={styles['withdraw-content']}>
         <Select
           label="Seleccionar banco"
-          options={sortByOptions}
+          options={banksOption}
           onChange={(e) => {
+            console.log('s: ', e.value);
             formik.setFieldValue('bank_account_number', e.value);
           }}
         />

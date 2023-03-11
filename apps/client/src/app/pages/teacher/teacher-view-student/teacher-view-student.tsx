@@ -1,7 +1,11 @@
 import styles from './teacher-view-student.module.scss';
 import { useCourseStudents } from '@ltpx-frontend-apps/store';
 import { useCallback, useEffect, useState } from 'react';
-import { QuizResult } from '@ltpx-frontend-apps/api';
+import {
+  AchievementModel,
+  QuizResult,
+  TaskStudent,
+} from '@ltpx-frontend-apps/api';
 import {
   AchievementCard,
   Button,
@@ -18,9 +22,15 @@ export interface TeacherViewStudentProps {
   studentId: number;
 }
 export function TeacherViewStudent(props: TeacherViewStudentProps) {
-  const {studentId} = props;
+  const { studentId } = props;
   const [quizzes, setQuizzes] = useState<QuizResult[]>([]);
-  const { _getStudentQuizzesByCourse } = useCourseStudents();
+  const [achievements, setAchievements] = useState<AchievementModel[]>([]);
+  const [tasks, setTasks] = useState<TaskStudent[]>([]);
+  const {
+    _getStudentQuizzesByCourse,
+    _getStudentAchievementsByCourse,
+    _getStudentTasksByCourse,
+  } = useCourseStudents();
   const [openModal, setOpenModal] = useState(false);
   const { courseId } = useParams();
   const [selectedTab, setSelectedTab] = useState(0);
@@ -38,11 +48,46 @@ export function TeacherViewStudent(props: TeacherViewStudentProps) {
       console.log('error: ', error);
     }
   }, []);
- 
+
+  const fetchAchievements = useCallback(async (id: number) => {
+    const course_id = parseInt(courseId || '');
+    const { success, data, error } = await _getStudentAchievementsByCourse(
+      course_id,
+      id
+    );
+    if (success) {
+      console.log('data y: ', data);
+      setAchievements(data);
+    } else {
+      console.log('error: ', error);
+    }
+  }, []);
+
+  const fetchTasks = useCallback(async (id: number) => {
+    const course_id = parseInt(courseId || '');
+    const { success, data, error } = await _getStudentTasksByCourse(
+      course_id,
+      id
+    );
+    if (success) {
+      console.log('data: ', data);
+      setTasks(data);
+    } else {
+      console.log('error: ', error);
+    }
+  }, []);
+
   useEffect(() => {
-    console.log(studentId)
-    fetchQuizzes(studentId);
-  }, [studentId]);
+    if (selectedTab === 0) {
+      fetchTasks(studentId);
+    }
+    if (selectedTab === 1) {
+      fetchQuizzes(studentId);
+    }
+    if (selectedTab === 2) {
+      fetchAchievements(studentId);
+    }
+  }, [studentId, selectedTab]);
 
   const tabs = [
     {
@@ -53,7 +98,7 @@ export function TeacherViewStudent(props: TeacherViewStudentProps) {
     },
     {
       text: 'Logros',
-    }
+    },
   ];
   const handleClick = (index: number) => {
     setSelectedTab(index);
@@ -64,7 +109,13 @@ export function TeacherViewStudent(props: TeacherViewStudentProps) {
       {selectedTab === 0 && (
         <div className={styles['task-student']}>
           <h4 className={styles['title-task']}>Tareas del estudiante: </h4>
-          <TaskTeacherCard title={'Matemáticas'} description={'entregada'} />
+          {tasks?.map((task, index) => (
+            <TaskTeacherCard
+              key={index}
+              title={task.title || ''}
+              description={task.description || ''}
+            />
+          ))}
         </div>
       )}
       {selectedTab === 1 && (
@@ -73,7 +124,10 @@ export function TeacherViewStudent(props: TeacherViewStudentProps) {
           <div className={styles['quizzes-content']}>
             {quizzes?.map((quiz, index) => (
               <div key={index}>
-                <QuizStudentCard title={quiz.name} text={`Resultado: ${quiz.score}`}>
+                <QuizStudentCard
+                  title={quiz.name}
+                  text={`Resultado: ${quiz.score}`}
+                >
                   <div className={styles['btn-test']}>
                     <Button
                       title="Calificar test"
@@ -95,7 +149,14 @@ export function TeacherViewStudent(props: TeacherViewStudentProps) {
       )}
       {selectedTab === 2 && (
         <div className={styles['achievements-student']}>
-          <AchievementCard image={''} text={''}/>
+          {achievements.length > 0 &&
+            achievements.map((achievement, index) => (
+              <AchievementCard
+                key={index}
+                image={achievement.image}
+                text={achievement.title}
+              />
+            ))}
         </div>
       )}
       <Dialog

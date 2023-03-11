@@ -31,6 +31,8 @@ import {
   validateMeetingRoomId,
   WithdrawalParams,
   makeWithdrawal,
+  TeacherProfileParams,
+  TeacherProfile,
 } from '@ltpx-frontend-apps/api';
 import { StateCreator } from 'zustand';
 import { StoreState } from '../store';
@@ -55,16 +57,6 @@ type TResponseGetApplication = {
   data: ApplicationTeach | any;
 };
 
-type TResponseProfile = {
-  ok: boolean;
-  data: IUserAccount | any;
-};
-
-type TResponseUpdateProfile = {
-  success: boolean;
-  data: IUserAccount | any;
-};
-
 type TResponse = {
   success: boolean;
   data?: any;
@@ -75,7 +67,7 @@ export type TeacherSlice = {
   loadingTeacherApi: boolean;
   teacher_account: StatusTeacherAccount;
   application: ApplicationTeach | null;
-  profile: IUserAccount | null;
+  profile: TeacherProfile;
   newQuiz: QuizModel | null;
   currentCourse: TeacherCourse;
   wallet: WalletModel;
@@ -85,8 +77,6 @@ export type TeacherSlice = {
   registerTeacher: (params: IRegisterUser) => Promise<TResponseLogin>;
   createCourse: (params: CourseApiParams) => Promise<TResponseCreateCourse>;
   editCourse: (params: CourseApiParams) => Promise<TResponseCreateCourse>;
-  getProfile: () => Promise<TResponseProfile>;
-  updateProfile: (params: IUserAccount) => Promise<TResponseUpdateProfile>;
   createQuiz: (params: any) => Promise<TResponse>;
   createAchievement: (params: AchievementParams) => Promise<TResponse>;
   getCourse: (id: number) => Promise<TResponse>;
@@ -97,6 +87,8 @@ export type TeacherSlice = {
   _getMeetingRoomId: (id: number) => Promise<TResponse>;
   _validateMeetingRoomId: (id: number, roomId: string) => Promise<TResponse>;
   _makeWithdrawal: (params: WithdrawalParams) => Promise<TResponse>;
+  _updateProfile: (params: TeacherProfileParams) => Promise<TResponse>;
+  getProfile: () => Promise<TResponse>;
 };
 
 export const createTeacherSlice: StateCreator<
@@ -108,7 +100,7 @@ export const createTeacherSlice: StateCreator<
   loadingTeacherApi: true,
   teacher_account: StatusTeacherAccount.unapplied,
   application: null,
-  profile: null,
+  profile: {} as TeacherProfile,
   newQuiz: null,
   currentCourse: {} as TeacherCourse,
   wallet: {} as WalletModel,
@@ -134,13 +126,13 @@ export const createTeacherSlice: StateCreator<
       return { ok: false, data: error };
     }
   },
-  getProfile: async (): Promise<TResponseGetApplication> => {
+  getProfile: async () => {
     try {
-      const response = await getTeacherProfile();
-      set({ profile: response });
-      return { ok: true, data: response };
+      const profile = await getTeacherProfile();
+      set({ profile });
+      return { success: true, data: profile };
     } catch (error) {
-      return { ok: false, data: error };
+      return { success: false, error: error };
     }
   },
   registerTeacher: async (params: IRegisterUser): Promise<TResponseLogin> => {
@@ -177,9 +169,7 @@ export const createTeacherSlice: StateCreator<
       return { success: false, data: error };
     }
   },
-  updateProfile: async (
-    params: IUserAccount
-  ): Promise<TResponseUpdateProfile> => {
+  _updateProfile: async ( params) => {
     try {
       const response = await updateTeacherProfile(params);
       set({ profile: response });

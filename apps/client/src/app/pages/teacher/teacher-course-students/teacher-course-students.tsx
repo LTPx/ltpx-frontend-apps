@@ -1,5 +1,6 @@
+import { CourseModel, Student } from '@ltpx-frontend-apps/api';
 import { Tab, Tabs } from '@ltpx-frontend-apps/shared-ui';
-import { useCourseStudents } from '@ltpx-frontend-apps/store';
+import { useCourse, useCourseStudents } from '@ltpx-frontend-apps/store';
 import { Avatar } from 'evergreen-ui';
 import { useCallback, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
@@ -14,22 +15,24 @@ export function TeacherCourseStudents(props: TeacherCourseStudentsProps) {
   const [loaded, setLoaded] = useState(false);
   const [idStudent, setIdStudent] = useState<number>();
   const [optionsTab, setOptionsTab] = useState<Tab[]>([]);
-  const [students, setStudents] = useState<any[]>([]);
+  const [students, setStudents] = useState<Student[]>([]);
+  const [course, setCourse] = useState<CourseModel>();
   const { courseId } = useParams();
   const id = parseInt(courseId || '');
 
-  const fetchData = useCallback(async () => {
+  const fetchStudents = useCallback(async () => {
     const { success, data, error } = await _getStudentsByCourse(id);
     if (success) {
-      const students = data;
-      const options = students.map((student: any) => {
-        //TODO: add interface student
+      const students = data.students;
+      const course = data.course;
+      const options = students.map((student: Student) => {
         return {
           text: student.name,
-          children: <TabStudent name={student.name} id={student.name.id} />,
+          children: <TabStudent name={student.name} />,
         };
       });
       setStudents(students);
+      setCourse(course);
       setOptionsTab(options);
       setLoaded(true);
       console.log(idStudent);
@@ -40,10 +43,10 @@ export function TeacherCourseStudents(props: TeacherCourseStudentsProps) {
   }, []);
 
   useEffect(() => {
-    fetchData();
+    fetchStudents();
   }, []);
 
-  const TabStudent = ({ name, id }: { name: string; id: number }) => (
+  const TabStudent = ({ name }: { name: string; }) => (
     <div className={styles['tab-options']}>
       <Avatar name={name} size={30} />
       {name}
@@ -52,9 +55,13 @@ export function TeacherCourseStudents(props: TeacherCourseStudentsProps) {
 
   return (
     <div className={styles['container']}>
-      <h2 className={styles['title']}>Curso: {optionsTab.length}</h2>
+      <h2 className={styles['title']}>Curso: {course ? course.title : ''}</h2>
       <div className={styles['content']}>
         <div className={styles['all-students']}>
+          <div className={styles['all-students-header']}>
+            <h3>Estudiantes</h3>
+            <h3>{ loaded ? students.length : 0}</h3>
+          </div>
           {loaded && (
             <Tabs
               className={styles['tabs']}

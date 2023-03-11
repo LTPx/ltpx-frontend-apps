@@ -8,36 +8,41 @@ import InputTextStatus, {
 } from '../input-text-status/input-text-status';
 
 /* eslint-disable-next-line */
-export interface PaymentFormProps {}
+export interface PaymentFormProps {
+  onSubmit: (params: any) => void;
+}
 
 export function PaymentForm(props: PaymentFormProps) {
+  const { onSubmit } = props;
   const formik = useFormik({
     initialValues: {
-      bankName: '',
-      bankAccountNumber: '',
-      bankAccountType: '',
-      identification_id: '',
+      bank_name: '',
+      bank_account_number: '',
+      bank_account_type: '',
+      national_id: '',
       email: '',
-      bankAccountOwner: '',
+      owner_account_name: '',
     },
     validationSchema: Yup.object({
-      bankName: Yup.string().required('Nombre del Banco es obligatorio'),
-      bankAccountNumber: Yup.string().required(
+      bank_name: Yup.string().required('Nombre del Banco es obligatorio'),
+      bank_account_number: Yup.string().required(
         'Número de cuenta es obligatorio'
       ),
-      bankAccountType: Yup.string().required('Tipo de cuenta es obligatorio'),
-      identification_id: Yup.string().required(
+      bank_account_type: Yup.string().required('Tipo de cuenta es obligatorio'),
+      national_id: Yup.string().required(
         'Número de identificación es obligatorio'
       ),
       email: Yup.string()
         .email('Debe ser un correo electrónico válido')
         .required('Correo electrónico es obligatorio'),
-      bankAccountOwner: Yup.string().required(
+      owner_account_name: Yup.string().required(
         'Propietario de la cuenta es obligatorio'
       ),
     }),
     onSubmit: (data) => {
-      console.log(data);
+      onSubmit({
+        bank_accounts: [data]
+      });
     },
   });
 
@@ -51,18 +56,18 @@ export function PaymentForm(props: PaymentFormProps) {
               <Input
                 label="Nombre del Banco"
                 type="text"
-                name="bankName"
+                name="bank_name"
                 placeholder="Ingresar nombre del Banco correspondiente"
                 onChange={(e: any) => {
                   formik.handleChange(e);
                 }}
-                value={formik.values.bankName}
+                value={formik.values.bank_name}
                 onBlur={formik.handleBlur}
               />
-              {formik.touched.bankName && formik.errors.bankName ? (
+              {formik.touched.bank_name && formik.errors.bank_name ? (
                 <InputTextStatus
                   status={StatusInputText.error}
-                  text={formik.errors.bankName}
+                  text={formik.errors.bank_name}
                 />
               ) : null}
             </div>
@@ -70,19 +75,19 @@ export function PaymentForm(props: PaymentFormProps) {
               <Input
                 label="Propietario de la cuenta"
                 type="text"
-                name="bankAccountOwner"
+                name="owner_account_name"
                 placeholder="Nombre del Propietario"
                 onChange={(e: any) => {
                   formik.handleChange(e);
                 }}
-                value={formik.values.bankAccountOwner}
+                value={formik.values.owner_account_name}
                 onBlur={formik.handleBlur}
               />
-              {formik.touched.bankAccountOwner &&
-              formik.errors.bankAccountOwner ? (
+              {formik.touched.owner_account_name &&
+              formik.errors.owner_account_name ? (
                 <InputTextStatus
                   status={StatusInputText.error}
-                  text={formik.errors.bankAccountOwner}
+                  text={formik.errors.owner_account_name}
                 />
               ) : null}
             </div>
@@ -90,19 +95,19 @@ export function PaymentForm(props: PaymentFormProps) {
               <Input
                 label="Número de identificación"
                 type="text"
-                name="identification_id"
+                name="national_id"
                 placeholder="Ingresar su número de identificación "
                 onChange={(e: any) => {
                   formik.handleChange(e);
                 }}
-                value={formik.values.identification_id}
+                value={formik.values.national_id}
                 onBlur={formik.handleBlur}
               />
-              {formik.touched.identification_id &&
-              formik.errors.identification_id ? (
+              {formik.touched.national_id &&
+              formik.errors.national_id ? (
                 <InputTextStatus
                   status={StatusInputText.error}
-                  text={formik.errors.identification_id}
+                  text={formik.errors.national_id}
                 />
               ) : null}
             </div>
@@ -110,19 +115,19 @@ export function PaymentForm(props: PaymentFormProps) {
               <Input
                 label="Número de cuenta"
                 type="number"
-                name="bankAccountNumber"
+                name="bank_account_number"
                 placeholder="Ingresar número de cuenta"
                 onChange={(e: any) => {
                   formik.handleChange(e);
                 }}
-                value={formik.values.bankAccountNumber}
+                value={formik.values.bank_account_number}
                 onBlur={formik.handleBlur}
               />
-              {formik.touched.bankAccountNumber &&
-              formik.errors.bankAccountNumber ? (
+              {formik.touched.bank_account_number &&
+              formik.errors.bank_account_number ? (
                 <InputTextStatus
                   status={StatusInputText.error}
-                  text={formik.errors.bankAccountNumber}
+                  text={formik.errors.bank_account_number}
                 />
               ) : null}
             </div>
@@ -130,19 +135,19 @@ export function PaymentForm(props: PaymentFormProps) {
               <Input
                 label="Tipo de cuenta"
                 type="text"
-                name="bankAccountType"
+                name="bank_account_type"
                 placeholder="Ingresar tipo de cuenta"
                 onChange={(e: any) => {
                   formik.handleChange(e);
                 }}
-                value={formik.values.bankAccountType}
+                value={formik.values.bank_account_type}
                 onBlur={formik.handleBlur}
               />
-              {formik.touched.bankAccountType &&
-              formik.errors.bankAccountType ? (
+              {formik.touched.bank_account_type &&
+              formik.errors.bank_account_type ? (
                 <InputTextStatus
                   status={StatusInputText.error}
-                  text={formik.errors.bankAccountType}
+                  text={formik.errors.bank_account_type}
                 />
               ) : null}
             </div>

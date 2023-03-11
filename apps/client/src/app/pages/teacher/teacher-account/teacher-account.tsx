@@ -1,5 +1,5 @@
-import { IUserAccount } from '@ltpx-frontend-apps/api';
-import { useTeacher } from '@ltpx-frontend-apps/store';
+import { IUserAccount, TeacherProfileParams } from '@ltpx-frontend-apps/api';
+import { useTeacher, useUser } from '@ltpx-frontend-apps/store';
 import {
   BannerNotification,
   ChangePasswordForm,
@@ -16,7 +16,8 @@ export interface TeacherAccountProps {}
 
 export function TeacherAccount(props: TeacherAccountProps) {
   const [showMessage, setShowMessage] = useState(false);
-  const { getProfile, updateProfile, profile } = useTeacher();
+  const { getProfile, _updateProfile, profile } = useTeacher();
+  const { user } = useUser();
 
   useEffect(() => {
     if (!profile) {
@@ -25,15 +26,20 @@ export function TeacherAccount(props: TeacherAccountProps) {
   }, []);
   const [selectedTab, setSelectedTab] = useState(0);
 
-  const updateUserAccount = async (data: IUserAccount) => {
-    const response = await updateProfile(data);
-    if (response.success) {
-      console.log(response);
+  async function updateUserAccount(params: IUserAccount) {
+
+  }
+
+  async function updateTeacherProfile(params: TeacherProfileParams) {
+    const { success, data, error} = await _updateProfile(params);
+    if (success) {
       setShowMessage(true);
+      console.log('data: ', data);
     } else {
-      console.log(response.data);
+      console.log('error: ', error);
     }
-  };
+  }
+
   const tabs = [
     {
       text: 'Perfil de Profesor',
@@ -46,7 +52,7 @@ export function TeacherAccount(props: TeacherAccountProps) {
     },
     {
       text: 'Cambiar Contraseña',
-    }
+    },
   ];
   const handleClick = (index: number) => {
     setSelectedTab(index);
@@ -70,12 +76,19 @@ export function TeacherAccount(props: TeacherAccountProps) {
             tabs={tabs}
             onClickTab={(option) => handleClick(option)}
           />
-          {selectedTab === 0 && <TeacherProfileForm />}
+          {selectedTab === 0 && <TeacherProfileForm onSubmit={updateTeacherProfile}/>}
           {selectedTab === 1 && (
-            <UserAccountForm url='/teacher/account/account-profile' onSubmit={updateUserAccount} data={profile} />
+            // <UserAccountForm
+            //   url="/teacher/account/account-profile"
+            //   onSubmit={updateUserAccount}
+            //   data={user}
+            // />
+            <div className="d">Pendiente</div>
           )}
-          {selectedTab === 2 && <PaymentForm />}
-          {selectedTab === 3 && <ChangePasswordForm url='/teacher/account/account-profile'  />}
+          {selectedTab === 2 && <PaymentForm onSubmit={updateTeacherProfile}/>}
+          {selectedTab === 3 && (
+            <ChangePasswordForm url="/teacher/account/account-profile" />
+          )}
         </div>
       )}
     </div>

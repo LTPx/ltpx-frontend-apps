@@ -55,10 +55,10 @@ export function TeacherDashboard(props: TeacherDashboardProps) {
           </div> */}
           <NoticeCard
             className={styles['card-join-discord']}
-            title={'Comunidad en discord'}
+            title={''}
             image={'../../../../assets/images/discord-group.jpg'}
             description={
-              'Únete a nuestra comunidad de profesores donde podrás encontrar noticias y hacer preguntas acerca del proceso de enseñar en OpenMind'
+              'Únete a nuestra comunidad de profesores en discord donde podrás encontrar noticias y hacer preguntas acerca del proceso de enseñar en OpenMind'
             }
           >
             <a href="https://discord.gg/aUNfs6BuTB" target={'_blank'}>

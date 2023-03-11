@@ -44,9 +44,9 @@ export function TeacherAccount(props: TeacherAccountProps) {
     {
       text: 'Perfil de Profesor',
     },
-    {
-      text: 'Cuenta de Usuario',
-    },
+    // {
+    //   text: 'Cuenta de Usuario',
+    // },
     {
       text: 'Cuenta Bancaria',
     },
@@ -77,16 +77,15 @@ export function TeacherAccount(props: TeacherAccountProps) {
             onClickTab={(option) => handleClick(option)}
           />
           {selectedTab === 0 && <TeacherProfileForm onSubmit={updateTeacherProfile}/>}
-          {selectedTab === 1 && (
-            // <UserAccountForm
-            //   url="/teacher/account/account-profile"
-            //   onSubmit={updateUserAccount}
-            //   data={user}
-            // />
-            <div className="d">Pendiente</div>
-          )}
-          {selectedTab === 2 && <PaymentForm onSubmit={updateTeacherProfile}/>}
-          {selectedTab === 3 && (
+          {/* {selectedTab === 1 && (
+            <UserAccountForm
+              url="/teacher/account/account-profile"
+              onSubmit={updateUserAccount}
+              data={user}
+            />
+          )} */}
+          {selectedTab === 1 && <PaymentForm onSubmit={updateTeacherProfile}/>}
+          {selectedTab === 2 && (
             <ChangePasswordForm url="/teacher/account/account-profile" />
           )}
         </div>

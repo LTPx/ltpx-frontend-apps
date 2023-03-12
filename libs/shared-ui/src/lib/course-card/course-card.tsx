@@ -38,7 +38,7 @@ export function CourseCard(props: CourseCardProps) {
         </div>
         <div className={styles['info']}>
           <div className={styles['info-item']}>
-            <Icon icon={'university'} size={15} />
+            <Icon icon={'trophy'} size={15} />
             {lessons} logros
           </div>
           {/* <div className={styles['info-item']}>

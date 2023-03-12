@@ -14,6 +14,7 @@ import {
   getApprovedCourses,
   getWithdrawalsByStatus,
   getWithdrawal,
+  approveWithdrawal,
 } from '@ltpx-frontend-apps/api';
 
 export type TResponse = {
@@ -40,6 +41,7 @@ export type AdminSlice = {
   _getApprovedCourses: () => Promise<TResponse>;
   _getWithdrawalsByStatus: (status: string) => Promise<TResponse>;
   _getWithdrawal: (id: number) => Promise<TResponse>;
+  _approveWithdrawal: (id: number, params: {receipt_id: string, receipt_image?: string}) => Promise<TResponse>;
 };
 
 export const createAdminSlice: StateCreator<StoreState, [], [], AdminSlice> = (
@@ -152,6 +154,14 @@ export const createAdminSlice: StateCreator<StoreState, [], [], AdminSlice> = (
   _getWithdrawal: async (id): Promise<TResponse> => {
     try {
       const withdrawal = await getWithdrawal(id);
+      return { success: true, data: withdrawal };
+    } catch (error) {
+      return { success: false, error };
+    }
+  },
+  _approveWithdrawal: async (id, params): Promise<TResponse> => {
+    try {
+      const withdrawal = await approveWithdrawal(id, params);
       return { success: true, data: withdrawal };
     } catch (error) {
       return { success: false, error };

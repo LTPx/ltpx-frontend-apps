@@ -12,7 +12,7 @@ export interface BankAccount {
   owner_account_name: string;
   national_id: string;
   bank_account_number: string;
-  type_account: string;
+  bank_account_type: string;
 }
 
 export interface TeacherProfile {

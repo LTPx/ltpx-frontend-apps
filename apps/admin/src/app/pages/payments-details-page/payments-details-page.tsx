@@ -87,7 +87,7 @@ export function PaymentsDetailsPage(props: PaymentsDetailsPageProps) {
             </div>
             <div className={styles['item']}>
               <h4>Tipo de cuenta: </h4>
-              <h4 className={styles['text']}>{withdrawal?.teacher_bank_account.type_account}</h4>
+              <h4 className={styles['text']}>{withdrawal?.teacher_bank_account.bank_account_type}</h4>
             </div>
           </div>
           <div className={styles['row']}>

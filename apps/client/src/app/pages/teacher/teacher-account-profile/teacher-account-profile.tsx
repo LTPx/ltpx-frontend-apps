@@ -66,7 +66,7 @@ export function TeacherAccountProfile(props: TeacherAccountProfileProps) {
                   <div className={styles['item']}>
                     <h4>Tipo de cuenta: </h4>
                     <h4 className={styles['text']}>
-                      {profile.bank_accounts[0].type_account}
+                      {profile.bank_accounts[0].bank_account_type}
                     </h4>
                   </div>
                 </div>

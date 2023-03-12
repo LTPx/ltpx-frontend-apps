@@ -23,6 +23,8 @@ export interface WithdrawalReviewAdmin {
   teacher_bank_account: BankAccount;
   teacher_name: string;
   submitted_at: string;
+  status: 'approved' | 'rejected' | 'review';
+  receipt_id?: string;
 }
 
 export type WithdrawalParams = Prettify<

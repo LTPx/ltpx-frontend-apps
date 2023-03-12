@@ -1,9 +1,11 @@
 import {
   Button,
   ColorsButton,
+  ColorsTag,
   FilesUploaded,
   Icon,
   Input,
+  Tag,
   TypeFile,
 } from '@ltpx-frontend-apps/shared-ui';
 import { useFormik } from 'formik';
@@ -47,8 +49,11 @@ export function PaymentsDetailsPage(props: PaymentsDetailsPageProps) {
         'Se debe ingresar numero de comprobante'
       ),
     }),
-    onSubmit: async(formData) => {
-      const { success, data, error} = await _approveWithdrawal(withdrawalId, formData);
+    onSubmit: async (formData) => {
+      const { success, data, error } = await _approveWithdrawal(
+        withdrawalId,
+        formData
+      );
       if (success) {
         console.log('data: ', data);
       } else {
@@ -57,10 +62,40 @@ export function PaymentsDetailsPage(props: PaymentsDetailsPageProps) {
     },
   });
 
+  const tags = {
+    approved: {
+      text: 'Aprobada',
+      color: ColorsTag.green,
+    },
+    rejected: {
+      text: 'Aprobada',
+      color: ColorsTag.red,
+    },
+    review: {
+      text: 'Pendiente',
+      color: ColorsTag.orange,
+    },
+  };
+
   return (
     <div className={styles['container']}>
       <div className={`${styles['withdrawal-card']} ${styles['details']}`}>
-        <h2 className={styles['title']}>Solicitud de Retiro</h2>
+        <div className={styles['title']}>
+          <h2>Solicitud de Retiro</h2>
+          {withdrawal?.status && (
+            <Tag
+              text={tags[withdrawal.status].text}
+              color={tags[withdrawal.status].color}
+            />
+          )}
+        </div>
+        {withdrawal?.status === 'approved' && withdrawal?.receipt_id &&(
+          <div className={styles['note']}>
+            <h4 className={styles['label']}>Numero de comprobante:</h4>
+            <pre className={styles['text']}>{withdrawal?.receipt_id}</pre>
+          </div>
+        )}
+
         <div className={styles['information-teacher']}>
           <div className={styles['information']}>
             <h4 className={styles['label']}>Profesor:</h4>
@@ -120,49 +155,42 @@ export function PaymentsDetailsPage(props: PaymentsDetailsPageProps) {
           <pre className={styles['text']}>{withdrawal?.note}</pre>
         </div>
       </div>
-      <div className={`${styles['withdrawal-card']} ${styles['form']}`}>
-        <div className={styles['payment-content']}>
-          <h2 className={styles['title']}>Registrar pago</h2>
-          <Input
-            label="Numero de comprobante"
-            type="text"
-            name="receipt_id"
-            value={formik.values.receipt_id}
-            onBlur={formik.handleBlur}
-            onChange={(e: any) => {
-              formik.handleChange(e);
-            }}
-            errorMessage={formik.errors.receipt_id}
-          />
-          <div className={styles['upload']}>
-            <label className={styles['title-upload']}>
-              Comprobante de deposito (.jpg, .png)
-            </label>
-            <FilesUploaded
-              className={styles['file']}
-              type={TypeFile.pdf}
-              onChange={(value) => {
-                formik.setFieldValue('receipt_image', value);
+      {withdrawal?.status === 'review' && (
+        <div className={`${styles['withdrawal-card']} ${styles['form']}`}>
+          <div className={styles['payment-content']}>
+            <h2 className={styles['title']}>Registrar pago</h2>
+            <Input
+              label="Numero de comprobante"
+              type="text"
+              name="receipt_id"
+              value={formik.values.receipt_id}
+              onBlur={formik.handleBlur}
+              onChange={(e: any) => {
+                formik.handleChange(e);
               }}
+              errorMessage={formik.errors.receipt_id}
+            />
+            <div className={styles['upload']}>
+              <label className={styles['title-upload']}>
+                Comprobante de deposito (.jpg, .png)
+              </label>
+              <FilesUploaded
+                className={styles['file']}
+                type={TypeFile.pdf}
+                onChange={(value) => {
+                  formik.setFieldValue('receipt_image', value);
+                }}
+              />
+            </div>
+            <Button
+              title={'Guardar'}
+              color={ColorsButton.primary}
+              onClick={formik.handleSubmit}
+              full={true}
             />
           </div>
-          <Button
-            title={'Guardar'}
-            color={ColorsButton.primary}
-            onClick={formik.handleSubmit}
-            full={true}
-          />
         </div>
-        {/* <div className={styles['payment-unapproved']}>
-          <Button
-            title={'Rechazar'}
-            outline={true}
-            color={ColorsButton.primary}
-            onClick={formik.handleSubmit}
-            full={true}
-          />
-        </div> */}
-      </div>
+      )}
     </div>
   );
 }

@@ -52,22 +52,22 @@ export function AppLayout(props: AppLayoutProps) {
         size: 20,
       },
     },
-    {
-      title: t('Configuración'),
-      url: '/admin/settings',
-      icon: {
-        icon: 'cog',
-        size: 20,
-      },
-    },
-    {
-      title: 'Planes de carrera',
-      url: '/admin/learning-path',
-      icon: {
-        icon: 'box-unpacked',
-        size: 20,
-      },
-    },
+    // {
+    //   title: t('Configuración'),
+    //   url: '/admin/settings',
+    //   icon: {
+    //     icon: 'cog',
+    //     size: 20,
+    //   },
+    // },
+    // {
+    //   title: 'Planes de carrera',
+    //   url: '/admin/learning-path',
+    //   icon: {
+    //     icon: 'box-unpacked',
+    //     size: 20,
+    //   },
+    // },
     {
       title: 'Pagos',
       url: '/admin/payments',

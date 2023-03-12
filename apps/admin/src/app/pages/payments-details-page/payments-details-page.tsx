@@ -9,11 +9,34 @@ import {
 import { useFormik } from 'formik';
 import styles from './payments-details-page.module.scss';
 import * as Yup from 'yup';
+import { useCallback, useEffect, useState } from 'react';
+import { useAdmin } from '@ltpx-frontend-apps/store';
+import { useParams } from 'react-router-dom';
+import { WithdrawalReviewAdmin } from '@ltpx-frontend-apps/api';
 
 /* eslint-disable-next-line */
 export interface PaymentsDetailsPageProps {}
 
 export function PaymentsDetailsPage(props: PaymentsDetailsPageProps) {
+  const { _getWithdrawal } = useAdmin();
+  const [ withdrawal, setWithdrawal] = useState<WithdrawalReviewAdmin>()
+  const { id } = useParams();
+  const withdrawalId = parseInt(id || '');
+
+  const fetchWithdrawal = useCallback(async () => {
+    const { success, data, error } = await _getWithdrawal(withdrawalId);
+    if (success) {
+      console.log('data: ', data);
+      setWithdrawal(data);
+    } else {
+      console.log('error: ', error);
+    }
+  }, []);
+
+  useEffect(() => {
+    fetchWithdrawal();
+  }, []);
+
   const formik = useFormik({
     initialValues: {
       id_receipt: '',
@@ -34,11 +57,11 @@ export function PaymentsDetailsPage(props: PaymentsDetailsPageProps) {
       <div className={styles['information-teacher']}>
         <div className={styles['information']}>
           <h4>Profesor:</h4>
-          <h4 className={styles['text']}>Angel Capa</h4>
+          <h4 className={styles['text']}>{withdrawal?.teacher_name}</h4>
         </div>
         <div className={styles['information']}>
           <h4>Cantidad:</h4>
-          <h4 className={styles['text']}>20$:</h4>
+          <h4 className={styles['text']}>{withdrawal?.amount_format}</h4>
         </div>
       </div>
       <div className={styles['bank']}>
@@ -50,27 +73,27 @@ export function PaymentsDetailsPage(props: PaymentsDetailsPageProps) {
           <div className={styles['row']}>
             <div className={styles['item']}>
               <h4>Nombre del Banco: </h4>
-              <h4 className={styles['text']}>Banco Pichincha</h4>
+              <h4 className={styles['text']}>{withdrawal?.teacher_bank_account.bank_name}</h4>
             </div>
             <div className={styles['item']}>
               <h4>Propietario de la cuenta: </h4>
-              <h4 className={styles['text']}>Angel Capa</h4>
+              <h4 className={styles['text']}>{withdrawal?.teacher_bank_account.owner_account_name}</h4>
             </div>
           </div>
           <div className={styles['row']}>
             <div className={styles['item']}>
               <h4>Número de cuenta: </h4>
-              <h4 className={styles['text']}>21170809654</h4>
+              <h4 className={styles['text']}>{withdrawal?.teacher_bank_account.bank_account_number}</h4>
             </div>
             <div className={styles['item']}>
               <h4>Tipo de cuenta: </h4>
-              <h4 className={styles['text']}>Cuenta de Ahorros</h4>
+              <h4 className={styles['text']}>{withdrawal?.teacher_bank_account.type_account}</h4>
             </div>
           </div>
           <div className={styles['row']}>
             <div className={styles['item']}>
               <h4>Número de identificación: </h4>
-              <h4 className={styles['text']}>1150869368</h4>
+              <h4 className={styles['text']}>{withdrawal?.teacher_bank_account.national_id}</h4>
             </div>
           </div>
         </div>
@@ -78,8 +101,8 @@ export function PaymentsDetailsPage(props: PaymentsDetailsPageProps) {
       <div className={styles['payment-content']}>
         <h3 className={styles['title-payment']}>Comprobante</h3>
         <Input
-          label="id del Comprobante"
-          type="number"
+          label="Numero de comprobante"
+          type="text"
           name="id_receipt"
           value={formik.values.id_receipt}
           onBlur={formik.handleBlur}

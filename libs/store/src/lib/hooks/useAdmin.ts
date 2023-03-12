@@ -17,6 +17,8 @@ export const useAdmin = () => {
     _getCourse,
     _approveCourse,
     _getApprovedCourses,
+    _getWithdrawalsByStatus,
+    _getWithdrawal,
   } = useAppStore();
 
   return {
@@ -35,5 +37,7 @@ export const useAdmin = () => {
     _getCourse,
     _approveCourse,
     _getApprovedCourses,
+    _getWithdrawalsByStatus,
+    _getWithdrawal,
   }
 }

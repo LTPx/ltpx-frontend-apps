@@ -20,10 +20,17 @@ export interface FormWithdrawalProps {
 export function FormWithdrawal(props: FormWithdrawalProps) {
   const { onClose, onSubmit, banks } = props;
 
+  const banksOption = banks.map((bank)=>{
+    return {
+      value: bank.bank_account_number,
+      text: `${bank.bank_name}: ${bank.bank_account_number}`
+    }
+  });
+
   const formik = useFormik({
     initialValues: {
-      bank_account_number: '',
-      amount: 0,
+      bank_account_number: banks[0].bank_account_number,
+      amount: 20,
       note: '',
     },
     validationSchema: Yup.object({
@@ -43,13 +50,6 @@ export function FormWithdrawal(props: FormWithdrawalProps) {
     },
   });
 
-  const banksOption = banks.map((bank, index)=>{
-    return {
-      value: bank.bank_account_number,
-      text: `${bank.bank_name}: ${bank.bank_account_number}`
-    }
-  });
-
   return (
     <form className={styles['form-withdraw']}>
       <div className={styles['withdraw-content']}>
@@ -57,7 +57,6 @@ export function FormWithdrawal(props: FormWithdrawalProps) {
           label="Seleccionar banco"
           options={banksOption}
           onChange={(e) => {
-            console.log('s: ', e.value);
             formik.setFieldValue('bank_account_number', e.value);
           }}
         />

@@ -1,3 +1,4 @@
+export * from './lib/course-row-card/course-row-card';
 export * from './lib/balance-account/balance-account';
 export * from './lib/form-withdrawal/form-withdrawal';
 export * from './lib/section-information/section-information';

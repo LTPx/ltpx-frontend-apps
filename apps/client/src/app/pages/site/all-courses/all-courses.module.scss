@@ -7,18 +7,41 @@
 
 .cover {
   display: flex;
-  justify-content: space-between;
-  padding: $size-lg-1 12rem;
-
+  padding: 4rem 0;
+  align-items: center;
+  background-color: #f9fafb;
+  background-image:  radial-gradient(#00bdab 1.65px, transparent 1.65px), radial-gradient(#00bdab 1.65px, #f9fafb 1.65px);
+  background-size: 75px 75px;
+  background-position: 0 0,33px 33px;
+  .cover-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
+  .header {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+  .title-courses {
+    font-weight: 500;
+  }
+  .subtitle-courses {
+    color: $text-gray-color;
+  }
   .search-responsive {
-    margin-top: 1rem;
+    padding-top: 1.5rem;
+    width: 25rem;
   }
 }
 
 .filters-container {
   display: flex;
   justify-content: space-between;
-  margin: $size-lg-1 $size-lg-1;
+  padding: 0 2rem $size-lg-1;
+  align-items: center;
 
   .filters {
     display: flex;
@@ -29,7 +52,6 @@
 
 .courses-container {
   padding: $size-lg-1 12rem;
-  background-color: #f7f7f7;
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -41,10 +63,15 @@
   flex-wrap: wrap;
   justify-content: center;
   gap: $size-md-1;
+  padding-top: 2rem;
+}
+.course-row {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  box-sizing: border-box;
 
   .course {
-    height: 20rem;
-    width: 16rem;
   }
 }
 
@@ -52,12 +79,16 @@
 @media screen and (max-width: 550px) {
   .cover {
     display: flex;
-    flex-direction: column;
-    align-items: center;
     padding: $size-lg-3 0;
-
-    .search-responsive {
+    .cover-content {
       display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    .search-responsive {
+      padding-top: 1rem;
+      width: 60%;
     }
   }
 
@@ -86,13 +117,12 @@
       }
     }
   }
-  .courses {
-    gap: $size-lg-1;
-    padding: $size-lg-1 0;
-
+  .course-row {
+    display: flex;
+    width: 100%;
+    align-items: center;
     .course {
-      height: 19rem;
-      width: 20rem;
+      width: 90%;
     }
   }
 }

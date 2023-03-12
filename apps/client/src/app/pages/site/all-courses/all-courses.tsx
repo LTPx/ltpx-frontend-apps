@@ -1,6 +1,6 @@
 import styles from './all-courses.module.scss';
 import { CourseModel } from '@ltpx-frontend-apps/api';
-import { CourseCard } from '@ltpx-frontend-apps/shared-ui';
+import { CourseCard, CourseRowCard } from '@ltpx-frontend-apps/shared-ui';
 import { InputSearch } from '@ltpx-frontend-apps/shared-ui';
 import { Select } from '@ltpx-frontend-apps/shared-ui';
 import { useTranslation } from 'react-i18next';
@@ -52,37 +52,46 @@ export function AllCourses(props: AllCoursesProps) {
   return (
     <div className={styles['container']}>
       <div className={styles['cover']}>
-        <div>
-          <h1>{t('allCourses.cover.title')}</h1>
-          <h4>{t('allCourses.cover.subtitle')}</h4>
+        <div className={styles['cover-content']}>
+          <div className={styles['header']}>
+            <h1 className={styles['title-courses']}>
+              {t('allCourses.cover.title')}
+            </h1>
+            <h4 className={styles['subtitle-courses']}>
+              {t('allCourses.cover.subtitle')}
+            </h4>
+          </div>
+          <InputSearch
+            className={styles['search-responsive']}
+            placeholder="Buscar cursos"
+          />
         </div>
-        <InputSearch
-          className={styles['search-responsive']}
-          placeholder="Buscar cursos"
-        />
       </div>
       <div className={styles['courses-container']}>
         <div className={styles['filters-container']}>
           <div className={styles['text']}>
-            Encontramos 20 cursos disponibles para ti
+            Tenemos los siguientes cursos disponibles para ti
           </div>
           <div className={styles['filters']}>
             <Select options={categories} />
             <Select options={sortByOptions} />
           </div>
         </div>
-        <div className={styles['courses']}>
+        <div className={styles['course-row']}>
           {courses.map((course, index) => (
             <div className={styles['course']} key={index}>
-              <CourseCard
+              <CourseRowCard
                 image={course.cover_url}
+                achievements={0}
+                description={
+                  "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. "
+                }
+                language={course.language}
                 category={course.category}
                 title={course.title}
-                price={course.price_format}
-                duration={0}
-                lessons={0}
                 stars={course.average_rating}
                 link={`/course/${course.id}/details`}
+                price={course.price_format}
               />
             </div>
           ))}

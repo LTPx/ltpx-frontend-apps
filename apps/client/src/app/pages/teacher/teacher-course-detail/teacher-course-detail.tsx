@@ -76,7 +76,7 @@ export function TeacherCourseDetail() {
               alt="cover"
               src={
                 course.cover_url ||
-                'https://designshack.net/wp-content/uploads/placeholder-image-368x246.png'
+                '../../../../assets/images/placeholder-image-details.svg'
               }
             ></img>
           </div>

@@ -256,7 +256,7 @@
 //tablet-responsive-vertical
 @media screen and (min-width: 560px) and (max-width: 850px) {
   .main-cover {
-    height: auto;
+    height: inherit;
     .cover {
       img {
         padding-top: $size-lg-4;
@@ -287,9 +287,12 @@
 }
 //tablet-responsive-horizontal
 @media screen and (min-width: 860px) and (max-width: 1224px) {
+  .main-cover {
+    height: inherit;
+  }
   .cover {
     img {
-      width: 35rem;
+      width: 26rem;
     }
   }
   .news-container {

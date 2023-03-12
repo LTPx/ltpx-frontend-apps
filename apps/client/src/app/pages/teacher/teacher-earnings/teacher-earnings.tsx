@@ -63,8 +63,8 @@ export function TeacherEarnings() {
         <div className={styles['content']}>
           <div className={styles['balance-info']}>
             <BalanceAccount
-              balanceWithdrawal={wallet.balance_pending_withdrawal}
-              balanceAvailable={wallet.balance_available_withdrawal}
+              balanceWithdrawal={wallet.balance_pending_withdrawal_format}
+              balanceAvailable={wallet.balance_available_withdrawal_format}
             />
             <div className={styles['withdrawal-form']}>
               <h2>Retiros</h2>
@@ -73,7 +73,7 @@ export function TeacherEarnings() {
                 title={'Retirar Fondos'}
                 full={true}
                 onClick={() => setOpenModal(true)}
-                disabled={wallet.balance_available_withdrawal === '$0.00'}
+                disabled={wallet.balance_available_withdrawal < 21 }
               />
             </div>
           </div>

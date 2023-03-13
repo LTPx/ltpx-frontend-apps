@@ -52,7 +52,12 @@ export function ApplyTeacherForm(props: ApplyTeacherFormProps) {
       police_record: Yup.string().required('Record Policial es requerido'),
       national_id_front: Yup.mixed()
         .nullable()
-        .required('Imagen de la identificación frontal es requerida'),
+        .required('Imagen de la identificación frontal es requerida')
+        .test("national_id_front", "El archivo debe ser menor o igual a 2mb", (value) => {
+          const fileSize = value.size;
+          const fileMb = fileSize / 1024 ** 2;
+          return fileMb <= 2;
+        }),
       national_id_back: Yup.mixed()
         .nullable()
         .required('Imagen de la identificación trasera es requerida'),
@@ -177,11 +182,7 @@ export function ApplyTeacherForm(props: ApplyTeacherFormProps) {
             description={
               <div>
                 <p>
-                  Obligatorio para personas naturales de Ecuador 🇪🇨, lo puedes
-                  obtener en el siguiente{' '}
-                  <a href="https://certificados.ministeriodelinterior.gob.ec/gestorcertificados/antecedentes" target={'_blank'}>
-                    link
-                  </a>
+                  Debe ser un certificado emitido por tu país de procedencia, Ejm: Ecuador - record policial
                 </p>
               </div>
             }

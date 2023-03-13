@@ -36,20 +36,20 @@ export function CourseAchievements(props: CourseAchievementsProps) {
       onClick: () => {
         setSelectedType(TypeAchievement.multiple);
       },
-      text: 'Cuando el alumno apruebe varios tests',
+      text: 'Al aprobar uno o varios tests',
     },
-    {
-      onClick: () => {
-        setSelectedType(TypeAchievement.single);
-      },
-      text: 'Cuando el alumno apruebe un test',
-    },
-    {
-      onClick: () => {
-        setSelectedType(TypeAchievement.score);
-      },
-      text: 'Por calificación',
-    },
+    // {
+    //   onClick: () => {
+    //     setSelectedType(TypeAchievement.single);
+    //   },
+    //   text: 'Cuando el alumno apruebe un test',
+    // },
+    // {
+    //   onClick: () => {
+    //     setSelectedType(TypeAchievement.score);
+    //   },
+    //   text: 'Por calificación',
+    // },
     {
       onClick: () => {
         setSelectedType(TypeAchievement.task);

@@ -338,7 +338,7 @@ export const es = {
     experience: 'Experiencia Laboral (Opcional)',
     degrees: 'Títulos académicos',
     degrees_files: 'Adjuntar títulos (.pdf)',
-    police_record: 'Record policial',
+    police_record: 'Antecedentes Penales',
   },
   boolean: {
     true: 'Verdadero',

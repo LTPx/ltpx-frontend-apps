@@ -58,6 +58,11 @@ export function FilesUploaded(props: FilesUploadedProps) {
   const handleChange = (e: any) => {
     const files = e.target.files;
     if (files.length > 0 && files.length === 1) {
+      const fileSize = files[0].size;
+      const fileMb = fileSize / 1024 ** 2;
+      if (fileMb >= 2) {
+        console.log('no puede ');
+      }
       setFileName(files[0].name);
       onChange(files[0]);
     }

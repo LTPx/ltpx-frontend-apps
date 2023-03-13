@@ -226,6 +226,8 @@ export const createCourseSlice: StateCreator<
       const course = get().course;
       const paramsWithId = { ...params, ...{ course_id: course.id } };
       const session = await createCourseSession(paramsWithId);
+      const updatedCourse = { ...course, ...{ session } };
+      set({ course: updatedCourse });
       return { success: true, data: session };
     } catch (error) {
       return { success: false, data: error };

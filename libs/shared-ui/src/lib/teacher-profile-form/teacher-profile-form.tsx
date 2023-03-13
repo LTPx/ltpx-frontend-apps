@@ -8,26 +8,33 @@ import Input from '../input/input';
 import TextArea from '../text-area/text-area';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { TeacherProfileParams } from '@ltpx-frontend-apps/api';
+import { TeacherProfile, TeacherProfileParams } from '@ltpx-frontend-apps/api';
 /* eslint-disable-next-line */
 export interface TeacherProfileFormProps {
   onSubmit: (params: TeacherProfileParams) => void;
+  profile?: TeacherProfile;
 }
 
 export function TeacherProfileForm(props: TeacherProfileFormProps) {
-  const { onSubmit } = props;
+  const { onSubmit, profile } = props;
+
+  function getSocialNetwork(socialNetwork: string) {
+    const socialNetworks = profile?.social_networks || [];
+    return socialNetworks.find((sn) => sn.name === socialNetwork)?.url || '';
+  }
   const formik = useFormik({
     initialValues: {
-      name: '',
-      skills: '',
-      biography: '',
-      profile_img: '',
-      video_presentation: '',
-      facebook_url: '',
-      twitter_url: '',
-      instagram_url: '',
-      linkedin_url: '',
+      name: profile?.teacher_name || '',
+      skills: profile?.skills || '',
+      biography: profile?.biography || '',
+      profile_img: profile?.image || '',
+      video_presentation: profile?.video || '',
+      facebook_url: getSocialNetwork('facebook'),
+      twitter_url: getSocialNetwork('twitter'),
+      instagram_url: getSocialNetwork('instagram'),
+      linkedin_url: getSocialNetwork('linkedin'),
     },
+    enableReinitialize: true,
     validationSchema: Yup.object({
       name: Yup.string().required('Nombre es obligatorio'),
       skills: Yup.string().required('Profesión es obligatorio'),
@@ -36,12 +43,12 @@ export function TeacherProfileForm(props: TeacherProfileFormProps) {
     onSubmit: (data) => {
       console.log(data);
       const social_networks = [
-        {name: 'facebook', url: data.facebook_url},
-        {name: 'twitter', url: data.twitter_url},
-        {name: 'instagram', url: data.instagram_url},
-        {name: 'linkedin', url: data.linkedin_url},
+        { name: 'facebook', url: data.facebook_url },
+        { name: 'twitter', url: data.twitter_url },
+        { name: 'instagram', url: data.instagram_url },
+        { name: 'linkedin', url: data.linkedin_url },
       ];
-      onSubmit({...data, ...{social_networks}})
+      onSubmit({ ...data, ...{ social_networks } });
     },
   });
   return (
@@ -53,7 +60,7 @@ export function TeacherProfileForm(props: TeacherProfileFormProps) {
             <div>
               <Input
                 label="Nombre publico"
-                description='Este sera el nombre que generara un link a tu perfil'
+                description='Este sera tu nombre oficial en openmind'
                 type="text"
                 name="name"
                 placeholder="Ejm: Luis Marisque"
@@ -72,8 +79,8 @@ export function TeacherProfileForm(props: TeacherProfileFormProps) {
             </div>
             <div>
               <Input
-                label="Especializaciones"
-                description='Tus habilidades en diferentes campos'
+                label="Habilidades"
+                description='Habilidades en las que te consideras experto'
                 type="text"
                 name="skills"
                 placeholder="Profesor, Diseñador"
@@ -83,8 +90,7 @@ export function TeacherProfileForm(props: TeacherProfileFormProps) {
                 value={formik.values.skills}
                 onBlur={formik.handleBlur}
               />
-              {formik.touched.skills &&
-              formik.errors.skills ? (
+              {formik.touched.skills && formik.errors.skills ? (
                 <InputTextStatus
                   status={StatusInputText.error}
                   text={formik.errors.skills}

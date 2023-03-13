@@ -24,7 +24,7 @@ import {
   CourseQuizzes,
 } from '../course';
 import { useCallback, useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import styles from './teacher-edit-course.module.scss';
 import { useTranslation } from 'react-i18next';
 import { useMoment } from '../../../hooks/useMoment';
@@ -47,6 +47,7 @@ export function TeacherEditCourse() {
   const { translateStatus } = useCourseUtil();
   const { formatDate } = useMoment();
   const { t } = useTranslation();
+  const navigate = useNavigate();
 
   const linksEditCourse = [
     { selected: true, text: t('teacherEditCourse.linksEditCourse.details') },
@@ -98,6 +99,7 @@ export function TeacherEditCourse() {
         show: true,
         text: 'Tu curso ha sido enviado a revision',
       }));
+      navigate('/teacher/courses');
     } else {
       setNotification((prevState) => ({
         ...prevState,

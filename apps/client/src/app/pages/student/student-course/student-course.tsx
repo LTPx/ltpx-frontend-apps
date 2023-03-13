@@ -77,7 +77,7 @@ export function StudentCourse(props: StudentCourseProps) {
           )}
           {selectedTab === 1 && (
             <div className={styles['course-date']}>
-              {enrolledCourse.sessions[0].meetings.map((meeting, index) => (
+              {enrolledCourse.session.meetings.map((meeting, index) => (
                 <CourseDateCard
                   className={styles['course-class']}
                   key={index}

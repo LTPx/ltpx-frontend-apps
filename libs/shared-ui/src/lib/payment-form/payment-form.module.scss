@@ -2,6 +2,10 @@
 .form {
   background-color: $white-color;
   padding: $size-md-1 $size-lg-3;
+  .describe {
+    color: $text-gray-color;
+    padding-top: 0.25rem;
+  }
 }
 .general {
   margin-top: $size-lg-1;

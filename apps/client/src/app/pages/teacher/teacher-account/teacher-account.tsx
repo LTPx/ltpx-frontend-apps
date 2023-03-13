@@ -9,6 +9,7 @@ import {
 } from '@ltpx-frontend-apps/shared-ui';
 import { useEffect, useState } from 'react';
 import styles from './teacher-account.module.scss';
+import { useNavigate } from 'react-router-dom';
 
 /* eslint-disable-next-line */
 export interface TeacherAccountProps {}
@@ -16,11 +17,10 @@ export interface TeacherAccountProps {}
 export function TeacherAccount(props: TeacherAccountProps) {
   const [showMessage, setShowMessage] = useState(false);
   const { getProfile, _updateProfile, profile } = useTeacher();
+  const navigate = useNavigate();
 
   useEffect(() => {
-    if (!profile) {
-      getProfile();
-    }
+    getProfile();
   }, []);
   const [selectedTab, setSelectedTab] = useState(0);
 
@@ -31,8 +31,9 @@ export function TeacherAccount(props: TeacherAccountProps) {
   async function updateTeacherProfile(params: TeacherProfileParams) {
     const { success, data, error} = await _updateProfile(params);
     if (success) {
-      setShowMessage(true);
       console.log('data: ', data);
+      setShowMessage(true);
+      navigate('/teacher/account/account-profile');
     } else {
       console.log('error: ', error);
     }
@@ -62,7 +63,9 @@ export function TeacherAccount(props: TeacherAccountProps) {
             tabs={tabs}
             onClickTab={(option) => handleClick(option)}
           />
-          {selectedTab === 0 && <TeacherProfileForm onSubmit={updateTeacherProfile}/>}
+          {selectedTab === 0 && <TeacherProfileForm
+          profile={profile}
+          onSubmit={updateTeacherProfile}/>}
           {selectedTab === 1 && <PaymentForm onSubmit={updateTeacherProfile}/>}
           {selectedTab === 2 && (
             <ChangePasswordForm url="/teacher/account/account-profile" />

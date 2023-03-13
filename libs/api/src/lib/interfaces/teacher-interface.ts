@@ -17,11 +17,14 @@ export interface BankAccount {
 
 export interface TeacherProfile {
   teacher_name: string;
+  skills: string;
   biography: string;
   social_networks: { name: string; url: string }[];
   bank_accounts: BankAccount[];
   national_id: string;
   status_account: StatusTeacherAccount;
+  image: string;
+  video: string;
 }
 
 export interface ITeacher {

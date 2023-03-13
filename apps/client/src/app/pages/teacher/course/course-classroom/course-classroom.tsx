@@ -26,9 +26,8 @@ export function CourseClassroom(props: CourseClassroomProps) {
   const { onSubmit } = props;
   const [openModal, setOpenModal] = useState(false);
   const { course, _addCourseSession } = useCourse();
-  const { sessions } = course;
+  const { session } = course;
   const { t } = useTranslation();
-  console.log('classroom: ', sessions);
 
   const handleClassroom = async (params: SessionParams) => {
     const { success, data, error } = await _addCourseSession(params);
@@ -46,7 +45,7 @@ export function CourseClassroom(props: CourseClassroomProps) {
         <h2>{t('courseClassroom.title')}</h2>
         <h4 className="muted">{t('courseClassroom.subtitle')}</h4>
       </div>
-      {sessions.length === 0 && (
+      {session === undefined && (
         <SetupCard
           icon={'cog'}
           text={t('courseClassroom.text')}
@@ -66,10 +65,10 @@ export function CourseClassroom(props: CourseClassroomProps) {
           handleClassroom(classroom);
         }}
       />
-      {sessions.length > 0 && (
+      {session?.meetings && session?.meetings.length > 0 && (
         <div className={styles['classes-container']}>
           <div className={styles['classes-preview']}>
-            {sessions[0].meetings.map((meeting, index) => (
+            {session.meetings.map((meeting, index) => (
               <CourseDateCard
                 className={styles['course-class']}
                 key={index}

@@ -20,7 +20,7 @@ const classesOptions = [
     text: 'Este curso incluirá clases para los estudiantes',
     icon: 'person-video',
   },
-  CLASSROOM_CUSTOMIZE,
+  // CLASSROOM_CUSTOMIZE,
   CLASSROOM_NONE,
 ];
 

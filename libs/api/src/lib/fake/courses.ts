@@ -1,5 +1,6 @@
 import { faker } from '@faker-js/faker';
 import { CourseLanguage, CourseLevel, PublicCourse, TeacherClassType } from '../interfaces/course-interface';
+import { CourseSession } from '../interfaces/session-interface';
 
 const createRandomCourse = ():PublicCourse => (
   {
@@ -15,7 +16,7 @@ const createRandomCourse = ():PublicCourse => (
     language: CourseLanguage.en,
     contents: [],
     quizzes: [],
-    sessions: [],
+    session: {} as CourseSession,
     learn_goals: `Learning: ${faker.commerce.productDescription()}`,
     enrollments_count: 12,
     requirements: 'No one',

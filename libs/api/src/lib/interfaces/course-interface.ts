@@ -66,7 +66,7 @@ export interface CourseModel {
   approved: boolean;
   level: CourseLevel;
   language: CourseLanguage;
-  sessions: CourseSession[];
+  session: CourseSession;
   status: CourseStatus;
   contents: ContentCourse[];
   classroom: Classroom;

@@ -160,7 +160,7 @@ export function CourseAchievements(props: CourseAchievementsProps) {
           onClick={() => {
             setSelectedType(TypeAchievement.multiple);
           }}
-          icon={'trophy'}
+          icon={'trophy-outline'}
           text={t('courseAchievements.text')}
         >
           <ButtonAddAchievement

@@ -22,6 +22,14 @@
       color: $text-gray-color;
     }
   }
+  .information-teacher {
+    border: 1px solid $gray-color-200;
+    padding: $size-md-1;
+    border-radius: 4px;
+    .text {
+      color: $text-gray-color;
+    }
+  }
 
   .bank {
     padding: $size-md-1;

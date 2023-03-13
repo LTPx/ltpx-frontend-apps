@@ -29,10 +29,14 @@ export function TeacherAccountProfile(props: TeacherAccountProfileProps) {
             </div>
             <p>{profile.biography} </p>
           </div>
-          <div className={styles['about-teacher']}>
+          <div className={styles['information-teacher']}>
             <div className={styles['title']}>
               <Icon icon={'pencil-square'} size={20}></Icon>
               <h3>Información de Usuario</h3>
+            </div>
+            <div>
+              <h4>Nombre de profesor: </h4>
+              <h4 className={styles['text']}>{profile.teacher_name}</h4>
             </div>
           </div>
           <div className={styles['bank']}>

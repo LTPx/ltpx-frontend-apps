@@ -12,6 +12,9 @@ import {
   adminGetCourse,
   adminApproveCourse,
   getApprovedCourses,
+  getWithdrawalsByStatus,
+  getWithdrawal,
+  approveWithdrawal,
 } from '@ltpx-frontend-apps/api';
 
 export type TResponse = {
@@ -36,6 +39,9 @@ export type AdminSlice = {
   _getCourse: (id: number) => void;
   _approveCourse: (id: number) => Promise<TResponse>;
   _getApprovedCourses: () => Promise<TResponse>;
+  _getWithdrawalsByStatus: (status: string) => Promise<TResponse>;
+  _getWithdrawal: (id: number) => Promise<TResponse>;
+  _approveWithdrawal: (id: number, params: {receipt_id: string, receipt_image?: string}) => Promise<TResponse>;
 };
 
 export const createAdminSlice: StateCreator<StoreState, [], [], AdminSlice> = (
@@ -133,6 +139,30 @@ export const createAdminSlice: StateCreator<StoreState, [], [], AdminSlice> = (
       const courses = await getApprovedCourses();
       set({ courses });
       return { success: true, data: courses };
+    } catch (error) {
+      return { success: false, error };
+    }
+  },
+  _getWithdrawalsByStatus: async (status): Promise<TResponse> => {
+    try {
+      const withdrawals = await getWithdrawalsByStatus(status);
+      return { success: true, data: withdrawals };
+    } catch (error) {
+      return { success: false, error };
+    }
+  },
+  _getWithdrawal: async (id): Promise<TResponse> => {
+    try {
+      const withdrawal = await getWithdrawal(id);
+      return { success: true, data: withdrawal };
+    } catch (error) {
+      return { success: false, error };
+    }
+  },
+  _approveWithdrawal: async (id, params): Promise<TResponse> => {
+    try {
+      const withdrawal = await approveWithdrawal(id, params);
+      return { success: true, data: withdrawal };
     } catch (error) {
       return { success: false, error };
     }

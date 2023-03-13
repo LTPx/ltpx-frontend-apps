@@ -1,12 +1,11 @@
 import { IUserAccount, TeacherProfileParams } from '@ltpx-frontend-apps/api';
-import { useTeacher, useUser } from '@ltpx-frontend-apps/store';
+import { useTeacher } from '@ltpx-frontend-apps/store';
 import {
   BannerNotification,
   ChangePasswordForm,
   PaymentForm,
   Tabs,
   TeacherProfileForm,
-  UserAccountForm,
 } from '@ltpx-frontend-apps/shared-ui';
 import { useEffect, useState } from 'react';
 import styles from './teacher-account.module.scss';
@@ -17,7 +16,6 @@ export interface TeacherAccountProps {}
 export function TeacherAccount(props: TeacherAccountProps) {
   const [showMessage, setShowMessage] = useState(false);
   const { getProfile, _updateProfile, profile } = useTeacher();
-  const { user } = useUser();
 
   useEffect(() => {
     if (!profile) {
@@ -44,9 +42,6 @@ export function TeacherAccount(props: TeacherAccountProps) {
     {
       text: 'Perfil de Profesor',
     },
-    // {
-    //   text: 'Cuenta de Usuario',
-    // },
     {
       text: 'Cuenta Bancaria',
     },
@@ -60,15 +55,6 @@ export function TeacherAccount(props: TeacherAccountProps) {
 
   return (
     <div className={styles['container']}>
-      {showMessage && (
-        <BannerNotification
-          onClickClose={() => {
-            setShowMessage(false);
-          }}
-        >
-          <h4>Tus datos se han actualizado</h4>
-        </BannerNotification>
-      )}
       {profile && (
         <div>
           <Tabs
@@ -77,13 +63,6 @@ export function TeacherAccount(props: TeacherAccountProps) {
             onClickTab={(option) => handleClick(option)}
           />
           {selectedTab === 0 && <TeacherProfileForm onSubmit={updateTeacherProfile}/>}
-          {/* {selectedTab === 1 && (
-            <UserAccountForm
-              url="/teacher/account/account-profile"
-              onSubmit={updateUserAccount}
-              data={user}
-            />
-          )} */}
           {selectedTab === 1 && <PaymentForm onSubmit={updateTeacherProfile}/>}
           {selectedTab === 2 && (
             <ChangePasswordForm url="/teacher/account/account-profile" />

@@ -1,7 +1,9 @@
 export interface WalletModel {
   id: number;
-  balance_available_withdrawal: string;
-  balance_pending_withdrawal: string;
+  balance_available_withdrawal: number;
+  balance_pending_withdrawal: number;
+  balance_available_withdrawal_format: string;
+  balance_pending_withdrawal_format: string;
   total_earnings: string;
   created_at: string;
   updated_at: string;

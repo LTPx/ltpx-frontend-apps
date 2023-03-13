@@ -36,7 +36,7 @@ export function CoursesByCategory(props: CoursesByCategoryProps) {
                 title={course.title}
                 price={course.price_format}
                 duration={0}
-                lessons={0}
+                achievements={0}
                 stars={course.average_rating}
                 link={`/course/${course.id}/details`}
               />

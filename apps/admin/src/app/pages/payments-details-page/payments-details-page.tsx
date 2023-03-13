@@ -1,114 +1,196 @@
 import {
   Button,
   ColorsButton,
+  ColorsTag,
   FilesUploaded,
   Icon,
   Input,
+  Tag,
   TypeFile,
 } from '@ltpx-frontend-apps/shared-ui';
 import { useFormik } from 'formik';
 import styles from './payments-details-page.module.scss';
 import * as Yup from 'yup';
+import { useCallback, useEffect, useState } from 'react';
+import { useAdmin } from '@ltpx-frontend-apps/store';
+import { useParams } from 'react-router-dom';
+import { WithdrawalReviewAdmin } from '@ltpx-frontend-apps/api';
 
 /* eslint-disable-next-line */
 export interface PaymentsDetailsPageProps {}
 
 export function PaymentsDetailsPage(props: PaymentsDetailsPageProps) {
+  const { _getWithdrawal, _approveWithdrawal } = useAdmin();
+  const [withdrawal, setWithdrawal] = useState<WithdrawalReviewAdmin>();
+  const { id } = useParams();
+  const withdrawalId = parseInt(id || '');
+
+  const fetchWithdrawal = useCallback(async () => {
+    const { success, data, error } = await _getWithdrawal(withdrawalId);
+    if (success) {
+      console.log('data: ', data);
+      setWithdrawal(data);
+    } else {
+      console.log('error: ', error);
+    }
+  }, []);
+
+  useEffect(() => {
+    fetchWithdrawal();
+  }, []);
+
   const formik = useFormik({
     initialValues: {
-      id_receipt: '',
-      file_receipt: null,
+      receipt_id: '',
+      receipt_image: '',
     },
     validationSchema: Yup.object({
-      id_receipt: Yup.string().required(
+      receipt_id: Yup.string().required(
         'Se debe ingresar numero de comprobante'
       ),
     }),
-    onSubmit: (data) => {
-      console.log(data);
+    onSubmit: async (formData) => {
+      const { success, data, error } = await _approveWithdrawal(
+        withdrawalId,
+        formData
+      );
+      if (success) {
+        console.log('data: ', data);
+      } else {
+        console.log('error: ', error);
+      }
     },
   });
+
+  const tags = {
+    approved: {
+      text: 'Aprobada',
+      color: ColorsTag.green,
+    },
+    rejected: {
+      text: 'Aprobada',
+      color: ColorsTag.red,
+    },
+    review: {
+      text: 'Pendiente',
+      color: ColorsTag.orange,
+    },
+  };
+
   return (
     <div className={styles['container']}>
-      <h2 className={styles['title-teacher']}>Solicitud de Retiro</h2>
-      <div className={styles['information-teacher']}>
-        <div className={styles['information']}>
-          <h4>Profesor:</h4>
-          <h4 className={styles['text']}>Angel Capa</h4>
-        </div>
-        <div className={styles['information']}>
-          <h4>Cantidad:</h4>
-          <h4 className={styles['text']}>20$:</h4>
-        </div>
-      </div>
-      <div className={styles['bank']}>
+      <div className={`${styles['withdrawal-card']} ${styles['details']}`}>
         <div className={styles['title']}>
-          <Icon icon={'bank'} size={20}></Icon>
-          <h3>Cuenta Bancaria</h3>
+          <h2>Solicitud de Retiro</h2>
+          {withdrawal?.status && (
+            <Tag
+              text={tags[withdrawal.status].text}
+              color={tags[withdrawal.status].color}
+            />
+          )}
         </div>
-        <div className={styles['info-bank']}>
-          <div className={styles['row']}>
-            <div className={styles['item']}>
-              <h4>Nombre del Banco: </h4>
-              <h4 className={styles['text']}>Banco Pichincha</h4>
-            </div>
-            <div className={styles['item']}>
-              <h4>Propietario de la cuenta: </h4>
-              <h4 className={styles['text']}>Angel Capa</h4>
-            </div>
+        {withdrawal?.status === 'approved' && withdrawal?.receipt_id &&(
+          <div className={styles['note']}>
+            <h4 className={styles['label']}>Numero de comprobante:</h4>
+            <pre className={styles['text']}>{withdrawal?.receipt_id}</pre>
           </div>
-          <div className={styles['row']}>
-            <div className={styles['item']}>
-              <h4>Número de cuenta: </h4>
-              <h4 className={styles['text']}>21170809654</h4>
-            </div>
-            <div className={styles['item']}>
-              <h4>Tipo de cuenta: </h4>
-              <h4 className={styles['text']}>Cuenta de Ahorros</h4>
-            </div>
+        )}
+
+        <div className={styles['information-teacher']}>
+          <div className={styles['information']}>
+            <h4 className={styles['label']}>Profesor:</h4>
+            <h4 className={styles['text']}>{withdrawal?.teacher_name}</h4>
           </div>
-          <div className={styles['row']}>
-            <div className={styles['item']}>
-              <h4>Número de identificación: </h4>
-              <h4 className={styles['text']}>1150869368</h4>
-            </div>
+          <div className={styles['information']}>
+            <h4 className={styles['label']}>Cantidad:</h4>
+            <h4 className={styles['amount']}>{withdrawal?.amount_format}</h4>
           </div>
         </div>
-      </div>
-      <div className={styles['payment-content']}>
-        <h3 className={styles['title-payment']}>Comprobante</h3>
-        <Input
-          label="id del Comprobante"
-          type="number"
-          name="id_receipt"
-          value={formik.values.id_receipt}
-          onBlur={formik.handleBlur}
-          onChange={(e: any) => {
-            formik.handleChange(e);
-          }}
-          errorMessage={formik.errors.id_receipt}
-        />
-        <div className={styles['upload']}>
-          <label className={styles['title-upload']}>
-            Comprobante de Deposito (.jpg, .png)
-          </label>
-          <FilesUploaded
-            className={styles['file']}
-            type={TypeFile.pdf}
-            onChange={(value) => {
-              formik.setFieldValue('file_receipt', value);
-            }}
-          />
+        <div className={styles['bank']}>
+          <div className={styles['title']}>
+            <Icon icon={'bank'} size={20}></Icon>
+            <h3>Cuenta Bancaria</h3>
+          </div>
+          <div className={styles['info-bank']}>
+            <div className={styles['row']}>
+              <div className={styles['item']}>
+                <h4>Nombre del Banco: </h4>
+                <h4 className={styles['text']}>
+                  {withdrawal?.teacher_bank_account.bank_name}
+                </h4>
+              </div>
+              <div className={styles['item']}>
+                <h4>Propietario de la cuenta: </h4>
+                <h4 className={styles['text']}>
+                  {withdrawal?.teacher_bank_account.owner_account_name}
+                </h4>
+              </div>
+            </div>
+            <div className={styles['row']}>
+              <div className={styles['item']}>
+                <h4>Número de cuenta: </h4>
+                <h4 className={styles['text']}>
+                  {withdrawal?.teacher_bank_account.bank_account_number}
+                </h4>
+              </div>
+              <div className={styles['item']}>
+                <h4>Tipo de cuenta: </h4>
+                <h4 className={styles['text']}>
+                  {withdrawal?.teacher_bank_account.bank_account_type}
+                </h4>
+              </div>
+            </div>
+            <div className={styles['row']}>
+              <div className={styles['item']}>
+                <h4>Número de identificación: </h4>
+                <h4 className={styles['text']}>
+                  {withdrawal?.teacher_bank_account.national_id}
+                </h4>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className={styles['note']}>
+          <h4 className={styles['label']}>Nota del profesor:</h4>
+          <pre className={styles['text']}>{withdrawal?.note}</pre>
         </div>
       </div>
-      <div className={styles['footer-approved']}>
-        <Button title={'Cancelar'} color={ColorsButton.white} />
-        <Button
-          title={'Aprobar Retiro'}
-          color={ColorsButton.primary}
-          onClick={formik.handleSubmit}
-        />
-      </div>
+      {withdrawal?.status === 'review' && (
+        <div className={`${styles['withdrawal-card']} ${styles['form']}`}>
+          <div className={styles['payment-content']}>
+            <h2 className={styles['title']}>Registrar pago</h2>
+            <Input
+              label="Numero de comprobante"
+              type="text"
+              name="receipt_id"
+              value={formik.values.receipt_id}
+              onBlur={formik.handleBlur}
+              onChange={(e: any) => {
+                formik.handleChange(e);
+              }}
+              errorMessage={formik.errors.receipt_id}
+            />
+            <div className={styles['upload']}>
+              <label className={styles['title-upload']}>
+                Comprobante de deposito (.jpg, .png)
+              </label>
+              <FilesUploaded
+                className={styles['file']}
+                type={TypeFile.pdf}
+                onChange={(value) => {
+                  formik.setFieldValue('receipt_image', value);
+                }}
+              />
+            </div>
+            <Button
+              title={'Guardar'}
+              color={ColorsButton.primary}
+              onClick={formik.handleSubmit}
+              full={true}
+            />
+          </div>
+        </div>
+      )}
     </div>
   );
 }

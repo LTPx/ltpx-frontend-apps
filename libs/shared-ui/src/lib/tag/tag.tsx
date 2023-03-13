@@ -15,10 +15,11 @@ export interface TagProps {
   text: string;
   color?: ColorsTag;
   icon?: string;
+  className?: string;
 }
 
 export function Tag(props: TagProps) {
-  const { text, color, icon } = props;
+  const { text, color, icon, className } = props;
 
   const colorsTags = {
     green: `${styles['tag-green']}`,
@@ -31,7 +32,7 @@ export function Tag(props: TagProps) {
   const selectedColor = colorsTags[color || ColorsTag.gray];
 
   return (
-    <div className={styles['container']}>
+    <div className={`${className} ${styles['container']}`}>
       <div className={`${selectedColor} ${styles['tag']}`}>
         {icon && <Icon icon={icon} size={15}></Icon>}
         <h5>{text}</h5>

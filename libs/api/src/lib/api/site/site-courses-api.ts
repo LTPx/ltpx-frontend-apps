@@ -1,10 +1,10 @@
 import { _http } from '../../http';
-import { CourseModel, FullCourse } from '../../interfaces/course-interface';
+import { CourseSite, FullCourse } from '../../interfaces/course-interface';
 
 const http = _http;
 
 export const getPopularCourses = async () => {
-  return new Promise<CourseModel[]>((resolve, reject) => {
+  return new Promise<CourseSite[]>((resolve, reject) => {
     http
       .get('api/v1/site/courses/popular_courses')
       .then((response) => {

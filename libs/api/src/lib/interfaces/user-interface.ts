@@ -1,5 +1,5 @@
 import { CartModel } from './cart-interface';
-import { StatusTeacherAccount } from './teacher-interface';
+import { BankAccount, StatusTeacherAccount } from './teacher-interface';
 
 export enum TypeAccounts {
   user = 'user',
@@ -38,7 +38,7 @@ export interface UserStore {
   teacher?: {
     id: number;
     teacher_name: string;
-    bank_accounts: string;
+    bank_accounts: BankAccount[];
   },
   id: number;
 }

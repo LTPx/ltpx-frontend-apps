@@ -181,7 +181,7 @@ export function TeacherViewStudent(props: TeacherViewStudentProps) {
             <EmptyState
               classNameImage={`${styles['image-empty']}`}
               className={`${styles['image-content']}`}
-              icon={'trophy'}
+              icon={'trophy-outline'}
               description={
                 'El estudiante aun no a alcanzado un logro. '
               }

@@ -117,7 +117,7 @@ export function TeacherProfile(props: TeacherProfileProps) {
                 title={course.title}
                 price={course.price_format}
                 duration={0}
-                lessons={0}
+                achievements={course.achievements?.length}
                 stars={course.average_rating}
                 link={`/course/${course.id}/details`}
               />

@@ -10,13 +10,13 @@ export interface CourseCardProps {
   title: string;
   price: string;
   duration?: number;
-  lessons?: number;
+  achievements?: number;
   stars?: number;
   link?: string;
 }
 
 export function CourseCard(props: CourseCardProps) {
-  const { image, category, title, price, duration, lessons, stars, link } =
+  const { image, category, title, price, duration, achievements, stars, link } =
     props;
   const { translateCategory } = useCourseUtil();
 
@@ -38,8 +38,8 @@ export function CourseCard(props: CourseCardProps) {
         </div>
         <div className={styles['info']}>
           <div className={styles['info-item']}>
-            <Icon icon={'university'} size={15} />
-            {lessons} logros
+            <Icon icon={'trophy'} size={15} />
+            {achievements} logros
           </div>
           {/* <div className={styles['info-item']}>
             <Icon icon={'clock'} size={15} />

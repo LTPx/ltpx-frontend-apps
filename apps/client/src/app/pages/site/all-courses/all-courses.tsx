@@ -1,6 +1,6 @@
 import styles from './all-courses.module.scss';
-import { CourseModel } from '@ltpx-frontend-apps/api';
-import { CourseCard } from '@ltpx-frontend-apps/shared-ui';
+import { CourseSite } from '@ltpx-frontend-apps/api';
+import { CourseRowCard } from '@ltpx-frontend-apps/shared-ui';
 import { InputSearch } from '@ltpx-frontend-apps/shared-ui';
 import { Select } from '@ltpx-frontend-apps/shared-ui';
 import { useTranslation } from 'react-i18next';
@@ -11,7 +11,7 @@ import { useCallback, useEffect, useState } from 'react';
 export interface AllCoursesProps {}
 
 export function AllCourses(props: AllCoursesProps) {
-  const [courses, setCourses] = useState<CourseModel[]>([]);
+  const [courses, setCourses] = useState<CourseSite[]>([]);
   const { _getPopularCourses } = useSite();
   const { t } = useTranslation();
   const categories = [
@@ -52,37 +52,44 @@ export function AllCourses(props: AllCoursesProps) {
   return (
     <div className={styles['container']}>
       <div className={styles['cover']}>
-        <div>
-          <h1>{t('allCourses.cover.title')}</h1>
-          <h4>{t('allCourses.cover.subtitle')}</h4>
+        <div className={styles['cover-content']}>
+          <div className={styles['header']}>
+            <h1 className={styles['title-courses']}>
+              {t('allCourses.cover.title')}
+            </h1>
+            <h4 className={styles['subtitle-courses']}>
+              {t('allCourses.cover.subtitle')}
+            </h4>
+          </div>
+          <InputSearch
+            className={styles['search-responsive']}
+            placeholder="Buscar cursos"
+          />
         </div>
-        <InputSearch
-          className={styles['search-responsive']}
-          placeholder="Buscar cursos"
-        />
       </div>
       <div className={styles['courses-container']}>
         <div className={styles['filters-container']}>
           <div className={styles['text']}>
-            Encontramos 20 cursos disponibles para ti
+            Tenemos los siguientes cursos disponibles para ti
           </div>
           <div className={styles['filters']}>
             <Select options={categories} />
             <Select options={sortByOptions} />
           </div>
         </div>
-        <div className={styles['courses']}>
+        <div className={styles['course-row']}>
           {courses.map((course, index) => (
             <div className={styles['course']} key={index}>
-              <CourseCard
+              <CourseRowCard
                 image={course.cover_url}
+                achievements={course.total_achievements}
+                description={course.description}
+                language={course.language}
                 category={course.category}
                 title={course.title}
-                price={course.price_format}
-                duration={0}
-                lessons={0}
                 stars={course.average_rating}
                 link={`/course/${course.id}/details`}
+                price={course.price_format}
               />
             </div>
           ))}

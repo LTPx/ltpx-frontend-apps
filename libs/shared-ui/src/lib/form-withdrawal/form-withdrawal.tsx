@@ -8,20 +8,29 @@ import * as Yup from 'yup';
 import InputTextStatus, {
   StatusInputText,
 } from '../input-text-status/input-text-status';
-import { WithdrawalParams } from '@ltpx-frontend-apps/api';
+import { BankAccount, WithdrawalParams } from '@ltpx-frontend-apps/api';
 
 /* eslint-disable-next-line */
 export interface FormWithdrawalProps {
+  banks: BankAccount[];
   onClose?: () => void;
   onSubmit: (data: WithdrawalParams) => void;
 }
 
 export function FormWithdrawal(props: FormWithdrawalProps) {
-  const { onClose, onSubmit } = props;
+  const { onClose, onSubmit, banks } = props;
+
+  const banksOption = banks.map((bank)=>{
+    return {
+      value: bank.bank_account_number,
+      text: `${bank.bank_name}: ${bank.bank_account_number}`
+    }
+  });
+
   const formik = useFormik({
     initialValues: {
-      bank_account_number: '',
-      amount: 0,
+      bank_account_number: banks[0].bank_account_number,
+      amount: 20,
       note: '',
     },
     validationSchema: Yup.object({
@@ -41,18 +50,12 @@ export function FormWithdrawal(props: FormWithdrawalProps) {
     },
   });
 
-  const sortByOptions = [
-    { value: '11029293', text: 'Pichincha' },
-    { value: '11029293', text: 'Loja' },
-    { value: '11029293', text: 'Guayaquil' },
-  ];
-
   return (
     <form className={styles['form-withdraw']}>
       <div className={styles['withdraw-content']}>
         <Select
           label="Seleccionar banco"
-          options={sortByOptions}
+          options={banksOption}
           onChange={(e) => {
             formik.setFieldValue('bank_account_number', e.value);
           }}

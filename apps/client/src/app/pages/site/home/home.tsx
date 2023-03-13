@@ -1,4 +1,4 @@
-import { buildCourses, CourseModel } from '@ltpx-frontend-apps/api';
+import { CourseSite } from '@ltpx-frontend-apps/api';
 import {
   Button,
   CategoryCard,
@@ -15,7 +15,7 @@ import { NavLink } from 'react-router-dom';
 import styles from './home.module.scss';
 
 export function Home() {
-  const [courses, setCourses] = useState<CourseModel[]>([]);
+  const [courses, setCourses] = useState<CourseSite[]>([]);
   const { _getPopularCourses } = useSite();
   const { isAuthenticated } = useUser();
   const { t } = useTranslation();
@@ -167,7 +167,7 @@ export function Home() {
                 title={course.title}
                 price={course.price_format}
                 duration={0}
-                lessons={0}
+                achievements={course.total_achievements}
                 stars={course.average_rating}
                 link={`/course/${course.id}/details`}
               />

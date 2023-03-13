@@ -75,6 +75,22 @@ export interface CourseModel {
   course_session_id: number;
 }
 
+export interface CourseSite {
+  id: number;
+  cover: any;
+  cover_url: string;
+  title: string;
+  description: string;
+  category: string;
+  price_currency: string;
+  price_cents: number;
+  price_format: string;
+  price: string;
+  average_rating: number;
+  language: CourseLanguage;
+  total_achievements: number;
+}
+
 export interface Comment {
   name: string;
   image: string;

@@ -2,7 +2,6 @@ import styles from './teacher-earnings.module.scss';
 import { WithdrawalParams } from '@ltpx-frontend-apps/api';
 import {
   BalanceAccount,
-  BalanceCard,
   Button,
   ColorsButton,
   EmptyState,
@@ -11,13 +10,14 @@ import {
   TransactionStatus,
   TransactionType,
 } from '@ltpx-frontend-apps/shared-ui';
-import { useTeacher } from '@ltpx-frontend-apps/store';
+import { useTeacher, useUser } from '@ltpx-frontend-apps/store';
 import { Dialog } from 'evergreen-ui';
 import { useCallback, useEffect, useState } from 'react';
 import { useMoment } from '../../../hooks/useMoment';
 
 export function TeacherEarnings() {
   const { _getWallet, wallet, _makeWithdrawal } = useTeacher();
+  const { user } = useUser();
   const [openModal, setOpenModal] = useState(false);
   const { formatDate } = useMoment();
   const fetchWallet = useCallback(async () => {
@@ -63,17 +63,18 @@ export function TeacherEarnings() {
         <div className={styles['content']}>
           <div className={styles['balance-info']}>
             <BalanceAccount
-              balanceWithdrawal={wallet.balance_pending_withdrawal}
-              balanceAvailable={wallet.balance_available_withdrawal}
+              balanceWithdrawal={wallet.balance_pending_withdrawal_format}
+              balanceAvailable={wallet.balance_available_withdrawal_format}
             />
             <div className={styles['withdrawal-form']}>
               <h2>Retiros</h2>
+              <h5>Para realizar un retiro debes tener al menos $20 en tu balance disponible</h5>
               <Button
-                title={'Retirar'}
+                title={'Retirar Fondos'}
                 full={true}
                 onClick={() => setOpenModal(true)}
+                disabled={wallet.balance_available_withdrawal < 21 }
               />
-              <h5>* Para realizar un retiro debes tener al menos $20 en tu balance disponible</h5>
             </div>
           </div>
           <div className={styles['transactions-container']}>
@@ -113,6 +114,7 @@ export function TeacherEarnings() {
         width={'40vw'}
       >
         <FormWithdrawal
+          banks={user.teacher?.bank_accounts || []}
           onClose={() => setOpenModal(false)}
           onSubmit={(params) => handleWithdrawal(params)}
         />

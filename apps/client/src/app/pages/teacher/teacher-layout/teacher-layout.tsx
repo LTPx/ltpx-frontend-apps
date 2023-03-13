@@ -1,6 +1,5 @@
-import { Dropdown, Header, Icon, UserMenu } from '@ltpx-frontend-apps/shared-ui';
+import { Avatar, AvatarSize, Dropdown, Header, Icon, UserMenu } from '@ltpx-frontend-apps/shared-ui';
 import { useUser } from '@ltpx-frontend-apps/store';
-import { Avatar } from 'evergreen-ui';
 import { useTranslation } from 'react-i18next';
 import { Outlet, useNavigate } from 'react-router-dom';
 import styles from './teacher-layout.module.scss';
@@ -66,7 +65,7 @@ export function TeacherLayout() {
               ]}
             />
             <div className={styles['avatar']}>
-              <Avatar name={user.fullname} size={40} color='green' src={avatar}/>
+              <Avatar outline={true} size={AvatarSize.small} image={avatar}/>
               <Icon icon='caret-down' size={18}/>
             </div>
           </Dropdown>

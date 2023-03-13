@@ -53,7 +53,7 @@ export function TeacherProfileForm(props: TeacherProfileFormProps) {
             <div>
               <Input
                 label="Nombre publico"
-                description='Este sera el nombre que generara un link a tu perfil'
+                description='Este sera tu nombre oficial en openmind'
                 type="text"
                 name="name"
                 placeholder="Ejm: Luis Marisque"
@@ -72,8 +72,8 @@ export function TeacherProfileForm(props: TeacherProfileFormProps) {
             </div>
             <div>
               <Input
-                label="Especializaciones"
-                description='Tus habilidades en diferentes campos'
+                label="Habilidades"
+                description='Habilidades en las que te consideras experto'
                 type="text"
                 name="skills"
                 placeholder="Profesor, Diseñador"

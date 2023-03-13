@@ -20,7 +20,8 @@ export function PaymentForm(props: PaymentFormProps) {
       bank_account_number: '',
       bank_account_type: '',
       national_id: '',
-      email: '',
+      address: '',
+      phone_number: '',
       owner_account_name: '',
     },
     validationSchema: Yup.object({
@@ -32,16 +33,16 @@ export function PaymentForm(props: PaymentFormProps) {
       national_id: Yup.string().required(
         'Número de identificación es obligatorio'
       ),
-      email: Yup.string()
-        .email('Debe ser un correo electrónico válido')
-        .required('Correo electrónico es obligatorio'),
+      address: Yup.string().required('La dirección es obligatorio'),
+      phone_number: Yup.string().required('teléfono es obligatorio'),
       owner_account_name: Yup.string().required(
         'Propietario de la cuenta es obligatorio'
       ),
     }),
     onSubmit: (data) => {
+      // console.log(data)
       onSubmit({
-        bank_accounts: [data]
+        bank_accounts: [data],
       });
     },
   });
@@ -51,6 +52,7 @@ export function PaymentForm(props: PaymentFormProps) {
       <form className={styles['form']}>
         <div className={styles['general']}>
           <label>Cuenta Bancaria</label>
+          <p className={styles['describe']}>Asegúrate que los datos estén correctos para recibir tus pagos sin problemas</p>
           <div className={styles['bank-information']}>
             <div>
               <Input
@@ -103,8 +105,7 @@ export function PaymentForm(props: PaymentFormProps) {
                 value={formik.values.national_id}
                 onBlur={formik.handleBlur}
               />
-              {formik.touched.national_id &&
-              formik.errors.national_id ? (
+              {formik.touched.national_id && formik.errors.national_id ? (
                 <InputTextStatus
                   status={StatusInputText.error}
                   text={formik.errors.national_id}
@@ -153,20 +154,39 @@ export function PaymentForm(props: PaymentFormProps) {
             </div>
             <div>
               <Input
-                label="Correo electrónico"
-                type="email"
-                name="email"
-                placeholder="myemail@example.com"
+                label="Dirección"
+                type="text"
+                name="address"
+                placeholder="Dirección de domicilio"
                 onChange={(e: any) => {
                   formik.handleChange(e);
                 }}
-                value={formik.values.email}
+                value={formik.values.address}
                 onBlur={formik.handleBlur}
               />
-              {formik.touched.email && formik.errors.email ? (
+              {formik.touched.address && formik.errors.address ? (
                 <InputTextStatus
                   status={StatusInputText.error}
-                  text={formik.errors.email}
+                  text={formik.errors.address}
+                />
+              ) : null}
+            </div>
+            <div>
+              <Input
+                label="Teléfono"
+                type="text"
+                name="phone_number"
+                placeholder="0987654321"
+                onChange={(e: any) => {
+                  formik.handleChange(e);
+                }}
+                value={formik.values.phone_number}
+                onBlur={formik.handleBlur}
+              />
+              {formik.touched.phone_number && formik.errors.phone_number ? (
+                <InputTextStatus
+                  status={StatusInputText.error}
+                  text={formik.errors.phone_number}
                 />
               ) : null}
             </div>

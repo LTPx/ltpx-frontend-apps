@@ -3,7 +3,6 @@ import { useTranslation } from 'react-i18next';
 import Avatar, { AvatarSize } from '../avatar/avatar';
 import Icon from '../icon/icon';
 import styles from './teacher-profile.module.scss';
-import illustration from './../../assets/images/astronaut.svg';
 import CourseCard from '../course-card/course-card';
 import { buildCourses } from '@ltpx-frontend-apps/api';
 
@@ -77,7 +76,7 @@ export function TeacherProfile(props: TeacherProfileProps) {
         <div className={styles['information-wrap']}>
           <div className={styles['information-content']}>
             <h2>Sobre Katherine</h2>
-            <p>
+            <p className={styles['text-description']}>
               {showMore ? biography : `${biography.substring(0, 500)}....`}
               <h4
                 className={styles['show']}

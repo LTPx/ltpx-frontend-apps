@@ -60,7 +60,7 @@ export function TeacherProfileForm(props: TeacherProfileFormProps) {
             <div>
               <Input
                 label="Nombre publico"
-                description='Este sera tu nombre oficial en openmind'
+                description='Este sera tu nombre oficial en OpenMind'
                 type="text"
                 name="name"
                 placeholder="Ejm: Luis Marisque"

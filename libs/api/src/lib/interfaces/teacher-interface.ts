@@ -13,6 +13,8 @@ export interface BankAccount {
   national_id: string;
   bank_account_number: string;
   bank_account_type: string;
+  address: string;
+  phone: string;
 }
 
 export interface TeacherProfile {

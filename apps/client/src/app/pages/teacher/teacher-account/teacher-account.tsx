@@ -3,7 +3,7 @@ import { useTeacher } from '@ltpx-frontend-apps/store';
 import {
   BannerNotification,
   ChangePasswordForm,
-  PaymentForm,
+  BankAccountForm,
   Tabs,
   TeacherProfileForm,
 } from '@ltpx-frontend-apps/shared-ui';
@@ -24,12 +24,10 @@ export function TeacherAccount(props: TeacherAccountProps) {
   }, []);
   const [selectedTab, setSelectedTab] = useState(0);
 
-  async function updateUserAccount(params: IUserAccount) {
-
-  }
+  async function updateUserAccount(params: IUserAccount) {}
 
   async function updateTeacherProfile(params: TeacherProfileParams) {
-    const { success, data, error} = await _updateProfile(params);
+    const { success, data, error } = await _updateProfile(params);
     if (success) {
       console.log('data: ', data);
       setShowMessage(true);
@@ -63,10 +61,18 @@ export function TeacherAccount(props: TeacherAccountProps) {
             tabs={tabs}
             onClickTab={(option) => handleClick(option)}
           />
-          {selectedTab === 0 && <TeacherProfileForm
-          profile={profile}
-          onSubmit={updateTeacherProfile}/>}
-          {selectedTab === 1 && <PaymentForm onSubmit={updateTeacherProfile}/>}
+          {selectedTab === 0 && (
+            <TeacherProfileForm
+              profile={profile}
+              onSubmit={updateTeacherProfile}
+            />
+          )}
+          {selectedTab === 1 && (
+            <BankAccountForm
+              account={profile.bank_accounts[0]}
+              onSubmit={updateTeacherProfile}
+            />
+          )}
           {selectedTab === 2 && (
             <ChangePasswordForm url="/teacher/account/account-profile" />
           )}

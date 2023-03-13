@@ -1,10 +1,10 @@
 import { render } from '@testing-library/react';
 
-import PaymentForm from './payment-form';
+import BankAccountForm from './payment-form';
 
-describe('PaymentForm', () => {
+describe('BankAccountForm', () => {
   it('should render successfully', () => {
-    const { baseElement } = render(<PaymentForm />);
+    const { baseElement } = render(<BankAccountForm />);
     expect(baseElement).toBeTruthy();
   });
 });

@@ -1,6 +1,9 @@
 @import '../../styles/styles.module.scss';
 
 .container {
+  .text-description {
+    color: $text-gray-color;
+  }
   .head-content {
     display: flex;
     flex-direction: column;
@@ -15,7 +18,7 @@
       gap: 1rem;
       padding-bottom: 1rem;
       h1 {
-        font-weight: bold;
+        font-weight: 500;
       }
       h3 {
         color: $text-gray-color;
@@ -48,9 +51,6 @@
           color: $primary-color;
           text-decoration: underline;
         }
-        h2 {
-          font-weight: bold;
-        }
         p {
           padding-top: 0.5rem;
           line-height: 2rem;
@@ -67,7 +67,6 @@
       .video-content {
         padding-top: 2rem;
         h2 {
-          font-weight: bold;
           padding-bottom: 0.5rem;
         }
         video {
@@ -80,12 +79,8 @@
     width: 100%;
     display: flex;
     justify-content: center;
-
-    h2 {
-      font-weight: bold;
-    }
     .courses-content {
-      width: 70%;
+      width: 80%;
       padding-top: 2rem;
     }
     .courses-teacher {

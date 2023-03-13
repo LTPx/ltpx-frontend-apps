@@ -192,7 +192,7 @@ export function Home() {
               icon={category.icon}
               key={index}
               title={category.title}
-              description={category.description}
+              // description={category.description}
               link={`/course/${category.key}/category`}
             />
           ))}

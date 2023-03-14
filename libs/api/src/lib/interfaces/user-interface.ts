@@ -39,6 +39,7 @@ export interface UserStore {
     id: number;
     teacher_name: string;
     bank_accounts: BankAccount[];
+    profile_image: string;
   },
   id: number;
 }

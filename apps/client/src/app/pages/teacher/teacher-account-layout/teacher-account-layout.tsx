@@ -15,7 +15,11 @@ export function TeacherAccountLayout(props: TeacherAccountLayoutProps) {
           <div className={styles['profile']}>
             <div className={styles['general-information']}>
               <NavLink to="/teacher/account">
-                <Avatar name={user.fullname} size={150} />
+                <Avatar
+                  name={user.fullname}
+                  src={user.teacher.profile_image}
+                  size={150}
+                />
               </NavLink>
               <h3>{user.fullname}</h3>
               <h4>{user.email}</h4>

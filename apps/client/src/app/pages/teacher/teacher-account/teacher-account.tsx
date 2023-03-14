@@ -15,7 +15,6 @@ import { useNavigate } from 'react-router-dom';
 export interface TeacherAccountProps {}
 
 export function TeacherAccount(props: TeacherAccountProps) {
-  const [showMessage, setShowMessage] = useState(false);
   const { getProfile, _updateProfile, profile } = useTeacher();
   const navigate = useNavigate();
 
@@ -30,7 +29,6 @@ export function TeacherAccount(props: TeacherAccountProps) {
     const { success, data, error } = await _updateProfile(params);
     if (success) {
       console.log('data: ', data);
-      setShowMessage(true);
       navigate('/teacher/account/account-profile');
     } else {
       console.log('error: ', error);

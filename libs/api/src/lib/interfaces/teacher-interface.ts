@@ -27,6 +27,7 @@ export interface TeacherProfile {
   status_account: StatusTeacherAccount;
   image: string;
   video: string;
+  profile_image: string;
 }
 
 export interface ITeacher {

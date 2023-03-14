@@ -247,6 +247,7 @@ export const es = {
     title: 'Nombre del test',
     questions: 'Preguntas',
     total_questions_to_approved: 'Preguntas Aprobadas',
+    score_to_approved: 'Puntos para aprobar',
     tip: 'Cuantas preguntas debe acertar el estudiante para aprobar este test'
   },
   quizFormConditional: {

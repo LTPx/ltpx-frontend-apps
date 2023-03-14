@@ -43,11 +43,10 @@ export function QuizFormAnswer(props: QuizFormAnswerProps) {
           label={t('quizFormAnswer.question') || ''}
           placeholder="Formula tu pregunta"
           value={formik.values.question}
-          onChange={(e: any) => {
-            formik.handleChange(e);
-          }}
+          onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           name="question"
+          errorMessage={formik.errors.question}
         />
         <Input
           label={t('quizFormAnswer.description') || ''}

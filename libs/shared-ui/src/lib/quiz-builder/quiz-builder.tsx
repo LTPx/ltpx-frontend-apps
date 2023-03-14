@@ -4,10 +4,12 @@ import {
   TypeQuestionQuiz,
 } from '@ltpx-frontend-apps/api';
 import {
+  Drawer,
   Icon,
   Menu,
   QuizFormAnswer,
   QuizFormMultipleOptions,
+  QuizQuestionView,
 } from '@ltpx-frontend-apps/shared-ui';
 import { useState } from 'react';
 import Button, { ColorsButton, TypeButton } from '../button/button';
@@ -28,35 +30,40 @@ export interface QuizBuilderProps {
 
 export function QuizBuilder(props: QuizBuilderProps) {
   const { onClose, onSubmit, className, quiz } = props;
-  const [selectedIndexEdit, setSelectedIndexEdit] = useState<number>(1);
   const [questionEdit, setQuestionEdit] = useState<QuestionQuiz>();
   const [selectedTypeQuestion, setSelectedTypeQuestion] =
     useState<TypeQuestionQuiz>();
   const { translateQuizCategories } = useCourseUtil();
   const { t } = useTranslation();
-  const type_question = [
+  const [open, setOpen] = useState(false);
+
+  const typeQuestions = [
     {
       text: 'Condicional',
       onClick: () => {
         setSelectedTypeQuestion(TypeQuestionQuiz.conditional);
+        setOpen(true);
       },
     },
     {
       text: 'Selección Multiple',
       onClick: () => {
         setSelectedTypeQuestion(TypeQuestionQuiz.multiple);
+        setOpen(true);
       },
     },
     {
       text: 'Una sola elección',
       onClick: () => {
         setSelectedTypeQuestion(TypeQuestionQuiz.single);
+        setOpen(true);
       },
     },
     {
       text: 'Respuesta de usuario',
       onClick: () => {
         setSelectedTypeQuestion(TypeQuestionQuiz.answer);
+        setOpen(true);
       },
     },
   ];
@@ -67,11 +74,14 @@ export function QuizBuilder(props: QuizBuilderProps) {
     total_questions_to_approved: quiz?.total_questions_to_approved || 1,
   };
 
-  const formik = useFormik({
+  const formikForm = useFormik({
     initialValues: initialValues,
+    enableReinitialize: true,
     validationSchema: Yup.object({
       name: Yup.string().required('Necesitas agregar un nombre'),
-      total_questions_to_approved: Yup.number().required('Necesitas definir el numero de preguntas'),
+      total_questions_to_approved: Yup.number().required(
+        'Necesitas definir el numero de preguntas'
+      ),
     }),
     onSubmit: (quiz) => {
       onSubmit && onSubmit(quiz);
@@ -79,106 +89,76 @@ export function QuizBuilder(props: QuizBuilderProps) {
   });
 
   const handleSaveQuestionData = (question: QuestionQuiz) => {
-    const { questions } = formik.values;
+    const { questions } = formikForm.values;
     const totalQuestions = questions.concat([question]);
-    formik.setFieldValue('questions', totalQuestions);
-    setSelectedTypeQuestion(undefined);
-  };
-
-  const cancelQuestion = () => {
+    formikForm.setFieldValue('questions', totalQuestions);
     setSelectedTypeQuestion(undefined);
   };
 
   const handleRemoveQuestion = (index: number) => {
-    const { questions } = formik.values;
+    const { questions } = formikForm.values;
     const updatedQuestions = questions.filter((q, i) => i !== index);
-    formik.setFieldValue('questions', updatedQuestions);
+    formikForm.setFieldValue('questions', updatedQuestions);
   };
 
   const handleUpdateQuestion = (question: QuestionQuiz, index: number) => {
-    const { questions } = formik.values;
+    const { questions } = formikForm.values;
     const updatedQuestions = questions.map((q, i) =>
       i === index ? question : q
     );
-    formik.setFieldValue('questions', updatedQuestions);
+    formikForm.setFieldValue('questions', updatedQuestions);
     setQuestionEdit(undefined);
-    setSelectedIndexEdit(-1);
     setSelectedTypeQuestion(undefined);
   };
 
   const ContentQuizForm = ({ questions }: { questions: QuestionQuiz[] }) => (
-    <>
-      <div className={styles['questions']}>
-        <label> {t('quizBuilder.questions')}</label>
-        {questions.map((question, index) => (
-          <div className={`${styles['question-wrapper']}`} key={index}>
-            <div className={`${styles['question']}`}>
-              <div className={styles['summary']}>
-                <div className={styles['number']}>{index + 1}</div>
-                <div className={styles['text']}>
-                  <h4>{question.question}</h4>
-                  <h5>{translateQuizCategories(question.kind)}</h5>
-                </div>
+    <div className={styles['questions']}>
+      <label> {t('quizBuilder.questions')}</label>
+      {questions.map((question, index) => (
+        <div className={`${styles['question-wrapper']}`} key={index}>
+          <QuizQuestionView
+            key={index}
+            question={question.question}
+            number={index + 1}
+            description={`${translateQuizCategories(question.kind)}`}
+          >
+            <div className={styles['actions']}>
+              <div className={styles['action']}>
+                {(100 / questions.length).toFixed()}pts
               </div>
-              <div className={styles['actions']}>
-                <div
-                  className={styles['action']}
-                  onClick={() => {
-                    setQuestionEdit(question);
-                    setSelectedIndexEdit(index);
-                  }}
-                >
-                  <Icon icon="pencil" size={15} />
-                </div>
-                <div
-                  className={styles['action']}
-                  onClick={() => {
-                    handleRemoveQuestion(index);
-                  }}
-                >
-                  <Icon icon="trash" size={15} />
-                </div>
+              <div
+                className={styles['action']}
+                onClick={() => {
+                  setQuestionEdit(question);
+                  // setSelectedIndexEdit(index);
+                  setOpen(true);
+                }}
+              >
+                <Icon icon="pencil" size={15} />
+              </div>
+              <div
+                className={styles['action']}
+                onClick={() => {
+                  handleRemoveQuestion(index);
+                }}
+              >
+                <Icon icon="trash" size={15} />
               </div>
             </div>
-            {questionEdit && selectedIndexEdit === index && (
-              <div className={styles['question-edit-form']}>
-                <QuestionsQuiz
-                  question={question}
-                  type={question.kind}
-                  onCancel={() => {
-                    setSelectedIndexEdit(-1);
-                    setQuestionEdit(undefined);
-                  }}
-                  onSubmit={(data) => {
-                    handleUpdateQuestion(data, index);
-                  }}
-                />
-              </div>
-            )}
-          </div>
-        ))}
-      </div>
-      {selectedTypeQuestion && !questionEdit && (
-        <div className={styles['forms']}>
-          <QuestionsQuiz
-            type={selectedTypeQuestion}
-            onCancel={cancelQuestion}
-            onSubmit={(data) => {
-              handleSaveQuestionData(data);
-            }}
-          />
+          </QuizQuestionView>
+          <div className={`${styles['question']}`}></div>
         </div>
-      )}
-      {!selectedTypeQuestion && (
-        <div className={styles['control-questions']}>
-          <Menu items={type_question}>
-            <Button title={'Agregar Pregunta'}
+      ))}
+      <div className={styles['control-questions']}>
+        <Menu items={typeQuestions}>
+          <Button
+            title={'Agregar Pregunta'}
             color={ColorsButton.secondary}
-            icon='plus'/>
-          </Menu>
-        </div>
-      )}
-      {!selectedTypeQuestion && formik.values.questions.length > 0 && (
+            icon="plus"
+          />
+        </Menu>
+      </div>
+      {!selectedTypeQuestion && formikForm.values.questions.length > 0 && (
         <div className={styles['footer']}>
           <Button
             title="Cancelar"
@@ -192,12 +172,12 @@ export function QuizBuilder(props: QuizBuilderProps) {
             color={ColorsButton.secondary}
             type={TypeButton.submit}
             onClick={() => {
-              formik.handleSubmit();
+              formikForm.handleSubmit();
             }}
           />
         </div>
       )}
-    </>
+    </div>
   );
 
   const QuestionsQuiz = ({
@@ -260,25 +240,55 @@ export function QuizBuilder(props: QuizBuilderProps) {
             label={t('quizBuilder.title') || ''}
             name="name"
             placeholder="Agrega un nombre"
-            onChange={formik.handleChange}
-            value={formik.values.name}
-            onBlur={formik.handleBlur}
-            errorMessage={formik.errors.name}
+            onChange={formikForm.handleChange}
+            value={formikForm.values.name}
+            onBlur={formikForm.handleBlur}
+            errorMessage={formikForm.errors.name}
           />
-          <Input
-            label={t('quizBuilder.total_questions_to_approved') || ''}
+          {/* <Input
+            label={t('quizBuilder.score_to_approved') || ''}
             description={t('quizBuilder.tip') || ''}
             name="total_questions_to_approved"
             placeholder="Todas"
             type='number'
-            onChange={formik.handleChange}
-            value={formik.values.total_questions_to_approved}
-            onBlur={formik.handleBlur}
-            errorMessage={formik.errors.total_questions_to_approved}
-          />
+            onChange={formikForm.handleChange}
+            value={formikForm.values.total_questions_to_approved}
+            onBlur={formikForm.handleBlur}
+            errorMessage={formikForm.errors.total_questions_to_approved}
+          /> */}
         </form>
-        <ContentQuizForm questions={formik.values.questions} />
+        <ContentQuizForm questions={formikForm.values.questions} />
       </div>
+      {open && (
+        <Drawer
+          open={open}
+          onClose={() => {
+            setOpen(false);
+          }}
+        >
+          <div className={styles['forms']}>
+            <QuestionsQuiz
+              type={
+                selectedTypeQuestion ||
+                questionEdit?.kind ||
+                TypeQuestionQuiz.answer
+              }
+              question={questionEdit}
+              onCancel={() => {
+                setQuestionEdit(undefined);
+                setOpen(false);
+              }}
+              onSubmit={(data) => {
+                console.log('data: ', data);
+                handleSaveQuestionData(data);
+                // handleUpdateQuestion(data, 1);
+                setQuestionEdit(undefined);
+                setOpen(false);
+              }}
+            />
+          </div>
+        </Drawer>
+      )}
     </div>
   );
 }

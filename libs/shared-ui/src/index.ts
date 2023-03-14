@@ -1,3 +1,4 @@
+export * from './lib/quiz-question-view/quiz-question-view';
 export * from './lib/course-row-card/course-row-card';
 export * from './lib/balance-account/balance-account';
 export * from './lib/form-withdrawal/form-withdrawal';
@@ -116,4 +117,4 @@ export * from './lib/input/input';
 export * from './lib/button/button';
 export * from './lib/header/header';
 
-export * from './hooks/useMoment'
+export * from './hooks/useMoment';

@@ -7,6 +7,7 @@ import {
   Input,
   Tag,
   TypeFile,
+  useMoment,
 } from '@ltpx-frontend-apps/shared-ui';
 import { useFormik } from 'formik';
 import styles from './payments-details-page.module.scss';
@@ -23,6 +24,7 @@ export function PaymentsDetailsPage(props: PaymentsDetailsPageProps) {
   const { _getWithdrawal, _approveWithdrawal } = useAdmin();
   const [withdrawal, setWithdrawal] = useState<WithdrawalReviewAdmin>();
   const { id } = useParams();
+  const { formatDate } = useMoment()
   const withdrawalId = parseInt(id || '');
 
   const fetchWithdrawal = useCallback(async () => {
@@ -45,9 +47,21 @@ export function PaymentsDetailsPage(props: PaymentsDetailsPageProps) {
       receipt_image: '',
     },
     validationSchema: Yup.object({
-      receipt_id: Yup.string().required(
-        'Se debe ingresar numero de comprobante'
-      ),
+      receipt_image: Yup.mixed()
+        .required('Se debe subir el comprobante de deposito')
+        .test(
+          'national_id_front',
+          'El archivo debe ser menor o igual a 1mb',
+          (value) => {
+            if (value) {
+              const fileSize = value.size;
+              const fileMb = fileSize / 1024 ** 2;
+              return fileMb <= 1;
+            } else {
+              return false;
+            }
+          }
+        ),
     }),
     onSubmit: async (formData) => {
       const { success, data, error } = await _approveWithdrawal(
@@ -89,13 +103,6 @@ export function PaymentsDetailsPage(props: PaymentsDetailsPageProps) {
             />
           )}
         </div>
-        {withdrawal?.status === 'approved' && withdrawal?.receipt_id &&(
-          <div className={styles['note']}>
-            <h4 className={styles['label']}>Numero de comprobante:</h4>
-            <pre className={styles['text']}>{withdrawal?.receipt_id}</pre>
-          </div>
-        )}
-
         <div className={styles['information-teacher']}>
           <div className={styles['information']}>
             <h4 className={styles['label']}>Profesor:</h4>
@@ -176,10 +183,11 @@ export function PaymentsDetailsPage(props: PaymentsDetailsPageProps) {
               </label>
               <FilesUploaded
                 className={styles['file']}
-                type={TypeFile.pdf}
+                type={TypeFile.image}
                 onChange={(value) => {
                   formik.setFieldValue('receipt_image', value);
                 }}
+                errorMessage={formik.errors.receipt_image}
               />
             </div>
             <Button
@@ -187,6 +195,27 @@ export function PaymentsDetailsPage(props: PaymentsDetailsPageProps) {
               color={ColorsButton.primary}
               onClick={formik.handleSubmit}
               full={true}
+            />
+          </div>
+        </div>
+      )}
+      {withdrawal?.status === 'approved' && withdrawal?.receipt_id && (
+        <div className={`${styles['withdrawal-card']} ${styles['approved-section']}`}>
+          <h2 className={styles['title']}>Comprobante</h2>
+          <div className={styles['section']}>
+            <h4 className={styles['label']}>Fecha de aprobación</h4>
+            <p className={styles['text']}>{formatDate(withdrawal?.approved_at)}</p>
+          </div>
+          <div className={styles['section']}>
+            <h4 className={styles['label']}>Numero de transacción</h4>
+            <pre className={styles['text']}>{withdrawal?.receipt_id}</pre>
+          </div>
+          <div className={styles['section']}>
+            <h4 className={styles['label']}>Image</h4>
+            <img
+              className={styles['image']}
+              src={withdrawal?.receipt_image}
+              alt="receipt-image"
             />
           </div>
         </div>

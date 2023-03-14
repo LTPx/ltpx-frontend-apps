@@ -191,11 +191,7 @@ export function ApplyTeacherForm(props: ApplyTeacherFormProps) {
             onChange={(value) => {
               formik.setFieldValue('police_record', value);
             }}
-            errorMessage={
-              formik.touched.police_record && formik.errors.police_record
-                ? formik.errors.police_record
-                : null
-            }
+            errorMessage={formik.errors.police_record}
           />
         </section>
         <section>

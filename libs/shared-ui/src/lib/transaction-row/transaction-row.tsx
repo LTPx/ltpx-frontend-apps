@@ -13,6 +13,7 @@ export enum TransactionType {
   payment = 'payment',
   withdrawal = 'withdrawal',
 }
+
 export interface TransactionRowProps {
   date: string;
   amount: string;

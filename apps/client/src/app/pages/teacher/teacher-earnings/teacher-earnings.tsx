@@ -9,11 +9,11 @@ import {
   TransactionRow,
   TransactionStatus,
   TransactionType,
+  useMoment,
 } from '@ltpx-frontend-apps/shared-ui';
 import { useTeacher, useUser } from '@ltpx-frontend-apps/store';
 import { Dialog } from 'evergreen-ui';
 import { useCallback, useEffect, useState } from 'react';
-import { useMoment } from '../../../hooks/useMoment';
 
 export function TeacherEarnings() {
   const { _getWallet, wallet, _makeWithdrawal } = useTeacher();

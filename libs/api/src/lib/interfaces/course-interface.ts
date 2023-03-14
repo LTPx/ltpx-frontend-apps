@@ -108,11 +108,12 @@ export interface TeacherSummary {
   id: string;
   image: string;
   biography: string;
-  fullname: string;
+  name: string;
   profession: string;
   total_courses: number;
   rating_average: number;
   total_students: number;
+  profile_image: string;
 }
 
 export interface FullCourse {

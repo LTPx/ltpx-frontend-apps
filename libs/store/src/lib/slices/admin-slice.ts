@@ -41,7 +41,7 @@ export type AdminSlice = {
   _getApprovedCourses: () => Promise<TResponse>;
   _getWithdrawalsByStatus: (status: string) => Promise<TResponse>;
   _getWithdrawal: (id: number) => Promise<TResponse>;
-  _approveWithdrawal: (id: number, params: {receipt_id: string, receipt_image?: string}) => Promise<TResponse>;
+  _approveWithdrawal: (id: number, params: {receipt_id?: string, receipt_image: string}) => Promise<TResponse>;
 };
 
 export const createAdminSlice: StateCreator<StoreState, [], [], AdminSlice> = (

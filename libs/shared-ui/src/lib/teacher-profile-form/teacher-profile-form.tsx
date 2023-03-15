@@ -27,7 +27,7 @@ export function TeacherProfileForm(props: TeacherProfileFormProps) {
       name: profile?.teacher_name || '',
       skills: profile?.skills || '',
       biography: profile?.biography || '',
-      profile_img: profile?.image || '',
+      profile_image: profile?.image || '',
       video_presentation: profile?.video || '',
       facebook_url: getSocialNetwork('facebook'),
       twitter_url: getSocialNetwork('twitter'),
@@ -60,7 +60,7 @@ export function TeacherProfileForm(props: TeacherProfileFormProps) {
             <div>
               <Input
                 label="Nombre publico"
-                description='Este sera tu nombre oficial en openmind'
+                description='Este sera tu nombre oficial en OpenMind'
                 type="text"
                 name="name"
                 placeholder="Ejm: Luis Marisque"
@@ -103,7 +103,7 @@ export function TeacherProfileForm(props: TeacherProfileFormProps) {
                 className={styles['file-upload']}
                 type={TypeFile.image}
                 onChange={(value) => {
-                  formik.setFieldValue('profile_img', value);
+                  formik.setFieldValue('profile_image', value);
                 }}
               />
             </div>

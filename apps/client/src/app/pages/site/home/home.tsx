@@ -142,7 +142,10 @@ export function Home() {
               />
             </div>
           </div>
-          <img src="../../../../assets/images/illustration-cover.svg" alt="cover" />
+          <img
+            src="../../../../assets/images/illustration-cover.svg"
+            alt="cover"
+          />
         </div>
         <img
           className={styles['image-cover']}

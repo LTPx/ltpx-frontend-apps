@@ -1,5 +1,6 @@
 import { _http } from '../../http';
 import { WithdrawalModel } from '../../interfaces/withdrawals-interfaces';
+import { encapsuleInFormData } from '../../utils';
 
 const http = _http;
 
@@ -29,10 +30,11 @@ export const getWithdrawal = async (id: number) => {
   });
 };
 
-export const approveWithdrawal = async (withdrawalId: number, params: {receipt_id: string, receipt_image?: string}) => {
+export const approveWithdrawal = async (withdrawalId: number, params: {receipt_id?: string, receipt_image: string}) => {
+  const data = encapsuleInFormData(params, {imagesKeys: ['receipt_image']})
   return new Promise<WithdrawalModel[]>((resolve, reject) => {
     http
-      .post(`api/v1/admin/withdrawals/${withdrawalId}/approve`, params)
+      .post(`api/v1/admin/withdrawals/${withdrawalId}/approve`, data)
       .then((response) => {
         resolve(response.data);
       })

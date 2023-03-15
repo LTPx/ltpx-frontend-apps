@@ -1,3 +1,4 @@
+export * from './lib/content-items/content-items';
 export * from './lib/course-row-card/course-row-card';
 export * from './lib/balance-account/balance-account';
 export * from './lib/form-withdrawal/form-withdrawal';
@@ -26,7 +27,7 @@ export * from './lib/transaction-row/transaction-row';
 export * from './lib/balance-card/balance-card';
 export * from './lib/teacher-profile-form/teacher-profile-form';
 export * from './lib/teacher-profile/teacher-profile';
-export * from './lib/payment-form/payment-form';
+export * from './lib/bank-account-form/bank-account-form';
 export * from './lib/news-card/news-card';
 export * from './lib/content-description/content-description';
 export * from './lib/achievements-list/achievements-list';
@@ -115,3 +116,5 @@ export * from './lib/nav/nav';
 export * from './lib/input/input';
 export * from './lib/button/button';
 export * from './lib/header/header';
+
+export * from './hooks/useMoment'

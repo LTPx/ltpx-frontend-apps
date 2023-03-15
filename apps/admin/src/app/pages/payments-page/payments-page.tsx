@@ -1,10 +1,9 @@
 import { WithdrawalReviewAdmin } from '@ltpx-frontend-apps/api';
-import { Tabs } from '@ltpx-frontend-apps/shared-ui';
+import { Tabs, useMoment } from '@ltpx-frontend-apps/shared-ui';
 import { useAdmin } from '@ltpx-frontend-apps/store';
-import { Avatar, Dialog } from 'evergreen-ui';
+import { Avatar } from 'evergreen-ui';
 import { useCallback, useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import PaymentsDetailsPage from '../payments-details-page/payments-details-page';
 import styles from './payments-page.module.scss';
 
 /* eslint-disable-next-line */
@@ -14,6 +13,7 @@ export function PaymentsPage(props: PaymentsPageProps) {
   const { _getWithdrawalsByStatus } = useAdmin();
   const [ selectedTabIndex, setSelectedTabIndex] = useState(0);
   const [withdrawals, setWithdrawals] = useState<WithdrawalReviewAdmin[]>([]);
+  const { formatDate } = useMoment();
   const tabs = [{ text: 'Pendientes' }, { text: 'Aprobados' }];
 
   const fetchData = useCallback(async (index: number) => {
@@ -57,7 +57,7 @@ export function PaymentsPage(props: PaymentsPageProps) {
                 {withdrawal.teacher_name}
               </td>
               <td>{withdrawal.amount_format}</td>
-              <td>{withdrawal.submitted_at}</td>
+              <td>{formatDate(withdrawal.submitted_at)}</td>
               <td>
                 <NavLink to={`/admin/payments-details/${withdrawal.id}`}>
                   Ver Solicitud

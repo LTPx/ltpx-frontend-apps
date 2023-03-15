@@ -53,11 +53,19 @@ export function ApplyTeacherForm(props: ApplyTeacherFormProps) {
       national_id_front: Yup.mixed()
         .nullable()
         .required('Imagen de la identificación frontal es requerida')
-        .test("national_id_front", "El archivo debe ser menor o igual a 2mb", (value) => {
-          const fileSize = value.size;
-          const fileMb = fileSize / 1024 ** 2;
-          return fileMb <= 2;
-        }),
+        .test(
+          'national_id_front',
+          'El archivo debe ser menor o igual a 2mb',
+          (value) => {
+            if (value) {
+              const fileSize = value.size;
+              const fileMb = fileSize / 1024 ** 2;
+              return fileMb <= 2;
+            } else {
+              return false;
+            }
+          }
+        ),
       national_id_back: Yup.mixed()
         .nullable()
         .required('Imagen de la identificación trasera es requerida'),
@@ -182,7 +190,8 @@ export function ApplyTeacherForm(props: ApplyTeacherFormProps) {
             description={
               <div>
                 <p>
-                  Debe ser un certificado emitido por tu país de procedencia, Ejm: Ecuador - record policial
+                  Debe ser un certificado emitido por tu país de procedencia,
+                  Ejm: Ecuador - record policial
                 </p>
               </div>
             }
@@ -191,11 +200,7 @@ export function ApplyTeacherForm(props: ApplyTeacherFormProps) {
             onChange={(value) => {
               formik.setFieldValue('police_record', value);
             }}
-            errorMessage={
-              formik.touched.police_record && formik.errors.police_record
-                ? formik.errors.police_record
-                : null
-            }
+            errorMessage={formik.errors.police_record}
           />
         </section>
         <section>

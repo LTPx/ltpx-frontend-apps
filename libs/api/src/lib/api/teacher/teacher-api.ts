@@ -1,6 +1,6 @@
 import { _http } from '../../http';
 import { ApplicationTeach, ApplyTeachApiParams, ApplyTeachModel, TeacherProfile } from '../../interfaces/teacher-interface';
-import { moveToFormData } from '../../utils';
+import { moveToFormData, sendAsFormData } from '../../utils';
 
 const http = _http;
 
@@ -18,9 +18,11 @@ export const getTeacherProfile = async () => {
 };
 
 export const updateTeacherProfile = async (teacher: Partial<TeacherProfile>) => {
+  const data = sendAsFormData(teacher);
+  debugger
   return new Promise<TeacherProfile>((resolve, reject) => {
     http
-      .put('api/v1/teacher/update_profile', teacher)
+      .put('api/v1/teacher/update_profile', data)
       .then((response) => {
         resolve(response.data);
       })

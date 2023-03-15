@@ -10,6 +10,7 @@ import {
   Tabs,
   Tag,
   TypeButton,
+  useMoment,
 } from '@ltpx-frontend-apps/shared-ui';
 import {
   useCourse,
@@ -27,7 +28,6 @@ import { useCallback, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import styles from './teacher-edit-course.module.scss';
 import { useTranslation } from 'react-i18next';
-import { useMoment } from '../../../hooks/useMoment';
 
 export type ResponseRequest = {
   success: boolean;

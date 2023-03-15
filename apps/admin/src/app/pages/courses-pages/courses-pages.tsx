@@ -1,4 +1,4 @@
-import { Tabs } from '@ltpx-frontend-apps/shared-ui';
+import { Tabs, useMoment } from '@ltpx-frontend-apps/shared-ui';
 import { useAdmin, useCourseUtil, useUtil } from '@ltpx-frontend-apps/store';
 import { useCallback, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
@@ -9,6 +9,7 @@ export function CoursesPages() {
     useAdmin();
   const { translateCategory } = useCourseUtil();
   const tabs = [{ text: 'Pendientes' }, { text: 'Aprobados' }];
+  const { formatDate } = useMoment();
 
   const fetchPending = useCallback(async () => {
     const resp = await _getPendingReviewCourses();
@@ -56,7 +57,7 @@ export function CoursesPages() {
             <tr key={index}>
               <td className={styles['user-name']}>{course.title}</td>
               <td>{translateCategory(course.category)}</td>
-              <td>{course.created_at}</td>
+              <td>{formatDate(course.created_at)}</td>
               <td>
                 <NavLink to={`/admin/courses/${course.id}`}>
                   Ver curso

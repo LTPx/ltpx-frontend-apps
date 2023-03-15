@@ -95,4 +95,19 @@
       }
     }
   }
+
+  .approved-section {
+
+    .section {
+      margin-top: 1rem;
+
+      .text {
+        color: $text-gray-color;
+      }
+
+      .image {
+        height: 10rem;
+      }
+    }
+  }
 }

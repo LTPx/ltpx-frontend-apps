@@ -127,7 +127,7 @@ export function CourseDetails() {
                   <div className={styles['avatar']}>
                     <NavLink to="/teacher-profile">
                       <Avatar
-                        image={teacher.image || ''}
+                        image={teacher.profile_image || ''}
                         size={AvatarSize.medium}
                         outline={true}
                       />
@@ -138,7 +138,7 @@ export function CourseDetails() {
                       <label>
                         {t('coursesDetails.teacherInformation.instructor')}
                       </label>
-                      <h5>{teacher.fullname}</h5>
+                      <h5>{teacher.name}</h5>
                     </div>
                     <div className={styles['item']}>
                       <label>
@@ -176,14 +176,14 @@ export function CourseDetails() {
                     )}
                     {selectedTab === 2 && (
                       <TeacherOverview
-                        name={teacher.fullname || ''}
+                        name={teacher.name || ''}
                         profession={teacher.profession || ''}
                         rating={teacher.rating_average || 0}
                         reviews={teacher.rating_average || 0}
                         students={teacher.total_students || 0}
                         courses={5}
                         biography={teacher.biography}
-                        image={teacher.image}
+                        image={teacher.profile_image}
                       />
                     )}
                     {selectedTab === 3 && (

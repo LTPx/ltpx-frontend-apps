@@ -1,4 +1,4 @@
-import { PartialBy } from "./util";
+import { PartialBy, PartialWithRequired, Prettify } from "./util";
 
 export enum TypeQuestionQuiz {
   multiple = 'multiple',
@@ -20,9 +20,22 @@ export interface QuizModel {
   updated_at: string;
 }
 
-export type NewQuizParams = Omit<
+type NewQuestions = {
+  questions_attributes: Prettify<
+    PartialWithRequired<
+      QuestionQuiz,
+      'id'
+    >[]
+  >;
+};
+
+export type QuizBasicParams = Omit<
   QuizModel,
-  'user_id' | 'created_at' | 'updated_at' | 'id' | 'course_id'
+  'user_id' | 'created_at' | 'updated_at' | 'course_id' | 'questions'
+>;
+
+export type QuizParams = Prettify<
+  PartialBy<QuizBasicParams, 'id'> & NewQuestions
 >;
 
 export type EditQuizParams = Omit<
@@ -36,11 +49,11 @@ export type QuizParamsUi = PartialBy<
 >;
 export interface QuestionQuiz {
   id?: string;
-  number?: string;
   question: string;
   description: string;
   kind: TypeQuestionQuiz;
   answers: AnswerModel[];
+  _destroy?: boolean; //rails needs destroy to remove nested attributes
 }
 
 export interface AnswerModel {

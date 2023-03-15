@@ -1,4 +1,4 @@
-import { QuizModel, QuizParamsUi } from '@ltpx-frontend-apps/api';
+import { QuizModel, QuizParams } from '@ltpx-frontend-apps/api';
 import {
   Button,
   ColorsButton,
@@ -25,7 +25,7 @@ export function CourseQuizzes(props: CourseQuizzesProps) {
   const { quizzes } = course;
   const { t } = useTranslation();
 
-  const handleSaveQuiz = async (quiz: QuizParamsUi) => {
+  const handleSaveQuiz = async (quiz: QuizParams) => {
     try {
       const { data } = quiz.id
         ? await _updateQuiz({ ...quiz, ...{ id: quiz.id } })

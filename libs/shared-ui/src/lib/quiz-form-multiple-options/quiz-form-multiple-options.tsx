@@ -13,7 +13,7 @@ export interface QuizFormMultipleOptionsProps {
   question?: QuestionQuiz;
   className?: string;
   singleSelection?: boolean;
-  onSubmit?: (data: QuestionQuiz) => void;
+  onSubmit: (data: any) => void;
   onCancel?: () => void;
 }
 
@@ -28,7 +28,7 @@ export function QuizFormMultipleOptions(props: QuizFormMultipleOptionsProps) {
     kind: singleSelection ? TypeQuestionQuiz.single : TypeQuestionQuiz.multiple,
     question: question?.question || '',
     description: question?.description || '',
-    answers: question?.answers || [
+    answers_attributes: question?.answers || [
       {
         text: '',
         correct: false,
@@ -55,7 +55,7 @@ export function QuizFormMultipleOptions(props: QuizFormMultipleOptionsProps) {
         })}
         onSubmit={(values) => {
           console.log('values: ', values);
-          onSubmit && onSubmit(values);
+          onSubmit(values);
         }}
       >
         {({
@@ -91,7 +91,7 @@ export function QuizFormMultipleOptions(props: QuizFormMultipleOptionsProps) {
                 name="answers"
                 render={(arrayHelpers) => (
                   <div>
-                    {values.answers.map((answer, index) => (
+                    {values.answers_attributes.map((answer, index) => (
                       <div
                         className={`${styles['answer']} ${
                           singleSelection ? styles['single'] : ''
@@ -118,15 +118,15 @@ export function QuizFormMultipleOptions(props: QuizFormMultipleOptionsProps) {
                             }`}
                             onClick={() => {
                               if (singleSelection) {
-                                values.answers.forEach((answer, i) => {
+                                values.answers_attributes.forEach((answer, i) => {
                                   if (index === i) {
                                     setFieldValue(
-                                      `answers[${index}].correct`,
+                                      `answers_attributes[${index}].correct`,
                                       !answer.correct
                                     );
                                   } else {
                                     setFieldValue(
-                                      `answers[${i}].correct`,
+                                      `answers_attributes[${i}].correct`,
                                       false
                                     );
                                   }

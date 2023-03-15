@@ -23,7 +23,7 @@ export function QuizFormConditional(props: QuizFormConditionalProps) {
     kind: TypeQuestionQuiz.conditional,
     question: question?.question || '',
     description: question?.description || '',
-    answers: question?.answers || [
+    answers_attributes: question?.answers || [
       {
         text: 'true',
         correct: false,
@@ -79,7 +79,7 @@ export function QuizFormConditional(props: QuizFormConditionalProps) {
           onBlur={formik.handleBlur}
         />
         <div className={styles['conditionals']}>
-          {formik.values.answers.map((conditional, index) => (
+          {formik.values.answers_attributes.map((conditional, index) => (
             <div className={styles['conditional-container']} key={index}>
               <h4 className={styles['conditional']}>
                 {conditional.text === 'true'

@@ -1,6 +1,7 @@
 import styles from './quiz-builder.module.scss';
 import {
   QuestionQuiz,
+  QuizParams,
   QuizParamsUi,
   TypeQuestionQuiz,
 } from '@ltpx-frontend-apps/api';
@@ -26,7 +27,7 @@ import * as Yup from 'yup';
 /* eslint-disable-next-line */
 export interface QuizBuilderProps {
   onClose?: () => void;
-  onSubmit?: (data: QuizParamsUi) => void;
+  onSubmit?: (data: QuizParams) => void;
   className?: string;
   quiz?: QuizParamsUi;
 }
@@ -53,7 +54,7 @@ export function QuizBuilder(props: QuizBuilderProps) {
   const initialValues = {
     id: quiz?.id,
     name: quiz?.name || '',
-    questions: questions,
+    questions_attributes: questions,
     total_questions_to_approved: quiz?.total_questions_to_approved || 1,
   };
 
@@ -67,6 +68,7 @@ export function QuizBuilder(props: QuizBuilderProps) {
       ),
     }),
     onSubmit: (quiz) => {
+      console.log('quiz: ', quiz);
       onSubmit && onSubmit(quiz);
     },
   });
@@ -75,8 +77,9 @@ export function QuizBuilder(props: QuizBuilderProps) {
     <div className={styles['questions']}>
       <label> {t('quizBuilder.questions')}</label>
       {questions.map((question, index) => (
-        <div className={`${styles['question-wrapper']}`} key={index}>
+        <div className={`${styles['questions-wrapper']}`} key={index}>
           <QuizQuestionView
+            className={`${question._destroy ? styles['hide'] : ''}`}
             key={index}
             question={question.question}
             number={index + 1}
@@ -98,8 +101,7 @@ export function QuizBuilder(props: QuizBuilderProps) {
               <div
                 className={styles['action']}
                 onClick={()=>{
-                  setSelectedIndex(index);
-                  removeQuestion();
+                  removeQuestion(index);
                 }}
               >
                 <Icon icon="trash" size={15} />
@@ -210,7 +212,13 @@ export function QuizBuilder(props: QuizBuilderProps) {
         <ContentQuizForm questions={questions} />
       </div>
       {currentQuestion && (
-        <Drawer open={true}>
+        <Drawer
+          open={true}
+          onClose={()=>{
+            setCurrentQuestion(undefined);
+            setSelectedIndex(undefined);
+          }}
+        >
           <div className={styles['forms']}>
             <QuestionsQuiz
               type={currentQuestion.kind}

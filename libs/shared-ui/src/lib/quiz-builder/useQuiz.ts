@@ -49,13 +49,16 @@ export const useQuiz = () => {
   }
 
   function processQuestion(question: QuestionQuiz) {
-    const result = selectedIndex ? updateQuestion(question) : addQuestion(question);
+    const result = selectedIndex !== undefined ? updateQuestion(question) : addQuestion(question);
     setQuestions(result);
     setCurrentQuestion(undefined);
   }
 
-  function removeQuestion() {
-    const result = questions.filter((q, i) => i !== selectedIndex);
+  function removeQuestion(index: number) {
+    const result = questions.map((question, i) => {
+      question._destroy = i === index ? true : !!question._destroy;
+      return question;
+    });
     setQuestions(result);
   }
 

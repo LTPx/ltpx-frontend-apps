@@ -35,11 +35,15 @@
   border-radius: 10px;
 }
 
-.question-wrapper {
+.questions-wrapper {
   display: flex;
   flex-direction: column;
   gap: 1rem;
   margin-top: 0.5rem;
+
+  .hide {
+    display: none;
+  }
 
   .actions {
     display: flex;

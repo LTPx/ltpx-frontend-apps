@@ -13,7 +13,7 @@ export interface QuizQuestionViewProps {
 export function QuizQuestionView(props: QuizQuestionViewProps) {
   const { className, number, question, description, children} = props;
   return (
-    <div className={`${styles['question']}`}>
+    <div className={`${styles['question']} ${className}`}>
       <div className={styles['summary']}>
         <div className={styles['number']}>{number}</div>
         <div className={styles['text']}>

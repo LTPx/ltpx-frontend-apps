@@ -10,7 +10,6 @@ import {
   _removeAchievement,
   createAchievement,
   AchievementParams,
-  NewQuizParams,
   createQuiz,
   editQuiz,
   EditQuizParams,
@@ -20,6 +19,7 @@ import {
   createCourseSession,
   NewTaskParams,
   createTask,
+  QuizParams,
 } from '@ltpx-frontend-apps/api';
 
 export type TResponse = {
@@ -37,11 +37,11 @@ export type CourseSlice = {
   removeContent: (index: number) => Promise<TResponse>;
   addUpdateClassroom: (classroom: Classroom) => Promise<TResponse>;
   updateContent: (content: ContentCourse, index: number) => Promise<TResponse>;
-  _addQuiz: (quiz: NewQuizParams) => Promise<TResponse>;
+  _addQuiz: (quiz: QuizParams) => Promise<TResponse>;
   _addAchievement: (achievement: AchievementParams) => Promise<TResponse>;
   _removeQuiz: (id: number) => Promise<TResponse>;
   _removeAchievement: (id: number) => Promise<TResponse>;
-  _updateQuiz: (quiz: EditQuizParams) => Promise<TResponse>;
+  _updateQuiz: (quiz: QuizParams) => Promise<TResponse>;
   _updateAchievement: (
     achievement: AchievementParams,
     id: number
@@ -98,7 +98,7 @@ export const createCourseSlice: StateCreator<
       return { success: false, data: error };
     }
   },
-  _addQuiz: async (params: NewQuizParams): Promise<TResponse> => {
+  _addQuiz: async (params: QuizParams): Promise<TResponse> => {
     try {
       const course = get().course;
       const paramsCourseId = { ...params, ...{ course_id: course.id } };
@@ -161,7 +161,7 @@ export const createCourseSlice: StateCreator<
       return { success: true, data: error };
     }
   },
-  _updateQuiz: async (params: EditQuizParams): Promise<TResponse> => {
+  _updateQuiz: async (params: QuizParams): Promise<TResponse> => {
     try {
       const course = get().course;
       const paramsCourseId = { ...params, ...{ course_id: course.id } };

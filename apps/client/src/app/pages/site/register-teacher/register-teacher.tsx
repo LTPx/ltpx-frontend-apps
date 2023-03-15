@@ -146,12 +146,15 @@ export function RegisterTeacher(props: RegisterTeacherProps) {
             <div className={styles['tab-container']}>
               <div className={styles['describe-content']}>
                 <h3>
-                  Puedes empezar creando un curso por medio de las herramientas
-                  que ofrece OpenMind, en donde los temas que se impartirán
-                  quedaran a tu libre elección con tu propio sello para la
-                  enseñanza, procura que los temas impartidos en tu curso sean
-                  interesantes y llamativos para los alumnos. Te recomendamos
-                  leer la siguiente sección{' '}
+                  Al usar OpenMind como profesor podrás crear tus propios cursos
+                  y dar clases fácilmente a alumnos de todo el mundo. Tu rol
+                  como profesor en OpenMind varía levemente del que tienes en
+                  una escuela tradicional, para crear un curso utiliza las
+                  herramientas que ofrece OpenMind, en donde los temas que se
+                  impartirán quedaran a tu libre elección con tu propio sello
+                  para la enseñanza, procura que los temas impartidos en tu
+                  curso sean interesantes y llamativos para los alumnos. Te
+                  recomendamos leer la siguiente sección{' '}
                   <NavLink to={'/blog/how-create-a-class'}>
                     ¿Como crear una gran clase en OpenMind?
                   </NavLink>{' '}
@@ -171,10 +174,15 @@ export function RegisterTeacher(props: RegisterTeacherProps) {
             <div className={styles['tab-container']}>
               <div className={styles['describe-content']}>
                 <h3>
-                  Consigue tus primeras valoraciones y reseñas promocionando tu
-                  curso mediante tus redes sociales y profesionales. Tu curso se
-                  podrá encontrar en nuestro marketplace, donde obtendrás
-                  ingresos por cada alumno que se inscriba a tu curso.
+                  OpenMind promociona tus clases en su marketplace  y los docentes
+                  con las mejores calificaciones y resultados serán
+                  promocionados aún más. Si tus clases tienen alta demanda,
+                  podrás subir su costo, tener más alumnos y ganar más dinero.
+                  Tus pagos no dependen de cumplir un cierto número de horas,
+                  sino de validar que tus alumnos han cumplido sus objetivos
+                  preestablecidos.
+                  <br/>
+                  <strong>Tus resultados dependen de la calidad de tu trabajo y nada más.</strong>
                 </h3>
               </div>
               <div className={styles['image-content']}>

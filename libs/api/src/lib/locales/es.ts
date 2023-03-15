@@ -160,7 +160,7 @@ export const es = {
     password: 'Contraseña',
     teacher : {
       title: 'Quiero ser Profesor',
-      text: 'Se parte de una comunidad de apoyo de instructores en línea, comparte tus conocimientos con otros y genera ingresos.',
+      text: 'Se parte de una comunidad de apoyo de profesores en línea, comparte tus conocimientos con otros y genera ingresos.',
     },
     user : {
       title: 'Registrarme',

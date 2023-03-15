@@ -55,7 +55,7 @@ export function QuizBuilder(props: QuizBuilderProps) {
     id: quiz?.id,
     name: quiz?.name || '',
     questions_attributes: questions,
-    total_questions_to_approved: quiz?.total_questions_to_approved || 1,
+    score_to_approved: quiz?.score_to_approved || 1,
   };
 
   const formikForm = useFormik({
@@ -63,7 +63,7 @@ export function QuizBuilder(props: QuizBuilderProps) {
     enableReinitialize: true,
     validationSchema: Yup.object({
       name: Yup.string().required('Necesitas agregar un nombre'),
-      total_questions_to_approved: Yup.number().required(
+      score_to_approved: Yup.number().required(
         'Necesitas definir el numero de preguntas'
       ),
     }),
@@ -87,7 +87,7 @@ export function QuizBuilder(props: QuizBuilderProps) {
           >
             <div className={styles['actions']}>
               <div className={styles['action']}>
-                {(100 / questions.length).toFixed()}pts
+                {question.points} pts
               </div>
               <div
                 className={styles['action']}
@@ -200,13 +200,13 @@ export function QuizBuilder(props: QuizBuilderProps) {
           {/* <Input
             label={t('quizBuilder.score_to_approved') || ''}
             description={t('quizBuilder.tip') || ''}
-            name="total_questions_to_approved"
+            name="score_to_approved"
             placeholder="Todas"
             type='number'
             onChange={formikForm.handleChange}
-            value={formikForm.values.total_questions_to_approved}
+            value={formikForm.values.score_to_approved}
             onBlur={formikForm.handleBlur}
-            errorMessage={formikForm.errors.total_questions_to_approved}
+            errorMessage={formikForm.errors.score_to_approved}
           /> */}
         </form>
         <ContentQuizForm questions={questions} />

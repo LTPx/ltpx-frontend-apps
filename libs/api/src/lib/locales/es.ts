@@ -246,7 +246,6 @@ export const es = {
   quizBuilder: {
     title: 'Nombre del test',
     questions: 'Preguntas',
-    total_questions_to_approved: 'Preguntas Aprobadas',
     score_to_approved: 'Puntos para aprobar',
     tip: 'Cuantas preguntas debe acertar el estudiante para aprobar este test'
   },
@@ -255,18 +254,21 @@ export const es = {
     description: 'Descripción (opcional)',
     true: 'Verdadera',
     false: 'Falsa',
-    correct: 'correcta'
+    correct: 'correcta',
+    points: 'Puntos'
   },
   quizFormMultipleOptions: {
     question: 'Pregunta',
     description: 'Descripción (opcional)',
     answer: 'Respuestas',
-    addAnswer: ' + Nueva respuesta'
+    addAnswer: ' + Nueva respuesta',
+    points: 'Puntos'
   },
   quizFormAnswer: {
     question: 'Pregunta',
     description: 'Descripción (opcional)',
-    text: 'Al estudiante le aparecerá un campo de texto para responder esta pregunta'
+    text: 'Al estudiante le aparecerá un campo de texto para responder esta pregunta',
+    points: 'Puntos'
   },
   courseAchievements: {
     title:'Logros',

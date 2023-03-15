@@ -21,6 +21,7 @@ export function QuizFormAnswer(props: QuizFormAnswerProps) {
     kind: TypeQuestionQuiz.answer,
     question: question?.question || '',
     description: question?.description || '',
+    points: question?.points || 1,
     answers_attributes: [{
       text: '',
       correct: false,
@@ -30,6 +31,7 @@ export function QuizFormAnswer(props: QuizFormAnswerProps) {
     initialValues: initialValues,
     validationSchema: Yup.object({
       question: Yup.string().required('Pregunta es obligatorio'),
+      points: Yup.number().required('Necesitas agregar puntos'),
     }),
     onSubmit: (data) => {
       onSubmit && onSubmit(data);
@@ -56,6 +58,15 @@ export function QuizFormAnswer(props: QuizFormAnswerProps) {
           value={formik.values.description}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
+        />
+        <Input
+          label={t('quizFormConditional.points') || ''}
+          name="points"
+          type="number"
+          value={formik.values.points}
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          errorMessage={formik.errors.points}
         />
         <h5 className={styles['text']}>
           {t('quizFormAnswer.text')}

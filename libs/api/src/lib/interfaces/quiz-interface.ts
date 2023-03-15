@@ -15,7 +15,7 @@ export interface QuizModel {
   questions_attributes: QuestionQuiz[];
   time_minutes_to_answer?: number;
   max_attempts?: number;
-  total_questions_to_approved?: number;
+  score_to_approved?: number;
   created_at: string;
   updated_at: string;
 }
@@ -54,6 +54,7 @@ export interface QuestionQuiz {
   kind: TypeQuestionQuiz;
   answers_attributes: AnswerModel[];
   _destroy?: boolean; //rails needs destroy to remove nested attributes
+  points: number;
 }
 
 export interface AnswerModel {

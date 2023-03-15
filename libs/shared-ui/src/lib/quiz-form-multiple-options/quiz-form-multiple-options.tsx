@@ -28,6 +28,7 @@ export function QuizFormMultipleOptions(props: QuizFormMultipleOptionsProps) {
     kind: singleSelection ? TypeQuestionQuiz.single : TypeQuestionQuiz.multiple,
     question: question?.question || '',
     description: question?.description || '',
+    points: question?.points || 1,
     answers_attributes: question?.answers_attributes || [
       {
         text: '',
@@ -52,6 +53,7 @@ export function QuizFormMultipleOptions(props: QuizFormMultipleOptionsProps) {
           question: Yup.string().required(
             'La pregunta no puede estar en blanco'
           ),
+          points: Yup.number().required('Necesitas agregar puntos'),
         })}
         onSubmit={(values) => {
           console.log('values: ', values);
@@ -84,6 +86,17 @@ export function QuizFormMultipleOptions(props: QuizFormMultipleOptionsProps) {
                 value={values.description}
                 onChange={handleChange}
                 onBlur={handleBlur}
+                errorMessage={errors.description}
+              />
+              <Input
+                label={t('quizFormMultipleOptions.points') || ''}
+                type='number'
+                name="points"
+                placeholder="Alguna observación antes de responder esta pregunta"
+                value={values.points}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                errorMessage={errors.points}
               />
               <br />
               <label>{t('quizFormMultipleOptions.answer')}</label>

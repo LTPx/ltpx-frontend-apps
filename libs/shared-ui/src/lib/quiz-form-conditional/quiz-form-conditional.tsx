@@ -19,6 +19,7 @@ export function QuizFormConditional(props: QuizFormConditionalProps) {
   const { t } = useTranslation();
 
   const initialValues = {
+    id: question?.id,
     kind: TypeQuestionQuiz.conditional,
     question: question?.question || '',
     description: question?.description || '',

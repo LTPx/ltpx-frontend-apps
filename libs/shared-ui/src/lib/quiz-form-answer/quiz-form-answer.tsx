@@ -17,6 +17,7 @@ export function QuizFormAnswer(props: QuizFormAnswerProps) {
   const { onSubmit, onCancel, question } = props;
   const { t } = useTranslation();
   const initialValues = {
+    id: question?.id,
     kind: TypeQuestionQuiz.answer,
     question: question?.question || '',
     description: question?.description || '',

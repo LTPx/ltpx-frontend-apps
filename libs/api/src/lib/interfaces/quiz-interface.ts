@@ -35,6 +35,8 @@ export type QuizParamsUi = PartialBy<
   'id'
 >;
 export interface QuestionQuiz {
+  id?: string;
+  number?: string;
   question: string;
   description: string;
   kind: TypeQuestionQuiz;

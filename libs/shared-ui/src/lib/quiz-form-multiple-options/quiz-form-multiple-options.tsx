@@ -24,6 +24,7 @@ export function QuizFormMultipleOptions(props: QuizFormMultipleOptionsProps) {
   const alphabetLetters = generateAlphabet();
 
   const initialValues = {
+    id: question?.id,
     kind: singleSelection ? TypeQuestionQuiz.single : TypeQuestionQuiz.multiple,
     question: question?.question || '',
     description: question?.description || '',

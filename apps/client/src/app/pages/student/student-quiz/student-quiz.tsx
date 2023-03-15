@@ -61,7 +61,7 @@ export function StudentQuiz() {
       const { answers } = fields;
       const answersFilter = answers.reduce(
         (userAnswers: any[], question: any) => {
-          return userAnswers.concat(question.answers);
+          return userAnswers.concat(question.answers_attributes);
         },
         []
       );
@@ -88,14 +88,14 @@ export function StudentQuiz() {
           </div>
           <div className={styles['content']}>
             <div className={styles['questions']}>
-              {currentQuiz.questions.map((question, index) => (
+              {currentQuiz.questions_attributes.map((question, index) => (
                 <div className="question" key={index}>
                   {question.kind === TypeQuestionQuiz.conditional && (
                     <QuizConditionalQuestion
                       number={index+1}
                       title={question.question}
                       description={question.description}
-                      answers={question.answers}
+                      answers={question.answers_attributes}
                       onChange={(answerSelected) => {
                         formik.setFieldValue(`answers[${index}].answers`, [
                           answerSelected,
@@ -108,7 +108,7 @@ export function StudentQuiz() {
                       number={index+1}
                       title={question.question}
                       description={question.description}
-                      answers={question.answers}
+                      answers={question.answers_attributes}
                       multiple={true}
                       onChange={(answersSelected) => {
                         formik.setFieldValue(
@@ -123,7 +123,7 @@ export function StudentQuiz() {
                       number={index+1}
                       title={question.question}
                       description={question.description}
-                      answers={question.answers}
+                      answers={question.answers_attributes}
                       multiple={false}
                       onChange={(answersSelected) => {
                         formik.setFieldValue(
@@ -144,11 +144,10 @@ export function StudentQuiz() {
                           const text = e.target.value;
                           formik.setFieldValue(`answers[${index}].answers`, [
                             {
-                              // answer_id: question.answers[0].id,
-                              // question_id: question.answers[0].question_id,
+                              // answer_id: question.answers_attributes[0].id,
+                              // question_id: question.answers_attributes[0].question_id,
                               // text,
                             },
-                            console.log('aqui' + question.answers[0])
                           ]);
                         }}
                         onBlur={formik.handleBlur}

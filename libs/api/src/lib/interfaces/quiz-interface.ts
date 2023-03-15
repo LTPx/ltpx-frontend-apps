@@ -12,7 +12,7 @@ export interface QuizModel {
   user_id: number;
   course_id: number;
   name: string;
-  questions: QuestionQuiz[];
+  questions_attributes: QuestionQuiz[];
   time_minutes_to_answer?: number;
   max_attempts?: number;
   total_questions_to_approved?: number;
@@ -52,7 +52,7 @@ export interface QuestionQuiz {
   question: string;
   description: string;
   kind: TypeQuestionQuiz;
-  answers: AnswerModel[];
+  answers_attributes: AnswerModel[];
   _destroy?: boolean; //rails needs destroy to remove nested attributes
 }
 
@@ -61,6 +61,7 @@ export interface AnswerModel {
   text: string;
   correct: boolean;
   question_id: number;
+  _destroy?: boolean; //rails needs destroy to remove nested attributes
 }
 
 export interface UserAnswer {

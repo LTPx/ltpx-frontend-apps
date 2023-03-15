@@ -28,7 +28,7 @@ export function QuizFormMultipleOptions(props: QuizFormMultipleOptionsProps) {
     kind: singleSelection ? TypeQuestionQuiz.single : TypeQuestionQuiz.multiple,
     question: question?.question || '',
     description: question?.description || '',
-    answers_attributes: question?.answers || [
+    answers_attributes: question?.answers_attributes || [
       {
         text: '',
         correct: false,

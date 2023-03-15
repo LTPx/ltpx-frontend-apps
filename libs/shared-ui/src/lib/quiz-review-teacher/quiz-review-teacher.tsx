@@ -47,7 +47,7 @@ export function QuizReviewTeacher(props: QuizReviewTeacherProps) {
           </div>
           <div className={styles['content']}>
             <div className={styles['questions']}>
-              {quiz.questions.map((question, index) => (
+              {quiz.questions_attributes.map((question, index) => (
                 <div className="question" key={index}>
                   {question.kind === TypeQuestionQuiz.conditional && (
                     <>
@@ -56,7 +56,7 @@ export function QuizReviewTeacher(props: QuizReviewTeacherProps) {
                       </h3>
                       <p>{question.description}</p>
                       <div className={styles['items']}>
-                        {question.answers.map((answer, i) => (
+                        {question.answers_attributes.map((answer, i) => (
                           <p
                             key={i}
                             className={`${styles['question-answer']} ${
@@ -78,7 +78,7 @@ export function QuizReviewTeacher(props: QuizReviewTeacherProps) {
                       </h3>
                       <p>{question.description}</p>
                       <div className={styles['items']}>
-                        {question.answers.map((answer, i) => (
+                        {question.answers_attributes.map((answer, i) => (
                           <p
                             key={i}
                             className={`${styles['question-answer']} ${
@@ -100,7 +100,7 @@ export function QuizReviewTeacher(props: QuizReviewTeacherProps) {
                       </h3>
                       <p>{question.description}</p>
                       <div className={styles['items']}>
-                        {question.answers.map((answer, i) => (
+                        {question.answers_attributes.map((answer, i) => (
                           <p
                             key={i}
                             className={`${styles['question-answer']} ${
@@ -122,7 +122,7 @@ export function QuizReviewTeacher(props: QuizReviewTeacherProps) {
                           {index + 1}. {question.question}
                         </h3>
                         <p>{question.description}</p>
-                        {question.answers.map((answer, i) => (
+                        {question.answers_attributes.map((answer, i) => (
                           <pre className={styles['question-answer']} key={i}>
                             {foundAnswer(answer.id)?.text}
                           </pre>

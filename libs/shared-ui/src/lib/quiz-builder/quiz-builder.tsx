@@ -48,7 +48,7 @@ export function QuizBuilder(props: QuizBuilderProps) {
   } = useQuiz();
 
   useEffect(() => {
-    setQuestions(quiz?.questions || []);
+    setQuestions(quiz?.questions_attributes || []);
   }, []);
 
   const initialValues = {

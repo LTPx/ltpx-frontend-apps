@@ -23,7 +23,7 @@ export function QuizFormConditional(props: QuizFormConditionalProps) {
     kind: TypeQuestionQuiz.conditional,
     question: question?.question || '',
     description: question?.description || '',
-    answers_attributes: question?.answers || [
+    answers_attributes: question?.answers_attributes || [
       {
         text: 'true',
         correct: false,
@@ -47,11 +47,11 @@ export function QuizFormConditional(props: QuizFormConditionalProps) {
   const markAsCorrect = (conditional: any) => {
     const { text, correct } = conditional;
     formik.setFieldValue(
-      `answers[0].correct`,
+      `answers_attributes[0].correct`,
       text === 'true' ? !correct : correct
     );
     formik.setFieldValue(
-      `answers[1].correct`,
+      `answers_attributes[1].correct`,
       text === 'true' ? correct : !correct
     );
   };

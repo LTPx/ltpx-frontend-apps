@@ -32,14 +32,14 @@ export function QuizFormMultipleOptions(props: QuizFormMultipleOptionsProps) {
       {
         text: '',
         correct: false,
-        question_id: -1, //TODO: remove this, currently fails due to QuestionQuiz interface needs ids
-        id: -1
+        question_id: null,
+        id: null
       },
       {
         text: '',
         correct: false,
-        question_id: -1,
-        id: -2
+        question_id: null,
+        id: null
       },
     ],
   };
@@ -88,7 +88,7 @@ export function QuizFormMultipleOptions(props: QuizFormMultipleOptionsProps) {
               <br />
               <label>{t('quizFormMultipleOptions.answer')}</label>
               <FieldArray
-                name="answers"
+                name="answers_attributes"
                 render={(arrayHelpers) => (
                   <div>
                     {values.answers_attributes.map((answer, index) => (
@@ -108,7 +108,7 @@ export function QuizFormMultipleOptions(props: QuizFormMultipleOptionsProps) {
                           className={styles['answer-input']}
                           value={answer.text}
                           onBlur={handleBlur}
-                          name={`answers[${index}].text`}
+                          name={`answers_attributes[${index}].text`}
                           onChange={handleChange}
                         />
                         <div className={styles['actions']}>
@@ -133,7 +133,7 @@ export function QuizFormMultipleOptions(props: QuizFormMultipleOptionsProps) {
                                 });
                               }
                               setFieldValue(
-                                `answers[${index}].correct`,
+                                `answers_attributes[${index}].correct`,
                                 !answer.correct
                               );
                             }}

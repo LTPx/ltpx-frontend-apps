@@ -85,8 +85,13 @@
 // @media screen and (min-width: 560px) and (max-width: 850px) {
 
 // }
-// @media screen and (min-width: 860px) and (max-width: 1224px) {
-//   .content {
-
-//   }
-// }
+@media screen and (min-width: 860px) and (max-width: 1224px) {
+  .rating-content {
+    padding: 0;
+    .rating-bar {
+      .bar {
+        width: 250px !important;
+      }
+    }
+  }
+}

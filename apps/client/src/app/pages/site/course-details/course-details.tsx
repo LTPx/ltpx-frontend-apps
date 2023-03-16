@@ -19,6 +19,8 @@ import {
   CourseDateCard,
   Button,
   ColorsButton,
+  Tag,
+  ColorsTag,
 } from '@ltpx-frontend-apps/shared-ui';
 import { Dialog } from 'evergreen-ui';
 import { useSite, useUser } from '@ltpx-frontend-apps/store';
@@ -96,6 +98,7 @@ export function CourseDetails() {
       text: 'Reseñas',
     },
   ];
+
   const courseDate = [
     {
       title: 'Clases Martes 21 de Febrero',
@@ -115,12 +118,73 @@ export function CourseDetails() {
         {course.id && (
           <>
             <div className={styles['head-responsive']}>
-              {/* <img src={course.cover_url} /> */}
-              <div className={styles['content-responsive']}>
-                <h2 className={styles['title-responsive']}>{course.title}</h2>
-                {/* <Button title='INSCRIBIRME AHORA' color={ColorsButton.secondary} full={true}/> */}
+              <div className={styles['wrap-responsive']}>
+                <img src={course.cover_url} />
+                <div className={styles['content-responsive']}>
+                  <div className={styles['title-content-responsive']}>
+                    <h3 className={styles['title-responsive']}>
+                      {course.title}
+                    </h3>
+                    <div className={styles['price-content']}>
+                      <h2 className={styles['price']}>$ {course.price}</h2>
+                    </div>
+                  </div>
+                  <h4 className={styles['teacher']}>
+                    Profesor: {teacher.name}
+                  </h4>
+                  <div className={styles['description-responsive']}>
+                    <Rating
+                      className={styles['rating-responsive']}
+                      stars={course.average_rating || 4}
+                    />
+                    <Tag
+                      color={ColorsTag.green}
+                      text={translateCategory(course.category)}
+                    />
+                  </div>
+                  <div className={styles['tag-responsive']}>
+                    <Tag
+                      color={ColorsTag.white}
+                      text={'Logros: ' + course.achievements?.length || '0'}
+                      icon={'trophy'}
+                    />
+                    <Tag
+                      color={ColorsTag.white}
+                      text={'Contenidos: ' + course.contents.length}
+                      icon={'copy'}
+                    />
+                    <Tag
+                      color={ColorsTag.white}
+                      text={'Inscritos: ' + course.enrollments_count}
+                      icon={'person'}
+                    />
+                    <Tag
+                      color={ColorsTag.white}
+                      text={'Idioma: ' + translateLanguage(course.language)}
+                      icon={'text-size'}
+                    />
+                    <Tag
+                      color={ColorsTag.white}
+                      text={'Nivel: ' + translateLevel(course.level)}
+                      icon={'level'}
+                    />
+                    <Tag
+                      color={ColorsTag.white}
+                      text={'Certificado: Si'}
+                      icon={'certificate'}
+                    />
+                  </div>
+                  <div className={styles['price-vertical-responsive']}>
+                    <div>
+                      <Button
+                        color={ColorsButton.secondary}
+                        title={'INSCRIBIRME AHORA'}
+                        full={true}
+                      />
+                    </div>
+                  </div>
+                </div>
               </div>
-              {/* <p>{course.description}</p> */}
             </div>
             <div className={styles['course-details']}>
               <div className={styles['description-container']}>
@@ -128,10 +192,6 @@ export function CourseDetails() {
                   <div className={styles['description-title']}>
                     <div className={styles['title']}>
                       <h1 className={styles['title-course']}>{course.title}</h1>
-                      {/* <h4 className="muted">
-    Looking how to increase your incomes and learn about new
-    digital money
-  </h4> */}
                     </div>
                   </div>
                   <div className={styles['description-course']}>
@@ -236,6 +296,20 @@ export function CourseDetails() {
                   onClickEnroll={enrolled}
                   certificate={true}
                 />
+              </div>
+            </div>
+            <div className={styles['price-responsive']}>
+              <div className={styles['price-content']}>
+                <h3 className={styles['price-text']}> $ {course.price}</h3>
+              </div>
+              <div className={styles['price-button']}>
+                <div className={styles['btn-content']}>
+                  <Button
+                    color={ColorsButton.secondary}
+                    title="Comprar Ahora"
+                    full={true}
+                  />
+                </div>
               </div>
             </div>
           </>

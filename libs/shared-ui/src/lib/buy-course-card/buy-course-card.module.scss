@@ -1,13 +1,12 @@
 @import '../../styles/styles.module.scss';
 
 .container {
-  width: 85%;
+  width: 80%;
   .buy-card {
     padding: 10px;
     background-color: $white-color;
     box-shadow: $card-shadow-strong;
     border: 1px solid $stroke-color;
-
     img {
       width: 100%;
       height: 10rem;
@@ -83,23 +82,23 @@
 
 @media screen and (max-width: 550px) {
   .container {
-    display: flex;
-    justify-content: center;
-    padding-bottom: 3rem;
-    width: 100%;
+    display: none;
+    // justify-content: center;
+    // padding-bottom: 3rem;
+    // width: 100%;
   }
-  .buy-card {
-    padding: 0 !important;
-    width: 100%;
-    background-color: ffffff !important;
-    box-shadow: inherit !important;
-    border: none !important
-  }
-  img {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-  }
+  // .buy-card {
+  //   padding: 0 !important;
+  //   width: 100%;
+  //   background-color: ffffff !important;
+  //   box-shadow: inherit !important;
+  //   border: none !important
+  // }
+  // img {
+  //   width: 100%;
+  //   height: 200px;
+  //   object-fit: cover;
+  // }
 }
 
 @media screen and (min-width: 560px) and (max-width: 850px){
@@ -122,6 +121,7 @@
 }
 @media screen and (min-width: 860px) and (max-width: 1224px) {
   .container {
+    width: 90%;
     .buy-card {
       img {
         width: 100%;

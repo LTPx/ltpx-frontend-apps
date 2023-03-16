@@ -25,17 +25,17 @@
   justify-content: center;
 
   .wrap-information {
-  display: flex;
-  width: 88%;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 1.5rem;
-  text-align: center;
-  .text-register {
-    color: $text-gray-color;
-    line-height: 1.75rem;
-  }
+    display: flex;
+    width: 88%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    text-align: center;
+    .text-register {
+      color: $text-gray-color;
+      line-height: 1.75rem;
+    }
   }
   img {
     width: 25rem;
@@ -60,7 +60,18 @@
 
 //smartphones-responsive
 @media screen and (max-width: 500px) {
-  .register {
-    width: 75%;
+  .register-content {
+    width: 100%;
+    padding-bottom: 5rem;
+  }
+  .container {
+    width: 90%;
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center !important;
+    justify-content: center;
+  }
+  img {
+    width: 20rem !important;
   }
 }

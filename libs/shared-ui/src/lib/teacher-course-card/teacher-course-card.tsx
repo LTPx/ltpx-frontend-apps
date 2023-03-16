@@ -37,6 +37,18 @@ export function TeacherCourseCard(props: TeacherCourseCardProps) {
     urlStudents,
   } = props;
 
+  const statusColors = {
+    published: ColorsTag.green,
+    review: ColorsTag.blue,
+    draft: ColorsTag.gray
+  }
+
+  const statusIcons = {
+    published: 'globe',
+    review: 'eye',
+    draft: 'edit'
+  }
+
   return (
     <div className={styles['container']}>
       <div className={styles['course-img']}>
@@ -47,12 +59,8 @@ export function TeacherCourseCard(props: TeacherCourseCardProps) {
           <div className={styles['head']}>
             <Tag
               text={t(`course_status.${status}`)}
-              color={
-                status === CourseStatus.publish
-                  ? ColorsTag.green
-                  : ColorsTag.white
-              }
-              icon={status === CourseStatus.publish ? 'globe' : 'edit'}
+              color={statusColors[status]}
+              icon={statusIcons[status]}
             />
             <Tag
               text={t(`course_categories.${category}`)}

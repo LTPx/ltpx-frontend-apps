@@ -34,7 +34,7 @@ export function StudentQuiz() {
   const fetchQuiz = useCallback(async () => {
     const { success, data, error } = await _getStudentQuiz(course_id, id);
     if (success) {
-      const answers = data.questions.map((question: QuestionQuiz) => {
+      const answers = data.questions_attributes.map((question: QuestionQuiz) => {
         return {
           question: question.question,
           answers: [],
@@ -65,6 +65,8 @@ export function StudentQuiz() {
         },
         []
       );
+      console.log('answersFilter: ', answersFilter);
+      console.log('fields: ', fields);
       const { data, success, error } = await _evaluateQuiz(id, answersFilter);
       if (success) {
         setScore(data.score);
@@ -88,14 +90,14 @@ export function StudentQuiz() {
           </div>
           <div className={styles['content']}>
             <div className={styles['questions']}>
-              {currentQuiz.questions.map((question, index) => (
+              {currentQuiz.questions_attributes.map((question, index) => (
                 <div className="question" key={index}>
                   {question.kind === TypeQuestionQuiz.conditional && (
                     <QuizConditionalQuestion
                       number={index+1}
                       title={question.question}
                       description={question.description}
-                      answers={question.answers}
+                      answers={question.answers_attributes}
                       onChange={(answerSelected) => {
                         formik.setFieldValue(`answers[${index}].answers`, [
                           answerSelected,
@@ -108,7 +110,7 @@ export function StudentQuiz() {
                       number={index+1}
                       title={question.question}
                       description={question.description}
-                      answers={question.answers}
+                      answers={question.answers_attributes}
                       multiple={true}
                       onChange={(answersSelected) => {
                         formik.setFieldValue(
@@ -123,7 +125,7 @@ export function StudentQuiz() {
                       number={index+1}
                       title={question.question}
                       description={question.description}
-                      answers={question.answers}
+                      answers={question.answers_attributes}
                       multiple={false}
                       onChange={(answersSelected) => {
                         formik.setFieldValue(
@@ -144,11 +146,10 @@ export function StudentQuiz() {
                           const text = e.target.value;
                           formik.setFieldValue(`answers[${index}].answers`, [
                             {
-                              // answer_id: question.answers[0].id,
-                              // question_id: question.answers[0].question_id,
+                              // answer_id: question.answers_attributes[0].id,
+                              // question_id: question.answers_attributes[0].question_id,
                               // text,
                             },
-                            console.log('aqui' + question.answers[0])
                           ]);
                         }}
                         onBlur={formik.handleBlur}

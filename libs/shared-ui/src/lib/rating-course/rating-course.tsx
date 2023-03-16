@@ -55,7 +55,6 @@ export function RatingCourse(props: RatingCourseProps) {
 
   return (
     <div className={styles['container']}>
-      <h3>{t('coursesDetails.ratingCourse.title')}</h3>
       <div className={styles['content']}>
         <div className={styles['total-rating']}>
           <h1>{calculateScore().toFixed(2)}</h1>

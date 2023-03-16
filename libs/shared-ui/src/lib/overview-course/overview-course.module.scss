@@ -4,7 +4,13 @@
   display: flex;
   flex-direction: column;
   gap: $size-lg-2;
-
+  line-height: 1.75rem;
+  .show {
+    color: $primary-color;
+    text-decoration: underline;
+    padding-top: 1.5rem;
+    cursor: pointer;
+  }
   .course-description {
     h3 {
       color: $text-color;

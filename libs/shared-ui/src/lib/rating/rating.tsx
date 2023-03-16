@@ -5,12 +5,13 @@ import styles from './rating.module.scss';
 export interface RatingProps {
   stars: number;
   text?: string;
+  className?: string;
 }
 
 export function Rating(props: RatingProps) {
-  const { stars, text } = props;
+  const { stars, text, className } = props;
   return (
-    <div className={styles['stars-container']}>
+    <div className={`${className} ${styles['stars-container']}`}>
       <div className={styles['stars']}>
         {Array.from(Array(stars).keys()).map((number, index)=>(
           <Icon key={index} icon={'star'} size={15} color='#eab308'/>

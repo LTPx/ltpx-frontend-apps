@@ -80,6 +80,7 @@ export function TeacherEditCourse() {
         ...prevState,
         show: true,
         text: 'Tus cambios han sido guardados',
+        kind: SnackbarType.success,
       }));
     } else {
       setNotification((prevState) => ({

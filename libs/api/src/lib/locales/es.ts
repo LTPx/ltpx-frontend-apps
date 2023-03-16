@@ -160,7 +160,7 @@ export const es = {
     password: 'Contraseña',
     teacher : {
       title: 'Quiero ser Profesor',
-      text: 'Se parte de una comunidad de apoyo de instructores en línea, comparte tus conocimientos con otros y genera ingresos.',
+      text: 'Se parte de una comunidad de apoyo de profesores en línea, comparte tus conocimientos con otros y genera ingresos.',
     },
     user : {
       title: 'Registrarme',
@@ -246,26 +246,29 @@ export const es = {
   quizBuilder: {
     title: 'Nombre del test',
     questions: 'Preguntas',
-    total_questions_to_approved: 'Preguntas Aprobadas',
-    tip: 'Cuantas preguntas debe acertar el estudiante para aprobar este test'
+    approve_score: 'Puntos para aprobar',
+    tip: 'Cuantos puntos debe obtener el estudiante para aprobar este test'
   },
   quizFormConditional: {
     question: 'Pregunta',
     description: 'Descripción (opcional)',
     true: 'Verdadera',
     false: 'Falsa',
-    correct: 'correcta'
+    correct: 'correcta',
+    points: 'Puntos'
   },
   quizFormMultipleOptions: {
     question: 'Pregunta',
     description: 'Descripción (opcional)',
     answer: 'Respuestas',
-    addAnswer: ' + Nueva respuesta'
+    addAnswer: ' + Nueva respuesta',
+    points: 'Puntos'
   },
   quizFormAnswer: {
     question: 'Pregunta',
     description: 'Descripción (opcional)',
-    text: 'Al estudiante le aparecerá un campo de texto para responder esta pregunta'
+    text: 'Al estudiante le aparecerá un campo de texto para responder esta pregunta',
+    points: 'Puntos'
   },
   courseAchievements: {
     title:'Logros',

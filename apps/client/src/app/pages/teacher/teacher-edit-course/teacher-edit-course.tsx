@@ -2,7 +2,6 @@ import { CourseStatus } from '@ltpx-frontend-apps/api';
 import {
   Button,
   ColorsButton,
-  ColorsTag,
   Icon,
   Snackbar,
   SnackbarPosition,
@@ -28,6 +27,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import styles from './teacher-edit-course.module.scss';
 import { useTranslation } from 'react-i18next';
+import { useEditCourse } from './useEditCourse';
 
 export type ResponseRequest = {
   success: boolean;
@@ -36,33 +36,16 @@ export type ResponseRequest = {
 };
 
 export function TeacherEditCourse() {
+  const { tabs, notification, setNotification, statusColors, statusIcons } = useEditCourse();
   const [indexSelectedView, setIndexSelectedView] = useState(0);
-  const [notification, setNotification] = useState({
-    show: false,
-    kind: SnackbarType.success,
-    text: '',
-  });
   const { getCourse, course, cleanCourse } = useCourse();
   const { _sendCourseToReview } = useTeacher();
   const { translateStatus } = useCourseUtil();
   const { formatDate } = useMoment();
   const { t } = useTranslation();
-  const navigate = useNavigate();
-
-  const linksEditCourse = [
-    { selected: true, text: t('teacherEditCourse.linksEditCourse.details') },
-    { selected: false, text: t('teacherEditCourse.linksEditCourse.contents') },
-    { selected: false, text: t('teacherEditCourse.linksEditCourse.quiz') },
-    {
-      selected: false,
-      text: t('teacherEditCourse.linksEditCourse.achievement'),
-    },
-    { selected: false, text: t('teacherEditCourse.linksEditCourse.sessions') },
-  ];
-
-  const params = useParams();
-  const { courseId } = params;
+  const { courseId } = useParams();
   const id = parseInt(courseId || '');
+  const navigate = useNavigate();
 
   const fetchData = useCallback(async () => {
     const resp = await getCourse(id);
@@ -74,18 +57,19 @@ export function TeacherEditCourse() {
   }, []);
 
   const showAndConfigNotification = async (response: ResponseRequest) => {
-    const { success, data, error } = response;
+    const { success, error } = response;
     if (success) {
       setNotification((prevState) => ({
         ...prevState,
         show: true,
         text: 'Tus cambios han sido guardados',
+        kind: SnackbarType.success,
       }));
     } else {
       setNotification((prevState) => ({
         ...prevState,
         show: true,
-        text: 'Ha ocurrido un error',
+        text: error || 'Ha ocurrido un error',
         kind: SnackbarType.error,
       }));
     }
@@ -120,12 +104,8 @@ export function TeacherEditCourse() {
           <div className={styles['details']}>
             <Tag
               text={translateStatus(course.status)}
-              color={
-                course.status === CourseStatus.publish
-                  ? ColorsTag.green
-                  : ColorsTag.gray
-              }
-              icon={course.status === CourseStatus.publish ? 'globe' : 'edit'}
+              color={statusColors[course.status]}
+              icon={statusIcons[course.status]}
             />
             <div className={styles['details']}>
               <Icon icon="calendar-days" size={18} />
@@ -140,28 +120,22 @@ export function TeacherEditCourse() {
             type={TypeButton.submit}
             outline={true}
             icon='rocket'
-            onClick={() => {
-              handleSendToReview();
-            }}
+            onClick={handleSendToReview}
             disabled={course.status !== CourseStatus.draft}
           />
           <Button
             title={t('buttons.saveDraft')}
             color={ColorsButton.primary}
             link={'/teacher/courses/all'}
-            onClick={() => {
-              cleanCourse()
-            }}
+            onClick={cleanCourse}
           />
         </div>
       </div>
       {course.id && (
         <div className={styles['content']}>
           <Tabs
-            tabs={linksEditCourse}
-            onClickTab={(index) => {
-              setIndexSelectedView(index);
-            }}
+            tabs={tabs}
+            onClickTab={setIndexSelectedView}
           />
           <div className={styles['section-content']}>
             {indexSelectedView === 0 && (

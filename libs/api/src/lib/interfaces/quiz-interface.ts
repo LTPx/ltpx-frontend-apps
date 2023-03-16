@@ -1,4 +1,4 @@
-import { PartialBy } from "./util";
+import { PartialBy, PartialWithRequired, Prettify } from "./util";
 
 export enum TypeQuestionQuiz {
   multiple = 'multiple',
@@ -12,17 +12,30 @@ export interface QuizModel {
   user_id: number;
   course_id: number;
   name: string;
-  questions: QuestionQuiz[];
+  questions_attributes: QuestionQuiz[];
   time_minutes_to_answer?: number;
   max_attempts?: number;
-  total_questions_to_approved?: number;
+  approve_score?: number;
   created_at: string;
   updated_at: string;
 }
 
-export type NewQuizParams = Omit<
+type NewQuestions = {
+  questions_attributes: Prettify<
+    PartialWithRequired<
+      QuestionQuiz,
+      'id'
+    >[]
+  >;
+};
+
+export type QuizBasicParams = Omit<
   QuizModel,
-  'user_id' | 'created_at' | 'updated_at' | 'id' | 'course_id'
+  'user_id' | 'created_at' | 'updated_at' | 'course_id' | 'questions'
+>;
+
+export type QuizParams = Prettify<
+  PartialBy<QuizBasicParams, 'id'> & NewQuestions
 >;
 
 export type EditQuizParams = Omit<
@@ -35,10 +48,13 @@ export type QuizParamsUi = PartialBy<
   'id'
 >;
 export interface QuestionQuiz {
+  id?: string;
   question: string;
   description: string;
   kind: TypeQuestionQuiz;
-  answers: AnswerModel[];
+  answers_attributes: AnswerModel[];
+  _destroy?: boolean; //rails needs destroy to remove nested attributes
+  points: number;
 }
 
 export interface AnswerModel {
@@ -46,6 +62,7 @@ export interface AnswerModel {
   text: string;
   correct: boolean;
   question_id: number;
+  _destroy?: boolean; //rails needs destroy to remove nested attributes
 }
 
 export interface UserAnswer {

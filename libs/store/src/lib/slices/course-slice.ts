@@ -10,22 +10,22 @@ import {
   _removeAchievement,
   createAchievement,
   AchievementParams,
-  NewQuizParams,
   createQuiz,
   editQuiz,
-  EditQuizParams,
   editAchievement,
   CourseApiParams,
   NewCourseSessionParams,
   createCourseSession,
   NewTaskParams,
   createTask,
+  QuizParams,
+  formatErrors,
 } from '@ltpx-frontend-apps/api';
 
 export type TResponse = {
   success: boolean;
   data?: any;
-  error?: Error;
+  error?: any;
 };
 
 export type CourseSlice = {
@@ -37,11 +37,11 @@ export type CourseSlice = {
   removeContent: (index: number) => Promise<TResponse>;
   addUpdateClassroom: (classroom: Classroom) => Promise<TResponse>;
   updateContent: (content: ContentCourse, index: number) => Promise<TResponse>;
-  _addQuiz: (quiz: NewQuizParams) => Promise<TResponse>;
+  _addQuiz: (quiz: QuizParams) => Promise<TResponse>;
   _addAchievement: (achievement: AchievementParams) => Promise<TResponse>;
   _removeQuiz: (id: number) => Promise<TResponse>;
   _removeAchievement: (id: number) => Promise<TResponse>;
-  _updateQuiz: (quiz: EditQuizParams) => Promise<TResponse>;
+  _updateQuiz: (quiz: QuizParams) => Promise<TResponse>;
   _updateAchievement: (
     achievement: AchievementParams,
     id: number
@@ -70,7 +70,7 @@ export const createCourseSlice: StateCreator<
       return { success: true, data: course };
     } catch (error) {
       set({ loadedCourse: true });
-      return { success: false, data: error };
+      return { success: false, error };
     }
   },
   addNewContent: async (content: ContentCourse): Promise<TResponse> => {
@@ -82,7 +82,7 @@ export const createCourseSlice: StateCreator<
       set({ course: courseUpdated });
       return { success: true, data: contents };
     } catch (error) {
-      return { success: false, data: error };
+      return { success: false, error };
     }
   },
   removeContent: async (index: number): Promise<TResponse> => {
@@ -95,10 +95,10 @@ export const createCourseSlice: StateCreator<
       set({ course: courseUpdated });
       return { success: true, data: contents };
     } catch (error) {
-      return { success: false, data: error };
+      return { success: false, error };
     }
   },
-  _addQuiz: async (params: NewQuizParams): Promise<TResponse> => {
+  _addQuiz: async (params: QuizParams): Promise<TResponse> => {
     try {
       const course = get().course;
       const paramsCourseId = { ...params, ...{ course_id: course.id } };
@@ -108,7 +108,7 @@ export const createCourseSlice: StateCreator<
       set({ course: courseUpdated });
       return { success: true, data: quizzes };
     } catch (error) {
-      return { success: false, data: error };
+      return { success: false, error: formatErrors(error) };
     }
   },
   _removeQuiz: async (id: number): Promise<TResponse> => {
@@ -120,7 +120,7 @@ export const createCourseSlice: StateCreator<
       set({ course: courseUpdated });
       return { success: true, data: quizzes };
     } catch (error) {
-      return { success: false, data: error };
+      return { success: false, error: formatErrors(error) };
     }
   },
   _addAchievement: async (params): Promise<TResponse> => {
@@ -133,7 +133,7 @@ export const createCourseSlice: StateCreator<
       set({ course: courseUpdated });
       return { success: true, data: achievement };
     } catch (error) {
-      return { success: false, data: error };
+      return { success: false, error };
     }
   },
   _removeAchievement: async (id: number): Promise<TResponse> => {
@@ -147,7 +147,7 @@ export const createCourseSlice: StateCreator<
       set({ course: courseUpdated });
       return { success: true, data: achievements };
     } catch (error) {
-      return { success: true, data: error };
+      return { success: false, error };
     }
   },
   addUpdateClassroom: async (classroom: Classroom): Promise<TResponse> => {
@@ -158,10 +158,10 @@ export const createCourseSlice: StateCreator<
       set({ course: courseUpdated });
       return { success: true, data: classroom };
     } catch (error) {
-      return { success: true, data: error };
+      return { success: false, error };
     }
   },
-  _updateQuiz: async (params: EditQuizParams): Promise<TResponse> => {
+  _updateQuiz: async (params: QuizParams) => {
     try {
       const course = get().course;
       const paramsCourseId = { ...params, ...{ course_id: course.id } };
@@ -173,7 +173,7 @@ export const createCourseSlice: StateCreator<
       set({ course: courseUpdated });
       return { success: true, data: quizzes };
     } catch (error) {
-      return { success: true, data: error };
+      return { success: false, error: formatErrors(error) };
     }
   },
   updateContent: async (
@@ -190,7 +190,7 @@ export const createCourseSlice: StateCreator<
       set({ course: courseUpdated });
       return { success: true, data: contents };
     } catch (error) {
-      return { success: true, data: error };
+      return { success: false, error };
     }
   },
   _updateAchievement: async (params, id): Promise<TResponse> => {
@@ -207,7 +207,7 @@ export const createCourseSlice: StateCreator<
       set({ course: courseUpdated });
       return { success: true, data: achievements };
     } catch (error) {
-      return { success: true, data: error };
+      return { success: false, error: formatErrors(error) };
     }
   },
   _updateCourse: async (params: CourseApiParams): Promise<TResponse> => {
@@ -218,7 +218,7 @@ export const createCourseSlice: StateCreator<
       set({ course: updatedCourse });
       return { success: true, data: updatedCourse };
     } catch (error) {
-      return { success: false, data: error };
+      return { success: false, error };
     }
   },
   _addCourseSession: async (params) => {
@@ -230,7 +230,7 @@ export const createCourseSlice: StateCreator<
       set({ course: updatedCourse });
       return { success: true, data: session };
     } catch (error) {
-      return { success: false, data: error };
+      return { success: false, error };
     }
   },
   _addTask: async(courseId, params) => {
@@ -238,7 +238,7 @@ export const createCourseSlice: StateCreator<
       const task = await createTask(courseId, params);
       return { success: true, data: task };
     } catch (error) {
-      return { success: false, data: error };
+      return { success: false, error };
     }
   },
   cleanCourse: () => {

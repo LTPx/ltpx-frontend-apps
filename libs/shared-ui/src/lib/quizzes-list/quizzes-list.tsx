@@ -19,7 +19,7 @@ export function QuizzesList(props: QuizzesListProps) {
             <Icon icon="list" size={20} />
             <div className="d">
               <h4>{quiz.name}</h4>
-              <h5>{quiz.questions.length} preguntas</h5>
+              <h5>{quiz.questions_attributes.length} preguntas</h5>
             </div>
           </div>
           <div className={styles['actions']}>

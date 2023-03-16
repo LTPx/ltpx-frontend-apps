@@ -11,7 +11,6 @@ import {
   CourseApiParams,
   ApplicationTeach,
   getApplicationTeach,
-  IUserAccount,
   getTeacherProfile,
   updateTeacherProfile,
   QuizModel,
@@ -33,6 +32,7 @@ import {
   makeWithdrawal,
   TeacherProfileParams,
   TeacherProfile,
+  formatErrors,
 } from '@ltpx-frontend-apps/api';
 import { StateCreator } from 'zustand';
 import { StoreState } from '../store';
@@ -77,7 +77,6 @@ export type TeacherSlice = {
   registerTeacher: (params: IRegisterUser) => Promise<TResponseLogin>;
   createCourse: (params: CourseApiParams) => Promise<TResponseCreateCourse>;
   editCourse: (params: CourseApiParams) => Promise<TResponseCreateCourse>;
-  createQuiz: (params: any) => Promise<TResponse>;
   createAchievement: (params: AchievementParams) => Promise<TResponse>;
   getCourse: (id: number) => Promise<TResponse>;
   _sendCourseToReview: (id: number) => Promise<TResponse>;
@@ -178,19 +177,6 @@ export const createTeacherSlice: StateCreator<
       return { success: false, data: error };
     }
   },
-  createQuiz: async (params) => {
-    try {
-      const quiz = await createQuiz(params);
-      const course = get().currentCourse;
-      const allQuizzes = course.quizzes || [];
-      const quizzes = allQuizzes.concat([quiz]);
-      const courseUpdated = { ...course, ...{quizzes}}
-      set({ currentCourse: courseUpdated });
-      return { success: true, data: quiz };
-    } catch (error) {
-      return { success: false,  error: formatErrors(error) };
-    }
-  },
   createAchievement: async (params) => {
     try {
       const achievement = await createAchievement(params);
@@ -268,8 +254,4 @@ const callApi = async (promiseFn: any, set: any, params?: any):Promise<TResponse
     set({loadingTeacherApi: false});
     return { success: false, data: error };
   }
-}
-
-function formatErrors(error: any) {
-  return Object.values(error?.response?.data).join(', ');
 }

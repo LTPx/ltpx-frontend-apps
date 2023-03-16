@@ -1,7 +1,7 @@
 @import '../../styles/styles.module.scss';
 
 .container {
-  width: 95%;
+  width: 85%;
   .buy-card {
     padding: 10px;
     background-color: $white-color;
@@ -86,9 +86,14 @@
     display: flex;
     justify-content: center;
     padding-bottom: 3rem;
+    width: 100%;
   }
   .buy-card {
-    width: 80%;
+    padding: 0 !important;
+    width: 100%;
+    background-color: ffffff !important;
+    box-shadow: inherit !important;
+    border: none !important
   }
   img {
     width: 100%;

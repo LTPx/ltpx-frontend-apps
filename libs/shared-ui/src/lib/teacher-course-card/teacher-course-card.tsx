@@ -50,7 +50,7 @@ export function TeacherCourseCard(props: TeacherCourseCardProps) {
               color={
                 status === CourseStatus.publish
                   ? ColorsTag.green
-                  : ColorsTag.white
+                  : ColorsTag.blue
               }
               icon={status === CourseStatus.publish ? 'globe' : 'edit'}
             />

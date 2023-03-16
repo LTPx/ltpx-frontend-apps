@@ -19,6 +19,7 @@ import {
   NewTaskParams,
   createTask,
   QuizParams,
+  formatErrors,
 } from '@ltpx-frontend-apps/api';
 
 export type TResponse = {
@@ -107,7 +108,7 @@ export const createCourseSlice: StateCreator<
       set({ course: courseUpdated });
       return { success: true, data: quizzes };
     } catch (error) {
-      return { success: false, error };
+      return { success: false, error: formatErrors(error) };
     }
   },
   _removeQuiz: async (id: number): Promise<TResponse> => {
@@ -119,7 +120,7 @@ export const createCourseSlice: StateCreator<
       set({ course: courseUpdated });
       return { success: true, data: quizzes };
     } catch (error) {
-      return { success: false, error };
+      return { success: false, error: formatErrors(error) };
     }
   },
   _addAchievement: async (params): Promise<TResponse> => {
@@ -172,7 +173,7 @@ export const createCourseSlice: StateCreator<
       set({ course: courseUpdated });
       return { success: true, data: quizzes };
     } catch (error) {
-      return { success: false, error };
+      return { success: false, error: formatErrors(error) };
     }
   },
   updateContent: async (
@@ -206,7 +207,7 @@ export const createCourseSlice: StateCreator<
       set({ course: courseUpdated });
       return { success: true, data: achievements };
     } catch (error) {
-      return { success: false, error };
+      return { success: false, error: formatErrors(error) };
     }
   },
   _updateCourse: async (params: CourseApiParams): Promise<TResponse> => {

@@ -15,7 +15,7 @@ export interface QuizModel {
   questions_attributes: QuestionQuiz[];
   time_minutes_to_answer?: number;
   max_attempts?: number;
-  score_to_approved?: number;
+  approve_score?: number;
   created_at: string;
   updated_at: string;
 }

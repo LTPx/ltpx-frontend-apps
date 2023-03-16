@@ -34,7 +34,7 @@ export function StudentQuiz() {
   const fetchQuiz = useCallback(async () => {
     const { success, data, error } = await _getStudentQuiz(course_id, id);
     if (success) {
-      const answers = data.questions.map((question: QuestionQuiz) => {
+      const answers = data.questions_attributes.map((question: QuestionQuiz) => {
         return {
           question: question.question,
           answers: [],
@@ -61,10 +61,12 @@ export function StudentQuiz() {
       const { answers } = fields;
       const answersFilter = answers.reduce(
         (userAnswers: any[], question: any) => {
-          return userAnswers.concat(question.answers_attributes);
+          return userAnswers.concat(question.answers);
         },
         []
       );
+      console.log('answersFilter: ', answersFilter);
+      console.log('fields: ', fields);
       const { data, success, error } = await _evaluateQuiz(id, answersFilter);
       if (success) {
         setScore(data.score);

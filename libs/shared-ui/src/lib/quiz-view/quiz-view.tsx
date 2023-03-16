@@ -41,7 +41,7 @@ export function QuizView(props: QuizViewProps) {
           </div>
           <div className={styles['content']}>
             <div className={styles['questions']}>
-              {quiz.questions.map((question, index) => (
+              {quiz.questions_attributes.map((question, index) => (
                 <div className={styles['question']} key={index}>
                   {question.kind === TypeQuestionQuiz.conditional && (
                     <>
@@ -50,7 +50,7 @@ export function QuizView(props: QuizViewProps) {
                       </h3>
                       <p>{question.description}</p>
                       <div className={styles['items']}>
-                        {question.answers.map((answer, i) => (
+                        {question.answers_attributes.map((answer, i) => (
                           <p
                             key={i}
                             className={`${styles['question-answer']} ${
@@ -72,7 +72,7 @@ export function QuizView(props: QuizViewProps) {
                       </h3>
                       <p>{question.description}</p>
                       <div className={styles['items']}>
-                        {question.answers.map((answer, i) => (
+                        {question.answers_attributes.map((answer, i) => (
                           <p
                             key={i}
                             className={`${styles['question-answer']} ${
@@ -94,7 +94,7 @@ export function QuizView(props: QuizViewProps) {
                       </h3>
                       <p>{question.description}</p>
                       <div className={styles['items']}>
-                        {question.answers.map((answer, i) => (
+                        {question.answers_attributes.map((answer, i) => (
                           <p
                             key={i}
                             className={`${styles['question-answer']} ${
@@ -115,7 +115,7 @@ export function QuizView(props: QuizViewProps) {
                         {index + 1}. {question.question}
                       </h3>
                       <p>{question.description}</p>
-                      {question.answers.map((answer, i) => (
+                      {question.answers_attributes.map((answer, i) => (
                         <pre className={styles['question-answer']} key={i}>
                           {foundAnswer(answer.id)?.text}
                         </pre>

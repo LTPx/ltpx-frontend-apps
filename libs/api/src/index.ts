@@ -63,3 +63,6 @@ export * from './lib/api/meeting/video-api';
 export * from '../src/lib/constants/course-constants';
 export * from '../src/lib/constants/app-constants';
 export * from '../src/lib/constants/achievements-constants';
+
+//utils
+export * from '../src/lib/utils/api-utils';

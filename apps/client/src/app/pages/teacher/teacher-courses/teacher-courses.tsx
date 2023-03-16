@@ -3,7 +3,6 @@ import {
   Button,
   ColorsButton,
   EmptyState,
-  InputSearch,
   Loader,
   NewCourseForm,
   Select,

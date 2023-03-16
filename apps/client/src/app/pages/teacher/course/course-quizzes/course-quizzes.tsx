@@ -1,4 +1,4 @@
-import { QuizModel, QuizParamsUi } from '@ltpx-frontend-apps/api';
+import { QuizModel, QuizParams } from '@ltpx-frontend-apps/api';
 import {
   Button,
   ColorsButton,
@@ -14,41 +14,34 @@ import styles from './course-quizzes.module.scss';
 
 /* eslint-disable-next-line */
 export interface CourseQuizzesProps {
-  onSubmit?: (data: ResponseRequest) => void;
+  onSubmit: (data: ResponseRequest) => void;
 }
 
 export function CourseQuizzes(props: CourseQuizzesProps) {
   const { onSubmit } = props;
-  const [ quizEdit, setQuizEdit ] = useState<QuizModel>();
-  const [ showForm, setShowForm ] = useState(false);
+  const [quizEdit, setQuizEdit] = useState<QuizModel>();
+  const [showForm, setShowForm] = useState(false);
   const { course, _removeQuiz, _addQuiz, _updateQuiz } = useCourse();
   const { quizzes } = course;
   const { t } = useTranslation();
 
-  const handleSaveQuiz = async (quiz: QuizParamsUi) => {
-    try {
-      const { data } = quiz.id
-        ? await _updateQuiz({ ...quiz, ...{ id: quiz.id } })
-        : await _addQuiz(quiz);
-      onSubmit &&
-        onSubmit({
-          success: true,
-          data: data,
-        });
-      setShowForm(false);
-      setQuizEdit(undefined);
-    } catch (error: any) {
-      onSubmit &&
-        onSubmit({
-          success: false,
-          error: error,
-        });
-    }
+  const handleSaveQuiz = async (quiz: QuizParams) => {
+    const response = quiz.id
+      ? await _updateQuiz({ ...quiz, ...{ id: quiz.id } })
+      : await _addQuiz(quiz);
+      const { success } = response;
+      if (success) {
+        onSubmit(response);
+        setShowForm(false);
+        setQuizEdit(undefined);
+      } else {
+        onSubmit(response);
+      }
   };
 
   const handleRemoveQuiz = async (id: number) => {
     try {
-      const { data } =  await _removeQuiz(id)
+      const { data } = await _removeQuiz(id);
       onSubmit &&
         onSubmit({
           success: true,
@@ -78,7 +71,7 @@ export function CourseQuizzes(props: CourseQuizzesProps) {
                 <Icon icon="list" size={20} />
                 <div className="d">
                   <h4>{quiz.name}</h4>
-                  <h5>{quiz.questions.length} preguntas</h5>
+                  <h5>{quiz.questions_attributes.length} preguntas</h5>
                 </div>
               </div>
               <div className={styles['actions']}>
@@ -111,7 +104,7 @@ export function CourseQuizzes(props: CourseQuizzesProps) {
           }}
           icon={'paper-outline'}
           text={t('courseQuizzes.text')}
-          titleButton={t('buttons.config')||''}
+          titleButton={t('buttons.config') || ''}
         />
       )}
       {!showForm && quizzes && quizzes.length > 0 && (

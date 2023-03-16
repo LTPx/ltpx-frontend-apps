@@ -236,6 +236,8 @@ export const en = {
   quizBuilder: {
     title: 'Nombre del test',
     questions: 'Preguntas',
+    approve_score: 'Puntos para aprobar',
+    tip: 'Cuantos puntos debe obtener el estudiante para aprobar este test'
   },
   quizFormConditional: {
     question: 'Pregunta',

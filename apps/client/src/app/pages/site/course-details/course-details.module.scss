@@ -5,6 +5,14 @@
   justify-content: center;
   width: 100%;
 }
+.wrap-responsive {
+  .image-responsive {
+    width: 100%;
+    height: 15rem;
+    object-fit: cover;
+  }
+}
+
 ::-webkit-scrollbar {
   display: none;
 }
@@ -58,11 +66,7 @@
   .content-responsive {
     width: 95%;
   }
-  img {
-    width: 100%;
-    height: 12rem;
-    object-fit: cover;
-  }
+
   .title-responsive {
     font-weight: 500;
     font-size: 1.75rem;
@@ -325,7 +329,7 @@
     align-items: center;
     padding-bottom: 2rem;
     background-color: $white-color-100;
-    img {
+    .image-responsive {
       width: 100%;
       height: 20rem !important;
       object-fit: cover !important;

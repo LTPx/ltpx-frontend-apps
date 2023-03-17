@@ -129,12 +129,16 @@
 //tablet-responsive-vertical
 @media screen and (max-width: 850px) {
   .container-header {
-    padding: $size-md-3 $size-lg-1;
+    padding: $size-md-3 1rem;
   }
 
   .links {
     .link {
-      padding: 0 3px;
+      padding: 0 5px;
+      &.accent {
+        padding: 0.5rem !important;
+      }
     }
+
   }
 }

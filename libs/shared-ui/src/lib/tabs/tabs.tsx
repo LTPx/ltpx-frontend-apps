@@ -15,11 +15,12 @@ export interface TabsProps {
   isNav?: boolean;
   vertical?: boolean;
   className?: string;
+  classNameText?: string;
   onClickTab?: (indexTab: number) => void;
 }
 
 export function Tabs(props: TabsProps) {
-  const { tabs, isNav, onClickTab, vertical, className } = props;
+  const { tabs, isNav, onClickTab, vertical, className, classNameText } = props;
   const [indexSelected, setIndexSelected] = useState(0);
   const selectTab = (index: number) => {
     setIndexSelected(index);
@@ -59,7 +60,7 @@ export function Tabs(props: TabsProps) {
               selectTab(index);
             }}
           >
-            {tab.children ? tab.children : <h4>{tab.text}</h4>}
+            {tab.children ? tab.children : <h3 className={`${classNameText} ${styles['text-tab']}`}>{tab.text}</h3>}
           </div>
         ))}
     </div>

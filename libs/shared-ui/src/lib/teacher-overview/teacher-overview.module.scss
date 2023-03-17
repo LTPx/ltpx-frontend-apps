@@ -2,6 +2,7 @@
 
 .container {
   width: 100%;
+  line-height: 1.75rem;
   h3 {
     color: $text-color;
   }
@@ -10,6 +11,7 @@
     padding-top: $size-md-3;
     display: flex;
     gap: $size-md-3;
+    padding-bottom: 0.5rem;
 
     img {
       cursor: pointer;

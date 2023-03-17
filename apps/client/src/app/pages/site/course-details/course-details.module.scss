@@ -5,12 +5,87 @@
   justify-content: center;
   width: 100%;
 }
+::-webkit-scrollbar {
+  display: none;
+}
+.price-vertical-responsive {
+  display: none;
+}
+.price-content {
+  display: none;
+}
+.price-responsive {
+  visibility: hidden;
+  display: grid;
+  grid-template-columns: 20% 80%;
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  background-color: $white-color;
+  padding: 0.5rem 0;
+  align-items: center;
+  .price-content {
+    display: flex;
+    justify-content: center;
+    .price-text {
+      font-weight: 500;
+      padding-left: 0.5rem;
+      // font-size: 1.35rem;
+    }
+  }
+  .price-button {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    .btn-content {
+      width: 90%;
+    }
+  }
+}
+.head-responsive {
+  display: none;
+  width: 100%;
+  .tag-responsive {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    padding-bottom: 1rem;
+  }
+  .rating-responsive {
+    padding-bottom: 0.5rem;
+  }
+
+  .content-responsive {
+    width: 95%;
+  }
+  img {
+    width: 100%;
+    height: 12rem;
+    object-fit: cover;
+  }
+  .title-responsive {
+    font-weight: 500;
+    font-size: 1.75rem;
+    text-align: start;
+    padding: 1rem 0 0.5rem 0;
+  }
+  .description-responsive {
+    display: flex;
+    gap: 1rem;
+    padding: 0.5rem 0;
+  }
+}
+.tabs-edit {
+  font-size: 1.15rem;
+}
 .container {
-  // background-color: $white-color;
   display: flex;
   flex-direction: column;
   width: 80%;
   padding: 3rem 0;
+  .title-course {
+    font-weight: 500;
+  }
 }
 
 .title-date {
@@ -32,16 +107,19 @@
 .buy-course-content {
   display: flex;
   justify-content: center;
+  position: relative;
 }
 .course-details {
   display: grid;
-  grid-template-columns: 70% 30%;
+  grid-template-columns: 65% 35%;
+  justify-content: center;
   width: 100%;
 
   .description {
-    margin-right: 10rem;
+    margin-right: 1rem;
     .description-title {
       padding-bottom: $size-md-1;
+      font-weight: 500;
       h1 {
         color: $text-color;
         padding-bottom: $size-md-1;
@@ -57,12 +135,10 @@
       padding: $size-md-1 0;
       align-items: center;
       gap: $size-lg-3;
-
       .items {
         display: flex;
         gap: 5rem;
       }
-
       .item {
         display: flex;
         flex-direction: column;
@@ -75,7 +151,6 @@
       }
     }
   }
-
   .summary-course {
     .tabs-content {
       margin: 2rem 0 4rem 0;
@@ -85,12 +160,28 @@
 
 //smartphones-responsive
 @media screen and (max-width: 550px) {
+  .wrap-responsive {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .head-responsive {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .price-responsive {
+    visibility: visible;
+  }
   .container {
     width: 100%;
-    padding-top: 1rem;
+    padding-top: 0;
     .title-date {
       padding-left: 1rem;
     }
+  }
+  .tabs-edit {
+    font-size: 1rem;
   }
   .course-date {
     width: 23rem;
@@ -114,8 +205,7 @@
   .course-details {
     padding: 0;
     display: flex;
-    flex-direction: column;
-
+    flex-direction: column-reverse;
     .description-container {
       width: 100%;
     }
@@ -125,7 +215,7 @@
       width: 100%;
 
       .description-title {
-        display: flex;
+        display: none;
         justify-content: center;
         padding: $size-lg-3 0;
         .title {
@@ -133,9 +223,11 @@
           text-align: center;
         }
       }
-
+      .buy-course-content {
+        display: none;
+      }
       .description-course {
-        display: flex;
+        display: none;
         flex-direction: column;
         align-items: center;
         padding: 0;
@@ -159,7 +251,6 @@
           overflow-x: auto;
           width: 22rem;
           gap: $size-lg-3;
-          padding-bottom: 0.75rem;
         }
 
         .comment-course {
@@ -182,13 +273,77 @@
 }
 //tablet-responsive-vertical
 @media screen and (min-width: 560px) and (max-width: 850px) {
+  .description-title {
+    display: none;
+  }
+  .price-content {
+    display: flex;
+  }
+  .title-responsive {
+    padding: 0 !important;
+  }
+  .title-content-responsive {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 0.5rem;
+    .price {
+      font-weight: 500;
+      color: $green-color;
+    }
+  }
+  .wrap-responsive {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .content-responsive {
+      width: 90%;
+      padding-top: 1rem;
+    }
+  }
+  .price-vertical-responsive {
+    display: flex;
+    padding-top: 1rem;
+    .price-content {
+      display: flex;
+      justify-content: center;
+    }
+    .price {
+      font-weight: 500;
+    }
+  }
+  .buy-course-content {
+    display: none;
+  }
+  .description-course {
+    display: none !important;
+  }
+  .head-responsive {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    padding-bottom: 2rem;
+    background-color: $white-color-100;
+    img {
+      width: 100%;
+      height: 20rem !important;
+      object-fit: cover !important;
+    }
+    .title-responsive {
+      font-size: 1.75rem;
+    }
+  }
   .container {
     display: flex;
-    width: 90%;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 0;
   }
   .course-details {
     width: 90%;
-    padding: $size-lg-1 $size-lg-1;
+    // padding: $size-lg-1 $size-lg-1;
     display: flex;
     flex-direction: column;
     .description-container {

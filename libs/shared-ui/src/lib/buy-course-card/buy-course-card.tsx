@@ -78,7 +78,7 @@ export function BuyCourseCard(props: BuyCourseCardProps) {
             </div>
             <div className={styles['item']}>
               <div className={styles['item-text']}>
-                <Icon icon={'user'} size={15} color="#888888"></Icon>
+                <Icon icon={'person'} size={15} color="#888888"></Icon>
                 <h4>{t('coursesDetails.buyCourseCard.details.enrolled')}</h4>
               </div>
               <h4>{enrolled} Alumnos</h4>
@@ -92,14 +92,14 @@ export function BuyCourseCard(props: BuyCourseCardProps) {
             </div>
             <div className={styles['item']}>
               <div className={styles['item-text']}>
-                <Icon icon={'sliders'} size={15} color="#888888"></Icon>
+                <Icon icon={'level'} size={15} color="#888888"></Icon>
                 <h4>{t('coursesDetails.buyCourseCard.details.skill')}</h4>
               </div>
               <h4>{skillLevel}</h4>
             </div>
             <div className={styles['item']}>
               <div className={styles['item-text']}>
-                <Icon icon={'file'} size={15} color="#888888"></Icon>
+                <Icon icon={'certificate'} size={15} color="#888888"></Icon>
                 <h4>{t('coursesDetails.buyCourseCard.details.certificate')}</h4>
               </div>
               <h4>{certificate ? 'Si' : 'No'}</h4>

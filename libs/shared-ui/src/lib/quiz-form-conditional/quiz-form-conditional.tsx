@@ -19,10 +19,12 @@ export function QuizFormConditional(props: QuizFormConditionalProps) {
   const { t } = useTranslation();
 
   const initialValues = {
+    id: question?.id,
     kind: TypeQuestionQuiz.conditional,
     question: question?.question || '',
     description: question?.description || '',
-    answers: question?.answers || [
+    points: question?.points || '',
+    answers_attributes: question?.answers_attributes || [
       {
         text: 'true',
         correct: false,
@@ -37,6 +39,7 @@ export function QuizFormConditional(props: QuizFormConditionalProps) {
     initialValues: initialValues,
     validationSchema: Yup.object({
       question: Yup.string().required('Pregunta es obligatorio'),
+      points: Yup.number().required('Necesitas agregar puntos'),
     }),
     onSubmit: (data) => {
       onSubmit && onSubmit(data);
@@ -46,11 +49,11 @@ export function QuizFormConditional(props: QuizFormConditionalProps) {
   const markAsCorrect = (conditional: any) => {
     const { text, correct } = conditional;
     formik.setFieldValue(
-      `answers[0].correct`,
+      `answers_attributes[0].correct`,
       text === 'true' ? !correct : correct
     );
     formik.setFieldValue(
-      `answers[1].correct`,
+      `answers_attributes[1].correct`,
       text === 'true' ? correct : !correct
     );
   };
@@ -77,8 +80,17 @@ export function QuizFormConditional(props: QuizFormConditionalProps) {
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
         />
+        <Input
+          label={t('quizFormConditional.points') || ''}
+          name="points"
+          type='number'
+          value={formik.values.points}
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          errorMessage={formik.errors.points}
+        />
         <div className={styles['conditionals']}>
-          {formik.values.answers.map((conditional, index) => (
+          {formik.values.answers_attributes.map((conditional, index) => (
             <div className={styles['conditional-container']} key={index}>
               <h4 className={styles['conditional']}>
                 {conditional.text === 'true'

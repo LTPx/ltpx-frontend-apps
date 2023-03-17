@@ -13,7 +13,7 @@ export interface QuizFormMultipleOptionsProps {
   question?: QuestionQuiz;
   className?: string;
   singleSelection?: boolean;
-  onSubmit?: (data: QuestionQuiz) => void;
+  onSubmit: (data: any) => void;
   onCancel?: () => void;
 }
 
@@ -24,21 +24,23 @@ export function QuizFormMultipleOptions(props: QuizFormMultipleOptionsProps) {
   const alphabetLetters = generateAlphabet();
 
   const initialValues = {
+    id: question?.id,
     kind: singleSelection ? TypeQuestionQuiz.single : TypeQuestionQuiz.multiple,
     question: question?.question || '',
     description: question?.description || '',
-    answers: question?.answers || [
+    points: question?.points || 1,
+    answers_attributes: question?.answers_attributes || [
       {
         text: '',
         correct: false,
-        question_id: -1, //TODO: remove this, currently fails due to QuestionQuiz interface needs ids
-        id: -1
+        question_id: null,
+        id: null
       },
       {
         text: '',
         correct: false,
-        question_id: -1,
-        id: -2
+        question_id: null,
+        id: null
       },
     ],
   };
@@ -51,10 +53,11 @@ export function QuizFormMultipleOptions(props: QuizFormMultipleOptionsProps) {
           question: Yup.string().required(
             'La pregunta no puede estar en blanco'
           ),
+          points: Yup.number().required('Necesitas agregar puntos'),
         })}
         onSubmit={(values) => {
           console.log('values: ', values);
-          onSubmit && onSubmit(values);
+          onSubmit(values);
         }}
       >
         {({
@@ -83,14 +86,25 @@ export function QuizFormMultipleOptions(props: QuizFormMultipleOptionsProps) {
                 value={values.description}
                 onChange={handleChange}
                 onBlur={handleBlur}
+                errorMessage={errors.description}
+              />
+              <Input
+                label={t('quizFormMultipleOptions.points') || ''}
+                type='number'
+                name="points"
+                placeholder="Alguna observación antes de responder esta pregunta"
+                value={values.points}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                errorMessage={errors.points}
               />
               <br />
               <label>{t('quizFormMultipleOptions.answer')}</label>
               <FieldArray
-                name="answers"
+                name="answers_attributes"
                 render={(arrayHelpers) => (
                   <div>
-                    {values.answers.map((answer, index) => (
+                    {values.answers_attributes.map((answer, index) => (
                       <div
                         className={`${styles['answer']} ${
                           singleSelection ? styles['single'] : ''
@@ -107,7 +121,7 @@ export function QuizFormMultipleOptions(props: QuizFormMultipleOptionsProps) {
                           className={styles['answer-input']}
                           value={answer.text}
                           onBlur={handleBlur}
-                          name={`answers[${index}].text`}
+                          name={`answers_attributes[${index}].text`}
                           onChange={handleChange}
                         />
                         <div className={styles['actions']}>
@@ -117,22 +131,22 @@ export function QuizFormMultipleOptions(props: QuizFormMultipleOptionsProps) {
                             }`}
                             onClick={() => {
                               if (singleSelection) {
-                                values.answers.forEach((answer, i) => {
+                                values.answers_attributes.forEach((answer, i) => {
                                   if (index === i) {
                                     setFieldValue(
-                                      `answers[${index}].correct`,
+                                      `answers_attributes[${index}].correct`,
                                       !answer.correct
                                     );
                                   } else {
                                     setFieldValue(
-                                      `answers[${i}].correct`,
+                                      `answers_attributes[${i}].correct`,
                                       false
                                     );
                                   }
                                 });
                               }
                               setFieldValue(
-                                `answers[${index}].correct`,
+                                `answers_attributes[${index}].correct`,
                                 !answer.correct
                               );
                             }}

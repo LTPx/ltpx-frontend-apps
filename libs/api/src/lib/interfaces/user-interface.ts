@@ -98,3 +98,10 @@ export interface UserModel {
   initial_register       :TypeAccounts;
   initial_vial           :TypeViews;
 }
+
+export interface UserBasic {
+  id :number;
+  email :string;
+  fullname :string;
+  username :string;
+}

@@ -58,6 +58,7 @@ export * from './lib/api/student/student-achievements-api';
 export * from './lib/api/student/student-tasks-api';
 
 export * from './lib/api/meeting/video-api';
+export * from './lib/api/chat/teacher-chat-api';
 
 //constants
 export * from '../src/lib/constants/course-constants';

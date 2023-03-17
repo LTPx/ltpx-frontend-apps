@@ -13,3 +13,4 @@ export * from './teacher-account-profile/teacher-account-profile';
 export * from './teacher-course-students/teacher-course-students';
 export * from './teacher-review-quiz/teacher-review-quiz';
 export * from './teacher-view-student/teacher-view-student';
+export * from './teacher-chat/teacher-chat';

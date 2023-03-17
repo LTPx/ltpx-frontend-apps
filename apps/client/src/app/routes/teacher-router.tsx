@@ -22,6 +22,7 @@ import {
   TeacherAccountLayout,
   TeacherAccountProfile,
   TeacherApply,
+  TeacherChat,
   TeacherCourseDetail,
   TeacherCourses,
   TeacherCourseStudents,
@@ -49,6 +50,7 @@ export const TeacherRoutes = () => {
           }
         >
           <Route path="dashboard" element={<TeacherDashboard />} />
+          <Route path="chat" element={<TeacherChat />} />
           <Route path="apply-teach" element={<TeacherApply />} />
           <Route path="earnings" element={<TeacherEarnings />} />
           <Route path="sessions" element={<TeacherMeetingsAgenda />} />

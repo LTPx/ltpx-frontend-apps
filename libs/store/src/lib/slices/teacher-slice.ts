@@ -33,6 +33,7 @@ import {
   TeacherProfileParams,
   TeacherProfile,
   formatErrors,
+  getTeacherRooms,
 } from '@ltpx-frontend-apps/api';
 import { StateCreator } from 'zustand';
 import { StoreState } from '../store';
@@ -88,6 +89,7 @@ export type TeacherSlice = {
   _makeWithdrawal: (params: WithdrawalParams) => Promise<TResponse>;
   _updateProfile: (params: TeacherProfileParams) => Promise<TResponse>;
   getProfile: () => Promise<TResponse>;
+  _getTeacherRooms: () => Promise<TResponse>;
 };
 
 export const createTeacherSlice: StateCreator<
@@ -241,7 +243,15 @@ export const createTeacherSlice: StateCreator<
     } catch (error) {
       return { success: false, error: error };
     }
-  }
+  },
+  _getTeacherRooms: async () => {
+    try {
+      const rooms = await getTeacherRooms();
+      return { success: true, data: rooms };
+    } catch (error) {
+      return { success: false, error };
+    }
+  },
 });
 
 const callApi = async (promiseFn: any, set: any, params?: any):Promise<TResponse> => {

@@ -17,6 +17,10 @@ import {
   Snackbar,
   SnackbarPosition,
   CourseDateCard,
+  Button,
+  ColorsButton,
+  Tag,
+  ColorsTag,
 } from '@ltpx-frontend-apps/shared-ui';
 import { Dialog } from 'evergreen-ui';
 import { useSite, useUser } from '@ltpx-frontend-apps/store';
@@ -94,6 +98,7 @@ export function CourseDetails() {
       text: 'Reseñas',
     },
   ];
+
   const courseDate = [
     {
       title: 'Clases Martes 21 de Febrero',
@@ -111,119 +116,203 @@ export function CourseDetails() {
     <div className={styles['wrap']}>
       <div className={styles['container']}>
         {course.id && (
-          <div className={styles['course-details']}>
-            <div className={styles['description-container']}>
-              <div className={styles['description']}>
-                <div className={styles['description-title']}>
-                  <div className={styles['title']}>
-                    <h1>{course.title}</h1>
-                    {/* <h4 className="muted">
-                    Looking how to increase your incomes and learn about new
-                    digital money
-                  </h4> */}
-                  </div>
-                </div>
-                <div className={styles['description-course']}>
-                  <div className={styles['avatar']}>
-                    <NavLink to="/teacher-profile">
-                      <Avatar
-                        image={teacher.profile_image || ''}
-                        size={AvatarSize.medium}
-                        outline={true}
-                      />
-                    </NavLink>
-                  </div>
-                  <div className={styles['items']}>
-                    <div className={styles['item']}>
-                      <label>
-                        {t('coursesDetails.teacherInformation.instructor')}
-                      </label>
-                      <h5>{teacher.name}</h5>
-                    </div>
-                    <div className={styles['item']}>
-                      <label>
-                        {t('coursesDetails.teacherInformation.categories')}
-                      </label>
-                      <h5>{translateCategory(course.category)}</h5>
-                    </div>
-                    <div className={styles['item']}>
-                      <label>
-                        {t('coursesDetails.teacherInformation.review')}
-                      </label>
-                      <div className={styles['rating']}>
-                        <Rating stars={course.average_rating || 0} />
-                      </div>
+          <>
+            <div className={styles['head-responsive']}>
+              <div className={styles['wrap-responsive']}>
+                <img src={course.cover_url} />
+                <div className={styles['content-responsive']}>
+                  <div className={styles['title-content-responsive']}>
+                    <h3 className={styles['title-responsive']}>
+                      {course.title}
+                    </h3>
+                    <div className={styles['price-content']}>
+                      <h2 className={styles['price']}>$ {course.price}</h2>
                     </div>
                   </div>
-                </div>
-                <div className={styles['summary-course']}>
-                  <Tabs
-                    className={styles['tabs']}
-                    tabs={tabs}
-                    isNav={false}
-                    onClickTab={(option) => handleClick(option)}
-                  />
-                  <div className={styles['tabs-content']}>
-                    {selectedTab === 0 && (
-                      <OverviewCourse
-                        description={course.description}
-                        goals={course.learn_goals.split('\n')}
-                        requirements={course.requirements.split('\n')}
+                  <h4 className={styles['teacher']}>
+                    Profesor: {teacher.name}
+                  </h4>
+                  <div className={styles['description-responsive']}>
+                    <Rating
+                      className={styles['rating-responsive']}
+                      stars={course.average_rating || 4}
+                    />
+                    <Tag
+                      color={ColorsTag.green}
+                      text={translateCategory(course.category)}
+                    />
+                  </div>
+                  <div className={styles['tag-responsive']}>
+                    <Tag
+                      color={ColorsTag.white}
+                      text={'Logros: ' + course.achievements?.length || '0'}
+                      icon={'trophy'}
+                    />
+                    <Tag
+                      color={ColorsTag.white}
+                      text={'Contenidos: ' + course.contents.length}
+                      icon={'copy'}
+                    />
+                    <Tag
+                      color={ColorsTag.white}
+                      text={'Inscritos: ' + course.enrollments_count}
+                      icon={'person'}
+                    />
+                    <Tag
+                      color={ColorsTag.white}
+                      text={'Idioma: ' + translateLanguage(course.language)}
+                      icon={'text-size'}
+                    />
+                    <Tag
+                      color={ColorsTag.white}
+                      text={'Nivel: ' + translateLevel(course.level)}
+                      icon={'level'}
+                    />
+                    <Tag
+                      color={ColorsTag.white}
+                      text={'Certificado: Si'}
+                      icon={'certificate'}
+                    />
+                  </div>
+                  <div className={styles['price-vertical-responsive']}>
+                    <div>
+                      <Button
+                        color={ColorsButton.secondary}
+                        title={'INSCRIBIRME AHORA'}
+                        full={true}
                       />
-                    )}
-                    {selectedTab === 1 && (
-                      <CourseContents contents={course.contents || []} />
-                    )}
-                    {selectedTab === 2 && (
-                      <TeacherOverview
-                        name={teacher.name || ''}
-                        profession={teacher.profession || ''}
-                        rating={teacher.rating_average || 0}
-                        reviews={teacher.rating_average || 0}
-                        students={teacher.total_students || 0}
-                        courses={5}
-                        biography={teacher.biography}
-                        image={teacher.profile_image}
-                      />
-                    )}
-                    {selectedTab === 3 && (
-                      <div className={styles['reviews-wrap']}>
-                        <RatingCourse
-                          ratings={currentFullCourse.ratings || []}
-                        ></RatingCourse>
-                        <div className={styles['comment-course']}>
-                          {currentFullCourse.comments.map((comment, index) => (
-                            <CommentCourse
-                              reviewTitle={comment.title}
-                              name={comment.name}
-                              comment={comment.comment}
-                              date={comment.date}
-                              key={index}
-                              image={comment.image}
-                            />
-                          ))}
-                        </div>
-                        <ReviewForm />
-                      </div>
-                    )}
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-            <div className={styles['buy-course-content']}>
-              <BuyCourseCard
-                price={course.price_format}
-                achievements={course.achievements?.length || 0}
-                lectures={course.contents.length}
-                enrolled={course.enrollments_count}
-                language={translateLanguage(course.language)}
-                skillLevel={translateLevel(course.level)}
-                image={course.cover_url}
-                onClickEnroll={enrolled}
-                certificate={true}
-              />
+            <div className={styles['course-details']}>
+              <div className={styles['description-container']}>
+                <div className={styles['description']}>
+                  <div className={styles['description-title']}>
+                    <div className={styles['title']}>
+                      <h1 className={styles['title-course']}>{course.title}</h1>
+                    </div>
+                  </div>
+                  <div className={styles['description-course']}>
+                    <div className={styles['avatar']}>
+                      <NavLink to="/teacher-profile">
+                        <Avatar
+                          image={teacher.profile_image || ''}
+                          size={AvatarSize.medium}
+                          outline={true}
+                        />
+                      </NavLink>
+                    </div>
+                    <div className={styles['items']}>
+                      <div className={styles['item']}>
+                        <label>
+                          {t('coursesDetails.teacherInformation.instructor')}
+                        </label>
+                        <h5>{teacher.name}</h5>
+                      </div>
+                      <div className={styles['item']}>
+                        <label>
+                          {t('coursesDetails.teacherInformation.categories')}
+                        </label>
+                        <h5>{translateCategory(course.category)}</h5>
+                      </div>
+                      <div className={styles['item']}>
+                        <label>
+                          {t('coursesDetails.teacherInformation.review')}
+                        </label>
+                        <div className={styles['rating']}>
+                          <Rating stars={course.average_rating || 0} />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className={styles['summary-course']}>
+                    <Tabs
+                      className={styles['tabs']}
+                      classNameText={styles['tabs-edit']}
+                      tabs={tabs}
+                      isNav={false}
+                      onClickTab={(option) => handleClick(option)}
+                    />
+                    <div className={styles['tabs-content']}>
+                      {selectedTab === 0 && (
+                        <OverviewCourse
+                          description={course.description}
+                          goals={course.learn_goals.split('\n')}
+                          requirements={course.requirements.split('\n')}
+                        />
+                      )}
+                      {selectedTab === 1 && (
+                        <CourseContents contents={course.contents || []} />
+                      )}
+                      {selectedTab === 2 && (
+                        <TeacherOverview
+                          name={teacher.name || ''}
+                          profession={teacher.profession || ''}
+                          rating={teacher.rating_average || 0}
+                          reviews={teacher.rating_average || 0}
+                          students={teacher.total_students || 0}
+                          courses={5}
+                          biography={teacher.biography}
+                          image={teacher.profile_image}
+                        />
+                      )}
+                      {selectedTab === 3 && (
+                        <div className={styles['reviews-wrap']}>
+                          <RatingCourse
+                            ratings={currentFullCourse.ratings || []}
+                          ></RatingCourse>
+                          <div className={styles['comment-course']}>
+                            {currentFullCourse.comments.map(
+                              (comment, index) => (
+                                <CommentCourse
+                                  reviewTitle={comment.title}
+                                  name={comment.name}
+                                  comment={comment.comment}
+                                  date={comment.date}
+                                  key={index}
+                                  image={comment.image}
+                                />
+                              )
+                            )}
+                          </div>
+                          <ReviewForm />
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className={styles['buy-course-content']}>
+                <BuyCourseCard
+                  price={course.price_format}
+                  achievements={course.achievements?.length || 0}
+                  lectures={course.contents.length}
+                  enrolled={course.enrollments_count}
+                  language={translateLanguage(course.language)}
+                  skillLevel={translateLevel(course.level)}
+                  image={course.cover_url}
+                  onClickEnroll={enrolled}
+                  certificate={true}
+                />
+              </div>
             </div>
-          </div>
+            <div className={styles['price-responsive']}>
+              <div className={styles['price-content']}>
+                <h3 className={styles['price-text']}> $ {course.price}</h3>
+              </div>
+              <div className={styles['price-button']}>
+                <div className={styles['btn-content']}>
+                  <Button
+                    color={ColorsButton.secondary}
+                    title="Comprar Ahora"
+                    full={true}
+                  />
+                </div>
+              </div>
+            </div>
+          </>
         )}
         <h2 className={styles['title-date']}>Horarios de Clases</h2>
         <div className={styles['course-date']}>

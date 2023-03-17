@@ -1,22 +1,32 @@
+import { useState } from 'react';
 import Icon from '../icon/icon';
 import styles from './overview-course.module.scss';
 
 /* eslint-disable-next-line */
 export interface OverviewCourseProps {
-  description?: string;
+  description: string;
   goals?: string[];
   requirements?: string[];
 }
 
 export function OverviewCourse(props: OverviewCourseProps) {
   const { description, goals, requirements } = props;
+  const [showMore, setShowMore] = useState(false);
 
   return (
     <div className={styles['container']}>
       <div className={styles['overview']}>
         <section className={`${styles['course-description']}`}>
           <h3>Descripción del curso</h3>
-          <pre>{description}</pre>
+          <pre>
+            {showMore ? description : `${description.substring(0, 800)}....`}
+            <h4
+                className={styles['show']}
+                onClick={() => setShowMore(!showMore)}
+              >
+                {showMore ? 'Mostrar menos' : 'Mostrar mas'}
+              </h4>
+          </pre>
         </section>
         <section className={`${styles['achievements']}`}>
           <h3>Que aprenderás</h3>

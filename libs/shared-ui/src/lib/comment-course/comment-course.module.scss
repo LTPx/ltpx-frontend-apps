@@ -5,7 +5,7 @@
   // width: 100%;
   padding-top: $size-lg-3;
   padding-bottom: $size-lg-3;
-
+  line-height: 1.75rem;
   .avatar-content {
     padding: $size-md-1;
   }
@@ -15,6 +15,7 @@
     .head {
       display: flex;
       justify-content: space-between;
+      padding-bottom: 0.25rem;
 
       h3 {
         color: $text-color;
@@ -27,7 +28,6 @@
       color: $text-gray-color;
       display: flex;
       justify-content: space-between;
-      padding-right: $size-md-1;
     }
     .comment {
       font-size: 14px;

@@ -119,15 +119,16 @@ export function RegisterTeacher(props: RegisterTeacherProps) {
                   de solicitud y aprobación:
                   <ul>
                     <li>
-                      Registrarte en OpenMind en la sección Quiero ser Profesor.
+                      Regístrate en OpenMind en la sección Enseñar o dando clic
+                      en uno de los botones en esta página.
                     </li>
                     <li>
-                      Enviar una solicitud de admisión donde compartirá la
-                      información necesaria para su registro ademas de su
-                      experiencia en la educación y formación académica.
+                      Envía tu solicitud de admisión incluyendo la documentación
+                      requerida ademas de tu experiencia en educación y tu
+                      formación académica.
                     </li>
                     <li>
-                      Su solicitud sera sometida a un proceso de verificación de
+                      Tu solicitud será sometida a un proceso de verificación de
                       antecedentes y verificación de identidad.
                     </li>
                   </ul>
@@ -147,15 +148,12 @@ export function RegisterTeacher(props: RegisterTeacherProps) {
               <div className={styles['describe-content']}>
                 <h3>
                   Al usar OpenMind como profesor podrás crear tus propios cursos
-                  y dar clases fácilmente a alumnos de todo el mundo. Tu rol
-                  como profesor en OpenMind varía levemente del que tienes en
-                  una escuela tradicional, para crear un curso utiliza las
-                  herramientas que ofrece OpenMind, en donde los temas que se
-                  impartirán quedaran a tu libre elección con tu propio sello
-                  para la enseñanza, procura que los temas impartidos en tu
-                  curso sean interesantes y llamativos para los alumnos. Te
-                  recomendamos leer la siguiente sección{' '}
-                  <NavLink to={'/blog/how-create-a-class'}>
+                  y dar clases fácilmente a alumnos de todo el mundo. Para crear
+                  un curso utiliza las herramientas que ofrece OpenMind, en
+                  donde los temas que se impartirán quedaran a tu libre elección
+                  con tu propio sello para la enseñanza, procura que los temas
+                  impartidos en tu curso sean interesantes y llamativos para los
+                  alumnos. Te recomendamos leer la siguiente sección <NavLink to={'/blog/how-create-a-class'}>
                     ¿Como crear una gran clase en OpenMind?
                   </NavLink>{' '}
                   para poder empezar.
@@ -174,15 +172,18 @@ export function RegisterTeacher(props: RegisterTeacherProps) {
             <div className={styles['tab-container']}>
               <div className={styles['describe-content']}>
                 <h3>
-                  OpenMind promociona tus clases en su marketplace  y los docentes
-                  con las mejores calificaciones y resultados serán
+                  OpenMind promociona tus clases en su marketplace y los
+                  docentes con las mejores calificaciones y resultados serán
                   promocionados aún más. Si tus clases tienen alta demanda,
                   podrás subir su costo, tener más alumnos y ganar más dinero.
                   Tus pagos no dependen de cumplir un cierto número de horas,
                   sino de validar que tus alumnos han cumplido sus objetivos
                   preestablecidos.
-                  <br/>
-                  <strong>Tus resultados dependen de la calidad de tu trabajo y nada más.</strong>
+                  <br />
+                  <strong>
+                    Tus resultados dependen de la calidad de tu trabajo y nada
+                    más.
+                  </strong>
                 </h3>
               </div>
               <div className={styles['image-content']}>

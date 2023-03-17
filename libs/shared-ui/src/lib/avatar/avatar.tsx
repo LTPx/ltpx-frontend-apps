@@ -6,6 +6,7 @@ export enum AvatarSize {
   tiny = 'tiny',
   small = 'small',
   medium = 'medium',
+  medium_x = 'medium_x',
   large = 'large',
 }
 

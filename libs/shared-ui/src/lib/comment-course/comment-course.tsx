@@ -16,7 +16,7 @@ export function CommentCourse(props: CommentCourseProps) {
   return (
     <div className={styles['container']}>
       <div className={styles['avatar-content']}>
-        <Avatar image={image} size={AvatarSize.medium}></Avatar>
+        <Avatar image={image} size={AvatarSize.medium_x}></Avatar>
       </div>
       <div className={styles['comment-content']}>
         <div className={styles['head']}>

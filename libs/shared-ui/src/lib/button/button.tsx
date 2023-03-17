@@ -26,6 +26,7 @@ export interface ButtonProps {
   outline?: boolean;
   full?: boolean;
   link?: string;
+  target?: boolean;
   icon?: string;
 }
 
@@ -41,6 +42,7 @@ export function Button(props: ButtonProps) {
     full,
     link,
     icon,
+    target,
     ...other
   } = props;
 
@@ -63,26 +65,37 @@ export function Button(props: ButtonProps) {
       <button
         className={`${btnClass} ${className}`}
         type={type || TypeButton.button}
-        onClick={(event)=>{
-          onClick && onClick(event)
+        onClick={(event) => {
+          onClick && onClick(event);
         }}
         disabled={disabled}
-        onMouseDown={(event)=>{event.preventDefault()}}
+        onMouseDown={(event) => {
+          event.preventDefault();
+        }}
         {...other}
       >
         <div className={css['button-content']}>
-          { icon && ( <Icon icon={icon} size={15} />)} {title}
+          {icon && <Icon icon={icon} size={15} />} {title}
         </div>
       </button>
     );
   };
 
   return (
+    // eslint-disable-next-line react/jsx-no-useless-fragment
     <>
       {link ? (
-        <NavLink to={link}>
-          <Button />
-        </NavLink>
+        <div>
+          {target ? (
+            <NavLink to={link} target={'_blank'}>
+              <Button />
+            </NavLink>
+          ) : (
+            <NavLink to={link}>
+              <Button />
+            </NavLink>
+          )}
+        </div>
       ) : (
         <Button />
       )}

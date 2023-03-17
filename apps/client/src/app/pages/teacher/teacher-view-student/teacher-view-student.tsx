@@ -3,6 +3,7 @@ import { useCourseStudents } from '@ltpx-frontend-apps/store';
 import { useCallback, useEffect, useState } from 'react';
 import {
   AchievementModel,
+  CourseModel,
   QuizResult,
   TaskStudent,
 } from '@ltpx-frontend-apps/api';
@@ -14,9 +15,7 @@ import {
   QuizStudentCard,
   Tabs,
   TaskTeacherCard,
-  TextArea,
 } from '@ltpx-frontend-apps/shared-ui';
-import { Dialog } from 'evergreen-ui';
 import { useParams } from 'react-router-dom';
 /* eslint-disable-next-line */
 export interface TeacherViewStudentProps {
@@ -25,16 +24,15 @@ export interface TeacherViewStudentProps {
 export function TeacherViewStudent(props: TeacherViewStudentProps) {
   const { studentId } = props;
   const [quizzes, setQuizzes] = useState<QuizResult[]>([]);
+  const [course, setCourse] = useState<CourseModel[]>([]);
   const [achievements, setAchievements] = useState<AchievementModel[]>([]);
   const [tasks, setTasks] = useState<TaskStudent[]>([]);
   const {
+    _getStudentsByCourse,
     _getStudentQuizzesByCourse,
     _getStudentAchievementsByCourse,
     _getStudentTasksByCourse,
   } = useCourseStudents();
-  const [openModal, setOpenModal] = useState(false);
-  const exist = false;
-  // const [task, setLoaded] = useState(false);
   const { courseId } = useParams();
   const [selectedTab, setSelectedTab] = useState(0);
 
@@ -111,23 +109,27 @@ export function TeacherViewStudent(props: TeacherViewStudentProps) {
       <Tabs tabs={tabs} onClickTab={(option) => handleClick(option)} />
       {selectedTab === 0 && (
         <div>
-          {exist === false ? (
+          {tasks.length > 0 ? (
+            <div className={styles['task-student']}>
+              {tasks.map((task, index) => (
+                <div key={index}>
+                  {/* <h4 className={styles['title-task']}>
+                    Tareas del estudiante:{' '}{courseId}
+                  </h4> */}
+                  <TaskTeacherCard
+                    title={task.title || ''}
+                    description={task.description || ''}
+                  />
+                </div>
+              ))}
+            </div>
+          ) : (
             <EmptyState
               classNameImage={`${styles['image-empty']}`}
               className={`${styles['image-content']}`}
               icon={'task-outline'}
-              description={
-                'El estudiante aun no a completado una tarea'
-              }
+              description={'El estudiante aun no a completado una tarea'}
             />
-          ) : (
-            <div className={styles['task-student']}>
-              <h4 className={styles['title-task']}>Tareas del estudiante: </h4>
-              <TaskTeacherCard
-                title={'Matemáticas'}
-                description={'entregada'}
-              />
-            </div>
           )}
         </div>
       )}
@@ -135,9 +137,9 @@ export function TeacherViewStudent(props: TeacherViewStudentProps) {
         <div>
           {quizzes.length > 0 ? (
             <div className={styles['content']}>
-              <h4 className={styles['subtitle']}>
+              {/* <h4 className={styles['subtitle']}>
                 Test dados por el estudiante
-              </h4>
+              </h4> */}
               <div className={styles['quizzes-content']}>
                 {quizzes?.map((quiz, index) => (
                   <div key={index}>
@@ -149,13 +151,8 @@ export function TeacherViewStudent(props: TeacherViewStudentProps) {
                         <Button
                           title="Calificar test"
                           icon="play-filled"
+                          target={true}
                           link={`/teacher/quiz-review/${quiz.id}`}
-                        />
-                        <Button
-                          title="Dar Feedback"
-                          color={ColorsButton.secondary}
-                          icon="play-filled"
-                          onClick={() => setOpenModal(true)}
                         />
                       </div>
                     </QuizStudentCard>
@@ -168,52 +165,34 @@ export function TeacherViewStudent(props: TeacherViewStudentProps) {
               classNameImage={`${styles['image-empty']}`}
               className={`${styles['image-content']}`}
               icon={'quiz-outline'}
-              description={
-                'El estudiante aun no a completado un test.'
-              }
+              description={'El estudiante aun no a completado un test.'}
             />
           )}
         </div>
       )}
       {selectedTab === 2 && (
         <div className={styles['achievements-student']}>
-          {exist === false ? (
+          {achievements.length > 0 ? (
+            <div className={styles['achievements-content']}>
+              {achievements?.map((achievement, index) => (
+                <div className={styles['achievements']}  key={index}>
+                  <AchievementCard
+                    image={achievement.image}
+                    text={achievement.title}
+                  />
+                </div>
+              ))}
+            </div>
+          ) : (
             <EmptyState
               classNameImage={`${styles['image-empty']}`}
               className={`${styles['image-content']}`}
               icon={'trophy-outline'}
-              description={
-                'El estudiante aun no a alcanzado un logro. '
-              }
+              description={'El estudiante aun no a alcanzado un logro. '}
             />
-          ) : (
-            <AchievementCard image={''} text={''} />
           )}
         </div>
       )}
-      <Dialog
-        isShown={openModal}
-        hasFooter={false}
-        title="Feedback"
-        onCloseComplete={() => setOpenModal(false)}
-        width={'40vw'}
-      >
-        <div className={styles['feedback']}>
-          <div className={styles['content-feed']}>
-            <TextArea className={styles['text-area']} rows={8} />
-          </div>
-          <div className={styles['footer']}>
-            <Button
-              color={ColorsButton.white}
-              onClick={() => {
-                setOpenModal(false);
-              }}
-              title={'Cancelar'}
-            />
-            <Button title={'Enviar'} />
-          </div>
-        </div>
-      </Dialog>
     </div>
   );
 }

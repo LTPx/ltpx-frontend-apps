@@ -10,16 +10,18 @@ interface ActionButton {
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface PanelAccordionProps {
   title: string;
+  subTitle?: string;
   text?: string;
   data?: any;
   children?: any;
+  classNameSubTitle?: any;
   actions?: ActionButton[];
 }
 
 export function PanelAccordion(props: PanelAccordionProps) {
   const [isOpen, setIsOpen] = useState(false);
 
-  const { title, text, children, actions, data } = props;
+  const {subTitle, classNameSubTitle, title, text, children, actions, data } = props;
 
   const handleClick = () => {
     setIsOpen(!isOpen);
@@ -28,7 +30,10 @@ export function PanelAccordion(props: PanelAccordionProps) {
   return (
     <div className={styles['container']}>
       <div className={styles['accordion']} onClick={handleClick}>
-        <h4>{title}</h4>
+        <div className={styles['title-content']}>
+          <h4>{title}</h4>
+          <h4 className={`${classNameSubTitle} ${styles['subtitle']}`}>{subTitle}</h4>
+        </div>
         <div className={styles['actions']}>
           {actions?.map((action, index) => (
             <div

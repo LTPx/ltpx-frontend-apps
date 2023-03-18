@@ -1,6 +1,7 @@
 import { QuizParamsUi } from '@ltpx-frontend-apps/api';
 import { ReactElement } from 'react';
 import Icon from '../icon/icon';
+import PanelAccordion from '../panel-accordion/panel-accordion';
 import styles from './quizzes-list.module.scss';
 
 /* eslint-disable-next-line */
@@ -15,13 +16,42 @@ export function QuizzesList(props: QuizzesListProps) {
     <div className={styles['quizzes']}>
       {quizzes?.map((quiz, index) => (
         <div className={styles['quiz']} key={index}>
-          <div className={styles['summary']}>
-            <Icon icon="list" size={20} />
-            <div className="d">
-              <h4>{quiz.name}</h4>
-              <h5>{quiz.questions_attributes.length} preguntas</h5>
+          <PanelAccordion
+            classNameSubTitle={styles['subtitle-text']}
+            title={
+              'Test: ' +
+              quiz.name
+            }
+            subTitle={
+              "Total de preguntas: " + quiz.questions_attributes.length +
+              ' y puntos necesarios para aprobar: ' +
+              quiz.approve_score
+            }
+          >
+            <div>
+              {quiz.questions_attributes.map((question, index) => (
+                <div className={styles['test']} key={index}>
+                  <div className={styles['title-content']}>
+                    <h4 className={styles['title-test']}>
+                      {index + 1}. {question.question}
+                    </h4>
+                    <h4 className={styles['points-test']}>
+                      Puntos: ({question.points})
+                    </h4>
+                  </div>
+                  <h4 className={styles['description-test']}>
+                    {question.description}
+                  </h4>
+                  {question.answers_attributes.map((answer, index) => (
+                    <div className={styles['options-test']} key={index}>
+                      <h4>{answer.text}</h4>
+                    </div>
+                  ))}
+                </div>
+              ))}
+              <h4></h4>
             </div>
-          </div>
+          </PanelAccordion>
           <div className={styles['actions']}>
             {/* <div className={styles['action']} onClick={() => {}}>
               <Icon icon="plus" size={15} />

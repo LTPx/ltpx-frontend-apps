@@ -18,6 +18,7 @@ export * from './lib/interfaces/wallet-interface';
 export * from './lib/interfaces/session-interface';
 export * from './lib/interfaces/task-interface';
 export * from './lib/interfaces/withdrawals-interfaces';
+export * from './lib/interfaces/chat-interface';
 
 //fake api
 export * from '../src/lib/fake/courses';

@@ -15,6 +15,20 @@ export const getTeacherRooms = async () => {
   });
 };
 
+export const getTeacherRoom = async (userId: number, roomId?: number) => {
+  const params = {user_id: userId, room_id: roomId}
+  return new Promise<any[]>((resolve, reject) => {
+    http
+      .get('api/v1/chat/teachers/room', {params})
+      .then((response) => {
+        resolve(response.data);
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
+};
+
 export const starChatStudent = async (userId: number) => {
   return new Promise<any>((resolve, reject) => {
     http

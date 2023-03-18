@@ -1,22 +1,19 @@
 import styles from './teacher-chat.module.scss';
-import { UserBasic } from '@ltpx-frontend-apps/api';
-import { Tab, Tabs } from '@ltpx-frontend-apps/shared-ui';
-import { useTeacher } from '@ltpx-frontend-apps/store';
+import { ChatMessage, UserBasic } from '@ltpx-frontend-apps/api';
+import { ChatMessages, Tab, Tabs } from '@ltpx-frontend-apps/shared-ui';
+import { useTeacher, useUser } from '@ltpx-frontend-apps/store';
 import { Avatar } from 'evergreen-ui';
 import { useCallback, useEffect, useState } from 'react';
-import TeacherViewStudent from '../teacher-view-student/teacher-view-student';
 
-/* eslint-disable-next-line */
-export interface TeacherChatProps {}
-
-export function TeacherChat(props: TeacherChatProps) {
-  const { _getTeacherRooms } = useTeacher();
+export function TeacherChat() {
+  const { _getTeacherRooms, _getTeacherRoom } = useTeacher();
+  const { user } = useUser();
   const [loaded, setLoaded] = useState(false);
-  const [userId, setUserId] = useState<number>();
   const [optionsTab, setOptionsTab] = useState<Tab[]>([]);
   const [users, setUsers] = useState<UserBasic[]>([]);
+  const [messages, setMessages] = useState<ChatMessage[]>([]);
 
-  const fetchStudents = useCallback(async () => {
+  const fetchRooms = useCallback(async () => {
     const { success, data, error } = await _getTeacherRooms();
     if (success) {
       const users = data;
@@ -35,8 +32,19 @@ export function TeacherChat(props: TeacherChatProps) {
     }
   }, []);
 
+  const fetchRoom = useCallback(async (id:number, roomId?: number) => {
+    const { success, data, error } = await _getTeacherRoom(id, roomId);
+    if (success) {
+      setMessages(data);
+      setLoaded(true);
+    } else {
+      setLoaded(true);
+      console.log(error);
+    }
+  }, []);
+
   useEffect(() => {
-    fetchStudents();
+    fetchRooms();
   }, []);
 
   const TabStudent = ({ name }: { name: string; }) => (
@@ -61,13 +69,18 @@ export function TeacherChat(props: TeacherChatProps) {
               tabs={optionsTab}
               vertical={true}
               onClickTab={(index) => {
-                setUserId(users[index].id);
+                // setUserId(users[index].id);
+                fetchRoom(users[index].id);
               }}
             />
           )}
         </div>
         <div className={styles['information']}>
-          {userId && <TeacherViewStudent studentId={userId} />}
+          <div className={styles['live-chat-content']}>
+            <h3>Chat Group</h3>
+            <label className='muted'>Por favor se respetuoso</label>
+            <ChatMessages messages={messages} senderId={user.id}/>
+          </div>
         </div>
       </div>
     </div>

@@ -19,7 +19,7 @@ export function LiveClass(props: LiveClassProps) {
         <div className={styles['live-chat-content']}>
           <h3>Chat Group</h3>
           <label className='muted'>Please be respectful</label>
-          <ChatMessages messages={conversation} userId={'13'}/>
+          {/* <ChatMessages messages={conversation} userId={'13'}/> */}
         </div>
       </div>
     </div>

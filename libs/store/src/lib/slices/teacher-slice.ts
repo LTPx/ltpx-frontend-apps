@@ -35,6 +35,8 @@ import {
   formatErrors,
   getTeacherRooms,
   getTeacherRoom,
+  sendMessage,
+  NewChatMessage,
 } from '@ltpx-frontend-apps/api';
 import { StateCreator } from 'zustand';
 import { StoreState } from '../store';
@@ -92,6 +94,7 @@ export type TeacherSlice = {
   getProfile: () => Promise<TResponse>;
   _getTeacherRooms: () => Promise<TResponse>;
   _getTeacherRoom: (userId: number, roomId?: number) => Promise<TResponse>;
+  _sendMessage: (message: NewChatMessage) => Promise<TResponse>;
 };
 
 export const createTeacherSlice: StateCreator<
@@ -258,6 +261,14 @@ export const createTeacherSlice: StateCreator<
     try {
       const room = await getTeacherRoom(userId, roomId);
       return { success: true, data: room };
+    } catch (error) {
+      return { success: false, error };
+    }
+  },
+  _sendMessage: async (newMessage) => {
+    try {
+      const message = await sendMessage(newMessage);
+      return { success: true, data: message };
     } catch (error) {
       return { success: false, error };
     }

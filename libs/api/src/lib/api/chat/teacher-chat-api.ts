@@ -1,4 +1,5 @@
 import { _http } from '../../http';
+import { ChatMessage, NewChatMessage } from '../../interfaces/chat-interface';
 
 const http = _http;
 
@@ -29,23 +30,10 @@ export const getTeacherRoom = async (userId: number, roomId?: number) => {
   });
 };
 
-export const starChatStudent = async (userId: number) => {
-  return new Promise<any>((resolve, reject) => {
+export const sendMessage = async (message: NewChatMessage) => {
+  return new Promise<ChatMessage>((resolve, reject) => {
     http
-      .post(`api/v1/chat/students/${userId}`)
-      .then((response) => {
-        resolve(response.data);
-      })
-      .catch((error) => {
-        reject(error);
-      });
-  });
-};
-
-export const sendMessageStudent = async (userId: number, message: string ) => {
-  return new Promise<any>((resolve, reject) => {
-    http
-      .post(`api/v1/chat/students/${userId}`, {message})
+      .post('api/v1/chat/teachers/send_message', message)
       .then((response) => {
         resolve(response.data);
       })

@@ -8,19 +8,25 @@ import styles from './chat-messages.module.scss';
 export interface ChatMessagesProps {
   messages: Array<ChatMessage>;
   senderId: number;
+  onSubmit: (message: ChatMessage) => void;
 }
 
 export function ChatMessages(props: ChatMessagesProps) {
   const mainRef = useRef<HTMLDivElement | null>(null);
-  const { messages, senderId } = props;
+  const { messages, senderId, onSubmit} = props;
   const [ msgs, setMsgs] = useState(messages);
 
   const handleKeyDown = (event: any) => {
     if (event.key === 'Enter') {
       const { target: { value } } = event;
-      const user = getCurrentChatUser();
-      const message = Object.assign(user, {message: value});
-      // setMsgs([...msgs, message]);
+      const newMessage = {
+        text: value,
+        user_id: senderId,
+        user_name: 'Yp',
+        created_at: '',
+      };
+      setMsgs([...msgs, newMessage]);
+      onSubmit(newMessage);
       // if(mainRef.current) {
       //   window.scrollTo(0, mainRef.current.scrollTop);
       // }
@@ -37,7 +43,7 @@ export function ChatMessages(props: ChatMessagesProps) {
             )}
             <div className={styles['text']}>
               <h5>{message.user_name}</h5>
-              <p>{message.body}</p>
+              <p>{message.text}</p>
             </div>
             { message.user_id === senderId && (
               <Avatar name={message.user_name}/>

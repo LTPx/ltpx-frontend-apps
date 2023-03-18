@@ -26,6 +26,7 @@ export const useTeacher = () => {
     _makeWithdrawal,
     _getTeacherRooms,
     _getTeacherRoom,
+    _sendMessage,
   } = useAppStore();
 
   return {
@@ -53,5 +54,6 @@ export const useTeacher = () => {
     _makeWithdrawal,
     _getTeacherRooms,
     _getTeacherRoom,
+    _sendMessage,
   }
 }

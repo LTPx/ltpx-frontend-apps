@@ -76,15 +76,20 @@ export function TeacherProfile(props: TeacherProfileProps) {
         <div className={styles['information-wrap']}>
           <div className={styles['information-content']}>
             <h2>Sobre Katherine</h2>
-            <p className={styles['text-description']}>
-              {showMore ? biography : `${biography.substring(0, 500)}....`}
-              <h4
-                className={styles['show']}
-                onClick={() => setShowMore(!showMore)}
-              >
-                {showMore ? 'Mostrar menos' : 'Mostrar mas'}
-              </h4>
-            </p>
+            {biography.length > 500 ? (
+              <p className={styles['text-description']}>
+                {showMore ? biography : `${biography.substring(0, 500)}....`}
+                <h4
+                  className={styles['show']}
+                  onClick={() => setShowMore(!showMore)}
+                >
+                  {showMore ? 'Mostrar menos' : 'Mostrar mas'}
+                </h4>
+              </p>
+            ) : (
+              <p className={styles['text-description']}>{biography}</p>
+            )}
+
             <div className={styles['social-networks']}>
               <Icon className={styles['icon']} icon={'facebook'} size={22} />
               <Icon className={styles['icon']} icon={'twitter'} size={22} />
@@ -108,21 +113,21 @@ export function TeacherProfile(props: TeacherProfileProps) {
         <div className={styles['courses-content']}>
           <h2>Cursos</h2>
           <div className={styles['courses-teacher']}>
-          {popularCourses.map((course, index) => (
-            <div className={styles['course']} key={index}>
-              <CourseCard
-                image={course.cover}
-                category={course.category}
-                title={course.title}
-                price={course.price_format}
-                duration={0}
-                achievements={course.achievements?.length}
-                stars={course.average_rating}
-                link={`/course/${course.id}/details`}
-              />
-            </div>
-          ))}
-        </div>
+            {popularCourses.map((course, index) => (
+              <div className={styles['course']} key={index}>
+                <CourseCard
+                  image={course.cover}
+                  category={course.category}
+                  title={course.title}
+                  price={course.price_format}
+                  duration={0}
+                  achievements={course.achievements?.length}
+                  stars={course.average_rating}
+                  link={`/course/${course.id}/details`}
+                />
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </div>

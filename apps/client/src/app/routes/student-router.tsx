@@ -8,7 +8,6 @@ import {
   Dashboard,
   Invoice,
   Purchases,
-  Settings,
   StudentCourses,
   StudentCourse,
   StudentClasses,
@@ -42,12 +41,6 @@ export const StudentRoutes = () => {
             path="live-meeting/:meetingId/:roomId"
             element={<VideoMeetingLive redirectUrl="/student/classes" />}
           />
-          {/* <Route path="classes" element={<ClassesLayout/>}>
-            <Route path="/student/classes" element={<Navigate replace to="week" />} />
-            <Route path="week" element={<Classes/>}/>
-            <Route path="calendar" element={<ClassesCalendar/>}/>
-            <Route path=":classId" element={<LiveClass/>}/>
-          </Route> */}
           <Route path="payments" element={<PaymentsLayout />}>
             <Route
               path="/student/payments"
@@ -56,8 +49,6 @@ export const StudentRoutes = () => {
             <Route path="purchases" element={<Purchases />} />
             <Route path="invoice" element={<Invoice />} />
           </Route>
-          <Route path="settings" element={<Settings />} />
-          {/* <Route path="account" element={<Account />} /> */}
           <Route path="account" element={<StudentAccountLayout />}>
             <Route path="/student/account" element={<StudentAccountProfile />} />
             <Route path="account-form" element={<Account />} />

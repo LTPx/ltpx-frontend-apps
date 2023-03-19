@@ -1,0 +1,53 @@
+@import '../../../styles.scss';
+.feedback {
+  display: flex;
+  flex-direction: column;
+  .text-area {
+    margin-top: 0;
+  }
+  .footer {
+    display: flex;
+    padding-top: 1rem;
+    gap: 1rem;
+    justify-content: end;
+  }
+}
+.image-content {
+  padding: 3rem 0;
+  gap: 0 !important;
+  color: $text-gray-color;
+  .image-empty {
+    width: 10rem !important;
+    height: 10rem !important;
+  }
+}
+
+.container {
+  // width: 70vw;
+
+  .subtitle {
+    padding-bottom: 1rem;
+  }
+  .task-student {
+    padding: 1rem;
+    .title-task {
+      padding-bottom: 0.5rem;
+    }
+  }
+  .content {
+    background-color: $white-color;
+    border-radius: 15px;
+    flex-grow: 1;
+    padding: 1rem;
+    box-shadow: $card-shadow-medium;
+  }
+  .quizzes-content {
+    display: flex;
+    flex-direction: column;
+    gap: $size-md-1;
+  }
+  .btn-test {
+    display: flex;
+    gap: 1rem;
+  }
+}

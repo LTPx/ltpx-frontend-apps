@@ -2,7 +2,7 @@ import { Routes, Route, BrowserRouter, Navigate } from 'react-router-dom';
 import {
   PaymentsLayout,
 } from '../layouts/index';
-import { AllCourses, CourseDetails, Home } from '../pages/site';
+import { AllCourses, CourseDetails, Home } from '../site';
 import {
   Account,
   Dashboard,
@@ -17,7 +17,7 @@ import {
   StudentQuiz,
   StudentReviewQuiz,
   StudentChat,
-} from '../pages/student/index';
+} from '../student/index';
 import VideoMeetingLive from '../video/video-meeting-live/video-meeting-live';
 
 export const StudentRoutes = () => {

@@ -1,0 +1,27 @@
+@import '../../../../styles.scss';
+
+.header-text {
+  margin-bottom: $size-lg-1;
+}
+.text-content {
+  padding: 1rem;
+}
+.media {
+  height: 5rem;
+  margin-top: $size-md-1;
+  background-color: #f7f7f7;
+}
+
+.form-content {
+  margin-bottom: $size-md-3;
+  position: relative;
+  background-color: #f9fafb;
+  padding: $size-md-1 $size-md-1 $size-lg-1 $size-md-1;
+}
+
+.footer {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+  padding: 1.5rem 0;
+}

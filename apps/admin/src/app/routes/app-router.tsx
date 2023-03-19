@@ -1,17 +1,17 @@
 import { Route, Routes } from 'react-router-dom';
 import AppLayout from '../components/app-layout/app-layout';
-import ApplicationDetailsPage from '../pages/application-details-page/application-details-page';
-import CourseDetailsPage from '../pages/course-details-page/course-details-page';
-import CoursesPages from '../pages/courses-pages/courses-pages';
-import DashboardPage from '../pages/dashboard-page/dashboard-page';
-import LearningPathPage from '../pages/learning-path-page/learning-path-page';
-import Login from '../pages/login/login';
-import NewUserPage from '../pages/new-user-page/new-user-page';
-import SettingsAppPage from '../pages/settings-app-page/settings-app-page';
-import TeachersPage from '../pages/teachers-page/teachers-page';
-import PaymentsPage from '../pages/payments-page/payments-page';
-import PaymentsDetailsPage from '../pages/payments-details-page/payments-details-page';
-import UsersPage from '../pages/users-page/users-page';
+import ApplicationDetailsPage from '/application-details-page/application-details-page';
+import CourseDetailsPage from '/course-details-page/course-details-page';
+import CoursesPages from '/courses-pages/courses-pages';
+import DashboardPage from '/dashboard-page/dashboard-page';
+import LearningPathPage from '/learning-path-page/learning-path-page';
+import Login from '/login/login';
+import NewUserPage from '/new-user-page/new-user-page';
+import SettingsAppPage from '/settings-app-page/settings-app-page';
+import TeachersPage from '/teachers-page/teachers-page';
+import PaymentsPage from '/payments-page/payments-page';
+import PaymentsDetailsPage from '/payments-details-page/payments-details-page';
+import UsersPage from '/users-page/users-page';
 
 export const AppRouter = () => {
   return (

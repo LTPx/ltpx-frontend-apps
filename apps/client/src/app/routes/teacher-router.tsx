@@ -12,10 +12,10 @@ import {
   StudentSafetyPrivacy,
   TeacherProfileGuidelines,
   WhatIsOpenMind,
-} from '../pages/site/blog';
-import BlogLayout from '../pages/site/blog-layout/blog-layout';
-import BlogHome from '../pages/site/blog/blog-home/blog-home';
-import EthicsManualForTeaching from '../pages/site/blog/ethics-manual-for-teaching/ethics-manual-for-teaching';
+} from '../site/blog';
+import BlogLayout from '../site/blog-layout/blog-layout';
+import BlogHome from '../site/blog/blog-home/blog-home';
+import EthicsManualForTeaching from '../site/blog/ethics-manual-for-teaching/ethics-manual-for-teaching';
 import {
   ManageCourses,
   TeacherAccount,
@@ -32,7 +32,7 @@ import {
   TeacherLayout,
   TeacherMeetingsAgenda,
   TeacherReviewQuiz,
-} from '../pages/teacher';
+} from '../teacher';
 import VideoMeetingLive from '../video/video-meeting-live/video-meeting-live';
 import { ProtectedRoutesTeacher } from './guards/protected-routes-teacher/protected-routes-teacher';
 

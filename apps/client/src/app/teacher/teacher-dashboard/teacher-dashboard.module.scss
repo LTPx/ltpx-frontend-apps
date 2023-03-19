@@ -1,0 +1,51 @@
+@import '../../../styles.scss';
+
+.container {
+  min-width: 80vw;
+
+  h1 {
+    margin-bottom: 1rem;
+  }
+}
+.upcoming-classes {
+  padding-top: 1rem;
+}
+.layout {
+  display: flex;
+  gap: 3rem;
+
+  .content {
+    background-color: $white-color;
+    border-radius: 15px;
+    flex-grow: 1;
+    height:fit-content;
+    padding: 2rem;
+    box-shadow: $card-shadow-medium;
+  }
+
+  .help-ads {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+
+    .classes {
+      .head {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+    }
+
+    .card-teaching {
+      background-color: $white-color;
+      color: $gray-color;
+      h2 {
+        color: $secondary-color;
+      }
+    }
+    .card-join-discord {
+      background-color: #404eed;
+      color: $gray-color-100;
+    }
+  }
+}

@@ -1,0 +1,49 @@
+@import '../../../styles.scss';
+
+.container {
+  padding: $size-lg-3 5rem;
+
+  .head {
+    display: flex;
+    align-items: center;
+    margin-bottom: 2rem;
+    justify-content: space-between;
+    .title {
+      align-items: baseline;
+    }
+  }
+  .cover {
+    height: 20rem;
+    display: flex;
+    align-items: center;
+
+    img {
+      object-fit: cover;
+      width: 100%;
+      height: 100%;
+      border-radius: 5px;
+    }
+  }
+  .course-content {
+    margin-top: 1rem;
+  }
+}
+
+.basic-info {
+  display: flex;
+  gap: $size-sm-2;
+  padding: 1rem 0;
+
+  .noted {
+    padding: $size-sm-1 $size-sm-2;
+    background-color: #f9fafb;
+    border-radius: 5px;
+    text-transform: capitalize;
+    color: $text-gray-color;
+
+    &.status {
+      background-color: $green-color-100;
+      color: $green-color;
+    }
+  }
+}

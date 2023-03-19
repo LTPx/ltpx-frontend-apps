@@ -1,17 +1,12 @@
 import { Routes, Route, BrowserRouter, Navigate } from 'react-router-dom';
 import {
-  ClassesLayout,
-  CoursesLayout,
-  DashboardLayout,
   PaymentsLayout,
 } from '../layouts/index';
 import { AllCourses, CourseDetails, Home } from '../pages/site';
 import {
   Account,
-  ClassesCalendar,
   Dashboard,
   Invoice,
-  LiveClass,
   Purchases,
   Settings,
   StudentCourses,

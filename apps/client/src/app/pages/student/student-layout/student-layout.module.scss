@@ -18,8 +18,14 @@
 .teacher-actions {
   display: flex;
   justify-content: center;
-  align-items: baseline;
+  align-items: center;
   gap: 2rem;
+  margin-left: 1rem;
+}
+
+.chat-button {
+  cursor: pointer;
+  background-color: $white-color-100;
 }
 
 .content {

@@ -9,7 +9,7 @@ import {
 import { useUser } from '@ltpx-frontend-apps/store';
 import { Avatar } from 'evergreen-ui';
 import { useTranslation } from 'react-i18next';
-import { Outlet, useNavigate } from 'react-router-dom';
+import { NavLink, Outlet, useNavigate } from 'react-router-dom';
 import avatar from './../../../../assets/images/avatars/avatar-1.svg'
 
 export function StudentLayout() {
@@ -78,6 +78,9 @@ export function StudentLayout() {
     <div className={styles['container']}>
       <Header links={links} className={styles['header']}>
         <div className={styles['teacher-actions']}>
+          <NavLink className={styles['chat-button']} to='chat'>
+            <Icon icon='chat-dots' size={20} />
+          </NavLink>
           <Dropdown>
             <UserMenu
               name={user.fullname}

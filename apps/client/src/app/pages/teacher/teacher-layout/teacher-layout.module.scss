@@ -13,16 +13,19 @@
     "header header header"
     "content content content";
   height: 100vh;
-  .avatar-item {
-    
-  }
 }
 
 .teacher-actions {
   display: flex;
   justify-content: center;
-  align-items: baseline;
+  align-items: center;
   gap: 2rem;
+  margin-left: 2rem;
+}
+
+.chat-button {
+  cursor: pointer;
+  background-color: $white-color-100;
 }
 
 .content {

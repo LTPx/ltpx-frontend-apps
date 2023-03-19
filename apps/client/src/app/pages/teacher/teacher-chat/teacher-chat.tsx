@@ -93,7 +93,7 @@ export function TeacherChat() {
         </div>
         <div className={styles['information']}>
           <div className={styles['live-chat-content']}>
-            <h3>Chat Group</h3>
+            <h3>OpenMind Chat</h3>
             <label className="muted">Por favor se respetuoso</label>
             {room ? (
               <ChatMessages

@@ -12,10 +12,10 @@ import {
   StudentSafetyPrivacy,
   TeacherProfileGuidelines,
   WhatIsOpenMind,
-} from '../site/blog';
-import BlogLayout from '../site/blog-layout/blog-layout';
-import BlogHome from '../site/blog/blog-home/blog-home';
-import EthicsManualForTeaching from '../site/blog/ethics-manual-for-teaching/ethics-manual-for-teaching';
+} from '../blog';
+import BlogLayout from '../blog/blog-layout/blog-layout';
+import BlogHome from '../blog/blog-home/blog-home';
+import EthicsManualForTeaching from '../blog/ethics-manual-for-teaching/ethics-manual-for-teaching';
 import {
   ManageCourses,
   TeacherAccount,

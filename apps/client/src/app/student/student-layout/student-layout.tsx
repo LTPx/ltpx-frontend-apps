@@ -78,7 +78,7 @@ export function StudentLayout() {
     <div className={styles['container']}>
       <Header links={links} className={styles['header']}>
         <div className={styles['teacher-actions']}>
-          <NavLink className={styles['chat-button']} to='chat'>
+          <NavLink className={styles['chat-button']} to='/student/chat'>
             <Icon icon='chat-dots' size={20} />
           </NavLink>
           <Dropdown>

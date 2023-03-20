@@ -1,6 +1,6 @@
-import { ChatMessage, getCurrentChatUser } from '@ltpx-frontend-apps/api';
+import { ChatMessage } from '@ltpx-frontend-apps/api';
 import { Avatar } from 'evergreen-ui';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useMoment } from '../../hooks/useMoment';
 import Input, { Position } from '../input/input';
 import styles from './chat-messages.module.scss';
@@ -21,22 +21,32 @@ export function ChatMessages(props: ChatMessagesProps) {
   const mainRef = useRef<HTMLDivElement | null>(null);
   const { messages, senderId, onSubmit, room } = props;
   const [ msgs, setMsgs] = useState(messages);
-  const { fromNow } = useMoment();
+  const { fromNow, dateNow } = useMoment();
 
-  const handleKeyDown = (event: any) => {
+  useEffect(() => {
+    scrollDown()
+  }, [messages]);
+
+  function scrollDown() {
+    const height = mainRef.current?.scrollHeight || 100;
+    // mainRef.current?.scrollIntoView({behavior: 'smooth'});
+    mainRef.current?.scrollTo(0, height);
+  }
+
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter') {
-      const { target: { value } } = event;
+      const { currentTarget: { value } } = event;
       const newMessage = {
         text: value,
         user_id: senderId,
         user_name: 'Yp',
-        created_at: '',
+        created_at: dateNow.toString(),
       };
-      setMsgs([...msgs, newMessage]);
+      const mensajes = msgs.concat([newMessage]);
+      setMsgs(mensajes);
       onSubmit(newMessage);
-      // if(mainRef.current) {
-      //   window.scrollTo(0, mainRef.current.scrollTop);
-      // }
+      event.currentTarget.value = '';
+      scrollDown();
     }
   };
 

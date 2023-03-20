@@ -15,6 +15,7 @@ export const useMoment = () => {
 
   return {
     formatDate,
-    fromNow
+    fromNow,
+    dateNow: moment()
   };
 };

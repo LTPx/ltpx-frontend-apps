@@ -12,16 +12,17 @@ import {
   StudentSafetyPrivacy,
   TeacherProfileGuidelines,
   WhatIsOpenMind,
-} from '../pages/site/blog';
-import BlogLayout from '../pages/site/blog-layout/blog-layout';
-import BlogHome from '../pages/site/blog/blog-home/blog-home';
-import EthicsManualForTeaching from '../pages/site/blog/ethics-manual-for-teaching/ethics-manual-for-teaching';
+} from '../blog';
+import BlogLayout from '../blog/blog-layout/blog-layout';
+import BlogHome from '../blog/blog-home/blog-home';
+import EthicsManualForTeaching from '../blog/ethics-manual-for-teaching/ethics-manual-for-teaching';
 import {
   ManageCourses,
   TeacherAccount,
   TeacherAccountLayout,
   TeacherAccountProfile,
   TeacherApply,
+  TeacherChat,
   TeacherCourseDetail,
   TeacherCourses,
   TeacherCourseStudents,
@@ -31,7 +32,7 @@ import {
   TeacherLayout,
   TeacherMeetingsAgenda,
   TeacherReviewQuiz,
-} from '../pages/teacher';
+} from '../teacher';
 import VideoMeetingLive from '../video/video-meeting-live/video-meeting-live';
 import { ProtectedRoutesTeacher } from './guards/protected-routes-teacher/protected-routes-teacher';
 
@@ -49,6 +50,7 @@ export const TeacherRoutes = () => {
           }
         >
           <Route path="dashboard" element={<TeacherDashboard />} />
+          <Route path="chat" element={<TeacherChat />} />
           <Route path="apply-teach" element={<TeacherApply />} />
           <Route path="earnings" element={<TeacherEarnings />} />
           <Route path="sessions" element={<TeacherMeetingsAgenda />} />

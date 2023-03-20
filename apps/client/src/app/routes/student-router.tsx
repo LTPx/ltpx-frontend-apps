@@ -1,19 +1,13 @@
 import { Routes, Route, BrowserRouter, Navigate } from 'react-router-dom';
 import {
-  ClassesLayout,
-  CoursesLayout,
-  DashboardLayout,
   PaymentsLayout,
 } from '../layouts/index';
-import { AllCourses, CourseDetails, Home } from '../pages/site';
+import { AllCourses, CourseDetails, Home } from '../site';
 import {
   Account,
-  ClassesCalendar,
   Dashboard,
   Invoice,
-  LiveClass,
   Purchases,
-  Settings,
   StudentCourses,
   StudentCourse,
   StudentClasses,
@@ -22,7 +16,8 @@ import {
   StudentAccountProfile,
   StudentQuiz,
   StudentReviewQuiz,
-} from '../pages/student/index';
+  StudentChat,
+} from '../student/index';
 import VideoMeetingLive from '../video/video-meeting-live/video-meeting-live';
 
 export const StudentRoutes = () => {
@@ -35,6 +30,7 @@ export const StudentRoutes = () => {
           <Route path="/course/:courseId/details" element={<CourseDetails />} />
         </Route>
         <Route path="student" element={<StudentLayout />}>
+          <Route path="chat" element={<StudentChat />} />
           <Route path="dashboard" element={<Dashboard />} />
           <Route path="courses" element={<StudentCourses />} />
           <Route path="courses/:courseId" element={<StudentCourse />} />
@@ -45,12 +41,6 @@ export const StudentRoutes = () => {
             path="live-meeting/:meetingId/:roomId"
             element={<VideoMeetingLive redirectUrl="/student/classes" />}
           />
-          {/* <Route path="classes" element={<ClassesLayout/>}>
-            <Route path="/student/classes" element={<Navigate replace to="week" />} />
-            <Route path="week" element={<Classes/>}/>
-            <Route path="calendar" element={<ClassesCalendar/>}/>
-            <Route path=":classId" element={<LiveClass/>}/>
-          </Route> */}
           <Route path="payments" element={<PaymentsLayout />}>
             <Route
               path="/student/payments"
@@ -59,8 +49,6 @@ export const StudentRoutes = () => {
             <Route path="purchases" element={<Purchases />} />
             <Route path="invoice" element={<Invoice />} />
           </Route>
-          <Route path="settings" element={<Settings />} />
-          {/* <Route path="account" element={<Account />} /> */}
           <Route path="account" element={<StudentAccountLayout />}>
             <Route path="/student/account" element={<StudentAccountProfile />} />
             <Route path="account-form" element={<Account />} />

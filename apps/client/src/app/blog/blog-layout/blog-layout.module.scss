@@ -1,0 +1,81 @@
+@import '../../../styles.scss';
+
+.container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  padding: $size-lg-3 0;
+
+  .breadcrumbs {
+    padding: $size-sm-2 $size-md-1;
+  }
+
+  .content-wrapper {
+    width: 60vw;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .content {
+    display: flex;
+    flex-direction: column;
+    line-height: $size-lg-1;
+    padding: 0 $size-md-1;
+
+    img {
+      height: 22rem;
+      width: 100%;
+      border-radius: $size-sm-2;
+      object-fit: cover;
+    }
+    h1 {
+      padding-top: $size-md-1;
+      font-weight: 500;
+    }
+    h2 {
+      padding-top: $size-md-1;
+    }
+    p {
+      padding-top: $size-md-1;
+    }
+    h4 {
+      padding-top: $size-md-1;
+    }
+    ul {
+      li {
+        margin-left: $size-lg-1;
+      }
+    }
+  }
+}
+
+//smartphones-responsive
+@media screen and (max-width: 550px) {
+  .container {
+    .content-wrapper {
+      width: inherit;
+      img {
+        object-fit: cover;
+        height: 12rem;
+      }
+    }
+  }
+}
+//tablet-responsive-vertical
+@media screen and (min-width: 560px) and (max-width: 850px) {
+  .container {
+    .content-wrapper {
+      width: 80%;
+    }
+  }
+}
+// tablet-responsive-horizontal
+@media screen and (min-width: 860px) and (max-width: 1224px) {
+  .container {
+    .content-wrapper {
+      width: 60%;
+    }
+  }
+}

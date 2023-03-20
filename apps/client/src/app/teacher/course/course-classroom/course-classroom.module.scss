@@ -1,0 +1,86 @@
+@import '../../../../styles.scss';
+
+.header-text {
+  margin-bottom: $size-lg-1;
+}
+
+.field-form {
+  margin-top: $size-md-3;
+
+  .range {
+    margin-top: $size-sm-2;
+    display: flex;
+    gap: $size-md-1;
+    align-items: center;
+    background-color: #f9fafb;
+    padding: $size-md-1 $size-lg-1;
+    border: 1px solid #d4d4d4;
+  }
+}
+
+.days-config {
+  margin-top: $size-md-1;
+}
+
+.days {
+  display: flex;
+  flex-direction: column;
+  gap: $size-sm-2;
+  margin-top: $size-md-1;
+}
+
+.content-form {
+  padding: $size-md-1 $size-lg-1 $size-lg-1 $size-lg-1;
+
+  .render-content {
+    margin-top: $size-md-1;
+  }
+}
+
+.classes-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.classroom-summary {
+  background-color: $green-color-100;
+  display: flex;
+  flex-direction: column;
+  gap: $size-sm-2;
+  padding: $size-md-1 $size-lg-1;
+  margin-top: $size-md-1;
+}
+
+.modal-classroom {
+  display: flex;
+  gap: $size-md-1;
+
+  .content {
+    min-width: 40vw;
+  }
+}
+
+.classroom-preview {
+  .edit-btn {
+    text-align: end;
+    margin-top: $size-md-1;
+    cursor: pointer;
+    color: $green-color;
+  }
+}
+
+.classes-container {
+  .classes-preview {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .edit-btn {
+    text-align: end;
+    margin-top: $size-md-1;
+    cursor: pointer;
+    color: $green-color;
+  }
+}
+

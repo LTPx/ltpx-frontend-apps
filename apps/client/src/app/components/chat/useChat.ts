@@ -15,8 +15,11 @@ export const useChat = () => {
 
   const fetchRooms = useCallback(async () => {
     try {
-      const rooms = await getRooms();
-      setRooms(rooms);
+      const roomsData = await getRooms();
+      setRooms(roomsData);
+      if (roomsData.length > 0 ){
+        fetchMessages(roomsData[0].id);
+      }
     } catch (error) {
       console.log(error);
     }
@@ -31,6 +34,7 @@ export const useChat = () => {
       setLoadingMessages(false);
     } catch (error) {
       console.log(error);
+      setLoadingMessages(false);
     }
   }
 
@@ -55,11 +59,11 @@ export const useChat = () => {
 
   return {
     rooms,
-    room,
     messages,
     fetchMessages,
     sendMessage,
     loadingMessages,
     senderId: user.id,
+    currentRoom: room
   };
 };

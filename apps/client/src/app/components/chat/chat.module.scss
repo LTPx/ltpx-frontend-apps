@@ -50,17 +50,18 @@
 }
 
 .rooms {
-  padding: 0 1rem;
+  // padding: 0 1rem;
 }
 
 .room-row {
   display: flex;
-  padding: 0.5rem 0;
+  padding: 0.5rem 1rem;
   align-items: center;
   gap: 1rem;
   cursor: pointer;
 
   &.selected {
-    background-color: $white-color-100;
+    background-color: $gray-color-200;
+
   }
 }

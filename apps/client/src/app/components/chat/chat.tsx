@@ -11,7 +11,7 @@ export interface ChatProps {
 
 export function Chat(props: ChatProps) {
   const { initRoomId, initUserId } = props;
-  const { rooms, room, messages, senderId, fetchMessages, sendMessage, loadingMessages } = useChat();
+  const { rooms, currentRoom, messages, senderId, fetchMessages, sendMessage, loadingMessages } = useChat();
   return (
     <div className={styles['container']}>
       <div className={styles['content']}>
@@ -22,10 +22,12 @@ export function Chat(props: ChatProps) {
           <div className={styles['rooms']}>
             {rooms.map((room, index) => (
               <div
-                className={styles['room-row']}
+                className={`${styles['room-row']} ${room.id == currentRoom?.id ? styles['selected'] : ''}`}
                 key={index}
                 onClick={() => {
-                  fetchMessages(room.id);
+                  if (room.id !== currentRoom?.id) {
+                    fetchMessages(room.id);
+                  }
                 }}
               >
                 <Avatar name={room.name} size={30} />
@@ -35,14 +37,10 @@ export function Chat(props: ChatProps) {
           </div>
         </div>
         <div className={styles['chat-body']}>
-          {/* <div className={styles['chat-body-header']}>
-            <h3>Chat</h3>
-            <p>Se respetuoso con todos</p>ess
-          </div> */}
           <div className="messages">
-            {!loadingMessages && room &&
+            {!loadingMessages && currentRoom &&
               <ChatMessages
-                room={room}
+                room={currentRoom}
                 messages={messages}
                 senderId={senderId}
                 onSubmit={(message) => {

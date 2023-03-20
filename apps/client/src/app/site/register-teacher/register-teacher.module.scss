@@ -1,0 +1,166 @@
+@import '../../../styles.scss';
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  .coll-to-action {
+    padding: 5rem 0;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 20rem;
+    background-color: #f7f9fb;
+    background-image: radial-gradient(#85a2c8 0.8px, transparent 0.8px),
+      radial-gradient(#85a2c8 0.8px, #f7f9fb 0.8px);
+    background-size: 32px 32px;
+    background-position: 0 0, 16px 16px;
+
+    .wrap {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4rem;
+    }
+    .information-section {
+      width: 50%;
+      .description {
+        padding-bottom: 1rem;
+        .title-register {
+          font-weight: 500;
+          padding-bottom: 0.25rem;
+        }
+      }
+    }
+    .image-section {
+      img {
+        width: 20rem;
+      }
+    }
+  }
+
+  .begin-teacher {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 5rem 0;
+    .content {
+      width: 80%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .tab {
+      border: none;
+    }
+    .title {
+      padding-bottom: 1rem;
+      font-weight: 500;
+    }
+    .tab-container {
+      display: grid;
+      grid-template-columns: 50% 50%;
+      padding-top: 2rem;
+      border-top: 1px solid $gray-color-200;
+      align-items: center;
+      .describe-content {
+        color: $text-gray-color;
+        line-height: 2rem;
+        ul {
+          margin-left: 2rem;
+          padding-top: 0.5rem;
+        }
+        h3 {
+          font-size: 1.15rem;
+        }
+      }
+      .image-content {
+        display: flex;
+        justify-content: center;
+      }
+    }
+    .image-one {
+      width: 25rem;
+      height: 20rem;
+    }
+  }
+}
+.section-content {
+  background-color: $white-color;
+  .btn {
+    padding-top: 1.5rem;
+  }
+}
+
+.register-form {
+  // max-width: 30rem;
+  margin-bottom: 2rem;
+}
+
+//smartphones-responsive
+@media screen and (max-width: 550px) {
+  .coll-to-action {
+    height: inherit !important;
+  }
+  .wrap {
+    flex-direction: column;
+  }
+  .image-section {
+    img {
+      width: 15rem !important;
+    }
+  }
+  .image-one {
+    width: 18rem !important;
+    height: 18rem !important;
+  }
+  .information-section {
+    width: 80% !important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .begin-teacher {
+    .tab-container {
+      display: flex !important;
+      flex-direction: column !important;
+      gap: 2rem;
+    }
+  }
+}
+//tablet-responsive-vertical
+@media screen and (min-width: 560px) and (max-width: 850px) {
+  .coll-to-action {
+    height: inherit !important;
+  }
+  .wrap {
+    width: 85% !important;
+  }
+  .image-section {
+    img {
+      width: 15rem !important;
+    }
+  }
+  .information-section {
+    width: 80% !important;
+  }
+  .image-one {
+    width: 20rem !important;
+    height: 20rem !important;
+  }
+  .tab-container {
+    gap: 2rem !important;
+  }
+  .content {
+    width: 85% !important;
+  }
+}
+//tablet-responsive-horizontal
+@media screen and (min-width: 860px) and (max-width: 1224px) {
+  .tab-container {
+    gap: 1rem !important;
+  }
+}

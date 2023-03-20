@@ -1,0 +1,21 @@
+@import '../../../styles.scss';
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: $size-lg-1;
+  gap: $size-lg-3;
+
+  .back {
+    display: flex;
+    justify-content: center;
+    padding-bottom: $size-lg-3;
+    cursor: pointer;
+    .link {
+      display: flex;
+      gap: $size-sm-3;
+      align-items: center;
+    }
+  }
+}

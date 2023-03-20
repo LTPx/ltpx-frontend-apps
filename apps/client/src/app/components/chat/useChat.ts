@@ -5,9 +5,13 @@ import { useCallback, useEffect, useState } from "react";
 export const useChat = () => {
   const { user } = useUser();
   const [rooms, setRooms] = useState<Room[]>([]);
+  const [room, setRoom] = useState<Room>();
   const [messages, setMessages] = useState<ChatMessage[]>([]);
-  const [selectedRoomId, setSelectedRoomId] = useState<number>(1);
   const [loadingMessages, setLoadingMessages] = useState(false);
+
+  function getRoom(roomId: number) {
+    return rooms.find(room => room.id === roomId);
+  }
 
   const fetchRooms = useCallback(async () => {
     try {
@@ -19,7 +23,7 @@ export const useChat = () => {
   }, []);
 
   async function fetchMessages(roomId: number) {
-    setSelectedRoomId(roomId);
+    setRoom(getRoom(roomId));
     setLoadingMessages(true);
     try {
       const messages: ChatMessage[] = await getRoomMessages(roomId);
@@ -31,15 +35,17 @@ export const useChat = () => {
   }
 
   async function sendMessage(message: ChatMessage) {
-    const newMessage = {
-      text: message.text,
-      user_id: user.id,
-      room_id: selectedRoomId,
-    }
-    try {
-      await sendRoomMessage(newMessage, selectedRoomId)
-    } catch (error) {
-      console.log(error)
+    if (room) {
+      const newMessage = {
+        text: message.text,
+        user_id: user.id,
+        room_id: room.id,
+      }
+      try {
+        await sendRoomMessage(newMessage, room.id)
+      } catch (error) {
+        console.log(error)
+      }
     }
   }
 
@@ -49,6 +55,7 @@ export const useChat = () => {
 
   return {
     rooms,
+    room,
     messages,
     fetchMessages,
     sendMessage,

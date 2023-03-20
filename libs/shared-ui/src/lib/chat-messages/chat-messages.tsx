@@ -1,11 +1,17 @@
 import { ChatMessage, getCurrentChatUser } from '@ltpx-frontend-apps/api';
 import { Avatar } from 'evergreen-ui';
 import { useRef, useState } from 'react';
+import { useMoment } from '../../hooks/useMoment';
 import Input, { Position } from '../input/input';
 import styles from './chat-messages.module.scss';
 
 /* eslint-disable-next-line */
 export interface ChatMessagesProps {
+  room: {
+    name: string;
+    id: number,
+    image?: string;
+  }
   messages: Array<ChatMessage>;
   senderId: number;
   onSubmit: (message: ChatMessage) => void;
@@ -13,8 +19,9 @@ export interface ChatMessagesProps {
 
 export function ChatMessages(props: ChatMessagesProps) {
   const mainRef = useRef<HTMLDivElement | null>(null);
-  const { messages, senderId, onSubmit} = props;
+  const { messages, senderId, onSubmit, room } = props;
   const [ msgs, setMsgs] = useState(messages);
+  const { fromNow } = useMoment();
 
   const handleKeyDown = (event: any) => {
     if (event.key === 'Enter') {
@@ -35,19 +42,18 @@ export function ChatMessages(props: ChatMessagesProps) {
 
   return (
     <div className={styles['container']}>
+      <div className={styles['header']}>
+        <Avatar name={room.name} size={40}/>
+        {room.name}
+      </div>
       <div className={styles['chat']} ref={mainRef}>
         { msgs.length > 0 ? msgs.map((message, index)=>(
-          <div key={index} className={`${styles['user']} ${ message.user_id === senderId ? styles['student'] : ''}`}>
-            { message.user_id !== senderId && (
-              <Avatar name={message.user_name}/>
-            )}
-            <div className={styles['text']}>
-              <h5>{message.user_name}</h5>
+          <div key={index} className={`${styles['user']} ${ message.user_id === senderId ? styles['current-user'] : ''}`}>
+            <div className={`${styles.text} ${message.user_id === senderId ?  styles['current-user'] : ''}`}>
+              {message.user_id !== senderId && <h5>{message.user_name}</h5>}
               <p>{message.text}</p>
             </div>
-            { message.user_id === senderId && (
-              <Avatar name={message.user_name}/>
-            )}
+            <h5 className={styles.date}>{fromNow(message.created_at)}</h5>
           </div>
         )) : (
           <h3>No hay mensajes</h3>

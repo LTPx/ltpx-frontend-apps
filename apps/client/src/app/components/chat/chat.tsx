@@ -11,13 +11,13 @@ export interface ChatProps {
 
 export function Chat(props: ChatProps) {
   const { initRoomId, initUserId } = props;
-  const { rooms, messages, senderId, fetchMessages, sendMessage, loadingMessages } = useChat();
+  const { rooms, room, messages, senderId, fetchMessages, sendMessage, loadingMessages } = useChat();
   return (
     <div className={styles['container']}>
       <div className={styles['content']}>
         <div className={styles['all-students']}>
           <div className={styles['all-students-header']}>
-            <h3>Usuarios</h3>
+            <h3>Chat</h3>
           </div>
           <div className={styles['rooms']}>
             {rooms.map((room, index) => (
@@ -35,13 +35,14 @@ export function Chat(props: ChatProps) {
           </div>
         </div>
         <div className={styles['chat-body']}>
-          <div className={styles['chat-body-header']}>
+          {/* <div className={styles['chat-body-header']}>
             <h3>Chat</h3>
             <p>Se respetuoso con todos</p>ess
-          </div>
+          </div> */}
           <div className="messages">
-            {!loadingMessages &&
+            {!loadingMessages && room &&
               <ChatMessages
+                room={room}
                 messages={messages}
                 senderId={senderId}
                 onSubmit={(message) => {

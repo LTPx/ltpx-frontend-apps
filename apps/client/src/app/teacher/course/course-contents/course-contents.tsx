@@ -9,7 +9,6 @@ import {
   SetupCard,
 } from '@ltpx-frontend-apps/shared-ui';
 import { useCourse } from '@ltpx-frontend-apps/store';
-import { Dialog } from 'evergreen-ui';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ResponseRequest } from '../../teacher-edit-course/teacher-edit-course';
@@ -108,13 +107,16 @@ export function CourseContents(props: CourseContentsProps) {
               </pre>
             </PanelAccordion>
           ))}
-          <Button
-            title={t('buttons.addContent')}
-            onClick={() => {
-              setOpenModal(true);
-            }}
-            color={ColorsButton.accent}
-          />
+          <div className={styles['button-content']}>
+            <Button
+              title={t('buttons.addContent')}
+              onClick={() => {
+                setOpenModal(true);
+              }}
+              color={ColorsButton.secondary}
+              outline={true}
+            />
+          </div>
         </>
       )}
       {openModal && (
@@ -129,37 +131,32 @@ export function CourseContents(props: CourseContentsProps) {
           onSubmit={(content) => saveContent(content)}
         />
       )}
-      <Dialog
-        isShown={openConfirm}
+      <DialogConfirm
+        open={openConfirm}
         title={'Estas seguro que deseas eliminar?'}
-        hasFooter={false}
-        onCloseComplete={() => setOpenConfirm(false)}
-      >
-        <DialogConfirm
-          subtitle="Recuerde que una ves eliminado no podrá volver a recuperar la información"
-          confirm={async () => {
-            try {
-              if (indexContentEdit) {
-                // const { index } = contents[indexContentEdit];
-                const { data } = await removeContent(indexContentEdit);
-                onSubmit &&
-                  onSubmit({
-                    success: true,
-                    data: data,
-                  });
-                setOpenConfirm(false);
-              }
-            } catch (error) {
+        subtitle="Recuerde que una ves eliminado no podrá volver a recuperar la información"
+        confirm={async () => {
+          try {
+            if (indexContentEdit) {
+              // const { index } = contents[indexContentEdit];
+              const { data } = await removeContent(indexContentEdit);
               onSubmit &&
                 onSubmit({
-                  success: false,
-                  error: error,
+                  success: true,
+                  data: data,
                 });
+              setOpenConfirm(false);
             }
-          }}
-          cancel={() => setOpenConfirm(false)}
-        />
-      </Dialog>
+          } catch (error) {
+            onSubmit &&
+              onSubmit({
+                success: false,
+                error: error,
+              });
+          }
+        }}
+        onClose={() => setOpenConfirm(false)}
+      />
     </div>
   );
 }

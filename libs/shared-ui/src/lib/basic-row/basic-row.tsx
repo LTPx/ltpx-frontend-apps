@@ -42,21 +42,16 @@ export function BasicRow(props: BasicRowProps) {
           </div>
         </div>
       </div>
-      <Dialog
-        isShown={openMessage}
-        title={"Estas seguro que deseas eliminar?"}
-        hasFooter={false}
-        onCloseComplete={() => setOpenMessage(false)}
-      >
-        <DialogConfirm
-          subtitle="Recuerde que una ves eliminado no podrá volver a recuperar la información"
-          confirm={() => {
-            remove && remove();
-            setOpenMessage(false);
-          }}
-          cancel={() => setOpenMessage(false)}
-        />
-      </Dialog>
+      <DialogConfirm
+        open={openMessage}
+        title={'Estas seguro que deseas eliminar?'}
+        subtitle="Recuerde que una ves eliminado no podrá volver a recuperar la información"
+        confirm={() => {
+          remove && remove();
+          setOpenMessage(false);
+        }}
+        onClose={() => setOpenMessage(false)}
+      />
     </div>
   );
 }

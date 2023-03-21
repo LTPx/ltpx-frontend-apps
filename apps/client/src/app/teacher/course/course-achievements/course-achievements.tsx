@@ -9,7 +9,6 @@ import {
   BasicRow,
   Button,
   ColorsButton,
-  Icon,
   Menu,
   SetupCard,
 } from '@ltpx-frontend-apps/shared-ui';

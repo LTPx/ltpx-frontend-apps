@@ -35,8 +35,8 @@ export function Footer(props: FooterProps) {
             <div className={styles['icon-contact']}>
               <Icon icon={'mail'} size={17} />
               <h4>
-              <a target="_blank" href="mailto:mail@growopenminds.com">
-                mail@growopenminds.com
+              <a target="_blank" href="mailto:support@growopenminds.com">
+                support@growopenminds.com
                 </a>
                 </h4>
             </div>

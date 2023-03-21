@@ -30,6 +30,7 @@ export function Register(props: RegisterProps) {
         <div className={styles['information']}>
           <div className={styles['wrap-information']}>
             <img
+              className={styles['img-register']}
               src="../../../../assets/images/vector.svg"
               alt="img-register"
             />

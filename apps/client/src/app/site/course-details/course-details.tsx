@@ -119,7 +119,7 @@ export function CourseDetails() {
           <>
             <div className={styles['head-responsive']}>
               <div className={styles['wrap-responsive']}>
-                <img src={course.cover_url} />
+                <img className={styles['image-responsive']} src={course.cover_url} />
                 <div className={styles['content-responsive']}>
                   <div className={styles['title-content-responsive']}>
                     <h3 className={styles['title-responsive']}>

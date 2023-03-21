@@ -215,6 +215,7 @@ export const es = {
       details: 'Datos Generales',
       contents: 'Contenidos',
       quiz: 'Tests',
+      task: 'Tareas',
       achievement: 'Logros',
       sessions: 'Sesiones'
     },
@@ -242,6 +243,11 @@ export const es = {
     title:'Tests',
     subtitle: 'Evalúa a tus estudiantes creando tests',
     text:'Crear test'
+  },
+  courseTask: {
+    title:'Tareas',
+    subtitle: 'Crea tareas para tus estudiantes',
+    text:'Crear Tarea'
   },
   quizBuilder: {
     title: 'Nombre del test',

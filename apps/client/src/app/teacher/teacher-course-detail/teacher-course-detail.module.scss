@@ -3,6 +3,11 @@
 .container {
   padding: $size-lg-3 5rem;
 
+  .sessions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
   .head {
     display: flex;
     align-items: center;

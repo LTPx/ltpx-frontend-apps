@@ -7,6 +7,7 @@ import {
   AchievementsList,
   ClassroomView,
   CourseContents,
+  CourseDateCard,
   InformationCard,
   OverviewCourse,
   QuizzesList,
@@ -117,20 +118,19 @@ export function TeacherCourseDetail() {
               <AchievementsList achievements={course.achievements || []} />
             )}
             {selectedTab === 4 && course.classroom && (
-              <>
-                <InformationCard
-                  title={CLASSROOMS[course.classroom.condition].title}
-                  text={CLASSROOMS[course.classroom.condition].text}
-                  icon={CLASSROOMS[course.classroom.condition].icon}
-                  selected={true}
-                />
-                {course.classroom.meetings.length > 0 && (
-                  <ClassroomView
-                    classroom={course.classroom}
-                    className={styles['classroom-summary']}
+              <div className={styles['sessions']}>
+                {course.session.meetings.map((meeting, index) => (
+                  <CourseDateCard
+                    className={styles['course-class']}
+                    key={index}
+                    title={'Reunion ' + (index + 1)}
+                    description={
+                      'Fecha: ' + meeting.month + ' - ' + meeting.day_number
+                    }
+                    time={'Hora: ' + meeting.end_time}
                   />
-                )}
-              </>
+                ))}
+              </div>
             )}
           </div>
         </>

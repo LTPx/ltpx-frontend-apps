@@ -27,6 +27,7 @@ export const useEditCourse = () => {
     { selected: true, text: t('teacherEditCourse.linksEditCourse.details') },
     { selected: false, text: t('teacherEditCourse.linksEditCourse.contents') },
     { selected: false, text: t('teacherEditCourse.linksEditCourse.quiz') },
+    { selected: false, text: t('teacherEditCourse.linksEditCourse.task') },
     {
       selected: false,
       text: t('teacherEditCourse.linksEditCourse.achievement'),

@@ -46,6 +46,15 @@
     flex-direction: column;
     gap: $size-md-1;
   }
+  .achievements-content {
+    display: flex;
+    padding: 1rem 0;
+    .achievements {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+  }
   .btn-test {
     display: flex;
     gap: 1rem;

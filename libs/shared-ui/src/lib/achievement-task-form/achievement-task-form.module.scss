@@ -1,5 +1,11 @@
 @import '../../styles/styles.module.scss';
 
+.task-content {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 1rem;
+  align-items: center;
+}
 .task-form {
   display: flex;
   flex-direction: column;
@@ -15,30 +21,30 @@
   }
 }
 
-.task-upload {
-  margin-top: 1rem;
-  display: flex;
-  flex-direction: column;
-  .title-task {
-    padding-bottom: 0.5rem;
-  }
-  .task-content {
-    padding: 1rem 1.5rem;
-    border: 1px solid $stroke-color;
-    border-radius: 0.25rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    .task {
-      display: flex;
-      gap: 1rem;
-      align-items: center;
-    }
-  }
-  .btn-add-task {
-    margin-top: 0.5rem;
-  }
-}
+// .task-upload {
+//   margin-top: 1rem;
+//   display: flex;
+//   flex-direction: column;
+//   .title-task {
+//     padding-bottom: 0.5rem;
+//   }
+//   .task-content {
+//     padding: 1rem 1.5rem;
+//     border: 1px solid $stroke-color;
+//     border-radius: 0.25rem;
+//     display: flex;
+//     align-items: center;
+//     justify-content: space-between;
+//     .task {
+//       display: flex;
+//       gap: 1rem;
+//       align-items: center;
+//     }
+//   }
+//   .btn-add-task {
+//     margin-top: 0.5rem;
+//   }
+// }
 
 .footer {
   display: flex;

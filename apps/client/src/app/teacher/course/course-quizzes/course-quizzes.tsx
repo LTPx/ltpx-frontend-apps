@@ -1,8 +1,8 @@
 import { QuizModel, QuizParams } from '@ltpx-frontend-apps/api';
 import {
+  BasicRow,
   Button,
   ColorsButton,
-  Icon,
   QuizBuilder,
   SetupCard,
 } from '@ltpx-frontend-apps/shared-ui';
@@ -29,14 +29,14 @@ export function CourseQuizzes(props: CourseQuizzesProps) {
     const response = quiz.id
       ? await _updateQuiz({ ...quiz, ...{ id: quiz.id } })
       : await _addQuiz(quiz);
-      const { success } = response;
-      if (success) {
-        onSubmit(response);
-        setShowForm(false);
-        setQuizEdit(undefined);
-      } else {
-        onSubmit(response);
-      }
+    const { success } = response;
+    if (success) {
+      onSubmit(response);
+      setShowForm(false);
+      setQuizEdit(undefined);
+    } else {
+      onSubmit(response);
+    }
   };
 
   const handleRemoveQuiz = async (id: number) => {
@@ -66,34 +66,19 @@ export function CourseQuizzes(props: CourseQuizzesProps) {
       {!showForm && (
         <div className={styles['quizzes']}>
           {quizzes?.map((quiz, index) => (
-            <div className={styles['quiz']} key={index}>
-              <div className={styles['summary']}>
-                <Icon icon="list" size={20} />
-                <div className="d">
-                  <h4>{quiz.name}</h4>
-                  <h5>{quiz.questions_attributes.length} preguntas</h5>
-                </div>
-              </div>
-              <div className={styles['actions']}>
-                <div
-                  className={styles['action']}
-                  onClick={() => {
-                    setQuizEdit(quiz);
-                    setShowForm(true);
-                  }}
-                >
-                  <Icon icon="pencil" size={15} />
-                </div>
-                <div
-                  className={styles['action']}
-                  onClick={() => {
-                    handleRemoveQuiz(quiz.id);
-                  }}
-                >
-                  <Icon icon="trash" size={15} />
-                </div>
-              </div>
-            </div>
+            <BasicRow
+              title={quiz.name}
+              subtitle={quiz.questions_attributes.length + ' preguntas'}
+              icon="list"
+              key={index}
+              onClick={() => {
+                setQuizEdit(quiz);
+                setShowForm(true);
+              }}
+              remove={() => {
+                handleRemoveQuiz(quiz.id);
+              }}
+            />
           ))}
         </div>
       )}
@@ -108,14 +93,17 @@ export function CourseQuizzes(props: CourseQuizzesProps) {
         />
       )}
       {!showForm && quizzes && quizzes.length > 0 && (
-        <Button
-          title={t('buttons.test')}
-          className={styles['add-button']}
-          color={ColorsButton.accent}
-          onClick={() => {
-            setShowForm(true);
-          }}
-        />
+        <div className={styles['button-content']}>
+          <Button
+            title={t('buttons.test')}
+            className={styles['add-button']}
+            outline={true}
+            color={ColorsButton.secondary}
+            onClick={() => {
+              setShowForm(true);
+            }}
+          />
+        </div>
       )}
       {showForm && (
         <>
@@ -130,14 +118,16 @@ export function CourseQuizzes(props: CourseQuizzesProps) {
               setQuizEdit(undefined);
             }}
           />
-          <Button
-            title={t('buttons.cancel')}
-            className={styles['add-button']}
-            color={ColorsButton.accent}
-            onClick={() => {
-              setShowForm(false);
-            }}
-          />
+          <div className={styles['button-content']}>
+            <Button
+              title={t('buttons.cancel')}
+              className={styles['add-button']}
+              color={ColorsButton.accent}
+              onClick={() => {
+                setShowForm(false);
+              }}
+            />
+          </div>
         </>
       )}
     </div>

@@ -39,8 +39,8 @@ export function Chat(props: ChatProps) {
                   }
                 }}
               >
-                <Avatar name={roomData.name} size={30} />
-                {roomData.name}
+                <Avatar name={roomData.user_name} size={30} />
+                {roomData.user_name}
               </div>
             ))}
           </div>

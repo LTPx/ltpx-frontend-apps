@@ -21,6 +21,7 @@ export type ChatSlice = {
   room: Room;
   messages: ChatMessage[];
   setRoomById: (roomId: number) => void;
+  appendNewMessage: (message: ChatMessage) => void;
   _getRooms: () => Promise<TResponse>;
   _getRoom: (roomId: number) => Promise<TResponse>;
   _newChatRoom: (userId: number) => Promise<TResponse>;
@@ -38,6 +39,14 @@ export const createChatSlice: StateCreator<StoreState, [], [], ChatSlice> = (
     const rooms = get().rooms;
     const room = rooms.find(room => room.id === roomId);
     set({room});
+  },
+  appendNewMessage: (message) => {
+    const messages = [...get().room.messages , ...[message]];
+    const room = {
+      ...get().room,
+      ...{ messages },
+    };
+    set({ room });
   },
   _getRooms: async () => {
     try {

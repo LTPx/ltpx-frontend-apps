@@ -17,4 +17,5 @@ export interface Room {
   created_at: string;
   is_private: boolean;
   messages: ChatMessage[];
+  user_name?: string; // only if is private
 }

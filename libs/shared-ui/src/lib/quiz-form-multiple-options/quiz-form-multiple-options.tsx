@@ -68,7 +68,10 @@ export function QuizFormMultipleOptions(props: QuizFormMultipleOptionsProps) {
           submitForm,
           errors,
         }) => (
-          <Form className={className || ''}>
+          <Form 
+          className={styles['form-quiz-options']}
+          // className={className || 'form-quiz-options}
+          >
             <div className={styles['fields']}>
               <Input
                 label={t('quizFormMultipleOptions.question') || ''}

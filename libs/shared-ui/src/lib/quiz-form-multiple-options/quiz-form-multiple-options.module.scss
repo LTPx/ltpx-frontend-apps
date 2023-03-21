@@ -1,7 +1,17 @@
 @import '../../styles/styles.module.scss';
 
-.container {
-
+.questions {
+  height: 100%;
+}
+.form-quiz-options {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  // background-color: aqua;
+}
+.fields {
+  // background-color: aqua;
 }
 
 .form {

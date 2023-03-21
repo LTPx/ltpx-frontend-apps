@@ -16,10 +16,10 @@ import {
   GreatExperienceOpenMind,
   GeneratingImpactOpportunities,
   WhatMakesClassGoingOn,
-} from '../pages/site/blog';
-import BlogLayout from '../pages/site/blog-layout/blog-layout';
-import BlogHome from '../pages/site/blog/blog-home/blog-home';
-import EthicsManualForTeaching from '../pages/site/blog/ethics-manual-for-teaching/ethics-manual-for-teaching';
+} from '../blog';
+import BlogLayout from '../blog/blog-layout/blog-layout';
+import BlogHome from '../blog/blog-home/blog-home';
+import EthicsManualForTeaching from '../blog/ethics-manual-for-teaching/ethics-manual-for-teaching';
 import {
   Home,
   Login,
@@ -34,8 +34,8 @@ import {
   TeacherProfilePage,
   SiteLayout,
   FrequentlyAskedQuestions,
-} from '../pages/site/index';
-import TermsConditions from '../pages/site/terms-conditions/terms-conditions';
+} from '../site/index';
+import TermsConditions from '../site/terms-conditions/terms-conditions';
 
 export const SiteRoutes = () => {
   return (

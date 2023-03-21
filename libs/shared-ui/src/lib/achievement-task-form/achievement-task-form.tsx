@@ -3,7 +3,6 @@ import {
   AchievementsImages,
   AchievementParams,
   TypeAchievement,
-  NewTaskParams,
   TaskModel,
   EntityAchievement,
 } from '@ltpx-frontend-apps/api';
@@ -17,24 +16,18 @@ import InputTextStatus, {
 } from '../input-text-status/input-text-status';
 import { useTranslation } from 'react-i18next';
 import { useState } from 'react';
-import { Dialog } from 'evergreen-ui';
-import TaskForm from '../task-form/task-form';
-import Icon from '../icon/icon';
-import { useCourse } from '@ltpx-frontend-apps/store';
 
 /* eslint-disable-next-line */
 export interface AchievementTaskFormProps {
   achievement?: AchievementParams;
   className?: string;
-  onSubmit: (data:AchievementParams) => void;
+  onSubmit: (data: AchievementParams) => void;
   onCancel?: () => void;
 }
 
 export function AchievementTaskForm(props: AchievementTaskFormProps) {
   const { onCancel, onSubmit, className, achievement } = props;
-  const [ openModal, setOpenModal ] = useState(false);
-  const [ task, setTask] = useState<TaskModel>();
-  const { _addTask, course } = useCourse();
+  const [task, setTask] = useState<TaskModel>();
   const { t } = useTranslation();
 
   const initialValues = {
@@ -46,20 +39,7 @@ export function AchievementTaskForm(props: AchievementTaskFormProps) {
     settings: [],
   };
 
-  async function handleSaveTask (params: NewTaskParams) {
-    console.log('task params: ', params);
-    const {data, success, error } = await _addTask(course.id, params);
-    if (success) {
-      setTask(data);
-      console.log('data: ', data);
-    }else {
-      console.log('error: ', error);
-    }
-  }
-
-
   return (
-    <>
       <Formik
         initialValues={initialValues}
         validationSchema={Yup.object({
@@ -79,8 +59,8 @@ export function AchievementTaskForm(props: AchievementTaskFormProps) {
                 entity_id: task?.id || -1,
                 must_reach_value: 100,
                 points_to_assign: 100,
-                description: task?.title
-              }
+                description: task?.title,
+              },
             ],
           });
         }}
@@ -104,36 +84,29 @@ export function AchievementTaskForm(props: AchievementTaskFormProps) {
                 name="title"
                 errorMessage={errors.title}
               />
-              <div className={styles['task-upload']}>
+              <div className={styles['task-content']}>
                 <label className={styles['title-task']}>
-                  {t('achievementTaskForm.task')}
+                  Seleccionar tarea
                 </label>
-                {task ? (
+              </div>
+              {/* <div className={styles['task-upload']}>
+                {task && (
                   <div className={styles['task-content']}>
                     <div className={styles['task']}>
                       <Icon icon={'book'} size={18} />
                       <h4>Tarea: {task.title}</h4>
+                      <h4>{task.description}</h4>
                     </div>
                     <div>
                       <Button
-                        onClick={() => setOpenModal(true)}
                         title={'Editar Tarea'}
                         icon={'pencil'}
                         outline={true}
                       />
                     </div>
                   </div>
-                ) : (
-                  <div className={styles['btn-add-task']}>
-                    <Button
-                      onClick={() => setOpenModal(true)}
-                      title={'Agregar Tarea'}
-                      icon={'plus'}
-                      outline={true}
-                    />
-                  </div>
                 )}
-              </div>
+              </div> */}
               <br />
               <label>{t('achievementTaskForm.titleImage')}</label>
               <SelectImage
@@ -181,21 +154,6 @@ export function AchievementTaskForm(props: AchievementTaskFormProps) {
           </Form>
         )}
       </Formik>
-      <Dialog
-        isShown={openModal}
-        hasFooter={false}
-        hasHeader={false}
-        onCloseComplete={() => setOpenModal(false)}
-        width={'40vw'}
-      >
-        <TaskForm
-          onClose={() => setOpenModal(false)}
-          onSubmit={(params) => {
-            handleSaveTask(params);
-          }}
-        />
-      </Dialog>
-    </>
   );
 }
 

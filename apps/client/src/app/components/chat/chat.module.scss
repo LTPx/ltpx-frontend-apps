@@ -1,0 +1,90 @@
+@import '../../../styles.scss';
+
+.tab-options {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.container {
+  width: 60vw;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  .title {
+    padding-bottom: 1rem;
+  }
+  .content {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 25% 75%;
+    gap: 1rem;
+  }
+
+  .rooms-container {
+    box-shadow: $card-shadow-medium;
+    background-color: $white-color;
+    min-width: 10rem;
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem;
+      border-bottom: 1px solid #d4d4d4;
+
+      svg {
+        cursor: pointer;
+        color: $primary-color;
+      }
+    }
+  }
+
+  .student-tabs {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+  }
+}
+
+.chat-body {
+  box-shadow: $card-shadow-medium;
+  background-color: $white-color;
+}
+
+.chat-body-header {
+
+}
+
+.rooms {
+  // padding: 0 1rem;
+}
+
+.room-row {
+  display: flex;
+  padding: 0.5rem 1rem;
+  align-items: center;
+  gap: 1rem;
+  cursor: pointer;
+
+  &.selected {
+    background-color: $gray-color-200;
+
+    &:hover {
+      background-color: $gray-color-200;
+    }
+  }
+
+  &:hover {
+    background-color: $white-color-100;
+  }
+}
+
+.action {
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+
+  &:hover {
+    background-color: $white-color-100;
+  }
+}

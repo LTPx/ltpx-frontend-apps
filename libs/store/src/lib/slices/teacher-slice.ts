@@ -18,7 +18,6 @@ import {
   AchievementParams,
   TeacherCourse,
   getTeacherCourse,
-  createQuiz,
   createAchievement,
   sendCourseToReview,
   getWallet,
@@ -241,7 +240,7 @@ export const createTeacherSlice: StateCreator<
     } catch (error) {
       return { success: false, error: error };
     }
-  }
+  },
 });
 
 const callApi = async (promiseFn: any, set: any, params?: any):Promise<TResponse> => {

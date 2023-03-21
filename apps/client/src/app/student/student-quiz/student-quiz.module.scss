@@ -1,0 +1,42 @@
+@import '../../../styles.scss';
+.btn-quiz-score {
+  display: flex;
+  justify-content: center;
+  padding-top: $size-md-2;
+}
+.container {
+  width: 60vw;
+
+  .quiz-container {
+    padding: 3rem;
+  }
+
+  .header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+
+    p {
+      font-weight: 500;
+    }
+  }
+
+  .questions {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+
+    .question {
+      h3 {
+        font-weight: 500;
+      }
+    }
+  }
+
+  .footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    padding: 2rem 0 0 0;
+  }
+}

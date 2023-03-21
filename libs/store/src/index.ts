@@ -10,3 +10,4 @@ export * from './lib/hooks/useCart';
 export * from './lib/hooks/useSiteUtil';
 export * from './lib/hooks/useStudent';
 export * from './lib/hooks/useCourseStudents';
+export * from './lib/hooks/useChat';

@@ -5,6 +5,15 @@
   gap: 2rem;
   margin-top: 1.5rem;
 }
+.container {
+  height: 100%;
+}
+.form-quiz-conditional {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
 
 .conditional-container {
   display: flex;

@@ -9,7 +9,13 @@ export const useMoment = () => {
     return result.charAt(0).toUpperCase() + result.slice(1);
   };
 
+  const fromNow = (date: string) => {
+    return moment(date).fromNow();
+  };
+
   return {
     formatDate,
+    fromNow,
+    dateNow: moment()
   };
 };

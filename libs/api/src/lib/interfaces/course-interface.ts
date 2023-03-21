@@ -2,6 +2,7 @@ import { AchievementModel } from './achievement-interface';
 import { MeetingModel } from './meeting-interface';
 import { QuizModel } from './quiz-interface';
 import { CourseSession } from './session-interface';
+import { TaskModel } from './task-interface';
 import { PartialWithRequired } from './util';
 
 export enum TeacherClassType {
@@ -73,6 +74,7 @@ export interface CourseModel {
   quizzes: QuizModel[];
   achievements?: AchievementModel[];
   course_session_id: number;
+  tasks: TaskModel[];
 }
 
 export interface CourseSite {

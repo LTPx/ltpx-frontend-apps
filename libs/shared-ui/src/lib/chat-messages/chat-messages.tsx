@@ -1,31 +1,25 @@
-import { ChatMessage } from '@ltpx-frontend-apps/api';
+import { ChatMessage, Room } from '@ltpx-frontend-apps/api';
 import { Avatar } from 'evergreen-ui';
 import { useEffect, useRef, useState } from 'react';
 import { useMoment } from '../../hooks/useMoment';
 import Input, { Position } from '../input/input';
 import styles from './chat-messages.module.scss';
 
-/* eslint-disable-next-line */
 export interface ChatMessagesProps {
-  room: {
-    name: string;
-    id: number,
-    image?: string;
-  }
-  messages: Array<ChatMessage>;
+  room: Room;
   senderId: number;
   onSubmit: (message: ChatMessage) => void;
 }
 
 export function ChatMessages(props: ChatMessagesProps) {
   const mainRef = useRef<HTMLDivElement | null>(null);
-  const { messages, senderId, onSubmit, room } = props;
-  const [ msgs, setMsgs] = useState(messages);
+  const { senderId, onSubmit, room } = props;
+  // const [ msgs, setMsgs] = useState(messages);
   const { fromNow, dateNow } = useMoment();
 
   useEffect(() => {
     scrollDown()
-  }, [messages]);
+  }, [room.messages]);
 
   function scrollDown() {
     const height = mainRef.current?.scrollHeight || 100;
@@ -42,8 +36,8 @@ export function ChatMessages(props: ChatMessagesProps) {
         user_name: 'Yp',
         created_at: dateNow.toString(),
       };
-      const mensajes = msgs.concat([newMessage]);
-      setMsgs(mensajes);
+      // const mensajes = msgs.concat([newMessage]);
+      // setMsgs(mensajes);
       onSubmit(newMessage);
       event.currentTarget.value = '';
       scrollDown();
@@ -57,7 +51,7 @@ export function ChatMessages(props: ChatMessagesProps) {
         {room.name}
       </div>
       <div className={styles['chat']} ref={mainRef}>
-        { msgs.length > 0 ? msgs.map((message, index)=>(
+        { room.messages.length > 0 ? room.messages.map((message, index)=>(
           <div key={index} className={`${styles['user']} ${ message.user_id === senderId ? styles['current-user'] : ''}`}>
             <div className={`${styles.text} ${message.user_id === senderId ?  styles['current-user'] : ''}`}>
               {message.user_id !== senderId && <h5>{message.user_name}</h5>}

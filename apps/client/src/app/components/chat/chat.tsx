@@ -1,50 +1,65 @@
 import { ChatMessages } from '@ltpx-frontend-apps/shared-ui';
+import { useChat, useUser } from '@ltpx-frontend-apps/store';
 import { Avatar } from 'evergreen-ui';
+import { ReactElement } from 'react';
 import styles from './chat.module.scss';
-import { useChat } from './useChat';
+import { useChatData } from './useChatData';
 
-/* eslint-disable-next-line */
 export interface ChatProps {
   initRoomId?: number;
   initUserId?: number;
+  children?: ReactElement;
 }
 
 export function Chat(props: ChatProps) {
-  const { initRoomId, initUserId } = props;
-  const { rooms, currentRoom, messages, senderId, fetchMessages, sendMessage, loadingMessages } = useChat();
+  const { initRoomId, initUserId, children } = props;
+  const { senderId } = useChatData();
+  const {
+    rooms,
+    room,
+    _getRoom,
+    _sendMessageRoom,
+  } = useChat();
+  const { user } = useUser();
+
   return (
     <div className={styles['container']}>
       <div className={styles['content']}>
-        <div className={styles['all-students']}>
-          <div className={styles['all-students-header']}>
-            <h3>Chat</h3>
+        <div className={styles['rooms-container']}>
+          <div className={styles['header']}>
+            <h3>Chat {rooms.length}</h3>
+            {children}
           </div>
           <div className={styles['rooms']}>
-            {rooms.map((room, index) => (
+            {rooms.map((roomData, index) => (
               <div
-                className={`${styles['room-row']} ${room.id == currentRoom?.id ? styles['selected'] : ''}`}
+                className={`${styles['room-row']} ${room.id == roomData.id ? styles['selected'] : ''}`}
                 key={index}
                 onClick={() => {
-                  if (room.id !== currentRoom?.id) {
-                    fetchMessages(room.id);
+                  if (room.id !== roomData.id) {
+                    _getRoom(roomData.id)
                   }
                 }}
               >
-                <Avatar name={room.name} size={30} />
-                {room.name}
+                <Avatar name={roomData.name} size={30} />
+                {roomData.name}
               </div>
             ))}
           </div>
         </div>
         <div className={styles['chat-body']}>
           <div className="messages">
-            {!loadingMessages && currentRoom &&
+            { room.messages &&
               <ChatMessages
-                room={currentRoom}
-                messages={messages}
+                room={room}
                 senderId={senderId}
                 onSubmit={(message) => {
-                  sendMessage(message);
+                  const newMessage = {
+                    text: message.text,
+                    user_id: user.id,
+                    room_id: room.id,
+                  }
+                  _sendMessageRoom(newMessage)
                 }}
               />
             }

@@ -20,16 +20,23 @@
     grid-template-columns: 25% 75%;
     gap: 1rem;
   }
-  .all-students {
+
+  .rooms-container {
     box-shadow: $card-shadow-medium;
     background-color: $white-color;
-    height:fit-content;
+    min-width: 10rem;
 
-    .all-students-header {
+    .header {
       display: flex;
       justify-content: space-between;
+      align-items: center;
       padding: 1rem;
       border-bottom: 1px solid #d4d4d4;
+
+      svg {
+        cursor: pointer;
+        color: $primary-color;
+      }
     }
   }
 
@@ -63,5 +70,21 @@
   &.selected {
     background-color: $gray-color-200;
 
+    &:hover {
+      background-color: $gray-color-200;
+    }
+  }
+
+  &:hover {
+    background-color: $white-color-100;
+  }
+}
+
+.action {
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+
+  &:hover {
+    background-color: $white-color-100;
   }
 }

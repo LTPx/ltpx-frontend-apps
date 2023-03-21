@@ -19,6 +19,8 @@ export const useCourse = () => {
     course,
     cleanCourse,
     _addTask,
+    _updateTask,
+    _removeTask,
   } = useAppStore();
 
   return {
@@ -42,5 +44,7 @@ export const useCourse = () => {
     achievements: course.achievements,
     classroom: course.classroom,
     _addTask,
+    _updateTask,
+    _removeTask,
   };
 };

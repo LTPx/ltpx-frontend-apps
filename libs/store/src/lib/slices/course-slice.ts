@@ -20,6 +20,8 @@ import {
   createTask,
   QuizParams,
   formatErrors,
+  editTask,
+  removeTask,
 } from '@ltpx-frontend-apps/api';
 
 export type TResponse = {
@@ -49,6 +51,8 @@ export type CourseSlice = {
   _updateCourse: (course: CourseApiParams) => Promise<TResponse>;
   _addCourseSession: (params: NewCourseSessionParams) => Promise<TResponse>;
   _addTask: (courseId: number, task: NewTaskParams) => Promise<TResponse>;
+  _updateTask: (courseId: number, task: NewTaskParams) => Promise<TResponse>;
+  _removeTask: (courseId: number, taskId: number) => Promise<TResponse>;
 };
 
 export const createCourseSlice: StateCreator<
@@ -87,7 +91,7 @@ export const createCourseSlice: StateCreator<
   },
   removeContent: async (index: number): Promise<TResponse> => {
     try {
-      let contents = get().course.contents;
+      const contents = get().course.contents;
       contents.splice(index, 1);
       const courseStore = get().course;
       const courseUpdated = { ...courseStore, ...{ contents } };
@@ -236,6 +240,13 @@ export const createCourseSlice: StateCreator<
   _addTask: async(courseId, params) => {
     try {
       const task = await createTask(courseId, params);
+      const tasks = get().course.tasks;
+      const allTasks = tasks.concat([task]);
+      const course = get().course;
+      const updatedCourse = {...course, ...{
+        tasks: allTasks
+      }};
+      set({course: updatedCourse})
       return { success: true, data: task };
     } catch (error) {
       return { success: false, error };
@@ -244,4 +255,29 @@ export const createCourseSlice: StateCreator<
   cleanCourse: () => {
     set({ course: {} as TeacherCourse });
   },
+  _updateTask: async(courseId, taskId) => {
+    try {
+      const task = await editTask(courseId, taskId);
+      return {success: true, data: task};
+    } catch (error) {
+      return {success: false, error}
+    }
+  },
+  _removeTask: async(courseId, taskId) => {
+    try {
+      await removeTask(courseId, taskId);
+      const tasks = get().course.tasks;
+      const updatedTasks = tasks.filter((task)=>{
+        return task.id !== taskId;
+      });
+      const course = get().course;
+      const updatedCourse = {...course, ...{
+        tasks: updatedTasks
+      }};
+      set({course: updatedCourse})
+      return {success: true};
+    } catch (error) {
+      return {success: false, error};
+    }
+  }
 });

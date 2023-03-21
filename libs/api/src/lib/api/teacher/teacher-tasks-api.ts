@@ -1,13 +1,12 @@
 import { _http } from '../../http';
-import { EditSessionParams, CourseSessionModel } from '../../interfaces/session-interface';
 import { NewTaskParams, TaskModel } from '../../interfaces/task-interface';
 
 const http = _http;
 
-export const createTask = async (id: number, params: NewTaskParams) => {
+export const createTask = async (courseId: number, params: NewTaskParams) => {
   return new Promise<TaskModel>((resolve, reject) => {
     http
-      .post(`api/v1/teacher/courses/${id}/tasks`, params)
+      .post(`api/v1/teacher/courses/${courseId}/tasks`, params)
       .then((response) => {
         resolve(response.data);
       })
@@ -17,11 +16,10 @@ export const createTask = async (id: number, params: NewTaskParams) => {
   });
 };
 
-export const editTask = async (session: EditSessionParams) => {
-  const { id } = session;
-  return new Promise<CourseSessionModel>((resolve, reject) => {
+export const editTask = async (courseId: number, params: NewTaskParams) => {
+  return new Promise<TaskModel>((resolve, reject) => {
     http
-      .put(`api/v1/teacher/course_sessions/${id}`, session)
+      .put(`api/v1/teacher/courses/${courseId}/tasks`, params)
       .then((response) => {
         resolve(response.data);
       })
@@ -31,10 +29,10 @@ export const editTask = async (session: EditSessionParams) => {
   });
 };
 
-export const removeTask = async (id: number) => {
+export const removeTask = async (courseId: number, taskId: number) => {
   return new Promise((resolve, reject) => {
     http
-      .delete(`api/v1/teacher/course_sessions/${id}`)
+      .delete(`api/v1/teacher/courses/${courseId}/tasks/${taskId}`)
       .then((response) => {
         resolve(response.data);
       })

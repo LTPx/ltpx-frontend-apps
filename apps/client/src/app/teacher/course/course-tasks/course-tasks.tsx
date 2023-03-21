@@ -10,29 +10,48 @@ import { useCourse } from '@ltpx-frontend-apps/store';
 import { Dialog } from 'evergreen-ui';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { ResponseRequest } from '../../teacher-edit-course/teacher-edit-course';
 import styles from './course-tasks.module.scss';
 
 /* eslint-disable-next-line */
 export interface CourseTasksProps {
-  onSubmit?: (content: ResponseRequest) => void;
+  onSubmit: (data: any) => void;
 }
 
 export function CourseTasks(props: CourseTasksProps) {
   const { onSubmit } = props;
   const [task, setTask] = useState<TaskModel>();
   const [openModal, setOpenModal] = useState(false);
-  const { _addTask, course } = useCourse();
+  const { _addTask, _updateTask, _removeTask, course } = useCourse();
   const { tasks } = course;
 
   async function handleSaveTask(params: NewTaskParams) {
-    console.log('task params: ', params);
     const { data, success, error } = await _addTask(course.id, params);
     if (success) {
       setTask(data);
-      console.log('data: ', data);
+      onSubmit({
+        success
+      })
+    } else {
+      onSubmit({
+        success: false,
+        error
+      })
+    }
+  }
+
+  async function handleRemoveTask(taskId: number) {
+    const { success, error } = await _removeTask(course.id, taskId);
+    if (success) {
+      console.log('success remove');
+      onSubmit({
+        success,
+      });
     } else {
       console.log('error: ', error);
+      onSubmit({
+        success: false,
+        error,
+      });
     }
   }
   const { t } = useTranslation();
@@ -53,6 +72,9 @@ export function CourseTasks(props: CourseTasksProps) {
                   onClick={() => setOpenModal(true)}
                   title={element.title}
                   subtitle={element.description}
+                  remove={() => {
+                    handleRemoveTask(element.id);
+                  }}
                 />
               </div>
             ))}

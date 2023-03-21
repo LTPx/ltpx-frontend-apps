@@ -1,5 +1,5 @@
 import { useChat, useUser } from "@ltpx-frontend-apps/store";
-import { useCallback, useEffect } from "react";
+import { useCallback } from "react";
 import Pusher from "pusher-js";
 import { ChatMessage } from "@ltpx-frontend-apps/api";
 import { useEffectOnce } from "./useEffectOnce";
@@ -41,5 +41,9 @@ export const useChatData = () => {
         appendNewMessage(newMessage);
       }
     })
+  }
+
+  return {
+
   }
 };

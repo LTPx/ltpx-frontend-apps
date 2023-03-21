@@ -23,6 +23,7 @@ export function CourseTasks(props: CourseTasksProps) {
   const [task, setTask] = useState<TaskModel>();
   const [openModal, setOpenModal] = useState(false);
   const { _addTask, course } = useCourse();
+  const { tasks } = course;
 
   async function handleSaveTask(params: NewTaskParams) {
     console.log('task params: ', params);
@@ -43,22 +44,26 @@ export function CourseTasks(props: CourseTasksProps) {
         <h4 className="muted">{t('courseTask.subtitle')}</h4>
       </div>
       <div className={styles['task-upload']}>
-        {task ? (
-          <div>
-            <BasicRow
-              icon='ordered-list'
-              onClick={() => setOpenModal(true)}
-              title={task.title}
-              subtitle={task.description}
-            />
+        {tasks.length > 0 ? (
+          <div className={styles['task-list']}>
+            {tasks.map((element, index) => (
+              <div key={index}>
+                <BasicRow
+                  icon="ordered-list"
+                  onClick={() => setOpenModal(true)}
+                  title={element.title}
+                  subtitle={element.description}
+                />
+              </div>
+            ))}
             <div className={styles['button-content']}>
-            <Button
-              className={styles['btn-add-task']}
-              title="Crear Nueva Tarea"
-              color={ColorsButton.secondary}
-              outline={true}
-              onClick={() => setOpenModal(true)}
-            />
+              <Button
+                className={styles['btn-add-task']}
+                title="Crear Nueva Tarea"
+                color={ColorsButton.secondary}
+                outline={true}
+                onClick={() => setOpenModal(true)}
+              />
             </div>
           </div>
         ) : (

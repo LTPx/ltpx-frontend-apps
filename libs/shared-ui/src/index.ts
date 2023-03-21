@@ -1,3 +1,5 @@
+export * from './lib/dialog-confirm/dialog-confirm';
+export * from './lib/basic-row/basic-row';
 export * from './lib/quiz-question-view/quiz-question-view';
 export * from './lib/content-items/content-items';
 export * from './lib/course-row-card/course-row-card';

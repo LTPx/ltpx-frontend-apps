@@ -22,10 +22,12 @@ export function QuizFormAnswer(props: QuizFormAnswerProps) {
     question: question?.question || '',
     description: question?.description || '',
     points: question?.points || 1,
-    answers_attributes: [{
-      text: '',
-      correct: false,
-    }],
+    answers_attributes: [
+      {
+        text: '',
+        correct: false,
+      },
+    ],
   };
   const formik = useFormik({
     initialValues: initialValues,
@@ -41,36 +43,36 @@ export function QuizFormAnswer(props: QuizFormAnswerProps) {
 
   return (
     <div className={styles['container']}>
-      <form onSubmit={formik.handleSubmit}>
-        <Input
-          label={t('quizFormAnswer.question') || ''}
-          placeholder="Formula tu pregunta"
-          value={formik.values.question}
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          name="question"
-          errorMessage={formik.errors.question}
-        />
-        <Input
-          label={t('quizFormAnswer.description') || ''}
-          name="description"
-          placeholder="Alguna observación antes de responder esta pregunta"
-          value={formik.values.description}
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-        />
-        <Input
-          label={t('quizFormConditional.points') || ''}
-          name="points"
-          type="number"
-          value={formik.values.points}
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          errorMessage={formik.errors.points}
-        />
-        <h5 className={styles['text']}>
-          {t('quizFormAnswer.text')}
-        </h5>
+      <form className={styles['form-quiz-answer']} onSubmit={formik.handleSubmit}>
+        <div className={styles['quiz-answer']}>
+          <Input
+            label={t('quizFormAnswer.question') || ''}
+            placeholder="Formula tu pregunta"
+            value={formik.values.question}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            name="question"
+            errorMessage={formik.errors.question}
+          />
+          <Input
+            label={t('quizFormAnswer.description') || ''}
+            name="description"
+            placeholder="Alguna observación antes de responder esta pregunta"
+            value={formik.values.description}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+          />
+          <Input
+            label={t('quizFormConditional.points') || ''}
+            name="points"
+            type="number"
+            value={formik.values.points}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            errorMessage={formik.errors.points}
+          />
+          <h5 className={styles['text']}>{t('quizFormAnswer.text')}</h5>
+        </div>
         <div className={styles['footer']}>
           <Button
             title={t('buttons.cancel')}
@@ -82,7 +84,9 @@ export function QuizFormAnswer(props: QuizFormAnswerProps) {
           />
           <Button
             title={
-              question?.question ? t('buttons.updateQuestion') : t('buttons.addQuestion')
+              question?.question
+                ? t('buttons.updateQuestion')
+                : t('buttons.addQuestion')
             }
             type={TypeButton.submit}
             onClick={formik.submitForm}

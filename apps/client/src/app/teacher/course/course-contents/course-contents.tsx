@@ -4,10 +4,12 @@ import {
   ColorsButton,
   CourseContent,
   CourseContentForm,
+  DialogConfirm,
   PanelAccordion,
   SetupCard,
 } from '@ltpx-frontend-apps/shared-ui';
 import { useCourse } from '@ltpx-frontend-apps/store';
+import { Dialog } from 'evergreen-ui';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ResponseRequest } from '../../teacher-edit-course/teacher-edit-course';
@@ -27,6 +29,7 @@ export interface CourseContentsProps {
 export function CourseContents(props: CourseContentsProps) {
   const { onSubmit } = props;
   const [openModal, setOpenModal] = useState(false);
+  const [openConfirm, setOpenConfirm] = useState(false);
   const [contentEdit, setContentEdit] = useState<CourseContent>();
   const [indexContentEdit, setIndexContentEdit] = useState<number>();
   const { course, addNewContent, updateContent, removeContent } = useCourse();
@@ -45,22 +48,10 @@ export function CourseContents(props: CourseContentsProps) {
     },
     {
       icon: 'trash',
-      onClick: async (content: any) => {
-        try {
-          const { index } = content;
-          const { data } = await removeContent(index);
-          onSubmit &&
-            onSubmit({
-              success: true,
-              data: data,
-            });
-        } catch (error) {
-          onSubmit &&
-            onSubmit({
-              success: false,
-              error: error,
-            });
-        }
+      onClick: (data: any) => {
+        const { index } = data;
+        setOpenConfirm(true);
+        setIndexContentEdit(index);
       },
     },
   ];
@@ -112,7 +103,9 @@ export function CourseContents(props: CourseContentsProps) {
               data={{ content, index }}
               actions={actionsContent}
             >
-              <pre className={styles['text-content']}>{content.description}</pre>
+              <pre className={styles['text-content']}>
+                {content.description}
+              </pre>
             </PanelAccordion>
           ))}
           <Button
@@ -136,6 +129,37 @@ export function CourseContents(props: CourseContentsProps) {
           onSubmit={(content) => saveContent(content)}
         />
       )}
+      <Dialog
+        isShown={openConfirm}
+        title={'Estas seguro que deseas eliminar?'}
+        hasFooter={false}
+        onCloseComplete={() => setOpenConfirm(false)}
+      >
+        <DialogConfirm
+          subtitle="Recuerde que una ves eliminado no podrá volver a recuperar la información"
+          confirm={async () => {
+            try {
+              if (indexContentEdit) {
+                // const { index } = contents[indexContentEdit];
+                const { data } = await removeContent(indexContentEdit);
+                onSubmit &&
+                  onSubmit({
+                    success: true,
+                    data: data,
+                  });
+                setOpenConfirm(false);
+              }
+            } catch (error) {
+              onSubmit &&
+                onSubmit({
+                  success: false,
+                  error: error,
+                });
+            }
+          }}
+          cancel={() => setOpenConfirm(false)}
+        />
+      </Dialog>
     </div>
   );
 }

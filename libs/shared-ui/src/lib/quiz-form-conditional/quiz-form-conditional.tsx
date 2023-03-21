@@ -60,54 +60,59 @@ export function QuizFormConditional(props: QuizFormConditionalProps) {
 
   return (
     <div className={styles['container']}>
-      <form onSubmit={formik.handleSubmit}>
-        <Input
-          label={t('quizFormConditional.question') || ''}
-          placeholder="Formula tu pregunta"
-          value={formik.values.question}
-          onChange={(e: any) => {
-            formik.handleChange(e);
-          }}
-          onBlur={formik.handleBlur}
-          name="question"
-          errorMessage={formik.errors.question}
-        />
-        <Input
-          label={t('quizFormConditional.description') || ''}
-          name="description"
-          placeholder="Alguna observación antes de responder esta pregunta"
-          value={formik.values.description}
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-        />
-        <Input
-          label={t('quizFormConditional.points') || ''}
-          name="points"
-          type='number'
-          value={formik.values.points}
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          errorMessage={formik.errors.points}
-        />
-        <div className={styles['conditionals']}>
-          {formik.values.answers_attributes.map((conditional, index) => (
-            <div className={styles['conditional-container']} key={index}>
-              <h4 className={styles['conditional']}>
-                {conditional.text === 'true'
-                  ? t('quizFormConditional.true')
-                  : t('quizFormConditional.false')}
-              </h4>
-              <div
-                className={`${styles['checker']} ${
-                  conditional.correct ? styles['check'] : ''
-                }`}
-                onClick={() => markAsCorrect(conditional)}
-              >
-                <Icon icon="check" size={15} />
-                <h4>{t('quizFormConditional.correct')}</h4>
+      <form
+        className={styles['form-quiz-conditional']}
+        onSubmit={formik.handleSubmit}
+      >
+        <div>
+          <Input
+            label={t('quizFormConditional.question') || ''}
+            placeholder="Formula tu pregunta"
+            value={formik.values.question}
+            onChange={(e: any) => {
+              formik.handleChange(e);
+            }}
+            onBlur={formik.handleBlur}
+            name="question"
+            errorMessage={formik.errors.question}
+          />
+          <Input
+            label={t('quizFormConditional.description') || ''}
+            name="description"
+            placeholder="Alguna observación antes de responder esta pregunta"
+            value={formik.values.description}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+          />
+          <Input
+            label={t('quizFormConditional.points') || ''}
+            name="points"
+            type="number"
+            value={formik.values.points}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            errorMessage={formik.errors.points}
+          />
+          <div className={styles['conditionals']}>
+            {formik.values.answers_attributes.map((conditional, index) => (
+              <div className={styles['conditional-container']} key={index}>
+                <h4 className={styles['conditional']}>
+                  {conditional.text === 'true'
+                    ? t('quizFormConditional.true')
+                    : t('quizFormConditional.false')}
+                </h4>
+                <div
+                  className={`${styles['checker']} ${
+                    conditional.correct ? styles['check'] : ''
+                  }`}
+                  onClick={() => markAsCorrect(conditional)}
+                >
+                  <Icon icon="check" size={15} />
+                  <h4>{t('quizFormConditional.correct')}</h4>
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
         <div className={styles['footer']}>
           <Button

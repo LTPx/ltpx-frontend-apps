@@ -4,3 +4,5 @@ export * from './course-quizzes/course-quizzes';
 export * from './course-achievements/course-achievements';
 export * from './course-classroom/course-classroom';
 export * from './course-settings/course-settings';
+export * from './course-tasks/course-tasks';
+

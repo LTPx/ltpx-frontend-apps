@@ -6,6 +6,7 @@ import {
 } from '@ltpx-frontend-apps/api';
 import {
   AchievementBuilder,
+  BasicRow,
   Button,
   ColorsButton,
   Icon,
@@ -99,14 +100,16 @@ export function CourseAchievements(props: CourseAchievementsProps) {
     color,
     className,
     title,
+    outline,
   }: {
     color: ColorsButton;
     className?: string;
     title: string;
+    outline?: boolean;
   }) => (
     <div className={className}>
       <Menu items={achievementsForms}>
-        <Button color={color} title={title} />
+        <Button outline={outline} color={color} title={title} />
       </Menu>
     </div>
   );
@@ -120,38 +123,22 @@ export function CourseAchievements(props: CourseAchievementsProps) {
       {!selectedType && (
         <div className={styles['achievements']}>
           {achievements?.map((achievement, index) => (
-            <div className={styles['achievement']} key={index}>
-              <div className={styles['summary']}>
-                <img src={achievement.image} />
-                <div className={styles['text']}>
-                  <h4>{achievement.title}</h4>
-                  <h5>Precio: ${achievement.price}</h5>
-                </div>
-              </div>
-              <div className={styles['actions']}>
-                <div
-                  className={styles['action']}
-                  onClick={() => {
-                    setAchievement({
-                      ...achievement,
-                      ...{
-                      },
-                    });
-                    setSelectedType(achievement.rule);
-                  }}
-                >
-                  <Icon icon="pencil" size={15} />
-                </div>
-                <div
-                  className={styles['action']}
-                  onClick={() => {
-                    handleRemoveAchievement(achievement.id);
-                  }}
-                >
-                  <Icon icon="trash" size={15} />
-                </div>
-              </div>
-            </div>
+            <BasicRow
+              key={index}
+              image={achievement.image}
+              title={achievement.title}
+              subtitle={'Precio: ' + achievement.price}
+              remove={() => {
+                handleRemoveAchievement(achievement.id);
+              }}
+              onClick={() => {
+                setAchievement({
+                  ...achievement,
+                  ...{},
+                });
+                setSelectedType(achievement.rule);
+              }}
+            />
           ))}
         </div>
       )}
@@ -170,11 +157,14 @@ export function CourseAchievements(props: CourseAchievementsProps) {
         </SetupCard>
       )}
       {!selectedType && achievements && achievements.length > 0 && (
-        <ButtonAddAchievement
-          color={ColorsButton.secondary}
-          className={styles['add-button']}
-          title={t('buttons._addAchievement')}
-        />
+        <div className={styles['button-content']}>
+          <ButtonAddAchievement
+            color={ColorsButton.secondary}
+            className={styles['add-button']}
+            title={t('buttons._addAchievement')}
+            outline={true}
+          />
+        </div>
       )}
       {selectedType && selectedType && (
         <AchievementBuilder

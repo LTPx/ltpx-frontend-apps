@@ -22,6 +22,7 @@ import {
   CourseContents,
   CourseGeneralInformation,
   CourseQuizzes,
+  CourseTasks,
 } from '../course';
 import { useCallback, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -36,7 +37,8 @@ export type ResponseRequest = {
 };
 
 export function TeacherEditCourse() {
-  const { tabs, notification, setNotification, statusColors, statusIcons } = useEditCourse();
+  const { tabs, notification, setNotification, statusColors, statusIcons } =
+    useEditCourse();
   const [indexSelectedView, setIndexSelectedView] = useState(0);
   const { getCourse, course, cleanCourse } = useCourse();
   const { _sendCourseToReview } = useTeacher();
@@ -119,7 +121,7 @@ export function TeacherEditCourse() {
             color={ColorsButton.secondary}
             type={TypeButton.submit}
             outline={true}
-            icon='rocket'
+            icon="rocket"
             onClick={handleSendToReview}
             disabled={course.status !== CourseStatus.draft}
           />
@@ -133,10 +135,7 @@ export function TeacherEditCourse() {
       </div>
       {course.id && (
         <div className={styles['content']}>
-          <Tabs
-            tabs={tabs}
-            onClickTab={setIndexSelectedView}
-          />
+          <Tabs tabs={tabs} onClickTab={setIndexSelectedView} />
           <div className={styles['section-content']}>
             {indexSelectedView === 0 && (
               <CourseGeneralInformation
@@ -162,13 +161,20 @@ export function TeacherEditCourse() {
               />
             )}
             {indexSelectedView === 3 && (
-              <CourseAchievements
+              <CourseTasks
                 onSubmit={(data) => {
                   showAndConfigNotification(data);
                 }}
               />
             )}
             {indexSelectedView === 4 && (
+              <CourseAchievements
+                onSubmit={(data) => {
+                  showAndConfigNotification(data);
+                }}
+              />
+            )}
+            {indexSelectedView === 5 && (
               <CourseClassroom
                 onSubmit={(data) => {
                   showAndConfigNotification(data);

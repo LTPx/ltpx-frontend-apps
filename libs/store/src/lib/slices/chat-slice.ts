@@ -20,6 +20,7 @@ export type ChatSlice = {
   rooms: Room[];
   room: Room;
   messages: ChatMessage[];
+  setRoomById: (roomId: number) => void;
   _getRooms: () => Promise<TResponse>;
   _getRoom: (roomId: number) => Promise<TResponse>;
   _newChatRoom: (userId: number) => Promise<TResponse>;
@@ -33,11 +34,15 @@ export const createChatSlice: StateCreator<StoreState, [], [], ChatSlice> = (
   rooms: [],
   room: {} as Room,
   messages: [],
+  setRoomById: (roomId) => {
+    const rooms = get().rooms;
+    const room = rooms.find(room => room.id === roomId);
+    set({room});
+  },
   _getRooms: async () => {
     try {
       const rooms = await getRooms();
-      const room = rooms.length ? rooms[0] : get().room;
-      set({ rooms, room });
+      set({ rooms });
       return { success: true, data: rooms };
     } catch (error) {
       console.log(error);
@@ -59,7 +64,7 @@ export const createChatSlice: StateCreator<StoreState, [], [], ChatSlice> = (
       const room = await createNewRoom(userId);
       const rooms = [...get().rooms, ...[room]];
       set({ rooms });
-      return { success: true, data: rooms };
+      return { success: true, data: room };
     } catch (error) {
       console.log(error);
       return { success: true, error };

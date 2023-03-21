@@ -1,9 +1,7 @@
-import { ChatMessage, createNewRoom, getRoomMessages, getRooms, Room, sendRoomMessage } from "@ltpx-frontend-apps/api";
-import { useChat, useUser } from "@ltpx-frontend-apps/store";
-import { useCallback, useEffect, useState } from "react";
+import { useChat } from "@ltpx-frontend-apps/store";
+import { useCallback, useEffect } from "react";
 
 export const useChatData = () => {
-  const { user } = useUser();
   const {
     _getRooms,
   } = useChat();
@@ -17,6 +15,5 @@ export const useChatData = () => {
   }, []);
 
   return {
-    senderId: user.id,
   };
 };

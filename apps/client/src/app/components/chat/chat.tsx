@@ -1,8 +1,8 @@
+import styles from './chat.module.scss';
 import { ChatMessages } from '@ltpx-frontend-apps/shared-ui';
 import { useChat, useUser } from '@ltpx-frontend-apps/store';
 import { Avatar } from 'evergreen-ui';
 import { ReactElement } from 'react';
-import styles from './chat.module.scss';
 import { useChatData } from './useChatData';
 
 export interface ChatProps {
@@ -13,7 +13,7 @@ export interface ChatProps {
 
 export function Chat(props: ChatProps) {
   const { initRoomId, initUserId, children } = props;
-  const { senderId } = useChatData();
+  useChatData();
   const {
     rooms,
     room,
@@ -52,7 +52,7 @@ export function Chat(props: ChatProps) {
             { room.messages &&
               <ChatMessages
                 room={room}
-                senderId={senderId}
+                senderId={user.id}
                 onSubmit={(message) => {
                   const newMessage = {
                     text: message.text,

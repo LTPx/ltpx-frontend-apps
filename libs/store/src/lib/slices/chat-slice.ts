@@ -73,12 +73,12 @@ export const createChatSlice: StateCreator<StoreState, [], [], ChatSlice> = (
   _sendMessageRoom: async (newMessage) => {
     try {
       const message = await sendRoomMessage(newMessage, newMessage.room_id);
-      // const roomStore = {...get().room};
-      // const room = {
-      //   ...roomStore,
-      //   ...{ messages: [roomStore.messages, ...[message]] },
-      // };
-      // set({ room });
+      const messages = [...get().room.messages , ...[message]];
+      const room = {
+        ...get().room,
+        ...{ messages },
+      };
+      set({ room });
       return { success: true, data: message };
     } catch (error) {
       console.log(error);

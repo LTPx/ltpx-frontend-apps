@@ -2,6 +2,7 @@ import { useChat, useUser } from "@ltpx-frontend-apps/store";
 import { useCallback, useEffect } from "react";
 import Pusher from "pusher-js";
 import { ChatMessage } from "@ltpx-frontend-apps/api";
+import { useEffectOnce } from "./useEffectOnce";
 
 export const useChatData = () => {
   const { user } = useUser();
@@ -13,7 +14,6 @@ export const useChatData = () => {
 
   const {
     _getRooms,
-    room,
     appendNewMessage,
   } = useChat();
 
@@ -21,29 +21,25 @@ export const useChatData = () => {
     await _getRooms()
   }, []);
 
-  useEffect(() => {
+  useEffectOnce(() => {
     fetchRooms();
-  }, []);
-
-  useEffect(() => {
-    if (room.id) {
-      const channel = pusher.subscribe(room.name);
-      channel.bind('new', (newMessage: ChatMessage) => {
-        if (newMessage.user_id !== user.id) {
-          console.log('newMessage: ', newMessage);
-          appendNewMessage(newMessage);
-        }
-      })
-    }
+    listenMessages();
 
     return () => {
-      if (room.id) {
-        console.log('unsubscribe');
-        pusher.unsubscribe(room.name);
-      }
+      const channelName = `listen_messages_user_${user.id}`;
+      pusher.unsubscribe(channelName);
+      console.log('unsubscribe');
     };
-  }, [room]);
+  });
 
-  return {
-  };
+  function listenMessages() {
+    const channelName = `listen_messages_user_${user.id}`;
+    const channel = pusher.subscribe(channelName);
+    channel.bind('new', (newMessage: ChatMessage) => {
+      if (newMessage.user_id !== user.id) {
+        console.log('newMessage: ', newMessage);
+        appendNewMessage(newMessage);
+      }
+    })
+  }
 };

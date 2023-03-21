@@ -6,13 +6,11 @@ import { ReactElement } from 'react';
 import { useChatData } from './useChatData';
 
 export interface ChatProps {
-  initRoomId?: number;
-  initUserId?: number;
   children?: ReactElement;
 }
 
 export function Chat(props: ChatProps) {
-  const { initRoomId, initUserId, children } = props;
+  const { children } = props;
   useChatData();
   const {
     rooms,

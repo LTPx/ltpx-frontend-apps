@@ -84,7 +84,7 @@ export function CourseTasks(props: CourseTasksProps) {
             {tasks.map((element, index) => (
               <div key={index}>
                 <BasicRow
-                  icon="ordered-list"
+                  icon="task-outline"
                   onClick={() => {
                     setTask(element);
                     setOpenModal(true);

@@ -35,14 +35,14 @@ export function Footer(props: FooterProps) {
             <div className={styles['icon-contact']}>
               <Icon icon={'mail'} size={17} />
               <h4>
-              <a target="_blank" href="mailto:support@growopenminds.com">
-                support@growopenminds.com
+              <a target="_blank" href="mailto:soporte@growopenminds.com">
+                soporte@growopenminds.com
                 </a>
                 </h4>
             </div>
           </div>
           <div className={styles['social-networks']}>
-            <a target="_blank" href="https://www.facebook.com/growmoi">
+            <a target="_blank" href="https://www.facebook.com/growopenminds">
               <Icon
                 className={styles['social']}
                 icon="facebook"
@@ -68,7 +68,7 @@ export function Footer(props: FooterProps) {
             </a>
             <a
               target="_blank"
-              href="https://www.linkedin.com/company/moiaprendizajesocial/"
+              href="https://www.linkedin.com/company/growopenminds/"
             >
               <Icon
                 className={styles['social']}

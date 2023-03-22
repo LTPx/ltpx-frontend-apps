@@ -9,7 +9,6 @@ import {
   AchievementParams,
   QuizModel,
   TypeAchievement,
-  Condition,
   EntityAchievement,
 } from '@ltpx-frontend-apps/api';
 import InputTextStatus, {

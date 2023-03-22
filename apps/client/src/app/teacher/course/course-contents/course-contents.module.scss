@@ -6,6 +6,10 @@
 .text-content {
   padding: 1rem;
 }
+.button-content {
+  display: flex;
+  justify-content: end;
+}
 .media {
   height: 5rem;
   margin-top: $size-md-1;

@@ -60,7 +60,7 @@ export function Tabs(props: TabsProps) {
               selectTab(index);
             }}
           >
-            {tab.children ? tab.children : <h3 className={`${classNameText} ${styles['text-tab']}`}>{tab.text}</h3>}
+            {tab.children ? tab.children : <h4 className={`${classNameText} ${styles['text-tab']}`}>{tab.text}</h4>}
           </div>
         ))}
     </div>

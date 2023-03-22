@@ -1,12 +1,12 @@
 @import '../../../styles.scss';
 
-.students-list {
+.users-list {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
   padding-bottom: 2rem;
 
-  .student {
+  .user {
     cursor: pointer;
     padding: 1rem;
     background-color: $gray-color-100;

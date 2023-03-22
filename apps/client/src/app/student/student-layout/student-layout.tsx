@@ -11,8 +11,11 @@ import { Avatar } from 'evergreen-ui';
 import { useTranslation } from 'react-i18next';
 import { NavLink, Outlet, useNavigate } from 'react-router-dom';
 import avatar from './../../../assets/images/avatars/avatar-1.svg'
+import Chat from '../../components/chat/chat';
+import { useState } from 'react';
 
 export function StudentLayout() {
+  const [openChat, setOpenChat] = useState(false);
   const { user, logout } = useUser();
   const navigate = useNavigate();
   const { t } = useTranslation();
@@ -74,13 +77,17 @@ export function StudentLayout() {
     window.location.reload();
   };
 
+  //TODO: move to new component
+  const ChatFloat = ({ onClick }: { onClick: () => void }) => (
+    <div className={styles['chat-tab-button']} onClick={onClick}>
+      <Icon icon="chat-dots" size={20} />
+    </div>
+  );
+
   return (
     <div className={styles['container']}>
       <Header links={links} className={styles['header']}>
         <div className={styles['teacher-actions']}>
-          <NavLink className={styles['chat-button']} to='/student/chat'>
-            <Icon icon='chat-dots' size={20} />
-          </NavLink>
           <Dropdown>
             <UserMenu
               name={user.fullname}
@@ -110,6 +117,15 @@ export function StudentLayout() {
       <div className={styles['content']}>
         <div className={styles['render-content']}>
           <Outlet />
+        </div>
+        <div className={styles['chat-float-container']}>
+          {openChat ? (
+            <div className={styles['chat-container']}>
+              <Chat onCancel={() => setOpenChat(false)} />
+            </div>
+          ) : (
+            <ChatFloat onClick={() => setOpenChat(true)} />
+          )}
         </div>
       </div>
     </div>

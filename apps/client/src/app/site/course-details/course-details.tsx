@@ -178,6 +178,7 @@ export function CourseDetails() {
                     <div>
                       <Button
                         color={ColorsButton.secondary}
+                        onClick={() => setOpenModal(true)}
                         title={'INSCRIBIRME AHORA'}
                         full={true}
                       />
@@ -306,6 +307,7 @@ export function CourseDetails() {
                 <div className={styles['btn-content']}>
                   <Button
                     color={ColorsButton.secondary}
+                    onClick={() => setOpenModal(true)}
                     title="Comprar Ahora"
                     full={true}
                   />
@@ -330,7 +332,7 @@ export function CourseDetails() {
           hasFooter={false}
           title="Regístrate y aprende hoy mismo"
           onCloseComplete={() => setOpenModal(false)}
-          width={'35vw'}
+          // width={'35vw'}
         >
           <div className={styles['register-modal']}>
             <RegisterForm

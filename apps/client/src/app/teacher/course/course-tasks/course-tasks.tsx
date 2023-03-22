@@ -1,3 +1,4 @@
+import styles from './course-tasks.module.scss';
 import { TaskModel, NewTaskParams } from '@ltpx-frontend-apps/api';
 import {
   BasicRow,
@@ -10,7 +11,6 @@ import { useCourse } from '@ltpx-frontend-apps/store';
 import { Dialog } from 'evergreen-ui';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import styles from './course-tasks.module.scss';
 
 /* eslint-disable-next-line */
 export interface CourseTasksProps {
@@ -42,12 +42,10 @@ export function CourseTasks(props: CourseTasksProps) {
   async function handleRemoveTask(taskId: number) {
     const { success, error } = await _removeTask(course.id, taskId);
     if (success) {
-      console.log('success remove');
       onSubmit({
         success,
       });
     } else {
-      console.log('error: ', error);
       onSubmit({
         success: false,
         error,
@@ -55,15 +53,13 @@ export function CourseTasks(props: CourseTasksProps) {
     }
   }
   async function handleUpdateTask(params: NewTaskParams) {
-    const paramsWithId = {...params, ...{id: task?.id}}
-    const { data, success, error } = await _updateTask(course.id, paramsWithId);
+    const paramsWithId = { ...params, ...{ id: task?.id } };
+    const { success, error } = await _updateTask(course.id, paramsWithId);
     if (success) {
-      console.log('success update'+ data);
       onSubmit({
         success,
       });
     } else {
-      console.log('error: ', error);
       onSubmit({
         success: false,
         error,
@@ -125,17 +121,11 @@ export function CourseTasks(props: CourseTasksProps) {
       >
         <TaskForm
           onClose={() => setOpenModal(false)}
-          task={
-            task
-              ? {
-                  ...task,
-                }
-              : undefined
-          }
+          task={task}
           onSubmit={(params) => {
             if (task?.id) {
               handleUpdateTask(params);
-              console.log(params)
+              console.log(params);
             } else {
               handleSaveTask(params);
             }

@@ -1,3 +1,4 @@
+import styles from './course-tasks.module.scss';
 import { TaskModel, NewTaskParams } from '@ltpx-frontend-apps/api';
 import {
   BasicRow,
@@ -10,28 +11,59 @@ import { useCourse } from '@ltpx-frontend-apps/store';
 import { Dialog } from 'evergreen-ui';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { ResponseRequest } from '../../teacher-edit-course/teacher-edit-course';
-import styles from './course-tasks.module.scss';
 
 /* eslint-disable-next-line */
 export interface CourseTasksProps {
-  onSubmit?: (content: ResponseRequest) => void;
+  onSubmit: (data: any) => void;
 }
 
 export function CourseTasks(props: CourseTasksProps) {
   const { onSubmit } = props;
   const [task, setTask] = useState<TaskModel>();
   const [openModal, setOpenModal] = useState(false);
-  const { _addTask, course } = useCourse();
+  const { _addTask, _updateTask, _removeTask, course } = useCourse();
+  const { tasks } = course;
 
   async function handleSaveTask(params: NewTaskParams) {
-    console.log('task params: ', params);
     const { data, success, error } = await _addTask(course.id, params);
     if (success) {
       setTask(data);
-      console.log('data: ', data);
+      onSubmit({
+        success,
+      });
     } else {
-      console.log('error: ', error);
+      onSubmit({
+        success: false,
+        error,
+      });
+    }
+  }
+
+  async function handleRemoveTask(taskId: number) {
+    const { success, error } = await _removeTask(course.id, taskId);
+    if (success) {
+      onSubmit({
+        success,
+      });
+    } else {
+      onSubmit({
+        success: false,
+        error,
+      });
+    }
+  }
+  async function handleUpdateTask(params: NewTaskParams) {
+    const paramsWithId = { ...params, ...{ id: task?.id } };
+    const { success, error } = await _updateTask(course.id, paramsWithId);
+    if (success) {
+      onSubmit({
+        success,
+      });
+    } else {
+      onSubmit({
+        success: false,
+        error,
+      });
     }
   }
   const { t } = useTranslation();
@@ -43,22 +75,32 @@ export function CourseTasks(props: CourseTasksProps) {
         <h4 className="muted">{t('courseTask.subtitle')}</h4>
       </div>
       <div className={styles['task-upload']}>
-        {task ? (
-          <div>
-            <BasicRow
-              icon='ordered-list'
-              onClick={() => setOpenModal(true)}
-              title={task.title}
-              subtitle={task.description}
-            />
+        {tasks.length > 0 ? (
+          <div className={styles['task-list']}>
+            {tasks.map((element, index) => (
+              <div key={index}>
+                <BasicRow
+                  icon="task-outline"
+                  onClick={() => {
+                    setTask(element);
+                    setOpenModal(true);
+                  }}
+                  title={element.title}
+                  subtitle={element.description}
+                  remove={() => {
+                    handleRemoveTask(element.id);
+                  }}
+                />
+              </div>
+            ))}
             <div className={styles['button-content']}>
-            <Button
-              className={styles['btn-add-task']}
-              title="Crear Nueva Tarea"
-              color={ColorsButton.secondary}
-              outline={true}
-              onClick={() => setOpenModal(true)}
-            />
+              <Button
+                className={styles['btn-add-task']}
+                title="Crear Nueva Tarea"
+                color={ColorsButton.secondary}
+                outline={true}
+                onClick={() => setOpenModal(true)}
+              />
             </div>
           </div>
         ) : (
@@ -79,8 +121,14 @@ export function CourseTasks(props: CourseTasksProps) {
       >
         <TaskForm
           onClose={() => setOpenModal(false)}
+          task={task}
           onSubmit={(params) => {
-            handleSaveTask(params);
+            if (task?.id) {
+              handleUpdateTask(params);
+              console.log(params);
+            } else {
+              handleSaveTask(params);
+            }
           }}
         />
       </Dialog>

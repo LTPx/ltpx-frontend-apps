@@ -16,6 +16,7 @@ import InputTextStatus, {
 } from '../input-text-status/input-text-status';
 import { useTranslation } from 'react-i18next';
 import { useState } from 'react';
+import { useCourse } from '@ltpx-frontend-apps/store';
 
 /* eslint-disable-next-line */
 export interface AchievementTaskFormProps {
@@ -28,7 +29,11 @@ export interface AchievementTaskFormProps {
 export function AchievementTaskForm(props: AchievementTaskFormProps) {
   const { onCancel, onSubmit, className, achievement } = props;
   const [task, setTask] = useState<TaskModel>();
+  const { _addTask, course } = useCourse();
+  const { tasks } = course;
   const { t } = useTranslation();
+  const [indexSelected, setIndexSelected] = useState(-1);
+
 
   const initialValues = {
     title: achievement?.title || '',
@@ -37,6 +42,13 @@ export function AchievementTaskForm(props: AchievementTaskFormProps) {
     file: null,
     rule: TypeAchievement.task,
     settings: [],
+    tasks: tasks.map((e) => {
+      return {
+        text: e.title,
+        id: e.id,
+        selected: e.id,
+      };
+    }),
   };
 
   return (
@@ -89,24 +101,15 @@ export function AchievementTaskForm(props: AchievementTaskFormProps) {
                   Seleccionar tarea
                 </label>
               </div>
-              {/* <div className={styles['task-upload']}>
-                {task && (
-                  <div className={styles['task-content']}>
-                    <div className={styles['task']}>
-                      <Icon icon={'book'} size={18} />
-                      <h4>Tarea: {task.title}</h4>
-                      <h4>{task.description}</h4>
-                    </div>
-                    <div>
-                      <Button
-                        title={'Editar Tarea'}
-                        icon={'pencil'}
-                        outline={true}
-                      />
-                    </div>
+              <div>
+                {tasks.map((element, index)=> (
+                  <div className={styles['task-upload']} key={index}>
+                    <h4 className={styles['title-task']}>{element.title}</h4>
+                    {index}
+                    {element.id}
                   </div>
-                )}
-              </div> */}
+                ))}
+              </div>
               <br />
               <label>{t('achievementTaskForm.titleImage')}</label>
               <SelectImage

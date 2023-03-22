@@ -31,4 +31,9 @@
   .btn-add-task {
     margin-top: 1rem;
   }
+  .task-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
 }

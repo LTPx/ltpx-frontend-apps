@@ -86,7 +86,6 @@ export function RegisterTeacher(props: RegisterTeacherProps) {
         hasFooter={false}
         title={'Aplicar para Profesor'}
         onCloseComplete={() => setOpenModal(false)}
-        width={'40vw'}
       >
         <div className={styles['register-form']}>
           <RegisterForm

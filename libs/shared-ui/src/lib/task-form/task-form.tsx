@@ -13,15 +13,16 @@ import { NewTaskParams } from '@ltpx-frontend-apps/api';
 /* eslint-disable-next-line */
 export interface TaskFormProps {
   onClose?: () => void;
+  task?: NewTaskParams;
   onSubmit?: (task: NewTaskParams) => void;
 }
 
 export function TaskForm(props: TaskFormProps) {
-  const { onClose, onSubmit } = props;
+  const { onClose, onSubmit, task } = props;
   const formik = useFormik({
     initialValues: {
-      title: '',
-      description: '',
+      title: task?.title || '',
+      description: task?.description || '',
       file: null,
     },
     validationSchema: Yup.object({

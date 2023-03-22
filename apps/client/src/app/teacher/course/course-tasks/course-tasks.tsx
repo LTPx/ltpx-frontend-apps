@@ -29,13 +29,13 @@ export function CourseTasks(props: CourseTasksProps) {
     if (success) {
       setTask(data);
       onSubmit({
-        success
-      })
+        success,
+      });
     } else {
       onSubmit({
         success: false,
-        error
-      })
+        error,
+      });
     }
   }
 
@@ -43,6 +43,21 @@ export function CourseTasks(props: CourseTasksProps) {
     const { success, error } = await _removeTask(course.id, taskId);
     if (success) {
       console.log('success remove');
+      onSubmit({
+        success,
+      });
+    } else {
+      console.log('error: ', error);
+      onSubmit({
+        success: false,
+        error,
+      });
+    }
+  }
+  async function handleUpdateTask(params: NewTaskParams) {
+    const { data, success, error } = await _updateTask(course.id, params);
+    if (success) {
+      console.log('success update'+ data);
       onSubmit({
         success,
       });
@@ -69,7 +84,10 @@ export function CourseTasks(props: CourseTasksProps) {
               <div key={index}>
                 <BasicRow
                   icon="ordered-list"
-                  onClick={() => setOpenModal(true)}
+                  onClick={() => {
+                    setTask(element);
+                    setOpenModal(true);
+                  }}
                   title={element.title}
                   subtitle={element.description}
                   remove={() => {
@@ -106,8 +124,20 @@ export function CourseTasks(props: CourseTasksProps) {
       >
         <TaskForm
           onClose={() => setOpenModal(false)}
+          task={
+            task
+              ? {
+                  ...task,
+                }
+              : undefined
+          }
           onSubmit={(params) => {
-            handleSaveTask(params);
+            if (task?.id) {
+              handleUpdateTask(params);
+              console.log(params)
+            } else {
+              handleSaveTask(params);
+            }
           }}
         />
       </Dialog>

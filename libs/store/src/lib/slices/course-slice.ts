@@ -52,7 +52,7 @@ export type CourseSlice = {
   _addCourseSession: (params: NewCourseSessionParams) => Promise<TResponse>;
   _addTask: (courseId: number, task: NewTaskParams) => Promise<TResponse>;
   _updateTask: (courseId: number, task: NewTaskParams) => Promise<TResponse>;
-  _removeTask: (courseId: number, taskId: number) => Promise<TResponse>;
+  _removeTask: (id: number, taskId: number) => Promise<TResponse>;
 };
 
 export const createCourseSlice: StateCreator<
@@ -255,12 +255,20 @@ export const createCourseSlice: StateCreator<
   cleanCourse: () => {
     set({ course: {} as TeacherCourse });
   },
-  _updateTask: async(courseId, taskId) => {
+  _updateTask: async(id, params) => {
     try {
-      const task = await editTask(courseId, taskId);
-      return {success: true, data: task};
+      const courseStore = get().course;
+      const paramsTaskId = { ...params, ...{ course_id: courseStore.id } };
+      const task = await editTask(id, paramsTaskId);
+      const tasks = courseStore.tasks?.map((taskStore) => {
+        return paramsTaskId.id === task.id 
+          ? task : taskStore;
+      });
+      const courseUpdated = { ...courseStore, ...{ tasks } };
+      set({ course: courseUpdated });
+      return { success: true, data: tasks };
     } catch (error) {
-      return {success: false, error}
+      return {success: false, error: formatErrors(error)}
     }
   },
   _removeTask: async(courseId, taskId) => {

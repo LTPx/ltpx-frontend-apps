@@ -11,7 +11,7 @@ export interface TeacherProfileProps {
   image: string;
   video: string;
   name: string;
-  profession: string;
+  skills: string;
   biography: string;
   rating: number;
   totalReviews: number;
@@ -25,13 +25,13 @@ export function TeacherProfile(props: TeacherProfileProps) {
     image,
     video,
     name,
-    profession,
+    skills,
     biography,
     rating,
     totalReviews,
     totalStudents,
     totalCourses,
-    socialNetworks
+    socialNetworks,
   } = props;
   const [showMore, setShowMore] = useState(false);
   const { t } = useTranslation();
@@ -43,7 +43,7 @@ export function TeacherProfile(props: TeacherProfileProps) {
         <div className={styles['head-profile']}>
           <Avatar image={image} size={AvatarSize.large} outline={true} />
           <h1>{name}</h1>
-          <h3>{profession}</h3>
+          <h3>{skills}</h3>
           <div className={styles['teacher-review-information']}>
             <div className={styles['review-information']}>
               <Icon className={styles['icon']} icon={'star'} size={18}></Icon>
@@ -94,21 +94,24 @@ export function TeacherProfile(props: TeacherProfileProps) {
               <p className={styles['text-description']}>{biography}</p>
             )}
             <div className={styles['social-networks']}>
-              { socialNetworks.map((network, index)=>(
-                <a className={styles['social-network']} href={network.url} key={index} >
-                  <Icon className={styles['icon']} icon={network.name} size={22} />
+              {socialNetworks.map((network, index) => (
+                <a
+                  className={styles['social-network']}
+                  href={network.url}
+                  key={index}
+                >
+                  <Icon
+                    className={styles['icon']}
+                    icon={network.name}
+                    size={22}
+                  />
                 </a>
               ))}
             </div>
           </div>
           <div className={styles['video-content']}>
             <h2>Video de Presentación</h2>
-            <video
-              width="90%"
-              height="300"
-              src={video}
-              controls
-            ></video>
+            <video width="90%" height="300" src={video} controls></video>
           </div>
         </div>
       </div>

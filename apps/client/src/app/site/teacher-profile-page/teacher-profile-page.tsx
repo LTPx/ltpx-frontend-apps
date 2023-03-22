@@ -1,8 +1,6 @@
 import { TeacherSummary } from '@ltpx-frontend-apps/api';
 import { TeacherProfile } from '@ltpx-frontend-apps/shared-ui';
 import { useSite } from '@ltpx-frontend-apps/store';
-// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
-import ProfileUser from 'libs/shared-ui/src/lib/profile-user/profile-user';
 import { useCallback, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
@@ -38,7 +36,7 @@ export function TeacherProfilePage(props: TeacherProfilePageProps) {
             image={teacher.profile_image}
             video={teacher.profile_video}
             name={teacher.name}
-            profession={'Fotógrafa'}
+            skills={teacher.skills}
             biography={teacher.biography}
             rating={teacher.rating_average}
             totalReviews={teacher.total_reviews}

@@ -118,6 +118,7 @@ export interface TeacherSummary {
   total_students: number;
   profile_image: string;
   profile_video: string;
+  skills: string;
   slug: string;
   social_networks: {
     name: string;

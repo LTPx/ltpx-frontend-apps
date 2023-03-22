@@ -19,7 +19,7 @@ export const createTask = async (courseId: number, params: NewTaskParams) => {
 export const editTask = async (courseId: number, params: NewTaskParams) => {
   return new Promise<TaskModel>((resolve, reject) => {
     http
-      .put(`api/v1/teacher/courses/${courseId}/tasks`, params)
+      .put(`api/v1/teacher/courses/${courseId}/tasks/${params.id}`, params)
       .then((response) => {
         resolve(response.data);
       })

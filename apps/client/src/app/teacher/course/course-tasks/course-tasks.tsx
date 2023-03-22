@@ -55,7 +55,8 @@ export function CourseTasks(props: CourseTasksProps) {
     }
   }
   async function handleUpdateTask(params: NewTaskParams) {
-    const { data, success, error } = await _updateTask(course.id, params);
+    const paramsWithId = {...params, ...{id: task?.id}}
+    const { data, success, error } = await _updateTask(course.id, paramsWithId);
     if (success) {
       console.log('success update'+ data);
       onSubmit({

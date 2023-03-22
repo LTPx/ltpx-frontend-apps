@@ -1,6 +1,6 @@
 import { _http } from '../../http';
 import { ApplicationTeach, ApplyTeachApiParams, ApplyTeachModel, TeacherProfile } from '../../interfaces/teacher-interface';
-import { moveToFormData, sendAsFormData } from '../../utils';
+import { encapsuleInFormData, moveToFormData, sendAsFormData } from '../../utils';
 
 const http = _http;
 
@@ -18,8 +18,7 @@ export const getTeacherProfile = async () => {
 };
 
 export const updateTeacherProfile = async (teacher: Partial<TeacherProfile>) => {
-  const data = sendAsFormData(teacher);
-  debugger
+  const data = encapsuleInFormData(teacher, {mediaKeys: ['profile_image', 'profile_video']});
   return new Promise<TeacherProfile>((resolve, reject) => {
     http
       .put('api/v1/teacher/update_profile', data)

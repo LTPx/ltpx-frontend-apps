@@ -8,6 +8,7 @@ export const useSite = () => {
     _confirmUserPayment,
     _createPaymentOrder,
     _cancelUserPayment,
+    _getTeacherProfile
   } = useAppStore();
 
   return {
@@ -17,5 +18,6 @@ export const useSite = () => {
     _confirmUserPayment,
     _createPaymentOrder,
     _cancelUserPayment,
+    _getTeacherProfile,
   }
 }

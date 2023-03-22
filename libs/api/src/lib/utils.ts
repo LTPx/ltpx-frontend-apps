@@ -48,9 +48,9 @@ export const sendAsFormData = (data: any) => {
   return input;
 };
 
-export const encapsuleInFormData = (data: any, settings?: {jsonKeys?:string[], imagesKeys?:string[]}) => {
+export const encapsuleInFormData = (data: any, settings?: {jsonKeys?:string[], mediaKeys?:string[]}) => {
   const jsons = settings?.jsonKeys || [];
-  const images = settings?.imagesKeys || [];
+  const media = settings?.mediaKeys || [];
   let input = new FormData();
   Object.keys(data).map((key) => {
     if (data[key]) {
@@ -59,7 +59,7 @@ export const encapsuleInFormData = (data: any, settings?: {jsonKeys?:string[], i
         input.append(key, JSON.stringify(dataContent));
         return
       }
-      if (images.includes(key)) {
+      if (media.includes(key)) {
         input.append(key, data[key]);
         return
       }

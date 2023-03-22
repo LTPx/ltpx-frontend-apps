@@ -11,6 +11,7 @@ import {
   FullCourse,
   CourseModel,
   TeacherSummary,
+  getPublicTeacherProfile,
 } from '@ltpx-frontend-apps/api';
 
 export type TResponse = {
@@ -26,6 +27,7 @@ export type SiteSlice = {
   _createPaymentOrder: (params: NewUserCoursePaymentParams) => Promise<TResponse>;
   _confirmUserPayment: (params: ConfirmUserPayment) => Promise<TResponse>;
   _cancelUserPayment: (orderId: number) => Promise<TResponse>;
+  _getTeacherProfile: (slug: string) => Promise<TResponse>;
 };
 
 export const createSiteSlice: StateCreator<StoreState, [], [], SiteSlice> = (
@@ -79,4 +81,12 @@ export const createSiteSlice: StateCreator<StoreState, [], [], SiteSlice> = (
       return { success: false, error };
     }
   },
+  _getTeacherProfile: async (slug:string) => {
+    try {
+      const teacher = await getPublicTeacherProfile(slug);
+      return { success: true, data: teacher}
+    } catch (error) {
+      return { success: false, error}
+    }
+  }
 });

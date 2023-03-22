@@ -45,9 +45,11 @@ export * from './lib/api/admin/users-api';
 export * from './lib/api/admin/admin-courses-api';
 export * from './lib/api/admin/admin-withdrawals-api';
 
+//teacher
 export * from './lib/api/site/site-courses-api';
 export * from './lib/api/site/carts-api';
 export * from './lib/api/site/enrollments-api';
+export * from './lib/api/site/teacher-api';
 
 export * from './lib/api/user/payments-api';
 

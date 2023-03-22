@@ -1,6 +1,10 @@
+import { TeacherSummary } from '@ltpx-frontend-apps/api';
 import { TeacherProfile } from '@ltpx-frontend-apps/shared-ui';
+import { useSite } from '@ltpx-frontend-apps/store';
 // eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
 import ProfileUser from 'libs/shared-ui/src/lib/profile-user/profile-user';
+import { useCallback, useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 
 import styles from './teacher-profile-page.module.scss';
 
@@ -8,15 +12,41 @@ import styles from './teacher-profile-page.module.scss';
 export interface TeacherProfilePageProps {}
 
 export function TeacherProfilePage(props: TeacherProfilePageProps) {
+  const [teacher, setTeacher] = useState<TeacherSummary>();
+  const { slug } = useParams();
+  const { _getTeacherProfile } = useSite();
+
+  const fetchPopularCourse = useCallback(async () => {
+    const id = slug || '';
+    const { success, data, error } = await _getTeacherProfile(id);
+    if (success) {
+      console.log(data);
+      setTeacher(data);
+    } else {
+      console.log('error: ', error);
+    }
+  }, []);
+
+  useEffect(() => {
+    fetchPopularCourse();
+  }, []);
   return (
     <div className={styles['container']}>
       <div className={styles['content']}>
-        <TeacherProfile
-          img={'https://images.unsplash.com/photo-1544717305-2782549b5136?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8dGVhY2hlcnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=2000&q=60'}
-          nameTeacher={'Katherine Causbie'}
-          profession={'Fotógrafa'}
-          biography={'¡Hola! ¡Soy una profesora en Openmind a la que le encanta compartir clases de fotografía artística y psicología humano-animal! Mi objetivo es ofrecer experiencias de aprendizaje de alta calidad que apoyen la curiosidad, la inspiración y la comprensión. Todas las clases se llevan a cabo en línea en Openmind. Como maestro, me baso en muchas experiencias profesionales y académicas diferentes, junto con una experiencia trabajando y enseñando a niños y adolescentes en una variedad de entornos: programas de enriquecimiento, iniciativas comunitarias, exploración, cooperativas de educación en el hogar, escuelas públicas, aulas Montessori y cuidado de la salud mental. Tengo una licenciatura de la Universidad de Wittenberg con una doble especialización en Studio Art (Fotografía) y Psicología Social Crítica, y una especialización en Historia del Arte.'}
-          rating={4} reviews={23} students={10} courses={4}        />
+        {teacher && (
+          <TeacherProfile
+            image={teacher.profile_image}
+            video={teacher.profile_video}
+            name={teacher.name}
+            profession={'Fotógrafa'}
+            biography={teacher.biography}
+            rating={teacher.rating_average}
+            totalReviews={teacher.total_reviews}
+            totalStudents={teacher.total_students}
+            totalCourses={teacher.total_courses}
+            socialNetworks={teacher.social_networks}
+          />
+        )}
       </div>
     </div>
   );

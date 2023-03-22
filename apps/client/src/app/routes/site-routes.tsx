@@ -110,7 +110,7 @@ export const SiteRoutes = () => {
           </Route>
           <Route path="/about" element={<AboutUs />} />
           <Route path="/faq" element={<FrequentlyAskedQuestions />} />
-          <Route path="/teacher-profile" element={<TeacherProfilePage />} />
+          <Route path="/teacher/:slug" element={<TeacherProfilePage />} />
           <Route
             path="/course/:categoryId/category"
             element={<CoursesByCategory />}

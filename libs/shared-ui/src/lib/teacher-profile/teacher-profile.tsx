@@ -8,26 +8,30 @@ import { buildCourses } from '@ltpx-frontend-apps/api';
 
 /* eslint-disable-next-line */
 export interface TeacherProfileProps {
-  img: string;
-  nameTeacher: string;
+  image: string;
+  video: string;
+  name: string;
   profession: string;
   biography: string;
   rating: number;
-  reviews: number;
-  students: number;
-  courses: number;
+  totalReviews: number;
+  totalStudents: number;
+  totalCourses: number;
+  socialNetworks: any[]; //TODO: add interface
 }
 
 export function TeacherProfile(props: TeacherProfileProps) {
   const {
-    img,
-    nameTeacher,
+    image,
+    video,
+    name,
     profession,
     biography,
     rating,
-    reviews,
-    students,
-    courses,
+    totalReviews,
+    totalStudents,
+    totalCourses,
+    socialNetworks
   } = props;
   const [showMore, setShowMore] = useState(false);
   const { t } = useTranslation();
@@ -37,8 +41,8 @@ export function TeacherProfile(props: TeacherProfileProps) {
     <div className={styles['container']}>
       <div className={styles['head-content']}>
         <div className={styles['head-profile']}>
-          <Avatar image={img} size={AvatarSize.large} outline={true} />
-          <h1>{nameTeacher}</h1>
+          <Avatar image={image} size={AvatarSize.large} outline={true} />
+          <h1>{name}</h1>
           <h3>{profession}</h3>
           <div className={styles['teacher-review-information']}>
             <div className={styles['review-information']}>
@@ -52,7 +56,7 @@ export function TeacherProfile(props: TeacherProfileProps) {
                 icon={'comment'}
                 size={18}
               ></Icon>
-              <h4>{reviews}</h4>
+              <h4>{totalReviews}</h4>
               <h4>{t('coursesDetails.teacherOverview.reviews')}</h4>
             </div>
             <div className={styles['review-information']}>
@@ -61,12 +65,12 @@ export function TeacherProfile(props: TeacherProfileProps) {
                 icon={'persons'}
                 size={18}
               ></Icon>
-              <h4>{students}</h4>
+              <h4>{totalStudents}</h4>
               <h4>{t('coursesDetails.teacherOverview.students')}</h4>
             </div>
             <div className={styles['review-information']}>
               <Icon className={styles['icon']} icon={'book'} size={18}></Icon>
-              <h4>{courses}</h4>
+              <h4>{totalCourses}</h4>
               <h4>{t('coursesDetails.teacherOverview.courses')}</h4>
             </div>
           </div>
@@ -75,7 +79,7 @@ export function TeacherProfile(props: TeacherProfileProps) {
       <div className={styles['information']}>
         <div className={styles['information-wrap']}>
           <div className={styles['information-content']}>
-            <h2>Sobre Katherine</h2>
+            <h2>Sobre {name}</h2>
             {biography.length > 500 ? (
               <p className={styles['text-description']}>
                 {showMore ? biography : `${biography.substring(0, 500)}....`}
@@ -89,12 +93,12 @@ export function TeacherProfile(props: TeacherProfileProps) {
             ) : (
               <p className={styles['text-description']}>{biography}</p>
             )}
-
             <div className={styles['social-networks']}>
-              <Icon className={styles['icon']} icon={'facebook'} size={22} />
-              <Icon className={styles['icon']} icon={'twitter'} size={22} />
-              <Icon className={styles['icon']} icon={'instagram'} size={22} />
-              <Icon className={styles['icon']} icon={'linkedin'} size={22} />
+              { socialNetworks.map((network, index)=>(
+                <a className={styles['social-network']} href={network.url} key={index} >
+                  <Icon className={styles['icon']} icon={network.name} size={22} />
+                </a>
+              ))}
             </div>
           </div>
           <div className={styles['video-content']}>
@@ -102,8 +106,7 @@ export function TeacherProfile(props: TeacherProfileProps) {
             <video
               width="90%"
               height="300"
-              src="video.webm"
-              poster="../../../../assets/images/video.svg"
+              src={video}
               controls
             ></video>
           </div>

@@ -28,12 +28,18 @@ export interface AchievementTaskFormProps {
 
 export function AchievementTaskForm(props: AchievementTaskFormProps) {
   const { onCancel, onSubmit, className, achievement } = props;
-  const [task, setTask] = useState<TaskModel>();
-  const { _addTask, course } = useCourse();
+  const { course } = useCourse();
   const { tasks } = course;
   const { t } = useTranslation();
-  const [indexSelected, setIndexSelected] = useState(-1);
 
+  const conditions = achievement ? achievement.conditions_attributes : [];
+  const taskIds = conditions.map((condition) => condition.entity_id) || [];
+
+  function findConditionId(id: number) {
+    return conditions.find((condition) => {
+      return condition.entity_id === id;
+    })?.id;
+  }
 
   const initialValues = {
     title: achievement?.title || '',
@@ -41,122 +47,137 @@ export function AchievementTaskForm(props: AchievementTaskFormProps) {
     price: achievement?.price || 0,
     file: null,
     rule: TypeAchievement.task,
-    settings: [],
-    tasks: tasks.map((e) => {
+    tasks: tasks.map((task) => {
+      const conditionId = findConditionId(task.id);
       return {
-        text: e.title,
-        id: e.id,
-        selected: e.id,
+        text: task.title,
+        id: task.id,
+        selected: taskIds.includes(task.id),
+        conditionId,
       };
     }),
   };
 
   return (
-      <Formik
-        initialValues={initialValues}
-        validationSchema={Yup.object({
-          title: Yup.string().required('Titulo no puede estar en blanco'),
-          image: Yup.string().required('Es necesario seleccionar una imagen'),
-        })}
-        onSubmit={(formData) => {
-          console.log('formDataAchievement: ', formData);
-          onSubmit({
-            title: formData.title,
-            rule: formData.rule,
-            price: formData.price,
-            image: formData.image,
-            conditions_attributes: [
-              {
-                entity: EntityAchievement.task,
-                entity_id: task?.id || -1,
-                must_reach_value: 100,
-                points_to_assign: 100,
-                description: task?.title,
-              },
-            ],
-          });
-        }}
-      >
-        {({
-          values,
-          handleChange,
-          handleBlur,
-          setFieldValue,
-          submitForm,
-          errors,
-        }) => (
-          <Form className={className || ''}>
-            <div className={styles['fields']}>
-              <Input
-                placeholder="Asigna un nombre interesante"
-                label={t('achievementTaskForm.title') || ''}
-                value={values.title}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                name="title"
-                errorMessage={errors.title}
-              />
-              <div className={styles['task-content']}>
-                <label className={styles['title-task']}>
-                  Seleccionar tarea
-                </label>
-              </div>
-              <div>
-                {tasks.map((element, index)=> (
-                  <div className={styles['task-upload']} key={index}>
-                    <h4 className={styles['title-task']}>{element.title}</h4>
-                    {index}
-                    {element.id}
-                  </div>
-                ))}
-              </div>
-              <br />
-              <label>{t('achievementTaskForm.titleImage')}</label>
-              <SelectImage
-                selected={values.image}
-                onChange={(img) => {
-                  setFieldValue('image', img);
-                }}
-                images={AchievementsImages}
-              />
-              {errors.image && (
-                <InputTextStatus
-                  status={StatusInputText.error}
-                  text={errors.image}
-                />
-              )}
-              <Input
-                placeholder="1"
-                label={t('achievementTaskForm.price') || ''}
-                description="Este valor sera enviado a tu cuenta una vez el alumno alcance este logro"
-                type="number"
-                min={1}
-                value={values.price}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                name="price"
-                errorMessage={errors.price}
-              />
+    <Formik
+      initialValues={initialValues}
+      validationSchema={Yup.object({
+        title: Yup.string().required('Titulo no puede estar en blanco'),
+        image: Yup.string().required('Es necesario seleccionar una imagen'),
+      })}
+      onSubmit={(formData) => {
+        const conditions = formData.tasks.map((task) => {
+          return {
+            id: task.conditionId,
+            points_to_assign: 100,
+            entity: EntityAchievement.task,
+            entity_id: task.id,
+            must_reach_value: 100,
+            description: task.text,
+            _destroy: !task.selected,
+          };
+        });
+        onSubmit({
+          title: formData.title,
+          rule: formData.rule,
+          price: formData.price,
+          image: formData.image,
+          conditions_attributes: conditions,
+        });
+      }}
+    >
+      {({
+        values,
+        handleChange,
+        handleBlur,
+        setFieldValue,
+        submitForm,
+        errors,
+      }) => (
+        <Form className={className || ''}>
+          <div className={styles['fields']}>
+            <Input
+              placeholder="Escribe un nombre interesante"
+              label={t('achievementTaskForm.title') || ''}
+              value={values.title}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              name="title"
+              errorMessage={errors.title}
+            />
+            <br />
+            <label>{t('achievementByScoreForm.quiz')}</label>
+            <div className={styles['tasks']}>
+              {values.tasks.map((task, index) => (
+                <div
+                  className={`${styles['task']} ${
+                    task.selected ? styles['selected'] : ''
+                  }`}
+                  key={index}
+                  onClick={() => {
+                    values.tasks.forEach((task, i) => {
+                      if (index === i) {
+                        setFieldValue(
+                          `tasks[${index}].selected`,
+                          !task.selected
+                        );
+                      } else {
+                        setFieldValue(`tasks[${i}].selected`, false);
+                      }
+                    });
+                  }}
+                >
+                  <h4>{task.text}</h4>
+                </div>
+              ))}
             </div>
-            <div className={styles['footer']}>
-              <Button
-                title={t('buttons.cancel')}
-                color={ColorsButton.white}
-                type={TypeButton.button}
-                onClick={() => {
-                  onCancel && onCancel();
-                }}
+            <br />
+            <label>{t('achievementTaskForm.titleImage')}</label>
+            <SelectImage
+              selected={values.image}
+              onChange={(img) => {
+                setFieldValue('image', img);
+              }}
+              images={AchievementsImages}
+            />
+            {errors.image && (
+              <InputTextStatus
+                status={StatusInputText.error}
+                text={errors.image}
               />
-              <Button
-                title={t('buttons.saveAchievement')}
-                color={ColorsButton.secondary}
-                type={TypeButton.submit}
-                onClick={submitForm}
-              />
-            </div>
-          </Form>
-        )}
-      </Formik>
+            )}
+            <Input
+              placeholder="1"
+              label={t('achievementTaskForm.price') || ''}
+              description="Este valor sera enviado a tu cuenta una vez el alumno alcance este logro"
+              type="number"
+              min={1}
+              value={values.price}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              name="price"
+              errorMessage={errors.price}
+            />
+          </div>
+          <div className={styles['footer']}>
+            <Button
+              title={t('buttons.cancel')}
+              color={ColorsButton.white}
+              type={TypeButton.button}
+              onClick={() => {
+                onCancel && onCancel();
+              }}
+            />
+            <Button
+              title={t('buttons.saveAchievement')}
+              color={ColorsButton.secondary}
+              type={TypeButton.submit}
+              onClick={submitForm}
+            />
+          </div>
+        </Form>
+      )}
+    </Formik>
   );
 }
 

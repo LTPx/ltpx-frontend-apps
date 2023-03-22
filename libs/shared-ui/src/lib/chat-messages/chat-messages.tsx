@@ -76,7 +76,7 @@ export function ChatMessages(props: ChatMessagesProps) {
       </div>
       <div className={styles['text-input']}>
         <Input
-          placeholder="Send message"
+          placeholder="Enviar mensaje"
           addonInput={{ icon: 'chat-dots', position: Position.right }}
           onKeyDown={handleKeyDown}
         />

@@ -1,37 +1,41 @@
 @import '../../../styles.scss';
 
-.tab-options {
-  display: flex;
-  gap: 1rem;
-  align-items: center;
-}
-
 .container {
-  width: 60vw;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
+  width: 30vw;
+  box-shadow: $card-shadow-medium;
+  background-color: $white-color;
+
+  .actions {
+    display: flex;
+    justify-content: flex-end;
+    padding: 0.5rem;
+    border-bottom: 1px solid $gray-color-200;
+
+    svg {
+      cursor: pointer;
+    }
+  }
+
   .title {
     padding-bottom: 1rem;
   }
   .content {
+    display: flex;
     width: 100%;
-    display: grid;
-    grid-template-columns: 25% 75%;
-    gap: 1rem;
   }
 
   .rooms-container {
     box-shadow: $card-shadow-medium;
-    background-color: $white-color;
     min-width: 10rem;
+    flex: 1;
+    border-right: 1px solid $gray-color-100;
 
     .header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 1rem;
-      border-bottom: 1px solid #d4d4d4;
+      padding: 0.9rem;
+      border-bottom: 1px solid $gray-color-200;
 
       svg {
         cursor: pointer;
@@ -40,24 +44,9 @@
     }
   }
 
-  .student-tabs {
-    display: flex;
-    gap: 1rem;
-    align-items: center;
+  .chat-body {
+    flex: 2;
   }
-}
-
-.chat-body {
-  box-shadow: $card-shadow-medium;
-  background-color: $white-color;
-}
-
-.chat-body-header {
-
-}
-
-.rooms {
-  // padding: 0 1rem;
 }
 
 .room-row {

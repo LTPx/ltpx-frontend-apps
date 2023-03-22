@@ -1,5 +1,5 @@
 import styles from './chat.module.scss';
-import { ChatMessages } from '@ltpx-frontend-apps/shared-ui';
+import { ChatMessages, Icon } from '@ltpx-frontend-apps/shared-ui';
 import { useChat, useUser } from '@ltpx-frontend-apps/store';
 import { Avatar } from 'evergreen-ui';
 import { ReactElement } from 'react';
@@ -7,10 +7,11 @@ import { useChatData } from './useChatData';
 
 export interface ChatProps {
   children?: ReactElement;
+  onCancel?: () => void;
 }
 
 export function Chat(props: ChatProps) {
-  const { children } = props;
+  const { children, onCancel } = props;
   useChatData();
   const {
     rooms,
@@ -22,10 +23,13 @@ export function Chat(props: ChatProps) {
 
   return (
     <div className={styles['container']}>
+      <div className={styles.actions}>
+        <Icon icon='close' size={20} onClick={onCancel}/>
+      </div>
       <div className={styles['content']}>
         <div className={styles['rooms-container']}>
           <div className={styles['header']}>
-            <h3>Chat {rooms.length}</h3>
+            <h3>Chat</h3>
             {children}
           </div>
           <div className={styles['rooms']}>

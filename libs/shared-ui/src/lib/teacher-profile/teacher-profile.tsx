@@ -4,7 +4,7 @@ import Avatar, { AvatarSize } from '../avatar/avatar';
 import Icon from '../icon/icon';
 import styles from './teacher-profile.module.scss';
 import CourseCard from '../course-card/course-card';
-import { buildCourses } from '@ltpx-frontend-apps/api';
+import { buildCourses, CourseModel } from '@ltpx-frontend-apps/api';
 
 /* eslint-disable-next-line */
 export interface TeacherProfileProps {
@@ -18,6 +18,7 @@ export interface TeacherProfileProps {
   totalStudents: number;
   totalCourses: number;
   socialNetworks: any[]; //TODO: add interface
+  courses: CourseModel[];
 }
 
 export function TeacherProfile(props: TeacherProfileProps) {
@@ -32,10 +33,10 @@ export function TeacherProfile(props: TeacherProfileProps) {
     totalStudents,
     totalCourses,
     socialNetworks,
+    courses,
   } = props;
   const [showMore, setShowMore] = useState(false);
   const { t } = useTranslation();
-  const popularCourses = buildCourses(4);
 
   return (
     <div className={styles['container']}>
@@ -81,15 +82,17 @@ export function TeacherProfile(props: TeacherProfileProps) {
           <div className={styles['information-content']}>
             <h2>Sobre {name}</h2>
             {biography.length > 500 ? (
-              <p className={styles['text-description']}>
-                {showMore ? biography : `${biography.substring(0, 500)}....`}
-                <h4
+              <>
+                <p className={styles['text-description']}>
+                  {showMore ? biography : `${biography.substring(0, 500)}....`}
+                </p>
+                <div
                   className={styles['show']}
                   onClick={() => setShowMore(!showMore)}
                 >
-                  {showMore ? 'Mostrar menos' : 'Mostrar mas'}
-                </h4>
-              </p>
+                  <h4>{showMore ? 'Mostrar menos' : 'Mostrar mas'}</h4>
+                </div>
+              </>
             ) : (
               <p className={styles['text-description']}>{biography}</p>
             )}
@@ -117,12 +120,12 @@ export function TeacherProfile(props: TeacherProfileProps) {
       </div>
       <div className={styles['courses']}>
         <div className={styles['courses-content']}>
-          <h2>Cursos</h2>
+          <h2>Cursos del profesor</h2>
           <div className={styles['courses-teacher']}>
-            {popularCourses.map((course, index) => (
+            {courses.map((course, index) => (
               <div className={styles['course']} key={index}>
                 <CourseCard
-                  image={course.cover}
+                  image={course.cover_url}
                   category={course.category}
                   title={course.title}
                   price={course.price_format}

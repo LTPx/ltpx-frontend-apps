@@ -124,6 +124,7 @@ export interface TeacherSummary {
     name: string;
     url: string;
   }[];
+  courses?: CourseModel[];
 }
 
 export interface FullCourse {

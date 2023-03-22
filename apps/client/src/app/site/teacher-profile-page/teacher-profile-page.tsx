@@ -43,6 +43,7 @@ export function TeacherProfilePage(props: TeacherProfilePageProps) {
             totalStudents={teacher.total_students}
             totalCourses={teacher.total_courses}
             socialNetworks={teacher.social_networks}
+            courses={teacher.courses || []}
           />
         )}
       </div>

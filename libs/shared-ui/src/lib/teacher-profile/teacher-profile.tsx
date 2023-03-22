@@ -4,7 +4,7 @@ import Avatar, { AvatarSize } from '../avatar/avatar';
 import Icon from '../icon/icon';
 import styles from './teacher-profile.module.scss';
 import CourseCard from '../course-card/course-card';
-import { buildCourses, CourseModel } from '@ltpx-frontend-apps/api';
+import { CourseModel } from '@ltpx-frontend-apps/api';
 
 /* eslint-disable-next-line */
 export interface TeacherProfileProps {

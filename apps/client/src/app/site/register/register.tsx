@@ -14,9 +14,9 @@ export function Register(props: RegisterProps) {
   const { t } = useTranslation();
 
   const onSubmitForm = async (formData: IRegisterUser) => {
-    const { isLogin, data } = await register(formData);
+    const { success } = await register(formData);
 
-    if (isLogin) {
+    if (success) {
       navigate('/home');
       window.location.reload();
     } else {

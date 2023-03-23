@@ -24,8 +24,8 @@ export function Login(props: LoginProps) {
       email: formData.email,
       password: formData.password,
     };
-    const { isLogin, data } = await login(userAccount);
-    if (isLogin) {
+    const { success, data } = await login(userAccount);
+    if (success) {
       if (data.initial_view === TypeAccounts.user) {
         navigate('/home');
       }

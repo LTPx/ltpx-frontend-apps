@@ -44,7 +44,6 @@ export function CourseDetails() {
   const { translateLanguage, translateLevel, translateCategory } =
     useCourseUtil();
   const id = parseInt(courseId || '');
-  const navigate = useNavigate();
   const { t } = useTranslation();
   const { _getSiteCourse, currentFullCourse } = useSite();
   const { course, teacher } = currentFullCourse;
@@ -60,11 +59,11 @@ export function CourseDetails() {
   }, []);
 
   const onSubmitForm = async (formData: IRegisterUser) => {
-    const { isLogin, data } = await register(formData);
-    if (isLogin) {
+    const { success, error } = await register(formData);
+    if (success) {
       window.location.reload();
     } else {
-      console.log(data);
+      console.log(error);
     }
   };
 

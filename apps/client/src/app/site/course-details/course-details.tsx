@@ -17,6 +17,7 @@ import {
   ColorsButton,
   Tag,
   ColorsTag,
+  useMoment,
 } from '@ltpx-frontend-apps/shared-ui';
 import { Dialog } from 'evergreen-ui';
 import { useSite, useUser } from '@ltpx-frontend-apps/store';
@@ -41,8 +42,9 @@ export function CourseDetails() {
     useCourseUtil();
   const { t } = useTranslation();
   const { _getSiteCourse, currentFullCourse } = useSite();
-  const { course, teacher } = currentFullCourse;
+  const { course, teacher, session } = currentFullCourse;
   const [message, setMessage] = useState<MessageCheckout>();
+  const { customFormatDate, moment } = useMoment();
 
   const fetchCourse = useCallback(async () => {
     const { success, data, error } = await _getSiteCourse(slug || '');
@@ -90,19 +92,6 @@ export function CourseDetails() {
     // },
   ];
 
-  const courseDate = [
-    {
-      title: 'Clases Martes 21 de Febrero',
-      description: '21 de febrero – 7 de marzo (3 Semanas)',
-      time: '8:30 - 9:20 PM',
-    },
-    {
-      title: 'Clases Domingo 12 de Marzo',
-      description: '12 de Marzo – 26 de marzo (3 Semanas)',
-      time: '8:30 - 9:20 PM',
-    },
-  ];
-
   return (
     <div className={styles['wrap']}>
       <div className={styles['container']}>
@@ -146,7 +135,7 @@ export function CourseDetails() {
                     />
                     <Tag
                       color={ColorsTag.white}
-                      text={'Inscritos: ' + course.enrollments_count}
+                      text={'Inscritos: ' + session.enrollments_count}
                       icon={'person'}
                     />
                     <Tag
@@ -269,9 +258,9 @@ export function CourseDetails() {
               <div className={styles['buy-course-content']}>
                 <BuyCourseCard
                   price={course.price_format}
-                  achievements={course.achievements?.length || 0}
-                  lectures={course.contents.length}
-                  enrolled={course.enrollments_count}
+                  totalAchievements={course.achievements?.length || 0}
+                  totalContents={course.contents.length}
+                  totalEnrolled={session.enrollments_count}
                   language={translateLanguage(course.language)}
                   skillLevel={translateLevel(course.level)}
                   image={course.cover_url}
@@ -299,12 +288,12 @@ export function CourseDetails() {
         )}
         <h2 className={styles['title-date']}>Horarios de Clases</h2>
         <div className={styles['course-date']}>
-          {courseDate.map((course, index) => (
+          {session.meetings.map((meeting, index) => (
             <CourseDateCard
               key={index}
-              title={course.title}
-              description={course.description}
-              time={course.time}
+              description={`Las clases tendrán una duración de ${session.call_time_min} min`}
+              title={`Clase ${index+1}: ${customFormatDate(meeting.start_date, 'MMM D YYYY')}`}
+              time={`Hora de inicio: ${customFormatDate(meeting.start_date, 'h:mm a')}`}
             />
           ))}
         </div>
@@ -332,7 +321,7 @@ export function CourseDetails() {
             product={{
               description: course.title,
               price: parseFloat(course.price),
-              id: course.course_session_id,
+              id: session.id,
               image: course.cover_url,
             }}
             onSuccess={() => {

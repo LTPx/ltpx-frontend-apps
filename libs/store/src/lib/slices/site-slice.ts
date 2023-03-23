@@ -9,9 +9,10 @@ import {
   ConfirmUserPayment,
   cancelPaymentOrder,
   FullCourse,
-  CourseModel,
   TeacherSummary,
   getPublicTeacherProfile,
+  CourseSite,
+  CourseSessionSummary,
 } from '@ltpx-frontend-apps/api';
 
 export type TResponse = {
@@ -35,8 +36,9 @@ export const createSiteSlice: StateCreator<StoreState, [], [], SiteSlice> = (
   get
 ) => ({
   currentFullCourse: {
-    course: {} as CourseModel,
+    course: {} as CourseSite,
     teacher: {} as TeacherSummary,
+    session: {} as CourseSessionSummary,
     comments: [],
     ratings: []
   } as FullCourse,

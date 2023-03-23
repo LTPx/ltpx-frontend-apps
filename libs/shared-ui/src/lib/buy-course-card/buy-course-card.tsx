@@ -8,9 +8,9 @@ export interface BuyCourseCardProps {
   image: string;
   price: string;
   discount?: number;
-  achievements: number;
-  lectures: number;
-  enrolled: number;
+  totalAchievements: number;
+  totalContents: number;
+  totalEnrolled: number;
   language: string;
   skillLevel: string;
   certificate: boolean;
@@ -23,9 +23,9 @@ export function BuyCourseCard(props: BuyCourseCardProps) {
     image,
     price,
     discount,
-    achievements,
-    lectures,
-    enrolled,
+    totalAchievements,
+    totalContents,
+    totalEnrolled,
     language,
     skillLevel,
     certificate,
@@ -67,21 +67,21 @@ export function BuyCourseCard(props: BuyCourseCardProps) {
                 <Icon icon={'trophy'} size={15} color="#888888"></Icon>
                 <h4>{t('coursesDetails.buyCourseCard.details.achievement')}</h4>
               </div>
-              <h4>{achievements}</h4>
+              <h4>{totalAchievements}</h4>
             </div>
             <div className={styles['item']}>
               <div className={styles['item-text']}>
                 <Icon icon={'copy'} size={15} color="#888888"></Icon>
                 <h4>{t('coursesDetails.buyCourseCard.details.contents')}</h4>
               </div>
-              <h4>{lectures}</h4>
+              <h4>{totalContents}</h4>
             </div>
             <div className={styles['item']}>
               <div className={styles['item-text']}>
                 <Icon icon={'person'} size={15} color="#888888"></Icon>
                 <h4>{t('coursesDetails.buyCourseCard.details.enrolled')}</h4>
               </div>
-              <h4>{enrolled} Alumnos</h4>
+              <h4>{totalEnrolled}</h4>
             </div>
             <div className={styles['item']}>
               <div className={styles['item-text']}>

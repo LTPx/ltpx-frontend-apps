@@ -28,7 +28,7 @@ export function TeacherProfileForm(props: TeacherProfileFormProps) {
       skills: profile?.skills || '',
       biography: profile?.biography || '',
       profile_image: profile?.image || '',
-      video_presentation: profile?.video || '',
+      profile_video: profile?.video || '',
       facebook_url: getSocialNetwork('facebook'),
       twitter_url: getSocialNetwork('twitter'),
       instagram_url: getSocialNetwork('instagram'),
@@ -144,7 +144,7 @@ export function TeacherProfileForm(props: TeacherProfileFormProps) {
                 className={styles['file-upload']}
                 type={TypeFile.video}
                 onChange={(value) => {
-                  formik.setFieldValue('video_presentation', value);
+                  formik.setFieldValue('profile_video', value);
                 }}
                 errorMessage={
                   formik.touched.video_presentation &&

@@ -114,8 +114,17 @@ export interface TeacherSummary {
   profession: string;
   total_courses: number;
   rating_average: number;
+  total_reviews: number;
   total_students: number;
   profile_image: string;
+  profile_video: string;
+  skills: string;
+  slug: string;
+  social_networks: {
+    name: string;
+    url: string;
+  }[];
+  courses?: CourseModel[];
 }
 
 export interface FullCourse {
@@ -179,7 +188,7 @@ export interface MeetingDate {
 }
 
 export interface ClassroomClasses {
-  course_id: number,
+  course_id: number;
   title: string;
   type: TeacherClassType;
   min_participants: number;

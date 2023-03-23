@@ -4,42 +4,47 @@ import Avatar, { AvatarSize } from '../avatar/avatar';
 import Icon from '../icon/icon';
 import styles from './teacher-profile.module.scss';
 import CourseCard from '../course-card/course-card';
-import { buildCourses } from '@ltpx-frontend-apps/api';
+import { CourseModel } from '@ltpx-frontend-apps/api';
 
 /* eslint-disable-next-line */
 export interface TeacherProfileProps {
-  img: string;
-  nameTeacher: string;
-  profession: string;
+  image: string;
+  video: string;
+  name: string;
+  skills: string;
   biography: string;
   rating: number;
-  reviews: number;
-  students: number;
-  courses: number;
+  totalReviews: number;
+  totalStudents: number;
+  totalCourses: number;
+  socialNetworks: any[]; //TODO: add interface
+  courses: CourseModel[];
 }
 
 export function TeacherProfile(props: TeacherProfileProps) {
   const {
-    img,
-    nameTeacher,
-    profession,
+    image,
+    video,
+    name,
+    skills,
     biography,
     rating,
-    reviews,
-    students,
+    totalReviews,
+    totalStudents,
+    totalCourses,
+    socialNetworks,
     courses,
   } = props;
   const [showMore, setShowMore] = useState(false);
   const { t } = useTranslation();
-  const popularCourses = buildCourses(4);
 
   return (
     <div className={styles['container']}>
       <div className={styles['head-content']}>
         <div className={styles['head-profile']}>
-          <Avatar image={img} size={AvatarSize.large} outline={true} />
-          <h1>{nameTeacher}</h1>
-          <h3>{profession}</h3>
+          <Avatar image={image} size={AvatarSize.large} outline={true} />
+          <h1>{name}</h1>
+          <h3>{skills}</h3>
           <div className={styles['teacher-review-information']}>
             <div className={styles['review-information']}>
               <Icon className={styles['icon']} icon={'star'} size={18}></Icon>
@@ -52,7 +57,7 @@ export function TeacherProfile(props: TeacherProfileProps) {
                 icon={'comment'}
                 size={18}
               ></Icon>
-              <h4>{reviews}</h4>
+              <h4>{totalReviews}</h4>
               <h4>{t('coursesDetails.teacherOverview.reviews')}</h4>
             </div>
             <div className={styles['review-information']}>
@@ -61,12 +66,12 @@ export function TeacherProfile(props: TeacherProfileProps) {
                 icon={'persons'}
                 size={18}
               ></Icon>
-              <h4>{students}</h4>
+              <h4>{totalStudents}</h4>
               <h4>{t('coursesDetails.teacherOverview.students')}</h4>
             </div>
             <div className={styles['review-information']}>
               <Icon className={styles['icon']} icon={'book'} size={18}></Icon>
-              <h4>{courses}</h4>
+              <h4>{totalCourses}</h4>
               <h4>{t('coursesDetails.teacherOverview.courses')}</h4>
             </div>
           </div>
@@ -75,48 +80,52 @@ export function TeacherProfile(props: TeacherProfileProps) {
       <div className={styles['information']}>
         <div className={styles['information-wrap']}>
           <div className={styles['information-content']}>
-            <h2>Sobre Katherine</h2>
+            <h2>Sobre {name}</h2>
             {biography.length > 500 ? (
-              <p className={styles['text-description']}>
-                {showMore ? biography : `${biography.substring(0, 500)}....`}
-                <h4
+              <>
+                <p className={styles['text-description']}>
+                  {showMore ? biography : `${biography.substring(0, 500)}....`}
+                </p>
+                <div
                   className={styles['show']}
                   onClick={() => setShowMore(!showMore)}
                 >
-                  {showMore ? 'Mostrar menos' : 'Mostrar mas'}
-                </h4>
-              </p>
+                  <h4>{showMore ? 'Mostrar menos' : 'Mostrar mas'}</h4>
+                </div>
+              </>
             ) : (
               <p className={styles['text-description']}>{biography}</p>
             )}
-
             <div className={styles['social-networks']}>
-              <Icon className={styles['icon']} icon={'facebook'} size={22} />
-              <Icon className={styles['icon']} icon={'twitter'} size={22} />
-              <Icon className={styles['icon']} icon={'instagram'} size={22} />
-              <Icon className={styles['icon']} icon={'linkedin'} size={22} />
+              {socialNetworks.map((network, index) => (
+                <a
+                  className={styles['social-network']}
+                  href={network.url}
+                  key={index}
+                >
+                  <Icon
+                    className={styles['icon']}
+                    icon={network.name}
+                    size={22}
+                  />
+                </a>
+              ))}
             </div>
           </div>
           <div className={styles['video-content']}>
             <h2>Video de Presentación</h2>
-            <video
-              width="90%"
-              height="300"
-              src="video.webm"
-              poster="../../../../assets/images/video.svg"
-              controls
-            ></video>
+            <video width="90%" height="300" src={video} controls></video>
           </div>
         </div>
       </div>
       <div className={styles['courses']}>
         <div className={styles['courses-content']}>
-          <h2>Cursos</h2>
+          <h2>Cursos del profesor</h2>
           <div className={styles['courses-teacher']}>
-            {popularCourses.map((course, index) => (
+            {courses.map((course, index) => (
               <div className={styles['course']} key={index}>
                 <CourseCard
-                  image={course.cover}
+                  image={course.cover_url}
                   category={course.category}
                   title={course.title}
                   price={course.price_format}

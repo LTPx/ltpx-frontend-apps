@@ -28,6 +28,8 @@ export interface TeacherProfile {
   image: string;
   video: string;
   profile_image: string;
+  profile_video: string;
+  slug: string;
 }
 
 export interface ITeacher {

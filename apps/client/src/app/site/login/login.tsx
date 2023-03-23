@@ -14,7 +14,7 @@ import { useTranslation } from 'react-i18next';
 export interface LoginProps {}
 
 export function Login(props: LoginProps) {
-  const [error, setError] = useState(false);
+  const [loginError, setLoginError] = useState<string>();
   const { login } = useUser();
   const { t } = useTranslation();
   const navigate = useNavigate();
@@ -24,7 +24,7 @@ export function Login(props: LoginProps) {
       email: formData.email,
       password: formData.password,
     };
-    const { success, data } = await login(userAccount);
+    const { success, data, error } = await login(userAccount);
     if (success) {
       if (data.initial_view === TypeAccounts.user) {
         navigate('/home');
@@ -38,7 +38,7 @@ export function Login(props: LoginProps) {
         window.location.reload();
       }
     } else {
-      setError(true);
+      setLoginError(error);
     }
   };
 
@@ -47,12 +47,12 @@ export function Login(props: LoginProps) {
       <div className={styles['content']}>
         <h1>{t('login.title')}</h1>
         <p>{t('login.text')}</p>
-        {error && (
+        {loginError !== undefined && (
           <BannerNotification
             type={BannerType.error}
-            onClickClose={() => setError(false)}
+            onClickClose={() => setLoginError(undefined)}
           >
-            Tu email o password no coinciden, prueba recuperando contraseña
+            {loginError}
           </BannerNotification>
         )}
         <LoginForm

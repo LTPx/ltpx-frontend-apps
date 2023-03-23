@@ -31,7 +31,7 @@ export const getWithdrawal = async (id: number) => {
 };
 
 export const approveWithdrawal = async (withdrawalId: number, params: {receipt_id?: string, receipt_image: string}) => {
-  const data = encapsuleInFormData(params, {imagesKeys: ['receipt_image']})
+  const data = encapsuleInFormData(params, {mediaKeys: ['receipt_image']})
   return new Promise<WithdrawalModel[]>((resolve, reject) => {
     http
       .post(`api/v1/admin/withdrawals/${withdrawalId}/approve`, data)

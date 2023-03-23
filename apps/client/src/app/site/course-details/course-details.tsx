@@ -197,7 +197,7 @@ export function CourseDetails() {
                   </div>
                   <div className={styles['description-course']}>
                     <div className={styles['avatar']}>
-                      <NavLink to="/teacher-profile">
+                      <NavLink to={`/teacher/${teacher.slug}`}>
                         <Avatar
                           image={teacher.profile_image || ''}
                           size={AvatarSize.medium}

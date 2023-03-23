@@ -115,7 +115,7 @@ export function Home() {
 
   useEffect(() => {
     fetchPopularCourse();
-  }, [fetchPopularCourse]);
+  }, []);
 
   return (
     <div className={styles['container']}>

@@ -18,6 +18,7 @@ import {
   Tag,
   ColorsTag,
   useMoment,
+  AchievementBadge,
 } from '@ltpx-frontend-apps/shared-ui';
 import { Dialog } from 'evergreen-ui';
 import { useSite, useUser } from '@ltpx-frontend-apps/store';
@@ -82,10 +83,13 @@ export function CourseDetails() {
 
   const tabs = [
     {
-      text: 'Descripción',
+      text: 'Información',
     },
     {
       text: 'Contenidos',
+    },
+    {
+      text: 'Logros',
     },
     // {
     //   text: 'Reseñas',
@@ -99,7 +103,10 @@ export function CourseDetails() {
           <>
             <div className={styles['head-responsive']}>
               <div className={styles['wrap-responsive']}>
-                <img className={styles['image-responsive']} src={course.cover_url} />
+                <img
+                  className={styles['image-responsive']}
+                  src={course.cover_url}
+                />
                 <div className={styles['content-responsive']}>
                   <div className={styles['title-content-responsive']}>
                     <h3 className={styles['title-responsive']}>
@@ -229,6 +236,17 @@ export function CourseDetails() {
                       {selectedTab === 1 && (
                         <CourseContents contents={course.contents || []} />
                       )}
+                      {selectedTab === 2 && (
+                        <div className={styles['achievements']}>
+                          {course.achievements?.map((achievement, index) => (
+                            <AchievementBadge
+                              key={index}
+                              title={achievement.title}
+                              image={achievement.image}
+                            />
+                          ))}
+                        </div>
+                      )}
                       {/* {selectedTab === 3 && (
                         <div className={styles['reviews-wrap']}>
                           <RatingCourse
@@ -288,14 +306,21 @@ export function CourseDetails() {
         )}
         <h2 className={styles['title-date']}>Horarios de Clases</h2>
         <div className={styles['course-date']}>
-          {session.meetings.map((meeting, index) => (
-            <CourseDateCard
-              key={index}
-              description={`Las clases tendrán una duración de ${session.call_time_min} min`}
-              title={`Clase ${index+1}: ${customFormatDate(meeting.start_date, 'MMM D YYYY')}`}
-              time={`Hora de inicio: ${customFormatDate(meeting.start_date, 'h:mm a')}`}
-            />
-          ))}
+          {session.meetings &&
+            session.meetings.map((meeting, index) => (
+              <CourseDateCard
+                key={index}
+                description={`Las clases tendrán una duración de ${session.call_time_min} min`}
+                title={`Clase ${index + 1}: ${customFormatDate(
+                  meeting.start_date,
+                  'MMM D YYYY'
+                )}`}
+                time={`Hora de inicio: ${customFormatDate(
+                  meeting.start_date,
+                  'h:mm a'
+                )}`}
+              />
+            ))}
         </div>
         <Dialog
           isShown={openModal}

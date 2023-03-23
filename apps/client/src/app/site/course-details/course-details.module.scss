@@ -162,6 +162,12 @@
   }
 }
 
+.achievements {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
 //smartphones-responsive
 @media screen and (max-width: 550px) {
   .wrap-responsive {

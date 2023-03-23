@@ -48,19 +48,49 @@ export function ApplyTeacherForm(props: ApplyTeacherFormProps) {
       phone: Yup.string().required('Teléfono es requerido'),
       country: Yup.string().required('País es requerido'),
       city: Yup.string().required('Ciudad es requerido'),
-      degrees_files: Yup.string().required('Por favor suba los archivos'),
-      police_record: Yup.string().required('Record Policial es requerido'),
+      degrees_files: Yup.mixed()
+        .nullable()
+        .required('Se debe subir los archivos')
+        .test(
+          'degrees_files',
+          'El archivo debe ser menor o igual a 3mb',
+          (value) => {
+            if (value) {
+              const fileSize = value.size;
+              const fileMb = fileSize / 1024 ** 2;
+              return fileMb <= 3;
+            } else {
+              return false;
+            }
+          }
+        ),
+      police_record: Yup.mixed()
+        .nullable()
+        .required('Record Policial es requerido')
+        .test(
+          'police_record',
+          'El archivo debe ser menor o igual a 3mb',
+          (value) => {
+            if (value) {
+              const fileSize = value.size;
+              const fileMb = fileSize / 1024 ** 2;
+              return fileMb <= 3;
+            } else {
+              return false;
+            }
+          }
+        ),
       national_id_front: Yup.mixed()
         .nullable()
         .required('Imagen de la identificación frontal es requerida')
         .test(
           'national_id_front',
-          'El archivo debe ser menor o igual a 2mb',
+          'El archivo debe ser menor o igual a 3mb',
           (value) => {
             if (value) {
               const fileSize = value.size;
               const fileMb = fileSize / 1024 ** 2;
-              return fileMb <= 2;
+              return fileMb <= 3;
             } else {
               return false;
             }
@@ -68,7 +98,20 @@ export function ApplyTeacherForm(props: ApplyTeacherFormProps) {
         ),
       national_id_back: Yup.mixed()
         .nullable()
-        .required('Imagen de la identificación trasera es requerida'),
+        .required('Imagen de la identificación trasera es requerida')
+        .test(
+          'national_id_back',
+          'El archivo debe ser menor o igual a 3mb',
+          (value) => {
+            if (value) {
+              const fileSize = value.size;
+              const fileMb = fileSize / 1024 ** 2;
+              return fileMb <= 3;
+            } else {
+              return false;
+            }
+          }
+        ),
     }),
     onSubmit: (data) => {
       onSubmitForm(data);
@@ -200,7 +243,11 @@ export function ApplyTeacherForm(props: ApplyTeacherFormProps) {
             onChange={(value) => {
               formik.setFieldValue('police_record', value);
             }}
-            errorMessage={formik.errors.police_record}
+            errorMessage={
+              formik.touched.police_record && formik.errors.police_record
+                ? formik.errors.police_record
+                : null
+            }
           />
         </section>
         <section>

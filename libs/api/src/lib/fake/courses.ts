@@ -31,7 +31,8 @@ const createRandomCourse = ():PublicCourse => (
       max: 10,
       call_time_min: 45,
       meetings:[]
-    }
+    },
+    slug: 's-a-s-a'
   }
 )
 

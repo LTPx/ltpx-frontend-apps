@@ -23,7 +23,7 @@ export type TResponse = {
 export type SiteSlice = {
   currentFullCourse: FullCourse;
   _getPopularCourses: () => Promise<TResponse>;
-  _getSiteCourse: (id: number) => Promise<TResponse>;
+  _getSiteCourse: (slug: string) => Promise<TResponse>;
   _createPaymentOrder: (params: NewUserCoursePaymentParams) => Promise<TResponse>;
   _confirmUserPayment: (params: ConfirmUserPayment) => Promise<TResponse>;
   _cancelUserPayment: (orderId: number) => Promise<TResponse>;
@@ -48,9 +48,9 @@ export const createSiteSlice: StateCreator<StoreState, [], [], SiteSlice> = (
       return { success: false, error };
     }
   },
-  _getSiteCourse: async (id): Promise<TResponse> => {
+  _getSiteCourse: async (slug): Promise<TResponse> => {
     try {
-      const course = await siteGetCourse(id);
+      const course = await siteGetCourse(slug);
       set({ currentFullCourse: course })
       return { success: true, data: course };
     } catch (error) {

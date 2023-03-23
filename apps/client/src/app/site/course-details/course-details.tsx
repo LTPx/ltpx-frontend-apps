@@ -6,10 +6,6 @@ import {
   Rating,
   Tabs,
   BuyCourseCard,
-  TeacherOverview,
-  RatingCourse,
-  CommentCourse,
-  ReviewForm,
   OverviewCourse,
   CourseContents,
   RegisterForm,
@@ -25,7 +21,7 @@ import {
 import { Dialog } from 'evergreen-ui';
 import { useSite, useUser } from '@ltpx-frontend-apps/store';
 import { useCallback, useEffect, useState } from 'react';
-import { NavLink, useNavigate, useParams } from 'react-router-dom';
+import { NavLink, useParams } from 'react-router-dom';
 import { useCourseUtil } from '@ltpx-frontend-apps/store';
 import { useTranslation } from 'react-i18next';
 import CheckoutForm from '../../components/checkout-form/checkout-form';
@@ -39,18 +35,17 @@ export function CourseDetails() {
   const [openModal, setOpenModal] = useState(false);
   const [openEnrollModal, setOpenEnrollModal] = useState(false);
   const [selectedTab, setSelectedTab] = useState(0);
-  const { courseId } = useParams();
+  const { slug } = useParams();
   const { isAuthenticated, register } = useUser();
   const { translateLanguage, translateLevel, translateCategory } =
     useCourseUtil();
-  const id = parseInt(courseId || '');
   const { t } = useTranslation();
   const { _getSiteCourse, currentFullCourse } = useSite();
   const { course, teacher } = currentFullCourse;
   const [message, setMessage] = useState<MessageCheckout>();
 
   const fetchCourse = useCallback(async () => {
-    const { success, data, error } = await _getSiteCourse(id);
+    const { success, data, error } = await _getSiteCourse(slug || '');
     if (success) {
       console.log('data: ', data);
     } else {
@@ -90,12 +85,9 @@ export function CourseDetails() {
     {
       text: 'Contenidos',
     },
-    {
-      text: 'Profesor',
-    },
-    {
-      text: 'Reseñas',
-    },
+    // {
+    //   text: 'Reseñas',
+    // },
   ];
 
   const courseDate = [
@@ -209,7 +201,9 @@ export function CourseDetails() {
                         <label>
                           {t('coursesDetails.teacherInformation.instructor')}
                         </label>
-                        <h5>{teacher.name}</h5>
+                        <NavLink to={`/teacher/${teacher.slug}`}>
+                          <h5>{teacher.name}</h5>
+                        </NavLink>
                       </div>
                       <div className={styles['item']}>
                         <label>
@@ -246,19 +240,7 @@ export function CourseDetails() {
                       {selectedTab === 1 && (
                         <CourseContents contents={course.contents || []} />
                       )}
-                      {selectedTab === 2 && (
-                        <TeacherOverview
-                          name={teacher.name || ''}
-                          profession={teacher.profession || ''}
-                          rating={teacher.rating_average || 0}
-                          reviews={teacher.rating_average || 0}
-                          students={teacher.total_students || 0}
-                          courses={5}
-                          biography={teacher.biography}
-                          image={teacher.profile_image}
-                        />
-                      )}
-                      {selectedTab === 3 && (
+                      {/* {selectedTab === 3 && (
                         <div className={styles['reviews-wrap']}>
                           <RatingCourse
                             ratings={currentFullCourse.ratings || []}
@@ -279,7 +261,7 @@ export function CourseDetails() {
                           </div>
                           <ReviewForm />
                         </div>
-                      )}
+                      )} */}
                     </div>
                   </div>
                 </div>

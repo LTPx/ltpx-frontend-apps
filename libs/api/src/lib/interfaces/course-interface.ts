@@ -75,6 +75,7 @@ export interface CourseModel {
   achievements?: AchievementModel[];
   course_session_id: number;
   tasks: TaskModel[];
+  slug: string;
 }
 
 export interface CourseSite {
@@ -91,6 +92,7 @@ export interface CourseSite {
   average_rating: number;
   language: CourseLanguage;
   total_achievements: number;
+  slug: string;
 }
 
 export interface Comment {

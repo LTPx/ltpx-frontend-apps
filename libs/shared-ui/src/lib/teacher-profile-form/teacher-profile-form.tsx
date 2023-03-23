@@ -52,8 +52,8 @@ export function TeacherProfileForm(props: TeacherProfileFormProps) {
           }
         }
       ),
-      video_presentation: Yup.mixed().test(
-        'video_presentation',
+      profile_video: Yup.mixed().test(
+        'profile_video',
         'El archivo debe ser menor o igual a 30mb',
         (value) => {
           if (value) {
@@ -147,9 +147,9 @@ export function TeacherProfileForm(props: TeacherProfileFormProps) {
                   formik.setFieldValue('profile_video', value);
                 }}
                 errorMessage={
-                  formik.touched.video_presentation &&
-                  formik.errors.video_presentation
-                    ? formik.errors.video_presentation
+                  formik.touched.profile_video &&
+                  formik.errors.profile_video
+                    ? formik.errors.profile_video
                     : null
                 }
               />

@@ -94,10 +94,16 @@ export function TeacherCourseCard(props: TeacherCourseCardProps) {
           <NavLink to={url}>
             <h3 className={styles['title']}>{title}</h3>
           </NavLink>
-          {description.length > 200 ? (
-            <p>{description ? `${description.substring(0, 200)}...` : ''}</p>
-          ) : (
-            <p>{description}</p>
+          {description && (
+            <div>
+              {description.length > 200 ? (
+                <p>
+                  {description ? `${description.substring(0, 200)}...` : ''}
+                </p>
+              ) : (
+                <p>{description}</p>
+              )}
+            </div>
           )}
           <div className={`${styles['describe']} ${styles['end']}`}>
             <h4 className={styles['accent']}>${price}</h4>

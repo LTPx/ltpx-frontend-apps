@@ -101,7 +101,8 @@ export function TeacherLayout() {
         <Snackbar
           position={SnackbarPosition.centerBottom}
           open={true}
-          title={feedbackAction.text}
+          title={feedbackAction.type === 'success' ? 'Actualizado' : 'Errores'}
+          text={feedbackAction.text}
           kind={
             feedbackAction.type === 'success'
               ? SnackbarType.success

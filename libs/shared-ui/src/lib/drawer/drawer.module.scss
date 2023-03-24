@@ -1,7 +1,12 @@
-/*
- * Replace this with your own classes
- *
- * e.g.
- * .container {
- * }
-*/
+@import '../../styles/styles.module.scss';
+
+.container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  .title {
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid $gray-color-300;
+  }
+}

@@ -16,7 +16,7 @@ import {
   QuizFormConditional,
   Button,
   ColorsButton,
-  TypeButton
+  TypeButton,
 } from '@ltpx-frontend-apps/shared-ui';
 import { useEffect } from 'react';
 import { useFormik } from 'formik';
@@ -44,7 +44,7 @@ export function QuizBuilder(props: QuizBuilderProps) {
     removeQuestion,
     currentQuestion,
     setCurrentQuestion,
-    setSelectedIndex
+    setSelectedIndex,
   } = useQuiz();
 
   useEffect(() => {
@@ -86,9 +86,7 @@ export function QuizBuilder(props: QuizBuilderProps) {
             description={`${translateQuizCategories(question.kind)}`}
           >
             <div className={styles['actions']}>
-              <div className={styles['action']}>
-                {question.points} pts
-              </div>
+              <div className={styles['points']}>{question.points} pts</div>
               <div
                 className={styles['action']}
                 onClick={() => {
@@ -100,7 +98,7 @@ export function QuizBuilder(props: QuizBuilderProps) {
               </div>
               <div
                 className={styles['action']}
-                onClick={()=>{
+                onClick={() => {
                   removeQuestion(index);
                 }}
               >
@@ -202,7 +200,7 @@ export function QuizBuilder(props: QuizBuilderProps) {
             description={t('quizBuilder.tip') || ''}
             name="approve_score"
             placeholder="19"
-            type='number'
+            type="number"
             onChange={formikForm.handleChange}
             value={formikForm.values.approve_score}
             onBlur={formikForm.handleBlur}
@@ -214,10 +212,11 @@ export function QuizBuilder(props: QuizBuilderProps) {
       {currentQuestion && (
         <Drawer
           open={true}
-          onClose={()=>{
+          onClose={() => {
             setCurrentQuestion(undefined);
             setSelectedIndex(undefined);
           }}
+          title={'Agregar Pregunta'}
         >
           <div className={styles['forms']}>
             <QuestionsQuiz

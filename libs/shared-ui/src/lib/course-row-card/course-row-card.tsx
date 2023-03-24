@@ -61,9 +61,17 @@ export function CourseRowCard(props: CourseRowCardProps) {
             <Icon key={index} icon={'star'} size={15} color="#888888" />
           ))}
         </div>
-        <p className={styles['description']}>
-          {description ? `${description.substring(0, 200)}...` : ''}
-        </p>
+        {description && (
+          <div>
+            {description.length > 200 ? (
+              <p className={styles['description']}>
+                {description ? `${description.substring(0, 200)}...` : ''}
+              </p>
+            ) : (
+              <p className={styles['description']}>{description}</p>
+            )}
+          </div>
+        )}
         <div className={styles['price']}>
           <h3 className={styles['text-price']}>{price}</h3>
         </div>

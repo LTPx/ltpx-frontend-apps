@@ -99,7 +99,10 @@ export function CourseTasks(props: CourseTasksProps) {
                 title="Crear Nueva Tarea"
                 color={ColorsButton.secondary}
                 outline={true}
-                onClick={() => setOpenModal(true)}
+                onClick={() => {
+                  setTask(undefined);
+                  setOpenModal(true);
+                }}
               />
             </div>
           </div>
@@ -108,7 +111,7 @@ export function CourseTasks(props: CourseTasksProps) {
             onClick={() => setOpenModal(true)}
             icon={'task-outline'}
             text={t('courseTask.text')}
-            titleButton={t('buttons.config') || ''}
+            titleButton={'Agregar Tarea'}
           />
         )}
       </div>
@@ -125,7 +128,7 @@ export function CourseTasks(props: CourseTasksProps) {
           onSubmit={(params) => {
             if (task?.id) {
               handleUpdateTask(params);
-              console.log(params);
+              setTask(undefined);
             } else {
               handleSaveTask(params);
             }

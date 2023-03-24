@@ -47,6 +47,19 @@ export const editCourse = async (course: CourseApiParams) => {
   });
 };
 
+export const deleteCourse = async (courseId: number) => {
+  return new Promise<TeacherCourse>((resolve, reject) => {
+    http
+      .get(`api/v1/teacher/courses/${courseId}`)
+      .then((response) => {
+        resolve(response.data);
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
+};
+
 export const getTeacherCourse = async (courseId: number) => {
   return new Promise<TeacherCourse>((resolve, reject) => {
     http

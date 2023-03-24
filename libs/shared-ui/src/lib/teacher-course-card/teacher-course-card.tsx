@@ -40,14 +40,14 @@ export function TeacherCourseCard(props: TeacherCourseCardProps) {
   const statusColors = {
     published: ColorsTag.green,
     review: ColorsTag.blue,
-    draft: ColorsTag.gray
-  }
+    draft: ColorsTag.gray,
+  };
 
   const statusIcons = {
     published: 'globe',
     review: 'eye',
-    draft: 'edit'
-  }
+    draft: 'edit',
+  };
 
   return (
     <div className={styles['container']}>
@@ -94,7 +94,17 @@ export function TeacherCourseCard(props: TeacherCourseCardProps) {
           <NavLink to={url}>
             <h3 className={styles['title']}>{title}</h3>
           </NavLink>
-          <p>{description ? `${description.substring(0, 200)}...` : ''}</p>
+          {description && (
+            <div>
+              {description.length > 200 ? (
+                <p>
+                  {description ? `${description.substring(0, 200)}...` : ''}
+                </p>
+              ) : (
+                <p>{description}</p>
+              )}
+            </div>
+          )}
           <div className={`${styles['describe']} ${styles['end']}`}>
             <h4 className={styles['accent']}>${price}</h4>
           </div>

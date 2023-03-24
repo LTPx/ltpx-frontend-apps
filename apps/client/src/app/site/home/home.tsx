@@ -172,7 +172,7 @@ export function Home() {
                 duration={0}
                 achievements={course.total_achievements}
                 stars={course.average_rating}
-                link={`/course/${course.id}/details`}
+                link={`/course/${course.slug}`}
               />
             </div>
           ))}

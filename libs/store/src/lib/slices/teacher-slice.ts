@@ -32,6 +32,8 @@ import {
   TeacherProfileParams,
   TeacherProfile,
   formatErrors,
+  deleteCourse,
+  CourseModel,
 } from '@ltpx-frontend-apps/api';
 import { StateCreator } from 'zustand';
 import { StoreState } from '../store';
@@ -70,12 +72,14 @@ export type TeacherSlice = {
   newQuiz: QuizModel | null;
   currentCourse: TeacherCourse;
   wallet: WalletModel;
+  myCourses: TeacherCourse[];
   meetings: MeetingDate[];
   applyTeach: (params: ApplyTeachApiParams) => Promise<any>;
   getApplicationTeach: () => Promise<any>;
   registerTeacher: (params: IRegisterUser) => Promise<TResponseLogin>;
   createCourse: (params: CourseApiParams) => Promise<TResponseCreateCourse>;
   editCourse: (params: CourseApiParams) => Promise<TResponseCreateCourse>;
+  removeCourse: (id: number) => Promise<TResponse>;
   createAchievement: (params: AchievementParams) => Promise<TResponse>;
   getCourse: (id: number) => Promise<TResponse>;
   _sendCourseToReview: (id: number) => Promise<TResponse>;
@@ -99,6 +103,7 @@ export const createTeacherSlice: StateCreator<
   teacher_account: StatusTeacherAccount.unapplied,
   application: null,
   profile: {} as TeacherProfile,
+  myCourses: [],
   newQuiz: null,
   currentCourse: {} as TeacherCourse,
   wallet: {} as WalletModel,
@@ -167,6 +172,19 @@ export const createTeacherSlice: StateCreator<
       return { success: false, data: error };
     }
   },
+  removeCourse: async (courseId) => {
+    try {
+      await deleteCourse(courseId);
+      const allCourses = get().myCourses;
+      const updateCourses = allCourses.filter((course)=>{
+        return course.id !== courseId;
+      });
+      set({ myCourses: updateCourses });
+      return { success: true };
+    } catch (error) {
+      return { success: false, data: error };
+    }
+  },
   _updateProfile: async ( params) => {
     try {
       const response = await updateTeacherProfile(params);
@@ -219,7 +237,15 @@ export const createTeacherSlice: StateCreator<
     return callApi(getTeacherClassesMonth, set);
   },
   _getCourses: async () => {
-    return callApi(getTeacherCourses, set);
+    set({loadingTeacherApi: true})
+    try {
+    const courses = await getTeacherCourses();
+    set({myCourses: courses, loadingTeacherApi: false})
+    return {success: true, data: courses}
+    } catch (error) {
+      set({loadingTeacherApi: false})
+      return {success: false, error}
+    }
   },
   _getMeetingRoomId: async (id) => {
     const params = id;

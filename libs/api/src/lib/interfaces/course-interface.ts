@@ -75,6 +75,7 @@ export interface CourseModel {
   achievements?: AchievementModel[];
   course_session_id: number;
   tasks: TaskModel[];
+  slug: string;
 }
 
 export interface CourseSite {
@@ -91,6 +92,12 @@ export interface CourseSite {
   average_rating: number;
   language: CourseLanguage;
   total_achievements: number;
+  slug: string;
+  learn_goals: string;
+  requirements: string;
+  contents: ContentCourse[];
+  level: CourseLevel;
+  achievements?: AchievementModel[];
 }
 
 export interface Comment {
@@ -127,8 +134,17 @@ export interface TeacherSummary {
   courses?: CourseModel[];
 }
 
+export interface CourseSessionSummary {
+  id: number;
+  call_time_min: number;
+  enrollments_count: number;
+  max_participants: number;
+  meetings: {start_date: string}[];
+}
+
 export interface FullCourse {
-  course: CourseModel;
+  course: CourseSite;
+  session: CourseSessionSummary;
   teacher: TeacherSummary;
   comments: Comment[];
   ratings: Rating[];

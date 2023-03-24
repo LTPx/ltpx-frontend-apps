@@ -31,6 +31,7 @@ export function CourseContents(props: CourseContentsProps) {
   const [openConfirm, setOpenConfirm] = useState(false);
   const [contentEdit, setContentEdit] = useState<CourseContent>();
   const [indexContentEdit, setIndexContentEdit] = useState<number>();
+  const [indexDelete, setIndexDelete] = useState(0);
   const { course, addNewContent, updateContent, removeContent } = useCourse();
   const { contents } = course;
   const { t } = useTranslation();
@@ -49,8 +50,9 @@ export function CourseContents(props: CourseContentsProps) {
       icon: 'trash',
       onClick: (data: any) => {
         const { index } = data;
+        console.log(index);
+        setIndexDelete(index);
         setOpenConfirm(true);
-        setIndexContentEdit(index);
       },
     },
   ];
@@ -87,7 +89,7 @@ export function CourseContents(props: CourseContentsProps) {
           onClick={() => {
             setOpenModal(true);
           }}
-          icon={'copy'}
+          icon={'copy-outline'}
           text={'Los contenidos son recursos de textos para tus estudiantes'}
           titleButton={t('buttons.addNow') || ''}
         />
@@ -128,7 +130,9 @@ export function CourseContents(props: CourseContentsProps) {
             setContentEdit(undefined);
             setIndexContentEdit(undefined);
           }}
-          onSubmit={(content) => saveContent(content)}
+          onSubmit={(content) => {
+            saveContent(content);
+          }}
         />
       )}
       <DialogConfirm
@@ -137,9 +141,8 @@ export function CourseContents(props: CourseContentsProps) {
         subtitle="Recuerde que una ves eliminado no podrá volver a recuperar la información"
         confirm={async () => {
           try {
-            if (indexContentEdit) {
-              // const { index } = contents[indexContentEdit];
-              const { data } = await removeContent(indexContentEdit);
+            if (indexDelete >= 0) {
+              const { data } = await removeContent(indexDelete);
               onSubmit &&
                 onSubmit({
                   success: true,

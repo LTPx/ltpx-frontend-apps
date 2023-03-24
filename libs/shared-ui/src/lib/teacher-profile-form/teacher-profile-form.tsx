@@ -39,6 +39,32 @@ export function TeacherProfileForm(props: TeacherProfileFormProps) {
       name: Yup.string().required('Nombre es obligatorio'),
       skills: Yup.string().required('Profesión es obligatorio'),
       biography: Yup.string().required('Biografía es obligatorio'),
+      profile_image: Yup.mixed().test(
+        'profile_image',
+        'El archivo debe ser menor o igual a 2mb',
+        (value) => {
+          if (value) {
+            const fileSize = value.size;
+            const fileMb = fileSize / 1024 ** 2;
+            return fileMb <= 2;
+          } else {
+            return false;
+          }
+        }
+      ),
+      profile_video: Yup.mixed().test(
+        'profile_video',
+        'El archivo debe ser menor o igual a 30mb',
+        (value) => {
+          if (value) {
+            const fileSize = value.size;
+            const fileMb = fileSize / 1024 ** 2;
+            return fileMb <= 30;
+          } else {
+            return false;
+          }
+        }
+      ),
     }),
     onSubmit: (data) => {
       console.log(data);
@@ -60,7 +86,7 @@ export function TeacherProfileForm(props: TeacherProfileFormProps) {
             <div>
               <Input
                 label="Nombre publico"
-                description='Este sera tu nombre oficial en OpenMind'
+                description="Este sera tu nombre oficial en OpenMind"
                 type="text"
                 name="name"
                 placeholder="Ejm: Luis Marisque"
@@ -80,7 +106,7 @@ export function TeacherProfileForm(props: TeacherProfileFormProps) {
             <div>
               <Input
                 label="Habilidades"
-                description='Habilidades en las que te consideras experto'
+                description="Habilidades en las que te consideras experto"
                 type="text"
                 name="skills"
                 placeholder="Profesor, Diseñador"
@@ -105,6 +131,11 @@ export function TeacherProfileForm(props: TeacherProfileFormProps) {
                 onChange={(value) => {
                   formik.setFieldValue('profile_image', value);
                 }}
+                errorMessage={
+                  formik.touched.profile_image && formik.errors.profile_image
+                    ? formik.errors.profile_image
+                    : null
+                }
               />
             </div>
             <div className={styles['upload']}>
@@ -115,6 +146,12 @@ export function TeacherProfileForm(props: TeacherProfileFormProps) {
                 onChange={(value) => {
                   formik.setFieldValue('profile_video', value);
                 }}
+                errorMessage={
+                  formik.touched.profile_video &&
+                  formik.errors.profile_video
+                    ? formik.errors.profile_video
+                    : null
+                }
               />
             </div>
           </div>

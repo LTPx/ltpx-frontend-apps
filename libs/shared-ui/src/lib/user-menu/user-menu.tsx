@@ -1,4 +1,4 @@
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import Avatar, { AvatarSize } from '../avatar/avatar';
 import Icon from '../icon/icon';
 import styles from './user-menu.module.scss';
@@ -8,6 +8,7 @@ export interface LinkOption {
   icon: string;
   text: string;
   url?: string;
+  href?: string;
   onClick?: () => void;
 }
 
@@ -39,12 +40,20 @@ export function UserMenu(props: UserMenuProps) {
             }}
           >
             <Icon icon={link.icon} size={16}></Icon>
-            {link.url ? (
-              <NavLink to={link.url}>
+            {link.href ? (
+              <a target="_blank" href="https://wa.me/message/Y5P6BHULTPA2B1">
                 <h4>{link.text}</h4>
-              </NavLink>
+              </a>
             ) : (
-              <h4>{link.text}</h4>
+              <div>
+                {link.url ? (
+                  <NavLink to={link.url}>
+                    <h4>{link.text}</h4>
+                  </NavLink>
+                ) : (
+                  <h4>{link.text}</h4>
+                )}
+              </div>
             )}
           </div>
         ))}

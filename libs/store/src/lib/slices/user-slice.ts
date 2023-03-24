@@ -7,25 +7,21 @@ import {
   logout,
   registerUser,
   getCurrentUser,
-  UserResponse,
   TypeViews,
   UserStore,
   loginAdmin,
+  FormatResponse,
+  formatErrors,
 } from '@ltpx-frontend-apps/api';
-
-type TResponseLogin = {
-  isLogin: boolean;
-  data: UserResponse | any;
-};
 
 export type UserSlice = {
   user: UserStore;
   isAuthenticated: boolean;
-  currentView: TypeViews,
-  getCurrentUser: () => Promise<TResponseLogin>;
-  login: (credentials: ICredentials) => Promise<TResponseLogin>;
-  loginAdmin: (credentials: ICredentials) => Promise<TResponseLogin>;
-  register: (params: IRegisterUser) => Promise<TResponseLogin>;
+  currentView: TypeViews;
+  getCurrentUser: () => Promise<FormatResponse>;
+  login: (credentials: ICredentials) => Promise<FormatResponse>;
+  loginAdmin: (credentials: ICredentials) => Promise<FormatResponse>;
+  register: (params: IRegisterUser) => Promise<FormatResponse>;
   logout: () => void;
 };
 
@@ -40,27 +36,24 @@ export type UserSlice = {
 // const currentView: TypeViews = (<any>TypeViews)[viewString];
 // console.log('currentView slice: ', currentView);
 
-export const createUserSlice: StateCreator<
-  StoreState,
-  [],
-  [],
-  UserSlice
-> = (set) => ({
+export const createUserSlice: StateCreator<StoreState, [], [], UserSlice> = (
+  set
+) => ({
   user: {} as UserStore,
   isAuthenticated: false,
   currentView: TypeViews.default,
-  getCurrentUser: async ():Promise<TResponseLogin> => {
+  getCurrentUser: async () => {
     try {
       const user = await getCurrentUser();
-      const { initial_view, cart } =  user;
+      const { initial_view, cart } = user;
       if (cart) {
-        const coursesInCart = cart.items.map((item)=> item.course);
+        const coursesInCart = cart.items.map((item) => item.course);
         set({
           user: user,
           isAuthenticated: true,
           currentView: initial_view,
           teacher_account: user.teacher_account,
-          coursesInCart: coursesInCart
+          coursesInCart: coursesInCart,
         });
       } else {
         set({
@@ -70,63 +63,63 @@ export const createUserSlice: StateCreator<
           teacher_account: user.teacher_account,
         });
       }
-      return { isLogin: true, data: user };
+      return { success: true, data: user };
     } catch (error) {
       set({
         isAuthenticated: false,
-        currentView: TypeViews.user
+        currentView: TypeViews.user,
       });
       localStorage.clear();
-      return { isLogin: false, data: error };
+      return { success: false, error: formatErrors(error) };
     }
   },
-  login: async (credentials: ICredentials):Promise<TResponseLogin> => {
+  login: async (credentials) => {
     try {
       const user = await loginUser(credentials);
       set({
         user: user,
         isAuthenticated: true,
-        currentView: user.initial_view
+        currentView: user.initial_view,
       });
       // localStorage.setItem('view_app', view);
-      return { isLogin: true, data: user };
+      return { success: true, data: user };
     } catch (error) {
-      return { isLogin: false, data: error };
+      return { success: false, error: formatErrors(error) };
     }
   },
-  loginAdmin: async (credentials: ICredentials):Promise<TResponseLogin> => {
+  loginAdmin: async (credentials) => {
     try {
       const user = await loginAdmin(credentials);
       set({
         user: user,
         isAuthenticated: true,
-        currentView: user.initial_view
+        currentView: user.initial_view,
       });
       // localStorage.setItem('view_app', view);
-      return { isLogin: true, data: user };
+      return { success: true, data: user };
     } catch (error) {
-      return { isLogin: false, data: error };
+      return { success: false, error: formatErrors(error) };
     }
   },
-  register: async (params: IRegisterUser):Promise<TResponseLogin> => {
+  register: async (params) => {
     try {
       const user = await registerUser(params);
       const view = user.initial_view;
       set({
         user: user,
         isAuthenticated: true,
-        currentView: view
+        currentView: view,
       });
-      return { isLogin: true, data: user };
+      return { success: true, data: user };
     } catch (error) {
-      return { isLogin: false, data: error };
+      return { success: false, error: formatErrors(error) };
     }
   },
   logout: async () => {
     try {
       await logout();
-      set({ isAuthenticated: false });
       localStorage.clear();
+      set({ isAuthenticated: false });
     } catch (error) {
       console.log(error);
     }

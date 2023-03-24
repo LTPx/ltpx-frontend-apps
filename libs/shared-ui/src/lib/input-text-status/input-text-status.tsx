@@ -9,10 +9,11 @@ export enum StatusInputText {
 export interface InputTextStatusProps {
   status: StatusInputText;
   text: string;
+  className?: string;
 }
 
 export function InputTextStatus(props: InputTextStatusProps) {
-  const { status, text } = props;
+  const { status, text, className } = props;
 
   const statusColor = {
     error: `${styles['status-error']}`,
@@ -22,7 +23,7 @@ export function InputTextStatus(props: InputTextStatusProps) {
   const selectedStatus = statusColor[status];
 
   return (
-    <div className={styles['container']}>
+    <div className={`${className} ${styles['container']}`}>
       <div className={`${selectedStatus} ${styles['status']}`}>
         <h5>{text}</h5>
       </div>

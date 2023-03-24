@@ -79,9 +79,7 @@
     padding: 0.5rem 0;
   }
 }
-.tabs-edit {
-  font-size: 1.15rem;
-}
+
 .container {
   display: flex;
   flex-direction: column;
@@ -160,6 +158,12 @@
       margin: 2rem 0 4rem 0;
     }
   }
+}
+
+.achievements {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
 }
 
 //smartphones-responsive

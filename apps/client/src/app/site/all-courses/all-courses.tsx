@@ -88,7 +88,7 @@ export function AllCourses(props: AllCoursesProps) {
                 category={course.category}
                 title={course.title}
                 stars={course.average_rating}
-                link={`/course/${course.id}/details`}
+                link={`/course/${course.slug}`}
                 price={course.price_format}
               />
             </div>

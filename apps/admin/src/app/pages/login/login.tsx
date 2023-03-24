@@ -11,10 +11,7 @@ import { useNavigate } from 'react-router-dom';
 import styles from './login.module.scss';
 
 export function Login() {
-  const [error, setError] = useState({
-    invalid: false,
-    message: ''
-  });
+  const [error, setError] = useState<string>();
   const { loginAdmin } = useUser();
   const navigate = useNavigate();
 
@@ -23,15 +20,11 @@ export function Login() {
       email: formData.email,
       password: formData.password,
     };
-    const { isLogin, data } = await loginAdmin(userAccount);
-    console.log('data: ', data);
-    if (isLogin) {
+    const { success, error } = await loginAdmin(userAccount);
+    if (success) {
       navigate('/admin/dashboard');
     } else {
-      setError({
-        invalid: true,
-        message: data.message
-      });
+      setError(error);
     }
   }
 
@@ -42,17 +35,14 @@ export function Login() {
           <Brand />
           <h1>Iniciar Sesión</h1>
         </div>
-        {error.invalid && (
+        {error && (
           <BannerNotification
             type={BannerType.error}
             onClickClose={() => {
-              setError({
-                invalid: false,
-                message: ''
-              });
+              setError(undefined);
             }}
           >
-            {error.message}
+            {error}
           </BannerNotification>
         )}
         <LoginForm onSubmit={onSubmitForm} />

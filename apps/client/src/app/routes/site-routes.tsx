@@ -48,7 +48,7 @@ export const SiteRoutes = () => {
           <Route path="/register" element={<Register />} />
           <Route path="/register-teacher" element={<RegisterTeacher />} />
           <Route path="/courses" element={<AllCourses />} />
-          <Route path="/course/:courseId/details" element={<CourseDetails />} />
+          <Route path="/course/:slug" element={<CourseDetails />} />
           <Route path="/terms-and-conditions" element={<TermsConditions />} />
           <Route path="/forget-password" element={<ForgetPassword />} />
           <Route path="blog" element={<BlogLayout />}>

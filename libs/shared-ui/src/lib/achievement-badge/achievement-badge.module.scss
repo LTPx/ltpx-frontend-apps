@@ -1,0 +1,18 @@
+@import '../../styles/styles.module.scss';
+
+.achievement {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+  background-color: $white-color;
+  box-shadow: $card-shadow-medium;
+  border: 1px solid $stroke-color;
+  padding: 1rem;
+  width: 10rem;
+  border-radius: 10px;
+
+  img {
+    width: 5rem;
+  }
+}

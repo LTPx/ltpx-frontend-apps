@@ -60,6 +60,19 @@ export function CourseGeneralInformation(props: CourseGeneralInformationProps) {
     },
     validationSchema: Yup.object({
       title: Yup.string().required('es obligatorio'),
+      cover: Yup.mixed().test(
+        'cover',
+        'El archivo debe ser menor o igual a 2mb',
+        (value) => {
+          if (value) {
+            const fileSize = value.size;
+            const fileMb = fileSize / 1024 ** 2;
+            return fileMb <= 2;
+          } else {
+            return false;
+          }
+        }
+      ),
     }),
     onSubmit: async (formData) => {
       try {
@@ -95,6 +108,11 @@ export function CourseGeneralInformation(props: CourseGeneralInformationProps) {
               formik.setFieldValue('cover', file);
             }}
             name="cover"
+            errorMessage={
+              formik.touched.cover && formik.errors.cover
+                ? formik.errors.cover
+                : null
+            }
           />
         </div>
       </section>
@@ -163,7 +181,7 @@ export function CourseGeneralInformation(props: CourseGeneralInformationProps) {
           title={t('buttons.cancel')}
           color={ColorsButton.white}
           link={'/teacher/courses/all'}
-          onClick={()=>{
+          onClick={() => {
             cleanCourse();
           }}
         />

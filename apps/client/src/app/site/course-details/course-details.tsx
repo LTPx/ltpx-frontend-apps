@@ -6,10 +6,6 @@ import {
   Rating,
   Tabs,
   BuyCourseCard,
-  TeacherOverview,
-  RatingCourse,
-  CommentCourse,
-  ReviewForm,
   OverviewCourse,
   CourseContents,
   RegisterForm,
@@ -21,11 +17,13 @@ import {
   ColorsButton,
   Tag,
   ColorsTag,
+  useMoment,
+  AchievementBadge,
 } from '@ltpx-frontend-apps/shared-ui';
 import { Dialog } from 'evergreen-ui';
 import { useSite, useUser } from '@ltpx-frontend-apps/store';
 import { useCallback, useEffect, useState } from 'react';
-import { NavLink, useNavigate, useParams } from 'react-router-dom';
+import { NavLink, useParams } from 'react-router-dom';
 import { useCourseUtil } from '@ltpx-frontend-apps/store';
 import { useTranslation } from 'react-i18next';
 import CheckoutForm from '../../components/checkout-form/checkout-form';
@@ -39,19 +37,18 @@ export function CourseDetails() {
   const [openModal, setOpenModal] = useState(false);
   const [openEnrollModal, setOpenEnrollModal] = useState(false);
   const [selectedTab, setSelectedTab] = useState(0);
-  const { courseId } = useParams();
+  const { slug } = useParams();
   const { isAuthenticated, register } = useUser();
   const { translateLanguage, translateLevel, translateCategory } =
     useCourseUtil();
-  const id = parseInt(courseId || '');
-  const navigate = useNavigate();
   const { t } = useTranslation();
   const { _getSiteCourse, currentFullCourse } = useSite();
-  const { course, teacher } = currentFullCourse;
+  const { course, teacher, session } = currentFullCourse;
   const [message, setMessage] = useState<MessageCheckout>();
+  const { customFormatDate, moment } = useMoment();
 
   const fetchCourse = useCallback(async () => {
-    const { success, data, error } = await _getSiteCourse(id);
+    const { success, data, error } = await _getSiteCourse(slug || '');
     if (success) {
       console.log('data: ', data);
     } else {
@@ -60,11 +57,11 @@ export function CourseDetails() {
   }, []);
 
   const onSubmitForm = async (formData: IRegisterUser) => {
-    const { isLogin, data } = await register(formData);
-    if (isLogin) {
+    const { success, error } = await register(formData);
+    if (success) {
       window.location.reload();
     } else {
-      console.log(data);
+      console.log(error);
     }
   };
 
@@ -86,30 +83,17 @@ export function CourseDetails() {
 
   const tabs = [
     {
-      text: 'Descripción',
+      text: 'Información',
     },
     {
       text: 'Contenidos',
     },
     {
-      text: 'Profesor',
+      text: 'Logros',
     },
-    {
-      text: 'Reseñas',
-    },
-  ];
-
-  const courseDate = [
-    {
-      title: 'Clases Martes 21 de Febrero',
-      description: '21 de febrero – 7 de marzo (3 Semanas)',
-      time: '8:30 - 9:20 PM',
-    },
-    {
-      title: 'Clases Domingo 12 de Marzo',
-      description: '12 de Marzo – 26 de marzo (3 Semanas)',
-      time: '8:30 - 9:20 PM',
-    },
+    // {
+    //   text: 'Reseñas',
+    // },
   ];
 
   return (
@@ -119,7 +103,10 @@ export function CourseDetails() {
           <>
             <div className={styles['head-responsive']}>
               <div className={styles['wrap-responsive']}>
-                <img className={styles['image-responsive']} src={course.cover_url} />
+                <img
+                  className={styles['image-responsive']}
+                  src={course.cover_url}
+                />
                 <div className={styles['content-responsive']}>
                   <div className={styles['title-content-responsive']}>
                     <h3 className={styles['title-responsive']}>
@@ -155,7 +142,7 @@ export function CourseDetails() {
                     />
                     <Tag
                       color={ColorsTag.white}
-                      text={'Inscritos: ' + course.enrollments_count}
+                      text={'Inscritos: ' + session.enrollments_count}
                       icon={'person'}
                     />
                     <Tag
@@ -210,7 +197,9 @@ export function CourseDetails() {
                         <label>
                           {t('coursesDetails.teacherInformation.instructor')}
                         </label>
-                        <h5>{teacher.name}</h5>
+                        <NavLink to={`/teacher/${teacher.slug}`}>
+                          <h5>{teacher.name}</h5>
+                        </NavLink>
                       </div>
                       <div className={styles['item']}>
                         <label>
@@ -248,18 +237,17 @@ export function CourseDetails() {
                         <CourseContents contents={course.contents || []} />
                       )}
                       {selectedTab === 2 && (
-                        <TeacherOverview
-                          name={teacher.name || ''}
-                          profession={teacher.profession || ''}
-                          rating={teacher.rating_average || 0}
-                          reviews={teacher.rating_average || 0}
-                          students={teacher.total_students || 0}
-                          courses={5}
-                          biography={teacher.biography}
-                          image={teacher.profile_image}
-                        />
+                        <div className={styles['achievements']}>
+                          {course.achievements?.map((achievement, index) => (
+                            <AchievementBadge
+                              key={index}
+                              title={achievement.title}
+                              image={achievement.image}
+                            />
+                          ))}
+                        </div>
                       )}
-                      {selectedTab === 3 && (
+                      {/* {selectedTab === 3 && (
                         <div className={styles['reviews-wrap']}>
                           <RatingCourse
                             ratings={currentFullCourse.ratings || []}
@@ -280,7 +268,7 @@ export function CourseDetails() {
                           </div>
                           <ReviewForm />
                         </div>
-                      )}
+                      )} */}
                     </div>
                   </div>
                 </div>
@@ -288,9 +276,9 @@ export function CourseDetails() {
               <div className={styles['buy-course-content']}>
                 <BuyCourseCard
                   price={course.price_format}
-                  achievements={course.achievements?.length || 0}
-                  lectures={course.contents.length}
-                  enrolled={course.enrollments_count}
+                  totalAchievements={course.achievements?.length || 0}
+                  totalContents={course.contents.length}
+                  totalEnrolled={session.enrollments_count}
                   language={translateLanguage(course.language)}
                   skillLevel={translateLevel(course.level)}
                   image={course.cover_url}
@@ -318,14 +306,21 @@ export function CourseDetails() {
         )}
         <h2 className={styles['title-date']}>Horarios de Clases</h2>
         <div className={styles['course-date']}>
-          {courseDate.map((course, index) => (
-            <CourseDateCard
-              key={index}
-              title={course.title}
-              description={course.description}
-              time={course.time}
-            />
-          ))}
+          {session.meetings &&
+            session.meetings.map((meeting, index) => (
+              <CourseDateCard
+                key={index}
+                description={`Las clases tendrán una duración de ${session.call_time_min} min`}
+                title={`Clase ${index + 1}: ${customFormatDate(
+                  meeting.start_date,
+                  'MMM D YYYY'
+                )}`}
+                time={`Hora de inicio: ${customFormatDate(
+                  meeting.start_date,
+                  'h:mm a'
+                )}`}
+              />
+            ))}
         </div>
         <Dialog
           isShown={openModal}
@@ -351,7 +346,7 @@ export function CourseDetails() {
             product={{
               description: course.title,
               price: parseFloat(course.price),
-              id: course.course_session_id,
+              id: session.id,
               image: course.cover_url,
             }}
             onSuccess={() => {

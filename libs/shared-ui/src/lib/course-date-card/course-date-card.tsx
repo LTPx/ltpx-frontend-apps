@@ -14,8 +14,8 @@ export function CourseDateCard(props: CourseDateCardProps) {
   return (
     <div className={`${styles['content']} ${className}`}>
       <h3>{title}</h3>
-      <h4 className={styles['description']}>{description}</h4>
       <h4 className={styles['time']}>{time}</h4>
+      <h4 className={styles['description']}>{description}</h4>
     </div>
   );
 }

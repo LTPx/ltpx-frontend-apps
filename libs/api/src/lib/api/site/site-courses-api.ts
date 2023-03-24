@@ -16,7 +16,7 @@ export const getPopularCourses = async () => {
   });
 };
 
-export const siteGetCourse = async (courseId: number) => {
+export const siteGetCourse = async (courseId: string) => {
   return new Promise<FullCourse>((resolve, reject) => {
     http
       .get(`api/v1/site/courses/${courseId}`)

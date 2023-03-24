@@ -118,8 +118,8 @@ export const createUserSlice: StateCreator<StoreState, [], [], UserSlice> = (
   logout: async () => {
     try {
       await logout();
-      set({ isAuthenticated: false });
       localStorage.clear();
+      set({ isAuthenticated: false });
     } catch (error) {
       console.log(error);
     }

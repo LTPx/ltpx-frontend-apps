@@ -26,7 +26,7 @@ export function ApplicationDetailsPage(props: ApplicationDetailsPageProps) {
     _approveApplication,
   } = useAdmin();
   const navigate = useNavigate();
-  const { translateStatusTeacherApplication } = useUtil();
+  const { translateStatusApply } = useUtil();
   const params = useParams();
   const { id } = params;
   const appId = parseInt(id || '');
@@ -66,7 +66,7 @@ export function ApplicationDetailsPage(props: ApplicationDetailsPageProps) {
             <h1>Solicitud de: {viewApplication.name}</h1>
             {viewApplication.status !== 'review' ? (
               <div>
-                <h3>{translateStatusTeacherApplication(viewApplication.status)}</h3>
+                <h3>{translateStatusApply(viewApplication.status)}</h3>
                 <h4>{viewApplication.updated_at}</h4>
               </div>
             ) : (

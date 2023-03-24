@@ -11,12 +11,12 @@ export const useUtil = () => {
     };
   });
 
-  const translateStatusTeacherApplication = (status: string) => {
+  const translateStatusApply = (status: string) => {
     return t(`application_teacher_status.${status}`);
   };
 
   return {
     countries,
-    translateStatusTeacherApplication
+    translateStatusApply
   };
 };

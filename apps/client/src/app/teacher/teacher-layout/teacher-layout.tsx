@@ -85,6 +85,7 @@ export function TeacherLayout() {
                 {
                   icon: 'telephone',
                   text: 'Contactar Soporte',
+                  href: 'https://wa.me/message/Y5P6BHULTPA2B1',
                 },
                 {
                   icon: 'log-out',

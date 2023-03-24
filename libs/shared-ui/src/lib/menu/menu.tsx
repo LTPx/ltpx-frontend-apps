@@ -31,10 +31,8 @@ export function Menu(props: MenuProps) {
               <div className={styles['menu-item-wrapper']} key={key}>
                 {item.url ? (
                   <div>
-                    {item.disabled === true ? (
-                      <div
-                        className={styles['menu-item-disabled']}
-                      >
+                    {item.disabled ? (
+                      <div className={styles['menu-item-disabled']}>
                         {item.icon && <Icon icon={item.icon} size={18} />}
                         <h4>{item.text}</h4>
                       </div>
@@ -47,7 +45,11 @@ export function Menu(props: MenuProps) {
                   </div>
                 ) : (
                   <div
-                    className={styles['menu-item']}
+                    className={`${
+                      item.disabled
+                        ? styles['menu-item-disabled']
+                        : styles['menu-item']
+                    }`}
                     onClick={() => {
                       item.onClick && item.onClick();
                     }}

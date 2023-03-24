@@ -1,4 +1,5 @@
-import { CourseStatus } from '@ltpx-frontend-apps/api';
+import styles from './teacher-edit-course.module.scss';
+import { CourseStatus, FormatResponse } from '@ltpx-frontend-apps/api';
 import {
   Button,
   ColorsButton,
@@ -15,6 +16,7 @@ import {
   useCourse,
   useCourseUtil,
   useTeacher,
+  useUtil,
 } from '@ltpx-frontend-apps/store';
 import {
   CourseAchievements,
@@ -26,23 +28,22 @@ import {
 } from '../course';
 import { useCallback, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import styles from './teacher-edit-course.module.scss';
 import { useTranslation } from 'react-i18next';
 import { useEditCourse } from './useEditCourse';
 
-export type ResponseRequest = {
-  success: boolean;
-  data?: any;
-  error?: any;
-};
-
 export function TeacherEditCourse() {
-  const { tabs, notification, setNotification, statusColors, statusIcons } =
-    useEditCourse();
+  const {
+    tabs,
+    notification,
+    setNotification,
+    statusColors,
+    statusIcons
+  } = useEditCourse();
   const [indexSelectedView, setIndexSelectedView] = useState(0);
   const { getCourse, course, cleanCourse } = useCourse();
   const { _sendCourseToReview } = useTeacher();
   const { translateStatus } = useCourseUtil();
+  const { setMessageToast } = useUtil();
   const { formatDate } = useMoment();
   const { t } = useTranslation();
   const { courseId } = useParams();
@@ -50,30 +51,19 @@ export function TeacherEditCourse() {
   const navigate = useNavigate();
 
   const fetchData = useCallback(async () => {
-    const resp = await getCourse(id);
-    console.log('resp....: ', resp);
+    await getCourse(id);
   }, []);
 
   useEffect(() => {
     fetchData();
   }, []);
 
-  const showAndConfigNotification = async (response: ResponseRequest) => {
+  const showAndConfigNotification = async (response: FormatResponse) => {
     const { success, error } = response;
     if (success) {
-      setNotification((prevState) => ({
-        ...prevState,
-        show: true,
-        text: 'Tus cambios han sido guardados',
-        kind: SnackbarType.success,
-      }));
+      setMessageToast('success', 'Tus cambios han sido guardados');
     } else {
-      setNotification((prevState) => ({
-        ...prevState,
-        show: true,
-        text: error || 'Ha ocurrido un error',
-        kind: SnackbarType.error,
-      }));
+      setMessageToast('error', `${error || 'Ha ocurrido un error'}`);
     }
   };
 
@@ -183,21 +173,6 @@ export function TeacherEditCourse() {
             )}
           </div>
         </div>
-      )}
-      {notification.show && (
-        <Snackbar
-          position={SnackbarPosition.centerBottom}
-          open={notification.show}
-          title={notification.text}
-          kind={notification.kind}
-          duration={1500}
-          onClose={() => {
-            setNotification((prevState) => ({
-              ...prevState,
-              show: false,
-            }));
-          }}
-        />
       )}
     </div>
   );

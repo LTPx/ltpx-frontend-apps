@@ -1,18 +1,11 @@
 import { getChatStudents, UserModel } from "@ltpx-frontend-apps/api";
-import { SnackbarType } from "@ltpx-frontend-apps/shared-ui";
-import { useUser } from "@ltpx-frontend-apps/store";
+import { useAppStore, useUser, useUtil } from "@ltpx-frontend-apps/store";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 
+
 export const useTeacherLayout = () => {
-  const [notification, setNotification] = useState({
-    kind: SnackbarType.success,
-    title: '',
-    icon: '',
-    open: true,
-    duration: 5000
-  });
   const [openChat, setOpenChat] = useState(false);
   const [openNewChat, setOpenNewChat] = useState(false);
   const [users, setUsers] = useState<UserModel[]>([]);
@@ -20,6 +13,8 @@ export const useTeacherLayout = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const { teacher_account } = user;
+  const { feedbackAction } = useAppStore();
+  const { cleanMessageToast } = useUtil();
 
   async function logoutSession() {
     await logout();
@@ -67,6 +62,7 @@ export const useTeacherLayout = () => {
     setOpenChat,
     openNewChat,
     setOpenNewChat,
-    notification
+    feedbackAction,
+    cleanMessageToast,
   };
 };

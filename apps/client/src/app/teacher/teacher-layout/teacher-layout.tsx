@@ -7,6 +7,7 @@ import {
   Icon,
   Snackbar,
   SnackbarPosition,
+  SnackbarType,
   UserMenu,
 } from '@ltpx-frontend-apps/shared-ui';
 import { Outlet } from 'react-router-dom';
@@ -27,7 +28,8 @@ export function TeacherLayout() {
     setOpenChat,
     openNewChat,
     setOpenNewChat,
-    notification,
+    feedbackAction,
+    cleanMessageToast
   } = useTeacherLayout();
 
   const ChatFloat = ({ onClick }: { onClick: () => void }) => (
@@ -95,14 +97,16 @@ export function TeacherLayout() {
           </div>
         )}
       </div>
-      <Snackbar
-        position={SnackbarPosition.centerBottom}
-        open={notification.open}
-        title={notification.title}
-        icon={notification.icon}
-        kind={notification.kind}
-        duration={notification.duration}
-      />
+      { feedbackAction.text &&
+        <Snackbar
+          position={SnackbarPosition.centerBottom}
+          open={true}
+          title={feedbackAction.text}
+          kind={feedbackAction.type === 'success' ? SnackbarType.success : SnackbarType.error}
+          duration={2000}
+          onClose={cleanMessageToast}
+        />
+      }
     </div>
   );
 }

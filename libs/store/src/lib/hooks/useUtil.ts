@@ -1,8 +1,10 @@
-import { COUNTRIES_ABLE_APP } from '@ltpx-frontend-apps/api';
+import { COUNTRIES_ABLE_APP, FeedbackAction } from '@ltpx-frontend-apps/api';
 import { useTranslation } from 'react-i18next';
+import { useAppStore } from '../store';
 
 export const useUtil = () => {
   const { t } = useTranslation();
+  const { setFeedbackAction } = useAppStore();
 
   const countries = COUNTRIES_ABLE_APP.map((value) => {
     return {
@@ -15,8 +17,21 @@ export const useUtil = () => {
     return t(`application_teacher_status.${status}`);
   };
 
+  const setMessageToast = (type: 'success' | 'error' | 'information', text: string) => {
+    setFeedbackAction({
+      type,
+      text
+    })
+  }
+
+  const cleanMessageToast = () => {
+    setFeedbackAction({} as FeedbackAction)
+  }
+
   return {
     countries,
-    translateStatusApply
+    translateStatusApply,
+    setMessageToast,
+    cleanMessageToast
   };
 };

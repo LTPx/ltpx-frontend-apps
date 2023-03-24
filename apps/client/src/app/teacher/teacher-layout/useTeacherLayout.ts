@@ -9,12 +9,12 @@ export const useTeacherLayout = () => {
   const [openChat, setOpenChat] = useState(false);
   const [openNewChat, setOpenNewChat] = useState(false);
   const [users, setUsers] = useState<UserModel[]>([]);
+  const { feedbackAction } = useAppStore();
+  const { clearMessageToast } = useUtil();
   const { user, logout } = useUser();
+  const { teacher_account } = user;
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const { teacher_account } = user;
-  const { feedbackAction } = useAppStore();
-  const { cleanMessageToast } = useUtil();
 
   async function logoutSession() {
     await logout();
@@ -63,6 +63,6 @@ export const useTeacherLayout = () => {
     openNewChat,
     setOpenNewChat,
     feedbackAction,
-    cleanMessageToast,
+    clearMessageToast,
   };
 };

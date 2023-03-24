@@ -4,9 +4,6 @@ import {
   Button,
   ColorsButton,
   Icon,
-  Snackbar,
-  SnackbarPosition,
-  SnackbarType,
   Tabs,
   Tag,
   TypeButton,
@@ -34,8 +31,6 @@ import { useEditCourse } from './useEditCourse';
 export function TeacherEditCourse() {
   const {
     tabs,
-    notification,
-    setNotification,
     statusColors,
     statusIcons
   } = useEditCourse();
@@ -70,19 +65,10 @@ export function TeacherEditCourse() {
   const handleSendToReview = async () => {
     const { success, error } = await _sendCourseToReview(course.id);
     if (success) {
-      setNotification((prevState) => ({
-        ...prevState,
-        show: true,
-        text: 'Tu curso ha sido enviado a revision',
-      }));
+      setMessageToast('success', 'Tu curso ha sido enviado a revision');
       navigate('/teacher/courses');
     } else {
-      setNotification((prevState) => ({
-        ...prevState,
-        show: true,
-        text: error,
-        kind: SnackbarType.error,
-      }));
+      setMessageToast('error', error);
     }
   };
 

@@ -24,7 +24,7 @@ export const useUtil = () => {
     })
   }
 
-  const cleanMessageToast = () => {
+  const clearMessageToast = () => {
     setFeedbackAction({} as FeedbackAction)
   }
 
@@ -32,6 +32,6 @@ export const useUtil = () => {
     countries,
     translateStatusApply,
     setMessageToast,
-    cleanMessageToast
+    clearMessageToast
   };
 };

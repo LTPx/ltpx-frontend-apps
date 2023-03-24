@@ -29,7 +29,7 @@ export function TeacherLayout() {
     openNewChat,
     setOpenNewChat,
     feedbackAction,
-    cleanMessageToast
+    clearMessageToast,
   } = useTeacherLayout();
 
   const ChatFloat = ({ onClick }: { onClick: () => void }) => (
@@ -97,16 +97,20 @@ export function TeacherLayout() {
           </div>
         )}
       </div>
-      { feedbackAction.text &&
+      {feedbackAction.text && (
         <Snackbar
           position={SnackbarPosition.centerBottom}
           open={true}
           title={feedbackAction.text}
-          kind={feedbackAction.type === 'success' ? SnackbarType.success : SnackbarType.error}
+          kind={
+            feedbackAction.type === 'success'
+              ? SnackbarType.success
+              : SnackbarType.error
+          }
           duration={2000}
-          onClose={cleanMessageToast}
+          onClose={clearMessageToast}
         />
-      }
+      )}
     </div>
   );
 }

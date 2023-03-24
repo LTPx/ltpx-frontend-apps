@@ -23,7 +23,6 @@ export function CourseTasks(props: CourseTasksProps) {
   const [openModal, setOpenModal] = useState(false);
   const { _addTask, _updateTask, _removeTask, course } = useCourse();
   const { tasks } = course;
-  const [index, setIndex] = useState<number>();
 
   async function handleSaveTask(params: NewTaskParams) {
     const { data, success, error } = await _addTask(course.id, params);
@@ -85,8 +84,6 @@ export function CourseTasks(props: CourseTasksProps) {
                   onClick={() => {
                     setTask(element);
                     setOpenModal(true);
-                    setIndex(element.id);
-                    console.log(index);
                   }}
                   title={element.title}
                   subtitle={element.description}
@@ -131,7 +128,6 @@ export function CourseTasks(props: CourseTasksProps) {
           onSubmit={(params) => {
             if (task?.id) {
               handleUpdateTask(params);
-              console.log(params);
               setTask(undefined);
             } else {
               handleSaveTask(params);

@@ -1,4 +1,4 @@
-import { IUserAccount, TeacherProfileParams } from '@ltpx-frontend-apps/api';
+import { changePassword, IUserAccount, TeacherProfileParams } from '@ltpx-frontend-apps/api';
 import { useTeacher } from '@ltpx-frontend-apps/store';
 import {
   BannerNotification,
@@ -24,6 +24,19 @@ export function TeacherAccount(props: TeacherAccountProps) {
   const [selectedTab, setSelectedTab] = useState(0);
 
   async function updateUserAccount(params: IUserAccount) {}
+
+  async function updateUserPassword(params: any) {
+    const data = {
+      current_password: params.currentPassword,
+      confirm_password: params.confirmPassword,
+      password: params.newPassword
+    }
+    try {
+      await changePassword(data)
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   async function updateTeacherProfile(params: TeacherProfileParams) {
     const { success, data, error } = await _updateProfile(params);
@@ -72,7 +85,12 @@ export function TeacherAccount(props: TeacherAccountProps) {
             />
           )}
           {selectedTab === 2 && (
-            <ChangePasswordForm url="/teacher/account/account-profile" />
+            <ChangePasswordForm
+              url="/teacher/account/account-profile"
+              onSubmit={(params)=>{
+                updateUserPassword(params);
+              }}
+            />
           )}
         </div>
       )}

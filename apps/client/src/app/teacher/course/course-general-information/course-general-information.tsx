@@ -1,4 +1,4 @@
-import { CourseLanguage, CourseLevel } from '@ltpx-frontend-apps/api';
+import { CourseLanguage, CourseLevel, FormatResponse } from '@ltpx-frontend-apps/api';
 import {
   Button,
   ColorsButton,
@@ -12,7 +12,6 @@ import { useCourse, useCourseUtil } from '@ltpx-frontend-apps/store';
 import { useFormik } from 'formik';
 import { useTranslation } from 'react-i18next';
 import * as Yup from 'yup';
-import { ResponseRequest } from '../../teacher-edit-course/teacher-edit-course';
 import styles from './course-general-information.module.scss';
 
 /* eslint-disable-next-line */
@@ -28,7 +27,7 @@ export interface CourseGeneralInformation {
 }
 export interface CourseGeneralInformationProps
   extends CourseGeneralInformation {
-  onSubmit?: (data: ResponseRequest) => void;
+  onSubmit?: (data: FormatResponse) => void;
 }
 
 export function CourseGeneralInformation(props: CourseGeneralInformationProps) {

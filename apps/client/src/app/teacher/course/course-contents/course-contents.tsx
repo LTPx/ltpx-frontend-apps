@@ -1,4 +1,4 @@
-import { ContentCourse } from '@ltpx-frontend-apps/api';
+import { ContentCourse, FormatResponse } from '@ltpx-frontend-apps/api';
 import {
   Button,
   ColorsButton,
@@ -11,7 +11,6 @@ import {
 import { useCourse } from '@ltpx-frontend-apps/store';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { ResponseRequest } from '../../teacher-edit-course/teacher-edit-course';
 import styles from './course-contents.module.scss';
 
 /* eslint-disable-next-line */
@@ -22,7 +21,7 @@ export interface FormContent {
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface CourseContentsProps {
-  onSubmit?: (content: ResponseRequest) => void;
+  onSubmit?: (content: FormatResponse) => void;
 }
 
 export function CourseContents(props: CourseContentsProps) {

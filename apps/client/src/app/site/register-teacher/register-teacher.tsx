@@ -105,6 +105,7 @@ export function RegisterTeacher(props: RegisterTeacherProps) {
           <h1 className={styles['title']}>Como empezar</h1>
           <Tabs
             className={styles['tab']}
+            classNameText={styles['tab-text']}
             tabs={tabs}
             onClickTab={(index) => setSelectedTab(index)}
           />

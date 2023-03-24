@@ -22,7 +22,7 @@ export interface TeacherCoursesProps {}
 export function TeacherCourses(props: TeacherCoursesProps) {
   const [courses, setCourses] = useState<TeacherCourse[]>([]);
   const [openModal, setOpenModal] = useState(false);
-  const { createCourse, _getCourses, loadingTeacherApi } = useTeacher();
+  const { myCourses, removeCourse, createCourse, _getCourses, loadingTeacherApi } = useTeacher();
   const navigate = useNavigate();
   const { t } = useTranslation();
 
@@ -48,7 +48,7 @@ export function TeacherCourses(props: TeacherCoursesProps) {
 
   const CoursesList = () => (
     <div className={styles['courses']}>
-      {courses.map((course, index) => (
+      {myCourses.map((course, index) => (
         <TeacherCourseCard
           key={index}
           status={course.status || CourseStatus.draft}
@@ -79,6 +79,12 @@ export function TeacherCourses(props: TeacherCoursesProps) {
               url: `/teacher/courses/${course.course_session_id}/students`,
               disabled: course.enrollments_count === 0,
             },
+            {
+              text: 'Eliminar Curso',
+              icon: 'trash',
+              disabled: course.status === CourseStatus.publish,
+              onClick: () => handleRemoveCourse(course.id),
+            }
           ]}
         />
       ))}
@@ -106,11 +112,22 @@ export function TeacherCourses(props: TeacherCoursesProps) {
     }
   };
 
+  async function handleRemoveCourse(courseId: number) {
+    const { success, error } = await removeCourse(courseId);
+    console.log(courseId)
+    if (success) {
+      console.log("entrando")
+    } else {
+      console.log('error: ', error);
+    }
+  }
+
   return (
     <div className={`${styles['container']}`}>
       {loadingTeacherApi ? (
         <Loader />
       ) : (
+        // eslint-disable-next-line react/jsx-no-useless-fragment
         <>
           {courses.length === 0 ? (
             <EmptyState

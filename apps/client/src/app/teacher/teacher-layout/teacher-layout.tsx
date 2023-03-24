@@ -8,13 +8,17 @@ import {
 } from '@ltpx-frontend-apps/shared-ui';
 import { useUser } from '@ltpx-frontend-apps/store';
 import { useTranslation } from 'react-i18next';
-import { NavLink, Outlet, useNavigate } from 'react-router-dom';
+import { Outlet, useNavigate } from 'react-router-dom';
 import styles from './teacher-layout.module.scss';
 import avatar from './../../../assets/images/avatars/avatar-3.svg';
 import { useState } from 'react';
 import Chat from '../../components/chat/chat';
 import ChatNewPrivateRoom from '../../components/chat-new-private-room/chat-new-private-room';
-import { getChatStudents, UserModel } from '@ltpx-frontend-apps/api';
+import {
+  getChatStudents,
+  StatusTeacherAccount,
+  UserModel,
+} from '@ltpx-frontend-apps/api';
 
 export function TeacherLayout() {
   const [openChat, setOpenChat] = useState(false);
@@ -81,6 +85,7 @@ export function TeacherLayout() {
                 {
                   icon: 'telephone',
                   text: 'Contactar Soporte',
+                  href: 'https://wa.me/message/Y5P6BHULTPA2B1',
                 },
                 {
                   icon: 'log-out',
@@ -102,30 +107,32 @@ export function TeacherLayout() {
         <div className={styles['render-content']}>
           <Outlet />
         </div>
-        <div className={styles['chat-float-container']}>
-          {openChat ? (
-            <div className={styles['chat-container']}>
-              <Chat onCancel={() => setOpenChat(false)}>
-                <Icon
-                  icon="plus-circle"
-                  size={20}
-                  onClick={() => {
-                    handleNewChat();
-                  }}
-                />
-              </Chat>
-            </div>
-          ) : (
-            <ChatFloat onClick={() => setOpenChat(true)} />
-          )}
-        </div>
+        {user.teacher_account == StatusTeacherAccount.approved && (
+          <div className={styles['chat-float-container']}>
+            {openChat ? (
+              <div className={styles['chat-container']}>
+                <Chat onCancel={() => setOpenChat(false)}>
+                  <Icon
+                    icon="plus-circle"
+                    size={20}
+                    onClick={() => {
+                      handleNewChat();
+                    }}
+                  />
+                </Chat>
+              </div>
+            ) : (
+              <ChatFloat onClick={() => setOpenChat(true)} />
+            )}
+            {openNewChat && (
+              <ChatNewPrivateRoom
+                users={users}
+                onClose={() => setOpenNewChat(false)}
+              />
+            )}
+          </div>
+        )}
       </div>
-      {openNewChat && (
-        <ChatNewPrivateRoom
-          users={users}
-          onClose={() => setOpenNewChat(false)}
-        />
-      )}
     </div>
   );
 }

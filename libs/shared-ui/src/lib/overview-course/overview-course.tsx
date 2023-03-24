@@ -4,7 +4,7 @@ import styles from './overview-course.module.scss';
 
 /* eslint-disable-next-line */
 export interface OverviewCourseProps {
-  description: string;
+  description?: string;
   goals?: string[];
   requirements?: string[];
 }
@@ -18,18 +18,24 @@ export function OverviewCourse(props: OverviewCourseProps) {
       <div className={styles['overview']}>
         <section className={`${styles['course-description']}`}>
           <h3>Descripción del curso</h3>
-          {description.length > 800 ? (
-            <pre>
-              {showMore ? description : `${description.substring(0, 800)}....`}
-              <h4
-                className={styles['show']}
-                onClick={() => setShowMore(!showMore)}
-              >
-                {showMore ? 'Mostrar menos' : 'Mostrar mas'}
-              </h4>
-            </pre>
-          ) : (
-            <pre>{description}</pre>
+          {description && (
+            <div>
+              {description.length > 800 ? (
+                <pre>
+                  {showMore
+                    ? description
+                    : `${description.substring(0, 800)}....`}
+                  <h4
+                    className={styles['show']}
+                    onClick={() => setShowMore(!showMore)}
+                  >
+                    {showMore ? 'Mostrar menos' : 'Mostrar mas'}
+                  </h4>
+                </pre>
+              ) : (
+                <pre>{description}</pre>
+              )}
+            </div>
           )}
         </section>
         <section className={`${styles['achievements']}`}>

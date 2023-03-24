@@ -38,14 +38,12 @@ export function AchievementByQuizzesForm(props: AchievementByQuizzesFormProps) {
   } = props;
 
   const conditions = achievement ? achievement.conditions_attributes : [];
-  const quizzesIds = conditions.map(
-      (condition) => condition.entity_id
-    ) || [];
+  const quizzesIds = conditions.map((condition) => condition.entity_id) || [];
 
-  function findConditionId(id:number) {
+  function findConditionId(id: number) {
     return conditions.find((condition) => {
       return condition.entity_id === id;
-    })?.id
+    })?.id;
   }
 
   const initialValues = {
@@ -74,22 +72,25 @@ export function AchievementByQuizzesForm(props: AchievementByQuizzesFormProps) {
       validationSchema={Yup.object({
         title: Yup.string().required('Titulo no puede estar en blanco'),
         image: Yup.string().required('Es necesario seleccionar una imagen'),
+        quizzes: Yup.mixed().test((quizzes)=>{
+          return quizzes.find((quiz: any) => quiz.selected);
+        })
       })}
       onSubmit={(data) => {
         if (achievement) {
-          const conditions = data.quizzes
-            .map((quiz) => {
-              return {
-                id: quiz.conditionId,
-                points_to_assign: 100,
-                entity: EntityAchievement.quiz,
-                entity_id: quiz.id,
-                must_reach_value: 100,
-                description: quiz.text,
-                _destroy: !quiz.selected
-              };
-            });
-          const { quizzes, ...formData } = { //remove quizzes
+          const conditions = data.quizzes.map((quiz) => {
+            return {
+              id: quiz.conditionId,
+              points_to_assign: 100,
+              entity: EntityAchievement.quiz,
+              entity_id: quiz.id,
+              must_reach_value: 100,
+              description: quiz.text,
+              _destroy: !quiz.selected,
+            };
+          });
+          const { quizzes, ...formData } = {
+            //remove quizzes
             ...data,
             ...{
               conditions_attributes: conditions,
@@ -98,17 +99,18 @@ export function AchievementByQuizzesForm(props: AchievementByQuizzesFormProps) {
           onSubmit(formData);
         } else {
           const conditions = data.quizzes
-          .filter((quiz) => quiz.selected)
-          .map((quiz) => {
-            return {
-              points_to_assign: 100,
-              entity: EntityAchievement.quiz,
-              entity_id: quiz.id,
-              must_reach_value: 100,
-              description: quiz.text
-            };
-          });
-          const { quizzes, ...formData } = { //remove quizzes
+            .filter((quiz) => quiz.selected)
+            .map((quiz) => {
+              return {
+                points_to_assign: 100,
+                entity: EntityAchievement.quiz,
+                entity_id: quiz.id,
+                must_reach_value: 100,
+                description: quiz.text,
+              };
+            });
+          const { quizzes, ...formData } = {
+            //remove quizzes
             ...data,
             ...{ conditions_attributes: conditions },
           };
@@ -172,23 +174,23 @@ export function AchievementByQuizzesForm(props: AchievementByQuizzesFormProps) {
                             !quiz.selected
                           );
                         } else {
-                          setFieldValue(
-                            `quizzes[${i}].selected`,
-                            false
-                          );
+                          setFieldValue(`quizzes[${i}].selected`, false);
                         }
                       });
                     }
-                    setFieldValue(
-                      `quizzes[${index}].selected`,
-                      !quiz.selected
-                    );
+                    setFieldValue(`quizzes[${index}].selected`, !quiz.selected);
                   }}
                 >
                   <h4>{quiz.text}</h4>
                 </div>
               ))}
             </div>
+            {errors.quizzes && (
+              <InputTextStatus
+                status={StatusInputText.error}
+                text={'Selecciona al menos un test'}
+              />
+            )}
             <br />
             <label>{t('achievementByQuizzesForm.titleImage')}</label>
             <SelectImage

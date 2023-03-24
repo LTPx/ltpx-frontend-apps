@@ -14,12 +14,13 @@ export interface DrawerProps {
   children: React.ReactNode;
   className?: string;
   width?: number;
+  title?: string;
   position?: DrawerPosition;
   onClose?: () => void;
 }
 
 export function Drawer(props: DrawerProps) {
-  const { open, children, className, onClose, width, position } = props;
+  const { open, title, children, className, onClose, width, position } = props;
   return (
     <SideSheet
       position={position}
@@ -27,7 +28,10 @@ export function Drawer(props: DrawerProps) {
       isShown={open}
       onCloseComplete={() => onClose && onClose()}
     >
-      {children}
+      <div className={styles['container']}>
+        {title && <h2 className={styles['title']}>{title}</h2>}
+        {children}
+      </div>
     </SideSheet>
   );
 }

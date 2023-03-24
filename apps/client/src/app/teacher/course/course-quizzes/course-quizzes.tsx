@@ -118,16 +118,18 @@ export function CourseQuizzes(props: CourseQuizzesProps) {
               setQuizEdit(undefined);
             }}
           />
-          <div className={styles['button-content']}>
-            <Button
-              title={t('buttons.cancel')}
-              className={styles['add-button']}
-              color={ColorsButton.accent}
-              onClick={() => {
-                setShowForm(false);
-              }}
-            />
-          </div>
+          {!quizEdit && (
+            <div className={styles['button-content']}>
+              <Button
+                title={t('buttons.cancel')}
+                className={styles['add-button']}
+                color={ColorsButton.accent}
+                onClick={() => {
+                  setShowForm(false);
+                }}
+              />
+            </div>
+          )}
         </>
       )}
     </div>

@@ -261,7 +261,7 @@ export const createCourseSlice: StateCreator<
       const paramsTaskId = { ...params, ...{ course_id: courseStore.id } };
       const task = await editTask(id, paramsTaskId);
       const tasks = courseStore.tasks?.map((taskStore) => {
-        return paramsTaskId.id === task.id 
+        return taskStore.id === task.id 
           ? task : taskStore;
       });
       const courseUpdated = { ...courseStore, ...{ tasks } };

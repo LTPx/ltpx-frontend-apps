@@ -46,7 +46,7 @@ export function Login(props: LoginProps) {
     <div className={styles['container']}>
       <div className={styles['content']}>
         <h1>{t('login.title')}</h1>
-        <p>{t('login.text')}</p>
+        <p className={styles['login-text']}>{t('login.text')}</p>
         {loginError !== undefined && (
           <BannerNotification
             type={BannerType.error}

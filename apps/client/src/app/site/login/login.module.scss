@@ -15,6 +15,9 @@
     justify-content: center;
     margin-top: $size-md-1;
   }
+  .login-text {
+    color: $text-gray-color;
+  }
 }
 
 @media screen and (max-width: 500px) {

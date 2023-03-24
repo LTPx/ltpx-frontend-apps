@@ -31,8 +31,18 @@ export interface SnackbarProps {
 }
 
 export const Snackbar = (props: SnackbarProps) => {
-  const { text, tag, title, date, position, duration, icon, open, kind, onClose } =
-    props;
+  const {
+    text,
+    tag,
+    title,
+    date,
+    position,
+    duration,
+    icon,
+    open,
+    kind,
+    onClose,
+  } = props;
 
   useEffect(() => {
     console.log('here...');
@@ -42,7 +52,7 @@ export const Snackbar = (props: SnackbarProps) => {
       setTimeout(() => {
         setAnimateOut(true);
         setTimeout(() => {
-          setIsHidden(true);
+          // setIsHidden(true);
           onClose && onClose();
         }, 1500);
       }, duration);
@@ -104,10 +114,10 @@ export const Snackbar = (props: SnackbarProps) => {
               {iconStatus && !icon && <Icon icon={iconStatus} size={20}></Icon>}
             </div>
             <div className={styles['content-section']}>
-              <h4>{tag}</h4>
-              <h3>{title}</h3>
+              {tag && <h4 className={styles['tag']}>{tag}</h4>}
+              <h3 className={styles['title']}>{title}</h3>
               {text && <p>{text}</p>}
-              <h4 className={`${styles['date']}`}>{date}</h4>
+              {date && <h4 className={styles['date']}>{date}</h4>}
             </div>
             <div className={styles['close-section']}>
               <Icon onClick={handleClose} icon={'close'} size={15}></Icon>

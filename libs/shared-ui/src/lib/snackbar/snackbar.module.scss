@@ -29,28 +29,30 @@
 
   .container {
     display: grid;
-    grid-template-columns: auto 1fr auto;
-    align-items: flex-end;
+    grid-template-columns: 10% 80% 10%;
 
+    .icon-section {
+      display: flex;
+      justify-content: center;
+    }
     .content-section {
       display: flex;
       flex-direction: column;
-      gap: $size-sm-1;
-
+      gap: 0.25rem;
+      padding-left: $size-md-1;
       h4 {
         color: $secondary-color;
       }
 
-      h3 {
+      .title {
         color: $text-color;
-        font-weight: 400;
+        font-weight: 500;
         font-size: 1rem;
       }
 
       p {
         color: $text-gray-color;
         text-align: justify;
-        margin-bottom: $size-md-2;
       }
 
       .date {
@@ -58,12 +60,9 @@
       }
     }
 
-    // .icon-section {
-    //   padding-top: $size-sm-2;
-    // }
-
     .close-section {
-      padding-top: $size-sm-2;
+      display: flex;
+      justify-content: center;
     }
 
     .close-section svg {
@@ -102,7 +101,7 @@
 
   &.message-snackbar {
     .container {
-      h3 {
+      .title {
         color: $text-color;
       }
     }
@@ -110,13 +109,8 @@
 
   &.warning-snackbar {
     .container {
-      h3 {
+      .title {
         color: $orange-color;
-        padding-left: $size-md-1;
-      }
-
-      .date {
-        padding-left: $size-md-1;
       }
 
       .icon-section svg {
@@ -127,12 +121,8 @@
 
   &.error-snackbar {
     .container {
-      h3 {
+      .title {
         color: $red-color;
-        padding-left: $size-md-1;
-      }
-      .date {
-        padding-left: $size-md-1;
       }
 
       .icon-section svg {
@@ -143,12 +133,8 @@
 
   &.success-snackbar {
     .container {
-      h3 {
+      .title {
         color: $green-color;
-        padding-left: $size-md-1;
-      }
-      .date {
-        padding-left: $size-md-1;
       }
       .icon-section svg {
         color: $green-color;

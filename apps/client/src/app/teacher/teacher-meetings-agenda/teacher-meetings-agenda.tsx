@@ -54,6 +54,7 @@ export function TeacherMeetingsAgenda() {
       {loadingTeacherApi ? (
         <Loader />
       ) : (
+        // eslint-disable-next-line react/jsx-no-useless-fragment
         <>
           {classroomClasses.length === 0 ? (
             <EmptyState

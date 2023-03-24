@@ -41,10 +41,10 @@ export function NewClassForm(props: NewClassFormProps) {
       onClose={() => {
         onClose && onClose();
       }}
+      title={"Crear Nueva Clase"}
     >
       <div className={styles['content']}>
         <form className={styles['form']}>
-          <h1>Crear Nueva Clase</h1>
           <Input
             label="Elegir fecha y hora"
             type="datetime-local"

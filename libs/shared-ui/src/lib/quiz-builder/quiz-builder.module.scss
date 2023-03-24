@@ -49,6 +49,14 @@
     display: flex;
     gap: 0.5rem;
 
+    .points {
+      display: flex;
+      align-items: center;
+      padding: 0 1rem;
+      background-color: $green-color-100;
+      color: $green-color;
+      border-radius: 5px;
+    }
     .action {
       display: flex;
       align-items: center;
@@ -70,7 +78,6 @@
 
 .forms {
   padding: 0 2rem;
-  border: 1px solid $stroke-color;
   height: 100%;
 }
 

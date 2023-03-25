@@ -1,5 +1,5 @@
 import { changePassword, IUserAccount, TeacherProfileParams } from '@ltpx-frontend-apps/api';
-import { useTeacher } from '@ltpx-frontend-apps/store';
+import { useTeacher, useUtil } from '@ltpx-frontend-apps/store';
 import {
   BannerNotification,
   ChangePasswordForm,
@@ -17,6 +17,7 @@ export interface TeacherAccountProps {}
 export function TeacherAccount(props: TeacherAccountProps) {
   const { getProfile, _updateProfile, profile } = useTeacher();
   const navigate = useNavigate();
+  const { setMessageToast } = useUtil();
 
   useEffect(() => {
     getProfile();
@@ -33,8 +34,11 @@ export function TeacherAccount(props: TeacherAccountProps) {
     }
     try {
       await changePassword(data)
+      setMessageToast('success', 'Tu contraseña ah sido actualizada');
+      navigate('/teacher/account/account-profile');
+
     } catch (error) {
-      console.log(error);
+      setMessageToast('error', 'Ha ocurrido un error');
     }
   }
 

@@ -45,10 +45,10 @@ export function TeacherAccount(props: TeacherAccountProps) {
   async function updateTeacherProfile(params: TeacherProfileParams) {
     const { success, data, error } = await _updateProfile(params);
     if (success) {
-      console.log('data: ', data);
+      setMessageToast('success', 'Tu perfil ha sido actualizado');
       navigate('/teacher/account/account-profile');
     } else {
-      console.log('error: ', error);
+      setMessageToast('error', error);
     }
   }
 

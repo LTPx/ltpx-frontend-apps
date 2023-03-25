@@ -1,9 +1,6 @@
 import styles from './teacher-profile-form.module.scss';
 import Button, { ColorsButton, TypeButton } from '../button/button';
 import FilesUploaded, { TypeFile } from '../files-uploaded/files-uploaded';
-import InputTextStatus, {
-  StatusInputText,
-} from '../input-text-status/input-text-status';
 import Input from '../input/input';
 import TextArea from '../text-area/text-area';
 import { useFormik } from 'formik';
@@ -24,7 +21,7 @@ export function TeacherProfileForm(props: TeacherProfileFormProps) {
   }
   const formik = useFormik({
     initialValues: {
-      name: profile?.teacher_name || '',
+      teacher_name: profile?.teacher_name || '',
       skills: profile?.skills || '',
       biography: profile?.biography || '',
       profile_image: profile?.image || '',
@@ -36,7 +33,7 @@ export function TeacherProfileForm(props: TeacherProfileFormProps) {
     },
     enableReinitialize: true,
     validationSchema: Yup.object({
-      name: Yup.string().required('Nombre es obligatorio'),
+      teacher_name: Yup.string().required('Nombre es obligatorio'),
       skills: Yup.string().required('Profesión es obligatorio'),
       biography: Yup.string().required('Biografía es obligatorio'),
       profile_image: Yup.mixed().test(
@@ -48,7 +45,7 @@ export function TeacherProfileForm(props: TeacherProfileFormProps) {
             const fileMb = fileSize / 1024 ** 2;
             return fileMb <= 2;
           } else {
-            return false;
+            return true;
           }
         }
       ),
@@ -61,7 +58,7 @@ export function TeacherProfileForm(props: TeacherProfileFormProps) {
             const fileMb = fileSize / 1024 ** 2;
             return fileMb <= 30;
           } else {
-            return false;
+            return true;
           }
         }
       ),
@@ -88,20 +85,15 @@ export function TeacherProfileForm(props: TeacherProfileFormProps) {
                 label="Nombre publico"
                 description="Este sera tu nombre oficial en OpenMind"
                 type="text"
-                name="name"
+                name="teacher_name"
                 placeholder="Ejm: Luis Marisque"
                 onChange={(e: any) => {
                   formik.handleChange(e);
                 }}
-                value={formik.values.name}
+                value={formik.values.teacher_name}
                 onBlur={formik.handleBlur}
+                errorMessage={formik.errors.teacher_name}
               />
-              {formik.touched.name && formik.errors.name ? (
-                <InputTextStatus
-                  status={StatusInputText.error}
-                  text={formik.errors.name}
-                />
-              ) : null}
             </div>
             <div>
               <Input
@@ -115,13 +107,8 @@ export function TeacherProfileForm(props: TeacherProfileFormProps) {
                 }}
                 value={formik.values.skills}
                 onBlur={formik.handleBlur}
+                errorMessage={formik.errors.skills}
               />
-              {formik.touched.skills && formik.errors.skills ? (
-                <InputTextStatus
-                  status={StatusInputText.error}
-                  text={formik.errors.skills}
-                />
-              ) : null}
             </div>
             <div className={styles['upload']}>
               <label>Foto de Perfil (.jpg, .png)</label>
@@ -216,13 +203,8 @@ export function TeacherProfileForm(props: TeacherProfileFormProps) {
             }}
             value={formik.values.biography}
             onBlur={formik.handleBlur}
+            errorMessage={formik.errors.biography}
           />
-          {formik.touched.biography && formik.errors.biography ? (
-            <InputTextStatus
-              status={StatusInputText.error}
-              text={formik.errors.biography}
-            />
-          ) : null}
           <div className={styles['btn-submit']}>
             <Button
               color={ColorsButton.white}

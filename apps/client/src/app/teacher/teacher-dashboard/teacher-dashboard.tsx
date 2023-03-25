@@ -76,7 +76,7 @@ export function TeacherDashboard(props: TeacherDashboardProps) {
               title="Aprender Mas"
               color={ColorsButton.secondary}
               full={true}
-              link="/teacher/blog"
+              link="/blog"
             />
           </NoticeCard>
         </div>

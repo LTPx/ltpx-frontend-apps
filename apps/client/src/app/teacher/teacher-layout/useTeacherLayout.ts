@@ -35,19 +35,19 @@ export const useTeacherLayout = () => {
   const headerLinks = [
     {
       title: t('dashboards.teacher.dashboard'),
-      url: 'dashboard',
+      url: '/teacher/dashboard',
     },
     {
       title: t('dashboards.teacher.courses'),
-      url: 'courses',
+      url: '/teacher/courses',
     },
     {
       title: t('dashboards.teacher.sessions'),
-      url: 'sessions',
+      url: '/teacher/sessions',
     },
     {
       title: t('dashboards.teacher.earnings'),
-      url: 'earnings',
+      url: '/teacher/earnings',
     },
   ];
 

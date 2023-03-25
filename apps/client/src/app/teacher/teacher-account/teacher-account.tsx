@@ -1,7 +1,6 @@
-import { changePassword, IUserAccount, TeacherProfileParams } from '@ltpx-frontend-apps/api';
-import { useTeacher, useUtil } from '@ltpx-frontend-apps/store';
+import { IUserAccount, TeacherProfileParams } from '@ltpx-frontend-apps/api';
+import { useTeacher, useUser, useUtil } from '@ltpx-frontend-apps/store';
 import {
-  BannerNotification,
   ChangePasswordForm,
   BankAccountForm,
   Tabs,
@@ -16,8 +15,9 @@ export interface TeacherAccountProps {}
 
 export function TeacherAccount(props: TeacherAccountProps) {
   const { getProfile, _updateProfile, profile } = useTeacher();
-  const navigate = useNavigate();
+  const { changePassword } = useUser();
   const { setMessageToast } = useUtil();
+  const navigate = useNavigate();
 
   useEffect(() => {
     getProfile();
@@ -27,23 +27,22 @@ export function TeacherAccount(props: TeacherAccountProps) {
   async function updateUserAccount(params: IUserAccount) {}
 
   async function updateUserPassword(params: any) {
-    const data = {
+    const formatParams = {
       current_password: params.currentPassword,
       confirm_password: params.confirmPassword,
       password: params.newPassword
-    }
-    try {
-      await changePassword(data)
+    };
+    const { success, error } = await changePassword(formatParams);
+    if (success) {
       setMessageToast('success', 'Tu contraseña ah sido actualizada');
       navigate('/teacher/account/account-profile');
-
-    } catch (error) {
-      setMessageToast('error', 'Ha ocurrido un error');
+    } else {
+      setMessageToast('error', error);
     }
   }
 
   async function updateTeacherProfile(params: TeacherProfileParams) {
-    const { success, data, error } = await _updateProfile(params);
+    const { success, error } = await _updateProfile(params);
     if (success) {
       setMessageToast('success', 'Tu perfil ha sido actualizado');
       navigate('/teacher/account/account-profile');

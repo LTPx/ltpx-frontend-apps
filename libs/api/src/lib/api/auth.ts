@@ -11,7 +11,7 @@ export interface Credentials {
   password: string;
 }
 
-export interface ChangePassword {
+export interface ChangePasswordParams {
   current_password: string;
   confirm_password: string;
   password: string;
@@ -137,7 +137,7 @@ export const getCurrentUser = async() => {
 }
 
 
-export const changePassword = async(params: ChangePassword) => {
+export const changePassword = async(params: ChangePasswordParams) => {
   return new Promise<ICurrentUser>((resolve, reject) => {
     http
     .put('change_password', params)

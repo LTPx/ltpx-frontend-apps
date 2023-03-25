@@ -1,6 +1,14 @@
 import { _http } from '../../http';
-import { ApplicationTeach, ApplyTeachApiParams, ApplyTeachModel, TeacherProfile } from '../../interfaces/teacher-interface';
-import { encapsuleInFormData, moveToFormData, sendAsFormData } from '../../utils';
+import {
+  ApplicationTeach,
+  ApplyTeachApiParams,
+  ApplyTeachModel,
+  TeacherProfile,
+} from '../../interfaces/teacher-interface';
+import {
+  encapsuleInFormData,
+  moveToFormData,
+} from '../../utils';
 
 const http = _http;
 
@@ -17,8 +25,13 @@ export const getTeacherProfile = async () => {
   });
 };
 
-export const updateTeacherProfile = async (teacher: Partial<TeacherProfile>) => {
-  const data = encapsuleInFormData(teacher, {mediaKeys: ['profile_image', 'profile_video']});
+export const updateTeacherProfile = async (
+  teacher: Partial<TeacherProfile>
+) => {
+  const data = encapsuleInFormData(teacher, {
+    jsonKeys: ['bank_accounts', 'social_networks'],
+    mediaKeys: ['profile_image', 'profile_video'],
+  });
   return new Promise<TeacherProfile>((resolve, reject) => {
     http
       .put('api/v1/teacher/update_profile', data)

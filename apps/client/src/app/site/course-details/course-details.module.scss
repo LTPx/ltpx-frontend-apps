@@ -1,10 +1,44 @@
 @import '../../../styles.scss';
 
-.wrap {
+
+.container {
   display: flex;
-  justify-content: center;
-  width: 100%;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
 }
+
+.course-section {
+  padding: 2rem;
+  width: 80%;
+
+  .title-course {
+    font-weight: 500;
+  }
+}
+
+.schedules-section {
+  background-color: $white-color-100;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 0;
+
+  .content {
+    width: 80%;
+  }
+}
+
+.schedule-another-time {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 4rem 0;
+}
+
+
 .wrap-responsive {
   .image-responsive {
     width: 100%;
@@ -13,42 +47,52 @@
   }
 }
 
-::-webkit-scrollbar {
-  display: none;
-}
 .price-vertical-responsive {
   display: none;
 }
+
 .price-content {
   display: none;
 }
+
 .price-responsive {
   visibility: hidden;
-  display: grid;
-  grid-template-columns: 20% 80%;
+  display: flex;
+  justify-content: space-between;
   width: 100%;
   position: fixed;
   bottom: 0;
   background-color: $white-color;
-  padding: 0.5rem 0;
   align-items: center;
-  .price-content {
-    display: flex;
-    justify-content: center;
-    .price-text {
-      font-weight: 500;
-      padding-left: 0.5rem;
-      // font-size: 1.35rem;
-    }
+  padding: 1rem 0;
+
+  h3 {
+    margin-left: 1rem;
+    min-width: 5rem;
+    color: $green-color;
+    font-weight: 500;
   }
-  .price-button {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    .btn-content {
-      width: 90%;
-    }
+
+  button {
+    margin-right: 1rem;
   }
+  // .price-content {
+  //   display: flex;
+  //   justify-content: center;
+  //   .price-text {
+  //     font-weight: 500;
+  //     padding-left: 0.5rem;
+  //     // font-size: 1.35rem;
+  //   }
+  // }
+  // .price-button {
+  //   width: 100%;
+  //   display: flex;
+  //   justify-content: center;
+  //   .btn-content {
+  //     width: 90%;
+  //   }
+  // }
 }
 .head-responsive {
   display: none;
@@ -77,16 +121,6 @@
     display: flex;
     gap: 1rem;
     padding: 0.5rem 0;
-  }
-}
-
-.container {
-  display: flex;
-  flex-direction: column;
-  width: 80%;
-  padding: 3rem 0;
-  .title-course {
-    font-weight: 500;
   }
 }
 
@@ -168,6 +202,19 @@
 
 //smartphones-responsive
 @media screen and (max-width: 550px) {
+  .course-section {
+    width: 100%;
+    padding: 0;
+  }
+
+  .schedules-section .content{
+    width: 100%;
+  }
+
+  ::-webkit-scrollbar {
+    display: none;
+  }
+
   .wrap-responsive {
     display: flex;
     flex-direction: column;

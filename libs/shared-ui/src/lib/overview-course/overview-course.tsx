@@ -38,15 +38,13 @@ export function OverviewCourse(props: OverviewCourseProps) {
             </div>
           )}
         </section>
-        <section className={`${styles['achievements']}`}>
+        <section className={`${styles['goals']}`}>
           <h3>Que aprenderás</h3>
           <div className={styles['items']}>
             {goals &&
               goals.map((goal, index) => (
                 <div className={styles['item']} key={index}>
-                  <div>
-                    <Icon icon={'check-circle'} size={16} color="#4A8F9F" />
-                  </div>
+                  <Icon icon={'check-circle'} size={16} />
                   <h4>{goal}</h4>
                 </div>
               ))}

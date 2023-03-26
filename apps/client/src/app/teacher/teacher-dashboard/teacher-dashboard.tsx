@@ -1,13 +1,11 @@
 import { StatusTeacherAccount } from '@ltpx-frontend-apps/api';
 import {
-  BannerNotification,
   Button,
   ColorsButton,
   NoticeCard,
   UpcomingClass,
 } from '@ltpx-frontend-apps/shared-ui';
 import { useTeacher, useUser } from '@ltpx-frontend-apps/store';
-import { NavLink } from 'react-router-dom';
 import WelcomeNewTeacher from '../../components/welcome-new-teacher/welcome-new-teacher';
 import styles from './teacher-dashboard.module.scss';
 
@@ -16,21 +14,11 @@ export interface TeacherDashboardProps {}
 
 export function TeacherDashboard(props: TeacherDashboardProps) {
   const { user } = useUser();
-  // const { teacher_account } = useTeacher();
   return (
     <div className={`${styles['container']}`}>
-      {/* {teacher_account === StatusTeacherAccount.review && (
-        <BannerNotification onClickClose={()=>{}}>
-          <p>
-            Tu solicitud ha sido enviada, validaremos tus datos en un periodo
-            máximo de 48h luego recibirás un correo con una respuesta de nuestro
-            equipo
-          </p>
-        </BannerNotification>
-      )} */}
-      <h1>Bienvenido {user.fullname}</h1>
       <div className={styles['layout']}>
         <div className={styles['content']}>
+          <h1>Bienvenido {user.fullname}</h1>
           {user.teacher_account !== StatusTeacherAccount.approved && (
             <WelcomeNewTeacher />
           )}

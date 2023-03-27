@@ -33,7 +33,7 @@ export const StudentRoutes = () => {
           <Route path="chat" element={<StudentChat />} />
           <Route path="dashboard" element={<Dashboard />} />
           <Route path="courses" element={<StudentCourses />} />
-          <Route path="courses/:courseId" element={<StudentCourse />} />
+          <Route path="course/:slug" element={<StudentCourse />} />
           <Route path="classes" element={<StudentClasses />} />
           <Route path="course/:courseId/quiz/:quizId" element={<StudentQuiz/>} />
           <Route path="course/:courseId/quiz-review/:quizId" element={<StudentReviewQuiz/>} />

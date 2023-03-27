@@ -1,11 +1,11 @@
 @import '../../../styles.scss';
 
-
 .container {
   display: flex;
   flex: 1;
   flex-direction: column;
   align-items: center;
+  background-color: $white-color;
 }
 
 .course-section {

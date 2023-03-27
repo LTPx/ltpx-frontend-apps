@@ -107,8 +107,8 @@ export function CourseDetailsPage() {
               {selectedTab === 0 && (
                 <OverviewCourse
                   description={viewCourse.description}
-                  goals={viewCourse.learn_goals?.split('\n') || []}
-                  requirements={viewCourse.requirements?.split('\n') || []}
+                  goals={viewCourse.learn_goals ? viewCourse.learn_goals?.split('\n') : []}
+                  requirements={viewCourse.requirements ? viewCourse.requirements.split('\n') : []}
                 />
               )}
               {selectedTab === 1 && (

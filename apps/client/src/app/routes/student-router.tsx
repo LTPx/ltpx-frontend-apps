@@ -27,13 +27,13 @@ export const StudentRoutes = () => {
         <Route path="/" element={<StudentLayout />}>
           <Route path="/home" element={<Home />} />
           <Route path="/courses" element={<AllCourses />} />
-          <Route path="/course/:courseId/details" element={<CourseDetails />} />
+          <Route path="/course/:slug" element={<CourseDetails />} />
         </Route>
         <Route path="student" element={<StudentLayout />}>
           <Route path="chat" element={<StudentChat />} />
           <Route path="dashboard" element={<Dashboard />} />
           <Route path="courses" element={<StudentCourses />} />
-          <Route path="course/:slug" element={<StudentCourse />} />
+          <Route path="courses/:courseId" element={<StudentCourse />} />
           <Route path="classes" element={<StudentClasses />} />
           <Route path="course/:courseId/quiz/:quizId" element={<StudentQuiz/>} />
           <Route path="course/:courseId/quiz-review/:quizId" element={<StudentReviewQuiz/>} />

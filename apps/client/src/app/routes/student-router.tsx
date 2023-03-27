@@ -27,7 +27,7 @@ export const StudentRoutes = () => {
         <Route path="/" element={<StudentLayout />}>
           <Route path="/home" element={<Home />} />
           <Route path="/courses" element={<AllCourses />} />
-          <Route path="/course/:courseId/details" element={<CourseDetails />} />
+          <Route path="/course/:slug" element={<CourseDetails />} />
         </Route>
         <Route path="student" element={<StudentLayout />}>
           <Route path="chat" element={<StudentChat />} />

@@ -40,6 +40,8 @@
     justify-content: center;
     padding-bottom: 2rem;
     border-bottom: 1px solid $gray-color-200;
+    background-color: $white-color-100;
+
     .information-wrap {
       display: grid;
       grid-template-columns: 50% 50%;

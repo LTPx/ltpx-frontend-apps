@@ -33,7 +33,7 @@ import {
   TeacherProfile,
   formatErrors,
   deleteCourse,
-  CourseModel,
+  FormatResponse,
 } from '@ltpx-frontend-apps/api';
 import { StateCreator } from 'zustand';
 import { StoreState } from '../store';
@@ -74,7 +74,7 @@ export type TeacherSlice = {
   wallet: WalletModel;
   myCourses: TeacherCourse[];
   meetings: MeetingDate[];
-  applyTeach: (params: ApplyTeachApiParams) => Promise<any>;
+  applyTeach: (params: ApplyTeachApiParams) => Promise<FormatResponse>;
   getApplicationTeach: () => Promise<any>;
   registerTeacher: (params: IRegisterUser) => Promise<TResponseLogin>;
   createCourse: (params: CourseApiParams) => Promise<TResponseCreateCourse>;
@@ -108,16 +108,16 @@ export const createTeacherSlice: StateCreator<
   currentCourse: {} as TeacherCourse,
   wallet: {} as WalletModel,
   meetings: [],
-  applyTeach: async (params: ApplyTeachApiParams): Promise<TResponseApply> => {
+  applyTeach: async (params) => {
     try {
       const application = await applyToTeach(params);
       set({
         teacher_account: StatusTeacherAccount.review,
         application: application,
       });
-      return { accepted: true, data: application };
+      return { success: true, data: application };
     } catch (error) {
-      return { accepted: false, data: error };
+      return { success: false, error: formatErrors(error) };
     }
   },
   getApplicationTeach: async (): Promise<TResponseGetApplication> => {

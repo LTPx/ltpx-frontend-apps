@@ -1,7 +1,6 @@
 import { IUserAccount, TeacherProfileParams } from '@ltpx-frontend-apps/api';
-import { useTeacher } from '@ltpx-frontend-apps/store';
+import { useTeacher, useUser, useUtil } from '@ltpx-frontend-apps/store';
 import {
-  BannerNotification,
   ChangePasswordForm,
   BankAccountForm,
   Tabs,
@@ -16,6 +15,8 @@ export interface TeacherAccountProps {}
 
 export function TeacherAccount(props: TeacherAccountProps) {
   const { getProfile, _updateProfile, profile } = useTeacher();
+  const { changePassword } = useUser();
+  const { setMessageToast } = useUtil();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -25,13 +26,28 @@ export function TeacherAccount(props: TeacherAccountProps) {
 
   async function updateUserAccount(params: IUserAccount) {}
 
-  async function updateTeacherProfile(params: TeacherProfileParams) {
-    const { success, data, error } = await _updateProfile(params);
+  async function updateUserPassword(params: any) {
+    const formatParams = {
+      current_password: params.currentPassword,
+      confirm_password: params.confirmPassword,
+      password: params.newPassword
+    };
+    const { success, error } = await changePassword(formatParams);
     if (success) {
-      console.log('data: ', data);
+      setMessageToast('success', 'Tu contraseña ah sido actualizada');
       navigate('/teacher/account/account-profile');
     } else {
-      console.log('error: ', error);
+      setMessageToast('error', error);
+    }
+  }
+
+  async function updateTeacherProfile(params: TeacherProfileParams) {
+    const { success, error } = await _updateProfile(params);
+    if (success) {
+      setMessageToast('success', 'Tu perfil ha sido actualizado');
+      navigate('/teacher/account/account-profile');
+    } else {
+      setMessageToast('error', error);
     }
   }
 
@@ -72,7 +88,12 @@ export function TeacherAccount(props: TeacherAccountProps) {
             />
           )}
           {selectedTab === 2 && (
-            <ChangePasswordForm url="/teacher/account/account-profile" />
+            <ChangePasswordForm
+              url="/teacher/account/account-profile"
+              onSubmit={(params)=>{
+                updateUserPassword(params);
+              }}
+            />
           )}
         </div>
       )}

@@ -3,3 +3,8 @@ export type FormatResponse = {
   data?: any;
   error?: any;
 };
+
+export type FeedbackAction = {
+  type: 'success' | 'error' | 'information';
+  text: string;
+};

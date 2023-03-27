@@ -1,4 +1,4 @@
-import { QuizModel, QuizParams } from '@ltpx-frontend-apps/api';
+import { FormatResponse, QuizModel, QuizParams } from '@ltpx-frontend-apps/api';
 import {
   BasicRow,
   Button,
@@ -9,12 +9,11 @@ import {
 import { useCourse } from '@ltpx-frontend-apps/store';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { ResponseRequest } from '../../teacher-edit-course/teacher-edit-course';
 import styles from './course-quizzes.module.scss';
 
 /* eslint-disable-next-line */
 export interface CourseQuizzesProps {
-  onSubmit: (data: ResponseRequest) => void;
+  onSubmit: (data: FormatResponse) => void;
 }
 
 export function CourseQuizzes(props: CourseQuizzesProps) {
@@ -118,16 +117,18 @@ export function CourseQuizzes(props: CourseQuizzesProps) {
               setQuizEdit(undefined);
             }}
           />
-          <div className={styles['button-content']}>
-            <Button
-              title={t('buttons.cancel')}
-              className={styles['add-button']}
-              color={ColorsButton.accent}
-              onClick={() => {
-                setShowForm(false);
-              }}
-            />
-          </div>
+          {!quizEdit && (
+            <div className={styles['button-content']}>
+              <Button
+                title={t('buttons.cancel')}
+                className={styles['add-button']}
+                color={ColorsButton.accent}
+                onClick={() => {
+                  setShowForm(false);
+                }}
+              />
+            </div>
+          )}
         </>
       )}
     </div>

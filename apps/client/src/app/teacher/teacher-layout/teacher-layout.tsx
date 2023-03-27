@@ -1,66 +1,36 @@
+import styles from './teacher-layout.module.scss';
 import {
   Avatar,
   AvatarSize,
   Dropdown,
   Header,
   Icon,
+  Snackbar,
+  SnackbarPosition,
+  SnackbarType,
   UserMenu,
 } from '@ltpx-frontend-apps/shared-ui';
-import { useUser } from '@ltpx-frontend-apps/store';
-import { useTranslation } from 'react-i18next';
-import { Outlet, useNavigate } from 'react-router-dom';
-import styles from './teacher-layout.module.scss';
+import { Outlet } from 'react-router-dom';
 import avatar from './../../../assets/images/avatars/avatar-3.svg';
-import { useState } from 'react';
-import Chat from '../../components/chat/chat';
-import ChatNewPrivateRoom from '../../components/chat-new-private-room/chat-new-private-room';
-import {
-  getChatStudents,
-  StatusTeacherAccount,
-  UserModel,
-} from '@ltpx-frontend-apps/api';
+import { StatusTeacherAccount } from '@ltpx-frontend-apps/api';
+import { useTeacherLayout } from './useTeacherLayout';
+import { Chat, ChatNewPrivateRoom } from '../../components';
 
 export function TeacherLayout() {
-  const [openChat, setOpenChat] = useState(false);
-  const [openNewChat, setOpenNewChat] = useState(false);
-  const [users, setUsers] = useState<UserModel[]>([]);
-  const { user, logout } = useUser();
-  const navigate = useNavigate();
-  const { t } = useTranslation();
-  const links = [
-    {
-      title: t('dashboards.teacher.dashboard'),
-      url: 'dashboard',
-    },
-    {
-      title: t('dashboards.teacher.courses'),
-      url: 'courses',
-    },
-    {
-      title: t('dashboards.teacher.sessions'),
-      url: 'sessions',
-    },
-    {
-      title: t('dashboards.teacher.earnings'),
-      url: 'earnings',
-    },
-  ];
-
-  const logoutSession = async () => {
-    await logout();
-    navigate('/');
-    window.location.reload();
-  };
-
-  async function handleNewChat() {
-    try {
-      const data = await getChatStudents();
-      setUsers(data);
-      setOpenNewChat(true);
-    } catch (error) {
-      console.log(error);
-    }
-  }
+  const {
+    headerLinks,
+    handleNewChat,
+    logoutSession,
+    teacherAccount,
+    users,
+    currentUser,
+    openChat,
+    setOpenChat,
+    openNewChat,
+    setOpenNewChat,
+    feedbackAction,
+    clearMessageToast,
+  } = useTeacherLayout();
 
   const ChatFloat = ({ onClick }: { onClick: () => void }) => (
     <div className={styles['chat-tab-button']} onClick={onClick}>
@@ -70,12 +40,12 @@ export function TeacherLayout() {
 
   return (
     <div className={styles['container']}>
-      <Header links={links} className={styles['header']}>
+      <Header links={headerLinks} className={styles['header']}>
         <div className={styles['teacher-actions']}>
           <Dropdown>
             <UserMenu
-              name={user.fullname}
-              email={user.email}
+              name={currentUser.fullname}
+              email={currentUser.email}
               links={[
                 {
                   icon: 'user',
@@ -107,18 +77,12 @@ export function TeacherLayout() {
         <div className={styles['render-content']}>
           <Outlet />
         </div>
-        {user.teacher_account == StatusTeacherAccount.approved && (
+        {teacherAccount == StatusTeacherAccount.approved && (
           <div className={styles['chat-float-container']}>
             {openChat ? (
               <div className={styles['chat-container']}>
                 <Chat onCancel={() => setOpenChat(false)}>
-                  <Icon
-                    icon="plus-circle"
-                    size={20}
-                    onClick={() => {
-                      handleNewChat();
-                    }}
-                  />
+                  <Icon icon="plus-circle" size={20} onClick={handleNewChat} />
                 </Chat>
               </div>
             ) : (
@@ -133,6 +97,21 @@ export function TeacherLayout() {
           </div>
         )}
       </div>
+      {feedbackAction.text && (
+        <Snackbar
+          position={SnackbarPosition.centerBottom}
+          open={true}
+          title={feedbackAction.type === 'success' ? 'Actualizado' : 'Errores'}
+          text={feedbackAction.text}
+          kind={
+            feedbackAction.type === 'success'
+              ? SnackbarType.success
+              : SnackbarType.error
+          }
+          duration={2000}
+          onClose={clearMessageToast}
+        />
+      )}
     </div>
   );
 }

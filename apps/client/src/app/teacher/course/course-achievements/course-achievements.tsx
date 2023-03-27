@@ -2,6 +2,7 @@ import styles from './course-achievements.module.scss';
 import {
   AchievementModel,
   AchievementParams,
+  FormatResponse,
   TypeAchievement,
 } from '@ltpx-frontend-apps/api';
 import {
@@ -15,11 +16,10 @@ import {
 import { useCourse } from '@ltpx-frontend-apps/store';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { ResponseRequest } from '../../teacher-edit-course/teacher-edit-course';
 
 /* eslint-disable-next-line */
 export interface CourseAchievementsProps {
-  onSubmit?: (data: ResponseRequest) => void;
+  onSubmit?: (data: FormatResponse) => void;
 }
 
 export function CourseAchievements(props: CourseAchievementsProps) {

@@ -11,6 +11,7 @@ export const useUser = () => {
     register,
     registerTeacher,
     getCurrentUser,
+    changePassword,
   } = useAppStore();
 
   return {
@@ -23,6 +24,7 @@ export const useUser = () => {
     registerTeacher,
     getCurrentUser,
     isAuthenticated,
-    logout
+    logout,
+    changePassword,
   }
 }

@@ -1,3 +1,4 @@
+import styles from './teacher-apply.module.scss';
 import {
   ApplicationView,
   ApplyTeacherForm,
@@ -12,15 +13,11 @@ import {
 } from '@ltpx-frontend-apps/api';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import styles from './teacher-apply.module.scss';
 import { Dialog } from 'evergreen-ui';
-import { useTeacher } from '@ltpx-frontend-apps/store';
+import { useTeacher, useUtil } from '@ltpx-frontend-apps/store';
 import { useTranslation } from 'react-i18next';
 
-/* eslint-disable-next-line */
-export interface TeacherApplyProps {}
-
-export function TeacherApply(props: TeacherApplyProps) {
+export function TeacherApply() {
   const [saving, setSaving] = useState(false);
   const [formData, setFormData] = useState<ApplyTeachApiParams>();
   const [openConfirmationModal, setOpenConfirmationModal] = useState(false);
@@ -28,6 +25,7 @@ export function TeacherApply(props: TeacherApplyProps) {
   const { applyTeach, teacher_account, getApplicationTeach } = useTeacher();
   const navigate = useNavigate();
   const { t } = useTranslation();
+  const { setMessageToast } = useUtil();
 
   useEffect(() => {
     if (!application) {
@@ -40,20 +38,19 @@ export function TeacherApply(props: TeacherApplyProps) {
         }
       });
     }
-    // eslint-disable-next-line @typescript-eslint/no-empty-function
-    return () => {};
   }, []);
 
   const handleSubmit = async () => {
     if (formData) {
       setSaving(true);
-      const { accepted, data } = await applyTeach(formData);
+      const { success, error } = await applyTeach(formData);
       setSaving(false);
       setOpenConfirmationModal(false);
-      if (accepted) {
+      if (success) {
+        setMessageToast('success', 'Tu solicitud ha sido enviada a revision');
         navigate('/teacher/dashboard');
       } else {
-        console.log('error: ', data);
+        setMessageToast('error', error);
       }
     }
   };

@@ -12,6 +12,8 @@ import {
   loginAdmin,
   FormatResponse,
   formatErrors,
+  ChangePasswordParams,
+  changePassword,
 } from '@ltpx-frontend-apps/api';
 
 export type UserSlice = {
@@ -23,6 +25,7 @@ export type UserSlice = {
   loginAdmin: (credentials: ICredentials) => Promise<FormatResponse>;
   register: (params: IRegisterUser) => Promise<FormatResponse>;
   logout: () => void;
+  changePassword: (params: ChangePasswordParams) => Promise<FormatResponse>;
 };
 
 // const views = {
@@ -124,4 +127,12 @@ export const createUserSlice: StateCreator<StoreState, [], [], UserSlice> = (
       console.log(error);
     }
   },
+  changePassword: async (params) => {
+    try {
+      await changePassword(params);
+      return { success: true };
+    } catch (error) {
+      return { success: false, error: formatErrors(error) };
+    }
+  }
 });

@@ -73,7 +73,6 @@
     display: flex;
     gap: $size-lg-1;
     flex-wrap: wrap;
-    justify-content: center;
     width: 80%;
 
     .course {
@@ -176,6 +175,10 @@
     width: 100%;
     box-sizing: border-box;
   }
+  .image-cover { 
+    width: 100%;
+    height: 100%;
+  }
   .main-cover {
     width: 100%;
     height: auto;
@@ -210,6 +213,8 @@
     }
     .popular-courses {
       width: 100%;
+      justify-content: center;
+
       .course {
         height: 19rem;
         width: 20rem;
@@ -313,6 +318,6 @@
     }
   }
   .popular-courses {
-    width: 100% !important;
+    width: 95% !important;
   }
 }

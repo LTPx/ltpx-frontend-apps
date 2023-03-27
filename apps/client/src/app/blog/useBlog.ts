@@ -6,76 +6,76 @@ export const useBlog = () => {
   const linksOpenMind = [
     {
       text: '¿Qué es OpenMind, que es el protocolo LTP y porque debo usarlos?',
-      url: '/blog/what-is-openmind',
+      url: 'what-is-openmind',
     },
     { text: '¿Cómo funciona OpenMind?',
-      url: '/blog/how-openmind-works'
+      url: 'how-openmind-works'
     },
     {
       text: '¿Cual es el beneficio de aprender de manera más eficiente en Openmind?',
-      url: '/blog/learning-in-openmind',
+      url: 'learning-in-openmind',
     },
     {
       text: '¿Cómo funciona el sistema de cobro por logros de OpenMind?',
-      url: '/blog/achievement-payment-system',
+      url: 'achievement-payment-system',
     },
     {
       text: '¿Qué es y Cómo generar la Potenciación de Larga Duración (Long-Term Potentiation)?',
-      url: '/blog/long-term-potentiation',
+      url: 'long-term-potentiation',
     },
   ];
 
   const linksTeacher = [
     {
       text: 'Manual de ética para dar clases en la plataforma OpenMind',
-      url: '/blog/ethics-manual-for-teaching',
+      url: 'ethics-manual-for-teaching',
     },
     {
       text: 'Pautas para el perfil de docente',
-      url: '/blog/guidelines-teacher-profile',
+      url: 'guidelines-teacher-profile',
     },
     {
       text: 'Pautas para la imagen de perfil del docente',
-      url: '/blog/teacher-profile-guidelines',
+      url: 'teacher-profile-guidelines',
     },
     {
       text: 'Restricción y remoción de maestros',
-      url: '/blog/removal-of-teachers',
+      url: 'removal-of-teachers',
     },
     {
       text: 'Política de redes sociales para maestros',
-      url: '/blog/social-media-policy',
+      url: 'social-media-policy',
     },
     {
       text: ' ¿Como evaluar a mis alumnos para recibir pagos en OpenMind?',
-      url: '/blog/evaluate-to-receive-payments',
+      url: 'evaluate-to-receive-payments',
     },
     {
       text: 'Seguridad y privacidad del alumno',
-      url: '/blog/student-safety-privacy',
+      url: 'student-safety-privacy',
     },
     {
       text: 'Como crear una gran clase en OpenMind',
-      url: '/blog/how-create-a-class',
+      url: 'how-create-a-class',
     },
     {
       text: '¿Como asegurarse de entregar una gran experiencia en vivo en OpenMind?',
-      url: '/blog/great-experience-openMind',
+      url: 'great-experience-openMind',
     },
     {
       text: 'Clases 1 a 1: Generando impacto y oportunidades',
-      url: '/blog/generating-impact-opportunities',
+      url: 'generating-impact-opportunities',
     },
     {
       text: '¿Qué hace que una gran clase continua?',
-      url: '/blog/what-makes-class-going-on',
+      url: 'what-makes-class-going-on',
     }
   ];
 
   const linksStudent = [
     {
       text: 'Guía de privacidad del alumno',
-      url: '/blog/student-privacy-guide',
+      url: 'student-privacy-guide',
     },
   ];
 

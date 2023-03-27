@@ -41,7 +41,7 @@ export function Account(props: AccountProps) {
           }}
         ></UserAccountForm>
       )}
-      {selectedTab === 1 && <ChangePasswordForm url="/student/account" />}
+      {selectedTab === 1 && <ChangePasswordForm url="/student/account" onSubmit={()=>{}}/>}
     </div>
   );
 }

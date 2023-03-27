@@ -64,42 +64,42 @@ export function BuyCourseCard(props: BuyCourseCardProps) {
           <div className={styles['details']}>
             <div className={styles['item']}>
               <div className={styles['item-text']}>
-                <Icon icon={'trophy'} size={15} color="#888888"></Icon>
+                <Icon icon={'trophy'} size={15} color="#fbbf24"></Icon>
                 <h4>{t('coursesDetails.buyCourseCard.details.achievement')}</h4>
               </div>
               <h4>{totalAchievements}</h4>
             </div>
             <div className={styles['item']}>
               <div className={styles['item-text']}>
-                <Icon icon={'copy'} size={15} color="#888888"></Icon>
+                <Icon icon={'copy'} size={15} color="#10b981"></Icon>
                 <h4>{t('coursesDetails.buyCourseCard.details.contents')}</h4>
               </div>
               <h4>{totalContents}</h4>
             </div>
             <div className={styles['item']}>
               <div className={styles['item-text']}>
-                <Icon icon={'person'} size={15} color="#888888"></Icon>
+                <Icon icon={'person'} size={15} color="#10b981"></Icon>
                 <h4>{t('coursesDetails.buyCourseCard.details.enrolled')}</h4>
               </div>
               <h4>{totalEnrolled}</h4>
             </div>
             <div className={styles['item']}>
               <div className={styles['item-text']}>
-                <Icon icon={'text-size'} size={15} color="#888888"></Icon>
+                <Icon icon={'text-size'} size={15} color="#10b981"></Icon>
                 <h4>{t('coursesDetails.buyCourseCard.details.language')}</h4>
               </div>
               <h4>{language}</h4>
             </div>
             <div className={styles['item']}>
               <div className={styles['item-text']}>
-                <Icon icon={'level'} size={15} color="#888888"></Icon>
+                <Icon icon={'level'} size={15} color="#10b981"></Icon>
                 <h4>{t('coursesDetails.buyCourseCard.details.skill')}</h4>
               </div>
               <h4>{skillLevel}</h4>
             </div>
             <div className={styles['item']}>
               <div className={styles['item-text']}>
-                <Icon icon={'certificate'} size={15} color="#888888"></Icon>
+                <Icon icon={'certificate'} size={15} color="#10b981"></Icon>
                 <h4>{t('coursesDetails.buyCourseCard.details.certificate')}</h4>
               </div>
               <h4>{certificate ? 'Si' : 'No'}</h4>

@@ -10,7 +10,7 @@ import InputTextStatus, {
 
 /* eslint-disable-next-line */
 export interface ChangePasswordFormProps {
-  onSubmit?: (data: INewPassword) => void;
+  onSubmit: (data: INewPassword) => void;
   url?: string;
 }
 
@@ -37,7 +37,7 @@ export function ChangePasswordForm(props: ChangePasswordFormProps) {
       ),
     }),
     onSubmit: (data) => {
-      console.log(data);
+      onSubmit(data);
     },
   });
 

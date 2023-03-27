@@ -9,6 +9,7 @@ import { createTeacherSlice, TeacherSlice } from './slices/teacher-slice';
 import { createUserSlice, UserSlice } from './slices/user-slice';
 import { createCourseStudentsSlice, CourseStudentsSlice } from './slices/course-students-slice';
 import { ChatSlice, createChatSlice } from './slices/chat-slice';
+import { AppSlice, createAppSlice } from './slices/app-slice';
 
 export type StoreState = TeacherSlice &
   UserSlice &
@@ -18,7 +19,8 @@ export type StoreState = TeacherSlice &
   CartSlice &
   StudentSlice &
   CourseStudentsSlice &
-  ChatSlice;
+  ChatSlice &
+  AppSlice;
 
 export const useAppStore = create<StoreState>()(
   devtools((...a) => {
@@ -32,6 +34,7 @@ export const useAppStore = create<StoreState>()(
       ...createStudentSlice(...a),
       ...createCourseStudentsSlice(...a),
       ...createChatSlice(...a),
+      ...createAppSlice(...a),
     };
   })
 );

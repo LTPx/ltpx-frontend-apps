@@ -64,10 +64,10 @@ export function CourseClasses(props: CourseClassesProps) {
         onClose={() => {
           onClose && onClose();
         }}
+        title={t('courseClasses.title') || ''}
       >
         <div className={styles['content']}>
           <div className="d">
-            <h2>{t('courseClasses.title')}</h2>
             <GroupSelectOptionCard
               className={styles['options']}
               options={classesOptions}

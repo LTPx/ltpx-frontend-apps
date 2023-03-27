@@ -37,14 +37,6 @@ export function StudentLayout() {
         size: 20,
       },
     },
-    // {
-    //   title: t('dashboards.student.courses'),
-    //   url: 'courses',
-    //   icon: {
-    //     icon: 'university',
-    //     size: 20,
-    //   },
-    // },
     {
       title: t('dashboards.student.classes'),
       url: '/student/classes',
@@ -53,22 +45,6 @@ export function StudentLayout() {
         size: 20,
       },
     },
-    // {
-    //   title: t('dashboards.student.payments'),
-    //   url: 'payments',
-    //   icon: {
-    //     icon: 'wallet',
-    //     size: 20,
-    //   }
-    // },
-    // {
-    //   title: t('dashboards.student.settings'),
-    //   url: 'settings',
-    //   icon: {
-    //     icon: 'cog',
-    //     size: 20,
-    //   }
-    // },
   ];
 
   const logoutSession = async () => {

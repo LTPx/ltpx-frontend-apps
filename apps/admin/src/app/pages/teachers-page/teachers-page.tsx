@@ -8,7 +8,7 @@ import styles from './teachers-page.module.scss';
 /* eslint-disable-next-line */
 export function TeachersPage() {
   const { _pendingApplications, _approvedApplications, applications } = useAdmin();
-  const { translateStatusTeacherApplication } = useUtil();
+  const { translateStatusApply } = useUtil();
 
   const tabs = [
     { text: 'Pendientes' },
@@ -60,7 +60,7 @@ export function TeachersPage() {
                 {application.name}
               </td>
               <td>{application.country}</td>
-              <td>{translateStatusTeacherApplication(application.status)}</td>
+              <td>{translateStatusApply(application.status)}</td>
               <td>{application.created_at}</td>
               <td>
                 <NavLink to={`/admin/application/${application.id}`}>

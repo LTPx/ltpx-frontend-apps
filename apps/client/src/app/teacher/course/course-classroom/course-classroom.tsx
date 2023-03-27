@@ -1,6 +1,7 @@
 import {
   Classroom,
   CLASSROOMS,
+  FormatResponse,
   SessionParams,
   TeacherClassType,
 } from '@ltpx-frontend-apps/api';
@@ -14,12 +15,11 @@ import {
 import { useCourse, useUser } from '@ltpx-frontend-apps/store';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { ResponseRequest } from '../../teacher-edit-course/teacher-edit-course';
 import styles from './course-classroom.module.scss';
 
 /* eslint-disable-next-line */
 export interface CourseClassroomProps {
-  onSubmit?: (data: ResponseRequest) => void;
+  onSubmit?: (data: FormatResponse) => void;
 }
 
 export function CourseClassroom(props: CourseClassroomProps) {

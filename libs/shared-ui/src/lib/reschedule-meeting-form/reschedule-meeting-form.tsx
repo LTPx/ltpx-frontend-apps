@@ -37,10 +37,10 @@ export function RescheduleMeetingForm(props: RescheduleMeetingFormProps) {
       onClose={() => {
         onClose && onClose();
       }}
+      title={'Reagendar Clase'}
     >
       <div className={styles['content']}>
         <form className={styles['form']}>
-          <h1>Reagendar Clase</h1>
           <div className={styles['head']}>
             <h4>{titleClass}</h4>
             <div className={styles['class-information']}>

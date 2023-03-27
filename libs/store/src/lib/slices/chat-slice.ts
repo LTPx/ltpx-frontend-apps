@@ -61,7 +61,7 @@ export const createChatSlice: StateCreator<StoreState, [], [], ChatSlice> = (
   _getRoom: async (roomId) => {
     try {
       const room = await getRoom(roomId);
-      set({ room });
+      set({ room, messages: room.messages });
       return { success: true, data: room };
     } catch (error) {
       console.log(error);
@@ -70,9 +70,15 @@ export const createChatSlice: StateCreator<StoreState, [], [], ChatSlice> = (
   },
   _newChatRoom: async (userId) => {
     try {
-      const room = await createNewRoom(userId);
-      const rooms = [...get().rooms, ...[room]];
-      set({ rooms });
+      const room = await createNewRoom(userId); //NOTE: could create or get a room
+      const roomsStore = get().rooms;
+      const existRoom = roomsStore.find((r) => r.id === room.id);
+      if (!existRoom) {
+        const rooms = [...roomsStore, ...[room]];
+        set({ rooms });
+      } else {
+        set({ room: room, messages: room.messages });
+      }
       return { success: true, data: room };
     } catch (error) {
       console.log(error);

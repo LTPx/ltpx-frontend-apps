@@ -129,11 +129,11 @@ export function ClassroomForm(props: ClassroomFormProps) {
         </div>
         <div className={styles['field-form']}>
           <label>{t('classroomForm.dateClasses')}</label>
-          <SelectDates
+          {/* <SelectDates
             onChange={(dates) => {
               formik.setFieldValue('dates', dates);
             }}
-          />
+          /> */}
         </div>
       </section>
       <footer className={styles['buttons']}>

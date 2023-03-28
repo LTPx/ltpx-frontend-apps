@@ -1,12 +1,16 @@
 import { useState } from 'react';
+import { DateItem } from './select-dates';
 
-export const useDates = (meeting: any) => {
+export const useDates = (meeting: DateItem[]) => {
   const [dates, setDates] = useState(meeting);
   const [selectedIndex, setSelectedIndex] = useState<number>();
   const [currentDate, setCurrentDate] = useState<any>();
-  
-  function addDates(date: any) {
-    return dates.concat([date]);
+
+  const currentDates = new Date();
+  const today = currentDates.toISOString().split('T')[0] + 'T06:30';
+
+  function addDates() {
+    setDates([...dates, { date: today}]);
   }
 
   function updateDates(date: any) {
@@ -14,12 +18,13 @@ export const useDates = (meeting: any) => {
   }
 
   function processDates(date: any) {
-    const result = selectedIndex !== undefined ? updateDates(date) : addDates(date);
-    setDates(result);
-    setCurrentDate(undefined);
+    // const result = selectedIndex !== undefined ? updateDates(date) : addDates(date);
+    // setDates(result);
+    // setCurrentDate(undefined);
   }
+
   function removeDates(index: number) {
-    const result = dates.map((date: { _destroy: boolean; }, i: number) => {
+    const result = dates.map((date, i) => {
       date._destroy = i === index ? true : !!date._destroy;
       return date;
     });

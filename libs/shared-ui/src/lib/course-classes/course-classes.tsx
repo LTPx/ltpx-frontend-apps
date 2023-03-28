@@ -1,13 +1,10 @@
 import {
-  Classroom,
-  CLASSROOM_CUSTOMIZE,
   CLASSROOM_NONE,
   CourseSession,
   SessionParams,
   TeacherClassType,
 } from '@ltpx-frontend-apps/api';
 // eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
-import { MeetingModel } from 'libs/api/src/lib/interfaces/meeting-interface';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import Button, { ColorsButton } from '../button/button';
@@ -115,25 +112,6 @@ export function CourseClasses(props: CourseClassesProps) {
         }}
         session={session}
       />
-      {/* <Drawer open={openClassroom}>
-        <div className={styles['content']}>
-          <h2>{t('courseClasses.subtitle')}</h2>
-          <ClassroomForm
-            className={styles['classroom']}
-            onSubmit={(data) => {
-              onSubmit(data);
-            }}
-          >
-            <Button
-              color={ColorsButton.white}
-              onClick={() => {
-                setOpenClassroom(false);
-              }}
-              title={t('buttons.cancel')}
-            />
-          </ClassroomForm>
-        </div>
-      </Drawer> */}
     </div>
   );
 }

@@ -11,7 +11,7 @@ export interface SelectDatesProps {
   name?: string;
   min?: string;
   onChange?: (dates: string[]) => void;
-  meetingDates?: string[];
+  meetingDates?: any[];
 }
 
 const currentDate = new Date();
@@ -19,7 +19,6 @@ const currentDate = new Date();
 export function SelectDates(props: SelectDatesProps) {
   const { name, min, onChange, meetingDates } = props;
   const today = currentDate.toISOString().split('T')[0] + 'T06:30';
-  const [dates, setDates] = useState(meetingDates || [today]);
 
   const {
     addDates,
@@ -28,19 +27,21 @@ export function SelectDates(props: SelectDatesProps) {
     setSelectedIndex,
     setCurrentDate,
     processDates,
-    removeDates
-  } = useDates(dates, setDates);
+    removeDates,
+    setDates,
+    dates
+  } = useDates(meetingDates || today);
 
-  const addNewDate = () => {
-    setDates([...dates, today]);
-    onChange && onChange(dates);
-  };
-  const removeForm = (index: number) => {
-    const copyDates = [...dates];
-    copyDates.splice(index, 1);
-    setDates(copyDates);
-    onChange && onChange(copyDates);
-  };
+  // const addNewDate = () => {
+  //   setDates([...dates, today]);
+  //   onChange && onChange(dates);
+  // };
+  // const removeForm = (index: number) => {
+  //   const copyDates = [...dates];
+  //   copyDates.splice(index, 1);
+  //   setDates(copyDates);
+  //   onChange && onChange(copyDates);
+  // };
 
   // function removeDates(index: number) {
   //   const result = dates.map((date, i) => {
@@ -50,16 +51,16 @@ export function SelectDates(props: SelectDatesProps) {
   //   setDates(result);
   // }
 
-  const handleDateChange = (data: any, index: number) => {
-    const copyDates = [...dates];
-    copyDates[index] = data.currentTarget.value;
-    setDates(copyDates);
-    onChange && onChange(copyDates);
-  };
+  // const handleDateChange = (data: any, index: number) => {
+  //   const copyDates = [...dates];
+  //   copyDates[index] = data.currentTarget.value;
+  //   setDates(copyDates);
+  //   onChange && onChange(copyDates);
+  // };
 
   return (
     <div className={styles['container']}>
-      {dates &&
+      {/* {dates &&
         dates.map((date, index) => (
           <div className={styles['date-item']} key={index}>
             <Input
@@ -77,7 +78,7 @@ export function SelectDates(props: SelectDatesProps) {
       <h4 className={styles['add-date']} onClick={addNewDate}>
         {' '}
         + Nueva Fecha
-      </h4>
+      </h4> */}
     </div>
   );
 }

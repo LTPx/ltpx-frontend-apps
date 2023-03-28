@@ -12,10 +12,7 @@ import {
   TeacherClassType,
 } from '@ltpx-frontend-apps/api';
 import { useUser } from '@ltpx-frontend-apps/store';
-// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
-import { MeetingModel } from 'libs/api/src/lib/interfaces/meeting-interface';
 
-/* eslint-disable-next-line */
 export interface SessionFormProps {
   open?: boolean;
   onClose?: () => void;
@@ -28,6 +25,25 @@ export function SessionForm(props: SessionFormProps) {
   const { user } = useUser();
 
   const { t } = useTranslation();
+  const currentDate = new Date();
+  const today = currentDate.toISOString().split('T')[0] + 'T06:30';
+
+  const getFormatDates = () => {
+    if (session && session.meetings) {
+      return session.meetings.map((meeting)=>{
+        return {
+          id: meeting.id,
+          date: meeting.start_date
+        };
+      });
+    } else {
+      return [{date: today}];
+    }
+  }
+
+
+  const dates = getFormatDates();
+
   const formik = useFormik({
     initialValues: {
       max_participants: '',
@@ -112,9 +128,7 @@ export function SessionForm(props: SessionFormProps) {
               onChange={(dates) => {
                 formik.setFieldValue('dates', dates);
               }}
-              meetingDates={session?.meetings.map((meeting)=>{
-                return meeting.start_date;
-              })}
+              dateItems={dates}
             />
           </div>
         </section>

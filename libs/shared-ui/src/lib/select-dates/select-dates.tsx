@@ -1,25 +1,26 @@
 import moment from 'moment';
-import { useState } from 'react';
-import { useMoment } from '../../hooks/useMoment';
 import Icon from '../icon/icon';
 import Input from '../input/input';
 import styles from './select-dates.module.scss';
 import { useDates } from './useDates';
+
+export interface DateItem {
+  id?: number;
+  date: string;
+  _destroy?: boolean;
+}
 
 /* eslint-disable-next-line */
 export interface SelectDatesProps {
   name?: string;
   min?: string;
   onChange?: (dates: string[]) => void;
-  meetingDates?: any[];
+  dateItems: DateItem[];
 }
 
-const currentDate = new Date();
 
 export function SelectDates(props: SelectDatesProps) {
-  const { name, min, onChange, meetingDates } = props;
-  const today = currentDate.toISOString().split('T')[0] + 'T06:30';
-
+  const { name, min, onChange, dateItems } = props;
   const {
     addDates,
     updateDates,
@@ -28,9 +29,8 @@ export function SelectDates(props: SelectDatesProps) {
     setCurrentDate,
     processDates,
     removeDates,
-    setDates,
     dates
-  } = useDates(meetingDates || today);
+  } = useDates(dateItems);
 
   // const addNewDate = () => {
   //   setDates([...dates, today]);
@@ -60,25 +60,24 @@ export function SelectDates(props: SelectDatesProps) {
 
   return (
     <div className={styles['container']}>
-      {/* {dates &&
-        dates.map((date, index) => (
-          <div className={styles['date-item']} key={index}>
+      {dates.map((item, index) => (
+          <div className={`${styles['date-item']} ${item._destroy ? styles['hide'] : ''}`} key={index}>
             <Input
               type="datetime-local"
               name={name}
-              value={moment(date).format('YYYY-MM-DDTHH:mm')}
-              min={dates[index - 1] || today}
+              value={moment(item.date).format('YYYY-MM-DDTHH:mm')}
+              // min={dates[index - 1] || today}
               onChange={(e: any) => {
-                handleDateChange(e, index);
+                // handleDateChange(e, index);
               }}
             />
             <Icon icon="close" size={18} onClick={() => removeDates(index)} />
           </div>
         ))}
-      <h4 className={styles['add-date']} onClick={addNewDate}>
+      <h4 className={styles['add-date']} onClick={addDates}>
         {' '}
         + Nueva Fecha
-      </h4> */}
+      </h4>
     </div>
   );
 }

@@ -19,6 +19,7 @@ import {
   ColorsTag,
   useMoment,
   AchievementBadge,
+  SectionInformation,
 } from '@ltpx-frontend-apps/shared-ui';
 import { Dialog } from 'evergreen-ui';
 import { useSite, useUser } from '@ltpx-frontend-apps/store';
@@ -97,7 +98,7 @@ export function CourseDetails() {
   ];
 
   if (course.id === undefined) {
-    return <h1>loading..</h1>
+    return <h1>loading..</h1>;
   }
 
   return (
@@ -111,16 +112,12 @@ export function CourseDetails() {
             />
             <div className={styles['content-responsive']}>
               <div className={styles['title-content-responsive']}>
-                <h3 className={styles['title-responsive']}>
-                  {course.title}
-                </h3>
+                <h3 className={styles['title-responsive']}>{course.title}</h3>
                 <div className={styles['price-content']}>
                   <h2 className={styles['price']}>$ {course.price}</h2>
                 </div>
               </div>
-              <h4 className={styles['teacher']}>
-                Profesor: {teacher.name}
-              </h4>
+              <h4 className={styles['teacher']}>Profesor: {teacher.name}</h4>
               <div className={styles['description-responsive']}>
                 <Rating
                   className={styles['rating-responsive']}
@@ -170,6 +167,13 @@ export function CourseDetails() {
                     onClick={() => setOpenModal(true)}
                     title={'INSCRIBIRME AHORA'}
                     full={true}
+                  />
+                </div>
+                <div>
+                  <Button
+                    onClick={() => setOpenModal(true)}
+                    icon="chat"
+                    title="Contactar Profesor"
                   />
                 </div>
               </div>
@@ -287,6 +291,14 @@ export function CourseDetails() {
               onClickEnroll={enrolled}
               certificate={true}
             />
+            <div className={styles['contact-teacher']}>
+              <Button
+                onClick={() => setOpenModal(true)}
+                icon="chat"
+                full={true}
+                title="Contactar Profesor"
+              />
+            </div>
           </div>
         </div>
         <div className={styles['price-responsive']}>
@@ -321,10 +333,22 @@ export function CourseDetails() {
           </div>
         </div>
       </section>
-      <section className={styles['schedule-another-time']}>
+      <SectionInformation
+        className={styles['section-content']}
+        title={'¿Estos horarios no se ajustan a ti?'}
+        imgUrl={'../../../../assets/images/bg_shape.svg'}
+      >
+        <div className={styles['btn']}>
+          <Button
+            title={'Solicitar otro horario'}
+            onClick={() => setOpenModal(true)}
+          />
+        </div>
+      </SectionInformation>
+      {/* <section className={styles['schedule-another-time']}>
         <h2>¿Estos horarios no se ajustan a ti?</h2>
         <Button title='Solicitar otro horario'/>
-      </section>
+      </section> */}
       <Dialog
         isShown={openModal}
         hasFooter={false}

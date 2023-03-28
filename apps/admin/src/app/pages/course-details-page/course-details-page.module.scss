@@ -16,6 +16,14 @@
     }
   }
 
+  .classes-container {
+    .classes-preview {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+  
+  }
   .cover {
     height: 20rem;
     display: flex;

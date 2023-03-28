@@ -4,7 +4,7 @@ import styles from './section-information.module.scss';
 /* eslint-disable-next-line */
 export interface SectionInformationProps {
   title: string;
-  description: string;
+  description?: string;
   className?: string;
   children?: ReactElement;
   imgUrl?: string;
@@ -16,10 +16,12 @@ export function SectionInformation(props: SectionInformationProps) {
     <div className={`${styles['container']} ${className}`}>
       <div className={styles['content']}>
         <h1 className={styles['title']}>{title}</h1>
-        <h3 className={styles['description']}>{description}</h3>
+        {description && (
+          <h3 className={styles['description']}>{description}</h3>
+        )}
         {children}
       </div>
-      <img src={imgUrl}/>
+      <img src={imgUrl} />
     </div>
   );
 }

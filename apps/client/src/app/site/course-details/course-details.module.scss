@@ -1,6 +1,5 @@
 @import '../../../styles.scss';
 
-
 .container {
   display: flex;
   flex: 1;
@@ -16,7 +15,12 @@
     font-weight: 500;
   }
 }
-
+.section-content {
+  background-color: $white-color;
+  .btn {
+    padding-top: 1.5rem;
+  }
+}
 .schedules-section {
   background-color: $white-color-100;
   width: 100%;
@@ -37,7 +41,6 @@
   gap: 1rem;
   padding: 4rem 0;
 }
-
 
 .wrap-responsive {
   .image-responsive {
@@ -65,7 +68,7 @@
   background-color: $white-color;
   align-items: center;
   padding: 1rem 0;
-
+  z-index: 1;
   h3 {
     margin-left: 1rem;
     min-width: 5rem;
@@ -142,8 +145,14 @@
 
 .buy-course-content {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
   position: relative;
+  gap: 1rem;
+  .contact-teacher {
+    display: flex;
+    width: 80%;
+  }
 }
 .course-details {
   display: grid;
@@ -207,7 +216,7 @@
     padding: 0;
   }
 
-  .schedules-section .content{
+  .schedules-section .content {
     width: 100%;
   }
 
@@ -327,13 +336,20 @@
 //tablet-responsive-horizontal
 @media screen and (min-width: 860px) and (max-width: 1224px) {
   .container {
-    width: 90%;
+    // width: 90%;
+  }
+  .contact-teacher {
+    display: flex;
+    width: 90% !important;
   }
 }
 //tablet-responsive-vertical
 @media screen and (min-width: 560px) and (max-width: 850px) {
   .description-title {
     display: none;
+  }
+  .course-section {
+    width: 85% !important;
   }
   .price-content {
     display: flex;
@@ -363,6 +379,7 @@
   .price-vertical-responsive {
     display: flex;
     padding-top: 1rem;
+    gap: 1rem;
     .price-content {
       display: flex;
       justify-content: center;

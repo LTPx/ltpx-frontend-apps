@@ -8,7 +8,13 @@
     'header header header'
     'nav content content';
   height: 100vh;
-
+  
+  .chat-container {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+  }
+  
   .header {
     grid-area: header;
     padding: 1.5rem 3rem;

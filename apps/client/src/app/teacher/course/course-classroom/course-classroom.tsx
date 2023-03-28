@@ -64,8 +64,9 @@ export function CourseClassroom(props: CourseClassroomProps) {
           console.log('classroom: ', classroom);
           handleClassroom(classroom);
         }}
+        session={session}
       />
-      {session?.meetings && session?.meetings.length > 0 && (
+      {session?.meetings.length > 0 && (
         <div className={styles['classes-container']}>
           <div className={styles['classes-preview']}>
             {session.meetings.map((meeting, index) => (
@@ -80,6 +81,22 @@ export function CourseClassroom(props: CourseClassroomProps) {
               />
             ))}
           </div>
+          <div
+            className={styles['edit-btn']}
+            onClick={() => {
+              setOpenModal(true);
+            }}
+          >
+            <h4>Editar clases</h4>
+          </div>
+        </div>
+      )}
+      {session?.meetings.length === 0 && (
+        <div>
+          <h4>
+            Este curso no requiere de clases para que los estudiantes aprueben
+            este curso
+          </h4>
           <div
             className={styles['edit-btn']}
             onClick={() => {

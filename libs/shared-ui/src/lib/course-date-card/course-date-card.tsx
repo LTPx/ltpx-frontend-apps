@@ -1,4 +1,3 @@
-import Button, { ColorsButton } from '../button/button';
 import styles from './course-date-card.module.scss';
 
 /* eslint-disable-next-line */

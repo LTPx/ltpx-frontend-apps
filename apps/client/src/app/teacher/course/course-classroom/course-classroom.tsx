@@ -1,23 +1,17 @@
 import {
-  Classroom,
-  CLASSROOMS,
   FormatResponse,
   SessionParams,
-  TeacherClassType,
 } from '@ltpx-frontend-apps/api';
 import {
-  ClassroomView,
   CourseClasses,
   CourseDateCard,
-  InformationCard,
   SetupCard,
 } from '@ltpx-frontend-apps/shared-ui';
-import { useCourse, useUser } from '@ltpx-frontend-apps/store';
+import { useCourse } from '@ltpx-frontend-apps/store';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import styles from './course-classroom.module.scss';
 
-/* eslint-disable-next-line */
 export interface CourseClassroomProps {
   onSubmit?: (data: FormatResponse) => void;
 }
@@ -25,18 +19,29 @@ export interface CourseClassroomProps {
 export function CourseClassroom(props: CourseClassroomProps) {
   const { onSubmit } = props;
   const [openModal, setOpenModal] = useState(false);
-  const { course, _addCourseSession } = useCourse();
+  const { course, _addCourseSession, _editCourseSession } = useCourse();
   const { session } = course;
   const { t } = useTranslation();
 
   const handleClassroom = async (params: SessionParams) => {
-    const { success, data, error } = await _addCourseSession(params);
-    onSubmit &&
+    if (session && session.id) {
+      const paramsEdit = { ...params, ...{public: true, id: session.id} }
+      const { success, data, error } = await _editCourseSession(paramsEdit);
+      onSubmit &&
       onSubmit({
         success,
         data,
         error,
       });
+    } else {
+      const { success, data, error } = await _addCourseSession(params);
+      onSubmit &&
+      onSubmit({
+        success,
+        data,
+        error,
+      });
+    }
   };
 
   return (
@@ -64,8 +69,9 @@ export function CourseClassroom(props: CourseClassroomProps) {
           console.log('classroom: ', classroom);
           handleClassroom(classroom);
         }}
+        session={session}
       />
-      {session?.meetings && session?.meetings.length > 0 && (
+      {session?.meetings.length > 0 && (
         <div className={styles['classes-container']}>
           <div className={styles['classes-preview']}>
             {session.meetings.map((meeting, index) => (
@@ -80,6 +86,22 @@ export function CourseClassroom(props: CourseClassroomProps) {
               />
             ))}
           </div>
+          <div
+            className={styles['edit-btn']}
+            onClick={() => {
+              setOpenModal(true);
+            }}
+          >
+            <h4>Editar clases</h4>
+          </div>
+        </div>
+      )}
+      {session?.meetings.length === 0 && (
+        <div>
+          <h4>
+            Este curso no requiere de clases para que los estudiantes aprueben
+            este curso
+          </h4>
           <div
             className={styles['edit-btn']}
             onClick={() => {

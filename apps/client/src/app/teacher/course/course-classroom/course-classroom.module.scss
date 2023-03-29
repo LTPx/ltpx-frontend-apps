@@ -75,12 +75,11 @@
     gap: 1rem;
     flex-wrap: wrap;
   }
-
-  .edit-btn {
-    text-align: end;
-    margin-top: $size-md-1;
-    cursor: pointer;
-    color: $green-color;
-  }
+}
+.edit-btn {
+  text-align: end;
+  margin-top: $size-md-1;
+  cursor: pointer;
+  color: $green-color;
 }
 

@@ -10,11 +10,13 @@ import { useTranslation } from 'react-i18next';
 import { Outlet, useNavigate } from 'react-router-dom';
 import styles from './app-layout.module.scss';
 import { Avatar } from 'evergreen-ui';
+import { useState } from 'react';
 
 /* eslint-disable-next-line */
 export interface AppLayoutProps {}
 
 export function AppLayout(props: AppLayoutProps) {
+  const [openChat, setOpenChat] = useState(false);
   const { t } = useTranslation();
   const { user, logout } = useUser();
   const navigate = useNavigate();
@@ -108,7 +110,20 @@ export function AppLayout(props: AppLayoutProps) {
         <Nav links={links} />
       </div>
       <div className={styles['content']}>
-        <Outlet />
+        <div className={styles['render-content']}>
+          <Outlet />
+        </div>
+        {/* <div className={styles['chat-float-container']}>
+            {openChat ? (
+              <div className={styles['chat-container']}>
+                <Chat onCancel={() => setOpenChat(false)}>
+                  <Icon icon="plus-circle" size={20} />
+                </Chat>
+              </div> 
+            ) : (
+              <ChatFloat onClick={() => setOpenChat(true)} />
+            )}
+          </div> */}
       </div>
     </div>
   );

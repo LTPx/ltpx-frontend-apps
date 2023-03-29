@@ -64,8 +64,6 @@ export * from './lib/apply-teacher-form/apply-teacher-form';
 export * from './lib/group-select-option-card/group-select-option-card';
 export * from './lib/select-option-card/select-option-card';
 export * from './lib/modal/modal';
-export * from './lib/classroom-form/classroom-form';
-export * from './lib/select-dates/select-dates';
 export * from './lib/menu/menu';
 export * from './lib/group-select-option/group-select-option';
 export * from './lib/review-course-form/review-course-form';

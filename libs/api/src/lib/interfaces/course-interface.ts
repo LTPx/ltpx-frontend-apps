@@ -183,7 +183,7 @@ export const CLASSROOM_CUSTOMIZE = {
 export const CLASSROOM_NONE = {
   value: TeacherClassType.none,
   title: 'NO SE REQUIERE CLASES',
-  text: 'Este curso no requiere de clases para que los estudiante apruebe este curso',
+  text: 'Este curso no requiere de clases para que los estudiantes aprueben este curso',
   icon: 'forbidden',
 };
 

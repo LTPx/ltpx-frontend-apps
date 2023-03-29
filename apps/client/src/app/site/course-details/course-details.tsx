@@ -235,8 +235,8 @@ export function CourseDetails() {
                   {selectedTab === 0 && (
                     <OverviewCourse
                       description={course.description}
-                      goals={course.learn_goals.split('\n')}
-                      requirements={course.requirements.split('\n')}
+                      goals={course.learn_goals ? course.learn_goals.split('\n') : []}
+                      requirements={course.requirements ? course.requirements.split('\n') : []}
                     />
                   )}
                   {selectedTab === 1 && (

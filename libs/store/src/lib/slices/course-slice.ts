@@ -22,6 +22,8 @@ import {
   formatErrors,
   editTask,
   removeTask,
+  editSession,
+  EditSessionParams,
 } from '@ltpx-frontend-apps/api';
 
 export type TResponse = {
@@ -50,6 +52,7 @@ export type CourseSlice = {
   ) => Promise<TResponse>;
   _updateCourse: (course: CourseApiParams) => Promise<TResponse>;
   _addCourseSession: (params: NewCourseSessionParams) => Promise<TResponse>;
+  _editCourseSession: (params: EditSessionParams) => Promise<TResponse>;
   _addTask: (courseId: number, task: NewTaskParams) => Promise<TResponse>;
   _updateTask: (courseId: number, task: NewTaskParams) => Promise<TResponse>;
   _removeTask: (id: number, taskId: number) => Promise<TResponse>;
@@ -237,6 +240,18 @@ export const createCourseSlice: StateCreator<
       return { success: false, error };
     }
   },
+  _editCourseSession: async (params) => {
+    try {
+      const course = get().course;
+      const paramsWithId = { ...params, ...{ course_id: course.id } };
+      const session = await editSession(paramsWithId);
+      const updatedCourse = { ...course, ...{ session } };
+      set({ course: updatedCourse });
+      return { success: true, data: session };
+    } catch (error) {
+      return { success: false, error };
+    }
+  },
   _addTask: async(courseId, params) => {
     try {
       const task = await createTask(courseId, params);
@@ -261,7 +276,7 @@ export const createCourseSlice: StateCreator<
       const paramsTaskId = { ...params, ...{ course_id: courseStore.id } };
       const task = await editTask(id, paramsTaskId);
       const tasks = courseStore.tasks?.map((taskStore) => {
-        return taskStore.id === task.id 
+        return taskStore.id === task.id
           ? task : taskStore;
       });
       const courseUpdated = { ...courseStore, ...{ tasks } };

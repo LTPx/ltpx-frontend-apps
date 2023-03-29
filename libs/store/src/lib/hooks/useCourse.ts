@@ -3,6 +3,7 @@ import { useAppStore } from '../store';
 export const useCourse = () => {
   const {
     _addCourseSession,
+    _editCourseSession,
     addNewContent,
     _addQuiz,
     _addAchievement,
@@ -25,6 +26,7 @@ export const useCourse = () => {
 
   return {
     _addCourseSession,
+    _editCourseSession,
     addNewContent,
     _addQuiz,
     _addAchievement,

@@ -2,7 +2,6 @@ import { _http } from '../../http';
 import {
   EditSessionParams,
   NewCourseSessionParams,
-  CourseSessionModel,
   CourseSession,
 } from '../../interfaces/session-interface';
 
@@ -23,7 +22,7 @@ export const createCourseSession = async (quiz: NewCourseSessionParams) => {
 
 export const editSession = async (session: EditSessionParams) => {
   const { id } = session;
-  return new Promise<CourseSessionModel>((resolve, reject) => {
+  return new Promise<CourseSession>((resolve, reject) => {
     http
       .put(`api/v1/teacher/course_sessions/${id}`, session)
       .then((response) => {

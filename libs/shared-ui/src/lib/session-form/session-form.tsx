@@ -8,13 +8,11 @@ import Input from '../input/input';
 import {
   CourseSession,
   SessionParams,
-  TeacherClassType,
 } from '@ltpx-frontend-apps/api';
 import { useUser } from '@ltpx-frontend-apps/store';
 import * as Yup from 'yup';
 import moment from 'moment';
 import Icon from '../icon/icon';
-import InputTextStatus, { StatusInputText } from '../input-text-status/input-text-status';
 
 export interface SessionFormProps {
   open?: boolean;

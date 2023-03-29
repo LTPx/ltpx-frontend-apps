@@ -243,8 +243,18 @@ export const createCourseSlice: StateCreator<
   _editCourseSession: async (params) => {
     try {
       const course = get().course;
-      const paramsWithId = { ...params, ...{ course_id: course.id } };
-      const session = await editSession(paramsWithId);
+      //add destroy if was removed
+      const meetingsIds = params.meetings_attributes.map((m) => m.id);
+      const meetings = course.session.meetings.map((meeting)=>{
+        return {
+          id: meeting.id,
+          start_date: meeting.start_date,
+          host_user_id: 1,
+          _destroy: !meetingsIds.includes(meeting.id)
+        }
+      });
+      const paramsData = { ...params, ...{ course_id: course.id, meetings_attributes: meetings } };
+      const session = await editSession(paramsData);
       const updatedCourse = { ...course, ...{ session } };
       set({ course: updatedCourse });
       return { success: true, data: session };

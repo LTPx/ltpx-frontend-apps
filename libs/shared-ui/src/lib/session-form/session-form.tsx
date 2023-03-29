@@ -38,7 +38,7 @@ export function SessionForm(props: SessionFormProps) {
         };
       });
     } else {
-      return [{ date: today }];
+      return [{ id: null, date: today }];
     }
   };
 
@@ -86,7 +86,18 @@ export function SessionForm(props: SessionFormProps) {
             max_participants: values.max_participants,
             call_time_min: values.minutes + values.hour,
             meetings_attributes: values.dates.map((item) => {
-              return { start_date: item.date, host_user_id: user.id };
+              if (item.id) {
+                return {
+                  start_date: item.date,
+                  host_user_id: user.id,
+                  id: item.id,
+                };
+              } else {
+                return {
+                  start_date: item.date,
+                  host_user_id: user.id,
+                };
+              }
             }),
           };
           onSubmit && onSubmit(formData);

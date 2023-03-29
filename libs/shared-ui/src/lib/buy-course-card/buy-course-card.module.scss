@@ -1,7 +1,6 @@
 @import '../../styles/styles.module.scss';
 
 .container {
-  width: 80%;
   .buy-card {
     padding: 10px;
     background-color: $white-color;
@@ -57,6 +56,7 @@
         justify-content: space-between;
         border-bottom: 1px solid #c7c7c7;
         padding: 0.75rem 0rem;
+        min-width: 18rem;
 
         .item-text {
           display: flex;

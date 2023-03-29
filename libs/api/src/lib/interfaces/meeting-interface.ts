@@ -17,6 +17,8 @@ export interface MeetingModel {
 export interface MeetingNestedModel {
   host_user_id: number;
   start_date: string;
+  id?: number;
+  _destroy?: boolean;
 }
 
 export type NewMeetingParams = Omit<

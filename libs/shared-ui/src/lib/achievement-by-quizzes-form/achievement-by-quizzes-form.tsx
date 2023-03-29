@@ -72,9 +72,9 @@ export function AchievementByQuizzesForm(props: AchievementByQuizzesFormProps) {
       validationSchema={Yup.object({
         title: Yup.string().required('Titulo no puede estar en blanco'),
         image: Yup.string().required('Es necesario seleccionar una imagen'),
-        quizzes: Yup.mixed().test((quizzes)=>{
+        quizzes: Yup.mixed().test((quizzes) => {
           return quizzes.find((quiz: any) => quiz.selected);
-        })
+        }),
       })}
       onSubmit={(data) => {
         if (achievement) {
@@ -209,7 +209,7 @@ export function AchievementByQuizzesForm(props: AchievementByQuizzesFormProps) {
             <Input
               placeholder="1"
               label={t('achievementByQuizzesForm.price') || ''}
-              description="Este valor sera enviado a tu cuenta una vez el alumno alcance este logro"
+              description="Cuando asignes el precio recuerda que OpenMind cobra el 25% de cada logro por los servicios provistos"
               type="number"
               min={1}
               value={values.price}

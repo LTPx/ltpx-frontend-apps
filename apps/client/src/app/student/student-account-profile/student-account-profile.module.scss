@@ -1,10 +1,11 @@
 @import '../../../styles.scss';
 
-.container {
+.profile-container {
   display: flex;
   flex-direction: column;
   padding: $size-md-1;
   gap: $size-md-1;
+
   .title {
     display: flex;
     gap: $size-sm-3;

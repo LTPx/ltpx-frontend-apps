@@ -5,6 +5,7 @@ import {
   ClassroomView,
   ColorsButton,
   CourseContents,
+  CourseDateCard,
   InformationCard,
   OverviewCourse,
   QuizzesList,
@@ -24,7 +25,7 @@ export function CourseDetailsPage() {
   const { viewCourse, _getCourse, _approveCourse } = useAdmin();
   const { translateCategory, translateLanguage, translateLevel } =
     useCourseUtil();
-  const { classroom, quizzes, contents, achievements } = viewCourse;
+  const { classroom, quizzes, contents, achievements, session } = viewCourse;
   const params = useParams();
   const { id } = params;
   const courseId = parseInt(id || '');
@@ -47,7 +48,7 @@ export function CourseDetailsPage() {
     fetchData();
   }, [fetchData]);
 
-  const handleApproveCourse = async() => {
+  const handleApproveCourse = async () => {
     const { success, error } = await _approveCourse(viewCourse.id);
     if (success) {
       console.log('approved');
@@ -56,7 +57,7 @@ export function CourseDetailsPage() {
       setError(true);
       console.log('error: ', error);
     }
-  }
+  };
 
   return (
     <div className={styles['container']}>
@@ -64,7 +65,7 @@ export function CourseDetailsPage() {
         <div className="c">
           <div className={styles['header']}>
             <h1>{viewCourse.title}</h1>
-            { viewCourse.status === CourseStatus.review && (
+            {viewCourse.status === CourseStatus.review && (
               <div className={styles['actions']}>
                 <Button
                   title="Requiere cambios"
@@ -107,8 +108,8 @@ export function CourseDetailsPage() {
               {selectedTab === 0 && (
                 <OverviewCourse
                   description={viewCourse.description}
-                  goals={viewCourse.learn_goals?.split('\n') || []}
-                  requirements={viewCourse.requirements?.split('\n') || []}
+                  goals={viewCourse.learn_goals ? viewCourse.learn_goals?.split('\n') : []}
+                  requirements={viewCourse.requirements ? viewCourse.requirements.split('\n') : []}
                 />
               )}
               {selectedTab === 1 && (
@@ -118,21 +119,29 @@ export function CourseDetailsPage() {
               {selectedTab === 3 && (
                 <AchievementsList achievements={achievements || []} />
               )}
-              {selectedTab === 4 && classroom &&(
-                <>
-                  <InformationCard
-                    title={CLASSROOMS[classroom.condition].title}
-                    text={CLASSROOMS[classroom.condition].text}
-                    icon={CLASSROOMS[classroom.condition].icon}
-                    selected={true}
-                  />
-                  {classroom.meetings.length > 0 && (
-                    <ClassroomView
-                      classroom={classroom}
-                      className={styles['classroom-summary']}
-                    />
+              {selectedTab === 4 && classroom && (
+                <div>
+                  {session?.meetings && session?.meetings.length > 0 && (
+                    <div className={styles['classes-container']}>
+                      <div className={styles['classes-preview']}>
+                        {session.meetings.map((meeting, index) => (
+                          <CourseDateCard
+                            className={styles['course-class']}
+                            key={index}
+                            title={'Reunion ' + (index + 1)}
+                            description={
+                              'Fecha: ' +
+                              meeting.month +
+                              ' - ' +
+                              meeting.day_number
+                            }
+                            time={'Hora: ' + meeting.end_time}
+                          />
+                        ))}
+                      </div>
+                    </div>
                   )}
-                </>
+                </div>
               )}
             </div>
           </div>

@@ -1,5 +1,5 @@
 import { UserModel } from '@ltpx-frontend-apps/api';
-import { useChat } from '@ltpx-frontend-apps/store';
+import { useChat, useUtil } from '@ltpx-frontend-apps/store';
 import { Dialog } from 'evergreen-ui';
 import styles from './chat-new-private-room.module.scss';
 
@@ -11,14 +11,16 @@ export interface ChatNewPrivateRoomProps {
 
 export function ChatNewPrivateRoom(props: ChatNewPrivateRoomProps) {
   const { users, onClose } = props;
-  const { _newChatRoom, setRoomById } = useChat();
+  const { _newChatRoom } = useChat();
+  const { setMessageToast } = useUtil();
 
   async function createNewPrivateRoom(userId: number) {
-    const { data, error, success } = await _newChatRoom(userId);
+    const { error, success } = await _newChatRoom(userId);
     if (success) {
-      setRoomById(data.id);
+      onClose();
     } else {
-      console.log(error);
+      onClose();
+      setMessageToast('error', error)
     }
   }
 

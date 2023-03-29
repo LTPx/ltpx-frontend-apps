@@ -8,7 +8,7 @@ export interface StudentAccountProfileProps {}
 export function StudentAccountProfile(props: StudentAccountProfileProps) {
   const { user } = useUser();
   return (
-    <div className={styles['container']}>
+    <div className={styles['profile-container']}>
       <div className={styles['about-student']}>
         <div className={styles['title']}>
           <Icon icon={'pencil-square'} size={20}></Icon>

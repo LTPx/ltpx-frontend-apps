@@ -5,14 +5,14 @@ import Button, { ColorsButton, TypeButton } from '../button/button';
 import Select from '../select/select';
 import styles from './session-form.module.scss';
 import Input from '../input/input';
-import {
-  CourseSession,
-  SessionParams,
-} from '@ltpx-frontend-apps/api';
+import { CourseSession, SessionParams } from '@ltpx-frontend-apps/api';
 import { useUser } from '@ltpx-frontend-apps/store';
 import * as Yup from 'yup';
 import moment from 'moment';
 import Icon from '../icon/icon';
+import InputTextStatus, {
+  StatusInputText,
+} from '../input-text-status/input-text-status';
 
 export interface SessionFormProps {
   open?: boolean;
@@ -35,10 +35,11 @@ export function SessionForm(props: SessionFormProps) {
         return {
           id: meeting.id,
           date: meeting.start_date,
+          _destroy: false,
         };
       });
     } else {
-      return [{ id: null, date: today }];
+      return [{ id: null, date: today, _destroy: false }];
     }
   };
 
@@ -74,11 +75,22 @@ export function SessionForm(props: SessionFormProps) {
       <Formik
         initialValues={initialValues}
         validationSchema={Yup.object({
-          max_participants:Yup.number()
-          .required('Se debe agregar un numero de estudiantes')
-          .min(1, "Se debe asignar al menos un estudiantes")
-          .max(15, "El numero Máximo de estudiantes es de 15")
-          .positive('Debe ser un numero mayor a 0'),
+          max_participants: Yup.number()
+            .required('Se debe agregar un numero de estudiantes')
+            .min(1, 'Se debe asignar al menos un estudiantes')
+            .max(15, 'El numero Máximo de estudiantes es de 15')
+            .positive('Debe ser un numero mayor a 0'),
+          dates: Yup.mixed().test(
+            'dates',
+            'Se debe elegir una fecha para la sesión',
+            (dates) => {
+              if (dates.length > 0) {
+                return true;
+              } else {
+                return false;
+              }
+            }
+          ),
         })}
         onSubmit={(values) => {
           const formData = {
@@ -91,6 +103,7 @@ export function SessionForm(props: SessionFormProps) {
                   start_date: item.date,
                   host_user_id: user.id,
                   id: item.id,
+                  _destroy: item._destroy,
                 };
               } else {
                 return {
@@ -149,7 +162,6 @@ export function SessionForm(props: SessionFormProps) {
                     minutos
                   </div>
                 </div>
-                {/* <InputTextStatus status={StatusInputText.error} text={ errors.hour} /> */}
                 <br />
                 <label>{t('classroomForm.dateClasses')}</label>
                 <FieldArray
@@ -157,7 +169,12 @@ export function SessionForm(props: SessionFormProps) {
                   render={(arrayHelpers) => (
                     <div>
                       {values.dates.map((item, index) => (
-                        <div className={styles['date-item']} key={index}>
+                        <div
+                          className={`${styles['date-item']} ${
+                            item._destroy ? styles['hide'] : ''
+                          }`}
+                          key={index}
+                        >
                           <Input
                             type="datetime-local"
                             name={`dates[${index}].date`}
@@ -167,13 +184,23 @@ export function SessionForm(props: SessionFormProps) {
                           <div className={styles['actions']}>
                             <div
                               className={styles['remove']}
-                              onClick={() => arrayHelpers.remove(index)}
+                              onClick={() =>
+                                setFieldValue(`dates[${index}].date`, [
+                                  (item._destroy = true),
+                                ])
+                              }
                             >
                               <Icon icon="trash" size={15} />
                             </div>
                           </div>
                         </div>
                       ))}
+                      <InputTextStatus
+                        status={StatusInputText.error}
+                        text={
+                          typeof errors.dates === 'string' ? errors.dates : ''
+                        }
+                      />
                       <div
                         className={styles['add-date']}
                         onClick={() => arrayHelpers.push({ date: today })}

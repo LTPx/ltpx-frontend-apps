@@ -17,7 +17,7 @@ export function VideoMeetingLive(props: VideoMeetingLiveProps) {
   const { roomId, meetingId } = useParams();
   const APP_URL = process.env.NX_APP_URL || '';
   const redirectTo = `${APP_URL}${redirectUrl}`;
-
+  console.log('redirectTo: ', redirectTo);
   const fetchData = useCallback(async () => {
     if (meetingId && roomId) {
       const meetId = parseInt(meetingId || '');

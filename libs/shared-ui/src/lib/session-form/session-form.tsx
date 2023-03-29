@@ -87,11 +87,11 @@ export function SessionForm(props: SessionFormProps) {
             private_sessions: false,
             max_participants: values.max_participants,
             call_time_min: values.minutes + values.hour,
-            meetings_attributes: values.dates.map((date) => {
-              return { start_date: date, host_user_id: user.id };
+            meetings_attributes: values.dates.map((item) => {
+              return { start_date: item.date, host_user_id: user.id };
             }),
           };
-          // onSubmit && onSubmit(formData);
+          onSubmit && onSubmit(formData);
         }}
       >
         {({

@@ -6,8 +6,38 @@
   height: 100%;
   justify-content: space-between;
 }
+.form-quiz-options {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
 .section {
   padding: $size-md-3;
+}
+.date-item {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 1rem;
+  justify-content: space-between;
+  align-items: center;
+
+  svg {
+    margin-top: 1rem;
+    cursor: pointer;
+    color: $red-color-400;
+  }
+
+  &.hide {
+    display: none;
+  }
+}
+.add-date {
+  margin: 1rem 0;
+  cursor: pointer;
+  color: $green-color;
+  display: flex;
+  width: 7rem;
 }
 .field-form {
   margin-top: $size-md-3;

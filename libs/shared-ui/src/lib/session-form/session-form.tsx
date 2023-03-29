@@ -14,6 +14,7 @@ import { useUser } from '@ltpx-frontend-apps/store';
 import * as Yup from 'yup';
 import moment from 'moment';
 import Icon from '../icon/icon';
+import InputTextStatus, { StatusInputText } from '../input-text-status/input-text-status';
 
 export interface SessionFormProps {
   open?: boolean;
@@ -74,6 +75,13 @@ export function SessionForm(props: SessionFormProps) {
     >
       <Formik
         initialValues={initialValues}
+        validationSchema={Yup.object({
+          max_participants:Yup.number()
+          .required('Se debe agregar un numero de estudiantes')
+          .min(1, "Se debe asignar al menos un estudiantes")
+          .max(15, "El numero Máximo de estudiantes es de 15")
+          .positive('Debe ser un numero mayor a 0'),
+        })}
         onSubmit={(values) => {
           const formData = {
             private_sessions: false,
@@ -108,6 +116,7 @@ export function SessionForm(props: SessionFormProps) {
                     onChange={handleChange}
                     value={values.max_participants}
                     onBlur={handleBlur}
+                    errorMessage={errors.max_participants}
                   />
                 </div>
                 <div className={styles['field-form']}>
@@ -119,6 +128,7 @@ export function SessionForm(props: SessionFormProps) {
                       onChange={(e) => {
                         setFieldValue('hour', e.value);
                       }}
+                      errorMessage={errors.hour}
                     />{' '}
                     hora(s), con
                     <Select
@@ -130,42 +140,41 @@ export function SessionForm(props: SessionFormProps) {
                     minutos
                   </div>
                 </div>
-              </section>
-              <br />
-              <label>{t('classroomForm.dateClasses')}</label>
-              <FieldArray
-                name="dates"
-                render={(arrayHelpers) => (
-                  <div>
-                    {values.dates.map((item, index) => (
-                      <div key={index}>
-                        <Input
-                          type="datetime-local"
-                          name={`dates[${index}].date`}
-                          value={moment(item.date).format('YYYY-MM-DDTHH:mm')}
-                          onChange={handleChange}
-                        />
-                        <div className={styles['actions']}>
-                          <div
-                            className={styles['remove']}
-                            onClick={() => arrayHelpers.remove(index)}
-                          >
-                            <Icon icon="trash" size={15} />
+                {/* <InputTextStatus status={StatusInputText.error} text={ errors.hour} /> */}
+                <br />
+                <label>{t('classroomForm.dateClasses')}</label>
+                <FieldArray
+                  name="dates"
+                  render={(arrayHelpers) => (
+                    <div>
+                      {values.dates.map((item, index) => (
+                        <div className={styles['date-item']} key={index}>
+                          <Input
+                            type="datetime-local"
+                            name={`dates[${index}].date`}
+                            value={moment(item.date).format('YYYY-MM-DDTHH:mm')}
+                            onChange={handleChange}
+                          />
+                          <div className={styles['actions']}>
+                            <div
+                              className={styles['remove']}
+                              onClick={() => arrayHelpers.remove(index)}
+                            >
+                              <Icon icon="trash" size={15} />
+                            </div>
                           </div>
                         </div>
+                      ))}
+                      <div
+                        className={styles['add-date']}
+                        onClick={() => arrayHelpers.push({ date: today })}
+                      >
+                        + Nueva Fecha
                       </div>
-                    ))}
-                    <div
-                      className={styles['add-new']}
-                      onClick={() =>
-                        arrayHelpers.push({date: today})
-                      }
-                    >
-                      + Nueva Fecha
                     </div>
-                  </div>
-                )}
-              />
+                  )}
+                />
+              </section>
             </div>
             <div className={styles['buttons']}>
               <Button

@@ -11,7 +11,8 @@ export enum TypeFile {
   image = 'image',
   pdf = 'pdf',
   video = 'video',
-  all = 'all'
+  all = 'all',
+  specific = 'specific',
 }
 
 export interface FilesUploadedProps {
@@ -42,10 +43,11 @@ export function FilesUploaded(props: FilesUploadedProps) {
   const elementRef = useRef<HTMLInputElement | null>(null);
 
   const filesTypes = {
-    image: 'image/png, image/jpeg',
+    image: 'image/png, image/jpeg, image/jpg',
     pdf: 'application/pdf',
     video: 'video/*',
-    all: '/*'
+    all: '/*',
+    specific: 'image/png, image/jpeg, image/jpg, application/pdf, .doc, .docx',
   };
 
   const filesIcons = {
@@ -53,6 +55,7 @@ export function FilesUploaded(props: FilesUploadedProps) {
     pdf: 'file-pdf',
     video: 'video-outline',
     all: 'task-outline',
+    specific: 'task-outline',
   };
 
   const handleChange = (e: any) => {
@@ -80,7 +83,9 @@ export function FilesUploaded(props: FilesUploadedProps) {
   };
 
   return (
-    <div className={`${styles['container']} ${label ? styles['with-label'] : ''}`}>
+    <div
+      className={`${styles['container']} ${label ? styles['with-label'] : ''}`}
+    >
       {label && <label>{label}</label>}
       {description && description}
       <div className={`${styles['content']} ${className}`}>

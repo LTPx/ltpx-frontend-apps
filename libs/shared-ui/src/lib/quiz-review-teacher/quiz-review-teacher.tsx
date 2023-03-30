@@ -16,7 +16,7 @@ export interface QuizReviewTeacherProps {
     id: number;
     text?: string;
   }[];
-  children: ReactElement;
+  children?: ReactElement;
 }
 
 export function QuizReviewTeacher(props: QuizReviewTeacherProps) {
@@ -160,16 +160,8 @@ export function QuizReviewTeacher(props: QuizReviewTeacherProps) {
             />
           </div>
           <div className={styles['footer']}>
-            <Button
-              title="Cancelar"
-              color={ColorsButton.white}
-              link={`/teacher/dashboard/`}
-            />
-            <Button
-              title="Guardar"
-              color={ColorsButton.primary}
-              link={`/teacher/dashboard/`}
-            />
+            <Button title="Cancelar" color={ColorsButton.white} />
+            <Button title="Guardar" color={ColorsButton.primary} />
           </div>
         </div>
       )}

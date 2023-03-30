@@ -76,7 +76,7 @@ export function StudentLayout() {
                 },
                 {
                   icon: 'log-out',
-                  text: 'Cerrar Session',
+                  text: 'Cerrar Sesión',
                   onClick: () => {
                     logoutSession();
                   },

@@ -41,7 +41,7 @@ export function TaskStudentCard(props: TaskStudentCardProps) {
           </div>
         </div>
         <div className={styles['row-buttons']}>
-          {studentTask === null &&
+          {!studentTask &&
             <Button
               title="Entregar tarea"
               icon="pencil"

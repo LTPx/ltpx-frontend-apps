@@ -1,17 +1,17 @@
 import styles from './student-quiz.module.scss';
-import {
-  QuestionQuiz,
-  TypeQuestionQuiz,
-} from '@ltpx-frontend-apps/api';
+import { QuestionQuiz, TypeQuestionQuiz } from '@ltpx-frontend-apps/api';
 import {
   Button,
   ColorsButton,
+  InputTextStatus,
   QuizConditionalQuestion,
   QuizMultiselectQuestion,
   QuizScore,
+  StatusInputText,
   TextArea,
   TypeButton,
 } from '@ltpx-frontend-apps/shared-ui';
+import * as Yup from 'yup';
 import { useStudent } from '@ltpx-frontend-apps/store';
 import { Dialog } from 'evergreen-ui';
 import { useFormik } from 'formik';
@@ -20,7 +20,7 @@ import { useParams } from 'react-router-dom';
 
 export function StudentQuiz() {
   const [answersForm, setAnswersForm] = useState({
-    answers: [{ question: '', answers: [] }],
+    answers: [{ kind: '', question: '', answers: [] }],
   });
   const [loaded, setLoaded] = useState(false);
   const { _getStudentQuiz, _evaluateQuiz, currentQuiz } = useStudent();
@@ -34,12 +34,15 @@ export function StudentQuiz() {
   const fetchQuiz = useCallback(async () => {
     const { success, data, error } = await _getStudentQuiz(course_id, id);
     if (success) {
-      const answers = data.questions_attributes.map((question: QuestionQuiz) => {
-        return {
-          question: question.question,
-          answers: [],
-        };
-      });
+      const answers = data.questions_attributes.map(
+        (question: QuestionQuiz) => {
+          return {
+            question: question.question,
+            answers: [],
+            kind: question.kind,
+          };
+        }
+      );
       console.log('data quiz: ', data);
       console.log('data answers: ', answers);
       setLoaded(true);
@@ -55,12 +58,26 @@ export function StudentQuiz() {
 
   const formik = useFormik({
     initialValues: answersForm,
+    validationSchema: Yup.object({
+      answers: Yup.mixed().test(
+        'answers',
+        'La respuesta no puede estar vacía',
+        (data) => {
+          if (data) {
+            console.log('prueba',data)
+            return true;
+          } else {
+            return false;
+          }
+        }
+      ),
+    }),
     enableReinitialize: true,
     onSubmit: async (fields) => {
       console.log(fields);
       const { answers } = fields;
       const answersFilter = answers.reduce(
-        (userAnswers: any[], question: any) => {
+        (userAnswers: any[], question: any, kind: any) => {
           return userAnswers.concat(question.answers);
         },
         []
@@ -94,7 +111,7 @@ export function StudentQuiz() {
                 <div className="question" key={index}>
                   {question.kind === TypeQuestionQuiz.conditional && (
                     <QuizConditionalQuestion
-                      number={index+1}
+                      number={index + 1}
                       title={question.question}
                       description={question.description}
                       answers={question.answers_attributes}
@@ -107,7 +124,7 @@ export function StudentQuiz() {
                   )}
                   {question.kind === TypeQuestionQuiz.multiple && (
                     <QuizMultiselectQuestion
-                      number={index+1}
+                      number={index + 1}
                       title={question.question}
                       description={question.description}
                       answers={question.answers_attributes}
@@ -122,7 +139,7 @@ export function StudentQuiz() {
                   )}
                   {question.kind === TypeQuestionQuiz.single && (
                     <QuizMultiselectQuestion
-                      number={index+1}
+                      number={index + 1}
                       title={question.question}
                       description={question.description}
                       answers={question.answers_attributes}
@@ -137,7 +154,9 @@ export function StudentQuiz() {
                   )}
                   {question.kind === TypeQuestionQuiz.answer && (
                     <div className={styles['question']}>
-                      <h3>{index+1}. {question.question}</h3>
+                      <h3>
+                        {index + 1}. {question.question}
+                      </h3>
                       <TextArea
                         placeholder="Escribe tu respuesta"
                         rows={8}
@@ -146,13 +165,22 @@ export function StudentQuiz() {
                           const text = e.target.value;
                           formik.setFieldValue(`answers[${index}].answers`, [
                             {
-                              // answer_id: question.answers_attributes[0].id,
-                              // question_id: question.answers_attributes[0].question_id,
-                              // text,
+                              answer_id: question.answers_attributes[0].id,
+                              question_id:
+                                question.answers_attributes[0].question_id,
+                              text,
                             },
                           ]);
                         }}
                         onBlur={formik.handleBlur}
+                      />
+                      <InputTextStatus
+                        status={StatusInputText.error}
+                        text={
+                          typeof formik.errors.answers === 'string'
+                            ? formik.errors.answers
+                            : ''
+                        }
                       />
                     </div>
                   )}

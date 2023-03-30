@@ -19,6 +19,7 @@ export function StudentCourse(props: StudentCourseProps) {
   const [selectedTab, setSelectedTab] = useState(0);
   const { courseId } = useParams();
   const id = parseInt(courseId || '');
+  const [showMore, setShowMore] = useState(false);
 
   const fetchCourse = useCallback(async () => {
     const { success, data, error } = await _getStudentCourse(id);
@@ -32,10 +33,6 @@ export function StudentCourse(props: StudentCourseProps) {
   useEffect(() => {
     fetchCourse();
   }, []);
-
-  const handleStartTest = () => {
-    console.log('start');
-  };
 
   const tabs = [
     { text: 'Curso' },
@@ -68,9 +65,36 @@ export function StudentCourse(props: StudentCourseProps) {
           {selectedTab === 0 && (
             <div className={styles['contents-course']}>
               <h2 className={styles['title-content']}>Sobre el Curso</h2>
-              <p className={styles['about-course']}>
+              {enrolledCourse.description && (
+                <div>
+                  {enrolledCourse.description.length > 800 ? (
+                    <>
+                      <p className={styles['about-course']}>
+                        {showMore
+                          ? enrolledCourse.description
+                          : `${enrolledCourse.description.substring(
+                              0,
+                              800
+                            )}....`}
+                      </p>
+                      <div
+                        className={styles['show']}
+                        onClick={() => setShowMore(!showMore)}
+                      >
+                        <h4>{showMore ? 'Mostrar menos' : 'Mostrar mas'}</h4>
+                      </div>
+                    </>
+                  ) : (
+                    <p className={styles['about-course']}>
+                      {enrolledCourse.description}
+                    </p>
+                  )}
+                </div>
+              )}
+
+              {/* <p className={styles['about-course']}>
                 {enrolledCourse.description}
-              </p>
+              </p> */}
               <h3 className={styles['subtitle-content']}>Contenidos</h3>
               <CourseContents contents={enrolledCourse.contents || []} />
             </div>
@@ -91,19 +115,13 @@ export function StudentCourse(props: StudentCourseProps) {
             </div>
           )}
           {selectedTab === 2 && (
-            <StudentCourseTasks
-              courseId={enrolledCourse.id}
-            />
+            <StudentCourseTasks courseId={enrolledCourse.id} />
           )}
           {selectedTab === 3 && (
-            <StudentCourseQuizzes
-              courseId={enrolledCourse.id}
-            />
+            <StudentCourseQuizzes courseId={enrolledCourse.id} />
           )}
           {selectedTab === 4 && (
-            <StudentCourseAchievements
-              courseId={ parseInt(courseId || '')}
-            />
+            <StudentCourseAchievements courseId={parseInt(courseId || '')} />
           )}
         </div>
       </div>

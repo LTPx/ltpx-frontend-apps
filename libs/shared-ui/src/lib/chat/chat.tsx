@@ -1,10 +1,11 @@
-import styles from './chat.module.scss';
 import { ChatMessages, Icon } from '@ltpx-frontend-apps/shared-ui';
 import { useChat, useUser } from '@ltpx-frontend-apps/store';
 import { Avatar } from 'evergreen-ui';
 import { ReactElement } from 'react';
+import styles from './chat.module.scss';
 import { useChatData } from './useChatData';
 
+/* eslint-disable-next-line */
 export interface ChatProps {
   children?: ReactElement;
   onCancel?: () => void;

@@ -1,10 +1,9 @@
 import styles from './site-layout.module.scss';
-import { Dropdown, Footer, Header, Icon, UserMenu } from '@ltpx-frontend-apps/shared-ui';
+import { Chat, Dropdown, Footer, Header, Icon, UserMenu } from '@ltpx-frontend-apps/shared-ui';
 import { useUser } from '@ltpx-frontend-apps/store';
 import { Avatar } from 'evergreen-ui';
 import { useTranslation } from 'react-i18next';
 import { Outlet, useNavigate } from 'react-router-dom';
-import { Chat } from '../../components';
 import { useState } from 'react';
 
 export function SiteLayout() {

@@ -29,7 +29,6 @@ import { NavLink, useParams } from 'react-router-dom';
 import { useCourseUtil } from '@ltpx-frontend-apps/store';
 import { useTranslation } from 'react-i18next';
 import CheckoutForm from '../../components/checkout-form/checkout-form';
-import { Chat, ChatNewPrivateRoom } from '../../components';
 
 type MessageCheckout = {
   text: string;
@@ -53,7 +52,7 @@ export function CourseDetails() {
     _newChatRoom
   } = useChat();
 
- 
+
   const fetchCourse = useCallback(async () => {
     const { success, data, error } = await _getSiteCourse(slug || '');
     if (success) {
@@ -422,7 +421,4 @@ export function CourseDetails() {
 }
 
 export default CourseDetails;
-function useTeacherLayout(): { headerLinks: any; handleNewChat: any; logoutSession: any; teacherAccount: any; users: any; currentUser: any; openChat: any; setOpenChat: any; openNewChat: any; setOpenNewChat: any; feedbackAction: any; clearMessageToast: any; } {
-  throw new Error('Function not implemented.');
-}
 

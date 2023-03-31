@@ -1,3 +1,4 @@
+export * from './lib/chat/chat';
 export * from './lib/achievement-badge/achievement-badge';
 export * from './lib/dialog-confirm/dialog-confirm';
 export * from './lib/basic-row/basic-row';

@@ -1,5 +1,6 @@
 import styles from './student-layout.module.scss';
 import {
+  Chat,
   Dropdown,
   Header,
   Icon,
@@ -11,7 +12,6 @@ import { Avatar } from 'evergreen-ui';
 import { useTranslation } from 'react-i18next';
 import { NavLink, Outlet, useNavigate } from 'react-router-dom';
 import avatar from './../../../assets/images/avatars/avatar-1.svg'
-import Chat from '../../components/chat/chat';
 import { useState } from 'react';
 
 export function StudentLayout() {

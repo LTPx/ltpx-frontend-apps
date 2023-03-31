@@ -20,6 +20,8 @@ export type ChatSlice = {
   rooms: Room[];
   room: Room;
   messages: ChatMessage[];
+  showChat: boolean;
+  setShowChat: (show: boolean) => void;
   setRoomById: (roomId: number) => void;
   appendNewMessage: (message: ChatMessage) => void;
   _getRooms: () => Promise<TResponse>;
@@ -35,6 +37,10 @@ export const createChatSlice: StateCreator<StoreState, [], [], ChatSlice> = (
   rooms: [],
   room: {} as Room,
   messages: [],
+  showChat: false,
+  setShowChat: (show) => {
+    set({showChat: show});
+  },
   setRoomById: (roomId) => {
     const rooms = get().rooms;
     const room = rooms.find(room => room.id === roomId);
@@ -77,7 +83,7 @@ export const createChatSlice: StateCreator<StoreState, [], [], ChatSlice> = (
         const rooms = [...roomsStore, ...[room]];
         set({ rooms });
       } else {
-        set({ room: room, messages: room.messages });
+        set({ room: room, messages: room.messages, showChat: true });
       }
       return { success: true, data: room };
     } catch (error) {

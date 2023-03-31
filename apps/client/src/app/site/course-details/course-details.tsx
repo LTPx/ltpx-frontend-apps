@@ -49,7 +49,8 @@ export function CourseDetails() {
   const [message, setMessage] = useState<MessageCheckout>();
   const { customFormatDate, moment } = useMoment();
   const {
-    _newChatRoom
+    _newChatRoom,
+    setShowChat,
   } = useChat();
 
 
@@ -87,9 +88,10 @@ export function CourseDetails() {
     }
   };
 
-  const chatTeacher = async () => {
+  const chatWithTeacher = async () => {
     if (isAuthenticated) {
       await _newChatRoom(teacher.user_id)
+      setShowChat(true);
     } else {
       setOpenModal(true);
     }
@@ -184,9 +186,9 @@ export function CourseDetails() {
                 </div>
                 <div>
                   <Button
-                    onClick={chatTeacher}
+                    onClick={chatWithTeacher}
                     icon="chat"
-                    title="Contactar Profesor"
+                    title="Contactar Profesor s"
                   />
                 </div>
               </div>
@@ -312,10 +314,10 @@ export function CourseDetails() {
             />
             <div className={styles['contact-teacher']}>
               <Button
-                onClick={chatTeacher}
+                onClick={chatWithTeacher}
                 icon="chat"
                 full={true}
-                title="Contactar Profesor"
+                title="Contactar Profesor cc"
               />
             </div>
           </div>
@@ -360,7 +362,7 @@ export function CourseDetails() {
         <div className={styles['btn']}>
           <Button
             title={'Solicitar otro horario'}
-            onClick={() => setOpenModal(true)}
+            onClick={chatWithTeacher}
           />
         </div>
       </SectionInformation>

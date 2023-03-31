@@ -32,10 +32,6 @@ export function StudentCourseQuizzes(props: StudentCourseQuizzesProps) {
     fetchQuizzes();
   }, []);
 
-  const handleStartTest = () => {
-    console.log('start');
-  };
-
   return (
     <div className={styles['container']}>
       {quizzes?.map((quiz, index) => (
@@ -43,6 +39,7 @@ export function StudentCourseQuizzes(props: StudentCourseQuizzesProps) {
           <QuizStudentCard
             title={quiz.name}
             text={`Preguntas: ${quiz.total_questions}`}
+            score={quiz.last_quiz_result.score}
             approved={
               quiz.last_quiz_result ? quiz.last_quiz_result.score >= 80 : false
             }

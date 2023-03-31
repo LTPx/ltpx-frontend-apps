@@ -46,8 +46,14 @@
       font-weight: 500;
     }
 
-    .question-answer {
+    .answer-content {
       color: $text-gray-color;
+    }
+    .answer-correct {
+      background-color: $green-color-100;
+    }
+    .answer-noCorrect {
+      background-color: $red-color-100;
     }
   }
 }

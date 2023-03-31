@@ -1,5 +1,8 @@
 @import '../../../styles.scss';
-
+.wrap {
+  display: flex;
+  justify-content: center;
+}
 .container {
   margin-top: 3rem;
   width: 60vw;

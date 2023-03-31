@@ -1,5 +1,9 @@
 @import '../../../styles.scss';
 
+.wrap {
+  display: flex;
+  justify-content: center;
+}
 .container {
   width: 80vw;
   display: flex;

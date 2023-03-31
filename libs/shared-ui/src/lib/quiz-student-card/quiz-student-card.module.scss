@@ -17,6 +17,7 @@
     gap: 1.5rem;
     .row-info {
       display: flex;
+      gap: 0.15rem;
       flex-direction: column;
 
       .total-questions {
@@ -28,8 +29,7 @@
       }
 
       .no-approved {
-        color: $gray-color;
-        padding: 0.25rem;
+        color: $text-gray-color;
       }
     }
   }

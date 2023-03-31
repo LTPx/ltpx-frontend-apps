@@ -48,7 +48,7 @@ export const teacherGetStudentAchievements = async (courseId: number, studentId:
 export const teacherGetStudentTasks = async (courseId: number, studentId: number) => {
   return new Promise<TaskStudent[]>((resolve, reject) => {
     http
-      .get(`/api/v1/teacher/course_sessions/${courseId}/students/${studentId}/achievements`)
+      .get(`/api/v1/teacher/course_sessions/${courseId}/students/${studentId}/tasks`)
       .then((response) => {
         resolve(response.data);
       })

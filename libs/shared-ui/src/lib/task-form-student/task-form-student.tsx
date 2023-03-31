@@ -8,7 +8,7 @@ import FilesUploaded, { TypeFile } from '../files-uploaded/files-uploaded';
 export interface TaskFormStudentProps {
   description?: string;
   onClose?: () => void;
-  onSubmit?: (task: { answer: string, file: any}) => void;
+  onSubmit?: (task: { answer: string; file: any }) => void;
 }
 
 export function TaskFormStudent(props: TaskFormStudentProps) {
@@ -50,7 +50,7 @@ export function TaskFormStudent(props: TaskFormStudentProps) {
         <FilesUploaded
           multiple={true}
           className={styles['uploader']}
-          type={TypeFile.all}
+          type={TypeFile.specific}
           onChange={(value) => {
             formik.setFieldValue('file', value);
           }}

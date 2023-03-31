@@ -6,7 +6,7 @@ export interface TaskStudentResult {
   answer: string;
   approved: boolean;
   comments: string[];
-  score: number
+  score: number;
 }
 
 export interface TaskModel {

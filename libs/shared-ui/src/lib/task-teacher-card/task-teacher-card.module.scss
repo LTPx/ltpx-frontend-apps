@@ -38,12 +38,18 @@
   display: flex;
   flex-direction: column;
   .task-content {
-
+    .title-answer {
+      font-weight: 500;
+    }
+    .answer {
+      padding-top: 0.5rem;
+      // color: $text-gray-color;
+    }
   }
   .footer {
     display: flex;
     justify-content: end;
-    padding-top: 1rem;
+    padding: 1rem 0;
     gap: 1rem;
   }
 }

@@ -8,12 +8,12 @@ import styles from './task-teacher-card.module.scss';
 /* eslint-disable-next-line */
 export interface TaskTeacherCardProps {
   title: string;
-  description: string;
+  answer: string;
   file?: any;
 }
 
 export function TaskTeacherCard(props: TaskTeacherCardProps) {
-  const { title, description, file } = props;
+  const { title, answer, file } = props;
   const [isCorrect, setIsCorrect] = useState(false);
   const [openModal, setOpenModal] = useState(false);
 
@@ -53,7 +53,8 @@ export function TaskTeacherCard(props: TaskTeacherCardProps) {
       >
         <div className={styles['task']}>
           <div className={styles['task-content']}>
-            <h4 className={styles['description']}>{description}</h4>
+            <h4 className={styles['title-answer']}> Respuesta del estudiante:</h4>
+            <h4 className={styles['answer']}>{answer}</h4>
             <TextArea 
               label={'Comentario de Tarea (opcional)'}
               rows={5}

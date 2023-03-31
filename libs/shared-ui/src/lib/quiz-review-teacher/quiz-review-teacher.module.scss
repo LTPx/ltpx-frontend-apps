@@ -2,13 +2,18 @@
 
 .container {
   .quiz-container {
-    padding: 3rem;
+    padding: 2rem 1rem;
+  }
+  .btn-correct {
+    padding: 0.5rem 1rem;
   }
 }
+
 
 .header {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   padding-bottom: 1rem;
 
   .quiz-info {

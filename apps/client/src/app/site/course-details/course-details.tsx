@@ -20,14 +20,16 @@ import {
   useMoment,
   AchievementBadge,
   SectionInformation,
+  Icon,
 } from '@ltpx-frontend-apps/shared-ui';
 import { Dialog } from 'evergreen-ui';
-import { useSite, useUser } from '@ltpx-frontend-apps/store';
+import { useChat, useSite, useUser } from '@ltpx-frontend-apps/store';
 import { useCallback, useEffect, useState } from 'react';
 import { NavLink, useParams } from 'react-router-dom';
 import { useCourseUtil } from '@ltpx-frontend-apps/store';
 import { useTranslation } from 'react-i18next';
 import CheckoutForm from '../../components/checkout-form/checkout-form';
+import { Chat, ChatNewPrivateRoom } from '../../components';
 
 type MessageCheckout = {
   text: string;
@@ -47,7 +49,11 @@ export function CourseDetails() {
   const { course, teacher, session } = currentFullCourse;
   const [message, setMessage] = useState<MessageCheckout>();
   const { customFormatDate, moment } = useMoment();
+  const {
+    _newChatRoom
+  } = useChat();
 
+ 
   const fetchCourse = useCallback(async () => {
     const { success, data, error } = await _getSiteCourse(slug || '');
     if (success) {
@@ -77,6 +83,14 @@ export function CourseDetails() {
   const enrolled = () => {
     if (currentFullCourse && isAuthenticated) {
       setOpenEnrollModal(true);
+    } else {
+      setOpenModal(true);
+    }
+  };
+
+  const chatTeacher = async () => {
+    if (isAuthenticated) {
+      await _newChatRoom(teacher.user_id)
     } else {
       setOpenModal(true);
     }
@@ -171,7 +185,7 @@ export function CourseDetails() {
                 </div>
                 <div>
                   <Button
-                    onClick={() => setOpenModal(true)}
+                    onClick={chatTeacher}
                     icon="chat"
                     title="Contactar Profesor"
                   />
@@ -235,8 +249,14 @@ export function CourseDetails() {
                   {selectedTab === 0 && (
                     <OverviewCourse
                       description={course.description}
-                      goals={course.learn_goals ? course.learn_goals.split('\n') : []}
-                      requirements={course.requirements ? course.requirements.split('\n') : []}
+                      goals={
+                        course.learn_goals ? course.learn_goals.split('\n') : []
+                      }
+                      requirements={
+                        course.requirements
+                          ? course.requirements.split('\n')
+                          : []
+                      }
                     />
                   )}
                   {selectedTab === 1 && (
@@ -293,7 +313,7 @@ export function CourseDetails() {
             />
             <div className={styles['contact-teacher']}>
               <Button
-                onClick={() => setOpenModal(true)}
+                onClick={chatTeacher}
                 icon="chat"
                 full={true}
                 title="Contactar Profesor"
@@ -345,16 +365,11 @@ export function CourseDetails() {
           />
         </div>
       </SectionInformation>
-      {/* <section className={styles['schedule-another-time']}>
-        <h2>¿Estos horarios no se ajustan a ti?</h2>
-        <Button title='Solicitar otro horario'/>
-      </section> */}
       <Dialog
         isShown={openModal}
         hasFooter={false}
         title="Regístrate y aprende hoy mismo"
         onCloseComplete={() => setOpenModal(false)}
-        // width={'35vw'}
       >
         <div className={styles['register-modal']}>
           <RegisterForm
@@ -407,3 +422,7 @@ export function CourseDetails() {
 }
 
 export default CourseDetails;
+function useTeacherLayout(): { headerLinks: any; handleNewChat: any; logoutSession: any; teacherAccount: any; users: any; currentUser: any; openChat: any; setOpenChat: any; openNewChat: any; setOpenNewChat: any; feedbackAction: any; clearMessageToast: any; } {
+  throw new Error('Function not implemented.');
+}
+

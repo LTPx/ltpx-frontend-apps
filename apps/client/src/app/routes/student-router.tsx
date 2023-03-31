@@ -16,7 +16,6 @@ import {
   StudentAccountProfile,
   StudentQuiz,
   StudentReviewQuiz,
-  StudentChat,
 } from '../student/index';
 import VideoMeetingLive from '../video/video-meeting-live/video-meeting-live';
 
@@ -30,7 +29,6 @@ export const StudentRoutes = () => {
           <Route path="/course/:slug" element={<CourseDetails />} />
         </Route>
         <Route path="student" element={<StudentLayout />}>
-          <Route path="chat" element={<StudentChat />} />
           <Route path="dashboard" element={<Dashboard />} />
           <Route path="courses" element={<StudentCourses />} />
           <Route path="courses/:courseId" element={<StudentCourse />} />

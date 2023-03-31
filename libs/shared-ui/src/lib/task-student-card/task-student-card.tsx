@@ -18,8 +18,8 @@ export interface TaskStudentCardProps {
 
 export function TaskStudentCard(props: TaskStudentCardProps) {
   const { title, description, id, studentTask } = props;
-  const [ openModal, setOpenModal] = useState(false);
-  const {_sendTask } = useStudent();
+  const [openModal, setOpenModal] = useState(false);
+  const { _sendTask } = useStudent();
 
   async function handleSendTask(params: TaskStudent) {
     const { data, success, error } = await _sendTask(params);
@@ -41,13 +41,13 @@ export function TaskStudentCard(props: TaskStudentCardProps) {
           </div>
         </div>
         <div className={styles['row-buttons']}>
-          {!studentTask &&
+          {!studentTask && (
             <Button
               title="Entregar tarea"
               icon="pencil"
               onClick={() => setOpenModal(true)}
             />
-          }
+          )}
           {studentTask?.answer && <h4>Esperando revision del docente</h4>}
           {studentTask?.approved && <h4>Aprobado</h4>}
         </div>
@@ -63,7 +63,7 @@ export function TaskStudentCard(props: TaskStudentCardProps) {
           description={description}
           onClose={() => setOpenModal(false)}
           onSubmit={(data) => {
-            handleSendTask({...data, ...{task_id: id}});
+            handleSendTask({ ...data, ...{ task_id: id } });
           }}
         />
       </Dialog>

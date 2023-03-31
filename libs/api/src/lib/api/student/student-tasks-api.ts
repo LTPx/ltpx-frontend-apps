@@ -1,5 +1,5 @@
 import { _http } from '../../http';
-import { TaskModel, TaskStudent } from '../../interfaces/task-interface';
+import { TaskModel, TaskStudent, TaskStudentResult } from '../../interfaces/task-interface';
 
 const http = _http;
 
@@ -30,7 +30,7 @@ export const getStudentTask = async (courseId: number, quizId: number) => {
 };
 
 export const studentSendTask = async (params: TaskStudent) => {
-  return new Promise<TaskModel>((resolve, reject) => {
+  return new Promise<TaskStudentResult>((resolve, reject) => {
     http
       .post(`/api/v1/student/task_results`, params)
       .then((response) => {

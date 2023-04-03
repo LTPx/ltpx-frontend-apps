@@ -81,20 +81,26 @@ export function TeacherProfile(props: TeacherProfileProps) {
         <div className={styles['information-wrap']}>
           <div className={styles['information-content']}>
             <h2>Sobre {name}</h2>
-            {biography.length > 500 ? (
-              <>
-                <p className={styles['text-description']}>
-                  {showMore ? biography : `${biography.substring(0, 500)}....`}
-                </p>
-                <div
-                  className={styles['show']}
-                  onClick={() => setShowMore(!showMore)}
-                >
-                  <h4>{showMore ? 'Mostrar menos' : 'Mostrar mas'}</h4>
-                </div>
-              </>
-            ) : (
-              <p className={styles['text-description']}>{biography}</p>
+            {biography && (
+              <div>
+                {biography.length > 500 ? (
+                  <>
+                    <p className={styles['text-description']}>
+                      {showMore
+                        ? biography
+                        : `${biography.substring(0, 500)}....`}
+                    </p>
+                    <div
+                      className={styles['show']}
+                      onClick={() => setShowMore(!showMore)}
+                    >
+                      <h4>{showMore ? 'Mostrar menos' : 'Mostrar mas'}</h4>
+                    </div>
+                  </>
+                ) : (
+                  <p className={styles['text-description']}>{biography}</p>
+                )}
+              </div>
             )}
             <div className={styles['social-networks']}>
               {socialNetworks.map((network, index) => (

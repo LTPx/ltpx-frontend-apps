@@ -1,5 +1,11 @@
 import styles from './site-layout.module.scss';
-import { Dropdown, Footer, Header, UserMenu } from '@ltpx-frontend-apps/shared-ui';
+import {
+  ChatFloat,
+  Dropdown,
+  Footer,
+  Header,
+  UserMenu,
+} from '@ltpx-frontend-apps/shared-ui';
 import { useUser } from '@ltpx-frontend-apps/store';
 import { Avatar } from 'evergreen-ui';
 import { useTranslation } from 'react-i18next';
@@ -14,7 +20,7 @@ export function SiteLayout() {
     await logout();
     navigate('/');
     window.location.reload();
-  }
+  };
 
   const mainLinks = [
     { title: t('header.home'), url: '/home' },
@@ -27,15 +33,13 @@ export function SiteLayout() {
     { title: t('header.register'), url: '/register', accent: true },
   ];
 
-  const headerLinks = isAuthenticated
-    ? mainLinks
-    : mainLinks.concat(authLinks);
+  const headerLinks = isAuthenticated ? mainLinks : mainLinks.concat(authLinks);
 
   const companyLinks = [
     { text: t('footer.about'), url: '/about' },
     { text: t('footer.blog'), url: '/blog' },
-    { text: "Términos y condiciones", url: '/terms-and-conditions' },
-    { text: "Preguntas Frecuentes", url: '/faq' },
+    { text: 'Términos y condiciones', url: '/terms-and-conditions' },
+    { text: 'Preguntas Frecuentes', url: '/faq' },
   ];
 
   return (
@@ -57,7 +61,7 @@ export function SiteLayout() {
                   },
                 ]}
               />
-              <Avatar name={user.fullname} size={35}/>
+              <Avatar name={user.fullname} size={35} />
             </Dropdown>
           )}
         </div>
@@ -65,8 +69,9 @@ export function SiteLayout() {
       <div className={styles['content']}>
         <Outlet />
       </div>
+      <ChatFloat />
       <div className={styles['footer']}>
-        <Footer companyLinks={companyLinks}/>
+        <Footer companyLinks={companyLinks} />
       </div>
     </div>
   );

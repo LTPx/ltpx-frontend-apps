@@ -40,16 +40,8 @@ export const TeacherRoutes = () => {
           <Route path="earnings" element={<TeacherEarnings />} />
           <Route path="sessions" element={<TeacherMeetingsAgenda />} />
           <Route
-            path="/teacher/quiz-review/:quizId"
-            element={<TeacherReviewQuiz />}
-          />
-          <Route
             path="live-meeting/:meetingId/:roomId"
             element={<VideoMeetingLive redirectUrl="/teacher/sessions" />}
-          />
-          <Route
-            path="/teacher/quiz-review/:quizId"
-            element={<TeacherReviewQuiz />}
           />
           <Route
             path="live-meeting/:meetingId/:roomId"

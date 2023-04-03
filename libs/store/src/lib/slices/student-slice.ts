@@ -17,7 +17,9 @@ import {
   QuizModel,
   studentEvaluateQuiz,
   studentSendTask,
+  TaskModel,
   TaskStudent,
+  TaskStudentResult,
   UserAnswer,
 } from '@ltpx-frontend-apps/api';
 
@@ -31,6 +33,7 @@ export type StudentSlice = {
   purchases: Purchase[];
   enrolledCourses: CourseModel[];
   enrolledCourse: CourseModel;
+  allTasks: TaskModel[];
   studentClasses: Classroom[];
   currentQuiz: QuizModel;
   _getStudentPayments: () => Promise<TResponse>;
@@ -55,6 +58,7 @@ export const createStudentSlice: StateCreator<StoreState, [], [], StudentSlice> 
   enrolledCourses: [],
   enrolledCourse: {} as CourseModel,
   studentClasses: [],
+  allTasks: [],
   currentQuiz: {} as QuizModel,
   _getStudentPayments: async (): Promise<TResponse> => {
     try {
@@ -136,6 +140,7 @@ export const createStudentSlice: StateCreator<StoreState, [], [], StudentSlice> 
   _getStudentTasks: async (courseId): Promise<TResponse> => {
     try {
       const tasks = await getStudentTasks(courseId);
+      set({allTasks: tasks})
       return { success: true, data: tasks };
     } catch (error) {
       return { success: false, error };
@@ -152,6 +157,15 @@ export const createStudentSlice: StateCreator<StoreState, [], [], StudentSlice> 
   _sendTask: async (params): Promise<TResponse> => {
     try {
       const task = await studentSendTask(params);
+      const tasks = get().allTasks;
+      const tasksUpdated = tasks.map((taskStore) => {
+        if (taskStore.id == task.task_id) {
+          return {...taskStore, ...{student_task: task}}
+        } else {
+          return taskStore
+        }
+      })
+      set({ allTasks: tasksUpdated });
       return { success: true, data: task };
     } catch (error) {
       return { success: false, error };

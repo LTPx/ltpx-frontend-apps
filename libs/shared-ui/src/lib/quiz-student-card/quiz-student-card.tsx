@@ -7,12 +7,13 @@ import styles from './quiz-student-card.module.scss';
 export interface QuizStudentCardProps {
   title: string;
   text: string;
+  score?: number;
   approved?: boolean;
   children?: ReactElement;
 }
 
 export function QuizStudentCard(props: QuizStudentCardProps) {
-  const { title, text, children, approved } = props;
+  const { title, text, children, approved, score } = props;
 
   return (
     <div className={styles['container']}>
@@ -22,9 +23,13 @@ export function QuizStudentCard(props: QuizStudentCardProps) {
           <h4>{title}</h4>
           <h4 className={styles['total-questions']}>{text}</h4>
           {approved ? (
-            <h5 className={styles['approved']}>Aprobado</h5>
+            <h5 className={styles['approved']}>
+              Calificación: {score} - Aprobado
+            </h5>
           ) : (
-            <h5 className={styles['no-approved']}></h5>
+            <h5 className={styles['no-approved']}>
+              Calificación: {score} - No aprobado
+            </h5>
           )}
         </div>
       </div>

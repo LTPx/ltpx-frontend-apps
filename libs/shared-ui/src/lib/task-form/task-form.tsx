@@ -72,10 +72,10 @@ export function TaskForm(props: TaskFormProps) {
         />
       ) : null}
       <div className={styles['field-upload']}>
-        <label>{'Subir tarea que debe cumplir el alumno (.pdf)'}</label>
+        <label>{'Subir tarea que debe cumplir el alumno'}</label>
         <FilesUploaded
           className={styles['uploader']}
-          type={TypeFile.pdf}
+          type={TypeFile.specific}
           onChange={(value) => {
             formik.setFieldValue('file', value);
           }}

@@ -24,15 +24,14 @@
 
 .container {
   // width: 70vw;
-
   .subtitle {
     padding-bottom: 1rem;
   }
   .task-student {
     padding: 1rem;
-    .title-task {
-      padding-bottom: 0.5rem;
-    }
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
   }
   .content {
     background-color: $white-color;
@@ -48,10 +47,11 @@
   }
   .achievements-content {
     display: flex;
-    padding: 1rem 0;
+    padding: 1rem 2rem;
+    flex-wrap: wrap;
+    gap: 1rem;
     .achievements {
       display: flex;
-      gap: 0.5rem;
       flex-wrap: wrap;
     }
   }

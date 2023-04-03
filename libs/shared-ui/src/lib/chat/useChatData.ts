@@ -37,7 +37,6 @@ export const useChatData = () => {
     const channel = pusher.subscribe(channelName);
     channel.bind('new', (newMessage: ChatMessage) => {
       if (newMessage.user_id !== user.id) {
-        console.log('newMessage: ', newMessage);
         appendNewMessage(newMessage);
       }
     })

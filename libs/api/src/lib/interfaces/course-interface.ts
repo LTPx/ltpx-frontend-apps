@@ -114,7 +114,8 @@ export interface Rating {
 }
 
 export interface TeacherSummary {
-  id: string;
+  id: number;
+  user_id: number;
   image: string;
   biography: string;
   name: string;

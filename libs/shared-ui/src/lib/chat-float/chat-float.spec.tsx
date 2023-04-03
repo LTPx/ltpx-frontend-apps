@@ -1,10 +1,10 @@
 import { render } from '@testing-library/react';
 
-import StudentChat from './student-chat';
+import ChatFloat from './chat-float';
 
-describe('StudentChat', () => {
+describe('ChatFloat', () => {
   it('should render successfully', () => {
-    const { baseElement } = render(<StudentChat />);
+    const { baseElement } = render(<ChatFloat />);
     expect(baseElement).toBeTruthy();
   });
 });

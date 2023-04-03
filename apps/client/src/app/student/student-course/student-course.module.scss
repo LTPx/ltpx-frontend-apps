@@ -1,8 +1,16 @@
 @import '../../../styles.scss';
-
+.wrap {
+  display: flex;
+  justify-content: center;
+}
 .container {
   margin-top: 3rem;
   width: 60vw;
+  .show {
+    color: $primary-color;
+    text-decoration: underline;
+    padding-bottom: 2rem;
+  }
 }
 .tabs-content {
   padding-top: $size-lg-1;

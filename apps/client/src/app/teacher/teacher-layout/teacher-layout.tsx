@@ -2,6 +2,7 @@ import styles from './teacher-layout.module.scss';
 import {
   Avatar,
   AvatarSize,
+  Chat,
   Dropdown,
   Header,
   Icon,
@@ -14,7 +15,7 @@ import { Outlet } from 'react-router-dom';
 import avatar from './../../../assets/images/avatars/avatar-3.svg';
 import { StatusTeacherAccount } from '@ltpx-frontend-apps/api';
 import { useTeacherLayout } from './useTeacherLayout';
-import { Chat, ChatNewPrivateRoom } from '../../components';
+import { ChatNewPrivateRoom } from '../../components';
 
 export function TeacherLayout() {
   const {

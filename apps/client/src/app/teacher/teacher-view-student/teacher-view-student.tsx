@@ -3,20 +3,20 @@ import { useCourseStudents } from '@ltpx-frontend-apps/store';
 import { useCallback, useEffect, useState } from 'react';
 import {
   AchievementModel,
-  CourseModel,
   QuizResult,
   TaskStudent,
 } from '@ltpx-frontend-apps/api';
 import {
-  AchievementCard,
+  AchievementBadge,
   Button,
-  ColorsButton,
   EmptyState,
   QuizStudentCard,
   Tabs,
   TaskTeacherCard,
 } from '@ltpx-frontend-apps/shared-ui';
 import { useParams } from 'react-router-dom';
+import { Dialog } from 'evergreen-ui';
+import TeacherReviewQuiz from '../teacher-review-quiz/teacher-review-quiz';
 /* eslint-disable-next-line */
 export interface TeacherViewStudentProps {
   studentId: number;
@@ -24,11 +24,12 @@ export interface TeacherViewStudentProps {
 export function TeacherViewStudent(props: TeacherViewStudentProps) {
   const { studentId } = props;
   const [quizzes, setQuizzes] = useState<QuizResult[]>([]);
-  const [course, setCourse] = useState<CourseModel[]>([]);
   const [achievements, setAchievements] = useState<AchievementModel[]>([]);
   const [tasks, setTasks] = useState<TaskStudent[]>([]);
+  const [openTest, setOpenTest] = useState(false);
+  const [quizId, setQuzId] = useState(0);
+
   const {
-    _getStudentsByCourse,
     _getStudentQuizzesByCourse,
     _getStudentAchievementsByCourse,
     _getStudentTasksByCourse,
@@ -113,12 +114,9 @@ export function TeacherViewStudent(props: TeacherViewStudentProps) {
             <div className={styles['task-student']}>
               {tasks.map((task, index) => (
                 <div key={index}>
-                  {/* <h4 className={styles['title-task']}>
-                    Tareas del estudiante:{' '}{courseId}
-                  </h4> */}
                   <TaskTeacherCard
                     title={task.title || ''}
-                    description={task.description || ''}
+                    answer={task.answer || ''}
                   />
                 </div>
               ))}
@@ -137,9 +135,6 @@ export function TeacherViewStudent(props: TeacherViewStudentProps) {
         <div>
           {quizzes.length > 0 ? (
             <div className={styles['content']}>
-              {/* <h4 className={styles['subtitle']}>
-                Test dados por el estudiante
-              </h4> */}
               <div className={styles['quizzes-content']}>
                 {quizzes?.map((quiz, index) => (
                   <div key={index}>
@@ -152,13 +147,32 @@ export function TeacherViewStudent(props: TeacherViewStudentProps) {
                           title="Calificar test"
                           icon="play-filled"
                           target={true}
-                          link={`/teacher/quiz-review/${quiz.id}`}
+                          onClick={() => {
+                            setOpenTest(true);
+                            setQuzId(quiz.id);
+                          }}
                         />
                       </div>
                     </QuizStudentCard>
                   </div>
                 ))}
               </div>
+              {openTest && (
+                <Dialog
+                  isShown={openTest}
+                  hasFooter={false}
+                  hasHeader={false}
+                  hasClose={true}
+                  topOffset={20}
+                  onCloseComplete={() => setOpenTest(false)}
+                  width={'65vw'}
+                >
+                  <TeacherReviewQuiz
+                    quizId={quizId}
+                    close={() => setOpenTest(false)}
+                  />
+                </Dialog>
+              )}
             </div>
           ) : (
             <EmptyState
@@ -175,10 +189,10 @@ export function TeacherViewStudent(props: TeacherViewStudentProps) {
           {achievements.length > 0 ? (
             <div className={styles['achievements-content']}>
               {achievements?.map((achievement, index) => (
-                <div className={styles['achievements']}  key={index}>
-                  <AchievementCard
+                <div className={styles['achievements']} key={index}>
+                  <AchievementBadge
+                    title={achievement.title}
                     image={achievement.image}
-                    text={achievement.title}
                   />
                 </div>
               ))}

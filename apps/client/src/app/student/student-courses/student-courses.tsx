@@ -22,24 +22,24 @@ export function StudentCourses(props: StudentCoursesProps) {
   }, []);
 
   return (
-    <div className={`${styles['container']}`}>
-      <h1>Mis Cursos</h1>
-      <br />
-      <div className="card with-padding">
-        <div className={styles['content']}>
-          {enrolledCourses.map((course, index) => (
-            <UserCourseCard
-              key={index}
-              image={course.cover_url}
-              startDate={course.created_at}
-              title={course.title}
-              progress={0}
-              url={`/student/courses/${course.id}`}
-            />
-          ))}
+      <div className={`${styles['container']}`}>
+        <h1>Mis Cursos</h1>
+        <br />
+        <div className="card with-padding">
+          <div className={styles['content']}>
+            {enrolledCourses.map((course, index) => (
+              <UserCourseCard
+                key={index}
+                image={course.cover_url}
+                startDate={course.created_at}
+                title={course.title}
+                progress={0}
+                url={`/student/courses/${course.id}`}
+              />
+            ))}
+          </div>
         </div>
       </div>
-    </div>
   );
 }
 

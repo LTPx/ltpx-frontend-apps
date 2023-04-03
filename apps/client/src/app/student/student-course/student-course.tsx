@@ -19,6 +19,7 @@ export function StudentCourse(props: StudentCourseProps) {
   const [selectedTab, setSelectedTab] = useState(0);
   const { courseId } = useParams();
   const id = parseInt(courseId || '');
+  const [showMore, setShowMore] = useState(false);
 
   const fetchCourse = useCallback(async () => {
     const { success, data, error } = await _getStudentCourse(id);
@@ -33,10 +34,6 @@ export function StudentCourse(props: StudentCourseProps) {
     fetchCourse();
   }, []);
 
-  const handleStartTest = () => {
-    console.log('start');
-  };
-
   const tabs = [
     { text: 'Curso' },
     { text: 'Clases' },
@@ -45,66 +42,84 @@ export function StudentCourse(props: StudentCourseProps) {
     { text: 'Logros' },
   ];
 
-  // { text: 'Curso', url: `/student/courses/${courseId}/?tab=curse` },
-  // { text: 'Clases', url: `/student/courses/${courseId}/?tab=classes` },
-  // { text: 'Tareas', url: `/student/courses/${courseId}/?tab=tasks` },
-  // { text: 'Tests', url: `/student/courses/${courseId}/?tab=quizzes` },
-  // { text: 'Logros', url: `/student/courses/${courseId}/?tab=achievements` },
   const handleClick = (index: number) => {
     setSelectedTab(index);
   };
 
   return (
-    <div className={styles['container']}>
-      <h1>Curso: {enrolledCourse.title}</h1>
-      <br />
-      <div className="card with-padding">
-        <Tabs
-          tabs={tabs}
-          isNav={false}
-          onClickTab={(option) => handleClick(option)}
-        />
-        <div className={styles['tabs-content']}>
-          {selectedTab === 0 && (
-            <div className={styles['contents-course']}>
-              <h2 className={styles['title-content']}>Sobre el Curso</h2>
-              <p className={styles['about-course']}>
+    <div className={styles['wrap']}>
+      <div className={styles['container']}>
+        <h1>Curso: {enrolledCourse.title}</h1>
+        <br />
+        <div className="card with-padding">
+          <Tabs
+            tabs={tabs}
+            isNav={false}
+            onClickTab={(option) => handleClick(option)}
+          />
+          <div className={styles['tabs-content']}>
+            {selectedTab === 0 && (
+              <div className={styles['contents-course']}>
+                <h2 className={styles['title-content']}>Sobre el Curso</h2>
+                {enrolledCourse.description && (
+                  <div>
+                    {enrolledCourse.description.length > 800 ? (
+                      <>
+                        <p className={styles['about-course']}>
+                          {showMore
+                            ? enrolledCourse.description
+                            : `${enrolledCourse.description.substring(
+                                0,
+                                800
+                              )}....`}
+                        </p>
+                        <div
+                          className={styles['show']}
+                          onClick={() => setShowMore(!showMore)}
+                        >
+                          <h4>{showMore ? 'Mostrar menos' : 'Mostrar mas'}</h4>
+                        </div>
+                      </>
+                    ) : (
+                      <p className={styles['about-course']}>
+                        {enrolledCourse.description}
+                      </p>
+                    )}
+                  </div>
+                )}
+
+                {/* <p className={styles['about-course']}>
                 {enrolledCourse.description}
-              </p>
-              <h3 className={styles['subtitle-content']}>Contenidos</h3>
-              <CourseContents contents={enrolledCourse.contents || []} />
-            </div>
-          )}
-          {selectedTab === 1 && (
-            <div className={styles['course-date']}>
-              {enrolledCourse.session.meetings.map((meeting, index) => (
-                <CourseDateCard
-                  className={styles['course-class']}
-                  key={index}
-                  title={'Reunion ' + (index + 1)}
-                  description={
-                    'Fecha: ' + meeting.month + ' - ' + meeting.day_number
-                  }
-                  time={'Hora: ' + meeting.end_time}
-                />
-              ))}
-            </div>
-          )}
-          {selectedTab === 2 && (
-            <StudentCourseTasks
-              courseId={enrolledCourse.id}
-            />
-          )}
-          {selectedTab === 3 && (
-            <StudentCourseQuizzes
-              courseId={enrolledCourse.id}
-            />
-          )}
-          {selectedTab === 4 && (
-            <StudentCourseAchievements
-              courseId={ parseInt(courseId || '')}
-            />
-          )}
+              </p> */}
+                <h3 className={styles['subtitle-content']}>Contenidos</h3>
+                <CourseContents contents={enrolledCourse.contents || []} />
+              </div>
+            )}
+            {selectedTab === 1 && (
+              <div className={styles['course-date']}>
+                {enrolledCourse.session.meetings.map((meeting, index) => (
+                  <CourseDateCard
+                    className={styles['course-class']}
+                    key={index}
+                    title={'Reunion ' + (index + 1)}
+                    description={
+                      'Fecha: ' + meeting.month + ' - ' + meeting.day_number
+                    }
+                    time={'Hora: ' + meeting.end_time}
+                  />
+                ))}
+              </div>
+            )}
+            {selectedTab === 2 && (
+              <StudentCourseTasks courseId={enrolledCourse.id} />
+            )}
+            {selectedTab === 3 && (
+              <StudentCourseQuizzes courseId={enrolledCourse.id} />
+            )}
+            {selectedTab === 4 && (
+              <StudentCourseAchievements courseId={parseInt(courseId || '')} />
+            )}
+          </div>
         </div>
       </div>
     </div>

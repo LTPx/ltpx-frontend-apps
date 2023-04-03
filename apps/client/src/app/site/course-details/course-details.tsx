@@ -317,7 +317,7 @@ export function CourseDetails() {
                 onClick={chatWithTeacher}
                 icon="chat"
                 full={true}
-                title="Contactar Profesor cc"
+                title="Tengo una pregunta"
               />
             </div>
           </div>

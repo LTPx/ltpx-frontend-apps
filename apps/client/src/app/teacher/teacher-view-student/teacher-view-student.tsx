@@ -165,7 +165,7 @@ export function TeacherViewStudent(props: TeacherViewStudentProps) {
                   hasClose={true}
                   topOffset={20}
                   onCloseComplete={() => setOpenTest(false)}
-                  width={'60vw'}
+                  width={'65vw'}
                 >
                   <TeacherReviewQuiz
                     quizId={quizId}

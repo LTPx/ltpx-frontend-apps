@@ -69,7 +69,7 @@ export function SiteLayout() {
       <div className={styles['content']}>
         <Outlet />
       </div>
-      <ChatFloat />
+      {isAuthenticated && <ChatFloat />}
       <div className={styles['footer']}>
         <Footer companyLinks={companyLinks} />
       </div>

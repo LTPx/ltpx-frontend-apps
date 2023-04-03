@@ -3,15 +3,12 @@ import { useCourseStudents } from '@ltpx-frontend-apps/store';
 import { useCallback, useEffect, useState } from 'react';
 import {
   AchievementModel,
-  CourseModel,
   QuizResult,
   TaskStudent,
 } from '@ltpx-frontend-apps/api';
 import {
   AchievementBadge,
-  AchievementCard,
   Button,
-  ColorsButton,
   EmptyState,
   QuizStudentCard,
   Tabs,
@@ -27,15 +24,12 @@ export interface TeacherViewStudentProps {
 export function TeacherViewStudent(props: TeacherViewStudentProps) {
   const { studentId } = props;
   const [quizzes, setQuizzes] = useState<QuizResult[]>([]);
-  const [course, setCourse] = useState<CourseModel[]>([]);
   const [achievements, setAchievements] = useState<AchievementModel[]>([]);
   const [tasks, setTasks] = useState<TaskStudent[]>([]);
   const [openTest, setOpenTest] = useState(false);
   const [quizId, setQuzId] = useState(0);
 
-
   const {
-    _getStudentsByCourse,
     _getStudentQuizzesByCourse,
     _getStudentAchievementsByCourse,
     _getStudentTasksByCourse,
@@ -154,10 +148,9 @@ export function TeacherViewStudent(props: TeacherViewStudentProps) {
                           icon="play-filled"
                           target={true}
                           onClick={() => {
-                            setOpenTest(true)
-                            setQuzId(quiz.id)
-                          }
-                        }
+                            setOpenTest(true);
+                            setQuzId(quiz.id);
+                          }}
                         />
                       </div>
                     </QuizStudentCard>
@@ -174,7 +167,10 @@ export function TeacherViewStudent(props: TeacherViewStudentProps) {
                   onCloseComplete={() => setOpenTest(false)}
                   width={'65vw'}
                 >
-                  <TeacherReviewQuiz quizId={quizId} />
+                  <TeacherReviewQuiz
+                    quizId={quizId}
+                    close={() => setOpenTest(false)}
+                  />
                 </Dialog>
               )}
             </div>

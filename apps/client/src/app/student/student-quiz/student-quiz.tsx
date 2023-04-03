@@ -3,6 +3,7 @@ import { QuestionQuiz, TypeQuestionQuiz } from '@ltpx-frontend-apps/api';
 import {
   Button,
   ColorsButton,
+  DialogConfirm,
   InputTextStatus,
   QuizConditionalQuestion,
   QuizMultiselectQuestion,
@@ -29,6 +30,7 @@ export function StudentQuiz() {
   const course_id = parseInt(courseId || '');
 
   const [openModal, setOpenModal] = useState(false);
+  const [openConfirmation, setOpenConfirmation] = useState(false);
   const [score, setScore] = useState<number>(0);
 
   const fetchQuiz = useCallback(async () => {
@@ -59,18 +61,24 @@ export function StudentQuiz() {
   const formik = useFormik({
     initialValues: answersForm,
     validationSchema: Yup.object({
-      answers: Yup.mixed().test(
-        'answers',
-        'La respuesta no puede estar vacía',
-        (data) => {
-          if (data) {
-            console.log('prueba',data)
-            return true;
-          } else {
-            return false;
-          }
-        }
-      ),
+      // answers: Yup.mixed().test(
+      //     'answers',
+      //     'La respuesta no puede estar vacía',
+      //     (data) => {
+      //       console.log('aqui',data);
+      //       return data.forEach((question: any) => {
+      //         // debugger
+      //         if (question.kind === TypeQuestionQuiz.answer) {
+      //           if (question.answers.length > 0){
+      //             console.log('aqui', question.answers)
+      //             return true;
+      //           } else {
+      //             return false;
+      //           }
+      //         }
+      //       });
+      //     }
+      //   ),
     }),
     enableReinitialize: true,
     onSubmit: async (fields) => {
@@ -198,11 +206,20 @@ export function StudentQuiz() {
             <Button
               title="Finalizar test"
               type={TypeButton.submit}
-              onClick={formik.handleSubmit}
+              onClick={() => {
+                setOpenConfirmation(true);
+              }}
             />
           </div>
         </form>
       )}
+      <DialogConfirm
+        open={openConfirmation}
+        onClose={() => setOpenConfirmation(false)}
+        confirm={formik.handleSubmit}
+        title={'Seguro que desea enviar?'}
+        subtitle={'Recuerda verificar que todas las preguntas estén respondidas'}
+      />
       <Dialog
         isShown={openModal}
         hasFooter={false}

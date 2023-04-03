@@ -1,7 +1,5 @@
 import { QuizResultSummary } from '@ltpx-frontend-apps/api';
-import {
-  QuizReviewTeacher,
-} from '@ltpx-frontend-apps/shared-ui';
+import { QuizReviewTeacher } from '@ltpx-frontend-apps/shared-ui';
 import { useStudent } from '@ltpx-frontend-apps/store';
 import { useCallback, useEffect, useState } from 'react';
 import styles from './teacher-review-quiz.module.scss';
@@ -9,10 +7,11 @@ import styles from './teacher-review-quiz.module.scss';
 /* eslint-disable-next-line */
 export interface TeacherReviewQuizProps {
   quizId: number;
+  close?: () => void;
 }
 
 export function TeacherReviewQuiz(props: TeacherReviewQuizProps) {
-  const { quizId } = props;
+  const { quizId, close } = props;
   const [quiz, setQuiz] = useState<QuizResultSummary>();
   const { _getStudentQuizResult } = useStudent();
 
@@ -38,6 +37,7 @@ export function TeacherReviewQuiz(props: TeacherReviewQuizProps) {
           userAnswers={quiz.user_answers}
           score={quiz.score}
           submittedAt={quiz.submitted_at}
+          onClose={close}
         />
       )}
     </div>

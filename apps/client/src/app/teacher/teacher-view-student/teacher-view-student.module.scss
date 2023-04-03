@@ -48,11 +48,11 @@
   .achievements-content {
     display: flex;
     padding: 1rem 2rem;
+    flex-wrap: wrap;
+    gap: 1rem;
     .achievements {
       display: flex;
-      gap: 1rem;
       flex-wrap: wrap;
-
     }
   }
   .btn-test {

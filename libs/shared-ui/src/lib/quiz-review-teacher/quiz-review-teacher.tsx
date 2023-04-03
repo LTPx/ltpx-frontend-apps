@@ -11,6 +11,7 @@ export interface QuizReviewTeacherProps {
   quiz: QuizModel;
   score: number;
   submittedAt: string;
+  onClose?: () => void;
   userAnswers: {
     answer_id: number;
     id: number;
@@ -20,7 +21,7 @@ export interface QuizReviewTeacherProps {
 }
 
 export function QuizReviewTeacher(props: QuizReviewTeacherProps) {
-  const { quiz, userAnswers, score, submittedAt, children } = props;
+  const { quiz, userAnswers, score, submittedAt, children, onClose } = props;
   const [style, setStyle] = useState('answer-content');
   const answersIds = userAnswers.map((answer) => answer.answer_id);
   const foundAnswer = (answerId: number) => {
@@ -123,7 +124,7 @@ export function QuizReviewTeacher(props: QuizReviewTeacherProps) {
                         </h3>
                         <p>{question.description}</p>
                         {question.answers_attributes.map((answer, i) => (
-                          <pre className={styles['question-answer']} key={i}>
+                          <pre className={styles[style]} key={i}>
                             {foundAnswer(answer.id)?.text}
                           </pre>
                         ))}
@@ -160,7 +161,11 @@ export function QuizReviewTeacher(props: QuizReviewTeacherProps) {
             />
           </div>
           <div className={styles['footer']}>
-            <Button title="Cancelar" color={ColorsButton.white} />
+            <Button
+              title="Cancelar"
+              color={ColorsButton.white}
+              onClick={onClose}
+            />
             <Button title="Guardar" color={ColorsButton.primary} />
           </div>
         </div>

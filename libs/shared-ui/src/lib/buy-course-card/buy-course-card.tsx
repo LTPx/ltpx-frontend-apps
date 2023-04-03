@@ -37,7 +37,7 @@ export function BuyCourseCard(props: BuyCourseCardProps) {
   return (
     <div className={styles['container']}>
       <div className={`${styles['buy-card']}`}>
-        <img loading="lazy" src={image} alt="" />
+        <img className={styles['image-card']} loading="lazy" src={image} alt="" />
         <div className={`${styles['summary']}`}>
           <div className={styles['price-promo']}>
             <div className={styles['price']}>

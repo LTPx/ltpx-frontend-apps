@@ -55,41 +55,43 @@ export function Dashboard(props: DashboardProps) {
   }, []);
   return (
     <div className={styles['container']}>
-      <h1>Bienvenido {user.fullname}!</h1>
-      <div className={styles['cards-dashboard']}>
-        {cards.map((card, index) => (
-          <CourseCounterCard
-            key={index}
-            count={card.count}
-            text={card.text}
-            color={card.color}
-          />
-        ))}
-      </div>
-      <div className={styles['layout']}>
-        <div className={styles['content']}>
-          <h2>Mis Cursos</h2>
-          <div className={styles['courses']}>
-            {enrolledCourses.map((course, index) => (
-              <UserCourseCard
-                key={index}
-                image={course.cover_url}
-                startDate={course.created_at}
-                title={course.title}
-                progress={0}
-                url={`/student/courses/${course.id}`}
-              />
-            ))}
-          </div>
+      <div className={styles['wrap']}>
+        <h1>Bienvenido {user.fullname}!</h1>
+        <div className={styles['cards-dashboard']}>
+          {cards.map((card, index) => (
+            <CourseCounterCard
+              key={index}
+              count={card.count}
+              text={card.text}
+              color={card.color}
+            />
+          ))}
         </div>
-        <div className={styles['help-ads']}>
-          <div className={styles['profile']}>
-            <div className={styles['general-information']}>
-              <NavLink to="/student/account">
-                <Avatar name={user.fullname} size={110} />
-              </NavLink>
-              <h3>{user.fullname}</h3>
-              <h4>{user.email}</h4>
+        <div className={styles['layout']}>
+          <div className={styles['content']}>
+            <h2>Mis Cursos</h2>
+            <div className={styles['courses']}>
+              {enrolledCourses.map((course, index) => (
+                <UserCourseCard
+                  key={index}
+                  image={course.cover_url}
+                  startDate={course.created_at}
+                  title={course.title}
+                  progress={0}
+                  url={`/student/courses/${course.id}`}
+                />
+              ))}
+            </div>
+          </div>
+          <div className={styles['help-ads']}>
+            <div className={styles['profile']}>
+              <div className={styles['general-information']}>
+                <NavLink to="/student/account">
+                  <Avatar name={user.fullname} size={110} />
+                </NavLink>
+                <h3>{user.fullname}</h3>
+                <h4>{user.email}</h4>
+              </div>
             </div>
           </div>
         </div>

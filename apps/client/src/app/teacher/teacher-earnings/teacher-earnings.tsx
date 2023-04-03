@@ -36,6 +36,7 @@ export function TeacherEarnings() {
   async function handleWithdrawal(params: WithdrawalParams) {
     const { success, data, error } = await _makeWithdrawal(params);
     if (success) {
+      await _getWallet();
       console.log('data: ', data);
     } else {
       console.log('error: ', error);

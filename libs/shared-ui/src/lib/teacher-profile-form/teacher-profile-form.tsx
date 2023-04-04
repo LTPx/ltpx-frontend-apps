@@ -14,7 +14,6 @@ export interface TeacherProfileFormProps {
 
 export function TeacherProfileForm(props: TeacherProfileFormProps) {
   const { onSubmit, profile } = props;
-
   function getSocialNetwork(socialNetwork: string) {
     const socialNetworks = profile?.social_networks || [];
     return socialNetworks.find((sn) => sn.name === socialNetwork)?.url || '';

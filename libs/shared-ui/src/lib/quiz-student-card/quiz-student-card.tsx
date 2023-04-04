@@ -1,5 +1,4 @@
 import { ReactElement } from 'react';
-import Button, { ColorsButton } from '../button/button';
 import Icon from '../icon/icon';
 import styles from './quiz-student-card.module.scss';
 
@@ -22,14 +21,18 @@ export function QuizStudentCard(props: QuizStudentCardProps) {
         <div className={styles['row-info']}>
           <h4>{title}</h4>
           <h4 className={styles['total-questions']}>{text}</h4>
-          {approved ? (
-            <h5 className={styles['approved']}>
-              Calificación: {score} - Aprobado
-            </h5>
-          ) : (
-            <h5 className={styles['no-approved']}>
-              Calificación: {score} - No aprobado
-            </h5>
+          {score && (
+            <div>
+              {approved ? (
+                <h5 className={styles['approved']}>
+                  Calificación: {score} - Aprobado
+                </h5>
+              ) : (
+                <h5 className={styles['no-approved']}>
+                  Calificación: {score} - No aprobado
+                </h5>
+              )}
+            </div>
           )}
         </div>
       </div>

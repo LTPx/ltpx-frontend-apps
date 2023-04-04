@@ -28,21 +28,23 @@ export function StudentReviewQuiz(props: StudentReviewQuizProps) {
   }, []);
 
   return (
-    <div className={styles['container']}>
-      {quizResult?.id && (
-        <QuizView
-          quiz={quizResult.quiz}
-          userAnswers={quizResult.user_answers}
-          score={quizResult.score}
-          submittedAt={quizResult.submitted_at}
-        >
-          <Button
-            title="Regresar"
-            color={ColorsButton.secondary}
-            link={`/student/courses/${courseId}`}
-          />
-        </QuizView>
-      )}
+    <div className={styles['wrap']}>
+      <div className={styles['container']}>
+        {quizResult?.id && (
+          <QuizView
+            quiz={quizResult.quiz}
+            userAnswers={quizResult.user_answers}
+            score={quizResult.score}
+            submittedAt={quizResult.submitted_at}
+          >
+            <Button
+              title="Regresar"
+              color={ColorsButton.secondary}
+              link={`/student/courses/${courseId}`}
+            />
+          </QuizView>
+        )}
+      </div>
     </div>
   );
 }

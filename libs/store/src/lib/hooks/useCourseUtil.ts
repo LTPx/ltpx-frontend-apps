@@ -3,6 +3,7 @@ import {
   CATEGORIES,
   LANGUAGES,
   LEVELS,
+  OPTIONS
 } from '@ltpx-frontend-apps/api';
 import { useTranslation } from 'react-i18next';
 
@@ -29,6 +30,17 @@ export const useCourseUtil = () => {
       value: value,
     };
   });
+
+  const options = OPTIONS.map((value) => {
+    return {
+      text: t(`options.${value}`),
+      value: value,
+    };
+  });
+
+   const translateOption = (option: string) => {
+    return t(`option_conditional_test.${option}`);
+  };
 
   const translateCategory = (category: string) => {
     return t(`course_categories.${category}`);
@@ -58,11 +70,13 @@ export const useCourseUtil = () => {
     categories,
     languages,
     levels,
+    options,
     translateCategory,
     translateLevel,
     translateLanguage,
     translateStatus,
     translateQuizCategories,
-    translateAchievementType
+    translateAchievementType,
+    translateOption
   };
 };

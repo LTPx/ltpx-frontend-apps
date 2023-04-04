@@ -1,4 +1,8 @@
-import { StatusAccount, TypeAccounts, UserModel } from '@ltpx-frontend-apps/api';
+import {
+  StatusAccount,
+  TypeAccounts,
+  UserModel,
+} from '@ltpx-frontend-apps/api';
 import { useAdmin, useChat } from '@ltpx-frontend-apps/store';
 import { Avatar } from 'evergreen-ui';
 import { useCallback, useEffect, useState } from 'react';
@@ -18,16 +22,13 @@ export interface UsersTable {
 export interface UsersPageProps {}
 
 export function UsersPage(props: UsersPageProps) {
-  const [ users, setUsers] = useState<UserModel[]>([]);
+  const [users, setUsers] = useState<UserModel[]>([]);
   const { _getUsers } = useAdmin();
-  const {
-    _newChatRoom,
-    setShowChat,
-  } = useChat();
-  
+  const { _newChatRoom, setShowChat } = useChat();
+
   const fetchUsers = useCallback(async () => {
     const { success, data, error } = await _getUsers();
-    if ( success) {
+    if (success) {
       setUsers(data);
     } else {
       console.log('error: ', error);
@@ -40,7 +41,7 @@ export function UsersPage(props: UsersPageProps) {
   }, [fetchUsers]);
 
   const chatWithUser = async (id: number) => {
-    await _newChatRoom(id)
+    await _newChatRoom(id);
     setShowChat(true);
   };
 
@@ -66,20 +67,20 @@ export function UsersPage(props: UsersPageProps) {
               <td>{user.email}</td>
               <td>{user.initial_register}</td>
               <td className={styles['actions']}>
-              <Button
-                onClick={() =>chatWithUser(user.id)}
-                icon="chat"
-                color={ColorsButton.secondary}
-                outline={true}
-                title=""
-              />
-              <Button
-                icon="eye"
-                color={ColorsButton.secondary}
-                title="Ver perfil"
-                outline={true}
-              />
-                </td>
+                <Button
+                  icon="eye"
+                  color={ColorsButton.secondary}
+                  title="Ver perfil"
+                  outline={true}
+                />
+                <Button
+                  onClick={() => chatWithUser(user.id)}
+                  icon="chat"
+                  color={ColorsButton.secondary}
+                  outline={true}
+                  title=""
+                />
+              </td>
             </tr>
           ))}
         </tbody>

@@ -1,5 +1,5 @@
 import { Tabs, useMoment } from '@ltpx-frontend-apps/shared-ui';
-import { useAdmin, useCourseUtil, useUtil } from '@ltpx-frontend-apps/store';
+import { useAdmin, useCourseUtil } from '@ltpx-frontend-apps/store';
 import { useCallback, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import styles from './courses-pages.module.scss';

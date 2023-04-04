@@ -14,6 +14,8 @@ export const CATEGORIES = [
   'others',
 ];
 
+export const OPTIONS = ['true', 'false'];
+
 export const LEVELS = ['beginner', 'medium', 'advance', 'all'];
 
 export const LANGUAGES = ['es', 'en'];

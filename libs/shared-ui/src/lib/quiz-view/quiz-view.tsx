@@ -2,6 +2,7 @@ import { QuizModel, TypeQuestionQuiz } from '@ltpx-frontend-apps/api';
 import styles from './quiz-view.module.scss';
 import moment from 'moment';
 import { ReactElement } from 'react';
+import { useCourseUtil } from '@ltpx-frontend-apps/store';
 moment.locale('es');
 /* eslint-disable-next-line */
 export interface QuizViewProps {
@@ -19,6 +20,8 @@ export interface QuizViewProps {
 export function QuizView(props: QuizViewProps) {
   const { quiz, userAnswers, score, submittedAt, children } = props;
   const answersIds = userAnswers.map((answer) => answer.answer_id);
+  const { translateOption } = useCourseUtil();
+
   const foundAnswer = (answerId: number) => {
     return userAnswers.find((answer) => answer.answer_id == answerId);
   };
@@ -59,7 +62,7 @@ export function QuizView(props: QuizViewProps) {
                                 : ''
                             }`}
                           >
-                            {answer.text}
+                            {translateOption(answer.text)}
                           </p>
                         ))}
                       </div>

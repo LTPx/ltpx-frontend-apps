@@ -23,7 +23,7 @@ export const useChatData = () => {
 
   useEffectOnce(() => {
     fetchRooms();
-    listenMessages();
+    // listenMessages();
 
     return () => {
       const channelName = `listen_messages_user_${user.id}`;

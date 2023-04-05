@@ -69,7 +69,8 @@ export function TaskFormStudent(props: TaskFormStudentProps) {
         <Button
           className={styles['btn-submit']}
           color={ColorsButton.primary}
-          title={'Enviar al profesor'}
+          icon='rocket'
+          title={'Enviar mi tarea'}
           type={TypeButton.submit}
           onClick={formik.handleSubmit}
         />

@@ -47,6 +47,10 @@ export const es = {
     secondary_education: 'Educación Secundaria',
     others: 'Otros',
   },
+  option_conditional_test: {
+    true: 'Verdadero',
+    false: 'Falso'
+  },
   levels: {
     beginner: 'Básico',
     medium: 'Intermedio',

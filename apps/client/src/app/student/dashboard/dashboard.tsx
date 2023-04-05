@@ -37,7 +37,7 @@ export function Dashboard(props: DashboardProps) {
     },
     {
       count: 4,
-      text: 'Test en Progreso',
+      text: 'Logros Obtenidos',
       color: ColorsCounterCard.red,
     },
   ];

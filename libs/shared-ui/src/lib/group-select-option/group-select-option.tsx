@@ -1,6 +1,8 @@
 import styles from './group-select-option.module.scss';
 import { useState } from 'react';
 import Icon from '../icon/icon';
+import { TypeQuestionQuiz } from '@ltpx-frontend-apps/api';
+import { useCourseUtil } from '@ltpx-frontend-apps/store';
 
 /* eslint-disable-next-line */
 export interface OptionSelectGroup {
@@ -17,6 +19,7 @@ export interface GroupSelectOptionProps {
 export function GroupSelectOption(props: GroupSelectOptionProps) {
   const { options, onChange, className } = props;
   const [selectedIndex, setSelectedIndex] = useState(-1);
+  const { translateOption } = useCourseUtil();
 
   const handleClick = (index: number) => {
     setSelectedIndex(index);

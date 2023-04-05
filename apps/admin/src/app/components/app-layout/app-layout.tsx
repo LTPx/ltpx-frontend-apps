@@ -88,8 +88,8 @@ export function AppLayout(props: AppLayoutProps) {
         <div className={styles['teacher-actions']}>
           <Dropdown>
             <UserMenu
-              name={'Admin System'}
-              email={'admin@example.com'}
+              name={user.fullname}
+              email={user.email}
               links={[
                 {
                   icon: 'log-out',
@@ -102,7 +102,7 @@ export function AppLayout(props: AppLayoutProps) {
               ]}
             />
             <div className={styles['avatar']}>
-              <Avatar name={'Admin System'} size={40} color="green" />
+              <Avatar name={user.fullname} size={40} color="green" />
               <Icon icon="caret-down" size={18} />
             </div>
           </Dropdown>

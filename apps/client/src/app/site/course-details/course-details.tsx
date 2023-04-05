@@ -20,7 +20,6 @@ import {
   useMoment,
   AchievementBadge,
   SectionInformation,
-  Icon,
 } from '@ltpx-frontend-apps/shared-ui';
 import { Dialog } from 'evergreen-ui';
 import { useChat, useSite, useUser } from '@ltpx-frontend-apps/store';
@@ -188,7 +187,7 @@ export function CourseDetails() {
                   <Button
                     onClick={chatWithTeacher}
                     icon="chat"
-                    title="Contactar Profesor s"
+                    title="Tengo una pregunta"
                   />
                 </div>
               </div>

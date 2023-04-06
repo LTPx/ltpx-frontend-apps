@@ -4,7 +4,7 @@ import { useCallback, useEffect, useState } from 'react';
 import {
   AchievementModel,
   QuizResult,
-  TaskStudent,
+  TaskStudentResult,
 } from '@ltpx-frontend-apps/api';
 import {
   AchievementBadge,
@@ -25,7 +25,7 @@ export function TeacherViewStudent(props: TeacherViewStudentProps) {
   const { studentId } = props;
   const [quizzes, setQuizzes] = useState<QuizResult[]>([]);
   const [achievements, setAchievements] = useState<AchievementModel[]>([]);
-  const [tasks, setTasks] = useState<TaskStudent[]>([]);
+  const [tasks, setTasks] = useState<TaskStudentResult[]>([]);
   const [openTest, setOpenTest] = useState(false);
   const [quizId, setQuzId] = useState(0);
 
@@ -115,8 +115,11 @@ export function TeacherViewStudent(props: TeacherViewStudentProps) {
               {tasks.map((task, index) => (
                 <div key={index}>
                   <TaskTeacherCard
-                    title={task.title || ''}
-                    answer={task.answer || ''}
+                    title={task.task.title || ''}
+                    descriptionTask={task.task.description || ''}
+                    fileTeacher={task.task.file_url}
+                    answerStudent={task.answer || ''}
+                    fileStudent={task.file_url}
                   />
                 </div>
               ))}

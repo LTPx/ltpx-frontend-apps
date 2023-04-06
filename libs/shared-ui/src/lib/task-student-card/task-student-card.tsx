@@ -12,12 +12,13 @@ export interface TaskStudentCardProps {
   title: string;
   description: string;
   id: number;
+  file?: any;
   children?: ReactElement;
   studentTask?: TaskStudentResult;
 }
 
 export function TaskStudentCard(props: TaskStudentCardProps) {
-  const { title, description, id, studentTask } = props;
+  const { title, description, id, studentTask,file } = props;
   const [openModal, setOpenModal] = useState(false);
   const { _sendTask } = useStudent();
 
@@ -61,6 +62,7 @@ export function TaskStudentCard(props: TaskStudentCardProps) {
       >
         <TaskFormStudent
           description={description}
+          fileTask={file}
           onClose={() => setOpenModal(false)}
           onSubmit={(data) => {
             handleSendTask({ ...data, ...{ task_id: id } });

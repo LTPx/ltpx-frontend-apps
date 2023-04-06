@@ -5,14 +5,21 @@ export interface TaskStudentResult {
   student_id: number;
   answer: string;
   approved: boolean;
+  file_url?: any;
   comments: string[];
   score: number;
+  task: {
+    title: string;
+    description: string;
+    file_url?: any;
+  };
 }
 
 export interface TaskModel {
   id: number;
   course_id: number;
   title: string;
+  file_url?: any;
   description: string;
   student_task?: TaskStudentResult;
   created_at: string;

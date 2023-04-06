@@ -8,12 +8,15 @@ import styles from './task-teacher-card.module.scss';
 /* eslint-disable-next-line */
 export interface TaskTeacherCardProps {
   title: string;
-  answer: string;
-  file?: any;
+  fileTeacher?: any;
+  answerStudent?: string;
+  descriptionTask?: string;
+  fileStudent?: any;
 }
 
 export function TaskTeacherCard(props: TaskTeacherCardProps) {
-  const { title, answer, file } = props;
+  const { title, descriptionTask, answerStudent, fileStudent, fileTeacher } =
+    props;
   const [isCorrect, setIsCorrect] = useState(false);
   const [openModal, setOpenModal] = useState(false);
 
@@ -49,19 +52,47 @@ export function TaskTeacherCard(props: TaskTeacherCardProps) {
         hasFooter={false}
         title={title}
         onCloseComplete={() => setOpenModal(false)}
-        width={'40vw'}
+        width={'45vw'}
+        topOffset={40}
       >
         <div className={styles['task']}>
           <div className={styles['task-content']}>
-            <h4 className={styles['title-answer']}> Respuesta del estudiante:</h4>
-            <h4 className={styles['answer']}>{answer}</h4>
-            <TextArea 
-              label={'Comentario de Tarea (opcional)'}
-              rows={5}
-            />
+            <div className={styles['task-information']}>
+              {descriptionTask && (
+                <div className={styles['description']}>
+                  <h4 className={styles['description-title-teacher']}>
+                    Descripción de la Tarea:
+                  </h4>
+                  <h4 className={styles['description-task-teacher']}>
+                    {descriptionTask}
+                  </h4>
+                </div>
+              )}
+              {fileTeacher && (
+                <a href={fileTeacher} target="_blank">
+                  Archivo adjunto
+                </a>
+              )}
+            </div>
+            <div className={styles['task-information']}>
+              {answerStudent && (
+                <div>
+                  <h4 className={styles['title-answer']}>
+                    Respuesta del estudiante:
+                  </h4>
+                  <h4 className={styles['answer']}>{answerStudent}</h4>
+                </div>
+              )}
+              {fileStudent && (
+                <a href={fileStudent} target="_blank">
+                  Archivo adjunto
+                </a>
+              )}
+            </div>
+            <TextArea label={'Comentario de Tarea (opcional)'} rows={5} />
           </div>
           <div className={styles['footer']}>
-          <Button
+            <Button
               title="No es correcta"
               icon="close"
               onClick={() => {

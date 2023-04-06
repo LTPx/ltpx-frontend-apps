@@ -7,12 +7,13 @@ import FilesUploaded, { TypeFile } from '../files-uploaded/files-uploaded';
 /* eslint-disable-next-line */
 export interface TaskFormStudentProps {
   description?: string;
+  fileTask?: any;
   onClose?: () => void;
   onSubmit?: (task: { answer: string; file: any }) => void;
 }
 
 export function TaskFormStudent(props: TaskFormStudentProps) {
-  const { description, onClose, onSubmit } = props;
+  const { description, onClose, onSubmit, fileTask } = props;
 
   const formik = useFormik({
     initialValues: {
@@ -32,6 +33,9 @@ export function TaskFormStudent(props: TaskFormStudentProps) {
       <div className={styles['description-container']}>
         <label>En que consiste la tarea</label>
         <h4 className={styles['description']}>{description}</h4>
+        <a href={fileTask} target="_blank">
+          Descargar archivo adjunto
+        </a>
       </div>
       <TextArea
         label={'Agregar texto'}
@@ -69,7 +73,7 @@ export function TaskFormStudent(props: TaskFormStudentProps) {
         <Button
           className={styles['btn-submit']}
           color={ColorsButton.primary}
-          icon='rocket'
+          icon="rocket"
           title={'Enviar mi tarea'}
           type={TypeButton.submit}
           onClick={formik.handleSubmit}

@@ -4,6 +4,7 @@ import Button, { ColorsButton } from '../button/button';
 import TextArea from '../text-area/text-area';
 import { ReactElement, useState } from 'react';
 import moment from 'moment';
+import { useCourseUtil } from '@ltpx-frontend-apps/store';
 moment.locale('es');
 
 /* eslint-disable-next-line */
@@ -27,6 +28,7 @@ export function QuizReviewTeacher(props: QuizReviewTeacherProps) {
   const foundAnswer = (answerId: number) => {
     return userAnswers.find((answer) => answer.answer_id == answerId);
   };
+  const { translateOption } = useCourseUtil();
 
   const correctAnswer = () => {
     setStyle('answer-correct');
@@ -66,7 +68,7 @@ export function QuizReviewTeacher(props: QuizReviewTeacherProps) {
                                 : ''
                             }`}
                           >
-                            {answer.text}
+                            {translateOption(answer.text)}
                           </p>
                         ))}
                       </div>

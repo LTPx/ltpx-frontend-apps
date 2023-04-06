@@ -9,6 +9,12 @@ export interface TaskStudentResult {
   score: number;
 }
 
+export interface TaskStudentGrade {
+  id: number;
+  approved: boolean;
+  comments: string[];
+}
+
 export interface TaskModel {
   id: number;
   course_id: number;

@@ -20,14 +20,21 @@ export interface TaskStudentCardProps {
 export function TaskStudentCard(props: TaskStudentCardProps) {
   const { title, description, id, studentTask, file } = props;
   const [openModal, setOpenModal] = useState(false);
+  const [editTask, setEditTask] = useState(false);
   const { _sendTask } = useStudent();
 
   async function handleSendTask(params: TaskStudent) {
-    const { data, success, error } = await _sendTask(params);
-    if (success) {
-      console.log('data: ', data);
+    if (editTask) {
+      setOpenModal(false);
+      setEditTask(false);
+      alert('Pendiente aun de implementar');
     } else {
-      console.log('error: ', error);
+      const { data, success, error } = await _sendTask(params);
+      if (success) {
+        console.log('data: ', data);
+      } else {
+        console.log('error: ', error);
+      }
     }
   }
 
@@ -73,7 +80,10 @@ export function TaskStudentCard(props: TaskStudentCardProps) {
             studentTask?.comments.length > 0 && (
               <Button
                 title="Hacer de nuevo la tarea"
-                onClick={() => setOpenModal(true)}
+                onClick={() => {
+                  setOpenModal(true);
+                  setEditTask(true);
+                }}
               />
             )}
         </div>
@@ -82,7 +92,9 @@ export function TaskStudentCard(props: TaskStudentCardProps) {
         isShown={openModal}
         hasFooter={false}
         title={title}
-        onCloseComplete={() => setOpenModal(false)}
+        onCloseComplete={() => {
+          setOpenModal(false);
+        }}
         width={'50vw'}
       >
         <TaskFormStudent

@@ -1,6 +1,7 @@
 import { PartialBy, Prettify } from './util';
 
 export interface TaskStudentResult {
+  id: number;
   task_id: number;
   student_id: number;
   answer: string;

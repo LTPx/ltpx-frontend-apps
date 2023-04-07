@@ -1,9 +1,11 @@
-import { Dialog } from 'evergreen-ui';
+import { Dialog, RadioGroup } from 'evergreen-ui';
 import { useState } from 'react';
-import Button, { ColorsButton } from '../button/button';
+import Button, { ColorsButton, TypeButton } from '../button/button';
 import Icon from '../icon/icon';
 import TextArea from '../text-area/text-area';
 import styles from './task-teacher-card.module.scss';
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
 
 /* eslint-disable-next-line */
 export interface TaskTeacherCardProps {
@@ -12,14 +14,39 @@ export interface TaskTeacherCardProps {
   answerStudent?: string;
   descriptionTask?: string;
   fileStudent?: any;
+  approved: boolean;
+  onSubmit: (comment: string, approved: boolean) => void;
+  comments: string[];
 }
 
 export function TaskTeacherCard(props: TaskTeacherCardProps) {
-  const { title, descriptionTask, answerStudent, fileStudent, fileTeacher } =
-    props;
-  const [isCorrect, setIsCorrect] = useState(false);
+  const {
+    title,
+    descriptionTask,
+    answerStudent,
+    fileStudent,
+    fileTeacher,
+    onSubmit,
+    approved,
+    comments,
+  } = props;
   const [openModal, setOpenModal] = useState(false);
 
+  const formik = useFormik({
+    initialValues: {
+      comment: '',
+      approved: false,
+    },
+    validationSchema: Yup.object({
+      comment: Yup.string().required(
+        'Por favor deja un comentario para el alumno'
+      ),
+    }),
+    onSubmit: (formData) => {
+      onSubmit(formData.comment, formData.approved);
+      setOpenModal(false);
+    },
+  });
   return (
     <>
       <div className={styles['container']}>
@@ -30,20 +57,24 @@ export function TaskTeacherCard(props: TaskTeacherCardProps) {
           </div>
         </div>
         <div className={styles['row-buttons']}>
-          {isCorrect !== true ? (
+          {!approved && comments.length === 0 && (
             <Button
               title="Calificar tarea"
               icon="pencil"
               onClick={() => setOpenModal(true)}
             />
-          ) : (
-            <Button
-              title="Editar calificación"
-              icon="eye"
-              color={ColorsButton.secondary}
-              onClick={() => setOpenModal(true)}
-              outline={true}
-            />
+          )}
+          {approved && (
+            <div className={styles['approved-message']}>
+              <Icon icon="check-circle" size={18} />
+              <h5>Tarea marcada como correcta</h5>
+            </div>
+          )}
+          {approved === false && comments.length > 0 && (
+            <div className={styles['require-changes-message']}>
+              <Icon icon="pencil" size={18} />
+              <h5>La tarea requiere cambios</h5>
+            </div>
           )}
         </div>
       </div>
@@ -89,27 +120,46 @@ export function TaskTeacherCard(props: TaskTeacherCardProps) {
                 </a>
               )}
             </div>
-            <TextArea label={'Comentario de Tarea (opcional)'} rows={5} />
+            <div className="x">
+              <label>Como calificas esta tarea</label>
+              <RadioGroup
+                size={16}
+                value={formik.values.approved.toString()}
+                options={[
+                  { label: 'La tarea es correcta', value: 'true' },
+                  { label: 'Necesita cambios', value: 'false' },
+                ]}
+                onChange={(event) => {
+                  formik.setFieldValue(
+                    'approved',
+                    event.target.value === 'true'
+                  );
+                }}
+              />
+            </div>
+            <TextArea
+              label={'Comentario de tarea'}
+              type="text"
+              name="comment"
+              value={formik.values.comment}
+              onBlur={formik.handleBlur}
+              onChange={formik.handleChange}
+              errorMessage={formik.errors.comment}
+              rows={3}
+            />
           </div>
           <div className={styles['footer']}>
             <Button
-              title="No es correcta"
-              icon="close"
+              title="Cancelar"
               onClick={() => {
                 setOpenModal(false);
-                setIsCorrect(false);
               }}
-              outline={true}
-              color={ColorsButton.secondary}
+              color={ColorsButton.white}
             />
             <Button
-              title="La tarea es correcta"
-              icon="check"
-              outline={true}
-              onClick={() => {
-                setOpenModal(false);
-                setIsCorrect(true);
-              }}
+              title="Enviar calificación"
+              type={TypeButton.submit}
+              onClick={formik.submitForm}
             />
           </div>
         </div>

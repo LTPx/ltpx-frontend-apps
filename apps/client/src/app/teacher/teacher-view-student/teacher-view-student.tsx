@@ -4,7 +4,7 @@ import { useCallback, useEffect, useState } from 'react';
 import {
   AchievementModel,
   QuizResult,
-  TaskStudent,
+  TaskStudentResult,
 } from '@ltpx-frontend-apps/api';
 import {
   AchievementBadge,
@@ -25,14 +25,14 @@ export function TeacherViewStudent(props: TeacherViewStudentProps) {
   const { studentId } = props;
   const [quizzes, setQuizzes] = useState<QuizResult[]>([]);
   const [achievements, setAchievements] = useState<AchievementModel[]>([]);
-  const [tasks, setTasks] = useState<TaskStudent[]>([]);
+  const [studentTasks, setStudentTasks] = useState<TaskStudentResult[]>([]);
   const [openTest, setOpenTest] = useState(false);
   const [quizId, setQuzId] = useState(0);
-
   const {
     _getStudentQuizzesByCourse,
     _getStudentAchievementsByCourse,
     _getStudentTasksByCourse,
+    _teacherGradeTask,
   } = useCourseStudents();
   const { courseId } = useParams();
   const [selectedTab, setSelectedTab] = useState(0);
@@ -73,7 +73,7 @@ export function TeacherViewStudent(props: TeacherViewStudentProps) {
     );
     if (success) {
       console.log('data: ', data);
-      setTasks(data);
+      setStudentTasks(data);
     } else {
       console.log('error: ', error);
     }
@@ -105,18 +105,43 @@ export function TeacherViewStudent(props: TeacherViewStudentProps) {
   const handleClick = (index: number) => {
     setSelectedTab(index);
   };
+
+  async function handleGradeTask(
+    comment: string,
+    approved: boolean,
+    studentTaskId: number
+  ) {
+    const { success, data, error } = await _teacherGradeTask(studentTaskId, {
+      id: studentId,
+      comments: [comment],
+      approved,
+    });
+    if (success) {
+      fetchTasks(studentId);
+    } else {
+      console.log(error);
+    }
+  }
   return (
     <div className={styles['container']}>
       <Tabs tabs={tabs} onClickTab={(option) => handleClick(option)} />
       {selectedTab === 0 && (
         <div>
-          {tasks.length > 0 ? (
+          {studentTasks.length > 0 ? (
             <div className={styles['task-student']}>
-              {tasks.map((task, index) => (
+              {studentTasks.map((studentTask, index) => (
                 <div key={index}>
                   <TaskTeacherCard
-                    title={task.title || ''}
-                    answer={task.answer || ''}
+                    title={studentTask.task.title || ''}
+                    descriptionTask={studentTask.task.description || ''}
+                    fileTeacher={studentTask.task.file_url}
+                    answerStudent={studentTask.answer || ''}
+                    fileStudent={studentTask.file_url}
+                    approved={studentTask.approved}
+                    comments={studentTask.comments}
+                    onSubmit={(comment, approved) =>
+                      handleGradeTask(comment, approved, studentTask.id)
+                    }
                   />
                 </div>
               ))}

@@ -35,7 +35,7 @@ export const StudentRoutes = () => {
           <Route path="classes" element={<StudentClasses />} />
           <Route path="course/:courseId/quiz/:quizId" element={<StudentQuiz/>} />
           <Route path="course/:courseId/quiz-review/:quizId" element={<StudentReviewQuiz/>} />
-          <Route
+          <Route 
             path="live-meeting/:meetingId/:roomId"
             element={<VideoMeetingLive redirectUrl="/student/classes" />}
           />

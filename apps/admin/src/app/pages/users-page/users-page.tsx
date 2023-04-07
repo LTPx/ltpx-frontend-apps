@@ -1,8 +1,13 @@
-import { StatusAccount, TypeAccounts, UserModel } from '@ltpx-frontend-apps/api';
-import { useAdmin } from '@ltpx-frontend-apps/store';
+import {
+  StatusAccount,
+  TypeAccounts,
+  UserModel,
+} from '@ltpx-frontend-apps/api';
+import { useAdmin, useChat } from '@ltpx-frontend-apps/store';
 import { Avatar } from 'evergreen-ui';
 import { useCallback, useEffect, useState } from 'react';
 import styles from './users-page.module.scss';
+import { Button, ColorsButton } from '@ltpx-frontend-apps/shared-ui';
 
 /* eslint-disable-next-line */
 export interface UsersTable {
@@ -17,12 +22,13 @@ export interface UsersTable {
 export interface UsersPageProps {}
 
 export function UsersPage(props: UsersPageProps) {
-  const [ users, setUsers] = useState<UserModel[]>([]);
+  const [users, setUsers] = useState<UserModel[]>([]);
   const { _getUsers } = useAdmin();
+  const { _newChatRoom, setShowChat } = useChat();
 
   const fetchUsers = useCallback(async () => {
     const { success, data, error } = await _getUsers();
-    if ( success) {
+    if (success) {
       setUsers(data);
     } else {
       console.log('error: ', error);
@@ -33,6 +39,11 @@ export function UsersPage(props: UsersPageProps) {
   useEffect(() => {
     fetchUsers();
   }, [fetchUsers]);
+
+  const chatWithUser = async (id: number) => {
+    await _newChatRoom(id);
+    setShowChat(true);
+  };
 
   return (
     <div className={styles['container']}>
@@ -55,7 +66,21 @@ export function UsersPage(props: UsersPageProps) {
               </td>
               <td>{user.email}</td>
               <td>{user.initial_register}</td>
-              <td>Ver perfil</td>
+              <td className={styles['actions']}>
+                <Button
+                  icon="eye"
+                  color={ColorsButton.secondary}
+                  title="Ver perfil"
+                  outline={true}
+                />
+                <Button
+                  onClick={() => chatWithUser(user.id)}
+                  icon="chat"
+                  color={ColorsButton.secondary}
+                  outline={true}
+                  title=""
+                />
+              </td>
             </tr>
           ))}
         </tbody>

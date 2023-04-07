@@ -39,7 +39,9 @@ export function StudentCourseQuizzes(props: StudentCourseQuizzesProps) {
           <QuizStudentCard
             title={quiz.name}
             text={`Preguntas: ${quiz.total_questions}`}
-            score={quiz.last_quiz_result.score}
+            score={
+              quiz.last_quiz_result ? quiz.last_quiz_result.score : undefined
+            }
             approved={
               quiz.last_quiz_result ? quiz.last_quiz_result.score >= 80 : false
             }
@@ -61,14 +63,14 @@ export function StudentCourseQuizzes(props: StudentCourseQuizzesProps) {
                   link={`/student/course/${courseId}/quiz-review/${quiz.last_quiz_result.id}`}
                 />
               )}
-              {quiz.last_quiz_result?.score < 80 &&
+              {quiz.last_quiz_result?.score < 80 && (
                 <Button
                   color={ColorsButton.secondary}
                   title="Volver a Intentar"
                   icon="undo"
                   link={`/student/course/${courseId}/quiz/${quiz.id}`}
                 />
-              }
+              )}
             </>
           </QuizStudentCard>
         </div>

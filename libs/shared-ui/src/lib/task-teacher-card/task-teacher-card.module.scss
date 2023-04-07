@@ -34,16 +34,40 @@
     }
   }
 }
+
+.task-information {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid $gray-color-200;
+  gap: 0.5rem;
+  padding: 1rem;
+
+  .description {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .description-title-teacher {
+    font-weight: 500;
+  }
+  .description-task-teacher {
+    color: $text-gray-color;
+  }
+}
+
 .task {
   display: flex;
   flex-direction: column;
   .task-content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
     .title-answer {
       font-weight: 500;
     }
     .answer {
       padding-top: 0.5rem;
-      // color: $text-gray-color;
+      color: $text-gray-color;
     }
   }
   .footer {
@@ -54,3 +78,14 @@
   }
 }
 
+.approved-message {
+  display: flex;
+  gap: 0.5rem;
+  color: $green-color;
+}
+
+.require-changes-message {
+  display: flex;
+  gap: 0.5rem;
+  color: $blue-color;
+}

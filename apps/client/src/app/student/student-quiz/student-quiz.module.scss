@@ -4,9 +4,12 @@
   justify-content: center;
   padding-top: $size-md-2;
 }
+.wrap {
+  display: flex;
+  justify-content: center;
+}
 .container {
   width: 60vw;
-
   .quiz-container {
     padding: 3rem;
   }

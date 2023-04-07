@@ -182,7 +182,7 @@ export const createTeacherSlice: StateCreator<
       set({ myCourses: updateCourses });
       return { success: true };
     } catch (error) {
-      return { success: false, data: error };
+      return { success: false, data: formatErrors(error) };
     }
   },
   _updateProfile: async ( params) => {

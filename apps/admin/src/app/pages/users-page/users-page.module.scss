@@ -3,6 +3,10 @@
 .container {
   background-color: #fff;
   padding: 2rem 3rem;
+  .actions {
+    display: flex;
+    gap: 1rem;
+  }
 }
 
 table {

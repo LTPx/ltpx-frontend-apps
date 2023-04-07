@@ -1,9 +1,11 @@
 import {
+  Chat,
   Dropdown,
   Header,
   Icon,
   Nav,
   UserMenu,
+  ChatFloat
 } from '@ltpx-frontend-apps/shared-ui';
 import { useUser } from '@ltpx-frontend-apps/store';
 import { useTranslation } from 'react-i18next';
@@ -86,12 +88,12 @@ export function AppLayout(props: AppLayoutProps) {
         <div className={styles['teacher-actions']}>
           <Dropdown>
             <UserMenu
-              name={'Admin System'}
-              email={'admin@example.com'}
+              name={user.fullname}
+              email={user.email}
               links={[
                 {
                   icon: 'log-out',
-                  text: 'Cerrar Session',
+                  text: 'Cerrar Sesión',
                   onClick: async () => {
                     await logout();
                     navigate('/');
@@ -100,7 +102,7 @@ export function AppLayout(props: AppLayoutProps) {
               ]}
             />
             <div className={styles['avatar']}>
-              <Avatar name={'Admin System'} size={40} color="green" />
+              <Avatar name={user.fullname} size={40} color="green" />
               <Icon icon="caret-down" size={18} />
             </div>
           </Dropdown>
@@ -113,17 +115,15 @@ export function AppLayout(props: AppLayoutProps) {
         <div className={styles['render-content']}>
           <Outlet />
         </div>
-        {/* <div className={styles['chat-float-container']}>
-            {openChat ? (
-              <div className={styles['chat-container']}>
-                <Chat onCancel={() => setOpenChat(false)}>
-                  <Icon icon="plus-circle" size={20} />
-                </Chat>
-              </div> 
-            ) : (
-              <ChatFloat onClick={() => setOpenChat(true)} />
-            )}
-          </div> */}
+        <div className={styles['chat-float-container']}>
+          {openChat ? (
+            <div className={styles['chat-container']}>
+              <Chat onCancel={() => setOpenChat(false)} />
+            </div>
+          ) : (
+            <ChatFloat />
+          )}
+        </div>
       </div>
     </div>
   );

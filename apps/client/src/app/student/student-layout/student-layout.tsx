@@ -1,17 +1,17 @@
 import styles from './student-layout.module.scss';
 import {
   Chat,
+  ChatFloat,
   Dropdown,
   Header,
   Icon,
-  Nav,
   UserMenu,
 } from '@ltpx-frontend-apps/shared-ui';
 import { useUser } from '@ltpx-frontend-apps/store';
 import { Avatar } from 'evergreen-ui';
 import { useTranslation } from 'react-i18next';
-import { NavLink, Outlet, useNavigate } from 'react-router-dom';
-import avatar from './../../../assets/images/avatars/avatar-1.svg'
+import { Outlet, useNavigate } from 'react-router-dom';
+import avatar from './../../../assets/images/avatars/avatar-1.svg';
 import { useState } from 'react';
 
 export function StudentLayout() {
@@ -53,13 +53,6 @@ export function StudentLayout() {
     window.location.reload();
   };
 
-  //TODO: move to new component
-  const ChatFloat = ({ onClick }: { onClick: () => void }) => (
-    <div className={styles['chat-tab-button']} onClick={onClick}>
-      <Icon icon="chat-dots" size={20} />
-    </div>
-  );
-
   return (
     <div className={styles['container']}>
       <Header links={links} className={styles['header']}>
@@ -84,7 +77,12 @@ export function StudentLayout() {
               ]}
             />
             <div className={styles['avatar']}>
-              <Avatar name={user.fullname} size={40} color="green" src={avatar}/>
+              <Avatar
+                name={user.fullname}
+                size={40}
+                color="green"
+                src={avatar}
+              />
               <Icon icon="caret-down" size={18} />
             </div>
           </Dropdown>
@@ -100,7 +98,7 @@ export function StudentLayout() {
               <Chat onCancel={() => setOpenChat(false)} />
             </div>
           ) : (
-            <ChatFloat onClick={() => setOpenChat(true)} />
+            <ChatFloat />
           )}
         </div>
       </div>

@@ -26,6 +26,7 @@ export function StudentCourseTasks(props: StudentCourseTasksProps) {
         <TaskStudentCard
           key={index}
           title={task.title}
+          file={task.file_url}
           description={task.description}
           studentTask={task.student_task}
           id={task.id}

@@ -53,7 +53,7 @@ export function HeaderApp() {
                 links={[
                   {
                     icon: 'log-out',
-                    text: 'Cerrar Session',
+                    text: 'Cerrar Sesión',
                     onClick: () => {
                       logoutSession();
                     },

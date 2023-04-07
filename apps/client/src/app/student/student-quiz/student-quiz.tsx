@@ -103,146 +103,150 @@ export function StudentQuiz() {
   });
 
   return (
-    <div className={styles['container']}>
-      {loaded && (
-        <form className={`${styles['quiz-container']} card`}>
-          <div className={styles['header']}>
-            <h1>{currentQuiz.name}</h1>
-            <div className={styles['progress-quiz']}>
-              {/* <p>Total de Preguntas</p>
+    <div className={styles['wrap']}>
+      <div className={styles['container']}>
+        {loaded && (
+          <form className={`${styles['quiz-container']} card`}>
+            <div className={styles['header']}>
+              <h1>{currentQuiz.name}</h1>
+              <div className={styles['progress-quiz']}>
+                {/* <p>Total de Preguntas</p>
               <h3>{currentQuiz.questions.length}</h3> */}
+              </div>
             </div>
-          </div>
-          <div className={styles['content']}>
-            <div className={styles['questions']}>
-              {currentQuiz.questions_attributes.map((question, index) => (
-                <div className="question" key={index}>
-                  {question.kind === TypeQuestionQuiz.conditional && (
-                    <QuizConditionalQuestion
-                      number={index + 1}
-                      title={question.question}
-                      description={question.description}
-                      answers={question.answers_attributes}
-                      onChange={(answerSelected) => {
-                        formik.setFieldValue(`answers[${index}].answers`, [
-                          answerSelected,
-                        ]);
-                      }}
-                    />
-                  )}
-                  {question.kind === TypeQuestionQuiz.multiple && (
-                    <QuizMultiselectQuestion
-                      number={index + 1}
-                      title={question.question}
-                      description={question.description}
-                      answers={question.answers_attributes}
-                      multiple={true}
-                      onChange={(answersSelected) => {
-                        formik.setFieldValue(
-                          `answers[${index}].answers`,
-                          answersSelected
-                        );
-                      }}
-                    />
-                  )}
-                  {question.kind === TypeQuestionQuiz.single && (
-                    <QuizMultiselectQuestion
-                      number={index + 1}
-                      title={question.question}
-                      description={question.description}
-                      answers={question.answers_attributes}
-                      multiple={false}
-                      onChange={(answersSelected) => {
-                        formik.setFieldValue(
-                          `answers[${index}].answers`,
-                          answersSelected
-                        );
-                      }}
-                    />
-                  )}
-                  {question.kind === TypeQuestionQuiz.answer && (
-                    <div className={styles['question']}>
-                      <h3>
-                        {index + 1}. {question.question}
-                      </h3>
-                      <TextArea
-                        placeholder="Escribe tu respuesta"
-                        rows={8}
-                        name={`answers[${index}].answers`}
-                        onChange={(e: any) => {
-                          const text = e.target.value;
+            <div className={styles['content']}>
+              <div className={styles['questions']}>
+                {currentQuiz.questions_attributes.map((question, index) => (
+                  <div className="question" key={index}>
+                    {question.kind === TypeQuestionQuiz.conditional && (
+                      <QuizConditionalQuestion
+                        number={index + 1}
+                        title={question.question}
+                        description={question.description}
+                        answers={question.answers_attributes}
+                        onChange={(answerSelected) => {
                           formik.setFieldValue(`answers[${index}].answers`, [
-                            {
-                              answer_id: question.answers_attributes[0].id,
-                              question_id:
-                                question.answers_attributes[0].question_id,
-                              text,
-                            },
+                            answerSelected,
                           ]);
                         }}
-                        onBlur={formik.handleBlur}
                       />
-                      <InputTextStatus
-                        status={StatusInputText.error}
-                        text={
-                          typeof formik.errors.answers === 'string'
-                            ? formik.errors.answers
-                            : ''
-                        }
+                    )}
+                    {question.kind === TypeQuestionQuiz.multiple && (
+                      <QuizMultiselectQuestion
+                        number={index + 1}
+                        title={question.question}
+                        description={question.description}
+                        answers={question.answers_attributes}
+                        multiple={true}
+                        onChange={(answersSelected) => {
+                          formik.setFieldValue(
+                            `answers[${index}].answers`,
+                            answersSelected
+                          );
+                        }}
                       />
-                    </div>
-                  )}
-                </div>
-              ))}
+                    )}
+                    {question.kind === TypeQuestionQuiz.single && (
+                      <QuizMultiselectQuestion
+                        number={index + 1}
+                        title={question.question}
+                        description={question.description}
+                        answers={question.answers_attributes}
+                        multiple={false}
+                        onChange={(answersSelected) => {
+                          formik.setFieldValue(
+                            `answers[${index}].answers`,
+                            answersSelected
+                          );
+                        }}
+                      />
+                    )}
+                    {question.kind === TypeQuestionQuiz.answer && (
+                      <div className={styles['question']}>
+                        <h3>
+                          {index + 1}. {question.question}
+                        </h3>
+                        <TextArea
+                          placeholder="Escribe tu respuesta"
+                          rows={8}
+                          name={`answers[${index}].answers`}
+                          onChange={(e: any) => {
+                            const text = e.target.value;
+                            formik.setFieldValue(`answers[${index}].answers`, [
+                              {
+                                answer_id: question.answers_attributes[0].id,
+                                question_id:
+                                  question.answers_attributes[0].question_id,
+                                text,
+                              },
+                            ]);
+                          }}
+                          onBlur={formik.handleBlur}
+                        />
+                        <InputTextStatus
+                          status={StatusInputText.error}
+                          text={
+                            typeof formik.errors.answers === 'string'
+                              ? formik.errors.answers
+                              : ''
+                          }
+                        />
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
             </div>
-          </div>
-          <div className={styles['footer']}>
-            <Button
-              title="Cancelar"
-              color={ColorsButton.white}
-              outline={true}
-              link={`/student/courses/${courseId}`}
-            />
-            <Button
-              title="Finalizar test"
-              type={TypeButton.submit}
-              onClick={() => {
-                setOpenConfirmation(true);
-              }}
-            />
-          </div>
-        </form>
-      )}
-      <DialogConfirm
-        open={openConfirmation}
-        onClose={() => setOpenConfirmation(false)}
-        confirm={formik.handleSubmit}
-        title={'Seguro que desea enviar?'}
-        subtitle={'Recuerda verificar que todas las preguntas estén respondidas'}
-      />
-      <Dialog
-        isShown={openModal}
-        hasFooter={false}
-        hasHeader={false}
-        onCloseComplete={() => setOpenModal(false)}
-        width={'30vw'}
-      >
-        <QuizScore
-          totalScore={score}
-          message={'Felicitaciones'}
-          img={
-            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR83K5rBkgtaRL7Or_WNwxAzS_wy-8DaGDMKA&usqp=CAU'
+            <div className={styles['footer']}>
+              <Button
+                title="Cancelar"
+                color={ColorsButton.white}
+                outline={true}
+                link={`/student/courses/${courseId}`}
+              />
+              <Button
+                title="Finalizar test"
+                type={TypeButton.submit}
+                onClick={() => {
+                  setOpenConfirmation(true);
+                }}
+              />
+            </div>
+          </form>
+        )}
+        <DialogConfirm
+          open={openConfirmation}
+          onClose={() => setOpenConfirmation(false)}
+          confirm={formik.handleSubmit}
+          title={'Seguro que desea enviar?'}
+          subtitle={
+            'Recuerda verificar que todas las preguntas estén respondidas'
           }
+        />
+        <Dialog
+          isShown={openModal}
+          hasFooter={false}
+          hasHeader={false}
+          onCloseComplete={() => setOpenModal(false)}
+          width={'30vw'}
         >
-          <div className={styles['btn-quiz-score']}>
-            <Button
-              title={'Regresar'}
-              color={ColorsButton.secondary}
-              link={`/student/dashboard`}
-            />
-          </div>
-        </QuizScore>
-      </Dialog>
+          <QuizScore
+            totalScore={score}
+            message={'Felicitaciones'}
+            img={
+              'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR83K5rBkgtaRL7Or_WNwxAzS_wy-8DaGDMKA&usqp=CAU'
+            }
+          >
+            <div className={styles['btn-quiz-score']}>
+              <Button
+                title={'Regresar'}
+                color={ColorsButton.secondary}
+                link={`/student/dashboard`}
+              />
+            </div>
+          </QuizScore>
+        </Dialog>
+      </div>
     </div>
   );
 }

@@ -1,7 +1,6 @@
 import styles from './group-select-option.module.scss';
 import { useState } from 'react';
 import Icon from '../icon/icon';
-
 /* eslint-disable-next-line */
 export interface OptionSelectGroup {
   text: string;

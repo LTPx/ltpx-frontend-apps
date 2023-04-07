@@ -11,27 +11,62 @@
     display: flex;
     gap: 1rem;
   }
+
   .row {
     display: flex;
     align-items: center;
     gap: 1.5rem;
+
     .row-info {
       display: flex;
       flex-direction: column;
+
       .description {
         color: $text-gray-color;
         width: 35rem;
+      }
+
+      .comment {
+        color: $green-color;
       }
     }
   }
 
   .row-buttons {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     gap: 1rem;
 
     .btn {
       padding: $size-sm-2;
     }
+  }
+}
+
+.row-grid {
+  display: flex;
+  justify-content: space-between;
+}
+
+.approved-message {
+  display: flex;
+  gap: 0.5rem;
+  color: $green-color;
+}
+
+.require-changes-message {
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+
+  .message {
+    display: flex;
+    gap: 0.5rem;
+    color: $blue-color;
+  }
+
+  .comments {
+    color: $text-gray-color;
   }
 }

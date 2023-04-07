@@ -2,9 +2,12 @@
 
 .form {
   .description-container {
+    display: flex;
+    gap: 0.5rem;
+    flex-direction: column;
     .description {
       color: $text-gray-color;
-      margin-top: 0.5rem;
+      // margin-top: 0.5rem;
     }
   }
   .btn {

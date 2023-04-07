@@ -29,7 +29,7 @@ export function Header(props: HeaderProps) {
     <div className={`${styles['container-header']} ${className}`}>
       <div className={styles['header-responsive']}>
         <div className={styles['brand']}>
-          <Brand link="/" />
+          <Brand link="/home" />
         </div>
         <div className={styles['panel-container']}>
           <div className={styles['navbar']} onClick={handleClick}>
@@ -64,7 +64,7 @@ export function Header(props: HeaderProps) {
         </div>
       </div>
       <div className={styles['main-action']}>
-        <Brand link="/" />
+        <Brand link="/home" />
       </div>
       <div className={styles['information']}>
         <div className={styles['links']}>

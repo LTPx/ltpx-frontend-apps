@@ -88,9 +88,7 @@ export function ApplicationDetailsPage(props: ApplicationDetailsPageProps) {
               </div>
             )}
           </div>
-          <ApplicationView
-            application={viewApplication}
-          />
+          <ApplicationView application={viewApplication} />
         </>
       )}
       <Dialog

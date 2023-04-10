@@ -42,8 +42,8 @@ export const getStudentQuizResult = async (quizId: number) => {
   });
 };
 
-export const studentEvaluateQuiz = async (id: number, answers: UserAnswer[]) => {
-  const params = { quiz_id: id, user_answers_attributes: answers };
+export const studentEvaluateQuiz = async (id: number, answers: UserAnswer[], needReview?: boolean) => {
+  const params = { quiz_id: id, user_answers_attributes: answers, in_review: !!needReview };
   return new Promise<QuizResult>((resolve, reject) => {
     http
       .post(`api/v1/student/quiz_results`, params)

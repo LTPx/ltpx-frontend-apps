@@ -81,6 +81,7 @@ export interface QuizResult {
   total_correct_answer: number;
   total_incorrect_answer: number;
   total_no_answer: number;
+  in_review: boolean;
   created_at: string;
   updated_at: string;
 }
@@ -106,6 +107,7 @@ export interface QuizStudent {
   approve_score: number;
   last_quiz_result: {
     id: number,
-    score: number
+    score: number,
+    in_review: boolean
   }
 }

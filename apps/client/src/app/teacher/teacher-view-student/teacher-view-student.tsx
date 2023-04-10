@@ -9,6 +9,7 @@ import {
 import {
   AchievementBadge,
   Button,
+  ColorsButton,
   EmptyState,
   QuizStudentCard,
   Tabs,
@@ -169,9 +170,10 @@ export function TeacherViewStudent(props: TeacherViewStudentProps) {
                     >
                       <div className={styles['btn-test']}>
                         <Button
-                          title="Calificar test"
-                          icon="play-filled"
+                          title={quiz.in_review ? 'Calificar test' : 'Dar Feedback'}
+                          icon={quiz.in_review ? 'pencil' : 'chat'}
                           target={true}
+                          color={quiz.in_review ? ColorsButton.primary : ColorsButton.secondary }
                           onClick={() => {
                             setOpenTest(true);
                             setQuzId(quiz.id);

@@ -17,7 +17,7 @@ import { useStudent } from '@ltpx-frontend-apps/store';
 import { Dialog } from 'evergreen-ui';
 import { useFormik } from 'formik';
 import { useCallback, useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 export function StudentQuiz() {
   const [answersForm, setAnswersForm] = useState({
@@ -32,6 +32,7 @@ export function StudentQuiz() {
   const [openModal, setOpenModal] = useState(false);
   const [openConfirmation, setOpenConfirmation] = useState(false);
   const [score, setScore] = useState<number>(0);
+  const navigate = useNavigate();
 
   const fetchQuiz = useCallback(async () => {
     const { success, data, error } = await _getStudentQuiz(course_id, id);
@@ -45,8 +46,6 @@ export function StudentQuiz() {
           };
         }
       );
-      console.log('data quiz: ', data);
-      console.log('data answers: ', answers);
       setLoaded(true);
       setAnswersForm({ answers });
     } else {
@@ -82,18 +81,20 @@ export function StudentQuiz() {
     }),
     enableReinitialize: true,
     onSubmit: async (fields) => {
-      console.log(fields);
       const { answers } = fields;
       const answersFilter = answers.reduce(
-        (userAnswers: any[], question: any, kind: any) => {
+        (userAnswers: any[], question: any) => {
           return userAnswers.concat(question.answers);
         },
         []
       );
-      console.log('answersFilter: ', answersFilter);
-      console.log('fields: ', fields);
-      const { data, success, error } = await _evaluateQuiz(id, answersFilter);
+      const needReview = !!answersFilter.find((answer)=> answer.text);
+      const { data, success, error } = await _evaluateQuiz(id, answersFilter, needReview);
       if (success) {
+        if (needReview) {
+          navigate('/student/dashboard');
+          return;
+        }
         setScore(data.score);
         setOpenModal(true);
       } else {

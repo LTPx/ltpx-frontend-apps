@@ -103,6 +103,7 @@ export interface QuizStudent {
   name: string;
   total_questions: number;
   quizzes_results_ids: number[];
+  approve_score: number;
   last_quiz_result: {
     id: number,
     score: number

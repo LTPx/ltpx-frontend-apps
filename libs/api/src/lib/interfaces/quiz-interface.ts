@@ -86,6 +86,14 @@ export interface QuizResult {
   updated_at: string;
 }
 
+export interface QuizResultReview {
+  id: number;
+  score: number;
+  submitted_at: string;
+  quiz: QuizModel;
+  user_answers?: AnswerModel[];
+}
+
 export interface QuizResultSummary {
   id: number;
   quiz: QuizModel;

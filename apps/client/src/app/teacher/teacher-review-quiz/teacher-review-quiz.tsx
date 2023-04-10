@@ -31,13 +31,14 @@ export function TeacherReviewQuiz(props: TeacherReviewQuizProps) {
 
   return (
     <div className={styles['container']}>
-      {quiz?.id && (
+      {quiz && (
         <QuizReviewTeacher
           quiz={quiz.quiz}
           userAnswers={quiz.user_answers}
           score={quiz.score}
           submittedAt={quiz.submitted_at}
           onClose={close}
+          hideHeader={true}
         />
       )}
     </div>

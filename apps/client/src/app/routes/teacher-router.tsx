@@ -13,7 +13,6 @@ import {
   TeacherEditCourse,
   TeacherLayout,
   TeacherMeetingsAgenda,
-  TeacherReviewQuiz,
 } from '../teacher';
 import VideoMeetingLive from '../video/video-meeting-live/video-meeting-live';
 import { ProtectedRoutesTeacher } from './guards/protected-routes-teacher/protected-routes-teacher';

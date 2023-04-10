@@ -28,7 +28,7 @@ export function TeacherViewStudent(props: TeacherViewStudentProps) {
   const [achievements, setAchievements] = useState<AchievementModel[]>([]);
   const [studentTasks, setStudentTasks] = useState<TaskStudentResult[]>([]);
   const [openTest, setOpenTest] = useState(false);
-  const [quizId, setQuzId] = useState(0);
+  const [quizSelected, setQuzSelected] = useState<QuizResult>();
   const {
     _getStudentQuizzesByCourse,
     _getStudentAchievementsByCourse,
@@ -45,7 +45,6 @@ export function TeacherViewStudent(props: TeacherViewStudentProps) {
       id
     );
     if (success) {
-      console.log('data y: ', data);
       setQuizzes(data);
     } else {
       console.log('error: ', error);
@@ -103,6 +102,7 @@ export function TeacherViewStudent(props: TeacherViewStudentProps) {
       text: 'Logros',
     },
   ];
+
   const handleClick = (index: number) => {
     setSelectedTab(index);
   };
@@ -123,6 +123,7 @@ export function TeacherViewStudent(props: TeacherViewStudentProps) {
       console.log(error);
     }
   }
+
   return (
     <div className={styles['container']}>
       <Tabs tabs={tabs} onClickTab={(option) => handleClick(option)} />
@@ -176,7 +177,7 @@ export function TeacherViewStudent(props: TeacherViewStudentProps) {
                           color={quiz.in_review ? ColorsButton.primary : ColorsButton.secondary }
                           onClick={() => {
                             setOpenTest(true);
-                            setQuzId(quiz.id);
+                            setQuzSelected(quiz);
                           }}
                         />
                       </div>
@@ -187,17 +188,18 @@ export function TeacherViewStudent(props: TeacherViewStudentProps) {
               {openTest && (
                 <Dialog
                   isShown={openTest}
-                  hasFooter={false}
-                  hasHeader={false}
                   hasClose={true}
-                  topOffset={20}
+                  title={quizSelected?.name}
+                  // topOffset={20}
                   onCloseComplete={() => setOpenTest(false)}
-                  width={'65vw'}
+                  width={'55vw'}
                 >
-                  <TeacherReviewQuiz
-                    quizId={quizId}
-                    close={() => setOpenTest(false)}
-                  />
+                  { quizSelected &&
+                    <TeacherReviewQuiz
+                      quizId={quizSelected.id}
+                      close={() => setOpenTest(false)}
+                    />
+                  }
                 </Dialog>
               )}
             </div>

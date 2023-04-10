@@ -13,11 +13,13 @@ import {
   SnackbarPosition,
   SnackbarType,
   Tabs,
+  TextArea,
 } from '@ltpx-frontend-apps/shared-ui';
 import { useAdmin, useCourseUtil } from '@ltpx-frontend-apps/store';
 import { useCallback, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import styles from './course-details-page.module.scss';
+import { Dialog } from 'evergreen-ui';
 
 export function CourseDetailsPage() {
   const [error, setError] = useState(false);
@@ -25,15 +27,18 @@ export function CourseDetailsPage() {
   const { viewCourse, _getCourse, _approveCourse } = useAdmin();
   const { translateCategory, translateLanguage, translateLevel } =
     useCourseUtil();
-  const { classroom, quizzes, contents, achievements, session } = viewCourse;
+  const { classroom, quizzes, contents, achievements, session, tasks } =
+    viewCourse;
   const params = useParams();
   const { id } = params;
   const courseId = parseInt(id || '');
   const navigate = useNavigate();
+  const [openModal, setOpenModal] = useState(false);
 
   const tabs = [
     { text: 'Detalles' },
     { text: 'Contenidos' },
+    { text: 'Tareas' },
     { text: 'Test' },
     { text: 'Logros' },
     { text: 'Sesiones' },
@@ -59,6 +64,10 @@ export function CourseDetailsPage() {
     }
   };
 
+  const handleRequestChange = () => {
+    setOpenModal(true);
+  };
+
   return (
     <div className={styles['container']}>
       {viewCourse.id && (
@@ -72,7 +81,7 @@ export function CourseDetailsPage() {
                   color={ColorsButton.secondary}
                   outline={true}
                   onClick={() => {
-                    // handleRequestChange();
+                    handleRequestChange();
                   }}
                 />
                 <Button
@@ -108,18 +117,43 @@ export function CourseDetailsPage() {
               {selectedTab === 0 && (
                 <OverviewCourse
                   description={viewCourse.description}
-                  goals={viewCourse.learn_goals ? viewCourse.learn_goals?.split('\n') : []}
-                  requirements={viewCourse.requirements ? viewCourse.requirements.split('\n') : []}
+                  goals={
+                    viewCourse.learn_goals
+                      ? viewCourse.learn_goals?.split('\n')
+                      : []
+                  }
+                  requirements={
+                    viewCourse.requirements
+                      ? viewCourse.requirements.split('\n')
+                      : []
+                  }
                 />
               )}
               {selectedTab === 1 && (
                 <CourseContents contents={contents || []} />
               )}
-              {selectedTab === 2 && <QuizzesList quizzes={quizzes || []} />}
-              {selectedTab === 3 && (
+              {selectedTab === 2 && (
+                <div className={styles['task']}>
+                  {tasks.map((task, index) => (
+                    <div className={styles['task-content']} key={index}>
+                      <h4 className={styles['title-task']}>{task.title}</h4>
+                      <h4 className={styles['description-task']}>
+                        {task.description}
+                      </h4>
+                      {task.file_url && (
+                        <a href={task.file_url} target="blank_">
+                          Archivo Adjunto
+                        </a>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              )}
+              {selectedTab === 3 && <QuizzesList quizzes={quizzes || []} />}
+              {selectedTab === 4 && (
                 <AchievementsList achievements={achievements || []} />
               )}
-              {selectedTab === 4 && classroom && (
+              {selectedTab === 5 && classroom && (
                 <div>
                   {session?.meetings && session?.meetings.length > 0 && (
                     <div className={styles['classes-container']}>
@@ -157,6 +191,26 @@ export function CourseDetailsPage() {
           duration={3000}
         />
       )}
+      <Dialog
+        isShown={openModal}
+        hasFooter={false}
+        hasHeader={false}
+        onCloseComplete={() => setOpenModal(false)}
+        width={'45vw'}
+      >
+        <div className={styles['dialog']}>
+          <h3>Cambios Requeridos</h3>
+          <TextArea label="Describe el problema" rows={8} />
+          <div className={styles['footer']}>
+            <Button
+              title="Cancelar"
+              color={ColorsButton.white}
+              onClick={() => setOpenModal(false)}
+            />
+            <Button title="Solicitar cambios" />
+          </div>
+        </div>
+      </Dialog>
     </div>
   );
 }

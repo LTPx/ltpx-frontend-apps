@@ -1,6 +1,5 @@
 import { AchievementModel } from '@ltpx-frontend-apps/api';
 import { useCourseUtil } from '@ltpx-frontend-apps/store';
-import Icon from '../icon/icon';
 import styles from './achievements-list.module.scss';
 
 /* eslint-disable-next-line */
@@ -10,17 +9,26 @@ export interface AchievementsListProps {
 
 export function AchievementsList(props: AchievementsListProps) {
   const { achievements } = props;
-  const { translateAchievementType }= useCourseUtil();
+  const { translateAchievementType } = useCourseUtil();
   return (
     <div className={styles['achievements']}>
       {achievements?.map((achievement, index) => (
         <div key={index}>
           <div className={styles['achievement']}>
             <div className={styles['summary']}>
-              <img src={achievement.image} />
+              <div className={styles['image']}>
+                <img src={achievement.image} />
+              </div>
               <div className={styles['text']}>
                 <h4>{achievement.title}</h4>
-                <h5>El alumno debe: {translateAchievementType(achievement.rule)}</h5>
+                <h5>
+                  El alumno debe: {translateAchievementType(achievement.rule)}
+                </h5>
+                {achievement.conditions_attributes.map((a) => (
+                  <ul>
+                    <li>{a.description}</li>
+                  </ul>
+                ))}
               </div>
             </div>
             <div className={styles['actions']}>

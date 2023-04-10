@@ -7,13 +7,11 @@ import styles from './teachers-page.module.scss';
 
 /* eslint-disable-next-line */
 export function TeachersPage() {
-  const { _pendingApplications, _approvedApplications, applications } = useAdmin();
+  const { _pendingApplications, _approvedApplications, applications } =
+    useAdmin();
   const { translateStatusApply } = useUtil();
 
-  const tabs = [
-    { text: 'Pendientes' },
-    { text: 'Aprobadas' },
-  ];
+  const tabs = [{ text: 'Pendientes' }, { text: 'Aprobadas' }];
 
   const fetchPending = useCallback(async () => {
     const resp = await _pendingApplications();
@@ -29,19 +27,24 @@ export function TeachersPage() {
     fetchPending();
   }, [fetchPending]);
 
-  const handleChangeTab = async( tabIndex: number) => {
+  const handleChangeTab = async (tabIndex: number) => {
     if (tabIndex) {
       await fetchApproved();
     } else {
       await fetchPending();
     }
-  }
+  };
 
   return (
     <div className={styles['container']}>
       <h1>Administración de Profesores</h1>
       <p>Solicitudes</p>
-      <Tabs tabs={tabs} onClickTab={(index)=>{ handleChangeTab(index)}}/>
+      <Tabs
+        tabs={tabs}
+        onClickTab={(index) => {
+          handleChangeTab(index);
+        }}
+      />
       <table>
         <thead>
           <tr>
@@ -53,7 +56,7 @@ export function TeachersPage() {
           </tr>
         </thead>
         <tbody>
-          { applications.map((application, index) => (
+          {applications.map((application, index) => (
             <tr key={index}>
               <td className={styles['user-name']}>
                 <Avatar name={application.name} size={40}></Avatar>

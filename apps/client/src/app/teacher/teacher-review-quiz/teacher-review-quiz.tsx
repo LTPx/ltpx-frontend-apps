@@ -7,11 +7,12 @@ import styles from './teacher-review-quiz.module.scss';
 /* eslint-disable-next-line */
 export interface TeacherReviewQuizProps {
   quizId: number;
-  close?: () => void;
+  onSubmit: () => void;
+  onClose: () => void;
 }
 
 export function TeacherReviewQuiz(props: TeacherReviewQuizProps) {
-  const { quizId, close } = props;
+  const { quizId, onSubmit, onClose } = props;
   const [quiz, setQuiz] = useState<QuizResultSummary>();
   const { _getStudentQuizResult } = useStudent();
   const { _teacherGradeQuiz } = useCourseStudents();
@@ -34,7 +35,7 @@ export function TeacherReviewQuiz(props: TeacherReviewQuizProps) {
     if (quiz) {
       const { success, data, error} = await _teacherGradeQuiz(quiz.id, dataForm.answers);
       if (success) {
-        console.log('data: ', data);
+        onSubmit();
       } else {
         console.log('error: ', error);
       }
@@ -47,11 +48,9 @@ export function TeacherReviewQuiz(props: TeacherReviewQuizProps) {
         <QuizReviewTeacher
           quiz={quiz.quiz}
           userAnswers={quiz.user_answers}
-          score={quiz.score}
-          submittedAt={quiz.submitted_at}
-          onClose={close}
-          hideHeader={true}
+          onClose={onClose}
           onSubmit={handleGradeQuiz}
+          inReview={quiz.in_review}
         />
       )}
     </div>

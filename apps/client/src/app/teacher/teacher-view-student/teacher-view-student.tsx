@@ -189,15 +189,19 @@ export function TeacherViewStudent(props: TeacherViewStudentProps) {
                 <Dialog
                   isShown={openTest}
                   hasClose={true}
+                  hasFooter={false}
                   title={quizSelected?.name}
-                  // topOffset={20}
                   onCloseComplete={() => setOpenTest(false)}
                   width={'55vw'}
                 >
                   { quizSelected &&
                     <TeacherReviewQuiz
                       quizId={quizSelected.id}
-                      close={() => setOpenTest(false)}
+                      onClose={() => setOpenTest(false)}
+                      onSubmit={() => {
+                        setOpenTest(false);
+                        fetchQuizzes(studentId);
+                      }}
                     />
                   }
                 </Dialog>

@@ -1,35 +1,8 @@
 @import '../../styles/styles.module.scss';
 
 .container {
-  .quiz-container {
-    padding: 2rem 1rem;
-  }
   .btn-correct {
     padding: 0.5rem 1rem;
-  }
-}
-
-
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding-bottom: 1rem;
-
-  .quiz-info {
-    h2 {
-      font-weight: 500;
-    }
-
-    h4 {
-      color: $text-gray-color;
-    }
-  }
-
-  .quiz-score {
-    p {
-      color: $text-gray-color;
-    }
   }
 }
 
@@ -57,8 +30,6 @@
     }
   }
 }
-
-
 
 .footer {
   display: flex;

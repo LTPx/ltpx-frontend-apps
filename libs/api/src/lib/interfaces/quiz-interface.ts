@@ -98,6 +98,7 @@ export interface QuizResultSummary {
   id: number;
   quiz: QuizModel;
   score: number;
+  in_review: boolean;
   submitted_at: string;
   user_answers: {
     answer_id: number;

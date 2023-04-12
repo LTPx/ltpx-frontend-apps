@@ -9,6 +9,7 @@ import {
 import {
   AchievementBadge,
   Button,
+  ColorsButton,
   EmptyState,
   QuizStudentCard,
   Tabs,
@@ -27,7 +28,7 @@ export function TeacherViewStudent(props: TeacherViewStudentProps) {
   const [achievements, setAchievements] = useState<AchievementModel[]>([]);
   const [studentTasks, setStudentTasks] = useState<TaskStudentResult[]>([]);
   const [openTest, setOpenTest] = useState(false);
-  const [quizId, setQuzId] = useState(0);
+  const [quizSelected, setQuzSelected] = useState<QuizResult>();
   const {
     _getStudentQuizzesByCourse,
     _getStudentAchievementsByCourse,
@@ -44,7 +45,6 @@ export function TeacherViewStudent(props: TeacherViewStudentProps) {
       id
     );
     if (success) {
-      console.log('data y: ', data);
       setQuizzes(data);
     } else {
       console.log('error: ', error);
@@ -102,6 +102,7 @@ export function TeacherViewStudent(props: TeacherViewStudentProps) {
       text: 'Logros',
     },
   ];
+
   const handleClick = (index: number) => {
     setSelectedTab(index);
   };
@@ -122,6 +123,7 @@ export function TeacherViewStudent(props: TeacherViewStudentProps) {
       console.log(error);
     }
   }
+
   return (
     <div className={styles['container']}>
       <Tabs tabs={tabs} onClickTab={(option) => handleClick(option)} />
@@ -169,12 +171,13 @@ export function TeacherViewStudent(props: TeacherViewStudentProps) {
                     >
                       <div className={styles['btn-test']}>
                         <Button
-                          title="Calificar test"
-                          icon="play-filled"
+                          title={quiz.in_review ? 'Calificar test' : 'Dar Feedback'}
+                          icon={quiz.in_review ? 'pencil' : 'chat'}
                           target={true}
+                          color={quiz.in_review ? ColorsButton.primary : ColorsButton.secondary }
                           onClick={() => {
                             setOpenTest(true);
-                            setQuzId(quiz.id);
+                            setQuzSelected(quiz);
                           }}
                         />
                       </div>
@@ -185,17 +188,22 @@ export function TeacherViewStudent(props: TeacherViewStudentProps) {
               {openTest && (
                 <Dialog
                   isShown={openTest}
-                  hasFooter={false}
-                  hasHeader={false}
                   hasClose={true}
-                  topOffset={20}
+                  hasFooter={false}
+                  title={quizSelected?.name}
                   onCloseComplete={() => setOpenTest(false)}
-                  width={'65vw'}
+                  width={'55vw'}
                 >
-                  <TeacherReviewQuiz
-                    quizId={quizId}
-                    close={() => setOpenTest(false)}
-                  />
+                  { quizSelected &&
+                    <TeacherReviewQuiz
+                      quizId={quizSelected.id}
+                      onClose={() => setOpenTest(false)}
+                      onSubmit={() => {
+                        setOpenTest(false);
+                        fetchQuizzes(studentId);
+                      }}
+                    />
+                  }
                 </Dialog>
               )}
             </div>

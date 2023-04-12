@@ -81,14 +81,24 @@ export interface QuizResult {
   total_correct_answer: number;
   total_incorrect_answer: number;
   total_no_answer: number;
+  in_review: boolean;
   created_at: string;
   updated_at: string;
+}
+
+export interface QuizResultReview {
+  id: number;
+  score: number;
+  submitted_at: string;
+  quiz: QuizModel;
+  user_answers?: AnswerModel[];
 }
 
 export interface QuizResultSummary {
   id: number;
   quiz: QuizModel;
   score: number;
+  in_review: boolean;
   submitted_at: string;
   user_answers: {
     answer_id: number;
@@ -103,8 +113,10 @@ export interface QuizStudent {
   name: string;
   total_questions: number;
   quizzes_results_ids: number[];
+  approve_score: number;
   last_quiz_result: {
     id: number,
-    score: number
+    score: number,
+    in_review: boolean
   }
 }

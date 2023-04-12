@@ -135,9 +135,7 @@ export function QuizReviewTeacher(props: QuizReviewTeacherProps) {
                           <>
                             <pre
                               className={`${styles['question-answer']} ${
-                                !inReview
-                                  ? styles['selected']
-                                  : ''
+                                !inReview ? styles['selected'] : ''
                               }`}
                               key={indexAnswer}
                             >
@@ -150,7 +148,7 @@ export function QuizReviewTeacher(props: QuizReviewTeacherProps) {
                                   title={`Es incorrecto`}
                                   icon="close"
                                   color={ColorsButton.secondary}
-                                  outline={true}
+                                  outline={formik.values.answers.find((ans)=> ans.answer_id === answer.id)?.correct !== false}
                                   onClick={() => {
                                     setAnswer(false, answer.id);
                                   }}
@@ -160,7 +158,7 @@ export function QuizReviewTeacher(props: QuizReviewTeacherProps) {
                                   title="La respuesta es correcta"
                                   icon="check"
                                   color={ColorsButton.primary}
-                                  outline={true}
+                                  outline={formik.values.answers.find((ans)=> ans.answer_id === answer.id)?.correct !== true}
                                   onClick={() => {
                                     setAnswer(true, answer.id);
                                   }}

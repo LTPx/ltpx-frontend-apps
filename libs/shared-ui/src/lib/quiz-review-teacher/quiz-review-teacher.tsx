@@ -14,6 +14,7 @@ export interface QuizReviewTeacherProps {
   score: number;
   submittedAt: string;
   onClose?: () => void;
+  onSubmit: (data: any) => void;
   hideHeader?: boolean;
   userAnswers: {
     answer_id: number;
@@ -33,6 +34,7 @@ export function QuizReviewTeacher(props: QuizReviewTeacherProps) {
     children,
     onClose,
     hideHeader,
+    onSubmit,
   } = props;
   const [style, setStyle] = useState('answer-content');
   const answersIds = userAnswers.map((answer) => answer.answer_id);
@@ -50,8 +52,9 @@ export function QuizReviewTeacher(props: QuizReviewTeacherProps) {
     validationSchema: Yup.object({
       feedback: Yup.mixed().required('Agrega feedback por favor'),
     }),
-    onSubmit: async (formData) => {
+    onSubmit: (formData) => {
       console.log('formData: ', formData);
+      onSubmit(formData);
     },
   });
 

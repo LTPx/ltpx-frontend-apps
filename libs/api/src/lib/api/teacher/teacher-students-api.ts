@@ -1,7 +1,7 @@
 import { _http } from '../../http';
 import { AchievementModel } from '../../interfaces/achievement-interface';
 import { CourseModel, Student } from '../../interfaces/course-interface';
-import { QuizResult } from '../../interfaces/quiz-interface';
+import { QuizResult, UserAnswer } from '../../interfaces/quiz-interface';
 import { TaskStudent, TaskStudentGrade } from '../../interfaces/task-interface';
 
 const http = _http;
@@ -62,6 +62,19 @@ export const teacherGradeTask = async (studentTaskId: number, params: TaskStuden
   return new Promise<TaskStudent[]>((resolve, reject) => {
     http
       .put(`/api/v1/teacher/student_tasks/${studentTaskId}/grade`, params)
+      .then((response) => {
+        resolve(response.data);
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
+};
+
+export const teacherGradeQuiz = async (quizResultId: number, answers: UserAnswer[]) => {
+  return new Promise<TaskStudent[]>((resolve, reject) => {
+    http
+      .put(`/api/v1/teacher/quiz_results/${quizResultId}/grade`, {answers})
       .then((response) => {
         resolve(response.data);
       })

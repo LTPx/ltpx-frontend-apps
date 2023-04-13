@@ -169,7 +169,8 @@ export function TeacherViewStudent(props: TeacherViewStudentProps) {
                       title={quiz.name}
                       text={`Resultado: ${quiz.score}`}
                     >
-                      <div className={styles['btn-test']}>
+                      { quiz.feedback === null ? (
+                        <div className={styles['btn-test']}>
                         <Button
                           title={
                             quiz.in_review ? 'Calificar test' : 'Dar Feedback'
@@ -187,6 +188,10 @@ export function TeacherViewStudent(props: TeacherViewStudentProps) {
                           }}
                         />
                       </div>
+                      ) : (
+                        <h5>Feedback Enviado</h5>
+                      )}
+
                     </QuizStudentCard>
                   </div>
                 ))}

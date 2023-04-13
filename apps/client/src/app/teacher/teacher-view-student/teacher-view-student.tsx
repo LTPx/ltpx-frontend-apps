@@ -171,10 +171,16 @@ export function TeacherViewStudent(props: TeacherViewStudentProps) {
                     >
                       <div className={styles['btn-test']}>
                         <Button
-                          title={quiz.in_review ? 'Calificar test' : 'Dar Feedback'}
+                          title={
+                            quiz.in_review ? 'Calificar test' : 'Dar Feedback'
+                          }
                           icon={quiz.in_review ? 'pencil' : 'chat'}
                           target={true}
-                          color={quiz.in_review ? ColorsButton.primary : ColorsButton.secondary }
+                          color={
+                            quiz.in_review
+                              ? ColorsButton.primary
+                              : ColorsButton.secondary
+                          }
                           onClick={() => {
                             setOpenTest(true);
                             setQuzSelected(quiz);
@@ -188,13 +194,14 @@ export function TeacherViewStudent(props: TeacherViewStudentProps) {
               {openTest && (
                 <Dialog
                   isShown={openTest}
+                  // topOffset={10}
                   hasClose={true}
                   hasFooter={false}
                   title={quizSelected?.name}
                   onCloseComplete={() => setOpenTest(false)}
                   width={'55vw'}
                 >
-                  { quizSelected &&
+                  {quizSelected && (
                     <TeacherReviewQuiz
                       quizId={quizSelected.id}
                       onClose={() => setOpenTest(false)}
@@ -203,7 +210,7 @@ export function TeacherViewStudent(props: TeacherViewStudentProps) {
                         fetchQuizzes(studentId);
                       }}
                     />
-                  }
+                  )}
                 </Dialog>
               )}
             </div>

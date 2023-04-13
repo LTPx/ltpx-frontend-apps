@@ -52,7 +52,7 @@ export function QuizReviewTeacher(props: QuizReviewTeacherProps) {
 
   return (
     <div className={styles['container']}>
-      <div className="content-form">
+      <div className={styles['content-form']}>
         <div className={styles['content']}>
           <div className={styles['questions']}>
             {quiz.questions_attributes.map((question, index) => (

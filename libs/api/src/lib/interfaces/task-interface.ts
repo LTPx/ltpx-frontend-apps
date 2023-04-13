@@ -5,7 +5,7 @@ export interface TaskStudentResult {
   task_id: number;
   student_id: number;
   answer: string;
-  approved: boolean;
+  status: string;
   file_url?: any;
   comments: string[];
   score: number;
@@ -18,7 +18,7 @@ export interface TaskStudentResult {
 
 export interface TaskStudentGrade {
   id: number;
-  approved: boolean;
+  status: string;
   comments: string[];
 }
 
@@ -39,6 +39,8 @@ export interface TaskStudent {
   task_id: number;
   answer: string;
   file?: any;
+  id?: number
+  status?: 'review' | 'rejected' | 'approved'
 }
 
 export type NewTaskParams = Prettify<

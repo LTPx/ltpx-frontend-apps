@@ -14,9 +14,9 @@ export interface TaskTeacherCardProps {
   answerStudent?: string;
   descriptionTask?: string;
   fileStudent?: any;
-  approved: boolean;
-  onSubmit: (comment: string, approved: boolean) => void;
   comments: string[];
+  status: string;
+  onSubmit: (comment: string, status: string) => void;
 }
 
 export function TaskTeacherCard(props: TaskTeacherCardProps) {
@@ -27,7 +27,7 @@ export function TaskTeacherCard(props: TaskTeacherCardProps) {
     fileStudent,
     fileTeacher,
     onSubmit,
-    approved,
+    status,
     comments,
   } = props;
   const [openModal, setOpenModal] = useState(false);
@@ -43,7 +43,8 @@ export function TaskTeacherCard(props: TaskTeacherCardProps) {
       ),
     }),
     onSubmit: (formData) => {
-      onSubmit(formData.comment, formData.approved);
+      const status = formData.approved ? 'approved' : 'rejected';
+      onSubmit(formData.comment, status);
       setOpenModal(false);
     },
   });
@@ -57,20 +58,20 @@ export function TaskTeacherCard(props: TaskTeacherCardProps) {
           </div>
         </div>
         <div className={styles['row-buttons']}>
-          {!approved && comments.length === 0 && (
+          {status === 'review' && (
             <Button
               title="Calificar tarea"
               icon="pencil"
               onClick={() => setOpenModal(true)}
             />
           )}
-          {approved && (
+          {status === 'approved' && (
             <div className={styles['approved-message']}>
               <Icon icon="check-circle" size={18} />
               <h5>Tarea marcada como correcta</h5>
             </div>
           )}
-          {approved === false && comments.length > 0 && (
+          {status === 'rejected' && (
             <div className={styles['require-changes-message']}>
               <Icon icon="pencil" size={18} />
               <h5>La tarea requiere cambios</h5>

@@ -109,13 +109,13 @@ export function TeacherViewStudent(props: TeacherViewStudentProps) {
 
   async function handleGradeTask(
     comment: string,
-    approved: boolean,
+    status: string,
     studentTaskId: number
   ) {
     const { success, data, error } = await _teacherGradeTask(studentTaskId, {
       id: studentId,
       comments: [comment],
-      approved,
+      status,
     });
     if (success) {
       fetchTasks(studentId);
@@ -139,10 +139,10 @@ export function TeacherViewStudent(props: TeacherViewStudentProps) {
                     fileTeacher={studentTask.task.file_url}
                     answerStudent={studentTask.answer || ''}
                     fileStudent={studentTask.file_url}
-                    approved={studentTask.approved}
+                    status={studentTask.status}
                     comments={studentTask.comments}
-                    onSubmit={(comment, approved) =>
-                      handleGradeTask(comment, approved, studentTask.id)
+                    onSubmit={(comment, status) =>
+                      handleGradeTask(comment, status, studentTask.id)
                     }
                   />
                 </div>

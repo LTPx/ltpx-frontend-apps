@@ -87,7 +87,6 @@ export function StudentCourse(props: StudentCourseProps) {
                     )}
                   </div>
                 )}
-
                 {/* <p className={styles['about-course']}>
                 {enrolledCourse.description}
               </p> */}

@@ -3,9 +3,25 @@
   border: 1px solid $gray-color-200;
   border-radius: 8px;
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
-  align-items: center;
+  // align-items: center;
   padding: $size-md-1 2rem;
+
+  .text-feedback {
+    color: $text-gray-color;
+  }
+  .wrap {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .feedback {
+    padding-top: 1rem;
+  }
+  .title {
+    font-weight: 500;
+  }
 
   .buttons-review {
     display: flex;

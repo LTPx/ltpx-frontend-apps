@@ -103,6 +103,7 @@ export function TeacherMeetingsAgenda() {
                             {
                               text: 'Reagendar Clase',
                               icon: 'clock',
+                              disabled: true,
                               onClick: () => {
                                 setOpenModal(true);
                               },
@@ -123,6 +124,7 @@ export function TeacherMeetingsAgenda() {
                       agendar nuevas clases
                     </p>
                     <Button
+                      className={styles['btn']}
                       title="Agendar Nueva Clase"
                       icon="plus"
                       color={ColorsButton.secondary}

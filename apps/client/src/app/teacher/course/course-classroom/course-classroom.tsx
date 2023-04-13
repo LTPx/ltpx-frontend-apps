@@ -1,7 +1,4 @@
-import {
-  FormatResponse,
-  SessionParams,
-} from '@ltpx-frontend-apps/api';
+import { FormatResponse, SessionParams } from '@ltpx-frontend-apps/api';
 import {
   CourseClasses,
   CourseDateCard,
@@ -25,22 +22,22 @@ export function CourseClassroom(props: CourseClassroomProps) {
 
   const handleClassroom = async (params: SessionParams) => {
     if (session && session.id) {
-      const paramsEdit = { ...params, ...{public: true, id: session.id} }
+      const paramsEdit = { ...params, ...{ public: true, id: session.id } };
       const { success, data, error } = await _editCourseSession(paramsEdit);
       onSubmit &&
-      onSubmit({
-        success,
-        data,
-        error,
-      });
+        onSubmit({
+          success,
+          data,
+          error,
+        });
     } else {
       const { success, data, error } = await _addCourseSession(params);
       onSubmit &&
-      onSubmit({
-        success,
-        data,
-        error,
-      });
+        onSubmit({
+          success,
+          data,
+          error,
+        });
     }
   };
 

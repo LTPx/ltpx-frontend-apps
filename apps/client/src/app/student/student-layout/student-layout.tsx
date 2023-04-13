@@ -1,5 +1,7 @@
 import styles from './student-layout.module.scss';
 import {
+  Avatar,
+  AvatarSize,
   Chat,
   ChatFloat,
   Dropdown,
@@ -8,7 +10,6 @@ import {
   UserMenu,
 } from '@ltpx-frontend-apps/shared-ui';
 import { useUser } from '@ltpx-frontend-apps/store';
-import { Avatar } from 'evergreen-ui';
 import { useTranslation } from 'react-i18next';
 import { Outlet, useNavigate } from 'react-router-dom';
 import avatar from './../../../assets/images/avatars/avatar-1.svg';
@@ -77,12 +78,7 @@ export function StudentLayout() {
               ]}
             />
             <div className={styles['avatar']}>
-              <Avatar
-                name={user.fullname}
-                size={40}
-                color="green"
-                src={avatar}
-              />
+              <Avatar size={AvatarSize.small} outline={true} image={avatar} />
               <Icon icon="caret-down" size={18} />
             </div>
           </Dropdown>

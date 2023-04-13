@@ -4,6 +4,12 @@
   width: 70vw;
 }
 
+.btn {
+  cursor: not-allowed;
+  pointer-events: none;
+  opacity: 0.5;
+}
+
 .container {
   display: flex;
   gap: 1rem;
@@ -71,4 +77,3 @@
     }
   }
 }
-

@@ -119,6 +119,7 @@ export interface QuizStudent {
   last_quiz_result: {
     id: number,
     score: number,
-    in_review: boolean
+    in_review: boolean,
+    feedback: string
   }
 }

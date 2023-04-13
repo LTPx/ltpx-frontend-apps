@@ -68,10 +68,25 @@ export function TeacherCourseCard(props: TeacherCourseCardProps) {
             />
             <h5>
               {learners > 0 ? (
-                <NavLink className={styles['students-url']} to={urlStudents}>
-                  <Icon icon={'persons'} size={14}></Icon> {learners}{' '}
-                  <h5>Estudiantes</h5>
-                </NavLink>
+                <div>
+                  {learners === 1 ? (
+                    <NavLink
+                      className={styles['students-url']}
+                      to={urlStudents}
+                    >
+                      <Icon icon={'persons'} size={14}></Icon> {learners}{' '}
+                      <h5>Estudiante</h5>
+                    </NavLink>
+                  ) : (
+                    <NavLink
+                      className={styles['students-url']}
+                      to={urlStudents}
+                    >
+                      <Icon icon={'persons'} size={14}></Icon> {learners}{' '}
+                      <h5>Estudiantes</h5>
+                    </NavLink>
+                  )}
+                </div>
               ) : (
                 <div className={styles['students-icon']}>
                   <Icon icon={'persons'} size={14}></Icon> {learners}{' '}

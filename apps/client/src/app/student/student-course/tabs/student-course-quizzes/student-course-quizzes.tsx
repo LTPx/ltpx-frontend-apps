@@ -47,6 +47,10 @@ export function StudentCourseQuizzes(props: StudentCourseQuizzesProps) {
                 ? quiz.last_quiz_result.score >= quiz.approve_score
                 : false
             }
+            feedback={
+              quiz.last_quiz_result ? quiz.last_quiz_result.feedback : undefined
+            }
+            approveScore={quiz.approve_score}
           >
             <>
               {quiz.quizzes_results_ids.length === 0 && (

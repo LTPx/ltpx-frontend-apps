@@ -169,29 +169,28 @@ export function TeacherViewStudent(props: TeacherViewStudentProps) {
                       title={quiz.name}
                       text={`Resultado: ${quiz.score}`}
                     >
-                      { quiz.feedback === null ? (
+                      {quiz.feedback === null ? (
                         <div className={styles['btn-test']}>
-                        <Button
-                          title={
-                            quiz.in_review ? 'Calificar test' : 'Dar Feedback'
-                          }
-                          icon={quiz.in_review ? 'pencil' : 'chat'}
-                          target={true}
-                          color={
-                            quiz.in_review
-                              ? ColorsButton.primary
-                              : ColorsButton.secondary
-                          }
-                          onClick={() => {
-                            setOpenTest(true);
-                            setQuzSelected(quiz);
-                          }}
-                        />
-                      </div>
+                          <Button
+                            title={
+                              quiz.in_review ? 'Calificar test' : 'Dar Feedback'
+                            }
+                            icon={quiz.in_review ? 'pencil' : 'chat'}
+                            target={true}
+                            color={
+                              quiz.in_review
+                                ? ColorsButton.primary
+                                : ColorsButton.secondary
+                            }
+                            onClick={() => {
+                              setOpenTest(true);
+                              setQuzSelected(quiz);
+                            }}
+                          />
+                        </div>
                       ) : (
                         <h5>Feedback Enviado</h5>
                       )}
-
                     </QuizStudentCard>
                   </div>
                 ))}
@@ -199,7 +198,6 @@ export function TeacherViewStudent(props: TeacherViewStudentProps) {
               {openTest && (
                 <Dialog
                   isShown={openTest}
-                  // topOffset={10}
                   hasClose={true}
                   hasFooter={false}
                   title={quizSelected?.name}

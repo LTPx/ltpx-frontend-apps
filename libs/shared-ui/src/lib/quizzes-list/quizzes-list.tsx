@@ -46,7 +46,7 @@ export function QuizzesList(props: QuizzesListProps) {
                   {question.answers_attributes.map((answer, index) => (
                     <div key={index}>
                       {question.kind === TypeQuestionQuiz.conditional ? (
-                        <h4>{translateOption(answer.text)}</h4>
+                        <h4 className={styles['options-test']}>{translateOption(answer.text)}</h4>
                       ) : (
                         <div className={styles['options-test']}>
                           <h4>{answer.text}</h4>

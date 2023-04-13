@@ -35,54 +35,53 @@ export function StudentCourseQuizzes(props: StudentCourseQuizzesProps) {
   return (
     <div className={styles['container']}>
       {quizzes?.map((quiz, index) => (
-        <div key={index}>
-          <QuizStudentCard
-            title={quiz.name}
-            text={`Preguntas: ${quiz.total_questions}`}
-            score={
-              quiz.last_quiz_result ? quiz.last_quiz_result.score : undefined
-            }
-            approved={
-              quiz.last_quiz_result
-                ? quiz.last_quiz_result.score >= quiz.approve_score
-                : false
-            }
-          >
-            <>
-              {quiz.quizzes_results_ids.length === 0 && (
-                <Button
-                  title="Empezar test"
-                  icon="play-filled"
-                  link={`/student/course/${courseId}/quiz/${quiz.id}`}
-                />
-              )}
-              {quiz.last_quiz_result && (
-                <div className="result">
-                  {quiz.last_quiz_result.in_review && <h5>En revision</h5>}
-                  {quiz.last_quiz_result.score >= quiz.approve_score &&
-                    !quiz.last_quiz_result.in_review && (
-                      <Button
-                        color={ColorsButton.secondary}
-                        title="Mis respuestas"
-                        outline={true}
-                        icon="eye"
-                        link={`/student/course/${courseId}/quiz-review/${quiz.last_quiz_result.id}`}
-                      />
-                    )}
-                  {quiz.last_quiz_result.score < quiz.approve_score &&
-                    !quiz.last_quiz_result.in_review && (
-                      <Button
-                        color={ColorsButton.secondary}
-                        title="Volver a Intentar"
-                        icon="undo"
-                        link={`/student/course/${courseId}/quiz/${quiz.id}`}
-                      />
-                    )}
-                </div>
-              )}
-            </>
-          </QuizStudentCard>
-        </div>
+        <QuizStudentCard
+          key={index}
+          title={quiz.name}
+          text={`Preguntas: ${quiz.total_questions}`}
+          score={
+            quiz.last_quiz_result ? quiz.last_quiz_result.score : undefined
+          }
+          approved={
+            quiz.last_quiz_result
+              ? quiz.last_quiz_result.score >= quiz.approve_score
+              : false
+          }
+        >
+          <>
+            {quiz.quizzes_results_ids.length === 0 && (
+              <Button
+                title="Empezar test"
+                icon="play-filled"
+                link={`/student/course/${courseId}/quiz/${quiz.id}`}
+              />
+            )}
+            {quiz.last_quiz_result && (
+              <div className="result">
+                {quiz.last_quiz_result.in_review && <h5>En revision</h5>}
+                {quiz.last_quiz_result.score >= quiz.approve_score &&
+                  !quiz.last_quiz_result.in_review && (
+                    <Button
+                      color={ColorsButton.secondary}
+                      title="Mis respuestas"
+                      outline={true}
+                      icon="eye"
+                      link={`/student/course/${courseId}/quiz-review/${quiz.last_quiz_result.id}`}
+                    />
+                  )}
+                {quiz.last_quiz_result.score < quiz.approve_score &&
+                  !quiz.last_quiz_result.in_review && (
+                    <Button
+                      color={ColorsButton.secondary}
+                      title="Volver a Intentar"
+                      icon="undo"
+                      link={`/student/course/${courseId}/quiz/${quiz.id}`}
+                    />
+                  )}
+              </div>
+            )}
+          </>
+        </QuizStudentCard>
       ))}
     </div>
   );

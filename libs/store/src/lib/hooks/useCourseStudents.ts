@@ -8,6 +8,7 @@ export const useCourseStudents = () => {
     _getStudentTasksByCourse,
     _teacherGradeTask,
     _teacherGradeQuiz,
+    _teacherFeedbackQuiz,
   } = useAppStore();
 
   return {
@@ -17,5 +18,6 @@ export const useCourseStudents = () => {
     _getStudentTasksByCourse,
     _teacherGradeTask,
     _teacherGradeQuiz,
+    _teacherFeedbackQuiz,
   };
 };

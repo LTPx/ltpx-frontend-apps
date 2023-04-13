@@ -15,7 +15,7 @@ export function TeacherReviewQuiz(props: TeacherReviewQuizProps) {
   const { quizId, onSubmit, onClose } = props;
   const [quiz, setQuiz] = useState<QuizResultSummary>();
   const { _getStudentQuizResult } = useStudent();
-  const { _teacherGradeQuiz } = useCourseStudents();
+  const { _teacherGradeQuiz, _teacherFeedbackQuiz } = useCourseStudents();
 
   const fetchQuiz = useCallback(async () => {
     const { success, data, error } = await _getStudentQuizResult(quizId);
@@ -32,14 +32,25 @@ export function TeacherReviewQuiz(props: TeacherReviewQuizProps) {
   }, []);
 
   async function handleGradeQuiz(dataForm: any) {
-    if (quiz) {
-      const { success, data, error} = await _teacherGradeQuiz(quiz.id, dataForm.answers);
+    if (quiz && quiz.in_review) {
+      const { success, data, error} = await _teacherGradeQuiz(quiz.id, dataForm.answers, dataForm.feedback);
       if (success) {
+        console.log('data: ', data);
         onSubmit();
       } else {
         console.log('error: ', error);
       }
     }
+    if (quiz && !quiz.in_review) {
+      const { success, data, error} = await _teacherFeedbackQuiz(quiz.id, dataForm.feedback);
+      if (success) {
+        console.log('data: ', data);
+        onSubmit();
+      } else {
+        console.log('error: ', error);
+      }
+    }
+
   }
 
   return (

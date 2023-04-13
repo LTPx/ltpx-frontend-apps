@@ -6,7 +6,8 @@ import {
   teacherGradeTask,
   TaskStudentGrade,
   teacherGradeQuiz,
-  UserAnswer
+  teacherFeedbackQuiz,
+  UserAnswer,
 } from '@ltpx-frontend-apps/api';
 import { StateCreator } from 'zustand';
 import { StoreState } from '../store';
@@ -37,7 +38,12 @@ export type CourseStudentsSlice = {
   ) => Promise<TResponse>;
   _teacherGradeQuiz: (
     quizResultId: number,
-    answers: UserAnswer[]
+    answers: UserAnswer[],
+    feedback: string
+  ) => Promise<TResponse>;
+  _teacherFeedbackQuiz: (
+    quizResultId: number,
+    feedback: string
   ) => Promise<TResponse>;
 };
 
@@ -87,9 +93,17 @@ export const createCourseStudentsSlice: StateCreator<
       return { success: false, error };
     }
   },
-  _teacherGradeQuiz: async (studentTaskId, answers) => {
+  _teacherGradeQuiz: async (studentTaskId, answers, feedback) => {
     try {
-      const quiz = await teacherGradeQuiz(studentTaskId, answers);
+      const quiz = await teacherGradeQuiz(studentTaskId, answers, feedback);
+      return { success: true, data: quiz };
+    } catch (error) {
+      return { success: false, error };
+    }
+  },
+  _teacherFeedbackQuiz: async (studentTaskId, feedback) => {
+    try {
+      const quiz = await teacherFeedbackQuiz(studentTaskId, feedback);
       return { success: true, data: quiz };
     } catch (error) {
       return { success: false, error };

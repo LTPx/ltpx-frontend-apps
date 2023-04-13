@@ -109,13 +109,13 @@ export function TeacherViewStudent(props: TeacherViewStudentProps) {
 
   async function handleGradeTask(
     comment: string,
-    approved: boolean,
+    status: string,
     studentTaskId: number
   ) {
     const { success, data, error } = await _teacherGradeTask(studentTaskId, {
       id: studentId,
       comments: [comment],
-      approved,
+      status,
     });
     if (success) {
       fetchTasks(studentId);
@@ -139,10 +139,10 @@ export function TeacherViewStudent(props: TeacherViewStudentProps) {
                     fileTeacher={studentTask.task.file_url}
                     answerStudent={studentTask.answer || ''}
                     fileStudent={studentTask.file_url}
-                    approved={studentTask.approved}
+                    status={studentTask.status}
                     comments={studentTask.comments}
-                    onSubmit={(comment, approved) =>
-                      handleGradeTask(comment, approved, studentTask.id)
+                    onSubmit={(comment, status) =>
+                      handleGradeTask(comment, status, studentTask.id)
                     }
                   />
                 </div>
@@ -169,18 +169,29 @@ export function TeacherViewStudent(props: TeacherViewStudentProps) {
                       title={quiz.name}
                       text={`Resultado: ${quiz.score}`}
                     >
-                      <div className={styles['btn-test']}>
+                      { quiz.feedback === null ? (
+                        <div className={styles['btn-test']}>
                         <Button
-                          title={quiz.in_review ? 'Calificar test' : 'Dar Feedback'}
+                          title={
+                            quiz.in_review ? 'Calificar test' : 'Dar Feedback'
+                          }
                           icon={quiz.in_review ? 'pencil' : 'chat'}
                           target={true}
-                          color={quiz.in_review ? ColorsButton.primary : ColorsButton.secondary }
+                          color={
+                            quiz.in_review
+                              ? ColorsButton.primary
+                              : ColorsButton.secondary
+                          }
                           onClick={() => {
                             setOpenTest(true);
                             setQuzSelected(quiz);
                           }}
                         />
                       </div>
+                      ) : (
+                        <h5>Feedback Enviado</h5>
+                      )}
+
                     </QuizStudentCard>
                   </div>
                 ))}
@@ -188,13 +199,14 @@ export function TeacherViewStudent(props: TeacherViewStudentProps) {
               {openTest && (
                 <Dialog
                   isShown={openTest}
+                  // topOffset={10}
                   hasClose={true}
                   hasFooter={false}
                   title={quizSelected?.name}
                   onCloseComplete={() => setOpenTest(false)}
                   width={'55vw'}
                 >
-                  { quizSelected &&
+                  {quizSelected && (
                     <TeacherReviewQuiz
                       quizId={quizSelected.id}
                       onClose={() => setOpenTest(false)}
@@ -203,7 +215,7 @@ export function TeacherViewStudent(props: TeacherViewStudentProps) {
                         fetchQuizzes(studentId);
                       }}
                     />
-                  }
+                  )}
                 </Dialog>
               )}
             </div>

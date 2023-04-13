@@ -82,6 +82,7 @@ export interface QuizResult {
   total_incorrect_answer: number;
   total_no_answer: number;
   in_review: boolean;
+  feedback: string;
   created_at: string;
   updated_at: string;
 }
@@ -100,6 +101,7 @@ export interface QuizResultSummary {
   score: number;
   in_review: boolean;
   submitted_at: string;
+  feedback?: string;
   user_answers: {
     answer_id: number;
     id: number

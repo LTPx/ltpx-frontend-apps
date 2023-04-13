@@ -4,8 +4,13 @@
   .btn-correct {
     padding: 0.5rem 1rem;
   }
+  z-index: 0;
 }
 
+.content-form {
+  display: flex;
+  flex-direction: column;
+}
 .content {
   margin-top: 2rem;
 
@@ -35,7 +40,12 @@
   display: flex;
   justify-content: flex-end;
   gap: 1rem;
-  padding: 1rem 0;
+  padding: 1.5rem 2rem 1.5rem 0;
+  background: $white-color;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
 }
 
 .selected {
@@ -56,4 +66,5 @@
 
 .feedback {
   margin-top: 3rem;
+  margin-bottom: 8rem;
 }

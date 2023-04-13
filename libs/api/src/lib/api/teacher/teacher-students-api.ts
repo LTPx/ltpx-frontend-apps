@@ -71,10 +71,23 @@ export const teacherGradeTask = async (studentTaskId: number, params: TaskStuden
   });
 };
 
-export const teacherGradeQuiz = async (quizResultId: number, answers: UserAnswer[]) => {
+export const teacherGradeQuiz = async (quizResultId: number, answers: UserAnswer[], feedback:string) => {
   return new Promise<TaskStudent[]>((resolve, reject) => {
     http
-      .put(`/api/v1/teacher/quiz_results/${quizResultId}/grade`, {answers})
+      .put(`/api/v1/teacher/quiz_results/${quizResultId}/grade`, {answers, feedback})
+      .then((response) => {
+        resolve(response.data);
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
+};
+
+export const teacherFeedbackQuiz = async (quizResultId: number, feedback:string) => {
+  return new Promise<TaskStudent[]>((resolve, reject) => {
+    http
+      .put(`/api/v1/teacher/quiz_results/${quizResultId}/feedback`, {feedback})
       .then((response) => {
         resolve(response.data);
       })

@@ -16,10 +16,10 @@ export const getPopularCourses = async () => {
   });
 };
 
-export const siteGetCourse = async (courseId: string) => {
+export const siteGetCourse = async (slug: string) => {
   return new Promise<FullCourse>((resolve, reject) => {
     http
-      .get(`api/v1/site/courses/${courseId}`)
+      .get(`api/v1/site/courses/${slug}`)
       .then((response) => {
         resolve(response.data);
       })

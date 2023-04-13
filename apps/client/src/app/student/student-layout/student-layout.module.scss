@@ -31,6 +31,7 @@
 .content {
   grid-area: content;
   background-color: $background-gray-color;
+  padding-bottom: 10rem;
   // display: flex;
   // justify-content: center;
   .render-content {

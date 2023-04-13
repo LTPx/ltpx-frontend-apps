@@ -23,6 +23,7 @@ export const StudentRoutes = () => {
   return (
     <BrowserRouter>
       <Routes>
+        <Route path="/" element={<Navigate replace to="student/dashboard" />} />
         <Route path="/" element={<StudentLayout />}>
           <Route path="/home" element={<Home />} />
           <Route path="/courses" element={<AllCourses />} />
@@ -31,11 +32,11 @@ export const StudentRoutes = () => {
         <Route path="student" element={<StudentLayout />}>
           <Route path="dashboard" element={<Dashboard />} />
           <Route path="courses" element={<StudentCourses />} />
-          <Route path="courses/:courseId" element={<StudentCourse />} />
+          <Route path="course/:slug" element={<StudentCourse />} />
           <Route path="classes" element={<StudentClasses />} />
           <Route path="course/:courseId/quiz/:quizId" element={<StudentQuiz/>} />
           <Route path="course/:courseId/quiz-review/:quizId" element={<StudentReviewQuiz/>} />
-          <Route 
+          <Route
             path="live-meeting/:meetingId/:roomId"
             element={<VideoMeetingLive redirectUrl="/student/classes" />}
           />

@@ -100,6 +100,7 @@ export interface QuizResultSummary {
   score: number;
   in_review: boolean;
   submitted_at: string;
+  feedback?: string;
   user_answers: {
     answer_id: number;
     id: number

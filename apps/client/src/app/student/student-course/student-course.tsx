@@ -51,7 +51,7 @@ export function StudentCourse(props: StudentCourseProps) {
       <div className={styles['container']}>
         <h1>Curso: {enrolledCourse.title}</h1>
         <br />
-        <div className="card with-padding">
+        <div className="with-padding">
           <Tabs
             tabs={tabs}
             isNav={false}

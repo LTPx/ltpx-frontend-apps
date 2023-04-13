@@ -26,7 +26,8 @@ export function TaskForm(props: TaskFormProps) {
       file: null,
     },
     validationSchema: Yup.object({
-      title: Yup.string().required('Titulo de tarea es obligatorio'),
+      title: Yup.string().required('Titulo es obligatorio'),
+      description: Yup.string().required('Instrucciones es obligatorio'),
     }),
     onSubmit: (data) => {
       onSubmit && onSubmit(data);
@@ -37,10 +38,10 @@ export function TaskForm(props: TaskFormProps) {
   return (
     <form className={styles['form']}>
       <Input
-        label={'Titulo de la Tarea'}
+        label='Titulo'
         type="text"
         name="title"
-        placeholder="Titulo de la tarea"
+        placeholder="Titulo general de la tarea"
         onChange={(e: any) => {
           formik.handleChange(e);
         }}
@@ -54,11 +55,11 @@ export function TaskForm(props: TaskFormProps) {
         />
       ) : null}
       <TextArea
-        label={'Descripción'}
+        label='Instrucciones'
         type="text"
         name="description"
         rows={4}
-        placeholder="Agregar descripción sobre la tarea"
+        placeholder="Agregar las instrucciones para completar esta tarea"
         onChange={(e: any) => {
           formik.handleChange(e);
         }}
@@ -72,7 +73,7 @@ export function TaskForm(props: TaskFormProps) {
         />
       ) : null}
       <div className={styles['field-upload']}>
-        <label>{'Subir tarea que debe cumplir el alumno'}</label>
+        <label>Adjuntar un archivo</label>
         <FilesUploaded
           className={styles['uploader']}
           type={TypeFile.specific}

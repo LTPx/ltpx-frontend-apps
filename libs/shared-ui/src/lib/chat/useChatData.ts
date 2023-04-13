@@ -7,10 +7,10 @@ import { useEffectOnce } from "./useEffectOnce";
 export const useChatData = () => {
   const { user } = useUser();
   const key = process.env.NX_PUSHER_KEY || '';
-  const pusher = new Pusher(key, {
-    cluster: process.env.NX_PUSHER_CLUSTER || '',
-    forceTLS: true,
-  });
+  // const pusher = new Pusher(key, {
+  //   cluster: process.env.NX_PUSHER_CLUSTER || '',
+  //   forceTLS: true,
+  // });
 
   const {
     _getRooms,
@@ -26,21 +26,21 @@ export const useChatData = () => {
     // listenMessages();
 
     return () => {
-      const channelName = `listen_messages_user_${user.id}`;
-      pusher.unsubscribe(channelName);
-      console.log('unsubscribe');
+      // const channelName = `listen_messages_user_${user.id}`;
+      // pusher.unsubscribe(channelName);
+      // console.log('unsubscribe');
     };
   });
 
-  function listenMessages() {
-    const channelName = `listen_messages_user_${user.id}`;
-    const channel = pusher.subscribe(channelName);
-    channel.bind('new', (newMessage: ChatMessage) => {
-      if (newMessage.user_id !== user.id) {
-        appendNewMessage(newMessage);
-      }
-    })
-  }
+  // function listenMessages() {
+  //   const channelName = `listen_messages_user_${user.id}`;
+  //   const channel = pusher.subscribe(channelName);
+  //   channel.bind('new', (newMessage: ChatMessage) => {
+  //     if (newMessage.user_id !== user.id) {
+  //       appendNewMessage(newMessage);
+  //     }
+  //   })
+  // }
 
   return {
 

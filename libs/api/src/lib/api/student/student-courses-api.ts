@@ -16,10 +16,10 @@ export const getStudentCourses = async () => {
   });
 };
 
-export const getStudentCourse = async (id: number) => {
+export const getStudentCourse = async (slug: string) => {
   return new Promise<CourseModel>((resolve, reject) => {
     http
-      .get(`api/v1/student/courses/${id}`)
+      .get(`api/v1/student/courses/${slug}`)
       .then((response) => {
         resolve(response.data);
       })

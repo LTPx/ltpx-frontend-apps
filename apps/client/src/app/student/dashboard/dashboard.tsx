@@ -78,7 +78,7 @@ export function Dashboard(props: DashboardProps) {
                   startDate={course.created_at}
                   title={course.title}
                   progress={0}
-                  url={`/student/courses/${course.id}`}
+                  url={`/student/course/${course.slug}`}
                 />
               ))}
             </div>

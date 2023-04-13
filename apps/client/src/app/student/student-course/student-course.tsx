@@ -17,12 +17,11 @@ export interface StudentCourseProps {}
 export function StudentCourse(props: StudentCourseProps) {
   const { _getStudentCourse, enrolledCourse } = useStudent();
   const [selectedTab, setSelectedTab] = useState(0);
-  const { courseId } = useParams();
-  const id = parseInt(courseId || '');
+  const { slug } = useParams();
   const [showMore, setShowMore] = useState(false);
 
   const fetchCourse = useCallback(async () => {
-    const { success, data, error } = await _getStudentCourse(id);
+    const { success, data, error } = await _getStudentCourse(slug || '');
     if (success) {
       console.log('data: ', data);
     } else {
@@ -117,7 +116,7 @@ export function StudentCourse(props: StudentCourseProps) {
               <StudentCourseQuizzes courseId={enrolledCourse.id} />
             )}
             {selectedTab === 4 && (
-              <StudentCourseAchievements courseId={parseInt(courseId || '')} />
+              <StudentCourseAchievements courseId={enrolledCourse.id} />
             )}
           </div>
         </div>

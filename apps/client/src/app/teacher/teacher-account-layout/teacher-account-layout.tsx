@@ -1,4 +1,4 @@
-import { Button } from '@ltpx-frontend-apps/shared-ui';
+import { Button, Icon } from '@ltpx-frontend-apps/shared-ui';
 import { useUser } from '@ltpx-frontend-apps/store';
 import { Avatar } from 'evergreen-ui';
 import { NavLink, Outlet } from 'react-router-dom';
@@ -23,13 +23,27 @@ export function TeacherAccountLayout(props: TeacherAccountLayoutProps) {
               </NavLink>
               <h3>{user.fullname}</h3>
               <h4>{user.email}</h4>
-              <div className={styles['btn']}>
-                <Button
-                  className={styles['button-edit']}
-                  title="Editar perfil"
-                  outline={true}
-                  link={'account-form'}
-                />
+            </div>
+            <div className={styles['links-information']}>
+              <div className={styles['links-wrap']}>
+                <NavLink to={''}>
+                  <div className={styles['link']}>
+                    <Icon icon={'person'} size={23} />
+                    <h4>Información de Usuario</h4>
+                  </div>
+                </NavLink>
+                <NavLink to={'account-bank'}>
+                  <div className={styles['link']}>
+                    <Icon icon={'bank'} size={23} />
+                    <h4>Cuenta Bancaria</h4>
+                  </div>
+                </NavLink>
+                <NavLink to={'password-edit'}>
+                  <div className={styles['link']}>
+                    <Icon icon={'key'} size={23} />
+                    <h4>Cambiar Contraseña</h4>
+                  </div>
+                </NavLink>
               </div>
             </div>
           </div>

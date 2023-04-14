@@ -149,7 +149,7 @@ export function BankAccountForm(props: BankAccountFormProps) {
               color={ColorsButton.white}
               outline={true}
               title="Cancelar"
-              link={'/teacher/account/account-profile'}
+              link={'/teacher/account/account-bank'}
             />
             <Button
               color={ColorsButton.primary}

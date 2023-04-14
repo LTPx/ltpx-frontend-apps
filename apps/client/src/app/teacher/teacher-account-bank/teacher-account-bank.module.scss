@@ -1,12 +1,6 @@
 @import '../../../styles.scss';
 
 .container {
-  display: flex;
-  flex-direction: column;
-
-  .biography {
-    padding: 1rem 1.5rem;
-  }
   .title-content {
     display: flex;
     align-items: center;
@@ -17,12 +11,14 @@
       font-weight: 500;
     }
   }
+  .text {
+    color: $text-gray-color;
+  }
   .btn-edit {
     padding: 0.25rem 1rem;
     border-radius: 10px;
   }
-
-  .info {
+  .info-bank {
     padding: 1rem 1.5rem;
   }
   .item {

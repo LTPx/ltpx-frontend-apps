@@ -13,3 +13,11 @@ export * from './teacher-account-profile/teacher-account-profile';
 export * from './teacher-course-students/teacher-course-students';
 export * from './teacher-review-quiz/teacher-review-quiz';
 export * from './teacher-view-student/teacher-view-student';
+export * from './teacher-account-bank/teacher-account-bank';
+export * from './bank-account-edit/bank-account-edit';
+export * from './teacher-profile-edit/teacher-profile-edit';
+export * from './password-edit/password-edit';
+
+
+
+

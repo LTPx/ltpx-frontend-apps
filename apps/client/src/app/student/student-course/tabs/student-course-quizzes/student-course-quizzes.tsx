@@ -21,7 +21,6 @@ export function StudentCourseQuizzes(props: StudentCourseQuizzesProps) {
   const fetchQuizzes = useCallback(async () => {
     const { success, data, error } = await _getStudentQuizzes(courseId);
     if (success) {
-      console.log('data: ', data);
       setQuizzes(data);
     } else {
       console.log('error: ', error);

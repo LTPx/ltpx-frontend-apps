@@ -22,7 +22,6 @@ export function StudentCourseAchievements(
   const fetchQuizzes = useCallback(async () => {
     const { success, data, error } = await _getStudentAchievements(courseId);
     if (success) {
-      console.log('achievements: ', data);
       setAchievementsView(data);
     } else {
       console.log('error: ', error);

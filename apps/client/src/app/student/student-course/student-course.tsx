@@ -31,9 +31,7 @@ export function StudentCourse(props: StudentCourseProps) {
   const fetchCourse = useCallback(async () => {
     const { success, data, error } = await _getStudentCourse(slug || '');
     if (success) {
-      console.log('data: ', data);
     } else {
-      console.log('error: ', error);
     }
   }, []);
 
@@ -80,12 +78,12 @@ export function StudentCourse(props: StudentCourseProps) {
             <div className={`${styles['basic-card']} ${styles.center}`}>
               <h3>Que Aprenderás</h3>
               { enrolledCourse.learn_goals &&
-                <h4>{enrolledCourse.learn_goals.split('\n').map((goal)=>(
-                  <div className={styles['goals']}>
+                <div>{enrolledCourse.learn_goals.split('\n').map((goal, index)=>(
+                  <div className={styles['goals']} key={index}>
                     <div className={styles['square']}></div>
                     <h5>{goal}</h5>
                   </div>
-                ))}</h4>
+                ))}</div>
               }
             </div>
             <div className={`${styles['basic-card']}`}>

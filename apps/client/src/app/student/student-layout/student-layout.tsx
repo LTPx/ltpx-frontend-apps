@@ -15,13 +15,32 @@ import { useUser } from '@ltpx-frontend-apps/store';
 import { useTranslation } from 'react-i18next';
 import { Outlet, useNavigate } from 'react-router-dom';
 import avatar from './../../../assets/images/avatars/avatar-1.svg';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import ActionCable from 'actioncable';
 
 export function StudentLayout() {
   const [openChat, setOpenChat] = useState(false);
   const { user, logout } = useUser();
-  const navigate = useNavigate();
   const { t } = useTranslation();
+  const navigate = useNavigate();
+  const [notifications, setNotifications] = useState<string[]>([]);
+
+  useEffect(() => {
+    const cable = ActionCable.createConsumer('ws://localhost:3000/cable');
+    const notificationsChannel = cable.subscriptions.create({
+      channel: 'NotificationsChannel',
+      id: user.id
+    }, {
+      received(data: any) {
+        console.log(data);
+        setNotifications(['data'])
+      },
+    });
+
+    return () => {
+      cable.subscriptions.remove(notificationsChannel);
+    };
+  }, []);
 
   const links = [
     {
@@ -61,9 +80,9 @@ export function StudentLayout() {
       <Header links={links} className={styles['header']}>
         <div className={styles['teacher-actions']}>
           <Dropdown>
-            <NotificationList notifications={[]} countNewNotification={0}/>
+            <NotificationList notifications={[]} countNewNotification={notifications.length}/>
             <div className={styles['avatar']}>
-              <Cart amount={0}/>
+              <Cart amount={notifications.length}/>
             </div>
           </Dropdown>
           <Dropdown>

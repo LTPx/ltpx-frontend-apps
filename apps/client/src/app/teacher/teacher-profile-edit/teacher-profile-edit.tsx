@@ -16,7 +16,7 @@ import { useNavigate } from 'react-router-dom';
 export interface TeacherProfileEditProps {}
 
 export function TeacherProfileEdit(props: TeacherProfileEditProps) {
-  const { getProfile, _updateProfile, profile } = useTeacher();
+  const { _updateProfile, profile } = useTeacher();
   const [formData, setFormData] = useState<TeacherProfileParams>();
   const { setMessageToast } = useUtil();
   const navigate = useNavigate();
@@ -39,6 +39,9 @@ export function TeacherProfileEdit(props: TeacherProfileEditProps) {
   };
   return (
     <div className={styles['container']}>
+      <div className={styles['title-content']}>
+        <h4 className={styles['title']}>Editar Perfil de Profesor</h4>
+      </div>
       <TeacherProfileForm
         profile={profile}
         onSubmit={(data: TeacherProfileParams) => {

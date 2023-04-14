@@ -10,4 +10,6 @@ export * from './student-account-profile/student-account-profile';
 export * from './student-account-layout/student-account-layout';
 export * from './student-quiz/student-quiz';
 export * from './student-review-quiz/student-review-quiz';
+export * from './student-password-edit/student-password-edit'
+
 

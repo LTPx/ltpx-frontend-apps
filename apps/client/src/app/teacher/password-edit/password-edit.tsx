@@ -27,6 +27,9 @@ export function PasswordEdit(props: PasswordEditProps) {
   }
   return (
     <div className={styles['container']}>
+      <div className={styles['title-content']}>
+        <h4 className={styles['title']}>Cambiar Contraseña</h4>
+      </div>
       <ChangePasswordForm
         url="/teacher/account/account-profile"
         onSubmit={(params) => {

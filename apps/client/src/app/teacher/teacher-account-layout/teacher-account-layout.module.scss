@@ -4,6 +4,17 @@
   width: 80vw;
   display: flex;
   justify-content: center;
+
+  .tab {
+    padding: 0.25rem;
+    text-decoration: none;
+    color: initial;
+    cursor: pointer;
+
+    &.selected {
+      color: $primary-color;
+    }
+  }
   .content {
     width: 100%;
     display: grid;
@@ -19,7 +30,7 @@
     .links-wrap {
       display: flex;
       flex-direction: column;
-      gap: 1.5rem;
+      gap: 1.75rem;
     }
     .link {
       display: flex;

@@ -23,6 +23,9 @@ export function BankAccountEdit(props: BankAccountEditProps) {
   }
   return (
     <div className={styles['container']}>
+      <div className={styles['title-content']}>
+        <h4 className={styles['title']}>Editar Cuenta Bancaria</h4>
+      </div>
       <BankAccountForm
         account={profile.bank_accounts[0]}
         onSubmit={updateTeacherProfile}

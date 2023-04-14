@@ -3,6 +3,7 @@ import { MeetingModel } from './meeting-interface';
 import { QuizModel } from './quiz-interface';
 import { CourseSession } from './session-interface';
 import { TaskModel } from './task-interface';
+import { TeacherProfile } from './teacher-interface';
 import { PartialWithRequired } from './util';
 
 export enum TeacherClassType {
@@ -76,6 +77,7 @@ export interface CourseModel {
   course_session_id: number;
   tasks: TaskModel[];
   slug: string;
+  teacher?: TeacherProfile;
 }
 
 export interface CourseSite {

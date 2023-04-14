@@ -1,29 +1,40 @@
 @import '../../../styles.scss';
-.wrap {
+
+.main-container {
   display: flex;
   justify-content: center;
-}
-.container {
   margin-top: 3rem;
-  width: 60vw;
-  .show {
-    color: $primary-color;
-    text-decoration: underline;
-    padding-bottom: 2rem;
+
+  .container {
+    width: 75vw;
+  }
+
+  .columns-container {
+    display: flex;
+    gap: 3rem;
+    margin-top: 3rem;
+
+    .column-right {
+      flex: 1;
+    }
   }
 }
+
 .tabs-content {
   padding-top: $size-lg-1;
+
   .quizzes-content {
     display: flex;
     flex-direction: column;
     gap: $size-md-1;
   }
+
   .achievements-content {
     display: flex;
     flex-direction: column;
     gap: $size-lg-1;
     flex-wrap: wrap;
+
     .achievements-student {
       .title-achievement {
         padding-bottom: 1.5rem;
@@ -44,10 +55,12 @@
       }
     }
   }
+
   .course-date {
     display: flex;
     gap: $size-md-3;
     flex-wrap: wrap;
+
     .course-class {
       padding: $size-md-1;
       width: 9rem;
@@ -56,6 +69,7 @@
     }
   }
 }
+
 .contents-course {
   .title-content {
     padding-bottom: $size-sm-2;
@@ -66,5 +80,24 @@
   }
   .subtitle-content {
     padding-bottom: $size-sm-3;
+  }
+}
+
+.teacher-profile-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $size-sm-3;
+  padding: $size-md-3 $size-lg-1;
+  box-shadow: $card-shadow-medium;
+  background-color: $white-color;
+  border-radius: 10px;
+  text-align: center;
+  min-width: 12rem;
+  h3 {
+    font-weight: 450;
+  }
+  h4 {
+    color: $text-gray-color;
   }
 }

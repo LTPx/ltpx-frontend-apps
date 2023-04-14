@@ -15,4 +15,10 @@
     height: 22px;
     font-size: 14px;
   }
+
+  svg {
+    background-color: $gray-color-100;
+    padding: 0.25rem 0.5rem;
+    border-radius: 2px;
+  }
 }

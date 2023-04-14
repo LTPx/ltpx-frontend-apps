@@ -2,11 +2,13 @@ import styles from './student-layout.module.scss';
 import {
   Avatar,
   AvatarSize,
+  Cart,
   Chat,
   ChatFloat,
   Dropdown,
   Header,
   Icon,
+  NotificationList,
   UserMenu,
 } from '@ltpx-frontend-apps/shared-ui';
 import { useUser } from '@ltpx-frontend-apps/store';
@@ -58,6 +60,12 @@ export function StudentLayout() {
     <div className={styles['container']}>
       <Header links={links} className={styles['header']}>
         <div className={styles['teacher-actions']}>
+          <Dropdown>
+            <NotificationList notifications={[]} countNewNotification={0}/>
+            <div className={styles['avatar']}>
+              <Cart amount={0}/>
+            </div>
+          </Dropdown>
           <Dropdown>
             <UserMenu
               name={user.fullname}

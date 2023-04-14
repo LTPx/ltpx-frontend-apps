@@ -14,7 +14,7 @@ export function Cart(props: CartProps) {
       { amount ? (
         <div className={styles['badged']}>{amount}</div>
       ) : null}
-      <Icon icon='shopping-cart' size={20}/>
+      <Icon icon='notification' size={20}/>
     </div>
   );
 }

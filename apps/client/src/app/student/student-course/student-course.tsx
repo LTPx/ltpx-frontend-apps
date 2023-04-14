@@ -89,7 +89,7 @@ export function StudentCourse(props: StudentCourseProps) {
               }
             </div>
             <div className={`${styles['basic-card']}`}>
-              <ProgressBar text="Progreso del curso" percentage={0} className={styles['progress-card']}/>
+              <ProgressBar text="Completado" percentage={0} className={styles['progress-card']}/>
             </div>
           </div>
           <div className={styles['column-right']}>

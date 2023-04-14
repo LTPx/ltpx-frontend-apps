@@ -1,14 +1,12 @@
 import { getChatStudents, UserModel } from "@ltpx-frontend-apps/api";
-import { useAppStore, useUser, useUtil } from "@ltpx-frontend-apps/store";
-import { useEffect, useState } from "react";
+import { useAppStore, useNotification, useUser, useUtil } from "@ltpx-frontend-apps/store";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import ActionCable from 'actioncable';
 
 export const useTeacherLayout = () => {
   const [openChat, setOpenChat] = useState(false);
   const [openNewChat, setOpenNewChat] = useState(false);
-  const [notifications, setNotifications] = useState<string[]>([]);
   const [users, setUsers] = useState<UserModel[]>([]);
   const { feedbackAction } = useAppStore();
   const { clearMessageToast } = useUtil();
@@ -16,24 +14,7 @@ export const useTeacherLayout = () => {
   const { teacher_account } = user;
   const { t } = useTranslation();
   const navigate = useNavigate();
-
-
-  useEffect(() => {
-    const cable = ActionCable.createConsumer('ws://localhost:3000/cable');
-    const notificationsChannel = cable.subscriptions.create({
-      channel: 'NotificationsChannel',
-      id: user.id
-    }, {
-      received(data: any) {
-        console.log(data);
-        setNotifications([...notifications, ...[data]])
-      },
-    });
-
-    return () => {
-      cable.subscriptions.remove(notificationsChannel);
-    };
-  }, []);
+  const { notifications } = useNotification()
 
   async function logoutSession() {
     await logout();

@@ -11,36 +11,18 @@ import {
   NotificationList,
   UserMenu,
 } from '@ltpx-frontend-apps/shared-ui';
-import { useUser } from '@ltpx-frontend-apps/store';
+import { useNotification, useUser } from '@ltpx-frontend-apps/store';
 import { useTranslation } from 'react-i18next';
 import { Outlet, useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 import avatar from './../../../assets/images/avatars/avatar-1.svg';
-import { useEffect, useState } from 'react';
-import ActionCable from 'actioncable';
 
 export function StudentLayout() {
   const [openChat, setOpenChat] = useState(false);
   const { user, logout } = useUser();
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const [notifications, setNotifications] = useState<string[]>([]);
-
-  useEffect(() => {
-    const cable = ActionCable.createConsumer('ws://localhost:3000/cable');
-    const notificationsChannel = cable.subscriptions.create({
-      channel: 'NotificationsChannel',
-      id: user.id
-    }, {
-      received(data: any) {
-        console.log(data);
-        setNotifications(['data'])
-      },
-    });
-
-    return () => {
-      cable.subscriptions.remove(notificationsChannel);
-    };
-  }, []);
+  const { notifications } = useNotification()
 
   const links = [
     {

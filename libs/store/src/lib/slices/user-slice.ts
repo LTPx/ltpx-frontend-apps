@@ -14,12 +14,15 @@ import {
   formatErrors,
   ChangePasswordParams,
   changePassword,
+  Notification
 } from '@ltpx-frontend-apps/api';
 
 export type UserSlice = {
   user: UserStore;
   isAuthenticated: boolean;
   currentView: TypeViews;
+  notifications: Notification[];
+  addNotification: (notification: Notification) => void;
   getCurrentUser: () => Promise<FormatResponse>;
   login: (credentials: ICredentials) => Promise<FormatResponse>;
   loginAdmin: (credentials: ICredentials) => Promise<FormatResponse>;
@@ -40,11 +43,17 @@ export type UserSlice = {
 // console.log('currentView slice: ', currentView);
 
 export const createUserSlice: StateCreator<StoreState, [], [], UserSlice> = (
-  set
+  set,
+  get
 ) => ({
   user: {} as UserStore,
   isAuthenticated: false,
   currentView: TypeViews.default,
+  notifications: [],
+  addNotification: (notification) => {
+    const newNotifications = [...get().notifications, ...[notification]];
+    set({ notifications: newNotifications});
+  },
   getCurrentUser: async () => {
     try {
       const user = await getCurrentUser();

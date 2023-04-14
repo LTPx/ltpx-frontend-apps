@@ -2,7 +2,7 @@ import Avatar, { AvatarSize } from '../avatar/avatar';
 import styles from './notification-list.module.scss';
 
 /* eslint-disable-next-line */
-export interface Notification {
+export interface NotificationItem {
   image: string;
   text: string;
   date: string;
@@ -10,14 +10,14 @@ export interface Notification {
 }
 
 export interface NotificationListProps {
-  notifications: Array<Notification>;
+  notifications: Array<NotificationItem>;
   countNewNotification: number;
 }
 
 export function NotificationList(props: NotificationListProps) {
   const { countNewNotification, notifications } = props;
 
-  const NotificationRow = ({ image, text, date, read }: Notification) => (
+  const NotificationRow = ({ image, text, date, read }: NotificationItem) => (
     <div className={styles['notifications']}>
       <Avatar image={image} size={AvatarSize.small}></Avatar>
       <div className={styles['information']}>

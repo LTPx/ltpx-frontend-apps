@@ -4,11 +4,39 @@
   width: 80vw;
   display: flex;
   justify-content: center;
+
+  .tab {
+    padding: 0.25rem;
+    text-decoration: none;
+    color: initial;
+    cursor: pointer;
+
+    &.selected {
+      color: $primary-color;
+    }
+  }
   .content {
     width: 100%;
     display: grid;
     grid-template-columns: 30% 70%;
     gap: $size-lg-3;
+  }
+  .links-information {
+    display: flex;
+    flex-direction: column;
+    padding-top: 1.5rem;
+    justify-content: center;
+    align-items: center;
+    .links-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 1.75rem;
+    }
+    .link {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+    }
   }
   .profile {
     .general-information {
@@ -17,8 +45,8 @@
       align-items: center;
       gap: $size-sm-3;
       padding: $size-md-3;
-      box-shadow: $card-shadow-medium;
-      background-color: $white-color;
+      // box-shadow: $card-shadow-medium;
+      // background-color: $white-color;
       h3 {
         font-weight: 500;
       }

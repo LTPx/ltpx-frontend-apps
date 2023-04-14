@@ -1,13 +1,6 @@
 @import '../../../styles.scss';
 
-.profile-container {
-  display: flex;
-  flex-direction: column;
-
-  .btn-edit {
-    padding: 0.25rem 1rem;
-    border-radius: 10px;
-  }
+.container {
   .title-content {
     display: flex;
     align-items: center;
@@ -18,7 +11,14 @@
       font-weight: 500;
     }
   }
-  .info {
+  .text {
+    color: $text-gray-color;
+  }
+  .btn-edit {
+    padding: 0.25rem 1rem;
+    border-radius: 10px;
+  }
+  .info-bank {
     padding: 1rem 1.5rem;
   }
   .item {

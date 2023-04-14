@@ -3,50 +3,33 @@
 .container {
   display: flex;
   flex-direction: column;
-  padding: $size-md-1;
-  gap: $size-md-1;
-  .title {
+
+  .biography {
+    padding: 1rem 1.5rem;
+  }
+  .title-content {
     display: flex;
-    gap: $size-sm-3;
     align-items: center;
-    padding-bottom: $size-sm-2;
-    h3{
+    justify-content: space-between;
+    padding: 1rem 1.5rem;
+    background-color: $white-color-100;
+    .title {
       font-weight: 500;
     }
   }
-  .about-teacher {
-    border: 1px solid $gray-color-200;
-    padding: $size-md-1;
-    border-radius: 4px;
-    p {
-      color: $text-gray-color;
-    }
-  }
-  .information-teacher {
-    border: 1px solid $gray-color-200;
-    padding: $size-md-1;
-    border-radius: 4px;
-    .text {
-      color: $text-gray-color;
-    }
+  .btn-edit {
+    padding: 0.25rem 1rem;
+    border-radius: 10px;
   }
 
-  .bank {
-    padding: $size-md-1;
-    border: 1px solid $gray-color-200;
-
-    .info-bank {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      padding-top: $size-md-1;
-      .row {
-        .item {
-          padding-bottom: $size-md-1;
-          .text {
-            color: $text-gray-color;
-          }
-        }
-      }
-    }
+  .info {
+    padding: 1rem 1.5rem;
+  }
+  .item {
+    display: grid;
+    padding: 1rem 0;
+    grid-template-columns: 30% 70%;
+    align-items: center;
+    border-bottom: 1px solid $gray-color-200;
   }
 }

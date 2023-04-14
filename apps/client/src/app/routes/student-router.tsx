@@ -16,6 +16,7 @@ import {
   StudentAccountProfile,
   StudentQuiz,
   StudentReviewQuiz,
+  StudentPasswordEdit,
 } from '../student/index';
 import VideoMeetingLive from '../video/video-meeting-live/video-meeting-live';
 
@@ -50,7 +51,8 @@ export const StudentRoutes = () => {
           </Route>
           <Route path="account" element={<StudentAccountLayout />}>
             <Route path="/student/account" element={<StudentAccountProfile />} />
-            <Route path="account-form" element={<Account />} />
+            <Route path="account-edit" element={<Account />} />
+            <Route path="password-edit" element={<StudentPasswordEdit />} />
           </Route>
         </Route>
       </Routes>

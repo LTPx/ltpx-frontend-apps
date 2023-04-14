@@ -16,6 +16,33 @@
     grid-template-columns: 30% 70%;
     gap: $size-lg-3;
   }
+  .links-information {
+    display: flex;
+    flex-direction: column;
+    padding-top: 1.5rem;
+    justify-content: center;
+    align-items: center;
+    .links-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 1.75rem;
+    }
+    .link {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+    }
+  }
+  .tab {
+    padding: 0.25rem;
+    text-decoration: none;
+    color: initial;
+    cursor: pointer;
+
+    &.selected {
+      color: $primary-color;
+    }
+  }
   .profile {
     .general-information {
       display: flex;
@@ -23,21 +50,12 @@
       align-items: center;
       gap: $size-sm-3;
       padding: $size-md-3;
-      box-shadow: $card-shadow-medium;
-      background-color: $white-color;
+
       h3 {
         font-weight: 500;
       }
       h4 {
         color: $text-gray-color;
-      }
-      .btn {
-        padding-top: $size-sm-2;
-      }
-
-      .button-edit {
-        padding: $size-sm-2 $size-md-1;
-        align-items: center;
       }
     }
   }
@@ -46,4 +64,3 @@
     background-color: $white-color;
   }
 }
-

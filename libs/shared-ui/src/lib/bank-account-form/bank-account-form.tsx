@@ -51,7 +51,6 @@ export function BankAccountForm(props: BankAccountFormProps) {
     <div className={styles['container']}>
       <form className={styles['form']}>
         <div className={styles['general']}>
-          <label>Cuenta Bancaria</label>
           <p className={styles['describe']}>
             Asegúrate que los datos estén correctos para recibir tus pagos sin
             problemas
@@ -149,7 +148,7 @@ export function BankAccountForm(props: BankAccountFormProps) {
               color={ColorsButton.white}
               outline={true}
               title="Cancelar"
-              link={'/teacher/account/account-profile'}
+              link={'/teacher/account/account-bank'}
             />
             <Button
               color={ColorsButton.primary}

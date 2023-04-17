@@ -54,16 +54,31 @@ export function QuizView(props: QuizViewProps) {
                       <p>{question.description}</p>
                       <div className={styles['items']}>
                         {question.answers_attributes.map((answer, i) => (
-                          <p
-                            key={i}
-                            className={`${styles['question-answer']} ${
-                              answersIds.includes(answer.id || -1)
-                                ? styles['selected']
-                                : ''
-                            }`}
-                          >
-                            {translateOption(answer.text)}
-                          </p>
+                          <div>
+                            {answer.correct ? (
+                              <p
+                                key={i}
+                                className={`${styles['question-answer']} ${
+                                  answersIds.includes(answer.id || -1)
+                                    ? styles['selected-true']
+                                    : ''
+                                }`}
+                              >
+                                {translateOption(answer.text)}
+                              </p>
+                            ) : (
+                              <p
+                                key={i}
+                                className={`${styles['question-answer']} ${
+                                  answersIds.includes(answer.id || -1)
+                                    ? styles['selected-false']
+                                    : ''
+                                }`}
+                              >
+                                {translateOption(answer.text)}
+                              </p>
+                            )}
+                          </div>
                         ))}
                       </div>
                     </>
@@ -76,16 +91,31 @@ export function QuizView(props: QuizViewProps) {
                       <p>{question.description}</p>
                       <div className={styles['items']}>
                         {question.answers_attributes.map((answer, i) => (
-                          <p
-                            key={i}
-                            className={`${styles['question-answer']} ${
-                              answersIds.includes(answer.id || -1)
-                                ? styles['selected']
-                                : ''
-                            }`}
-                          >
-                            {answer.text}
-                          </p>
+                          <div>
+                            {answer.correct ? (
+                              <p
+                                key={i}
+                                className={`${styles['question-answer']} ${
+                                  answersIds.includes(answer.id || -1)
+                                    ? styles['selected-true']
+                                    : ''
+                                }`}
+                              >
+                                {answer.text}
+                              </p>
+                            ) : (
+                              <p
+                                key={i}
+                                className={`${styles['question-answer']} ${
+                                  answersIds.includes(answer.id || -1)
+                                    ? styles['selected-false']
+                                    : ''
+                                }`}
+                              >
+                                {answer.text}
+                              </p>
+                            )}
+                          </div>
                         ))}
                       </div>
                     </>
@@ -98,16 +128,31 @@ export function QuizView(props: QuizViewProps) {
                       <p>{question.description}</p>
                       <div className={styles['items']}>
                         {question.answers_attributes.map((answer, i) => (
-                          <p
-                            key={i}
-                            className={`${styles['question-answer']} ${
-                              answersIds.includes(answer.id || -1)
-                                ? styles['selected']
-                                : ''
-                            }`}
-                          >
-                            {answer.text}
-                          </p>
+                          <div>
+                            {answer.correct ? (
+                              <p
+                                key={i}
+                                className={`${styles['question-answer']} ${
+                                  answersIds.includes(answer.id || -1)
+                                    ? styles['selected-true']
+                                    : ''
+                                }`}
+                              >
+                                {answer.text}
+                              </p>
+                            ) : (
+                              <p
+                                key={i}
+                                className={`${styles['question-answer']} ${
+                                  answersIds.includes(answer.id || -1)
+                                    ? styles['selected-false']
+                                    : ''
+                                }`}
+                              >
+                                {answer.text}
+                              </p>
+                            )}
+                          </div>
                         ))}
                       </div>
                     </>
@@ -119,9 +164,33 @@ export function QuizView(props: QuizViewProps) {
                       </h3>
                       <p>{question.description}</p>
                       {question.answers_attributes.map((answer, i) => (
-                        <pre className={styles['question-answer']} key={i}>
-                          {foundAnswer(answer.id)?.text}
-                        </pre>
+                        <div>
+                          {answer.correct ? (
+                            <pre
+                              key={i}
+                              className={`${styles['question-answer']} ${
+                                answersIds.includes(answer.id || -1)
+                                  ? styles['selected-true']
+                                  : ''
+                              }`}
+                            >
+                              {foundAnswer(answer.id)?.text}
+                              {/* {answer.correct} */}
+                            </pre>
+                          ) : (
+                            <pre
+                              key={i}
+                              className={`${styles['question-answer']} ${
+                                answersIds.includes(answer.id || -1)
+                                  ? styles['selected-false']
+                                  : ''
+                              }`}
+                            >
+                              {foundAnswer(answer.id)?.text}
+                              {/* {answer.correct} */}
+                            </pre>
+                          )}
+                        </div>
                       ))}
                     </>
                   )}

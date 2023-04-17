@@ -69,12 +69,15 @@ export function TeacherEarnings() {
             />
             <div className={styles['withdrawal-form']}>
               <h2>Retiros</h2>
-              <h5>Para realizar un retiro debes tener al menos $20 en tu balance disponible</h5>
+              <h5>
+                Para realizar un retiro debes tener al menos $20 en tu balance
+                disponible
+              </h5>
               <Button
                 title={'Retirar Fondos'}
                 full={true}
                 onClick={() => setOpenModal(true)}
-                disabled={wallet.balance_available_withdrawal < 21 }
+                disabled={wallet.balance_available_withdrawal < 21}
               />
             </div>
           </div>
@@ -116,6 +119,7 @@ export function TeacherEarnings() {
       >
         <FormWithdrawal
           banks={user.teacher?.bank_accounts || []}
+          balanceAvailable={wallet.balance_available_withdrawal}
           onClose={() => setOpenModal(false)}
           onSubmit={(params) => handleWithdrawal(params)}
         />

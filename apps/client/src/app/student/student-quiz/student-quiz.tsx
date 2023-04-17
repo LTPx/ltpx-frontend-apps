@@ -25,7 +25,7 @@ export function StudentQuiz() {
   });
   const [loaded, setLoaded] = useState(false);
   const { _getStudentQuiz, _evaluateQuiz, currentQuiz } = useStudent();
-  const { quizId, courseId } = useParams();
+  const { quizId, courseId, slug } = useParams();
   const id = parseInt(quizId || '');
   const course_id = parseInt(courseId || '');
 
@@ -88,8 +88,12 @@ export function StudentQuiz() {
         },
         []
       );
-      const needReview = !!answersFilter.find((answer)=> answer.text);
-      const { data, success, error } = await _evaluateQuiz(id, answersFilter, needReview);
+      const needReview = !!answersFilter.find((answer) => answer.text);
+      const { data, success, error } = await _evaluateQuiz(
+        id,
+        answersFilter,
+        needReview
+      );
       if (success) {
         if (needReview) {
           navigate('/student/dashboard');
@@ -203,7 +207,8 @@ export function StudentQuiz() {
                 title="Cancelar"
                 color={ColorsButton.white}
                 outline={true}
-                link={`/student/courses/${courseId}`}
+                onClick={() => navigate(-1)}
+                // link={`/student/course/${enrolledCourse.slug}`}
               />
               <Button
                 title="Finalizar test"
@@ -242,7 +247,8 @@ export function StudentQuiz() {
               <Button
                 title={'Regresar'}
                 color={ColorsButton.secondary}
-                link={`/student/dashboard`}
+                onClick={() => navigate(-1)}
+                // link={`/student/dashboard`}
               />
             </div>
           </QuizScore>

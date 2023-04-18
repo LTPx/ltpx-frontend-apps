@@ -65,16 +65,31 @@ export function QuizReviewTeacher(props: QuizReviewTeacherProps) {
                     <p>{question.description}</p>
                     <div className={styles['items']}>
                       {question.answers_attributes.map((answer, i) => (
-                        <p
-                          key={i}
-                          className={`${styles['question-answer']} ${
-                            answersIds.includes(answer.id || -1)
-                              ? styles['selected']
-                              : ''
-                          }`}
-                        >
-                          {translateOption(answer.text)}
-                        </p>
+                        <div>
+                          {answer.correct ? (
+                            <p
+                              key={i}
+                              className={`${styles['question-answer']} ${
+                                answersIds.includes(answer.id || -1)
+                                  ? styles['selected-true']
+                                  : ''
+                              }`}
+                            >
+                              {translateOption(answer.text)}
+                            </p>
+                          ) : (
+                            <p
+                              key={i}
+                              className={`${styles['question-answer']} ${
+                                answersIds.includes(answer.id || -1)
+                                  ? styles['selected-false']
+                                  : ''
+                              }`}
+                            >
+                              {translateOption(answer.text)}
+                            </p>
+                          )}
+                        </div>
                       ))}
                     </div>
                   </>
@@ -87,16 +102,31 @@ export function QuizReviewTeacher(props: QuizReviewTeacherProps) {
                     <p>{question.description}</p>
                     <div className={styles['items']}>
                       {question.answers_attributes.map((answer, i) => (
-                        <p
-                          key={i}
-                          className={`${styles['question-answer']} ${
-                            answersIds.includes(answer.id || -1)
-                              ? styles['selected']
-                              : ''
-                          }`}
-                        >
-                          {answer.text}
-                        </p>
+                        <div>
+                          {answer.correct ? (
+                            <p
+                              key={i}
+                              className={`${styles['question-answer']} ${
+                                answersIds.includes(answer.id || -1)
+                                  ? styles['selected-true']
+                                  : ''
+                              }`}
+                            >
+                              {answer.text}
+                            </p>
+                          ) : (
+                            <p
+                              key={i}
+                              className={`${styles['question-answer']} ${
+                                answersIds.includes(answer.id || -1)
+                                  ? styles['selected-false']
+                                  : ''
+                              }`}
+                            >
+                              {answer.text}
+                            </p>
+                          )}
+                        </div>
                       ))}
                     </div>
                   </>
@@ -109,16 +139,31 @@ export function QuizReviewTeacher(props: QuizReviewTeacherProps) {
                     <p>{question.description}</p>
                     <div className={styles['items']}>
                       {question.answers_attributes.map((answer, i) => (
-                        <p
-                          key={i}
-                          className={`${styles['question-answer']} ${
-                            answersIds.includes(answer.id || -1)
-                              ? styles['selected']
-                              : ''
-                          }`}
-                        >
-                          {answer.text}
-                        </p>
+                        <div>
+                          {answer.correct ? (
+                            <p
+                              key={i}
+                              className={`${styles['question-answer']} ${
+                                answersIds.includes(answer.id || -1)
+                                  ? styles['selected-true']
+                                  : ''
+                              }`}
+                            >
+                              {answer.text}
+                            </p>
+                          ) : (
+                            <p
+                              key={i}
+                              className={`${styles['question-answer']} ${
+                                answersIds.includes(answer.id || -1)
+                                  ? styles['selected-false']
+                                  : ''
+                              }`}
+                            >
+                              {answer.text}
+                            </p>
+                          )}
+                        </div>
                       ))}
                     </div>
                   </>
@@ -148,7 +193,11 @@ export function QuizReviewTeacher(props: QuizReviewTeacherProps) {
                                   title={`Es incorrecto`}
                                   icon="close"
                                   color={ColorsButton.secondary}
-                                  outline={formik.values.answers.find((ans)=> ans.answer_id === answer.id)?.correct !== false}
+                                  outline={
+                                    formik.values.answers.find(
+                                      (ans) => ans.answer_id === answer.id
+                                    )?.correct !== false
+                                  }
                                   onClick={() => {
                                     setAnswer(false, answer.id);
                                   }}
@@ -158,7 +207,11 @@ export function QuizReviewTeacher(props: QuizReviewTeacherProps) {
                                   title="La respuesta es correcta"
                                   icon="check"
                                   color={ColorsButton.primary}
-                                  outline={formik.values.answers.find((ans)=> ans.answer_id === answer.id)?.correct !== true}
+                                  outline={
+                                    formik.values.answers.find(
+                                      (ans) => ans.answer_id === answer.id
+                                    )?.correct !== true
+                                  }
                                   onClick={() => {
                                     setAnswer(true, answer.id);
                                   }}

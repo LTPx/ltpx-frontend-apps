@@ -48,8 +48,12 @@
   right: 0;
 }
 
-.selected {
+.selected-true {
   background-color: $green-color-100;
+}
+
+.selected-false {
+  background-color: $red-color-100;
 }
 
 .items {

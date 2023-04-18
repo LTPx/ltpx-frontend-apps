@@ -11,6 +11,7 @@ import { useCallback, useEffect, useState } from 'react';
 /* eslint-disable-next-line */
 export interface StudentCourseQuizzesProps {
   courseId: number;
+  // slug: string;
 }
 
 export function StudentCourseQuizzes(props: StudentCourseQuizzesProps) {

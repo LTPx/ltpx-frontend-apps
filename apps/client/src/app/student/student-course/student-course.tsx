@@ -22,11 +22,7 @@ export function StudentCourse(props: StudentCourseProps) {
   const [selectedTab, setSelectedTab] = useState(0);
   const { slug } = useParams();
   const [showMore, setShowMore] = useState(false);
-  const {
-    _newChatRoom,
-    setShowChat,
-  } = useChat();
-
+  const { _newChatRoom, setShowChat } = useChat();
 
   const fetchCourse = useCallback(async () => {
     const { success, data, error } = await _getStudentCourse(slug || '');
@@ -53,7 +49,7 @@ export function StudentCourse(props: StudentCourseProps) {
 
   const chatWithTeacher = async () => {
     if (enrolledCourse.teacher) {
-      await _newChatRoom(enrolledCourse.teacher.user_id)
+      await _newChatRoom(enrolledCourse.teacher.user_id);
       setShowChat(true);
     }
   };
@@ -62,32 +58,44 @@ export function StudentCourse(props: StudentCourseProps) {
     <div className={styles['main-container']}>
       <div className={styles['container']}>
         <h1>Curso: {enrolledCourse.title}</h1>
-        {enrolledCourse.description &&
+        {enrolledCourse.description && (
           <p className={styles['about-course']}>
             {enrolledCourse.description.substring(0, 200)}
           </p>
-        }
+        )}
         <div className={styles['columns-container']}>
           <div className={styles['column-left']}>
-            <div className={`${styles['basic-card']} ${styles.center} ${styles['teacher-card']}`}>
+            <div
+              className={`${styles['basic-card']} ${styles.center} ${styles['teacher-card']}`}
+            >
               <Avatar src={enrolledCourse.teacher?.profile_image} size={100} />
               <h4>{enrolledCourse.teacher?.teacher_name}</h4>
               <h5>Profesor</h5>
-              <Button title='Enviarle un mensaje' icon='chat' onClick={chatWithTeacher}/>
+              <Button
+                title="Enviarle un mensaje"
+                icon="chat"
+                onClick={chatWithTeacher}
+              />
             </div>
             <div className={`${styles['basic-card']} ${styles.center}`}>
               <h3>Que Aprenderás</h3>
-              { enrolledCourse.learn_goals &&
-                <div>{enrolledCourse.learn_goals.split('\n').map((goal, index)=>(
-                  <div className={styles['goals']} key={index}>
-                    <div className={styles['square']}></div>
-                    <h5>{goal}</h5>
-                  </div>
-                ))}</div>
-              }
+              {enrolledCourse.learn_goals && (
+                <h4>
+                  {enrolledCourse.learn_goals.split('\n').map((goal) => (
+                    <div className={styles['goals']}>
+                      <div className={styles['square']}></div>
+                      <h5>{goal}</h5>
+                    </div>
+                  ))}
+                </h4>
+              )}
             </div>
             <div className={`${styles['basic-card']}`}>
-              <ProgressBar text="Completado" percentage={0} className={styles['progress-card']}/>
+              <ProgressBar
+                text="Completado"
+                percentage={0}
+                className={styles['progress-card']}
+              />
             </div>
           </div>
           <div className={styles['column-right']}>

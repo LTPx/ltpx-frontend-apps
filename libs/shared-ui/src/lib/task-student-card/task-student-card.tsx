@@ -2,7 +2,7 @@ import { ReactElement, useState } from 'react';
 import Button from '../button/button';
 import Icon from '../icon/icon';
 import styles from './task-student-card.module.scss';
-import { Dialog } from 'evergreen-ui';
+import { Avatar, Dialog } from 'evergreen-ui';
 import TaskFormStudent from '../task-form-student/task-form-student';
 import { useStudent } from '@ltpx-frontend-apps/store';
 import { TaskStudent, TaskStudentResult } from '@ltpx-frontend-apps/api';
@@ -22,6 +22,7 @@ export function TaskStudentCard(props: TaskStudentCardProps) {
   const [openModal, setOpenModal] = useState(false);
   const [editTask, setEditTask] = useState(false);
   const { _sendTask } = useStudent();
+  const { _getStudentCourse, enrolledCourse } = useStudent();
 
   async function handleSendTask(params: TaskStudent) {
     const paramsData =
@@ -37,45 +38,60 @@ export function TaskStudentCard(props: TaskStudentCardProps) {
   }
 
   return (
-    <div className="row-task">
-      <div className={styles['container']}>
-        <div className={styles['row']}>
-          <div className={styles['row-info']}>
+    <div className={styles['container']}>
+      <div className={styles['content']}>
+        <div className={styles['title-section']}>
+          <div className={styles['title-task']}>
             <h4>
               <strong>{title}</strong>
             </h4>
-            <h4 className={styles['description']}>
-              En que consiste: {description}
-            </h4>
-            {studentTask?.comments && studentTask?.comments.length > 0 && (
-              <div className={styles['comment']}>
-                Comentario: {studentTask?.comments.join(', ')}
-              </div>
-            )}
+            <h4 className={styles['description']}>Tarea</h4>
           </div>
-        </div>
-        <div className={styles['row-buttons']}>
-          <div className="status">
-            {studentTask?.status === 'review' && <h4>Enviada al profesor</h4>}
+          <div className={styles['status']}>
+            {studentTask?.status === 'review' && <h5>Pendiente</h5>}
             {studentTask?.status === 'approved' && (
               <div className={styles['approved-message']}>
                 <Icon icon="check-circle" size={18} />
-                <h5>Tarea aprobada</h5>
+                <h5> Aprobada</h5>
               </div>
             )}
-            { studentTask?.status === 'rejected' && (
-                <div className={styles['require-changes-message']}>
-                  <div className={styles['message']}>
-                    <Icon icon="pencil" size={18} />
-                    <h5>Necesita cambios</h5>
-                  </div>
+            {studentTask?.status === 'rejected' && (
+              <div className={styles['require-changes-message']}>
+                <div className={styles['message']}>
+                  <Icon icon="pencil" size={18} />
+                  <h5>Necesita cambios</h5>
                 </div>
-              )}
+              </div>
+            )}
           </div>
+          {/* <Button
+              className={styles['btn-status-task']}
+              title="pendiente"
+              outline={true}
+            /> */}
+        </div>
+        <div className={styles['about-task']}>
+          En que consiste: {description}
+        </div>
+        {studentTask?.comments && studentTask?.comments.length > 0 && (
+          <div className={styles['comment-teacher']}>
+            <div>
+              <Avatar src={enrolledCourse.teacher?.profile_image} size={45} />
+            </div>
+            <div>Comentario: {studentTask?.comments.join(', ')}</div>
+          </div>
+        )}
+        <div className={styles['row-buttons']}>
           {studentTask === undefined && (
-            <Button title="Hacer la tarea" onClick={() => setOpenModal(true)} />
+            <div className={styles['btn-task']}>
+              <Button
+                title="Hacer la tarea"
+                onClick={() => setOpenModal(true)}
+              />
+            </div>
           )}
           {studentTask?.status === 'rejected' && (
+            <div className={styles['btn-task']}>
               <Button
                 title="Hacer de nuevo la tarea"
                 onClick={() => {
@@ -83,9 +99,11 @@ export function TaskStudentCard(props: TaskStudentCardProps) {
                   setEditTask(true);
                 }}
               />
-            )}
+            </div>
+          )}
         </div>
       </div>
+
       <Dialog
         isShown={openModal}
         hasFooter={false}

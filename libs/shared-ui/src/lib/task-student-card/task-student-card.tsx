@@ -184,9 +184,25 @@ export function TaskStudentCard(props: TaskStudentCardProps) {
         topOffset={40}
       >
         <div className={styles['modal-taskView']}>
-        <div className={styles['task-wrap']}>
-          <div className={styles['task-information']}>
-            
+          <div className={styles['task-wrap']}>
+            <div className={styles['task-information']}>
+              {description && (
+                <div className={styles['task-student']}>
+                  <h4 className={styles['answer-task']}>
+                    Descripción de la Tarea:
+                  </h4>
+                  {file && (
+                    <a href={file} target="_blank">
+                      Archivo adjunto
+                    </a>
+                  )}
+                </div>
+              )}
+              <h4 className={styles['description-task-teacher']}>
+                {description}
+              </h4>
+            </div>
+            <div className={styles['task-information']}>
               <div className={styles['task-student']}>
                 <h4 className={styles['answer-task']}>Tu Respuesta: </h4>
                 {studentTask?.file_url && (
@@ -195,9 +211,8 @@ export function TaskStudentCard(props: TaskStudentCardProps) {
                   </a>
                 )}
               </div>
-            
-            <p className={styles['answer']}>{studentTask?.answer}</p>
-          </div>
+              <p className={styles['answer']}>{studentTask?.answer}</p>
+            </div>
           </div>
           <div className={styles['footer']}>
             <Button

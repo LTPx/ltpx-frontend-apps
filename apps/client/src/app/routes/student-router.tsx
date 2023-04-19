@@ -19,6 +19,7 @@ import {
   StudentPasswordEdit,
 } from '../student/index';
 import VideoMeetingLive from '../video/video-meeting-live/video-meeting-live';
+import { blogRoutes } from './blog-routes';
 
 export const StudentRoutes = () => {
   return (
@@ -26,6 +27,7 @@ export const StudentRoutes = () => {
       <Routes>
         <Route path="/" element={<Navigate replace to="student/dashboard" />} />
         <Route path="/" element={<StudentLayout />}>
+          { blogRoutes }
           <Route path="/home" element={<Home />} />
           <Route path="/courses" element={<AllCourses />} />
           <Route path="/course/:slug" element={<CourseDetails />} />

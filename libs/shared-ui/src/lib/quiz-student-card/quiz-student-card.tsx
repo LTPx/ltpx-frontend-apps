@@ -4,6 +4,7 @@ import styles from './quiz-student-card.module.scss';
 import moment from 'moment';
 import { useStudent } from '@ltpx-frontend-apps/store';
 import { Avatar } from 'evergreen-ui';
+import Tag from '../tag/tag';
 moment.locale('es');
 
 /* eslint-disable-next-line */
@@ -14,6 +15,7 @@ export interface QuizStudentCardProps {
   text?: string;
   attempts?: number;
   date?: string;
+  statusTest?: boolean;
   feedback?: string;
   approved?: boolean;
   approveScore?: number;
@@ -29,6 +31,7 @@ export function QuizStudentCard(props: QuizStudentCardProps) {
     date,
     children,
     approved,
+    statusTest,
     score,
     feedback,
     approveScore,
@@ -57,7 +60,11 @@ export function QuizStudentCard(props: QuizStudentCardProps) {
             {text ? (
               <h4 className={styles['subTitle']}>{text}</h4>
             ) : (
-              <h4 className={styles['subTitle']}>Test</h4>
+              <div>
+                {statusTest && (
+                  <h4 className={styles['subTitle']}>En revision</h4>
+                )}
+              </div>
             )}
           </div>
           <div className={styles['row-buttons']}>{children}</div>

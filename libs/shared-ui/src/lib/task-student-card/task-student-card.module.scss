@@ -8,6 +8,21 @@
   padding: $size-md-1 2rem;
   background-color: $white-color;
 
+  .status {
+    display: flex;
+    justify-content: end;
+  }
+
+  .btn-task-form {
+    padding: 0.5rem 1.5rem;
+  }
+
+  .title-task {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
   .text-description {
     color: $text-gray-color-medium;
   }
@@ -39,14 +54,13 @@
   .content {
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    gap: 1rem;
     width: 100%;
 
     .text-content {
       .show {
-        display: flex;
-        justify-content: end;
         color: $primary-color;
+        padding-left: 0.5rem;
         cursor: pointer;
       }
     }
@@ -83,8 +97,7 @@
     display: flex;
     justify-content: end;
     gap: 1rem;
-    padding: 1rem 0;
-
+    // padding-bottom: 0.5rem;
     .btn-task {
       justify-content: end;
     }

@@ -6,6 +6,7 @@ import { Avatar, Dialog } from 'evergreen-ui';
 import TaskFormStudent from '../task-form-student/task-form-student';
 import { useStudent } from '@ltpx-frontend-apps/store';
 import { TaskStudent, TaskStudentResult } from '@ltpx-frontend-apps/api';
+import Tag, { ColorsTag } from '../tag/tag';
 
 /* eslint-disable-next-line */
 export interface TaskStudentCardProps {
@@ -48,28 +49,55 @@ export function TaskStudentCard(props: TaskStudentCardProps) {
             </h4>
             <h4 className={styles['text-gray']}>Tarea</h4>
           </div>
-          <div className={styles['status']}>
-            {studentTask?.status === 'review' && (
-              <h5 className={styles['pending']}>Pendiente</h5>
-            )}
-            {studentTask?.status === 'approved' && (
-              <div className={styles['approved-message']}>
-                <h5 className={styles['approved-text']}> Aprobada</h5>
+          <div className={styles['row-buttons']}>
+            {studentTask === undefined && (
+              <div className={styles['btn-task']}>
+                <Button
+                  className={styles['btn-task-form']}
+                  title="Hacer la tarea"
+                  onClick={() => setOpenModal(true)}
+                />
               </div>
             )}
             {studentTask?.status === 'rejected' && (
-              <div className={styles['require-changes-message']}>
-                <div className={styles['message']}>
-                  <h5 className={styles['changes-text']}>Necesita cambios</h5>
-                </div>
+              <div className={styles['btn-task']}>
+                <Button
+                  className={styles['btn-task-form']}
+                  title="Hacer de nuevo la tarea"
+                  onClick={() => {
+                    setOpenModal(true);
+                    setEditTask(true);
+                  }}
+                />
+              </div>
+            )}
+            {studentTask?.status === 'approved' && (
+              <div className={styles['btn-task']}>
+                <Button
+                  className={styles['btn-task-form']}
+                  title="Ver mi respuesta"
+                  icon="eye"
+                  onClick={() => {
+                    setOpenModal(true);
+                    setEditTask(true);
+                  }}
+                />
+              </div>
+            )}
+            {studentTask?.status === 'review' && (
+              <div className={styles['btn-task']}>
+                <Button
+                  className={styles['btn-task-form']}
+                  title="Ver mi respuesta"
+                  icon="eye"
+                  onClick={() => {
+                    setOpenModal(true);
+                    setEditTask(true);
+                  }}
+                />
               </div>
             )}
           </div>
-          {/* <Button
-              className={styles['btn-status-task']}
-              title="pendiente"
-              outline={true}
-            /> */}
         </div>
         <div className={styles['about-task']}>
           <h4 className={styles['text-gray']}>{description}</h4>
@@ -88,13 +116,13 @@ export function TaskStudentCard(props: TaskStudentCardProps) {
                       : `${studentTask?.comments
                           .join(', ')
                           .substring(0, 130)}....`}
+                    <em
+                      className={styles['show']}
+                      onClick={() => setShowMore(!showMore)}
+                    >
+                      {showMore ? 'Mostrar menos' : 'Mostrar mas'}
+                    </em>
                   </p>
-                  <div
-                    className={styles['show']}
-                    onClick={() => setShowMore(!showMore)}
-                  >
-                    <h5>{showMore ? 'Mostrar menos' : 'Mostrar mas'}</h5>
-                  </div>
                 </div>
               ) : (
                 <p className={styles['text-description']}>
@@ -104,24 +132,21 @@ export function TaskStudentCard(props: TaskStudentCardProps) {
             </div>
           </div>
         )}
-        <div className={styles['row-buttons']}>
+        <div className={styles['status']}>
+          {studentTask?.status === 'review' && (
+            <Tag text={'Enviada para revisar'} color={ColorsTag.white} />
+          )}
           {studentTask === undefined && (
-            <div className={styles['btn-task']}>
-              <Button
-                title="Hacer la tarea"
-                onClick={() => setOpenModal(true)}
-              />
+            <Tag text={'Pendiente'} color={ColorsTag.gray} />
+          )}
+          {studentTask?.status === 'approved' && (
+            <div className={styles['approved-message']}>
+              <Tag text={'Aprobada'} color={ColorsTag.green} />
             </div>
           )}
           {studentTask?.status === 'rejected' && (
-            <div className={styles['btn-task']}>
-              <Button
-                title="Hacer de nuevo la tarea"
-                onClick={() => {
-                  setOpenModal(true);
-                  setEditTask(true);
-                }}
-              />
+            <div className={styles['message']}>
+              <Tag text={'Necesita cambios'} color={ColorsTag.blue} />
             </div>
           )}
         </div>

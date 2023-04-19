@@ -43,6 +43,7 @@ export function StudentCourseQuizzes(props: StudentCourseQuizzesProps) {
             score={
               quiz.last_quiz_result ? quiz.last_quiz_result.score : undefined
             }
+            attempts={quiz.max_attempts || undefined}
             date={quiz.last_quiz_result ? quiz.last_quiz_result.created_at : ""}
             approved={
               quiz.last_quiz_result
@@ -57,6 +58,7 @@ export function StudentCourseQuizzes(props: StudentCourseQuizzesProps) {
             <>
               {quiz.quizzes_results_ids.length === 0 && (
                 <Button
+                  className={styles['btn-task-form']}
                   title="Empezar test"
                   icon="play-filled"
                   link={`/student/course/${courseId}/quiz/${quiz.id}`}
@@ -68,6 +70,7 @@ export function StudentCourseQuizzes(props: StudentCourseQuizzesProps) {
                   {quiz.last_quiz_result.score >= quiz.approve_score &&
                     !quiz.last_quiz_result.in_review && (
                       <Button
+                      className={styles['btn-task-form']}
                         color={ColorsButton.secondary}
                         title="Mis respuestas"
                         outline={true}
@@ -78,6 +81,7 @@ export function StudentCourseQuizzes(props: StudentCourseQuizzesProps) {
                   {quiz.last_quiz_result.score < quiz.approve_score &&
                     !quiz.last_quiz_result.in_review && (
                       <Button
+                      className={styles['btn-task-form']}
                         color={ColorsButton.secondary}
                         title="Volver a Intentar"
                         icon="undo"

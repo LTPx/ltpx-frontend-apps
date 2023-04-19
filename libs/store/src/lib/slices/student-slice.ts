@@ -38,7 +38,7 @@ export type StudentSlice = {
   currentQuiz: QuizModel;
   _getStudentPayments: () => Promise<TResponse>;
   _getStudentCourses: () => Promise<TResponse>;
-  _getStudentCourse: (courseId: number) => Promise<TResponse>;
+  _getStudentCourse: (slug: string) => Promise<TResponse>;
   _getStudentClasses: () => Promise<TResponse>;
   _getStudentQuizzes: (courseId: number) => Promise<TResponse>;
   _getStudentQuiz: (courseId: number, quizId: number) => Promise<TResponse>;
@@ -78,9 +78,9 @@ export const createStudentSlice: StateCreator<StoreState, [], [], StudentSlice> 
       return { success: false, error };
     }
   },
-  _getStudentCourse: async (id): Promise<TResponse> => {
+  _getStudentCourse: async (slug): Promise<TResponse> => {
     try {
-      const course = await getStudentCourse(id);
+      const course = await getStudentCourse(slug);
       set({enrolledCourse: course});
       return { success: true, data: course };
     } catch (error) {

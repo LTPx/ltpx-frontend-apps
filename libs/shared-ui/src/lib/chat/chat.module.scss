@@ -10,9 +10,11 @@
     justify-content: flex-end;
     padding: 0.5rem;
     border-bottom: 1px solid $gray-color-200;
+    background-color: $primary-color;
 
     svg {
       cursor: pointer;
+      color: $white-color;
     }
   }
 
@@ -41,6 +43,12 @@
         cursor: pointer;
         color: $primary-color;
       }
+    }
+
+    .rooms {
+      max-height: 30rem;
+      overflow-y: auto;
+      overflow-x: hidden;
     }
   }
 

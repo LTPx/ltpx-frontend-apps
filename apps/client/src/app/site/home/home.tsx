@@ -91,7 +91,7 @@ export function Home() {
         'https://plus.unsplash.com/premium_photo-1661919585183-9656936b6fc1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NTR8fG1pbmR8ZW58MHx8MHx8&auto=format&fit=crop&w=800&q=60',
       name: t('Ricardo Capa'),
       date: '08 June, 2021',
-      title: '¿Cómo funcionaOpen Mind?',
+      title: '¿Cómo funciona Open Mind?',
       link: '/blog/how-openmind-works',
     },
     {

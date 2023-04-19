@@ -118,7 +118,7 @@ export function CourseTasks(props: CourseTasksProps) {
       <Dialog
         isShown={openModal}
         hasFooter={false}
-        hasHeader={false}
+        title={task?.id ? 'Editar Tarea' : 'Nueva Tarea'}
         onCloseComplete={() => setOpenModal(false)}
         width={'40vw'}
       >

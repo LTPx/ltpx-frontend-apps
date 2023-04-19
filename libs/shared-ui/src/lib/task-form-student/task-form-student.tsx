@@ -33,9 +33,11 @@ export function TaskFormStudent(props: TaskFormStudentProps) {
       <div className={styles['description-container']}>
         <label>En que consiste la tarea</label>
         <h4 className={styles['description']}>{description}</h4>
-        <a href={fileTask} target="_blank">
-          Descargar archivo adjunto
-        </a>
+        {fileTask && (
+          <a href={fileTask} target="_blank">
+            Descargar archivo adjunto
+          </a>
+        )}
       </div>
       <TextArea
         label={'Agregar texto'}

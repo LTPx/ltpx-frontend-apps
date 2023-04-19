@@ -1,15 +1,13 @@
 @import '../../styles/styles.module.scss';
 .form {
   background-color: $white-color;
-  padding: $size-md-1 $size-lg-3;
+  padding: 1rem 1.5rem;
   .describe {
     color: $text-gray-color;
     padding-top: 0.25rem;
   }
 }
-.general {
-  margin-top: $size-lg-1;
-}
+
 .bank-information {
   display: grid;
   grid-template-columns: 50% 50%;

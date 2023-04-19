@@ -3,7 +3,8 @@ import { QuizResultSummary } from '@ltpx-frontend-apps/api';
 import { Button, ColorsButton, QuizView } from '@ltpx-frontend-apps/shared-ui';
 import { useStudent } from '@ltpx-frontend-apps/store';
 import { useCallback, useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
+
 /* eslint-disable-next-line */
 export interface StudentReviewQuizProps {}
 
@@ -12,6 +13,7 @@ export function StudentReviewQuiz(props: StudentReviewQuizProps) {
   const { _getStudentQuizResult } = useStudent();
   const { courseId, quizId } = useParams();
   const id = parseInt(quizId || '');
+  const navigate = useNavigate();
 
   const fetchQuiz = useCallback(async () => {
     const { success, data, error } = await _getStudentQuizResult(id);
@@ -40,7 +42,8 @@ export function StudentReviewQuiz(props: StudentReviewQuizProps) {
             <Button
               title="Regresar"
               color={ColorsButton.secondary}
-              link={`/student/courses/${courseId}`}
+              onClick={() => navigate(-1)}
+              // link={`/student/course/${slug}`  
             />
           </QuizView>
         )}

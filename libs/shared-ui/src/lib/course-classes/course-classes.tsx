@@ -28,7 +28,7 @@ const classesOptions = [
 export interface CourseClassesProps {
   open?: boolean;
   onClose?: () => void;
-  onSave?: (classroom: SessionParams) => void;
+  onSave: (classroom: SessionParams) => void;
   session?: CourseSession;
 }
 
@@ -87,13 +87,21 @@ export function CourseClasses(props: CourseClassesProps) {
             />
             <Button
               onClick={() => {
-                onSave &&
-                  onSave({
-                    private_sessions: true,
-                    max_participants: 0,
-                    call_time_min: 0,
-                    meetings_attributes: [],
-                  });
+                onSave({
+                  private_sessions: true,
+                  max_participants: 0,
+                  call_time_min: 0,
+                  meetings_attributes: session
+                    ? session.meetings.map((meeting) => {
+                        return {
+                          id: meeting.id,
+                          _destroy: true,
+                          host_user_id: session.user_id,
+                          start_date: '',
+                        };
+                      })
+                    : [],
+                });
                 onClose && onClose();
               }}
               title={t('buttons.save')}

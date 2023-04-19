@@ -1,14 +1,11 @@
 import {
-  CLASSROOMS,
   getTeacherCourse,
   TeacherCourse,
 } from '@ltpx-frontend-apps/api';
 import {
   AchievementsList,
-  ClassroomView,
   CourseContents,
   CourseDateCard,
-  InformationCard,
   OverviewCourse,
   QuizzesList,
   Tabs,
@@ -21,6 +18,7 @@ import styles from './teacher-course-detail.module.scss';
 const tabs = [
   { text: 'Detalles' },
   { text: 'Contenidos' },
+  { text: 'Tareas' },
   { text: 'Test' },
   { text: 'Logros' },
   { text: 'Sesiones' },
@@ -112,12 +110,29 @@ export function TeacherCourseDetail() {
               <CourseContents contents={course.contents || []} />
             )}
             {selectedTab === 2 && (
-              <QuizzesList quizzes={course.quizzes || []} />
+              <div className={styles['task']}>
+                {course.tasks.map((task, index) => (
+                  <div className={styles['task-content']} key={index}>
+                    <h4 className={styles['title-task']}>{task.title}</h4>
+                    <h4 className={styles['description-task']}>
+                      {task.description}
+                    </h4>
+                    {task.file_url && (
+                      <a href={task.file_url} target="blank_">
+                        Archivo Adjunto
+                      </a>
+                    )}
+                  </div>
+                ))}
+              </div>
             )}
             {selectedTab === 3 && (
+              <QuizzesList quizzes={course.quizzes || []} />
+            )}
+            {selectedTab === 4 && (
               <AchievementsList achievements={course.achievements || []} />
             )}
-            {selectedTab === 4 && course.classroom && (
+            {selectedTab === 5 && course.classroom && (
               <div className={styles['sessions']}>
                 {course.session.meetings.map((meeting, index) => (
                   <CourseDateCard

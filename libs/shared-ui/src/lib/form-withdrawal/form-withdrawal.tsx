@@ -13,12 +13,13 @@ import { BankAccount, WithdrawalParams } from '@ltpx-frontend-apps/api';
 /* eslint-disable-next-line */
 export interface FormWithdrawalProps {
   banks: BankAccount[];
+  balanceAvailable: number;
   onClose?: () => void;
   onSubmit: (data: WithdrawalParams) => void;
 }
 
 export function FormWithdrawal(props: FormWithdrawalProps) {
-  const { onClose, onSubmit, banks } = props;
+  const { onClose, onSubmit, banks, balanceAvailable } = props;
 
   const banksOption = banks.map((bank)=>{
     return {
@@ -41,7 +42,21 @@ export function FormWithdrawal(props: FormWithdrawalProps) {
       .integer()
       .min(20, "El monto mínimo es 20 dólares")
       .max(2000, "El monto máximo es 2000 dólares")
-
+      .test(
+        "bank_account_number",
+        "Monto superior al saldo disponible de retiro",
+      (value) => {
+          if (value ) {
+            if (value > balanceAvailable) {
+              return false;
+            } else {
+              return true;
+            }
+          } else {
+            return true;
+          }
+        }
+      )
     }),
     onSubmit: (data) => {
       console.log(data);

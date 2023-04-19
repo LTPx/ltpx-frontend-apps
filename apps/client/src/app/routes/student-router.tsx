@@ -16,6 +16,7 @@ import {
   StudentAccountProfile,
   StudentQuiz,
   StudentReviewQuiz,
+  StudentPasswordEdit,
 } from '../student/index';
 import VideoMeetingLive from '../video/video-meeting-live/video-meeting-live';
 
@@ -32,7 +33,7 @@ export const StudentRoutes = () => {
         <Route path="student" element={<StudentLayout />}>
           <Route path="dashboard" element={<Dashboard />} />
           <Route path="courses" element={<StudentCourses />} />
-          <Route path="courses/:courseId" element={<StudentCourse />} />
+          <Route path="course/:slug" element={<StudentCourse />} />
           <Route path="classes" element={<StudentClasses />} />
           <Route path="course/:courseId/quiz/:quizId" element={<StudentQuiz/>} />
           <Route path="course/:courseId/quiz-review/:quizId" element={<StudentReviewQuiz/>} />
@@ -50,7 +51,8 @@ export const StudentRoutes = () => {
           </Route>
           <Route path="account" element={<StudentAccountLayout />}>
             <Route path="/student/account" element={<StudentAccountProfile />} />
-            <Route path="account-form" element={<Account />} />
+            <Route path="account-edit" element={<Account />} />
+            <Route path="password-edit" element={<StudentPasswordEdit />} />
           </Route>
         </Route>
       </Routes>

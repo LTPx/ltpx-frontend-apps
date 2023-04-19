@@ -3,38 +3,29 @@
 .profile-container {
   display: flex;
   flex-direction: column;
-  padding: $size-md-1;
-  gap: $size-md-1;
 
-  .title {
+  .btn-edit {
+    padding: 0.25rem 1rem;
+    border-radius: 10px;
+  }
+  .title-content {
     display: flex;
-    gap: $size-sm-3;
     align-items: center;
-    padding-bottom: $size-sm-2;
-    h3{
+    justify-content: space-between;
+    padding: 1rem 1.5rem;
+    background-color: $white-color-100;
+    .title {
       font-weight: 500;
     }
   }
-  .about-student {
-    border: 1px solid $gray-color-200;
-    padding: $size-md-1;
-    border-radius: 4px;
-    p {
-      color: $text-gray-color;
-    }
-  }
   .info {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    padding-top: $size-md-1;
-    .row {
-      .item {
-        padding-bottom: $size-md-3;
-        .text {
-          color: $text-gray-color;
-        }
-      }
-    }
+    padding: 1rem 1.5rem;
   }
-
+  .item {
+    display: grid;
+    padding: 1rem 0;
+    grid-template-columns: 30% 70%;
+    align-items: center;
+    border-bottom: 1px solid $gray-color-200;
+  }
 }

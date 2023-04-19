@@ -10,8 +10,6 @@ export default Story;
 
 export const Progress = () => {
   return (
-    <div>
-      <ProgressBar percentage={40} text='in progress'/>
-    </div>
+    <ProgressBar percentage={40} text='in progress'/>
   )
 };

@@ -1,7 +1,10 @@
 import { Routes, Route, BrowserRouter, Navigate } from 'react-router-dom';
 import {
+  BankAccountEdit,
   ManageCourses,
+  PasswordEdit,
   TeacherAccount,
+  TeacherAccountBank,
   TeacherAccountLayout,
   TeacherAccountProfile,
   TeacherApply,
@@ -13,6 +16,7 @@ import {
   TeacherEditCourse,
   TeacherLayout,
   TeacherMeetingsAgenda,
+  TeacherProfileEdit,
 } from '../teacher';
 import VideoMeetingLive from '../video/video-meeting-live/video-meeting-live';
 import { ProtectedRoutesTeacher } from './guards/protected-routes-teacher/protected-routes-teacher';
@@ -66,6 +70,10 @@ export const TeacherRoutes = () => {
             />
             <Route path="account-form" element={<TeacherAccount />} />
             <Route path="account-profile" element={<TeacherAccountProfile />} />
+            <Route path="account-bank" element={<TeacherAccountBank />} />
+            <Route path="account-bank-edit" element={<BankAccountEdit />} />
+            <Route path="profile-edit" element={<TeacherProfileEdit />} />
+            <Route path="password-edit" element={<PasswordEdit />} />
           </Route>
         </Route>
       </Routes>

@@ -3,41 +3,100 @@
   border: 1px solid $gray-color-200;
   border-radius: 8px;
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
-  align-items: center;
+  // align-items: center;
   padding: $size-md-1 2rem;
   background-color: $white-color;
+
+  .text-content {
+    .show {
+      color: $primary-color;
+      cursor: pointer;
+      padding-left: 0.5rem;
+    }
+  }
+  .content {
+    width: 100%;
+    display: flex;
+    gap: 1rem;
+    flex-direction: column;
+
+    .msg-score {
+      display: flex;
+      justify-content: end;
+    }
+
+    .empty-test {
+      opacity: 0.3;
+    }
+
+    .wrap-title {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .title {
+      font-weight: 500;
+    }
+
+    .subTitle {
+      color: $text-gray-color-medium;
+    }
+
+    .info-content {
+      display: flex;
+      gap: 3rem;
+      border-top: 1px solid $gray-color-200;
+      padding-top: 1rem ;
+      .item {
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
+        .item-title {
+          color: $text-gray-color-medium;
+        }
+      }
+    }
+  }
+
+  .head-section {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+    // padding-bottom: 1rem;
+  }
+
+  .text-feedback {
+    color: $text-gray-color-medium;
+  }
+
+  .feedback {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid $gray-color-200;
+  }
 
   .buttons-review {
     display: flex;
     gap: 1rem;
   }
-  .row {
-    display: flex;
-    align-items: center;
-    gap: 1.5rem;
-    .row-info {
-      display: flex;
-      gap: 0.15rem;
-      flex-direction: column;
 
-      .total-questions {
-        color: $text-gray-color;
-      }
+  .approved {
+    color: $green-color;
+  }
 
-      .approved {
-        color: $green-color;
-      }
-
-      .no-approved {
-        color: $red-color;
-      }
-    }
+  .no-approved {
+    color: $red-color;
   }
 
   .row-buttons {
     display: flex;
-    justify-content: center;
+    justify-content: end;
     gap: 1rem;
 
     .btn {

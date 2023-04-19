@@ -1,12 +1,10 @@
-import { CLASSROOMS, CourseStatus } from '@ltpx-frontend-apps/api';
+import { CourseStatus } from '@ltpx-frontend-apps/api';
 import {
   AchievementsList,
   Button,
-  ClassroomView,
   ColorsButton,
   CourseContents,
   CourseDateCard,
-  InformationCard,
   OverviewCourse,
   QuizzesList,
   Snackbar,

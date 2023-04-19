@@ -3,18 +3,14 @@
 .container {
   form {
     background-color: $white-color;
-    padding: $size-md-1 $size-lg-3;
+    padding: 1rem 1.5rem;
   }
 
   .form-submit {
-    margin-top: $size-md-1;
+    padding: 1.5rem 0;
     display: flex;
     justify-content: end;
     gap: 1rem;
-  }
-
-  .general {
-    margin-top: $size-lg-1;
   }
 
   .general-grid {

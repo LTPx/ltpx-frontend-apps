@@ -30,6 +30,7 @@ export interface TeacherProfile {
   profile_image: string;
   profile_video: string;
   slug: string;
+  user_id: number;
 }
 
 export interface ITeacher {

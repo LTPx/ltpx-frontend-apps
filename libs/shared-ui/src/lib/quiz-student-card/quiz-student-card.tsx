@@ -54,36 +54,61 @@ export function QuizStudentCard(props: QuizStudentCardProps) {
               )}
               <h4 className={styles['title']}>{title}</h4>
             </div>
-            <h4 className={styles['subTitle']}>test</h4>
+            {text ? (
+              <h4 className={styles['subTitle']}>{text}</h4>
+            ) : (
+              <h4 className={styles['subTitle']}>Test</h4>
+            )}
           </div>
           <div className={styles['row-buttons']}>{children}</div>
         </div>
-        <div className={styles['info-content']}>
-          <div className={styles['item']}>
-            <h5 className={styles['item-title']}>Preguntas</h5>
-            <h5>{totalQuestions}</h5>
+        {totalQuestions && (
+          <div className={styles['info-content']}>
+            <div className={styles['item']}>
+              <h5 className={styles['item-title']}>Preguntas</h5>
+              <h5>{totalQuestions}</h5>
+            </div>
+            <div className={styles['item']}>
+              <h5 className={styles['item-title']}>Puntaje mínimo</h5>
+              <h5>{approveScore} / 100 Pts</h5>
+            </div>
+            <div className={styles['item']}>
+              <h5 className={styles['item-title']}>Numero de Intentos</h5>
+              <h5>0 / {attempts}</h5>
+            </div>
+            <div className={styles['item']}>
+              <h5 className={styles['item-title']}>Enviado</h5>
+              {date ? (
+                <h5>{moment(date).format('D MMMM YYYY')}</h5>
+              ) : (
+                <h5>Aun no Enviada</h5>
+              )}
+            </div>
+            <div className={styles['item']}>
+              <h5 className={styles['item-title']}>Calificación</h5>
+              {!!score && (
+                <div>
+                  {approved ? (
+                    <h5 className={styles['approved']}>{score} / 100 Pts</h5>
+                  ) : (
+                    <h5 className={styles['no-approved']}>{score} / 100 Pts</h5>
+                  )}
+                </div>
+              )}
+              {score !== undefined && score === 0 && (
+                <h5 className={styles['no-approved']}>{score} / 100 Pts</h5>
+              )}
+              {!score && score !== 0 && (
+                <h5 className={styles['empty-test']}>0 / 100 Pts</h5>
+              )}
+            </div>
           </div>
-          <div className={styles['item']}>
-            <h5 className={styles['item-title']}>Puntaje mínimo</h5>
-            <h5>{approveScore} / 100 Pts</h5>
-          </div>
-          <div className={styles['item']}>
-            <h5 className={styles['item-title']}>Numero de Intentos</h5>
-            <h5>0 / {attempts}</h5>
-          </div>
-          <div className={styles['item']}>
-            <h5 className={styles['item-title']}>Enviado</h5>
-            {date ? (
-              <h5>{moment(date).format('D MMMM YYYY')}</h5>
-            ) : (
-              <h5>Aun no Enviada</h5>
-            )}
-          </div>
-        </div>
+        )}
+
         {feedback && (
           <div className={styles['feedback']}>
             <div>
-              <Avatar src={enrolledCourse.teacher?.profile_image} size={45} />
+              <Avatar src={enrolledCourse.teacher?.profile_image} size={30} />
             </div>
             <div>
               {feedback.length > 130 ? (
@@ -104,23 +129,6 @@ export function QuizStudentCard(props: QuizStudentCardProps) {
             </div>
           </div>
         )}
-        <div className={styles['msg-score']}>
-          {!!score && (
-            <div>
-              {approved ? (
-                <h4 className={styles['approved']}>{score} / 100 Pts</h4>
-              ) : (
-                <h4 className={styles['no-approved']}>{score} / 100 Pts</h4>
-              )}
-            </div>
-          )}
-          {score !== undefined && score === 0 && (
-            <h4 className={styles['no-approved']}>{score} / 100 Pts</h4>
-          )}
-          {!score && score !== 0 && (
-            <h4 className={styles['empty-test']}>0 / 100 Pts</h4>
-          )}
-        </div>
       </div>
     </div>
   );

@@ -82,7 +82,7 @@ export function StudentCourseQuizzes(props: StudentCourseQuizzesProps) {
                     !quiz.last_quiz_result.in_review && (
                       <Button
                       className={styles['btn-task-form']}
-                        color={ColorsButton.secondary}
+                        // color={ColorsButton.secondary}
                         title="Volver a Intentar"
                         icon="undo"
                         link={`/student/course/${courseId}/quiz/${quiz.id}`}

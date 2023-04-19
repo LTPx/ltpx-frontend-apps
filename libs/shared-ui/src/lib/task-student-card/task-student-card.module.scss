@@ -126,3 +126,39 @@
     color: $text-gray-color;
   }
 }
+
+.modal-taskView {
+  display: flex;
+  .answer-task {
+    font-weight: 500;
+  }
+  .answer {
+    color: $text-gray-color;
+  }
+  .footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    padding: 1.5rem 2rem 1.5rem 0;
+    background: $white-color;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+  .task-information {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid $gray-color-200;
+    gap: 0.5rem;
+    padding: 1rem;
+  }
+  .task-wrap {
+    padding-bottom: 6rem;
+  }
+  .task-student {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+}

@@ -1,5 +1,5 @@
 import { ReactElement, useState } from 'react';
-import Button from '../button/button';
+import Button, { ColorsButton } from '../button/button';
 import Icon from '../icon/icon';
 import styles from './task-student-card.module.scss';
 import { Avatar, Dialog } from 'evergreen-ui';
@@ -21,6 +21,7 @@ export interface TaskStudentCardProps {
 export function TaskStudentCard(props: TaskStudentCardProps) {
   const { title, description, id, studentTask, file } = props;
   const [openModal, setOpenModal] = useState(false);
+  const [openTaskView, setOpenTaskView] = useState(false);
   const [editTask, setEditTask] = useState(false);
   const { _sendTask } = useStudent();
   const { enrolledCourse } = useStudent();
@@ -76,10 +77,11 @@ export function TaskStudentCard(props: TaskStudentCardProps) {
                 <Button
                   className={styles['btn-task-form']}
                   title="Ver mi respuesta"
+                  outline={true}
+                  color={ColorsButton.secondary}
                   icon="eye"
                   onClick={() => {
-                    setOpenModal(true);
-                    setEditTask(true);
+                    setOpenTaskView(true);
                   }}
                 />
               </div>
@@ -89,10 +91,11 @@ export function TaskStudentCard(props: TaskStudentCardProps) {
                 <Button
                   className={styles['btn-task-form']}
                   title="Ver mi respuesta"
+                  outline={true}
+                  color={ColorsButton.secondary}
                   icon="eye"
                   onClick={() => {
-                    setOpenModal(true);
-                    setEditTask(true);
+                    setOpenTaskView(true);
                   }}
                 />
               </div>
@@ -105,7 +108,7 @@ export function TaskStudentCard(props: TaskStudentCardProps) {
         {studentTask?.comments && studentTask?.comments.length > 0 && (
           <div className={styles['comment-teacher']}>
             <div>
-              <Avatar src={enrolledCourse.teacher?.profile_image} size={45} />
+              <Avatar src={enrolledCourse.teacher?.profile_image} size={30} />
             </div>
             <div>
               {studentTask?.comments.join(', ').length > 130 ? (
@@ -169,6 +172,43 @@ export function TaskStudentCard(props: TaskStudentCardProps) {
             handleSendTask({ ...data, ...{ task_id: id } });
           }}
         />
+      </Dialog>
+      <Dialog
+        isShown={openTaskView}
+        hasFooter={false}
+        title={title}
+        onCloseComplete={() => {
+          setOpenTaskView(false);
+        }}
+        width={'45vw'}
+        topOffset={40}
+      >
+        <div className={styles['modal-taskView']}>
+        <div className={styles['task-wrap']}>
+          <div className={styles['task-information']}>
+            
+              <div className={styles['task-student']}>
+                <h4 className={styles['answer-task']}>Tu Respuesta: </h4>
+                {studentTask?.file_url && (
+                  <a href={studentTask?.file_url} target="_blank">
+                    Archivo adjunto
+                  </a>
+                )}
+              </div>
+            
+            <p className={styles['answer']}>{studentTask?.answer}</p>
+          </div>
+          </div>
+          <div className={styles['footer']}>
+            <Button
+              title="Cerrar"
+              onClick={() => {
+                setOpenTaskView(false);
+              }}
+              color={ColorsButton.white}
+            />
+          </div>
+        </div>
       </Dialog>
     </div>
   );

@@ -2,13 +2,11 @@ import styles from './student-layout.module.scss';
 import {
   Avatar,
   AvatarSize,
-  Cart,
   Chat,
   ChatFloat,
   Dropdown,
   Header,
   Icon,
-  NotificationList,
   UserMenu,
 } from '@ltpx-frontend-apps/shared-ui';
 import { useNotification, useUser } from '@ltpx-frontend-apps/store';
@@ -16,6 +14,7 @@ import { useTranslation } from 'react-i18next';
 import { Outlet, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import avatar from './../../../assets/images/avatars/avatar-1.svg';
+import Notifications from '../../components/notifications/notifications';
 
 export function StudentLayout() {
   const [openChat, setOpenChat] = useState(false);
@@ -61,12 +60,7 @@ export function StudentLayout() {
     <div className={styles['container']}>
       <Header links={links} className={styles['header']}>
         <div className={styles['teacher-actions']}>
-          <Dropdown>
-            <NotificationList notifications={[]} countNewNotification={notifications.length}/>
-            <div className={styles['avatar']}>
-              <Cart amount={notifications.length}/>
-            </div>
-          </Dropdown>
+          <Notifications/>
           <Dropdown>
             <UserMenu
               name={user.fullname}

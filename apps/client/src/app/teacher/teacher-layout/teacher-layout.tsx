@@ -2,12 +2,10 @@ import styles from './teacher-layout.module.scss';
 import {
   Avatar,
   AvatarSize,
-  Cart,
   Chat,
   Dropdown,
   Header,
   Icon,
-  NotificationList,
   Snackbar,
   SnackbarPosition,
   SnackbarType,
@@ -18,6 +16,7 @@ import avatar from './../../../assets/images/avatars/avatar-3.svg';
 import { StatusTeacherAccount } from '@ltpx-frontend-apps/api';
 import { useTeacherLayout } from './useTeacherLayout';
 import { ChatNewPrivateRoom } from '../../components';
+import Notifications from '../../components/notifications/notifications';
 
 export function TeacherLayout() {
   const {
@@ -46,12 +45,7 @@ export function TeacherLayout() {
     <div className={styles['container']}>
       <Header links={headerLinks} className={styles['header']}>
         <div className={styles['teacher-actions']}>
-          <Dropdown>
-            <NotificationList notifications={[]} countNewNotification={notifications.length}/>
-            <div className={styles['avatar']}>
-              <Cart amount={notifications.length}/>
-            </div>
-          </Dropdown>
+          <Notifications/>
           <Dropdown>
             <UserMenu
               name={currentUser.fullname}

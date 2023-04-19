@@ -113,6 +113,7 @@ export interface QuizStudent {
   user_id: number;
   course_id: number;
   name: string;
+  max_attempts: number;
   total_questions: number;
   quizzes_results_ids: number[];
   approve_score: number;
@@ -120,6 +121,7 @@ export interface QuizStudent {
     id: number,
     score: number,
     in_review: boolean,
-    feedback: string
+    feedback: string,
+    created_at: string
   }
 }

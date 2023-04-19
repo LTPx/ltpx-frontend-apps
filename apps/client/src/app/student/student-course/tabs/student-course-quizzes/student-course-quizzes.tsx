@@ -39,10 +39,11 @@ export function StudentCourseQuizzes(props: StudentCourseQuizzesProps) {
         <div key={index}>
           <QuizStudentCard
             title={quiz.name}
-            text={`Preguntas: ${quiz.total_questions}`}
+            totalQuestions={quiz.total_questions}
             score={
               quiz.last_quiz_result ? quiz.last_quiz_result.score : undefined
             }
+            date={quiz.last_quiz_result ? quiz.last_quiz_result.created_at : ""}
             approved={
               quiz.last_quiz_result
                 ? quiz.last_quiz_result.score >= quiz.approve_score

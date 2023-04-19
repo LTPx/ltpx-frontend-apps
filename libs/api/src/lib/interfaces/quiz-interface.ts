@@ -120,6 +120,7 @@ export interface QuizStudent {
     id: number,
     score: number,
     in_review: boolean,
-    feedback: string
+    feedback: string,
+    created_at: string
   }
 }

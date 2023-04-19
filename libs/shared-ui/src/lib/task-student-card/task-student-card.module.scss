@@ -8,9 +8,32 @@
   padding: $size-md-1 2rem;
   background-color: $white-color;
 
+  .text-description {
+    color: $text-gray-color-medium;
+  }
+
   .buttons-review {
     display: flex;
     gap: 1rem;
+  }
+  .pending {
+    border: 1px solid $gray-color-400;
+    padding: 0.5rem 1.5rem;
+    border-radius: 10px;
+    background-color: $gray-color-100;
+  }
+  .approved-text {
+    border: 1px solid $green-color;
+    padding: 0.25rem 1rem;
+    border-radius: 10px;
+    background-color: $green-color-100;
+  }
+
+  .changes-text {
+    border: 1px solid $blue-color;
+    padding: 0.25rem 1rem;
+    border-radius: 10px;
+    background-color: $blue-color-100;
   }
 
   .content {
@@ -18,6 +41,15 @@
     flex-direction: column;
     gap: 1.5rem;
     width: 100%;
+
+    .text-content {
+      .show {
+        display: flex;
+        justify-content: end;
+        color: $primary-color;
+        cursor: pointer;
+      }
+    }
 
     .comment-teacher {
       display: flex;
@@ -38,9 +70,8 @@
       }
     }
 
-    .description {
-      color: $text-gray-color;
-      width: 35rem;
+    .text-gray {
+      color: $text-gray-color-medium;
     }
 
     .comment {
@@ -52,6 +83,7 @@
     display: flex;
     justify-content: end;
     gap: 1rem;
+    padding: 1rem 0;
 
     .btn-task {
       justify-content: end;

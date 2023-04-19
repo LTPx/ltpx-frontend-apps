@@ -22,7 +22,8 @@ export function TaskStudentCard(props: TaskStudentCardProps) {
   const [openModal, setOpenModal] = useState(false);
   const [editTask, setEditTask] = useState(false);
   const { _sendTask } = useStudent();
-  const { _getStudentCourse, enrolledCourse } = useStudent();
+  const { enrolledCourse } = useStudent();
+  const [showMore, setShowMore] = useState(false);
 
   async function handleSendTask(params: TaskStudent) {
     const paramsData =
@@ -45,21 +46,21 @@ export function TaskStudentCard(props: TaskStudentCardProps) {
             <h4>
               <strong>{title}</strong>
             </h4>
-            <h4 className={styles['description']}>Tarea</h4>
+            <h4 className={styles['text-gray']}>Tarea</h4>
           </div>
           <div className={styles['status']}>
-            {studentTask?.status === 'review' && <h5>Pendiente</h5>}
+            {studentTask?.status === 'review' && (
+              <h5 className={styles['pending']}>Pendiente</h5>
+            )}
             {studentTask?.status === 'approved' && (
               <div className={styles['approved-message']}>
-                <Icon icon="check-circle" size={18} />
-                <h5> Aprobada</h5>
+                <h5 className={styles['approved-text']}> Aprobada</h5>
               </div>
             )}
             {studentTask?.status === 'rejected' && (
               <div className={styles['require-changes-message']}>
                 <div className={styles['message']}>
-                  <Icon icon="pencil" size={18} />
-                  <h5>Necesita cambios</h5>
+                  <h5 className={styles['changes-text']}>Necesita cambios</h5>
                 </div>
               </div>
             )}
@@ -71,14 +72,36 @@ export function TaskStudentCard(props: TaskStudentCardProps) {
             /> */}
         </div>
         <div className={styles['about-task']}>
-          En que consiste: {description}
+          <h4 className={styles['text-gray']}>{description}</h4>
         </div>
         {studentTask?.comments && studentTask?.comments.length > 0 && (
           <div className={styles['comment-teacher']}>
             <div>
               <Avatar src={enrolledCourse.teacher?.profile_image} size={45} />
             </div>
-            <div>Comentario: {studentTask?.comments.join(', ')}</div>
+            <div>
+              {studentTask?.comments.join(', ').length > 130 ? (
+                <div className={styles['text-content']}>
+                  <p className={styles['text-description']}>
+                    {showMore
+                      ? studentTask?.comments
+                      : `${studentTask?.comments
+                          .join(', ')
+                          .substring(0, 130)}....`}
+                  </p>
+                  <div
+                    className={styles['show']}
+                    onClick={() => setShowMore(!showMore)}
+                  >
+                    <h5>{showMore ? 'Mostrar menos' : 'Mostrar mas'}</h5>
+                  </div>
+                </div>
+              ) : (
+                <p className={styles['text-description']}>
+                  {studentTask?.comments.join(', ')}
+                </p>
+              )}
+            </div>
           </div>
         )}
         <div className={styles['row-buttons']}>

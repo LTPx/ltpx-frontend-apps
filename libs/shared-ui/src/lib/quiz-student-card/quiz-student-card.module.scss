@@ -9,52 +9,89 @@
   padding: $size-md-1 2rem;
   background-color: $white-color;
 
-  .text-feedback {
-    color: $text-gray-color;
+  .text-content {
+    .show {
+      display: flex;
+      justify-content: end;
+      color: $primary-color;
+      cursor: pointer;
+    }
   }
-  .wrap {
+  .content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+
+    .wrap-title {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .title {
+      font-weight: 500;
+    }
+
+    .subTitle {
+      color: $text-gray-color-medium;
+    }
+
+    .info-content {
+      display: flex;
+      gap: 3rem;
+      padding: 1.25rem 0;
+      .item {
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
+        .item-title {
+          color: $text-gray-color-medium;
+        }
+      }
+    }
+  }
+
+  .head-section {
     display: flex;
     justify-content: space-between;
+    width: 100%;
     align-items: center;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid $gray-color-200;
   }
+
+  .text-feedback {
+    color: $text-gray-color-medium;
+  }
+
   .feedback {
-    padding-top: 1rem;
-  }
-  .title {
-    font-weight: 500;
+    padding: 1rem 0;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    border-top: 1px solid $gray-color-200;
   }
 
   .buttons-review {
     display: flex;
     gap: 1rem;
   }
-  .row {
-    display: flex;
-    align-items: center;
-    gap: 1.5rem;
-    .row-info {
-      display: flex;
-      gap: 0.15rem;
-      flex-direction: column;
 
-      .total-questions {
-        color: $text-gray-color;
-      }
+  .approved {
+    color: $green-color;
+    font-weight: 500;
+  }
 
-      .approved {
-        color: $green-color;
-      }
-
-      .no-approved {
-        color: $red-color;
-      }
-    }
+  .no-approved {
+    color: $red-color;
+    font-weight: 500;
   }
 
   .row-buttons {
     display: flex;
-    justify-content: center;
+    justify-content: end;
     gap: 1rem;
+    padding: 1.5rem 0;
 
     .btn {
       padding: $size-sm-2;

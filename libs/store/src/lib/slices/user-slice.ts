@@ -14,7 +14,8 @@ import {
   formatErrors,
   ChangePasswordParams,
   changePassword,
-  Notification
+  Notification,
+  getNotifications
 } from '@ltpx-frontend-apps/api';
 
 export type UserSlice = {
@@ -29,6 +30,7 @@ export type UserSlice = {
   register: (params: IRegisterUser) => Promise<FormatResponse>;
   logout: () => void;
   changePassword: (params: ChangePasswordParams) => Promise<FormatResponse>;
+  _getNotifications: () => Promise<FormatResponse>;
 };
 
 // const views = {
@@ -143,5 +145,13 @@ export const createUserSlice: StateCreator<StoreState, [], [], UserSlice> = (
     } catch (error) {
       return { success: false, error: formatErrors(error) };
     }
-  }
+  },
+  _getNotifications: async () => {
+    try {
+      const notifications = await getNotifications();
+      return { success: true, data: notifications };
+    } catch (error) {
+      return { success: false, error: formatErrors(error) };
+    }
+  },
 });

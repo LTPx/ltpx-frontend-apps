@@ -11,13 +11,14 @@ export const useNotification = () => {
       channel: 'NotificationsChannel',
       id: user.id
     }, {
-      received(data: {text: string}) {
+      received(data: any) {
         const notification = {
           text: data.text,
           date: 'Today',
-          read: false
-        }
-        console.log('newNotification: ', notification);
+          type: data.type,
+          meta: data.meta,
+        };
+        console.log('newNotification: ', data);
         addNotification(notification);
       },
     });

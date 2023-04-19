@@ -14,6 +14,7 @@ export const useUser = () => {
     changePassword,
     notifications,
     addNotification,
+    _getNotifications,
   } = useAppStore();
 
   return {
@@ -30,5 +31,6 @@ export const useUser = () => {
     changePassword,
     notifications,
     addNotification,
+    _getNotifications,
   }
 }

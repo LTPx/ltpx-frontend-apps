@@ -30,10 +30,11 @@ export interface QuizBuilderProps {
   onSubmit?: (data: QuizParams) => void;
   className?: string;
   quiz?: QuizParamsUi;
+  showFooter?: boolean;
 }
 
 export function QuizBuilder(props: QuizBuilderProps) {
-  const { onClose, onSubmit, className, quiz } = props;
+  const { onClose, onSubmit, className, quiz, showFooter } = props;
   const { translateQuizCategories } = useCourseUtil();
   const { t } = useTranslation();
   const {
@@ -112,6 +113,7 @@ export function QuizBuilder(props: QuizBuilderProps) {
       <div className={styles['control-questions']}>
         <Menu items={typeQuestions}>
           <Button
+            className={showFooter ? styles['question-dialog'] : ''}
             title={'Agregar Pregunta'}
             color={ColorsButton.secondary}
             icon="plus"
@@ -119,7 +121,9 @@ export function QuizBuilder(props: QuizBuilderProps) {
         </Menu>
       </div>
       {questions.length > 0 && (
-        <div className={styles['footer']}>
+        <div
+          className={showFooter ? styles['footer-dialog'] : styles['footer']}
+        >
           <Button
             title="Cancelar"
             color={ColorsButton.white}

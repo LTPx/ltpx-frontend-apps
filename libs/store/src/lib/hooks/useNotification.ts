@@ -1,6 +1,8 @@
 import { useEffect } from 'react';
 import { useUser } from '@ltpx-frontend-apps/store';
 import ActionCable from 'actioncable';
+import { NotificationModel, NotificationWebHook } from '@ltpx-frontend-apps/api';
+import { useMoment } from '@ltpx-frontend-apps/shared-ui';
 
 export const useNotification = () => {
   const { user, addNotification, notifications } = useUser();
@@ -11,15 +13,16 @@ export const useNotification = () => {
       channel: 'NotificationsChannel',
       id: user.id
     }, {
-      received(data: any) {
-        const notification = {
-          text: data.text,
-          date: 'Today',
-          kind: data.kind,
-          meta: data.meta,
-        };
-        console.log('newNotification: ', data);
-        addNotification(notification);
+      received(notification: NotificationWebHook) {
+        console.log('newNotification: ', notification);
+        const newNotification = {
+          user_id: user.id,
+          kind: notification.type,
+          text: notification.text,
+          meta: notification.meta.data,
+          created_at: notification.created_at
+        }
+        addNotification(newNotification);
       },
     });
 

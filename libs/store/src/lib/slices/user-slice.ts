@@ -15,15 +15,16 @@ import {
   ChangePasswordParams,
   changePassword,
   Notification,
-  getNotifications
+  getNotifications,
+  NotificationModel
 } from '@ltpx-frontend-apps/api';
 
 export type UserSlice = {
   user: UserStore;
   isAuthenticated: boolean;
   currentView: TypeViews;
-  notifications: Notification[];
-  addNotification: (notification: Notification) => void;
+  notifications: NotificationModel[];
+  addNotification: (notification: NotificationModel) => void;
   getCurrentUser: () => Promise<FormatResponse>;
   login: (credentials: ICredentials) => Promise<FormatResponse>;
   loginAdmin: (credentials: ICredentials) => Promise<FormatResponse>;
@@ -149,6 +150,7 @@ export const createUserSlice: StateCreator<StoreState, [], [], UserSlice> = (
   _getNotifications: async () => {
     try {
       const notifications = await getNotifications();
+      set({ notifications });
       return { success: true, data: notifications };
     } catch (error) {
       return { success: false, error: formatErrors(error) };

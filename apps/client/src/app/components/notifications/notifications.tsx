@@ -13,8 +13,8 @@ import { NotificationModel } from '@ltpx-frontend-apps/api';
 export interface NotificationsProps {}
 
 export function Notifications(props: NotificationsProps) {
-  const { _getNotifications } = useUser();
-  const [notifications, setNotifications] = useState<any[]>([]);
+  const { _getNotifications, notifications } = useUser();
+  const [ notificationsUi, setNotificationsUi ] = useState<Notification[]>([]);
   const { fromNow } = useMoment();
 
   const icons = {
@@ -27,12 +27,12 @@ export function Notifications(props: NotificationsProps) {
 
   const fetchNotifications = useCallback(async () => {
     const { success, data, error } = await _getNotifications();
-    if (success) {
-      const allNotifications = formatNotifications(data);
-      setNotifications(allNotifications);
-    } else {
-      console.log(error);
-    }
+    // if (success) {
+    //   const allNotifications = formatNotifications(data);
+    //   setNotificationsUi(allNotifications);
+    // } else {
+    //   console.log(error);
+    // }
   }, []);
 
   useEffect(() => {
@@ -54,7 +54,7 @@ export function Notifications(props: NotificationsProps) {
   return (
     <Dropdown>
       <NotificationList
-        notifications={notifications}
+        notifications={formatNotifications(notifications)}
         countNewNotification={notifications.length}
       />
       <div className={styles['avatar']}>

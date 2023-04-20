@@ -1,5 +1,4 @@
 export interface NotificationModel {
-  id: number;
   user_id: number;
   text: string;
   meta: any;
@@ -11,4 +10,15 @@ export interface Notification {
   text: string;
   date: string;
   meta: any;
+}
+
+export interface NotificationWebHook {
+  text: string,
+  meta: {
+    sender_id: number,
+    sender_name: string,
+    data: any
+  };
+  type: 'task' | 'quiz'| 'system' | 'payment';
+  created_at: string;
 }

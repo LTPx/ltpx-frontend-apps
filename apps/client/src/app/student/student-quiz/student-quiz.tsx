@@ -96,7 +96,8 @@ export function StudentQuiz() {
       );
       if (success) {
         if (needReview) {
-          navigate('/student/dashboard');
+          navigate(-1);
+          // navigate('/student/dashboard');
           return;
         }
         setScore(data.score);

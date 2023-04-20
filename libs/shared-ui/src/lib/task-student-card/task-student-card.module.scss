@@ -134,6 +134,7 @@
   }
   .answer {
     color: $text-gray-color;
+    padding-bottom: 0.25rem;
   }
   .footer {
     display: flex;
@@ -154,11 +155,17 @@
     padding: 1rem;
   }
   .task-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
     padding-bottom: 6rem;
   }
   .task-student {
     display: flex;
     justify-content: space-between;
     align-items: center;
+  }
+  .description-task {
+    padding-bottom: 0.25rem;
   }
 }

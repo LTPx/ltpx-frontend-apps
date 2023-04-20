@@ -4,6 +4,7 @@ import styles from './quiz-student-card.module.scss';
 import moment from 'moment';
 import { useStudent } from '@ltpx-frontend-apps/store';
 import { Avatar } from 'evergreen-ui';
+import Tag from '../tag/tag';
 moment.locale('es');
 
 /* eslint-disable-next-line */
@@ -14,6 +15,7 @@ export interface QuizStudentCardProps {
   text?: string;
   attempts?: number;
   date?: string;
+  statusTest?: boolean;
   feedback?: string;
   approved?: boolean;
   approveScore?: number;
@@ -29,6 +31,7 @@ export function QuizStudentCard(props: QuizStudentCardProps) {
     date,
     children,
     approved,
+    statusTest,
     score,
     feedback,
     approveScore,
@@ -54,11 +57,7 @@ export function QuizStudentCard(props: QuizStudentCardProps) {
               )}
               <h4 className={styles['title']}>{title}</h4>
             </div>
-            {text ? (
-              <h4 className={styles['subTitle']}>{text}</h4>
-            ) : (
-              <h4 className={styles['subTitle']}>Test</h4>
-            )}
+            {text && <h4 className={styles['subTitle']}>{text}</h4>}
           </div>
           <div className={styles['row-buttons']}>{children}</div>
         </div>
@@ -73,7 +72,7 @@ export function QuizStudentCard(props: QuizStudentCardProps) {
               <h5>{approveScore} / 100 Pts</h5>
             </div>
             <div className={styles['item']}>
-              <h5 className={styles['item-title']}>Numero de Intentos</h5>
+              <h5 className={styles['item-title']}>Intentos</h5>
               <h5>0 / {attempts}</h5>
             </div>
             <div className={styles['item']}>

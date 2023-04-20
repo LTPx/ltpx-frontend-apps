@@ -7,7 +7,7 @@ import { useTeacher } from '@ltpx-frontend-apps/store';
 export interface TeacherAccountBankProps {}
 
 export function TeacherAccountBank(props: TeacherAccountBankProps) {
-  const { profile, getProfile } = useTeacher();
+  const { profile } = useTeacher();
 
   return (
     <div className={styles['container']}>
@@ -18,7 +18,7 @@ export function TeacherAccountBank(props: TeacherAccountBankProps) {
           <Button
             className={styles['btn-edit']}
             title="Editar"
-            color={ColorsButton.white}
+            color={ColorsButton.secondary}
             outline={true}
             link='/teacher/account/account-bank-edit'
           />

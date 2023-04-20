@@ -3,7 +3,9 @@ import { QuizStudent } from '@ltpx-frontend-apps/api';
 import {
   Button,
   ColorsButton,
+  ColorsTag,
   QuizStudentCard,
+  Tag,
 } from '@ltpx-frontend-apps/shared-ui';
 import { useStudent } from '@ltpx-frontend-apps/store';
 import { useCallback, useEffect, useState } from 'react';
@@ -43,8 +45,11 @@ export function StudentCourseQuizzes(props: StudentCourseQuizzesProps) {
             score={
               quiz.last_quiz_result ? quiz.last_quiz_result.score : undefined
             }
+            statusTest={
+              quiz.last_quiz_result ? quiz.last_quiz_result.in_review : false
+            }
             attempts={quiz.max_attempts || undefined}
-            date={quiz.last_quiz_result ? quiz.last_quiz_result.created_at : ""}
+            date={quiz.last_quiz_result ? quiz.last_quiz_result.created_at : ''}
             approved={
               quiz.last_quiz_result
                 ? quiz.last_quiz_result.score >= quiz.approve_score
@@ -66,11 +71,18 @@ export function StudentCourseQuizzes(props: StudentCourseQuizzesProps) {
               )}
               {quiz.last_quiz_result && (
                 <div className="result">
-                  {quiz.last_quiz_result.in_review && <h5>En revision</h5>}
+                  {quiz.last_quiz_result.in_review && (
+                    <Tag
+                      className={styles['tag-review']}
+                      icon={'clock'}
+                      text={'En revision'}
+                      color={ColorsTag.blue}
+                    />
+                  )}
                   {quiz.last_quiz_result.score >= quiz.approve_score &&
                     !quiz.last_quiz_result.in_review && (
                       <Button
-                      className={styles['btn-task-form']}
+                        className={styles['btn-task-form']}
                         color={ColorsButton.secondary}
                         title="Mis respuestas"
                         outline={true}
@@ -81,7 +93,7 @@ export function StudentCourseQuizzes(props: StudentCourseQuizzesProps) {
                   {quiz.last_quiz_result.score < quiz.approve_score &&
                     !quiz.last_quiz_result.in_review && (
                       <Button
-                      className={styles['btn-task-form']}
+                        className={styles['btn-task-form']}
                         // color={ColorsButton.secondary}
                         title="Volver a Intentar"
                         icon="undo"

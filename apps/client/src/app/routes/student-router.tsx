@@ -2,7 +2,7 @@ import { Routes, Route, BrowserRouter, Navigate } from 'react-router-dom';
 import {
   PaymentsLayout,
 } from '../layouts/index';
-import { AllCourses, CourseDetails, Home } from '../site';
+import { AllCourses, CourseDetails, CoursesByCategory, Home } from '../site';
 import {
   Account,
   Dashboard,
@@ -19,6 +19,7 @@ import {
   StudentPasswordEdit,
 } from '../student/index';
 import VideoMeetingLive from '../video/video-meeting-live/video-meeting-live';
+import { blogRoutes } from './blog-routes';
 
 export const StudentRoutes = () => {
   return (
@@ -26,9 +27,14 @@ export const StudentRoutes = () => {
       <Routes>
         <Route path="/" element={<Navigate replace to="student/dashboard" />} />
         <Route path="/" element={<StudentLayout />}>
+          { blogRoutes }
           <Route path="/home" element={<Home />} />
           <Route path="/courses" element={<AllCourses />} />
           <Route path="/course/:slug" element={<CourseDetails />} />
+          <Route
+            path="/course/:categoryId/category"
+            element={<CoursesByCategory />}
+          />
         </Route>
         <Route path="student" element={<StudentLayout />}>
           <Route path="dashboard" element={<Dashboard />} />

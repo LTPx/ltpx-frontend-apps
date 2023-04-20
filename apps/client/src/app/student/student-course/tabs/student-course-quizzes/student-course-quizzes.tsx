@@ -3,7 +3,9 @@ import { QuizStudent } from '@ltpx-frontend-apps/api';
 import {
   Button,
   ColorsButton,
+  ColorsTag,
   QuizStudentCard,
+  Tag,
 } from '@ltpx-frontend-apps/shared-ui';
 import { useStudent } from '@ltpx-frontend-apps/store';
 import { useCallback, useEffect, useState } from 'react';
@@ -70,13 +72,11 @@ export function StudentCourseQuizzes(props: StudentCourseQuizzesProps) {
               {quiz.last_quiz_result && (
                 <div className="result">
                   {quiz.last_quiz_result.in_review && (
-                    <Button
-                      className={styles['btn-task-form']}
-                      color={ColorsButton.secondary}
-                      title="Mis respuestas"
-                      outline={true}
-                      icon="eye"
-                      link={`/student/course/${courseId}/quiz-review/${quiz.last_quiz_result.id}`}
+                    <Tag
+                      className={styles['tag-review']}
+                      icon={'clock'}
+                      text={'En revision'}
+                      color={ColorsTag.blue}
                     />
                   )}
                   {quiz.last_quiz_result.score >= quiz.approve_score &&

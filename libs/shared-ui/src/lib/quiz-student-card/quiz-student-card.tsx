@@ -57,15 +57,7 @@ export function QuizStudentCard(props: QuizStudentCardProps) {
               )}
               <h4 className={styles['title']}>{title}</h4>
             </div>
-            {text ? (
-              <h4 className={styles['subTitle']}>{text}</h4>
-            ) : (
-              <div>
-                {statusTest && (
-                  <h4 className={styles['subTitle']}>En revision</h4>
-                )}
-              </div>
-            )}
+            {text && <h4 className={styles['subTitle']}>{text}</h4>}
           </div>
           <div className={styles['row-buttons']}>{children}</div>
         </div>
@@ -80,7 +72,7 @@ export function QuizStudentCard(props: QuizStudentCardProps) {
               <h5>{approveScore} / 100 Pts</h5>
             </div>
             <div className={styles['item']}>
-              <h5 className={styles['item-title']}>Numero de Intentos</h5>
+              <h5 className={styles['item-title']}>Intentos</h5>
               <h5>0 / {attempts}</h5>
             </div>
             <div className={styles['item']}>

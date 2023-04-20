@@ -2,7 +2,7 @@ import { Routes, Route, BrowserRouter, Navigate } from 'react-router-dom';
 import {
   PaymentsLayout,
 } from '../layouts/index';
-import { AllCourses, CourseDetails, Home } from '../site';
+import { AllCourses, CourseDetails, CoursesByCategory, Home } from '../site';
 import {
   Account,
   Dashboard,
@@ -31,6 +31,10 @@ export const StudentRoutes = () => {
           <Route path="/home" element={<Home />} />
           <Route path="/courses" element={<AllCourses />} />
           <Route path="/course/:slug" element={<CourseDetails />} />
+          <Route
+            path="/course/:categoryId/category"
+            element={<CoursesByCategory />}
+          />
         </Route>
         <Route path="student" element={<StudentLayout />}>
           <Route path="dashboard" element={<Dashboard />} />

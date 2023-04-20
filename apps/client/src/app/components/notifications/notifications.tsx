@@ -1,6 +1,7 @@
 import {
   Cart,
   Dropdown,
+  NotificationItem,
   NotificationList,
   useMoment,
 } from '@ltpx-frontend-apps/shared-ui';
@@ -9,12 +10,9 @@ import { useCallback, useEffect, useState } from 'react';
 import { useUser } from '@ltpx-frontend-apps/store';
 import { NotificationModel } from '@ltpx-frontend-apps/api';
 
-/* eslint-disable-next-line */
-export interface NotificationsProps {}
-
-export function Notifications(props: NotificationsProps) {
+export function Notifications() {
   const { _getNotifications, notifications } = useUser();
-  const [ notificationsUi, setNotificationsUi ] = useState<Notification[]>([]);
+  const [ notificationsItems, setNotificationsItems ] = useState<NotificationItem[]>([]);
   const { fromNow } = useMoment();
 
   const icons = {
@@ -26,18 +24,19 @@ export function Notifications(props: NotificationsProps) {
   }
 
   const fetchNotifications = useCallback(async () => {
-    const { success, data, error } = await _getNotifications();
-    // if (success) {
-    //   const allNotifications = formatNotifications(data);
-    //   setNotificationsUi(allNotifications);
-    // } else {
-    //   console.log(error);
-    // }
+    await _getNotifications();
   }, []);
 
   useEffect(() => {
     fetchNotifications();
   }, []);
+
+  useEffect(() => {
+    if (notifications.length) {
+      const notificationsFormat = formatNotifications(notifications);
+      setNotificationsItems(notificationsFormat);
+    }
+  }, [notifications]);
 
   function formatNotifications(notifications: NotificationModel[]) {
     return notifications.map((notification: NotificationModel)=>{
@@ -54,7 +53,7 @@ export function Notifications(props: NotificationsProps) {
   return (
     <Dropdown>
       <NotificationList
-        notifications={formatNotifications(notifications)}
+        notifications={notificationsItems}
         countNewNotification={notifications.length}
       />
       <div className={styles['avatar']}>

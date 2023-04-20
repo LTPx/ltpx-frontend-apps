@@ -15,7 +15,7 @@ export const useNotification = () => {
         const notification = {
           text: data.text,
           date: 'Today',
-          type: data.type,
+          kind: data.kind,
           meta: data.meta,
         };
         console.log('newNotification: ', data);

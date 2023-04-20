@@ -3,11 +3,11 @@ export interface NotificationModel {
   user_id: number;
   text: string;
   meta: any;
-  kind: string;
+  kind: 'task' | 'quiz'| 'system' | 'payment';
   created_at: string;
 }
 export interface Notification {
-  type: string;
+  kind: string;
   text: string;
   date: string;
   meta: any;

@@ -60,9 +60,6 @@ export function TaskStudentCard(props: TaskStudentCardProps) {
                   <Tag text={'Aprobada'} color={ColorsTag.green} />
                 </div>
               )}
-              <p className={styles['text-description']}>
-                {studentTask?.comments.join(', ')}
-              </p>
               {studentTask?.status === 'rejected' && (
                 <div className={styles['message']}>
                   <Tag text={'Necesita cambios'} color={ColorsTag.blue} />

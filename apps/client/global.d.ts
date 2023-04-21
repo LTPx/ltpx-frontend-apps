@@ -1,2 +1,2 @@
 declare module '@videosdk.live/rtc-js-prebuilt';
-// declare module 'pusher';
+declare module 'actioncable';

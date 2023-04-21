@@ -1,9 +1,8 @@
 import { getChatStudents, UserModel } from "@ltpx-frontend-apps/api";
-import { useAppStore, useUser, useUtil } from "@ltpx-frontend-apps/store";
+import { useAppStore, useNotification, useUser, useUtil } from "@ltpx-frontend-apps/store";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-
 
 export const useTeacherLayout = () => {
   const [openChat, setOpenChat] = useState(false);
@@ -15,6 +14,7 @@ export const useTeacherLayout = () => {
   const { teacher_account } = user;
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const { notifications } = useNotification()
 
   async function logoutSession() {
     await logout();
@@ -64,5 +64,6 @@ export const useTeacherLayout = () => {
     setOpenNewChat,
     feedbackAction,
     clearMessageToast,
+    notifications
   };
 };

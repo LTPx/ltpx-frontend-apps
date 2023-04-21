@@ -27,9 +27,7 @@ export function StudentCourse(props: StudentCourseProps) {
   const fetchCourse = useCallback(async () => {
     const { success, data, error } = await _getStudentCourse(slug || '');
     if (success) {
-      console.log('data: ', data);
     } else {
-      console.log('error: ', error);
     }
   }, []);
 

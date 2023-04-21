@@ -22,8 +22,6 @@ export interface AchievementDetailsCardProps {
 export function AchievementDetailsCard(props: AchievementDetailsCardProps) {
   const { title, imageUrl, currentPoints, totalPoints, quizzes, rule } = props;
   const { translateAchievementType } = useCourseUtil();
-  console.log('quizzes: ', quizzes);
-  console.log('rule: ', rule);
 
   return (
     <div className={styles['content']}>

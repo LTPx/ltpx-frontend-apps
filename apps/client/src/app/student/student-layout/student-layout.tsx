@@ -2,26 +2,26 @@ import styles from './student-layout.module.scss';
 import {
   Avatar,
   AvatarSize,
-  Cart,
   Chat,
   ChatFloat,
   Dropdown,
   Header,
   Icon,
-  NotificationList,
   UserMenu,
 } from '@ltpx-frontend-apps/shared-ui';
-import { useUser } from '@ltpx-frontend-apps/store';
+import { useNotification, useUser } from '@ltpx-frontend-apps/store';
 import { useTranslation } from 'react-i18next';
 import { Outlet, useNavigate } from 'react-router-dom';
-import avatar from './../../../assets/images/avatars/avatar-1.svg';
 import { useState } from 'react';
+import avatar from './../../../assets/images/avatars/avatar-1.svg';
+import Notifications from '../../components/notifications/notifications';
 
 export function StudentLayout() {
   const [openChat, setOpenChat] = useState(false);
   const { user, logout } = useUser();
-  const navigate = useNavigate();
   const { t } = useTranslation();
+  const navigate = useNavigate();
+  const { notifications } = useNotification()
 
   const links = [
     {
@@ -60,12 +60,7 @@ export function StudentLayout() {
     <div className={styles['container']}>
       <Header links={links} className={styles['header']}>
         <div className={styles['teacher-actions']}>
-          <Dropdown>
-            <NotificationList notifications={[]} countNewNotification={0}/>
-            <div className={styles['avatar']}>
-              <Cart amount={0}/>
-            </div>
-          </Dropdown>
+          <Notifications/>
           <Dropdown>
             <UserMenu
               name={user.fullname}

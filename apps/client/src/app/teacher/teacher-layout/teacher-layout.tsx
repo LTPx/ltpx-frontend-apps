@@ -16,6 +16,7 @@ import avatar from './../../../assets/images/avatars/avatar-3.svg';
 import { StatusTeacherAccount } from '@ltpx-frontend-apps/api';
 import { useTeacherLayout } from './useTeacherLayout';
 import { ChatNewPrivateRoom } from '../../components';
+import Notifications from '../../components/notifications/notifications';
 
 export function TeacherLayout() {
   const {
@@ -31,6 +32,7 @@ export function TeacherLayout() {
     setOpenNewChat,
     feedbackAction,
     clearMessageToast,
+    notifications
   } = useTeacherLayout();
 
   const ChatFloat = ({ onClick }: { onClick: () => void }) => (
@@ -43,6 +45,7 @@ export function TeacherLayout() {
     <div className={styles['container']}>
       <Header links={headerLinks} className={styles['header']}>
         <div className={styles['teacher-actions']}>
+          <Notifications/>
           <Dropdown>
             <UserMenu
               name={currentUser.fullname}

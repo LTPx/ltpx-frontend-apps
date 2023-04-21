@@ -32,7 +32,6 @@ export function TeacherLayout() {
     setOpenNewChat,
     feedbackAction,
     clearMessageToast,
-    notifications
   } = useTeacherLayout();
 
   const ChatFloat = ({ onClick }: { onClick: () => void }) => (

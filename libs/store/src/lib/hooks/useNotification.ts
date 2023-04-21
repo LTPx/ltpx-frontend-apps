@@ -2,11 +2,11 @@ import { useEffect } from 'react';
 import { useUser } from '@ltpx-frontend-apps/store';
 import { NotificationWebHook } from '@ltpx-frontend-apps/api';
 
-export const useNotification = () => {
+export const useNotification = (wsUrl: string) => {
   const { user, addNotification, notifications } = useUser();
 
   useEffect(() => {
-    const ws = new WebSocket('ws://localhost:3000/cable');
+    const ws = new WebSocket(wsUrl);
     ws.onopen = () => {
       ws.send(
         JSON.stringify({

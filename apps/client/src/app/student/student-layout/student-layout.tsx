@@ -22,7 +22,9 @@ export function StudentLayout() {
   const { user, logout } = useUser();
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const { notifications } = useNotification()
+
+  const wsUrl = process.env.NX_WS_URL || '';
+  useNotification(wsUrl);
 
   const links = [
     {

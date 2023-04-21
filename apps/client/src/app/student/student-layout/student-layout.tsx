@@ -7,6 +7,7 @@ import {
   Dropdown,
   Header,
   Icon,
+  NotificationList,
   UserMenu,
 } from '@ltpx-frontend-apps/shared-ui';
 import { useNotification, useUser } from '@ltpx-frontend-apps/store';

@@ -48,7 +48,24 @@ export function TaskStudentCard(props: TaskStudentCardProps) {
             <h4>
               <strong>{title}</strong>
             </h4>
-            <h4 className={styles['text-gray']}>Tarea</h4>
+            <div className={styles['status']}>
+              {studentTask?.status === 'review' && (
+                <Tag text={'Enviada para revisar'} color={ColorsTag.white} />
+              )}
+              {studentTask === undefined && (
+                <Tag text={'Pendiente'} color={ColorsTag.gray} />
+              )}
+              {studentTask?.status === 'approved' && (
+                <div className={styles['approved-message']}>
+                  <Tag text={'Aprobada'} color={ColorsTag.green} />
+                </div>
+              )}
+              {studentTask?.status === 'rejected' && (
+                <div className={styles['message']}>
+                  <Tag text={'Necesita cambios'} color={ColorsTag.blue} />
+                </div>
+              )}
+            </div>
           </div>
           <div className={styles['row-buttons']}>
             {studentTask === undefined && (
@@ -135,24 +152,6 @@ export function TaskStudentCard(props: TaskStudentCardProps) {
             </div>
           </div>
         )}
-        <div className={styles['status']}>
-          {studentTask?.status === 'review' && (
-            <Tag text={'Enviada para revisar'} color={ColorsTag.white} />
-          )}
-          {studentTask === undefined && (
-            <Tag text={'Pendiente'} color={ColorsTag.gray} />
-          )}
-          {studentTask?.status === 'approved' && (
-            <div className={styles['approved-message']}>
-              <Tag text={'Aprobada'} color={ColorsTag.green} />
-            </div>
-          )}
-          {studentTask?.status === 'rejected' && (
-            <div className={styles['message']}>
-              <Tag text={'Necesita cambios'} color={ColorsTag.blue} />
-            </div>
-          )}
-        </div>
       </div>
 
       <Dialog

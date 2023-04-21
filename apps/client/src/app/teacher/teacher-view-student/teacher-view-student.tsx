@@ -58,7 +58,7 @@ export function TeacherViewStudent(props: TeacherViewStudentProps) {
       id
     );
     if (success) {
-      console.log('data y: ', data);
+      console.log('data: ', data);
       setAchievements(data);
     } else {
       console.log('error: ', error);

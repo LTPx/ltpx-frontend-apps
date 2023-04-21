@@ -1,5 +1,9 @@
 @import '../../../styles.scss';
-
+.button-content {
+  display: flex;
+  justify-content: end;
+  padding: 4rem 1rem 1rem 1rem;
+}
 .tab-options {
   display: flex;
   gap: 1rem;
@@ -11,6 +15,21 @@
   flex-direction: column;
   .title {
     padding-bottom: 1rem;
+  }
+
+  .head-content {
+    // box-shadow: $card-shadow-medium;
+    // background-color: $white-color;
+    padding: 1rem 0 2rem 0;
+  }
+
+  .btn-actions {
+    display: flex;
+    justify-content: end;
+    gap: 0.5rem;
+    .btn {
+      padding: 0.5rem 1.5rem;
+    }
   }
   .content {
     width: 100%;

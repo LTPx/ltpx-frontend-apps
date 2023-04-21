@@ -41,8 +41,9 @@
       font-weight: 500;
     }
 
-    .subTitle {
+    .subtitle {
       color: $text-gray-color-medium;
+      font-size: 0.875rem;
     }
 
     .info-content {
@@ -88,10 +89,12 @@
 
   .approved {
     color: $green-color;
+    font-weight: 500;
   }
 
   .no-approved {
     color: $red-color;
+    font-weight: 500;
   }
 
   .row-buttons {

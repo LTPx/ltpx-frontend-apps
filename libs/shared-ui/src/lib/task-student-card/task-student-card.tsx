@@ -48,7 +48,24 @@ export function TaskStudentCard(props: TaskStudentCardProps) {
             <h4>
               <strong>{title}</strong>
             </h4>
-            <h4 className={styles['text-gray']}>Tarea</h4>
+            <div className={styles['status']}>
+              {studentTask?.status === 'review' && (
+                <Tag text={'Enviada para revisar'} color={ColorsTag.white} />
+              )}
+              {studentTask === undefined && (
+                <Tag text={'Pendiente'} color={ColorsTag.gray} />
+              )}
+              {studentTask?.status === 'approved' && (
+                <div className={styles['approved-message']}>
+                  <Tag text={'Aprobada'} color={ColorsTag.green} />
+                </div>
+              )}
+              {studentTask?.status === 'rejected' && (
+                <div className={styles['message']}>
+                  <Tag text={'Necesita cambios'} color={ColorsTag.blue} />
+                </div>
+              )}
+            </div>
           </div>
           <div className={styles['row-buttons']}>
             {studentTask === undefined && (
@@ -135,24 +152,6 @@ export function TaskStudentCard(props: TaskStudentCardProps) {
             </div>
           </div>
         )}
-        <div className={styles['status']}>
-          {studentTask?.status === 'review' && (
-            <Tag text={'Enviada para revisar'} color={ColorsTag.white} />
-          )}
-          {studentTask === undefined && (
-            <Tag text={'Pendiente'} color={ColorsTag.gray} />
-          )}
-          {studentTask?.status === 'approved' && (
-            <div className={styles['approved-message']}>
-              <Tag text={'Aprobada'} color={ColorsTag.green} />
-            </div>
-          )}
-          {studentTask?.status === 'rejected' && (
-            <div className={styles['message']}>
-              <Tag text={'Necesita cambios'} color={ColorsTag.blue} />
-            </div>
-          )}
-        </div>
       </div>
 
       <Dialog
@@ -184,20 +183,33 @@ export function TaskStudentCard(props: TaskStudentCardProps) {
         topOffset={40}
       >
         <div className={styles['modal-taskView']}>
-        <div className={styles['task-wrap']}>
-          <div className={styles['task-information']}>
-            
-              <div className={styles['task-student']}>
-                <h4 className={styles['answer-task']}>Tu Respuesta: </h4>
+          <div className={styles['task-wrap']}>
+            <div className={styles['task-information']}>
+              {description && (
+                <h4 className={styles['answer-task']}>
+                  Descripción de la Tarea:
+                </h4>
+              )}
+              <div>
+                <h4 className={styles['description-task']}>{description}</h4>
+                {file && (
+                  <a href={file} target="_blank">
+                    Archivo adjunto
+                  </a>
+                )}
+              </div>
+            </div>
+            <div className={styles['task-information']}>
+              <h4 className={styles['answer-task']}>Tu Respuesta: </h4>
+              <div>
+                <p className={styles['answer']}>{studentTask?.answer}</p>
                 {studentTask?.file_url && (
                   <a href={studentTask?.file_url} target="_blank">
                     Archivo adjunto
                   </a>
                 )}
               </div>
-            
-            <p className={styles['answer']}>{studentTask?.answer}</p>
-          </div>
+            </div>
           </div>
           <div className={styles['footer']}>
             <Button

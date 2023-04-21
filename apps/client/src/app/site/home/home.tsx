@@ -226,18 +226,20 @@ export function Home() {
           ))}
         </div>
       </div>
-      <SectionInformation
-        className={styles['section-content']}
-        title={'Postula para Profesor'}
-        imgUrl={'../../../../assets/images/bg_shape.svg'}
-        description={
-          '¡Únete a nosotros y empieza a generar ingresos sin problemas!'
-        }
-      >
-        <div className={styles['btn']}>
-          <Button title={'Registrarme Ahora'} link={'/register-teacher'} />
-        </div>
-      </SectionInformation>
+      {!isAuthenticated && (
+        <SectionInformation
+          className={styles['section-content']}
+          title={'Postula para Profesor'}
+          imgUrl={'../../../../assets/images/bg_shape.svg'}
+          description={
+            '¡Únete a nosotros y empieza a generar ingresos sin problemas!'
+          }
+        >
+          <div className={styles['btn']}>
+            <Button title={'Registrarme Ahora'} link={'/register-teacher'} />
+          </div>
+        </SectionInformation>
+      )}
     </div>
   );
 }

@@ -4,7 +4,6 @@ import styles from './quiz-student-card.module.scss';
 import moment from 'moment';
 import { useStudent } from '@ltpx-frontend-apps/store';
 import { Avatar } from 'evergreen-ui';
-moment.locale('es');
 
 /* eslint-disable-next-line */
 export interface QuizStudentCardProps {
@@ -14,6 +13,7 @@ export interface QuizStudentCardProps {
   text?: string;
   attempts?: number;
   date?: string;
+  statusTest?: boolean;
   feedback?: string;
   approved?: boolean;
   approveScore?: number;
@@ -29,6 +29,7 @@ export function QuizStudentCard(props: QuizStudentCardProps) {
     date,
     children,
     approved,
+    statusTest,
     score,
     feedback,
     approveScore,
@@ -54,30 +55,22 @@ export function QuizStudentCard(props: QuizStudentCardProps) {
               )}
               <h4 className={styles['title']}>{title}</h4>
             </div>
-            {text ? (
-              <h4 className={styles['subTitle']}>{text}</h4>
-            ) : (
-              <h4 className={styles['subTitle']}>Test</h4>
-            )}
+            <h4 className={styles['subtitle']}>{totalQuestions} Preguntas</h4>
           </div>
           <div className={styles['row-buttons']}>{children}</div>
         </div>
         {totalQuestions && (
           <div className={styles['info-content']}>
             <div className={styles['item']}>
-              <h5 className={styles['item-title']}>Preguntas</h5>
-              <h5>{totalQuestions}</h5>
-            </div>
-            <div className={styles['item']}>
               <h5 className={styles['item-title']}>Puntaje mínimo</h5>
               <h5>{approveScore} / 100 Pts</h5>
             </div>
             <div className={styles['item']}>
-              <h5 className={styles['item-title']}>Numero de Intentos</h5>
-              <h5>0 / {attempts}</h5>
+              <h5 className={styles['item-title']}>Intentos</h5>
+              <h5>{attempts} / 3</h5>
             </div>
             <div className={styles['item']}>
-              <h5 className={styles['item-title']}>Enviado</h5>
+              <h5 className={styles['item-title']}>Fecha de envió</h5>
               {date ? (
                 <h5>{moment(date).format('D MMMM YYYY')}</h5>
               ) : (

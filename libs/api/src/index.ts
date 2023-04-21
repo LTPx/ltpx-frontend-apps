@@ -19,6 +19,7 @@ export * from './lib/interfaces/session-interface';
 export * from './lib/interfaces/task-interface';
 export * from './lib/interfaces/withdrawals-interfaces';
 export * from './lib/interfaces/chat-interface';
+export * from './lib/interfaces/notification-interface';
 
 //fake api
 export * from '../src/lib/fake/courses';
@@ -52,6 +53,7 @@ export * from './lib/api/site/enrollments-api';
 export * from './lib/api/site/teacher-api';
 
 export * from './lib/api/user/payments-api';
+export * from './lib/api/user/notifications-api';
 
 export * from './lib/api/student/student-courses-api';
 export * from './lib/api/student/student-payments-api';

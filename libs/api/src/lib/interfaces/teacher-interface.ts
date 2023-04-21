@@ -19,6 +19,7 @@ export interface BankAccount {
 
 export interface TeacherProfile {
   teacher_name: string;
+  name: string;
   skills: string;
   biography: string;
   social_networks: { name: string; url: string }[];

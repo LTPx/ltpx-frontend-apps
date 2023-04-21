@@ -12,6 +12,11 @@ export const useUser = () => {
     registerTeacher,
     getCurrentUser,
     changePassword,
+    notifications,
+    addNotification,
+    totalUnreadNotifications,
+    clearUnreadNotification,
+    _getNotifications,
   } = useAppStore();
 
   return {
@@ -26,5 +31,10 @@ export const useUser = () => {
     isAuthenticated,
     logout,
     changePassword,
+    notifications,
+    addNotification,
+    totalUnreadNotifications,
+    clearUnreadNotification,
+    _getNotifications,
   }
 }

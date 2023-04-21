@@ -11,3 +11,4 @@ export * from './lib/hooks/useSiteUtil';
 export * from './lib/hooks/useStudent';
 export * from './lib/hooks/useCourseStudents';
 export * from './lib/hooks/useChat';
+export * from './lib/hooks/useNotification';

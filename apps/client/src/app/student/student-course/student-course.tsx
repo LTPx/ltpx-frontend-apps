@@ -27,9 +27,7 @@ export function StudentCourse(props: StudentCourseProps) {
   const fetchCourse = useCallback(async () => {
     const { success, data, error } = await _getStudentCourse(slug || '');
     if (success) {
-      console.log('data: ', data);
     } else {
-      console.log('error: ', error);
     }
   }, []);
 
@@ -71,7 +69,7 @@ export function StudentCourse(props: StudentCourseProps) {
               className={`${styles['basic-card']} ${styles.center} ${styles['teacher-card']}`}
             >
               <Avatar src={enrolledCourse.teacher?.profile_image} size={100} />
-              <h4>{enrolledCourse.teacher?.teacher_name}</h4>
+              <h4>{enrolledCourse.teacher?.name}</h4>
               <h5>Profesor</h5>
               <Button
                 title="Enviarle un mensaje"

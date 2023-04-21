@@ -43,7 +43,7 @@ export function CourseRowCard(props: CourseRowCardProps) {
             color={ColorsTag.green}
           />
           <div className={styles['item']}>
-            <Icon icon={'trophy'} size={14}></Icon> {achievements}{' '}
+            <Icon icon={'trophy'} size={14} color={'#fbbf24'}></Icon> {achievements}{' '}
             <h5>Logros</h5>
           </div>
           <div className={styles['item']}>

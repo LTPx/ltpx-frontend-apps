@@ -30,7 +30,7 @@ export function QuizView(props: QuizViewProps) {
     <div className={styles['container']}>
       {quiz.id && (
         <div className={`${styles['quiz-container']} card`}>
-          <div className={styles['header']}>
+          {/* <div className={styles['header']}>
             <div className={styles['quiz-info']}>
               <h2>Test: {quiz.name}</h2>
               <h4>
@@ -41,7 +41,7 @@ export function QuizView(props: QuizViewProps) {
               <p>Calificación</p>
               <h3>{score} / 100</h3>
             </div>
-          </div>
+          </div> */}
           <div className={styles['content']}>
             <div className={styles['questions']}>
               {quiz.questions_attributes.map((question, index) => (

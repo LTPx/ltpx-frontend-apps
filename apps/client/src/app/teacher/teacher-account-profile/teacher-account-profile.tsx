@@ -28,7 +28,7 @@ export function TeacherAccountProfile(props: TeacherAccountProfileProps) {
             <Button
               className={styles['btn-edit']}
               title="Editar"
-              color={ColorsButton.white}
+              color={ColorsButton.secondary}
               outline={true}
               link="/teacher/account/profile-edit"
             />
@@ -54,7 +54,7 @@ export function TeacherAccountProfile(props: TeacherAccountProfileProps) {
             <Button
               className={styles['btn-edit']}
               title="Editar"
-              color={ColorsButton.white}
+              color={ColorsButton.secondary}
               outline={true}
               link="/teacher/account/profile-edit"
             />

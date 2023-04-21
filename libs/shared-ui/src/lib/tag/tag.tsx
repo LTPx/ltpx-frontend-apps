@@ -32,8 +32,8 @@ export function Tag(props: TagProps) {
   const selectedColor = colorsTags[color || ColorsTag.gray];
 
   return (
-    <div className={`${className} ${styles['container']}`}>
-      <div className={`${selectedColor} ${styles['tag']}`}>
+    <div className={styles['container']} >
+      <div className={`${selectedColor} ${className} ${styles['tag']}`}>
         {icon && <Icon icon={icon} size={15}></Icon>}
         <h5>{text}</h5>
       </div>

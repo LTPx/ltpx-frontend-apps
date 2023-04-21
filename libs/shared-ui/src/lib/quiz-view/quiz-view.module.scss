@@ -1,9 +1,10 @@
 @import '../../styles/styles.module.scss';
 
-.container {
-  .quiz-container {
-    padding: 3rem;
-  }
+.content {
+  padding-bottom: 8rem;
+  // .quiz-container {
+  //   padding: 3rem;
+  // }
 }
 
 .header {
@@ -51,7 +52,12 @@
   display: flex;
   justify-content: flex-end;
   gap: 1rem;
-  padding: 1rem 0;
+  padding: 1.5rem 2rem 1.5rem 0;
+  background: $white-color;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
 }
 
 .selected-true {

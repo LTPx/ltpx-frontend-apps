@@ -11,17 +11,23 @@ import { useUser } from '@ltpx-frontend-apps/store';
 import { NotificationModel } from '@ltpx-frontend-apps/api';
 
 export function Notifications() {
-  const { _getNotifications, notifications } = useUser();
-  const [ notificationsItems, setNotificationsItems ] = useState<NotificationItem[]>([]);
+  const {
+    _getNotifications,
+    notifications,
+    totalUnreadNotifications,
+    clearUnreadNotification,
+  } = useUser();
+  const [notificationsItems, setNotificationsItems] = useState<
+    NotificationItem[]
+  >([]);
   const { fromNow } = useMoment();
-
   const icons = {
     task: 'task',
     quiz: 'quiz',
     system: 'cog',
     payment: 'bill',
     achievement: 'trophy',
-  }
+  };
 
   const fetchNotifications = useCallback(async () => {
     await _getNotifications();
@@ -39,25 +45,27 @@ export function Notifications() {
   }, [notifications]);
 
   function formatNotifications(notifications: NotificationModel[]) {
-    return notifications.map((notification: NotificationModel)=>{
+    return notifications.map((notification: NotificationModel) => {
       const icon = icons[notification.kind];
       return {
         kind: notification.kind,
         text: notification.text,
         date: fromNow(notification.created_at),
-        icon: icon
-      }
-    })
+        icon: icon,
+      };
+    });
   }
 
   return (
     <Dropdown>
-      <NotificationList
-        notifications={notificationsItems}
-        countNewNotification={notifications.length}
-      />
-      <div className={styles['avatar']}>
-        <Cart amount={notifications.length} />
+      <NotificationList notifications={notificationsItems} />
+      <div
+        className={styles['avatar']}
+        onClick={() => {
+          clearUnreadNotification();
+        }}
+      >
+        <Cart amount={totalUnreadNotifications} />
       </div>
     </Dropdown>
   );

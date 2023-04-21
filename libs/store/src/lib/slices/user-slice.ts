@@ -24,6 +24,8 @@ export type UserSlice = {
   isAuthenticated: boolean;
   currentView: TypeViews;
   notifications: NotificationModel[];
+  totalUnreadNotifications: number;
+  clearUnreadNotification: () => void;
   addNotification: (notification: NotificationModel) => void;
   getCurrentUser: () => Promise<FormatResponse>;
   login: (credentials: ICredentials) => Promise<FormatResponse>;
@@ -53,9 +55,14 @@ export const createUserSlice: StateCreator<StoreState, [], [], UserSlice> = (
   isAuthenticated: false,
   currentView: TypeViews.default,
   notifications: [],
+  totalUnreadNotifications: 0,
+  clearUnreadNotification: () => {
+    set({ totalUnreadNotifications: 0 });
+  },
   addNotification: (notification) => {
     const newNotifications = [...[notification], ...get().notifications];
-    set({ notifications: newNotifications});
+    const totalUnreadNotifications = get().totalUnreadNotifications;
+    set({ notifications: newNotifications, totalUnreadNotifications: totalUnreadNotifications + 1});
   },
   getCurrentUser: async () => {
     try {
@@ -150,7 +157,7 @@ export const createUserSlice: StateCreator<StoreState, [], [], UserSlice> = (
   _getNotifications: async () => {
     try {
       const notifications = await getNotifications();
-      set({ notifications });
+      set({ notifications, totalUnreadNotifications: 0 });
       return { success: true, data: notifications };
     } catch (error) {
       return { success: false, error: formatErrors(error) };

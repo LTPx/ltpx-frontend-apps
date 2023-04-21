@@ -14,6 +14,8 @@ export const useUser = () => {
     changePassword,
     notifications,
     addNotification,
+    totalUnreadNotifications,
+    clearUnreadNotification,
     _getNotifications,
   } = useAppStore();
 
@@ -31,6 +33,8 @@ export const useUser = () => {
     changePassword,
     notifications,
     addNotification,
+    totalUnreadNotifications,
+    clearUnreadNotification,
     _getNotifications,
   }
 }

@@ -1,8 +1,6 @@
 import { Icon } from '@ltpx-frontend-apps/shared-ui';
-import Avatar, { AvatarSize } from '../avatar/avatar';
 import styles from './notification-list.module.scss';
 
-/* eslint-disable-next-line */
 export interface NotificationItem {
   icon: string;
   text: string;
@@ -11,11 +9,10 @@ export interface NotificationItem {
 
 export interface NotificationListProps {
   notifications: Array<NotificationItem>;
-  countNewNotification: number;
 }
 
 export function NotificationList(props: NotificationListProps) {
-  const { countNewNotification, notifications } = props;
+  const { notifications } = props;
 
   const NotificationRow = ({ text, date, icon }: NotificationItem) => (
     <div className={styles['notifications']}>
@@ -29,10 +26,9 @@ export function NotificationList(props: NotificationListProps) {
 
   return (
     <div className={styles['container']}>
-      {/* {countNewNotification !== 0 && (
-        <h3>Tienes {countNewNotification} nuevas notificaciones</h3>
-      )} */}
-      {notifications.length === 0 && <h4>🔔 No tienes nuevas notificaciones</h4>}
+      {notifications.length === 0 && (
+        <h4>🔔 No tienes nuevas notificaciones</h4>
+      )}
       {notifications.map((notification, index) => (
         <NotificationRow
           key={index}

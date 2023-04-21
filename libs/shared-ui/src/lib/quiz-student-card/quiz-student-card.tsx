@@ -70,7 +70,7 @@ export function QuizStudentCard(props: QuizStudentCardProps) {
               <h5>{attempts} / 3</h5>
             </div>
             <div className={styles['item']}>
-              <h5 className={styles['item-title']}>Enviado</h5>
+              <h5 className={styles['item-title']}>Fecha de envió</h5>
               {date ? (
                 <h5>{moment(date).format('D MMMM YYYY')}</h5>
               ) : (

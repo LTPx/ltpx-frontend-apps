@@ -42,7 +42,6 @@ export const StudentRoutes = () => {
           <Route path="course/:slug" element={<StudentCourse />} />
           <Route path="classes" element={<StudentClasses />} />
           <Route path="course/:courseId/quiz/:quizId" element={<StudentQuiz/>} />
-          <Route path="course/:courseId/quiz-review/:quizId" element={<StudentReviewQuiz/>} />
           <Route
             path="live-meeting/:meetingId/:roomId"
             element={<VideoMeetingLive redirectUrl="/student/classes" />}

@@ -8,7 +8,9 @@ import {
   Tag,
 } from '@ltpx-frontend-apps/shared-ui';
 import { useStudent } from '@ltpx-frontend-apps/store';
+import { Dialog } from 'evergreen-ui';
 import { useCallback, useEffect, useState } from 'react';
+import StudentReviewQuiz from '../../../student-review-quiz/student-review-quiz';
 
 /* eslint-disable-next-line */
 export interface StudentCourseQuizzesProps {
@@ -20,6 +22,8 @@ export function StudentCourseQuizzes(props: StudentCourseQuizzesProps) {
   const { courseId } = props;
   const [quizzes, setQuizzes] = useState<QuizStudent[]>([]);
   const { _getStudentQuizzes } = useStudent();
+  const [openTest, setOpenTest] = useState(false);
+  const [quizSelected, setQuizSelected] = useState<QuizStudent>();
 
   const fetchQuizzes = useCallback(async () => {
     const { success, data, error } = await _getStudentQuizzes(courseId);
@@ -87,7 +91,11 @@ export function StudentCourseQuizzes(props: StudentCourseQuizzesProps) {
                         title="Mis respuestas"
                         outline={true}
                         icon="eye"
-                        link={`/student/course/${courseId}/quiz-review/${quiz.last_quiz_result.id}`}
+                        onClick={() => {
+                          setOpenTest(true);
+                          setQuizSelected(quiz);
+                        }}
+                        // link={`/student/course/${courseId}/quiz-review/${quiz.last_quiz_result.id}`}
                       />
                     )}
                   {quiz.last_quiz_result.score < quiz.approve_score &&
@@ -106,6 +114,25 @@ export function StudentCourseQuizzes(props: StudentCourseQuizzesProps) {
           </QuizStudentCard>
         </div>
       ))}
+      <Dialog
+        isShown={openTest}
+        hasClose={true}
+        hasFooter={false}
+        title={
+          quizSelected &&
+          quizSelected.name +
+            ' ' +
+            quizSelected.last_quiz_result.score +
+            ' / 100'
+        }
+        onCloseComplete={() => setOpenTest(false)}
+        width={'55vw'}
+      >
+        <StudentReviewQuiz
+          quizId={(quizSelected && quizSelected.last_quiz_result.id) || 0}
+          onClose={() => setOpenTest(false)}
+        />
+      </Dialog>
     </div>
   );
 }

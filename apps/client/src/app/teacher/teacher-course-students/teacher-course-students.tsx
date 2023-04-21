@@ -50,11 +50,11 @@ export function TeacherCourseStudents(props: TeacherCourseStudentsProps) {
       course ? course.id : 0,
       params
     );
-    // if (success) {
-    //   setMessageToast('success', 'Tus cambios han sido guardados');
-    // } else {
-    //   setMessageToast('error', `${error || 'Ha ocurrido un error'}`);
-    // }
+    if (success) {
+      setMessageToast('success', 'Tus cambios han sido guardados');
+    } else {
+      setMessageToast('error', `${error || 'Ha ocurrido un error'}`);
+    }
     if (success) {
       setTask(data);
     } else {
@@ -119,7 +119,7 @@ export function TeacherCourseStudents(props: TeacherCourseStudentsProps) {
     <div className={styles['container']}>
       <div className={styles['head-content']}>
         <h2 className={styles['title']}>Curso: {course ? course.title : ''}</h2>
-        <div className={styles['btn-actions']}>
+        {/* <div className={styles['btn-actions']}>
           <Button
             className={styles['btn']}
             icon="plus"
@@ -132,9 +132,8 @@ export function TeacherCourseStudents(props: TeacherCourseStudentsProps) {
             title="Agregar Test"
             onClick={() => setShowForm(true)}
           />
-        </div>
+        </div> */}
       </div>
-
       <Dialog
         isShown={showForm}
         hasFooter={false}
@@ -156,7 +155,6 @@ export function TeacherCourseStudents(props: TeacherCourseStudentsProps) {
         />
         <div className={styles['button-content']}></div>
       </Dialog>
-
       <Dialog
         isShown={openModal}
         hasFooter={false}

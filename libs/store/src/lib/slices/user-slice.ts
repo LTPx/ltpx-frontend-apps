@@ -54,7 +54,7 @@ export const createUserSlice: StateCreator<StoreState, [], [], UserSlice> = (
   currentView: TypeViews.default,
   notifications: [],
   addNotification: (notification) => {
-    const newNotifications = [...get().notifications, ...[notification]];
+    const newNotifications = [...[notification], ...get().notifications];
     set({ notifications: newNotifications});
   },
   getCurrentUser: async () => {

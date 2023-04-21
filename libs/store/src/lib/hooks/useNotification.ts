@@ -26,7 +26,6 @@ export const useNotification = () => {
 
       const { message } = data;
       const notification: NotificationWebHook = message;
-      debugger
       const newNotification = {
         user_id: user.id,
         kind: notification.type,

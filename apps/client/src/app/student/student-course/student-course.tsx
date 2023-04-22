@@ -4,6 +4,7 @@ import {
   CourseDateCard,
   ProgressBar,
   Tabs,
+  useMoment,
 } from '@ltpx-frontend-apps/shared-ui';
 import { useChat, useStudent } from '@ltpx-frontend-apps/store';
 import { useCallback, useEffect, useState } from 'react';
@@ -23,6 +24,7 @@ export function StudentCourse(props: StudentCourseProps) {
   const { slug } = useParams();
   const [showMore, setShowMore] = useState(false);
   const { _newChatRoom, setShowChat } = useChat();
+  const { customFormatDate, moment } = useMoment();
 
   const fetchCourse = useCallback(async () => {
     const { success, data, error } = await _getStudentCourse(slug || '');
@@ -152,12 +154,34 @@ export function StudentCourse(props: StudentCourseProps) {
                       <CourseDateCard
                         className={styles['course-class']}
                         key={index}
-                        title={'Reunion ' + (index + 1)}
-                        description={
-                          'Fecha: ' + meeting.month + ' - ' + meeting.day_number
-                        }
-                        time={'Hora: ' + meeting.end_time}
-                      />
+                        size={true}
+                        title={`Clase ${index + 1}: ${customFormatDate(
+                          meeting.start_date,
+                          'MMM D YYYY'
+                        )}`}
+                        description={`La clase tendrán una duración de ${enrolledCourse.session.call_time_min} min`}
+                        time={`Hora de inicio: ${customFormatDate(
+                          meeting.start_date,
+                          'h:mm a'
+                        )}`}
+                      >
+                        {meeting.meeting_id ? (
+                          <Button
+                            className={styles['btn-class']}
+                            title={`Ir a Clase`}
+                            full={true}
+                            link={`/student/live-meeting/${meeting.id}/${meeting.meeting_id}`}
+                          />
+                        ) : (
+                          <Button
+                            className={styles['btn-class']}
+                            title="No ha iniciado aun"
+                            full={true}
+                            outline={true}
+                            disabled={true}
+                          />
+                        )}
+                      </CourseDateCard>
                     ))}
                   </div>
                 )}

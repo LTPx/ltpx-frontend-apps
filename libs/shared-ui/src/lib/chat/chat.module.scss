@@ -1,7 +1,16 @@
 @import '../../styles/styles.module.scss';
 
+.image-empty {
+  width: 10rem !important;
+  height: 10rem !important;
+}
+
+.image-content {
+  padding: 4rem 1rem;
+}
+
 .container {
-  width: 30vw;
+  width: 35vw;
   box-shadow: $card-shadow-medium;
   background-color: $white-color;
 
@@ -36,7 +45,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 0.9rem;
+      padding: 0.85rem;
       border-bottom: 1px solid $gray-color-200;
 
       svg {
@@ -52,8 +61,12 @@
     }
   }
 
+  .messages {
+    height: 100%;
+  }
   .chat-body {
     flex: 2;
+    height: auto;
   }
 }
 

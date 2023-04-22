@@ -28,7 +28,6 @@ export function StudentCourseQuizzes(props: StudentCourseQuizzesProps) {
   const fetchQuizzes = useCallback(async () => {
     const { success, data, error } = await _getStudentQuizzes(courseId);
     if (success) {
-      console.log('data: ', data);
       setQuizzes(data);
     } else {
       console.log('error: ', error);
@@ -52,7 +51,7 @@ export function StudentCourseQuizzes(props: StudentCourseQuizzesProps) {
             statusTest={
               quiz.last_quiz_result ? quiz.last_quiz_result.in_review : false
             }
-            attempts={quiz.max_attempts || undefined}
+            attempts={quiz.quizzes_results_ids.length}
             date={quiz.last_quiz_result ? quiz.last_quiz_result.created_at : ''}
             approved={
               quiz.last_quiz_result

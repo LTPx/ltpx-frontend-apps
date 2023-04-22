@@ -1,16 +1,11 @@
 import { useChat, useUser } from "@ltpx-frontend-apps/store";
 import { useCallback } from "react";
-import Pusher from "pusher-js";
 import { ChatMessage } from "@ltpx-frontend-apps/api";
 import { useEffectOnce } from "./useEffectOnce";
 
 export const useChatData = () => {
   const { user } = useUser();
-  const key = process.env.NX_PUSHER_KEY || '';
-  // const pusher = new Pusher(key, {
-  //   cluster: process.env.NX_PUSHER_CLUSTER || '',
-  //   forceTLS: true,
-  // });
+
 
   const {
     _getRooms,

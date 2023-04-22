@@ -7,7 +7,9 @@
   box-shadow: $card-shadow-medium;
   border-radius: 4px;
   padding: 1rem;
-  min-width: 16rem;
+  width: 24rem;
+  max-height: 20rem;
+  overflow-y: auto;
 
   h3 {
     padding-bottom: 1.5rem;
@@ -25,13 +27,14 @@
       flex-direction: column;
       text-align: start;
 
-      h4 {
+      .text {
         color: $text-gray-color;
-        padding-bottom: 0.5rem;
+        padding-bottom: 0.25rem;
       }
 
-      h5 {
+      .date {
         color: $text-gray-color-medium;
+        font-size: 0.75rem;
       }
     }
     .status {

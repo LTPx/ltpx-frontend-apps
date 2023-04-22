@@ -14,18 +14,26 @@ import {
   formatErrors,
   ChangePasswordParams,
   changePassword,
+  Notification,
+  getNotifications,
+  NotificationModel
 } from '@ltpx-frontend-apps/api';
 
 export type UserSlice = {
   user: UserStore;
   isAuthenticated: boolean;
   currentView: TypeViews;
+  notifications: NotificationModel[];
+  totalUnreadNotifications: number;
+  clearUnreadNotification: () => void;
+  addNotification: (notification: NotificationModel) => void;
   getCurrentUser: () => Promise<FormatResponse>;
   login: (credentials: ICredentials) => Promise<FormatResponse>;
   loginAdmin: (credentials: ICredentials) => Promise<FormatResponse>;
   register: (params: IRegisterUser) => Promise<FormatResponse>;
   logout: () => void;
   changePassword: (params: ChangePasswordParams) => Promise<FormatResponse>;
+  _getNotifications: () => Promise<FormatResponse>;
 };
 
 // const views = {
@@ -40,11 +48,22 @@ export type UserSlice = {
 // console.log('currentView slice: ', currentView);
 
 export const createUserSlice: StateCreator<StoreState, [], [], UserSlice> = (
-  set
+  set,
+  get
 ) => ({
   user: {} as UserStore,
   isAuthenticated: false,
   currentView: TypeViews.default,
+  notifications: [],
+  totalUnreadNotifications: 0,
+  clearUnreadNotification: () => {
+    set({ totalUnreadNotifications: 0 });
+  },
+  addNotification: (notification) => {
+    const newNotifications = [...[notification], ...get().notifications];
+    const totalUnreadNotifications = get().totalUnreadNotifications;
+    set({ notifications: newNotifications, totalUnreadNotifications: totalUnreadNotifications + 1});
+  },
   getCurrentUser: async () => {
     try {
       const user = await getCurrentUser();
@@ -134,5 +153,14 @@ export const createUserSlice: StateCreator<StoreState, [], [], UserSlice> = (
     } catch (error) {
       return { success: false, error: formatErrors(error) };
     }
-  }
+  },
+  _getNotifications: async () => {
+    try {
+      const notifications = await getNotifications();
+      set({ notifications, totalUnreadNotifications: 0 });
+      return { success: true, data: notifications };
+    } catch (error) {
+      return { success: false, error: formatErrors(error) };
+    }
+  },
 });

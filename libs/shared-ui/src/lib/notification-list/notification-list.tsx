@@ -1,48 +1,40 @@
-import Avatar, { AvatarSize } from '../avatar/avatar';
+import { Icon } from '@ltpx-frontend-apps/shared-ui';
 import styles from './notification-list.module.scss';
 
-/* eslint-disable-next-line */
-export interface Notification {
-  image: string;
+export interface NotificationItem {
+  icon: string;
   text: string;
   date: string;
-  read: boolean;
 }
 
 export interface NotificationListProps {
-  notifications: Array<Notification>;
-  countNewNotification: number;
+  notifications: Array<NotificationItem>;
 }
 
 export function NotificationList(props: NotificationListProps) {
-  const { countNewNotification, notifications } = props;
+  const { notifications } = props;
 
-  const NotificationRow = ({ image, text, date, read }: Notification) => (
+  const NotificationRow = ({ text, date, icon }: NotificationItem) => (
     <div className={styles['notifications']}>
-      <Avatar image={image} size={AvatarSize.small}></Avatar>
+      <Icon icon={icon} size={25} />
       <div className={styles['information']}>
-        <h4>{text}</h4>
-        <h5>{date}</h5>
+        <h5 className={styles['text']}>{text}</h5>
+        <h5 className={styles['date']}>{date}</h5>
       </div>
-      <div
-        className={`${styles['status']} ${read ? styles['read'] : ''}`}
-      ></div>
     </div>
   );
 
   return (
     <div className={styles['container']}>
-      {countNewNotification !== 0 && (
-        <h3>Tienes {countNewNotification} nuevas notificaciones</h3>
+      {notifications.length === 0 && (
+        <h4>🔔 No tienes nuevas notificaciones</h4>
       )}
-      {notifications.length === 0 && <h4>🔔 No tienes nuevas notificaciones</h4>}
       {notifications.map((notification, index) => (
         <NotificationRow
           key={index}
-          image={notification.image}
+          icon={notification.icon}
           text={notification.text}
           date={notification.date}
-          read={notification.read}
         />
       ))}
     </div>

@@ -9,7 +9,7 @@ import styles from './notifications.module.scss';
 import { useCallback, useEffect, useState } from 'react';
 import { useUser } from '@ltpx-frontend-apps/store';
 import { NotificationModel } from '@ltpx-frontend-apps/api';
-import { fetchToken, onMessageListener } from '../../../../firebase';
+import { fetchToken, onMessageListener } from '../../../firebase';
 
 export function Notifications() {
   const {

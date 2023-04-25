@@ -9,6 +9,7 @@ import styles from './notifications.module.scss';
 import { useCallback, useEffect, useState } from 'react';
 import { useUser } from '@ltpx-frontend-apps/store';
 import { NotificationModel } from '@ltpx-frontend-apps/api';
+import { fetchToken, onMessageListener } from '../../../../firebase';
 
 export function Notifications() {
   const {
@@ -32,6 +33,16 @@ export function Notifications() {
   const fetchNotifications = useCallback(async () => {
     await _getNotifications();
   }, []);
+
+  const [notification, setNotification] = useState({title: '', body: ''});
+  const [isTokenFound, setTokenFound] = useState(false);
+  fetchToken(setTokenFound);
+
+  onMessageListener().then((payload: any) => {
+    setNotification({title: payload.notification.title, body: payload.notification.body})
+    // setShow(true);
+    console.log(payload);
+  }).catch(err => console.log('failed: ', err));
 
   useEffect(() => {
     fetchNotifications();

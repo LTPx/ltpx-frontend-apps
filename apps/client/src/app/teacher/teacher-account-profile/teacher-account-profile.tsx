@@ -29,7 +29,6 @@ export function TeacherAccountProfile(props: TeacherAccountProfileProps) {
               className={styles['btn-edit']}
               title="Editar"
               color={ColorsButton.secondary}
-              outline={true}
               link="/teacher/account/profile-edit"
             />
           </div>
@@ -55,7 +54,6 @@ export function TeacherAccountProfile(props: TeacherAccountProfileProps) {
               className={styles['btn-edit']}
               title="Editar"
               color={ColorsButton.secondary}
-              outline={true}
               link="/teacher/account/profile-edit"
             />
           </div>

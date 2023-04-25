@@ -73,13 +73,15 @@ export function ChatMessages(props: ChatMessagesProps) {
               </div>
             ))
           ) : (
-            <EmptyState
-              classNameImage={`${styles['image-empty']}`}
-              className={`${styles['image-content']}`}
-              img="../../../../assets/images/empty-states/no-messages.svg"
-              title="Comencemos a chatear"
-              description={'No tienes mensajes previos con esta persona'}
-            />
+            <div className={styles['empty-chat']}>
+              <EmptyState
+                classNameImage={`${styles['image-empty']}`}
+                className={`${styles['image-content']}`}
+                img="../../../../assets/images/empty-states/no-messages.svg"
+                title="Comencemos a chatear"
+                description={'No tienes mensajes previos con esta persona'}
+              />
+            </div>
           )}
         </div>
         <div className={styles['text-input']}>

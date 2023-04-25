@@ -26,7 +26,10 @@ export const TeacherRoutes = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Navigate replace to="teacher/dashboard" />} />
+        <Route
+          path="/home"
+          element={<Navigate replace to="/teacher/dashboard" />}
+        />
         <Route path="/" element={<TeacherLayout />}>
           {blogRoutes}
         </Route>

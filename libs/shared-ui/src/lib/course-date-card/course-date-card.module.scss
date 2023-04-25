@@ -3,12 +3,26 @@
 .content {
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   padding: $size-md-3;
   max-width: 12rem;
   border-radius: 15px;
   border: 1.5px solid $primary-color;
   line-height: 1.75rem;
   background-color: $white-color;
+  gap: 0.5rem;
+
+  .title-small {
+    font-size: 1rem;
+    font-weight: 500;
+  }
+  .time-small {
+    font-size: 0.75rem;
+    font-weight: 500;
+  }
+  .title {
+    font-weight: 500;
+  }
 
   h3 {
     padding-bottom: $size-sm-1;
@@ -20,11 +34,9 @@
   .time {
     color: $secondary-color-500;
   }
-
 }
 //smartphones-responsive
 @media screen and (max-width: 550px) {
-
   .description {
     width: 10rem;
   }

@@ -70,9 +70,9 @@
 
     .course-class {
       padding: $size-md-1;
-      width: 9rem;
-      border: 1px solid $gray-color-300;
-      border-radius: 8px;
+    }
+    .btn-class {
+      padding: 0.5rem 0;
     }
   }
 }

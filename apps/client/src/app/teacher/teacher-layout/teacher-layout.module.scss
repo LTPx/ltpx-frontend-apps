@@ -1,4 +1,4 @@
-@import "../../../styles.scss";
+@import '../../../styles.scss';
 
 .header {
   padding: 1rem 3.5rem;
@@ -10,8 +10,8 @@
   grid-template-columns: 1fr;
   grid-template-rows: auto 1fr auto;
   grid-template-areas:
-    "header header header"
-    "content content content";
+    'header header header'
+    'content content content';
   height: 100vh;
 }
 

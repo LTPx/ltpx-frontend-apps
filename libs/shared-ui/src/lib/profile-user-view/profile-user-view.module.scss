@@ -1,0 +1,29 @@
+@import '../../styles/styles.module.scss';
+
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 3rem 0;
+  .image {
+    height: 150px;
+    width: 150px;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+
+  .information {
+    padding-top: 1rem;
+  }
+  .info {
+    padding: 1rem 1.5rem;
+  }
+  .item {
+    display: grid;
+    padding: 1rem 0;
+    grid-template-columns: 30% 70%;
+    align-items: center;
+    border-bottom: 1px solid $gray-color-200;
+  }
+
+}

@@ -50,14 +50,38 @@ export function TeacherAccountProfile(props: TeacherAccountProfileProps) {
           </div>
           <div className={styles['title-content']}>
             <h4 className={styles['title']}>Sobre mi</h4>
-            <Button
-              className={styles['btn-edit']}
-              title="Editar"
-              color={ColorsButton.secondary}
-              link="/teacher/account/profile-edit"
-            />
           </div>
           <p className={styles['biography']}>{profile.biography} </p>
+          <div className={styles['title-content']}>
+            <h4 className={styles['title']}>Video de Presentación</h4>
+          </div>
+          <div className={styles['video-content']}>
+            {profile.profile_video ? (
+              <video
+                width="100%"
+                height="300"
+                src={profile.profile_video}
+                controls
+              ></video>
+            ) : (
+              <div className={styles['no-video']}>
+                <h4 className={styles['text-video']}>Aun no agregaste un video de Presentación</h4>
+              </div>
+            )}
+          </div>
+          <div className={styles['title-content']}>
+            <h4 className={styles['title']}>Redes Sociales</h4>
+          </div>
+          <div className={styles['info']}>
+            {profile.social_networks.map((social, key) => (
+              <div className={styles['item']} key={key}>
+                <h4 className={styles['social-network']}>{social.name}: </h4>
+                <a href={social.url} target="_blank">
+                  {social.url}
+                </a>
+              </div>
+            ))}
+          </div>
         </>
       )}
     </div>

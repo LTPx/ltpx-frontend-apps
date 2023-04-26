@@ -323,7 +323,7 @@ export const es = {
   },
   userAccountForm: {
     title: 'Información General',
-    subTitle: 'Otra Información',
+    subTitle: 'Información de ubicación',
     fullName: 'Nombre completo',
     userName: 'Nombre de usuario',
     email: 'Correo electrónico',

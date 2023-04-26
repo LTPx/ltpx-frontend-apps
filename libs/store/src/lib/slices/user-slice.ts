@@ -16,7 +16,9 @@ import {
   changePassword,
   Notification,
   getNotifications,
-  NotificationModel
+  NotificationModel,
+  IUserAccount,
+  updateAccount,
 } from '@ltpx-frontend-apps/api';
 
 export type UserSlice = {
@@ -34,6 +36,7 @@ export type UserSlice = {
   logout: () => void;
   changePassword: (params: ChangePasswordParams) => Promise<FormatResponse>;
   _getNotifications: () => Promise<FormatResponse>;
+  _updateAccount: (params: IUserAccount) => Promise<FormatResponse>;
 };
 
 // const views = {
@@ -62,7 +65,10 @@ export const createUserSlice: StateCreator<StoreState, [], [], UserSlice> = (
   addNotification: (notification) => {
     const newNotifications = [...[notification], ...get().notifications];
     const totalUnreadNotifications = get().totalUnreadNotifications;
-    set({ notifications: newNotifications, totalUnreadNotifications: totalUnreadNotifications + 1});
+    set({
+      notifications: newNotifications,
+      totalUnreadNotifications: totalUnreadNotifications + 1,
+    });
   },
   getCurrentUser: async () => {
     try {
@@ -159,6 +165,16 @@ export const createUserSlice: StateCreator<StoreState, [], [], UserSlice> = (
       const notifications = await getNotifications();
       set({ notifications, totalUnreadNotifications: 0 });
       return { success: true, data: notifications };
+    } catch (error) {
+      return { success: false, error: formatErrors(error) };
+    }
+  },
+  _updateAccount: async (params) => {
+    try {
+      const user = await updateAccount(params);
+      const userStore = { ...get().user, ...user };
+      set({ user: userStore });
+      return { success: true, data: user };
     } catch (error) {
       return { success: false, error: formatErrors(error) };
     }

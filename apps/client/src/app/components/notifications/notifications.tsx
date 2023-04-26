@@ -9,10 +9,12 @@ import styles from './notifications.module.scss';
 import { useCallback, useEffect, useState } from 'react';
 import { useUser } from '@ltpx-frontend-apps/store';
 import { NotificationModel } from '@ltpx-frontend-apps/api';
-import { fetchToken, onMessageListener } from '../../../firebase';
+import { messaging } from '../../../firebase';
+import { getToken } from 'firebase/messaging';
 
 export function Notifications() {
   const {
+    _setTokenDevice,
     _getNotifications,
     notifications,
     totalUnreadNotifications,
@@ -34,18 +36,22 @@ export function Notifications() {
     await _getNotifications();
   }, []);
 
-  const [notification, setNotification] = useState({title: '', body: ''});
-  const [isTokenFound, setTokenFound] = useState(false);
-  fetchToken(setTokenFound);
+  async function fetchToken() {
+    console.log('stop');
+    try {
+      const token = await getToken(messaging, {vapidKey: process.env.NX_FIREBASE_VAPID_KEY});
+      if (token) {
+        await _setTokenDevice(token);
+      }
+    } catch (error) {
+      console.log('An error occurred while retrieving token. ', error);
+    }
+  }
 
-  onMessageListener().then((payload: any) => {
-    setNotification({title: payload.notification.title, body: payload.notification.body})
-    // setShow(true);
-    console.log(payload);
-  }).catch(err => console.log('failed: ', err));
 
   useEffect(() => {
     fetchNotifications();
+    fetchToken();
   }, []);
 
   useEffect(() => {

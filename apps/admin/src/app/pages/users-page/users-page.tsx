@@ -101,6 +101,7 @@ export function UsersPage(props: UsersPageProps) {
         open={openProfile}
         onClose={() => setOpenProfile(false)}
         title={'Perfil'}
+        // width={500}
       >
         <ProfileUserView userId={saveId} />
       </Drawer>

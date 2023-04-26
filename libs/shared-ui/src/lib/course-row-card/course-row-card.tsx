@@ -43,15 +43,15 @@ export function CourseRowCard(props: CourseRowCardProps) {
             color={ColorsTag.green}
           />
           <div className={styles['item']}>
-            <Icon icon={'trophy'} size={14} color={'#fbbf24'}></Icon> {achievements}{' '}
-            <h5>Logros</h5>
+            <Icon icon={'trophy'} size={14} color={'#fbbf24'}></Icon>{' '}
+            {achievements}{' '}
+            {achievements === 1 ? <h5>Logro</h5> : <h5>Logros</h5>}
           </div>
           <div className={styles['item']}>
             <Icon icon={'text-size'} size={14}></Icon>
             <h5>{translateLanguage(language || '')}</h5>
           </div>
         </div>
-
         <h3 className={styles['title']}>{title}</h3>
         <div className="stars">
           {Array.from(Array(stars).keys()).map((number, index) => (

@@ -15,7 +15,7 @@ export interface UserAccountFormProps {
   user?: IUserAccount;
   url?: string;
 }
-
+ 
 export function UserAccountForm(props: UserAccountFormProps) {
   const { onSubmit, user, url } = props;
   const { t } = useTranslation();
@@ -52,7 +52,7 @@ export function UserAccountForm(props: UserAccountFormProps) {
                 <Input
                   label={t('userAccountForm.fullName') || ''}
                   name="fullname"
-                  placeholder="Carlos Huerta"
+                  placeholder="Nombre Completo"
                   onChange={(e: any) => {
                     formik.handleChange(e);
                   }}
@@ -69,7 +69,7 @@ export function UserAccountForm(props: UserAccountFormProps) {
               <Input
                 label={t('userAccountForm.userName') || ''}
                 name="username"
-                placeholder="carl"
+                placeholder="Nombre de Usuario"
                 onChange={(e: any) => {
                   formik.handleChange(e);
                 }}

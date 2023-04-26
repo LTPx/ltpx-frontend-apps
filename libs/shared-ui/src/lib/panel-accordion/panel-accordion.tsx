@@ -47,9 +47,9 @@ export function PanelAccordion(props: PanelAccordionProps) {
             </div>
           ))}
           {isOpen === false ? (
-            <Icon icon={'plus'} size={20}></Icon>
+            <Icon icon={'caret-down'} size={20}></Icon>
           ) : (
-            <Icon icon={'minus'} size={20}></Icon>
+            <Icon icon={'caret-up'} size={20}></Icon>
           )}
         </div>
       </div>

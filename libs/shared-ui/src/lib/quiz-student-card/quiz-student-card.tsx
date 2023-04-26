@@ -112,9 +112,7 @@ export function QuizStudentCard(props: QuizStudentCardProps) {
               {!score && score !== 0 && !statusTest && (
                 <h5 className={styles['empty-test']}>Aun no dada</h5>
               )}
-              {statusTest && (
-                <h5>En revision</h5>
-              )}
+              {statusTest && <h5>En revision</h5>}
             </div>
           </div>
         )}

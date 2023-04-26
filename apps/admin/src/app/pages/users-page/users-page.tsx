@@ -83,7 +83,6 @@ export function UsersPage(props: UsersPageProps) {
                     setOpenProfile(true);
                     setSaveId(user.id);
                   }}
-                  // link={`/admin/profile-view/${user.id}`}
                 />
                 <Button
                   onClick={() => chatWithUser(user.id)}

@@ -30,6 +30,19 @@ export const editUser = async (user: IUserAccount) => {
   });
 };
 
+export const getUser = async (userId: number) => {
+  return new Promise<UserModel>((resolve, reject) => {
+    http
+      .get(`api/v1/admin/users/${userId}`)
+      .then((response) => {
+        resolve(response.data);
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
+};
+
 export const getUsers = async () => {
   return new Promise<UserModel[]>((resolve, reject) => {
     http

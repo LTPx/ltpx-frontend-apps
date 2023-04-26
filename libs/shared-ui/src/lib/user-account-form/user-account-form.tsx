@@ -11,25 +11,25 @@ import { useTranslation } from 'react-i18next';
 /* eslint-disable-next-line */
 
 export interface UserAccountFormProps {
-  onSubmit: (data: IUserAccount) => void;
-  data?: IUserAccount | null;
+  onSubmit: (user: IUserAccount) => void;
+  user?: IUserAccount;
   url?: string;
 }
 
 export function UserAccountForm(props: UserAccountFormProps) {
-  const { onSubmit, data, url} = props;
+  const { onSubmit, user, url } = props;
   const { t } = useTranslation();
 
   const formik = useFormik({
     initialValues: {
-      fullname: data?.fullname || '',
-      username: data?.username || '',
-      phone: data?.phone || '',
-      birth: data?.birth || '',
-      country: data?.country || '',
-      city: data?.city || '',
-      address: data?.address || '',
-      email: data?.email || '',
+      fullname: user?.fullname || '',
+      username: user?.username || '',
+      phone: user?.phone || '',
+      birth: user?.birth || '',
+      country: user?.country || '',
+      city: user?.city || '',
+      address: user?.address || '',
+      email: user?.email || '',
     },
     validationSchema: Yup.object({
       fullname: Yup.string().required('Nombre completo es obligatorio'),
@@ -37,8 +37,8 @@ export function UserAccountForm(props: UserAccountFormProps) {
         .email('Debe ser un correo electrónico válido')
         .required('Correo electrónico es obligatorio'),
     }),
-    onSubmit: (data) => {
-      onSubmit(data);
+    onSubmit: (user) => {
+      onSubmit(user);
     },
   });
 
@@ -46,7 +46,6 @@ export function UserAccountForm(props: UserAccountFormProps) {
     <div className={styles['container']}>
       <form>
         <div className={styles['general']}>
-          <label>{t('userAccountForm.title')}</label>
           <div className={styles['general-grid']}>
             <div className={styles['fields']}>
               <div>
@@ -110,7 +109,8 @@ export function UserAccountForm(props: UserAccountFormProps) {
           </div>
         </div>
         <div className={styles['general']}>
-          <label>{t('userAccountForm.subTitle')}</label>
+          <h4>{t('userAccountForm.subTitle')}</h4>
+          <hr />
           <div className={styles['general-grid']}>
             <div className={styles['fields']}>
               <Input
@@ -143,7 +143,7 @@ export function UserAccountForm(props: UserAccountFormProps) {
                 value={formik.values.address}
                 onBlur={formik.handleBlur}
               />
-              <Input
+              {/* <Input
                 label={t('userAccountForm.birth') || ''}
                 name="birth"
                 placeholder="1996-12-21"
@@ -153,17 +153,17 @@ export function UserAccountForm(props: UserAccountFormProps) {
                 }}
                 value={formik.values.birth}
                 onBlur={formik.handleBlur}
-              />
+              /> */}
             </div>
           </div>
         </div>
         <div className={styles['form-submit']}>
           <Button
-              color={ColorsButton.white}
-              outline={true}
-              title="Cancelar"
-              link={url}
-            />
+            color={ColorsButton.white}
+            outline={true}
+            title="Cancelar"
+            link={url}
+          />
           <Button
             color={ColorsButton.primary}
             title={t('buttons.updateData')}

@@ -54,6 +54,7 @@ export * from './lib/api/site/teacher-api';
 
 export * from './lib/api/user/payments-api';
 export * from './lib/api/user/notifications-api';
+export * from './lib/api/user/account-api';
 
 export * from './lib/api/student/student-courses-api';
 export * from './lib/api/student/student-payments-api';

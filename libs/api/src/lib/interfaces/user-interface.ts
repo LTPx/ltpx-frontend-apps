@@ -32,6 +32,12 @@ export interface UserResponse {
 export interface UserStore {
   fullname: string;
   email: string;
+  username: string;
+  phone: string;
+  country: string;
+  city: string;
+  address: string;
+  birth: string;
   initial_register: TypeAccounts;
   initial_view: TypeViews;
   teacher_account?: StatusTeacherAccount;
@@ -63,6 +69,12 @@ export interface ICurrentUser {
   initial_register: TypeAccounts;
   initial_view: TypeViews;
   teacher_account?: StatusTeacherAccount;
+  username: string;
+  phone: string;
+  country: string;
+  city: string;
+  address: string;
+  birth: string;
   cart?: CartModel;
 }
 

@@ -1,13 +1,22 @@
 import styles from './account.module.scss';
 import { UserAccountForm } from '@ltpx-frontend-apps/shared-ui';
 import { IUserAccount } from '@ltpx-frontend-apps/api';
-import { useState } from 'react';
+import { useUser } from '@ltpx-frontend-apps/store';
+import { useNavigate } from 'react-router-dom';
 
-/* eslint-disable-next-line */
-export interface AccountProps {}
+export function Account() {
+  const { user, _updateAccount } = useUser();
+  const navigate = useNavigate();
 
-export function Account(props: AccountProps) {
-  const onSubmit = (data: IUserAccount) => console.log(data);
+  const onSubmit = async(params: IUserAccount) => {
+    const { success, error, data} =  await _updateAccount(params);
+    if (success) {
+      console.log(data);
+      navigate('/student/account');
+    } else {
+      console.log(error);
+    }
+  };
 
   return (
     <div className={`${styles['container']} card`}>
@@ -16,6 +25,7 @@ export function Account(props: AccountProps) {
       </div>
       <UserAccountForm
         url="/student/account"
+        user={user}
         onSubmit={(data) => {
           onSubmit(data);
         }}

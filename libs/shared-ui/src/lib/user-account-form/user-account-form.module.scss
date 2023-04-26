@@ -13,6 +13,19 @@
     gap: 1rem;
   }
 
+  .general{
+    h4 {
+      margin: 1.5rem 0 0.5rem 0;
+      font-weight: 500;
+    }
+
+    hr {
+      height: 1px;
+      background-color: $gray-color-300;
+      border: none;
+    }
+  }
+
   .general-grid {
     display: grid;
     gap: $size-md-1;

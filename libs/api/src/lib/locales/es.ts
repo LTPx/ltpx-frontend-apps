@@ -356,5 +356,8 @@ export const es = {
   boolean: {
     true: 'Verdadero',
     false: 'Falso'
+  },
+  accountBankType: {
+    saving: 'Ahorros'
   }
 }

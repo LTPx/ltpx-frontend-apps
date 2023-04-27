@@ -1,20 +1,21 @@
 import styles from './account.module.scss';
 import { UserAccountForm } from '@ltpx-frontend-apps/shared-ui';
 import { IUserAccount } from '@ltpx-frontend-apps/api';
-import { useUser } from '@ltpx-frontend-apps/store';
+import { useUser, useUtil } from '@ltpx-frontend-apps/store';
 import { useNavigate } from 'react-router-dom';
 
 export function Account() {
   const { user, _updateAccount } = useUser();
   const navigate = useNavigate();
+  const { setMessageToast } = useUtil();
 
-  const onSubmit = async(params: IUserAccount) => {
-    const { success, error, data} =  await _updateAccount(params);
+  const onSubmit = async (params: IUserAccount) => {
+    const { success, error, data } = await _updateAccount(params);
     if (success) {
-      console.log(data);
+      setMessageToast('success', 'Tu perfil ha sido actualizado');
       navigate('/student/account');
     } else {
-      console.log(error);
+      setMessageToast('error', error);
     }
   };
 

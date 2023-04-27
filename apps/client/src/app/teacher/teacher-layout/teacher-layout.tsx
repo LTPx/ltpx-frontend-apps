@@ -44,7 +44,7 @@ export function TeacherLayout() {
     <div className={styles['container']}>
       <Header links={headerLinks} className={styles['header']}>
         <div className={styles['teacher-actions']}>
-          <Notifications/>
+          <Notifications />
           <Dropdown>
             <UserMenu
               name={currentUser.fullname}

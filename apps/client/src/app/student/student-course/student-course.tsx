@@ -22,14 +22,15 @@ export function StudentCourse(props: StudentCourseProps) {
   const { _getStudentCourse, enrolledCourse } = useStudent();
   const [selectedTab, setSelectedTab] = useState(0);
   const { slug } = useParams();
-  const [showMore, setShowMore] = useState(false);
   const { _newChatRoom, setShowChat } = useChat();
   const { customFormatDate, moment } = useMoment();
 
   const fetchCourse = useCallback(async () => {
     const { success, data, error } = await _getStudentCourse(slug || '');
     if (success) {
+      console.log(success);
     } else {
+      console.log(error);
     }
   }, []);
 
@@ -71,7 +72,7 @@ export function StudentCourse(props: StudentCourseProps) {
               className={`${styles['basic-card']} ${styles.center} ${styles['teacher-card']}`}
             >
               <Avatar src={enrolledCourse.teacher?.profile_image} size={100} />
-              <h4>{enrolledCourse.teacher?.name}</h4>
+              <h4>{enrolledCourse.teacher?.teacher_name}</h4>
               <h5>Profesor</h5>
               <Button
                 title="Enviarle un mensaje"
@@ -83,8 +84,8 @@ export function StudentCourse(props: StudentCourseProps) {
               <h3>Que Aprenderás</h3>
               {enrolledCourse.learn_goals && (
                 <h4>
-                  {enrolledCourse.learn_goals.split('\n').map((goal) => (
-                    <div className={styles['goals']}>
+                  {enrolledCourse.learn_goals.split('\n').map((goal, key) => (
+                    <div className={styles['goals']} key={key}>
                       <div className={styles['square']}></div>
                       <h5>{goal}</h5>
                     </div>
@@ -166,7 +167,7 @@ export function StudentCourse(props: StudentCourseProps) {
                         {meeting.meeting_id ? (
                           <Button
                             className={styles['btn-class']}
-                            title={`Ir a Clase`}
+                            title={`Unirme a Clase`}
                             full={true}
                             link={`/student/live-meeting/${meeting.id}/${meeting.meeting_id}`}
                           />

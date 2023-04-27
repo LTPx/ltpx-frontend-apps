@@ -16,7 +16,6 @@ export interface HeaderProps {
   children?: any;
   links: Array<LinkHeader>;
   className?: string;
-
 }
 
 export function Header(props: HeaderProps) {

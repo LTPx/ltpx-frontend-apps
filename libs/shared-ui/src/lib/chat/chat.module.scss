@@ -13,12 +13,14 @@
   width: 35vw;
   box-shadow: $card-shadow-medium;
   background-color: $white-color;
+  border-radius: 8px;
 
   .actions {
     display: flex;
     justify-content: flex-end;
     padding: 0.5rem;
     border-bottom: 1px solid $gray-color-200;
+    border-radius: 8px 8px 0 0;
     background-color: $primary-color;
 
     svg {
@@ -38,6 +40,7 @@
   .rooms-container {
     box-shadow: $card-shadow-medium;
     min-width: 10rem;
+    min-height: 34rem;
     flex: 1;
     border-right: 1px solid $gray-color-100;
 

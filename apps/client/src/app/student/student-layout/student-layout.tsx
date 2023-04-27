@@ -8,9 +8,17 @@ import {
   Header,
   Icon,
   NotificationList,
+  Snackbar,
+  SnackbarPosition,
+  SnackbarType,
   UserMenu,
 } from '@ltpx-frontend-apps/shared-ui';
-import { useNotification, useUser } from '@ltpx-frontend-apps/store';
+import {
+  useAppStore,
+  useNotification,
+  useUser,
+  useUtil,
+} from '@ltpx-frontend-apps/store';
 import { useTranslation } from 'react-i18next';
 import { Outlet, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
@@ -21,6 +29,8 @@ export function StudentLayout() {
   const [openChat, setOpenChat] = useState(false);
   const { user, logout } = useUser();
   const { t } = useTranslation();
+  const { feedbackAction } = useAppStore();
+  const { clearMessageToast } = useUtil();
   const navigate = useNavigate();
 
   const wsUrl = process.env.NX_WS_URL || '';
@@ -63,7 +73,7 @@ export function StudentLayout() {
     <div className={styles['container']}>
       <Header links={links} className={styles['header']}>
         <div className={styles['teacher-actions']}>
-          <Notifications/>
+          <Notifications />
           <Dropdown>
             <UserMenu
               name={user.fullname}
@@ -104,6 +114,21 @@ export function StudentLayout() {
           )}
         </div>
       </div>
+      {feedbackAction.text && (
+        <Snackbar
+          position={SnackbarPosition.centerBottom}
+          open={true}
+          title={feedbackAction.type === 'success' ? 'Actualizado' : 'Errores'}
+          text={feedbackAction.text}
+          kind={
+            feedbackAction.type === 'success'
+              ? SnackbarType.success
+              : SnackbarType.error
+          }
+          duration={2000}
+          onClose={clearMessageToast}
+        />
+      )}
     </div>
   );
 }

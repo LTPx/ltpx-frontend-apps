@@ -13,7 +13,6 @@ import SettingsAppPage from '../pages/settings-app-page/settings-app-page';
 import TeachersPage from '../pages/teachers-page/teachers-page';
 import UsersPage from '../pages/users-page/users-page';
 
-
 export const AppRouter = () => {
   return (
     <Routes>

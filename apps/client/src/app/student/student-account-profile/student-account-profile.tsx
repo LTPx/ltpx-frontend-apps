@@ -12,7 +12,6 @@ export function StudentAccountProfile() {
           className={styles['btn-edit']}
           title="Editar"
           color={ColorsButton.secondary}
-          outline={true}
           link="/student/account/account-edit"
         />
       </div>

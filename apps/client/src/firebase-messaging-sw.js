@@ -8,12 +8,12 @@ importScripts(
 
 // Initialize the Firebase app in the service worker by passing the generated config
 const firebaseConfig = {
-  apiKey: process.env.NX_FIREBASE_API_KEY,
-  authDomain: process.env.NX_FIREBASE_AUTH_DOMAIN,
-  projectId: process.env.NX_FIREBASE_PROJECT_ID,
-  storageBucket: process.env.NX_FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: process.env.NX_FIREBASE_MESSAGING_SENDER_ID,
-  appId: process.env.NX_FIREBASE_APP_ID,
+  apiKey: "AIzaSyDkzRtx-C3FqCaD-NRx-Pla_7BWkZdSfeU",
+  authDomain: "ltpx-13865.firebaseapp.com",
+  projectId: "ltpx-13865",
+  storageBucket: "ltpx-13865.appspot.com",
+  messagingSenderId: "849542168487",
+  appId: "1:849542168487:web:975f3ab06527568cf98082"
 };
 
 firebase.initializeApp(firebaseConfig);
@@ -22,7 +22,7 @@ firebase.initializeApp(firebaseConfig);
 const messaging = firebase.messaging();
 
 messaging.onBackgroundMessage(function (payload) {
-  console.log('Received background message ', payload);
+  console.log('Received background messages ', payload);
 
   const notificationTitle = payload.notification.title;
   const notificationOptions = {

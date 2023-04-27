@@ -37,7 +37,6 @@ export function Notifications() {
   }, []);
 
   async function fetchToken() {
-    console.log('stop');
     try {
       const token = await getToken(messaging, {vapidKey: process.env.NX_FIREBASE_VAPID_KEY});
       if (token) {

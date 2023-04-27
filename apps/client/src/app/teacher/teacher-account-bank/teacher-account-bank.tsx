@@ -1,13 +1,14 @@
 import { Button } from '@ltpx-frontend-apps/shared-ui';
 import styles from './teacher-account-bank.module.scss';
 import { ColorsButton } from '@ltpx-frontend-apps/shared-ui';
-import { useTeacher } from '@ltpx-frontend-apps/store';
+import { useCourseUtil, useTeacher } from '@ltpx-frontend-apps/store';
 
 /* eslint-disable-next-line */
 export interface TeacherAccountBankProps {}
 
 export function TeacherAccountBank(props: TeacherAccountBankProps) {
   const { profile } = useTeacher();
+  const { translateAccountType } = useCourseUtil();
 
   return (
     <div className={styles['container']}>
@@ -19,8 +20,7 @@ export function TeacherAccountBank(props: TeacherAccountBankProps) {
             className={styles['btn-edit']}
             title="Editar"
             color={ColorsButton.secondary}
-            outline={true}
-            link='/teacher/account/account-bank-edit'
+            link="/teacher/account/account-bank-edit"
           />
         </div>
         <div className={styles['bank']}>
@@ -47,7 +47,9 @@ export function TeacherAccountBank(props: TeacherAccountBankProps) {
               <div className={styles['item']}>
                 <h4>Tipo de cuenta: </h4>
                 <h4 className={styles['text']}>
-                  {profile.bank_accounts[0].bank_account_type}
+                  {translateAccountType(
+                    profile.bank_accounts[0].bank_account_type
+                  )}
                 </h4>
               </div>
               <div className={styles['item']}>

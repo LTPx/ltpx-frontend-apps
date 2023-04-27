@@ -1,3 +1,4 @@
+export * from './lib/profile-user-view/profile-user-view';
 export * from './lib/chat-float/chat-float';
 export * from './lib/chat/chat';
 export * from './lib/achievement-badge/achievement-badge';

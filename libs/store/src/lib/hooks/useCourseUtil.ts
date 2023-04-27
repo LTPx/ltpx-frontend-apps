@@ -1,4 +1,5 @@
 import {
+  ACCOUNT_BANK,
   AchievementModel,
   CATEGORIES,
   LANGUAGES,
@@ -24,6 +25,13 @@ export const useCourseUtil = () => {
     };
   });
 
+  const accountBankType = ACCOUNT_BANK.map((value) => {
+    return {
+      text: t(`accountBankType.${value}`),
+      value: value,
+    };
+  });
+
   const languages = LANGUAGES.map((value) => {
     return {
       text: t(`languages.${value}`),
@@ -38,7 +46,7 @@ export const useCourseUtil = () => {
     };
   });
 
-   const translateOption = (option: string) => {
+  const translateOption = (option: string) => {
     return t(`option_conditional_test.${option}`);
   };
 
@@ -52,6 +60,10 @@ export const useCourseUtil = () => {
 
   const translateLanguage = (language: string) => {
     return t(`languages.${language}`);
+  };
+
+  const translateAccountType = (accountType: string) => {
+    return t(`accountBankType.${accountType}`);
   };
 
   const translateStatus = (status: string) => {
@@ -71,12 +83,14 @@ export const useCourseUtil = () => {
     languages,
     levels,
     options,
+    accountBankType,
     translateCategory,
     translateLevel,
     translateLanguage,
     translateStatus,
     translateQuizCategories,
     translateAchievementType,
-    translateOption
+    translateOption,
+    translateAccountType
   };
 };

@@ -17,6 +17,8 @@ export const useUser = () => {
     totalUnreadNotifications,
     clearUnreadNotification,
     _getNotifications,
+    _updateAccount,
+    _setTokenDevice,
   } = useAppStore();
 
   return {
@@ -36,5 +38,7 @@ export const useUser = () => {
     totalUnreadNotifications,
     clearUnreadNotification,
     _getNotifications,
+    _updateAccount,
+    _setTokenDevice,
   }
 }

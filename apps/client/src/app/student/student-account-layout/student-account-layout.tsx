@@ -1,4 +1,4 @@
-import { Button, Icon } from '@ltpx-frontend-apps/shared-ui';
+import { Icon } from '@ltpx-frontend-apps/shared-ui';
 import { useUser } from '@ltpx-frontend-apps/store';
 import { Avatar } from 'evergreen-ui';
 import { NavLink, Outlet } from 'react-router-dom';
@@ -34,6 +34,7 @@ export function StudentAccountLayout(props: StudentAccountLayoutProps) {
               <div className={styles['links-wrap']}>
                 {optionsLinks.map((option, index) => (
                   <NavLink
+                    key={index}
                     className={
                       indexSelected === index
                         ? `${styles['tab']} ${styles['selected']}`

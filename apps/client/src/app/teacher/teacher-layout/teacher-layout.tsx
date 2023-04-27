@@ -17,8 +17,12 @@ import { StatusTeacherAccount } from '@ltpx-frontend-apps/api';
 import { useTeacherLayout } from './useTeacherLayout';
 import { ChatNewPrivateRoom } from '../../components';
 import Notifications from '../../components/notifications/notifications';
+import { onMessageListener } from 'apps/client/src/firebase';
+import { useNotification } from '@ltpx-frontend-apps/store';
 
 export function TeacherLayout() {
+  useNotification(onMessageListener);
+
   const {
     headerLinks,
     handleNewChat,
@@ -44,7 +48,7 @@ export function TeacherLayout() {
     <div className={styles['container']}>
       <Header links={headerLinks} className={styles['header']}>
         <div className={styles['teacher-actions']}>
-          <Notifications/>
+          <Notifications />
           <Dropdown>
             <UserMenu
               name={currentUser.fullname}

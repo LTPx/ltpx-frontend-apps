@@ -1,7 +1,5 @@
 import { Routes, Route, BrowserRouter, Navigate } from 'react-router-dom';
-import {
-  PaymentsLayout,
-} from '../layouts/index';
+import { PaymentsLayout } from '../layouts/index';
 import { AllCourses, CourseDetails, CoursesByCategory, Home } from '../site';
 import {
   Account,
@@ -27,7 +25,7 @@ export const StudentRoutes = () => {
       <Routes>
         <Route path="/" element={<Navigate replace to="student/dashboard" />} />
         <Route path="/" element={<StudentLayout />}>
-          { blogRoutes }
+          {blogRoutes}
           <Route path="/home" element={<Home />} />
           <Route path="/courses" element={<AllCourses />} />
           <Route path="/course/:slug" element={<CourseDetails />} />
@@ -41,7 +39,10 @@ export const StudentRoutes = () => {
           <Route path="courses" element={<StudentCourses />} />
           <Route path="course/:slug" element={<StudentCourse />} />
           <Route path="classes" element={<StudentClasses />} />
-          <Route path="course/:courseId/quiz/:quizId" element={<StudentQuiz/>} />
+          <Route
+            path="course/:courseId/quiz/:quizId"
+            element={<StudentQuiz />}
+          />
           <Route
             path="live-meeting/:meetingId/:roomId"
             element={<VideoMeetingLive redirectUrl="/student/classes" />}
@@ -55,7 +56,10 @@ export const StudentRoutes = () => {
             <Route path="invoice" element={<Invoice />} />
           </Route>
           <Route path="account" element={<StudentAccountLayout />}>
-            <Route path="/student/account" element={<StudentAccountProfile />} />
+            <Route
+              path="/student/account"
+              element={<StudentAccountProfile />}
+            />
             <Route path="account-edit" element={<Account />} />
             <Route path="password-edit" element={<StudentPasswordEdit />} />
           </Route>

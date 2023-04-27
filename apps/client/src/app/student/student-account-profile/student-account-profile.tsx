@@ -1,11 +1,8 @@
-import { Button, ColorsButton, Icon } from '@ltpx-frontend-apps/shared-ui';
+import { Button, ColorsButton } from '@ltpx-frontend-apps/shared-ui';
 import { useUser } from '@ltpx-frontend-apps/store';
 import styles from './student-account-profile.module.scss';
 
-/* eslint-disable-next-line */
-export interface StudentAccountProfileProps {}
-
-export function StudentAccountProfile(props: StudentAccountProfileProps) {
+export function StudentAccountProfile() {
   const { user } = useUser();
   return (
     <div className={styles['profile-container']}>
@@ -15,7 +12,6 @@ export function StudentAccountProfile(props: StudentAccountProfileProps) {
           className={styles['btn-edit']}
           title="Editar"
           color={ColorsButton.secondary}
-          outline={true}
           link="/student/account/account-edit"
         />
       </div>
@@ -31,19 +27,19 @@ export function StudentAccountProfile(props: StudentAccountProfileProps) {
           </div>
           <div className={styles['item']}>
             <h4>Teléfono: </h4>
-            <h4 className={styles['text']}>+593 90611840</h4>
+            <h4 className={styles['text']}>{user.phone}</h4>
           </div>
           <div className={styles['item']}>
             <h4>Dirección: </h4>
-            <h4 className={styles['text']}>Av. Gobernación de Mainas</h4>
+            <h4 className={styles['text']}>{user.address}</h4>
           </div>
           <div className={styles['item']}>
             <h4>País: </h4>
-            <h4 className={styles['text']}>Ecuador</h4>
+            <h4 className={styles['text']}>{user.country}</h4>
           </div>
           <div className={styles['item']}>
             <h4>Ciudad: </h4>
-            <h4 className={styles['text']}>Loja</h4>
+            <h4 className={styles['text']}>{user.city}</h4>
           </div>
         </div>
       </div>

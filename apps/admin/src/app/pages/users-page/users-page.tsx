@@ -7,7 +7,12 @@ import { useAdmin, useChat } from '@ltpx-frontend-apps/store';
 import { Avatar } from 'evergreen-ui';
 import { useCallback, useEffect, useState } from 'react';
 import styles from './users-page.module.scss';
-import { Button, ColorsButton } from '@ltpx-frontend-apps/shared-ui';
+import {
+  Button,
+  ColorsButton,
+  Drawer,
+  ProfileUserView,
+} from '@ltpx-frontend-apps/shared-ui';
 
 /* eslint-disable-next-line */
 export interface UsersTable {
@@ -25,6 +30,8 @@ export function UsersPage(props: UsersPageProps) {
   const [users, setUsers] = useState<UserModel[]>([]);
   const { _getUsers } = useAdmin();
   const { _newChatRoom, setShowChat } = useChat();
+  const [openProfile, setOpenProfile] = useState(false);
+  const [saveId, setSaveId] = useState(0);
 
   const fetchUsers = useCallback(async () => {
     const { success, data, error } = await _getUsers();
@@ -72,6 +79,10 @@ export function UsersPage(props: UsersPageProps) {
                   color={ColorsButton.secondary}
                   title="Ver perfil"
                   outline={true}
+                  onClick={() => {
+                    setOpenProfile(true);
+                    setSaveId(user.id);
+                  }}
                 />
                 <Button
                   onClick={() => chatWithUser(user.id)}
@@ -85,6 +96,14 @@ export function UsersPage(props: UsersPageProps) {
           ))}
         </tbody>
       </table>
+      <Drawer
+        open={openProfile}
+        onClose={() => setOpenProfile(false)}
+        title={'Perfil'}
+        // width={500}
+      >
+        <ProfileUserView userId={saveId} />
+      </Drawer>
     </div>
   );
 }

@@ -15,3 +15,19 @@ export const updateAccount = async (userParams: IUserAccount) => {
       });
   });
 };
+
+export const setTokenDevice = async (token: string) => {
+  return new Promise<IUserAccount>((resolve, reject) => {
+    http
+      .post('/api/v1/user/accounts/set_device_token', { token_device: token})
+      .then((response) => {
+        resolve(response.data);
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
+};
+
+
+

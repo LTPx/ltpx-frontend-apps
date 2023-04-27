@@ -7,7 +7,6 @@ import {
   Dropdown,
   Header,
   Icon,
-  NotificationList,
   Snackbar,
   SnackbarPosition,
   SnackbarType,
@@ -24,6 +23,7 @@ import { Outlet, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import avatar from './../../../assets/images/avatars/avatar-1.svg';
 import Notifications from '../../components/notifications/notifications';
+import { onMessageListener } from 'apps/client/src/firebase';
 
 export function StudentLayout() {
   const [openChat, setOpenChat] = useState(false);
@@ -33,8 +33,7 @@ export function StudentLayout() {
   const { clearMessageToast } = useUtil();
   const navigate = useNavigate();
 
-  const wsUrl = process.env.NX_WS_URL || '';
-  useNotification(wsUrl);
+  useNotification(onMessageListener);
 
   const links = [
     {

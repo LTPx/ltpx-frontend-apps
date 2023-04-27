@@ -1,43 +1,24 @@
-import { useEffect } from 'react';
 import { useUser } from '@ltpx-frontend-apps/store';
-import { NotificationWebHook } from '@ltpx-frontend-apps/api';
 
-export const useNotification = (wsUrl: string) => {
+export const useNotification = (messageListener: any) => {
   const { user, addNotification, notifications } = useUser();
 
-  useEffect(() => {
-    const ws = new WebSocket(wsUrl);
-    ws.onopen = () => {
-      ws.send(
-        JSON.stringify({
-          command: "subscribe",
-          identifier:  JSON.stringify({
-            channel: 'NotificationsChannel',
-            id: user.id
-          })
-        })
-      )
+  messageListener().then((payload: any) => {
+    console.log('payload: ', payload);
+    const { data }  = payload;
+    const newNotification = {
+      user_id: user.id,
+      kind: data.type,
+      text: data.text,
+      meta: data.meta,
+      created_at: data.created_at,
     }
-    ws.onmessage = (e) => {
-      const data = JSON.parse(e.data);
-      if(data.type === "ping") return;
-      if(data.type === "welcome") return;
-      if(data.type === "confirm_subscription") return;
-
-      const { message } = data;
-      const notification: NotificationWebHook = message;
-      const newNotification = {
-        user_id: user.id,
-        kind: notification.type,
-        text: notification.text,
-        meta: notification.meta.data,
-        created_at: notification.created_at
-      }
+    if (data.receiver_id == user.id) {
       addNotification(newNotification);
     }
-    return () => {
-    };
-  }, []);
+  }).catch((err: any) => {
+    console.log('failed: ', err)
+  });
 
   return {
     notifications

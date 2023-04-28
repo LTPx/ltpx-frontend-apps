@@ -13,7 +13,9 @@ export function WelcomeNewTeacher(props: WelcomeNewTeacherProps) {
 
   return (
     <div className={styles['container']}>
-      <h4 className={styles['title']}>Realiza estos pasos para empezar a enseñar</h4>
+      <h4 className={styles['title']}>
+        Realiza estos pasos para empezar a enseñar
+      </h4>
       <div className={`${styles['step']} ${styles['with-tag']}`}>
         <div className={styles['step-content-wrapper']}>
           <div className={styles['step-icon']}>
@@ -21,15 +23,25 @@ export function WelcomeNewTeacher(props: WelcomeNewTeacherProps) {
           </div>
           <div className={styles['step-content']}>
             <h4>Envía una solicitud </h4>
-            <p>Por favor envíanos tu información y experiencia laboral para trabajar con nosotros</p>
+            <p>
+              Por favor envíanos tu información y experiencia laboral para
+              trabajar con nosotros
+            </p>
             <Button
-              title={teacher_account === StatusTeacherAccount.review ? 'Revisar Solicitud' : 'Aplicar Ahora' }
+              title={
+                teacher_account === StatusTeacherAccount.review || StatusTeacherAccount.rejected
+                  ? 'Revisar Solicitud'
+                  : 'Aplicar Ahora'
+              }
               link="/teacher/apply-teach"
             />
           </div>
         </div>
         {teacher_account === StatusTeacherAccount.review && (
-          <Tag text={'En revision'} color={ColorsTag.green}/>
+          <Tag text={'En revision'} color={ColorsTag.green} />
+        )}
+        {teacher_account === StatusTeacherAccount.rejected && (
+          <Tag text={'Requiere cambios'} color={ColorsTag.blue} />
         )}
       </div>
       <div className={styles['step']}>
@@ -40,19 +52,19 @@ export function WelcomeNewTeacher(props: WelcomeNewTeacherProps) {
           <h4>Completa tu perfil de docente </h4>
           <ul>
             <li>
-              Tu perfil de profesor te presenta a padres y alumnos debe
-              utilizar un tono profesional.
+              Tu perfil de profesor te presenta a padres y alumnos debe utilizar
+              un tono profesional.
             </li>
             <li>
-              Tu perfil aparecerá en tus clases y servirá como tu página de maestro
-              personal.
+              Tu perfil aparecerá en tus clases y servirá como tu página de
+              maestro personal.
             </li>
             <li>
               Tener un gran perfil les dará a los padres más confianza para
               inscribirse en tus clases.
             </li>
           </ul>
-          <NavLink to='/teacher/account/account-form'>
+          <NavLink to="/teacher/account/account-form">
             Click aquí para actualizar tu perfil
           </NavLink>
         </div>
@@ -68,9 +80,7 @@ export function WelcomeNewTeacher(props: WelcomeNewTeacherProps) {
             intento nosotros te guiaremos en el proceso, una vez lo tengas lo
             debes enviar a revision para que nosotros lo validemos
           </p>
-          <NavLink to='/teacher/courses/all'>
-            Crear mi primer curso
-          </NavLink>
+          <NavLink to="/teacher/courses/all">Crear mi primer curso</NavLink>
         </div>
       </div>
     </div>

@@ -5,6 +5,7 @@ export enum StatusTeacherAccount {
   deleted = 'deleted',
   approved = 'approved',
   unapplied = 'unapplied',
+  rejected = 'rejected'
 }
 
 export interface BankAccount {

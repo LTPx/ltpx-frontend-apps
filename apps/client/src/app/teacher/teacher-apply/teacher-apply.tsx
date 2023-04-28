@@ -63,6 +63,9 @@ export function TeacherApply() {
       {application?.status === StatusTeacherAccount.review && (
         <ApplicationView application={application} />
       )}
+      {application?.status === StatusTeacherAccount.rejected && (
+        <ApplicationView application={application} />
+      )}
       {teacher_account === StatusTeacherAccount.unapplied && (
         <>
           <p className={`${styles['text']}`}>{t('teacherApply.text')}</p>

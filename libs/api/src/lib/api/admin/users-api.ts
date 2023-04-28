@@ -1,7 +1,10 @@
-import { _http } from '../../http';
+import { getApiUrl } from '../../api';
+import { createInstance } from '../../http';
 import { IUserAccount, UserModel } from '../../interfaces/user-interface';
 
-const http = _http;
+const localKey = "token_opm"
+const API = getApiUrl();
+const http = createInstance(API, localKey);
 
 export const createUser = async (user: IUserAccount) => {
   return new Promise<UserModel>((resolve, reject) => {

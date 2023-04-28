@@ -1,60 +1,61 @@
 import {
   Button,
   ColorsButton,
-  Input,
-  Select,
+  TextArea,
   TypeButton,
 } from '@ltpx-frontend-apps/shared-ui';
 import styles from './require-changes-application-form.module.scss';
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
 
 /* eslint-disable-next-line */
 export interface RequireChangesApplicationFormProps {
-  id: number;
-  onCancel?: () => void;
-  onSubmit?: () => void;
+  onCancel: () => void;
+  onSubmit: (data: { comment: string }) => void;
 }
 
 export function RequireChangesApplicationForm(
   props: RequireChangesApplicationFormProps
 ) {
-  const { id, onCancel, onSubmit } = props;
-  const options = [
-    { text: 'Nombre', value: 'name' },
-    { text: 'Teléfono', value: 'phone' },
-    { text: 'Identificación frente', value: 'national_id_front' },
-    { text: 'Identificación atrás', value: 'national_id_back' },
-    { text: 'País', value: 'country' },
-    { text: 'Ciudad', value: 'city' },
-    { text: 'Experiencia', value: 'experience' },
-    { text: 'Formación', value: 'degrees' },
-    { text: 'Record Policial', value: 'police_record' },
-    { text: 'Otro', value: 'other' },
-  ];
+  const { onCancel, onSubmit } = props;
+
+  const formik = useFormik({
+    initialValues: {
+      comment: '',
+    },
+    validationSchema: Yup.object({
+      comment: Yup.string().required(
+        'No se puede enviar observaciones en blanco'
+      ),
+    }),
+    onSubmit: async (formData) => {
+      console.log(formData);
+      onSubmit(formData);
+    },
+  });
 
   return (
     <div className={styles['container']}>
-      <h3>Cambios Requeridos</h3>
-      <Select
-        options={options}
-        label="Selecciona el campo que necesita cambios"
-      />
-      <Input
-        label="Describe el problema"
-        placeholder="Ejm: tu identificación no es valida"
+      <TextArea
+        label="Observaciones"
+        rows={8}
+        placeholder="Describe los cambios que el usuario necesita realizar"
+        name="comment"
+        value={formik.values.comment}
+        onChange={(e: any) => {
+          formik.handleChange(e);
+        }}
       />
       <div className={styles['footer']}>
         <Button
           title="Cancelar"
           color={ColorsButton.white}
-          onClick={() => {
-            onCancel && onCancel();
-          }}
+          onClick={onCancel}
         />
         <Button
           title="Solicitar cambios"
-          onClick={() => {
-            onSubmit && onSubmit();
-          }}
+          type={TypeButton.submit}
+          onClick={formik.handleSubmit}
         />
       </div>
     </div>

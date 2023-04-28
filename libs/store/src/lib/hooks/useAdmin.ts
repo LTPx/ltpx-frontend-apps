@@ -21,6 +21,8 @@ export const useAdmin = () => {
     _getWithdrawalsByStatus,
     _getWithdrawal,
     _approveWithdrawal,
+    _rejectApplication,
+    _getApplicationsByStatus,
   } = useAppStore();
 
   return {
@@ -43,5 +45,7 @@ export const useAdmin = () => {
     _getWithdrawalsByStatus,
     _getWithdrawal,
     _approveWithdrawal,
+    _rejectApplication,
+    _getApplicationsByStatus,
   }
 }

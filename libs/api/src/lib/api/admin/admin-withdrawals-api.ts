@@ -1,8 +1,11 @@
-import { _http } from '../../http';
+import { getApiUrl } from '../../api';
+import { createInstance } from '../../http';
 import { WithdrawalModel } from '../../interfaces/withdrawals-interfaces';
 import { encapsuleInFormData } from '../../utils';
 
-const http = _http;
+const localKey = "token_opm"
+const API = getApiUrl();
+const http = createInstance(API, localKey);
 
 export const getWithdrawalsByStatus = async (status: string) => {
   return new Promise<WithdrawalModel[]>((resolve, reject) => {

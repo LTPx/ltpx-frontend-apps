@@ -24,7 +24,12 @@ export function Login() {
     if (success) {
       navigate('/admin/dashboard');
     } else {
-      setError(error);
+      if (error === "Signature has expired") {
+        setError('Tu sesión ha caducado por favor vuelve a intentar');
+        localStorage.clear();
+      } else {
+        setError(error);
+      }
     }
   }
 

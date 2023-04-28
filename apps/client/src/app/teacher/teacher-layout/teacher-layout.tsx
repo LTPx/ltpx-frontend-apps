@@ -84,25 +84,23 @@ export function TeacherLayout() {
         <div className={styles['render-content']}>
           <Outlet />
         </div>
-        {teacherAccount == StatusTeacherAccount.approved && (
-          <div className={styles['chat-float-container']}>
-            {openChat ? (
-              <div className={styles['chat-container']}>
-                <Chat onCancel={() => setOpenChat(false)}>
-                  <Icon icon="plus-circle" size={20} onClick={handleNewChat} />
-                </Chat>
-              </div>
-            ) : (
-              <ChatFloat onClick={() => setOpenChat(true)} />
-            )}
-            {openNewChat && (
-              <ChatNewPrivateRoom
-                users={users}
-                onClose={() => setOpenNewChat(false)}
-              />
-            )}
-          </div>
-        )}
+        <div className={styles['chat-float-container']}>
+          {openChat ? (
+            <div className={styles['chat-container']}>
+              <Chat onCancel={() => setOpenChat(false)}>
+                <Icon icon="plus-circle" size={20} onClick={handleNewChat} />
+              </Chat>
+            </div>
+          ) : (
+            <ChatFloat onClick={() => setOpenChat(true)} />
+          )}
+          {openNewChat && (
+            <ChatNewPrivateRoom
+              users={users}
+              onClose={() => setOpenNewChat(false)}
+            />
+          )}
+        </div>
       </div>
       {feedbackAction.text && (
         <Snackbar

@@ -1,8 +1,11 @@
-import { _http } from '../../http';
+import { getApiUrl } from '../../api';
+import { createInstance } from '../../http';
 import { CourseApiParams, CourseModel } from '../../interfaces/course-interface';
 import { moveToFormData } from '../../utils';
 
-const http = _http;
+const localKey = "token_opm"
+const API = getApiUrl();
+const http = createInstance(API, localKey);
 
 export const getPendingReviewCourses = async () => {
   return new Promise<CourseModel[]>((resolve, reject) => {

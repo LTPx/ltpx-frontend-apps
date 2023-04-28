@@ -11,6 +11,7 @@ interface ActionButton {
 export interface PanelAccordionProps {
   title: string;
   subTitle?: string;
+  isLogged? : string;
   text?: string;
   data?: any;
   children?: any;
@@ -21,7 +22,7 @@ export interface PanelAccordionProps {
 export function PanelAccordion(props: PanelAccordionProps) {
   const [isOpen, setIsOpen] = useState(false);
 
-  const {subTitle, classNameSubTitle, title, text, children, actions, data } = props;
+  const {subTitle, isLogged, classNameSubTitle, title, text, children, actions, data } = props;
 
   const handleClick = () => {
     setIsOpen(!isOpen);

@@ -25,13 +25,14 @@ export function StudentQuiz() {
   });
   const [loaded, setLoaded] = useState(false);
   const { _getStudentQuiz, _evaluateQuiz, currentQuiz } = useStudent();
-  const { quizId, courseId, slug } = useParams();
+  const { quizId, courseId } = useParams();
   const id = parseInt(quizId || '');
   const course_id = parseInt(courseId || '');
 
   const [openModal, setOpenModal] = useState(false);
   const [openConfirmation, setOpenConfirmation] = useState(false);
   const [score, setScore] = useState<number>(0);
+  const [approveScore, setApproveScore] = useState<number>(0);
   const navigate = useNavigate();
 
   const fetchQuiz = useCallback(async () => {
@@ -47,6 +48,7 @@ export function StudentQuiz() {
         }
       );
       setLoaded(true);
+      setApproveScore(data.approve_score);
       setAnswersForm({ answers });
     } else {
       console.log('error: ', error);
@@ -237,19 +239,12 @@ export function StudentQuiz() {
           onCloseComplete={() => setOpenModal(false)}
           width={'30vw'}
         >
-          <QuizScore
-            totalScore={score}
-            message={'Felicitaciones'}
-            img={
-              'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR83K5rBkgtaRL7Or_WNwxAzS_wy-8DaGDMKA&usqp=CAU'
-            }
-          >
+          <QuizScore totalScore={score} approveScore={approveScore}>
             <div className={styles['btn-quiz-score']}>
               <Button
                 title={'Regresar'}
                 color={ColorsButton.secondary}
                 onClick={() => navigate(-1)}
-                // link={`/student/dashboard`}
               />
             </div>
           </QuizScore>

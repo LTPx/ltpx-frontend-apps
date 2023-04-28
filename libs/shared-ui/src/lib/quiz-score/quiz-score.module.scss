@@ -1,5 +1,13 @@
 @import '../../styles/styles.module.scss';
 
+.approve {
+  color: $green-color;
+}
+
+.no-approve {
+  color: $red-color;
+}
+
 .container {
   width: 100%;
   box-sizing: border-box;
@@ -8,17 +16,6 @@
   padding: $size-lg-3;
   height: 100%;
 
-  .head-score {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding-bottom: $size-lg-1;
-    img {
-      width: 150px;
-      height: 150px;
-    }
-  }
-
   .content {
     display: flex;
     flex-direction: column;
@@ -26,16 +23,8 @@
     align-items: center;
 
     h1 {
-      color: $text-color;
       font-weight: bold;
-    }
-    h3 {
-      color: $text-gray-color;
-    }
-
-    .message {
-      color: $text-color;
-      text-align: center;
+      font-size: 5rem;
     }
   }
 }

@@ -36,6 +36,8 @@ export function TeacherLayout() {
     setOpenNewChat,
     feedbackAction,
     clearMessageToast,
+    newNotification,
+    notifications
   } = useTeacherLayout();
 
   const ChatFloat = ({ onClick }: { onClick: () => void }) => (
@@ -102,7 +104,7 @@ export function TeacherLayout() {
           )}
         </div>
       </div>
-      {feedbackAction.text && (
+      {feedbackAction.text &&
         <Snackbar
           position={SnackbarPosition.centerBottom}
           open={true}
@@ -116,7 +118,18 @@ export function TeacherLayout() {
           duration={2000}
           onClose={clearMessageToast}
         />
-      )}
+      }
+      {newNotification && notifications.length > 0 &&
+        <Snackbar
+          position={SnackbarPosition.bottomRight}
+          open={true}
+          title={'Nueva notificación'}
+          text={notifications[notifications.length - 1].text}
+          kind={SnackbarType.message}
+          duration={2000}
+          onClose={clearMessageToast}
+        />
+      }
     </div>
   );
 }

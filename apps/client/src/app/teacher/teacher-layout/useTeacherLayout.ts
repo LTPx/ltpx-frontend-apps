@@ -10,7 +10,7 @@ export const useTeacherLayout = () => {
   const [users, setUsers] = useState<UserModel[]>([]);
   const { feedbackAction } = useAppStore();
   const { clearMessageToast } = useUtil();
-  const { user, logout } = useUser();
+  const { user, logout, newNotification, notifications } = useUser();
   const { teacher_account } = user;
   const { t } = useTranslation();
   const navigate = useNavigate();
@@ -63,5 +63,7 @@ export const useTeacherLayout = () => {
     setOpenNewChat,
     feedbackAction,
     clearMessageToast,
+    newNotification,
+    notifications
   };
 };

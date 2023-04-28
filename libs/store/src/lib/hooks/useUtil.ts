@@ -4,7 +4,7 @@ import { useAppStore } from '../store';
 
 export const useUtil = () => {
   const { t } = useTranslation();
-  const { setFeedbackAction } = useAppStore();
+  const { setFeedbackAction, cleanNewNotification } = useAppStore();
 
   const countries = COUNTRIES_ABLE_APP.map((value) => {
     return {
@@ -25,7 +25,8 @@ export const useUtil = () => {
   }
 
   const clearMessageToast = () => {
-    setFeedbackAction({} as FeedbackAction)
+    setFeedbackAction({} as FeedbackAction);
+    cleanNewNotification();
   }
 
   return {

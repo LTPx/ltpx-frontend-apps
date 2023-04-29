@@ -1,21 +1,21 @@
+import styles from './require-changes-form.module.scss';
 import {
   Button,
   ColorsButton,
   TextArea,
   TypeButton,
 } from '@ltpx-frontend-apps/shared-ui';
-import styles from './require-changes-application-form.module.scss';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 
 /* eslint-disable-next-line */
-export interface RequireChangesApplicationFormProps {
+interface RequireChangesFormProps {
   onCancel: () => void;
   onSubmit: (data: { comment: string }) => void;
 }
 
-export function RequireChangesApplicationForm(
-  props: RequireChangesApplicationFormProps
+export function RequireChangesForm(
+  props: RequireChangesFormProps
 ) {
   const { onCancel, onSubmit } = props;
 
@@ -62,4 +62,4 @@ export function RequireChangesApplicationForm(
   );
 }
 
-export default RequireChangesApplicationForm;
+export default RequireChangesForm;

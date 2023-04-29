@@ -3,7 +3,6 @@ import {
   createCourse,
   ApplyTeachApiParams,
   IRegisterUser,
-  ITeacher,
   registerTeacher,
   StatusTeacherAccount,
   TypeViews,
@@ -34,14 +33,10 @@ import {
   formatErrors,
   deleteCourse,
   FormatResponse,
+  updateApplication,
 } from '@ltpx-frontend-apps/api';
 import { StateCreator } from 'zustand';
 import { StoreState } from '../store';
-
-type TResponseApply = {
-  accepted: boolean;
-  data: ITeacher | any;
-};
 
 type TResponseLogin = {
   isLogin: boolean;
@@ -56,12 +51,6 @@ type TResponseCreateCourse = {
 type TResponseGetApplication = {
   ok: boolean;
   data: ApplicationTeach | any;
-};
-
-type TResponse = {
-  success: boolean;
-  data?: any;
-  error?: any;
 };
 
 export type TeacherSlice = {
@@ -79,18 +68,19 @@ export type TeacherSlice = {
   registerTeacher: (params: IRegisterUser) => Promise<TResponseLogin>;
   createCourse: (params: CourseApiParams) => Promise<TResponseCreateCourse>;
   editCourse: (params: CourseApiParams) => Promise<TResponseCreateCourse>;
-  removeCourse: (id: number) => Promise<TResponse>;
-  createAchievement: (params: AchievementParams) => Promise<TResponse>;
-  getCourse: (id: number) => Promise<TResponse>;
-  _sendCourseToReview: (id: number) => Promise<TResponse>;
-  _getWallet: () => Promise<TResponse>;
-  _getClassrooms: () => Promise<TResponse>;
-  _getCourses: () => Promise<TResponse>;
-  _getMeetingRoomId: (id: number) => Promise<TResponse>;
-  _validateMeetingRoomId: (id: number, roomId: string) => Promise<TResponse>;
-  _makeWithdrawal: (params: WithdrawalParams) => Promise<TResponse>;
-  _updateProfile: (params: TeacherProfileParams) => Promise<TResponse>;
-  getProfile: () => Promise<TResponse>;
+  removeCourse: (id: number) => Promise<FormatResponse>;
+  createAchievement: (params: AchievementParams) => Promise<FormatResponse>;
+  getCourse: (id: number) => Promise<FormatResponse>;
+  _sendCourseToReview: (id: number) => Promise<FormatResponse>;
+  _getWallet: () => Promise<FormatResponse>;
+  _getClassrooms: () => Promise<FormatResponse>;
+  _getCourses: () => Promise<FormatResponse>;
+  _getMeetingRoomId: (id: number) => Promise<FormatResponse>;
+  _validateMeetingRoomId: (id: number, roomId: string) => Promise<FormatResponse>;
+  _makeWithdrawal: (params: WithdrawalParams) => Promise<FormatResponse>;
+  _updateProfile: (params: TeacherProfileParams) => Promise<FormatResponse>;
+  _updateApplicationTeach: (applicationId:number, params: ApplyTeachApiParams) => Promise<FormatResponse>;
+  getProfile: () => Promise<FormatResponse>;
 };
 
 export const createTeacherSlice: StateCreator<
@@ -267,9 +257,18 @@ export const createTeacherSlice: StateCreator<
       return { success: false, error: error };
     }
   },
+  _updateApplicationTeach: async (id, params) => {
+    try {
+      const application = await updateApplication(id, params);
+      set({ application });
+      return { success: true, data: application };
+    } catch (error) {
+      return { success: false, error: error };
+    }
+  },
 });
 
-const callApi = async (promiseFn: any, set: any, params?: any):Promise<TResponse> => {
+const callApi = async (promiseFn: any, set: any, params?: any) => {
   set({loadingTeacherApi: true});
   try {
     const response = await promiseFn(params);

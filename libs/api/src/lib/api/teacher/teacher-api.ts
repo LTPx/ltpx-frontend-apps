@@ -58,6 +58,20 @@ export const applyToTeach = async (teacher: ApplyTeachApiParams) => {
   });
 };
 
+export const updateApplication = async (id: number, teacher: ApplyTeachApiParams) => {
+  const teacherFormData = moveToFormData(teacher);
+  return new Promise<ApplyTeachModel>((resolve, reject) => {
+    http
+      .put(`api/v1/teacher/application_teachers/${id}`, teacherFormData)
+      .then((response) => {
+        resolve(response.data);
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
+};
+
 export const getApplicationTeach = async () => {
   return new Promise<ApplicationTeach>((resolve, reject) => {
     http

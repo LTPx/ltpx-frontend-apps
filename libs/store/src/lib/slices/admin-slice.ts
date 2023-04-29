@@ -18,6 +18,8 @@ import {
   getUser,
   rejectApplication,
   getApplicationsByStatus,
+  adminRejectCourse,
+  getCoursesByStatus,
 } from '@ltpx-frontend-apps/api';
 
 export type TResponse = {
@@ -40,14 +42,14 @@ export type AdminSlice = {
   _approveApplication: (id: number) => Promise<TResponse>;
   _getUsers: () => Promise<TResponse>;
   _getUser: (userId: number) => Promise<TResponse>;
-  _getPendingReviewCourses: () => Promise<TResponse>;
   _getCourse: (id: number) => void;
   _approveCourse: (id: number) => Promise<TResponse>;
-  _getApprovedCourses: () => Promise<TResponse>;
   _getWithdrawalsByStatus: (status: string) => Promise<TResponse>;
   _getWithdrawal: (id: number) => Promise<TResponse>;
   _approveWithdrawal: (id: number, params: {receipt_id?: string, receipt_image: string}) => Promise<TResponse>;
   _getApplicationsByStatus: (status: string) => Promise<TResponse>;
+  _rejectCourse: (courseId: number, comment: string) => Promise<TResponse>;
+  _getCoursesByStatus: (status: string) => Promise<TResponse>;
 };
 
 export const createAdminSlice: StateCreator<StoreState, [], [], AdminSlice> = (
@@ -122,15 +124,6 @@ export const createAdminSlice: StateCreator<StoreState, [], [], AdminSlice> = (
       return { success: false, error };
     }
   },
-  _getPendingReviewCourses: async () => {
-    try {
-      const courses = await getPendingReviewCourses();
-      set({ courses });
-      return { success: true, data: courses };
-    } catch (error) {
-      return { success: false, error };
-    }
-  },
   _getCourse: async (id) => {
     try {
       const course = await adminGetCourse(id);
@@ -152,15 +145,6 @@ export const createAdminSlice: StateCreator<StoreState, [], [], AdminSlice> = (
     try {
       const course = await adminApproveCourse(id);
       return { success: true, data: course };
-    } catch (error) {
-      return { success: false, error };
-    }
-  },
-  _getApprovedCourses: async () => {
-    try {
-      const courses = await getApprovedCourses();
-      set({ courses });
-      return { success: true, data: courses };
     } catch (error) {
       return { success: false, error };
     }
@@ -198,4 +182,21 @@ export const createAdminSlice: StateCreator<StoreState, [], [], AdminSlice> = (
       return { success: false, error };
     }
   },
+  _rejectCourse: async (id, params) => {
+    try {
+      const course = await adminRejectCourse(id, params);
+      return { success: true, data: course };
+    } catch (error) {
+      return { success: false, error };
+    }
+  },
+  _getCoursesByStatus: async (status) => {
+    try {
+      const courses = await getCoursesByStatus(status);
+      set({courses})
+      return { success: true, data: courses };
+    } catch (error) {
+      return { success: false, error };
+    }
+  }
 });

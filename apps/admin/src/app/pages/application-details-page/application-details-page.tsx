@@ -10,7 +10,7 @@ import { useAdmin, useUtil } from '@ltpx-frontend-apps/store';
 import { Dialog } from 'evergreen-ui';
 import { useCallback, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import RequireChangesApplicationForm from '../../components/require-changes-application-form/require-changes-application-form';
+import RequireChangesForm from '../../components/require-changes-form/require-changes-form';
 import styles from './application-details-page.module.scss';
 
 /* eslint-disable-next-line */
@@ -105,7 +105,7 @@ export function ApplicationDetailsPage(props: ApplicationDetailsPageProps) {
         onCloseComplete={() => setOpenModal(false)}
         width={'40vw'}
       >
-        <RequireChangesApplicationForm
+        <RequireChangesForm
           onCancel={() => setOpenModal(false)}
           onSubmit={(data) => handleRequireChanges(data)}
         />

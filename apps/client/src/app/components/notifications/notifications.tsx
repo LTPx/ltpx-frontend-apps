@@ -16,6 +16,7 @@ export function Notifications() {
   const {
     _setTokenDevice,
     _getNotifications,
+    _readNotifications,
     notifications,
     totalUnreadNotifications,
     clearUnreadNotification,
@@ -72,14 +73,21 @@ export function Notifications() {
     });
   }
 
+  async function clearNotifications() {
+    const { success, error } = await _readNotifications();
+    if (success) {
+      clearUnreadNotification();
+    } else {
+      console.log(error);
+    }
+  }
+
   return (
     <Dropdown>
       <NotificationList notifications={notificationsItems} />
       <div
         className={styles['avatar']}
-        onClick={() => {
-          clearUnreadNotification();
-        }}
+        onClick={clearNotifications}
       >
         <Cart amount={totalUnreadNotifications} />
       </div>

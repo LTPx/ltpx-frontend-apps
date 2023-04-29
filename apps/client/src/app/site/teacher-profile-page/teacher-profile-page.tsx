@@ -6,22 +6,21 @@ import { useParams } from 'react-router-dom';
 
 import styles from './teacher-profile-page.module.scss';
 
-/* eslint-disable-next-line */
-export interface TeacherProfilePageProps {}
-
-export function TeacherProfilePage(props: TeacherProfilePageProps) {
+export function TeacherProfilePage() {
   const [teacher, setTeacher] = useState<TeacherSummary>();
   const { slug } = useParams();
   const { _getTeacherProfile } = useSite();
 
   const fetchPopularCourse = useCallback(async () => {
     const id = slug || '';
-    const { success, data, error } = await _getTeacherProfile(id);
-    if (success) {
-      console.log(data);
-      setTeacher(data);
-    } else {
-      console.log('error: ', error);
+    if (slug !== 'dashboard') { //TODO: Routing error is calling in teacher app, temporal fix
+      const { success, data, error } = await _getTeacherProfile(id);
+      if (success) {
+        console.log(data);
+        setTeacher(data);
+      } else {
+        console.log('error: ', error);
+      }
     }
   }, []);
 

@@ -20,6 +20,7 @@ export const useUser = () => {
     _getNotifications,
     _updateAccount,
     _setTokenDevice,
+    _readNotifications,
   } = useAppStore();
 
   return {
@@ -42,5 +43,6 @@ export const useUser = () => {
     _getNotifications,
     _updateAccount,
     _setTokenDevice,
+    _readNotifications,
   }
 }

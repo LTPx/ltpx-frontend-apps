@@ -19,6 +19,7 @@ import {
   IUserAccount,
   updateAccount,
   setTokenDevice,
+  readNotifications,
 } from '@ltpx-frontend-apps/api';
 
 export type UserSlice = {
@@ -39,6 +40,7 @@ export type UserSlice = {
   _getNotifications: () => Promise<FormatResponse>;
   _updateAccount: (params: IUserAccount) => Promise<FormatResponse>;
   _setTokenDevice: (token: string) => Promise<FormatResponse>;
+  _readNotifications: () => Promise<FormatResponse>;
 };
 
 // const views = {
@@ -77,24 +79,14 @@ export const createUserSlice: StateCreator<StoreState, [], [], UserSlice> = (
   getCurrentUser: async () => {
     try {
       const user = await getCurrentUser();
-      const { initial_view, cart } = user;
-      if (cart) {
-        const coursesInCart = cart.items.map((item) => item.course);
-        set({
-          user: user,
-          isAuthenticated: true,
-          currentView: initial_view,
-          teacher_account: user.teacher_account,
-          coursesInCart: coursesInCart,
-        });
-      } else {
-        set({
-          user: user,
-          isAuthenticated: true,
-          currentView: initial_view,
-          teacher_account: user.teacher_account,
-        });
-      }
+      const { initial_view } = user;
+      set({
+        user: user,
+        isAuthenticated: true,
+        currentView: initial_view,
+        teacher_account: user.teacher_account,
+        totalUnreadNotifications: user.total_unread_notifications
+      });
       return { success: true, data: user };
     } catch (error) {
       set({
@@ -167,7 +159,7 @@ export const createUserSlice: StateCreator<StoreState, [], [], UserSlice> = (
   _getNotifications: async () => {
     try {
       const notifications = await getNotifications();
-      set({ notifications, totalUnreadNotifications: 0 });
+      set({ notifications});
       return { success: true, data: notifications };
     } catch (error) {
       return { success: false, error: formatErrors(error) };
@@ -191,4 +183,13 @@ export const createUserSlice: StateCreator<StoreState, [], [], UserSlice> = (
       return { success: false, error: formatErrors(error) };
     }
   },
+  _readNotifications:async () => {
+    try {
+      const user = await readNotifications();
+      set({user})
+      return { success: true, data: user };
+    } catch (error) {
+      return { success: false, error: formatErrors(error) };
+    }
+  }
 });

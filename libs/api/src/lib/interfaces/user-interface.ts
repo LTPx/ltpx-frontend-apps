@@ -76,6 +76,7 @@ export interface ICurrentUser {
   address: string;
   birth: string;
   cart?: CartModel;
+  total_unread_notifications: number;
 }
 
 export interface IUserAccount {

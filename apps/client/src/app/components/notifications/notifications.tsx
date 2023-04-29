@@ -92,10 +92,10 @@ export function Notifications() {
       withdrawal_completed: '/teacher/earnings',
       student_enrolled: '/student/dashboard',
       class_started: '/student/classes',
-      task_reviewed: `/student/course/${meta.entity_meta.course_slug}`,
-      quiz_reviewed: `/student/course/${meta.entity_meta.course_slug}`,
-      achievement_reached: `/student/course/${meta.entity_meta.course_slug}`,
-      course_completed: `/student/course/${meta.entity_meta.course_slug}`,
+      task_reviewed: `/student/course/${meta.entity_meta?.course_slug}`,
+      quiz_reviewed: `/student/course/${meta.entity_meta?.course_slug}`,
+      achievement_reached: `/student/course/${meta.entity_meta?.course_slug}`,
+      course_completed: `/student/course/${meta.entity_meta?.course_slug}`,
       chat_unread_messages: '/student/dashboard',
     };
     const linkToDetails = links[meta.action];

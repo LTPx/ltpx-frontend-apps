@@ -64,7 +64,24 @@ export function TeacherApply() {
         <ApplicationView application={application} />
       )}
       {application?.status === StatusTeacherAccount.rejected && (
-        <ApplicationView application={application} />
+        <>
+          {application.comments?.map((element, index) => (
+            <div className={styles['comments-applyTeach']} key={index}>
+              <p><strong>Comentarios de Revision: </strong> 
+              <h4>
+              {element.comment}
+              </h4></p>
+            </div>
+          ))}
+          <p className={`${styles['text-rejected']}`}>{t('teacherApply.text')}</p>
+          <ApplyTeacherForm
+            onSubmitForm={(data: ApplyTeachApiParams) => {
+              setOpenConfirmationModal(true);
+              setFormData(data);
+            }}
+            application={application}
+          />
+        </>
       )}
       {teacher_account === StatusTeacherAccount.unapplied && (
         <>

@@ -9,7 +9,7 @@ import styles from './teachers-page.module.scss';
 export function TeachersPage() {
   const { _getApplicationsByStatus, applications } = useAdmin();
   const { formatDate } = useMoment();
-  const tabs = [{ text: 'Pendientes' }, { text: 'Requiere cambios' }, { text: 'Aprobadas' }];
+  const tabs = [{ text: 'Pendientes' }, { text: 'Necesita cambios' }, { text: 'Aprobadas' }];
 
   const fetchApplications = useCallback(async (status: string) => {
     const resp = await _getApplicationsByStatus(status);
@@ -33,7 +33,7 @@ export function TeachersPage() {
   return (
     <div className={styles['container']}>
       <h1>Solicitudes de Profesores</h1>
-      <p>Estas son las ultimas solicitudes que hemos recibido</p>
+      <p>Estas son las ultimas solicitudes que se han recibido</p>
       <Tabs
         tabs={tabs}
         onClickTab={(index) => {

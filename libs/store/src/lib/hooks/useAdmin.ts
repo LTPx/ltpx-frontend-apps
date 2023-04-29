@@ -14,16 +14,15 @@ export const useAdmin = () => {
     _approveApplication,
     _approvedApplications,
     _getUsers,
-    _getPendingReviewCourses,
     _getCourse,
     _approveCourse,
-    _getApprovedCourses,
     _getWithdrawalsByStatus,
     _getWithdrawal,
     _approveWithdrawal,
     _rejectApplication,
     _getApplicationsByStatus,
     _rejectCourse,
+    _getCoursesByStatus,
   } = useAppStore();
 
   return {
@@ -39,15 +38,14 @@ export const useAdmin = () => {
     _approveApplication,
     _approvedApplications,
     _getUsers,
-    _getPendingReviewCourses,
     _getCourse,
     _approveCourse,
-    _getApprovedCourses,
     _getWithdrawalsByStatus,
     _getWithdrawal,
     _approveWithdrawal,
     _rejectApplication,
     _getApplicationsByStatus,
-    _rejectCourse
+    _rejectCourse,
+    _getCoursesByStatus,
   }
 }

@@ -7,6 +7,19 @@ const localKey = "token_opm"
 const API = getApiUrl();
 const http = createInstance(API, localKey);
 
+export const getCoursesByStatus = async (status: string) => {
+  return new Promise<CourseModel[]>((resolve, reject) => {
+    http
+      .get('api/v1/admin/courses/get_by_status', {params: {status}})
+      .then((response) => {
+        resolve(response.data);
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
+};
+
 export const getPendingReviewCourses = async () => {
   return new Promise<CourseModel[]>((resolve, reject) => {
     http

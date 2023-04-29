@@ -198,7 +198,7 @@ export function CourseDetailsPage() {
       <Dialog
         isShown={openModal}
         hasFooter={false}
-        hasHeader={false}
+        title='Solicitar Cambios'
         onCloseComplete={() => setOpenModal(false)}
         width={'45vw'}
       >

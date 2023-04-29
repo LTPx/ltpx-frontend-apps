@@ -97,6 +97,12 @@
       left: 35%;
       @include animation-bottom-toggle;
     }
+
+    &.center-bottom-right-snackbar {
+      bottom: 50px;
+      right: 100px;
+      @include animation-bottom-toggle;
+    }
   }
 
   &.message-snackbar {

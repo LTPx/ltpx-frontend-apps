@@ -27,7 +27,7 @@ import { onMessageListener } from 'apps/client/src/firebase';
 
 export function StudentLayout() {
   const [openChat, setOpenChat] = useState(false);
-  const { user, logout } = useUser();
+  const { user, logout, newNotification, notifications } = useUser();
   const { t } = useTranslation();
   const { feedbackAction } = useAppStore();
   const { clearMessageToast } = useUtil();
@@ -128,6 +128,17 @@ export function StudentLayout() {
           onClose={clearMessageToast}
         />
       )}
+      {newNotification && notifications.length > 0 &&
+        <Snackbar
+          position={SnackbarPosition.bottomRight}
+          open={true}
+          title={'Nueva notificación'}
+          text={notifications[notifications.length - 1].text}
+          kind={SnackbarType.message}
+          duration={1000}
+          onClose={clearMessageToast}
+        />
+      }
     </div>
   );
 }

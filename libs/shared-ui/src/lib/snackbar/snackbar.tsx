@@ -8,6 +8,7 @@ export enum SnackbarPosition {
   bottom = 'bottom',
   centerTop = 'centerTop',
   centerBottom = 'centerBottom',
+  bottomRight = 'bottomRight',
 }
 
 export enum SnackbarType {
@@ -45,7 +46,6 @@ export const Snackbar = (props: SnackbarProps) => {
   } = props;
 
   useEffect(() => {
-    console.log('here...');
     if (duration && open) {
       setIsHidden(false);
       setAnimateOut(false);
@@ -77,6 +77,7 @@ export const Snackbar = (props: SnackbarProps) => {
     bottom: styles['bottom-snackbar'],
     centerTop: styles['center-top-snackbar'],
     centerBottom: styles['center-bottom-snackbar'],
+    bottomRight: styles['center-bottom-right-snackbar'],
   };
   const colorsClasses = {
     warning: styles['warning-snackbar'],

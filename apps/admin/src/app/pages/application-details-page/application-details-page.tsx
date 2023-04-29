@@ -10,7 +10,7 @@ import { useAdmin, useUtil } from '@ltpx-frontend-apps/store';
 import { Dialog } from 'evergreen-ui';
 import { useCallback, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import RequireChangesApplicationForm from '../../components/require-changes-application-form/require-changes-application-form';
+import RequireChangesForm from '../../components/require-changes-form/require-changes-form';
 import styles from './application-details-page.module.scss';
 
 /* eslint-disable-next-line */
@@ -24,6 +24,7 @@ export function ApplicationDetailsPage(props: ApplicationDetailsPageProps) {
     viewApplication,
     _getApplication,
     _approveApplication,
+    _rejectApplication
   } = useAdmin();
   const navigate = useNavigate();
   const { translateStatusApply } = useUtil();
@@ -44,10 +45,6 @@ export function ApplicationDetailsPage(props: ApplicationDetailsPageProps) {
     }
   }, []);
 
-  const handleRequestChange = () => {
-    setOpenModal(true);
-  };
-
   const handleApproveApplication = async () => {
     const { success, error } = await _approveApplication(viewApplication.id);
     if (success) {
@@ -57,6 +54,16 @@ export function ApplicationDetailsPage(props: ApplicationDetailsPageProps) {
       console.log(error);
     }
   };
+
+  async function handleRequireChanges(comment: {comment: string}) {
+    const { success, error } = await _rejectApplication( viewApplication.id, comment.comment);
+    if (success) {
+      navigate('/admin/teachers');
+    } else {
+      setError(true);
+      console.log(error);
+    }
+  }
 
   return (
     <div className={styles['container']}>
@@ -76,7 +83,7 @@ export function ApplicationDetailsPage(props: ApplicationDetailsPageProps) {
                   color={ColorsButton.secondary}
                   outline={true}
                   onClick={() => {
-                    handleRequestChange();
+                    setOpenModal(true);
                   }}
                 />
                 <Button
@@ -94,14 +101,13 @@ export function ApplicationDetailsPage(props: ApplicationDetailsPageProps) {
       <Dialog
         isShown={openModal}
         hasFooter={false}
-        hasHeader={false}
+        title='Solicitar Cambios'
         onCloseComplete={() => setOpenModal(false)}
         width={'40vw'}
       >
-        <RequireChangesApplicationForm
-          id={appId}
+        <RequireChangesForm
           onCancel={() => setOpenModal(false)}
-          onSubmit={() => setOpenModal(false)}
+          onSubmit={(data) => handleRequireChanges(data)}
         />
       </Dialog>
       {error && (

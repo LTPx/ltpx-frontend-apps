@@ -1,8 +1,24 @@
-import { _http } from '../../http';
+import { getApiUrl } from '../../api';
+import { createInstance } from '../../http';
 import { CourseApiParams, CourseModel } from '../../interfaces/course-interface';
 import { moveToFormData } from '../../utils';
 
-const http = _http;
+const localKey = "token_opm"
+const API = getApiUrl();
+const http = createInstance(API, localKey);
+
+export const getCoursesByStatus = async (status: string) => {
+  return new Promise<CourseModel[]>((resolve, reject) => {
+    http
+      .get('api/v1/admin/courses/get_by_status', {params: {status}})
+      .then((response) => {
+        resolve(response.data);
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
+};
 
 export const getPendingReviewCourses = async () => {
   return new Promise<CourseModel[]>((resolve, reject) => {
@@ -76,6 +92,19 @@ export const adminApproveCourse = async (id: number) => {
   return new Promise<CourseModel>((resolve, reject) => {
     http
       .post(`api/v1/admin/courses/${id}/approve`)
+      .then((response) => {
+        resolve(response.data);
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
+};
+
+export const adminRejectCourse = async (id: number, comment: string) => {
+  return new Promise<CourseModel>((resolve, reject) => {
+    http
+      .post(`api/v1/admin/courses/${id}/require_changes`, {comment})
       .then((response) => {
         resolve(response.data);
       })

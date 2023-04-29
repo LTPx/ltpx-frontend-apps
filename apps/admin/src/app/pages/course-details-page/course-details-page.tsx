@@ -11,18 +11,18 @@ import {
   SnackbarPosition,
   SnackbarType,
   Tabs,
-  TextArea,
 } from '@ltpx-frontend-apps/shared-ui';
 import { useAdmin, useCourseUtil } from '@ltpx-frontend-apps/store';
 import { useCallback, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import styles from './course-details-page.module.scss';
 import { Dialog } from 'evergreen-ui';
+import RequireChangesForm from '../../components/require-changes-form/require-changes-form';
 
 export function CourseDetailsPage() {
   const [error, setError] = useState(false);
   const [selectedTab, setSelectedTab] = useState(0);
-  const { viewCourse, _getCourse, _approveCourse } = useAdmin();
+  const { viewCourse, _getCourse, _approveCourse, _rejectCourse } = useAdmin();
   const { translateCategory, translateLanguage, translateLevel } =
     useCourseUtil();
   const { classroom, quizzes, contents, achievements, session, tasks } =
@@ -62,9 +62,15 @@ export function CourseDetailsPage() {
     }
   };
 
-  const handleRequestChange = () => {
-    setOpenModal(true);
-  };
+  async function handleRequireChanges(comment: {comment: string}) {
+    const { success, error } = await _rejectCourse( viewCourse.id, comment.comment);
+    if (success) {
+      navigate('/admin/courses');
+    } else {
+      setError(true);
+      console.log(error);
+    }
+  }
 
   return (
     <div className={styles['container']}>
@@ -79,7 +85,7 @@ export function CourseDetailsPage() {
                   color={ColorsButton.secondary}
                   outline={true}
                   onClick={() => {
-                    handleRequestChange();
+                    setOpenModal(true);
                   }}
                 />
                 <Button
@@ -192,22 +198,14 @@ export function CourseDetailsPage() {
       <Dialog
         isShown={openModal}
         hasFooter={false}
-        hasHeader={false}
+        title='Solicitar Cambios'
         onCloseComplete={() => setOpenModal(false)}
         width={'45vw'}
       >
-        <div className={styles['dialog']}>
-          <h3>Cambios Requeridos</h3>
-          <TextArea label="Describe el problema" rows={8} />
-          <div className={styles['footer']}>
-            <Button
-              title="Cancelar"
-              color={ColorsButton.white}
-              onClick={() => setOpenModal(false)}
-            />
-            <Button title="Solicitar cambios" />
-          </div>
-        </div>
+        <RequireChangesForm
+          onCancel={() => setOpenModal(false)}
+          onSubmit={(data) => handleRequireChanges(data)}
+        />
       </Dialog>
     </div>
   );

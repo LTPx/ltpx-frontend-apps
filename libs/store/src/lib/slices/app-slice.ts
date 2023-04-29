@@ -11,6 +11,7 @@ export type TResponse = {
 export type AppSlice = {
   feedbackAction: FeedbackAction;
   setFeedbackAction: (feedback: FeedbackAction) => void;
+  cleanNewNotification: () => void;
 };
 
 export const createAppSlice: StateCreator<StoreState, [], [], AppSlice> = (
@@ -21,4 +22,7 @@ export const createAppSlice: StateCreator<StoreState, [], [], AppSlice> = (
   setFeedbackAction: (feedback) => {
     set({ feedbackAction: feedback });
   },
+  cleanNewNotification: () => {
+    set({ newNotification: false});
+  }
 });

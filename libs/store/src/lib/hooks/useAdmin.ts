@@ -23,6 +23,7 @@ export const useAdmin = () => {
     _approveWithdrawal,
     _rejectApplication,
     _getApplicationsByStatus,
+    _rejectCourse,
   } = useAppStore();
 
   return {
@@ -47,5 +48,6 @@ export const useAdmin = () => {
     _approveWithdrawal,
     _rejectApplication,
     _getApplicationsByStatus,
+    _rejectCourse
   }
 }

@@ -22,7 +22,7 @@ import RequireChangesForm from '../../components/require-changes-form/require-ch
 export function CourseDetailsPage() {
   const [error, setError] = useState(false);
   const [selectedTab, setSelectedTab] = useState(0);
-  const { viewCourse, _getCourse, _approveCourse } = useAdmin();
+  const { viewCourse, _getCourse, _approveCourse, _rejectCourse } = useAdmin();
   const { translateCategory, translateLanguage, translateLevel } =
     useCourseUtil();
   const { classroom, quizzes, contents, achievements, session, tasks } =
@@ -63,13 +63,13 @@ export function CourseDetailsPage() {
   };
 
   async function handleRequireChanges(comment: {comment: string}) {
-    // const { success, error } = await _rejectApplication( viewApplication.id, comment.comment);
-    // if (success) {
-    //   navigate('/admin/teachers');
-    // } else {
-    //   setError(true);
-    //   console.log(error);
-    // }
+    const { success, error } = await _rejectCourse( viewCourse.id, comment.comment);
+    if (success) {
+      navigate('/admin/courses');
+    } else {
+      setError(true);
+      console.log(error);
+    }
   }
 
   return (

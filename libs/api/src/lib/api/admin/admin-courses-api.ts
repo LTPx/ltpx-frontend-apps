@@ -87,3 +87,16 @@ export const adminApproveCourse = async (id: number) => {
       });
   });
 };
+
+export const adminRejectCourse = async (id: number, comment: string) => {
+  return new Promise<CourseModel>((resolve, reject) => {
+    http
+      .post(`api/v1/admin/courses/${id}/require_changes`, {comment})
+      .then((response) => {
+        resolve(response.data);
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
+};

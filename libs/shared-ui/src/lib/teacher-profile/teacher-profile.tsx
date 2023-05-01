@@ -120,7 +120,7 @@ export function TeacherProfile(props: TeacherProfileProps) {
           </div>
           <div className={styles['video-content']}>
             <h2>Video de Presentación</h2>
-            <video width="90%" height="300" src={video} controls></video>
+            <video width="100%" height="300" src={video} controls></video>
           </div>
         </div>
       </div>

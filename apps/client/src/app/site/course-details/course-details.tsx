@@ -47,11 +47,7 @@ export function CourseDetails() {
   const { course, teacher, session } = currentFullCourse;
   const [message, setMessage] = useState<MessageCheckout>();
   const { customFormatDate, moment } = useMoment();
-  const {
-    _newChatRoom,
-    setShowChat,
-  } = useChat();
-
+  const { _newChatRoom, setShowChat } = useChat();
 
   const fetchCourse = useCallback(async () => {
     const { success, data, error } = await _getSiteCourse(slug || '');
@@ -89,7 +85,7 @@ export function CourseDetails() {
 
   const chatWithTeacher = async () => {
     if (isAuthenticated) {
-      await _newChatRoom(teacher.user_id)
+      await _newChatRoom(teacher.user_id);
       setShowChat(true);
     } else {
       setOpenModal(true);
@@ -123,6 +119,7 @@ export function CourseDetails() {
             <img
               className={styles['image-responsive']}
               src={course.cover_url}
+              alt='cover-responsive'
             />
             <div className={styles['content-responsive']}>
               <div className={styles['title-content-responsive']}>
@@ -131,7 +128,17 @@ export function CourseDetails() {
                   <h2 className={styles['price']}>$ {course.price}</h2>
                 </div>
               </div>
-              <h4 className={styles['teacher']}>Profesor: {teacher.name}</h4>
+              <NavLink
+                className={styles['teacher-avatar']}
+                to={`/teacher/${teacher.slug}`}
+              >
+                <Avatar
+                  image={teacher.profile_image || ''}
+                  size={AvatarSize.small}
+                  outline={true}
+                />
+                <h4 className={styles['teacher']}>{teacher.name}</h4>
+              </NavLink>
               <div className={styles['description-responsive']}>
                 <Rating
                   className={styles['rating-responsive']}
@@ -260,7 +267,10 @@ export function CourseDetails() {
                     />
                   )}
                   {selectedTab === 1 && (
-                    <CourseContents lock={true} contents={course.contents || []} />
+                    <CourseContents
+                      lock={true}
+                      contents={course.contents || []}
+                    />
                   )}
                   {selectedTab === 2 && (
                     <div className={styles['achievements']}>
@@ -359,10 +369,7 @@ export function CourseDetails() {
         imgUrl={'../../../../assets/images/bg_shape.svg'}
       >
         <div className={styles['btn']}>
-          <Button
-            title={'Solicitar otro horario'}
-            onClick={chatWithTeacher}
-          />
+          <Button title={'Solicitar otro horario'} onClick={chatWithTeacher} />
         </div>
       </SectionInformation>
       <Dialog
@@ -422,4 +429,3 @@ export function CourseDetails() {
 }
 
 export default CourseDetails;
-

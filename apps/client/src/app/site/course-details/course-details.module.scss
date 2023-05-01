@@ -8,6 +8,16 @@
   background-color: $white-color;
   width: 100%;
 }
+.teacher-avatar {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+
+  .teacher {
+    color: $text-gray-color;
+    text-decoration: none;
+  }
+}
 
 .course-section {
   padding: 2rem 0;

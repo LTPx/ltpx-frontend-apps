@@ -63,12 +63,12 @@ export function CourseGeneralInformation(props: CourseGeneralInformationProps) {
         'cover',
         'El archivo debe ser menor o igual a 2mb',
         (value) => {
-          if (value) {
+          if (value && value.size) {
             const fileSize = value.size;
             const fileMb = fileSize / 1024 ** 2;
             return fileMb <= 2;
           } else {
-            return false;
+            return true;
           }
         }
       ),

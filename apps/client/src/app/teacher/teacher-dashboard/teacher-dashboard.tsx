@@ -2,23 +2,65 @@ import { StatusTeacherAccount } from '@ltpx-frontend-apps/api';
 import {
   Button,
   ColorsButton,
+  NewCourseForm,
   NoticeCard,
   UpcomingClass,
 } from '@ltpx-frontend-apps/shared-ui';
 import { useTeacher, useUser } from '@ltpx-frontend-apps/store';
 import WelcomeNewTeacher from '../../components/welcome-new-teacher/welcome-new-teacher';
 import styles from './teacher-dashboard.module.scss';
+import { Dialog } from 'evergreen-ui';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 /* eslint-disable-next-line */
 export interface TeacherDashboardProps {}
 
 export function TeacherDashboard(props: TeacherDashboardProps) {
   const { user } = useUser();
+  const [openModal, setOpenModal] = useState(false);
+  const { createCourse } = useTeacher();
+  const navigate = useNavigate();
+
+  const openNewCourse = () => {
+    setOpenModal(true);
+  };
+
+  const saveNewCourse = async (newCourseParams: any) => {
+    setOpenModal(false);
+    const { success, data } = await createCourse(newCourseParams);
+    const { id } = data;
+    if (success) {
+      navigate(`/teacher/courses/edit/${id}`);
+    } else {
+      console.log('error: ', data);
+    }
+  };
   return (
     <div className={`${styles['container']}`}>
       <div className={styles['layout']}>
         <div className={styles['content']}>
-          <h1>Bienvenido {user.fullname}</h1>
+          <div className={styles['dashboard-content']}>
+            <h1 className={styles['name-teacher']}>
+              Bienvenido {user.fullname}!
+            </h1>
+            <h4 className={styles['text-dashboard']}>
+              Al crear un curso, asegúrate de establecer objetivos claros y
+              específicos, esto ayudará a tus alumnos a entender lo que se
+              espera de ellos y a mantenerse enfocados y motivados a medida que
+              avanzan en el curso.
+            </h4>
+            <div className={styles['btn-content']}>
+              <Button
+                title="Crear Curso"
+                icon="plus"
+                color={ColorsButton.secondary}
+                onClick={() => {
+                  openNewCourse();
+                }}
+              />
+            </div>
+          </div>
           {user.teacher_account !== StatusTeacherAccount.approved && (
             <WelcomeNewTeacher />
           )}
@@ -67,6 +109,20 @@ export function TeacherDashboard(props: TeacherDashboardProps) {
               link="/blog"
             />
           </NoticeCard>
+          <Dialog
+            isShown={openModal}
+            hasFooter={false}
+            hasHeader={false}
+            onCloseComplete={() => setOpenModal(false)}
+            width={'40vw'}
+          >
+            <NewCourseForm
+              onSubmit={(data) => {
+                saveNewCourse(data);
+              }}
+              onCancel={() => setOpenModal(false)}
+            />
+          </Dialog>
         </div>
       </div>
     </div>

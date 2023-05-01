@@ -13,7 +13,6 @@ import {
 } from '@ltpx-frontend-apps/shared-ui';
 import { Outlet } from 'react-router-dom';
 import avatar from './../../../assets/images/avatars/avatar-3.svg';
-import { StatusTeacherAccount } from '@ltpx-frontend-apps/api';
 import { useTeacherLayout } from './useTeacherLayout';
 import { ChatNewPrivateRoom } from '../../components';
 import Notifications from '../../components/notifications/notifications';
@@ -27,7 +26,6 @@ export function TeacherLayout() {
     headerLinks,
     handleNewChat,
     logoutSession,
-    teacherAccount,
     users,
     currentUser,
     openChat,

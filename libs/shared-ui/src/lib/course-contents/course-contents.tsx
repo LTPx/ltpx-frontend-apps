@@ -9,14 +9,15 @@ export interface CourseContent{
 
 export interface CourseContentsProps {
   contents : CourseContent[];
+  lock?: boolean;
 }
 
 export function CourseContents(props: CourseContentsProps) {
-  const { contents } = props;
+  const { contents, lock } = props;
   return (
     <div className={styles['container']}>
       {contents.map((content, index) =>(
-        <PanelAccordion title={content.title} key={index}>
+        <PanelAccordion lock={lock} title={content.title} key={index}>
           <pre className={styles['content']}>
             {content.description}
           </pre>

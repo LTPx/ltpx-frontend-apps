@@ -22,7 +22,12 @@ export function TeacherApply() {
   const [formData, setFormData] = useState<ApplyTeachApiParams>();
   const [openConfirmationModal, setOpenConfirmationModal] = useState(false);
   const [application, setApplication] = useState<ApplicationTeach>();
-  const { applyTeach, teacher_account, getApplicationTeach } = useTeacher();
+  const {
+    applyTeach,
+    teacher_account,
+    getApplicationTeach,
+    _updateApplicationTeach,
+  } = useTeacher();
   const navigate = useNavigate();
   const { t } = useTranslation();
   const { setMessageToast } = useUtil();
@@ -55,6 +60,24 @@ export function TeacherApply() {
     }
   };
 
+  const handleUpdate = async () => {
+    if (formData && application) {
+      setSaving(true);
+      const { success, error } = await _updateApplicationTeach(application.id, {
+        ...formData,
+        ...{ id: application.id },
+      });
+      setSaving(false);
+      setOpenConfirmationModal(false);
+      if (success) {
+        setMessageToast('success', 'Tu solicitud ha sido actualizada');
+        navigate('/teacher/dashboard');
+      } else {
+        setMessageToast('error', error);
+      }
+    }
+  };
+
   return (
     <div className={`${styles['container']} card`}>
       <div className={`${styles['header']}`}>
@@ -62,6 +85,28 @@ export function TeacherApply() {
       </div>
       {application?.status === StatusTeacherAccount.review && (
         <ApplicationView application={application} />
+      )}
+      {application?.status === StatusTeacherAccount.rejected && (
+        <>
+          {application.comments?.map((element, index) => (
+            <div className={styles['comments-applyTeach']} key={index}>
+              <p>
+                <strong>Comentarios de Revision: </strong>
+                <h4>{element.comment}</h4>
+              </p>
+            </div>
+          ))}
+          <p className={`${styles['text-rejected']}`}>
+            {t('teacherApply.text')}
+          </p>
+          <ApplyTeacherForm
+            onSubmitForm={(data: ApplyTeachApiParams) => {
+              setOpenConfirmationModal(true);
+              setFormData(data);
+            }}
+            application={application}
+          />
+        </>
       )}
       {teacher_account === StatusTeacherAccount.unapplied && (
         <>
@@ -95,7 +140,11 @@ export function TeacherApply() {
                 <Button
                   title={t('buttons.sendReview')}
                   onClick={() => {
-                    handleSubmit();
+                    if (application?.id) {
+                      handleUpdate();
+                    } else {
+                      handleSubmit();
+                    }
                   }}
                 />
               </div>

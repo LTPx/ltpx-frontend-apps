@@ -1,5 +1,15 @@
 @import '../../../styles.scss';
 
+.comments-applyTeach {
+  padding: 2rem 1.5rem;
+  border: 1px solid $gray-color-200;
+  border-radius: 8px;
+  // color: $green-color;
+  background-color: $gray-color-100;
+}
+.text-rejected {
+  margin-top: 1rem;
+}
 .container {
   width: 60vw;
   padding: 4rem 6rem;

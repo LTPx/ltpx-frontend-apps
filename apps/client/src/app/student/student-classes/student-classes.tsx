@@ -25,12 +25,12 @@ export function StudentClasses() {
 
   return (
     <div className={styles['wrap']}>
-      <div className={`${styles['container']} card with-padding`}>
+      <div className={styles['container']}>
         <h2 className="">Clases de este mes</h2>
-        <h5 className="add-space-bottom muted">
+        <h4>
           Una vez el profesor inicie la clase se habilitara un link para que te
           unas
-        </h5>
+        </h4>
         {classroomClasses.map((item, index) => (
           <div className={styles['meetings']} key={index}>
             {item.meetings.map((meeting, indexMeeting) => (

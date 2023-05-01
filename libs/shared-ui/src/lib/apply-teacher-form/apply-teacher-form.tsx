@@ -9,6 +9,7 @@ import {
   TypeFile,
 } from '@ltpx-frontend-apps/shared-ui';
 import {
+  ApplicationTeach,
   ApplyTeachApiParams,
   COUNTRIES_ABLE_APP,
 } from '@ltpx-frontend-apps/api';
@@ -18,6 +19,7 @@ import { useTranslation } from 'react-i18next';
 /* eslint-disable-next-line */
 export interface ApplyTeacherFormProps {
   onSubmitForm: (data: ApplyTeachApiParams) => void;
+  application?: ApplicationTeach;
 }
 
 export function ApplyTeacherForm(props: ApplyTeacherFormProps) {
@@ -28,18 +30,18 @@ export function ApplyTeacherForm(props: ApplyTeacherFormProps) {
       value: value,
     };
   });
-  const { onSubmitForm } = props;
+  const { onSubmitForm, application } = props;
   const formik = useFormik({
     initialValues: {
-      name: '',
-      phone: '',
-      national_id: '',
+      name: application?.name || '',
+      phone: application?.phone || '',
+      national_id: application?.national_id || '',
       national_id_front: '',
       national_id_back: '',
-      country: '',
-      city: '',
-      experience: '',
-      degrees: '',
+      country: application?.country || '',
+      city: application?.city || '',
+      experience: application?.experience || '',
+      degrees: application?.degrees || '',
       degrees_files: '',
       police_record: '',
     },
@@ -114,7 +116,7 @@ export function ApplyTeacherForm(props: ApplyTeacherFormProps) {
         ),
     }),
     onSubmit: (data) => {
-      onSubmitForm(data);
+        onSubmitForm(data);
     },
   });
   return (

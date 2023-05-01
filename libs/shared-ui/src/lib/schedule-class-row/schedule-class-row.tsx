@@ -1,4 +1,4 @@
-import { Icon, MenuItem, Menu, Tag} from '@ltpx-frontend-apps/shared-ui';
+import { Icon, MenuItem, Menu, Tag } from '@ltpx-frontend-apps/shared-ui';
 import { ReactElement } from 'react';
 import styles from './schedule-class-row.module.scss';
 

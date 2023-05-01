@@ -5,7 +5,6 @@ import styles from './tabs.module.scss';
 /* eslint-disable-next-line */
 export interface Tab {
   text: string;
-  selected?: boolean;
   url?: string;
   children?: ReactElement;
 }
@@ -17,11 +16,12 @@ export interface TabsProps {
   className?: string;
   classNameText?: string;
   onClickTab?: (indexTab: number) => void;
+  indexTabSelected?: number;
 }
 
 export function Tabs(props: TabsProps) {
-  const { tabs, isNav, onClickTab, vertical, className, classNameText } = props;
-  const [indexSelected, setIndexSelected] = useState(0);
+  const { tabs, isNav, onClickTab, vertical, className, classNameText, indexTabSelected } = props;
+  const [indexSelected, setIndexSelected] = useState(indexTabSelected || 0);
   const selectTab = (index: number) => {
     setIndexSelected(index);
     onClickTab && onClickTab(index);

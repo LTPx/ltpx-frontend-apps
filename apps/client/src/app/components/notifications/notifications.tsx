@@ -8,10 +8,7 @@ import {
 import styles from './notifications.module.scss';
 import { useCallback, useEffect, useState } from 'react';
 import { useUser } from '@ltpx-frontend-apps/store';
-import {
-  NotificationMeta,
-  NotificationModel,
-} from '@ltpx-frontend-apps/api';
+import { NotificationMeta, NotificationModel } from '@ltpx-frontend-apps/api';
 import { messaging } from '../../../firebase';
 import { getToken } from 'firebase/messaging';
 import { NavLink } from 'react-router-dom';
@@ -80,28 +77,87 @@ export function Notifications() {
 
   function buildTextLink(text: string, meta: NotificationMeta) {
     const links = {
-      fill_application: '/teacher/apply-teach',
-      application_require_change: '/teacher/apply-teach',
-      application_approved: '/teacher/dashboard',
-      course_need_changes: '/teacher/courses/all',
-      course_approved: '/teacher/courses/all',
-      new_student: `/teacher/courses/${meta.entity_id}/students`,
-      task_need_review: `/teacher/courses/${meta.entity_id}/students`,
-      quiz_need_review: `/teacher/courses/${meta.entity_id}/students`,
-      add_credit: '/teacher/earnings',
-      withdrawal_completed: '/teacher/earnings',
-      student_enrolled: '/student/dashboard',
-      class_started: '/student/classes',
-      task_reviewed: `/student/course/${meta.entity_meta?.course_slug}`,
-      quiz_reviewed: `/student/course/${meta.entity_meta?.course_slug}`,
-      achievement_reached: `/student/course/${meta.entity_meta?.course_slug}`,
-      course_completed: `/student/course/${meta.entity_meta?.course_slug}`,
-      chat_unread_messages: '/student/dashboard',
+      fill_application: {
+        url: '/teacher/apply-teach',
+        params: ''
+      },
+      application_require_change: {
+        url: '/teacher/apply-teach',
+        params: ''
+      },
+      application_approved: {
+        url: '/teacher/dashboard',
+        params: ''
+      },
+      course_need_changes: {
+        url: '/teacher/courses/all',
+        params: ''
+      },
+      course_approved: {
+        url: '/teacher/courses/all',
+        params: ''
+      },
+      new_student: {
+        url: `/teacher/courses/${meta.entity_id}/students`,
+        params: ''
+      },
+      task_need_review: {
+        url: `/teacher/courses/${meta.entity_id}/students`,
+        params: '?tab=tasks'
+      },
+      quiz_need_review: {
+        url: `/teacher/courses/${meta.entity_id}/students`,
+        params: '?tab=quizzes'
+      },
+      add_credit: {
+        url: '/teacher/earnings',
+        params: ''
+      },
+      withdrawal_completed: {
+        url: '/teacher/earnings',
+        params: ''
+      },
+      student_enrolled: {
+        url: '/student/dashboard',
+        params: ''
+      },
+      class_started: {
+        url: '/student/classes',
+        params: ''
+      },
+      task_reviewed: {
+        url: `/student/course/${meta.entity_meta?.course_slug}`,
+        params: '?tab=tasks'
+      },
+      quiz_reviewed:  {
+        url: `/student/course/${meta.entity_meta?.course_slug}`,
+        params: '?tab=quizzes'
+      },
+      achievement_reached: {
+        url: `/student/course/${meta.entity_meta?.course_slug}`,
+        params: '?tab=achievements'
+      },
+      course_completed: {
+        url: `/student/course/${meta.entity_meta?.course_slug}`,
+        params: ''
+      },
+      chat_unread_messages: {
+        url: '/student/dashboard',
+        params: ''
+      },
     };
     const linkToDetails = links[meta.action];
     return (
       <div className="text">
-        {text} <NavLink to={linkToDetails}> Da clic aquí para revisar</NavLink>
+        {text}{' '}
+        <NavLink
+          to={{
+            pathname: linkToDetails.url,
+            search: linkToDetails.params,
+          }}
+        >
+          Da clic aquí para revisar
+        </NavLink>
       </div>
     );
   }

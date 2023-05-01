@@ -8,7 +8,7 @@ import {
   Select,
   TeacherCourseCard,
 } from '@ltpx-frontend-apps/shared-ui';
-import { useCourseUtil, useTeacher, useUtil } from '@ltpx-frontend-apps/store';
+import { useTeacher, useUtil } from '@ltpx-frontend-apps/store';
 import { Dialog } from 'evergreen-ui';
 import { useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -16,10 +16,8 @@ import { useNavigate } from 'react-router-dom';
 import styles from './teacher-courses.module.scss';
 
 const placeholderImage = '../../../../assets/images/placeholder-image.svg';
-/* eslint-disable-next-line */
-export interface TeacherCoursesProps {}
 
-export function TeacherCourses(props: TeacherCoursesProps) {
+export function TeacherCourses() {
   const [courses, setCourses] = useState<TeacherCourse[]>([]);
   const [openModal, setOpenModal] = useState(false);
   const { myCourses, removeCourse, createCourse, _getCourses, loadingTeacherApi } = useTeacher();
@@ -38,7 +36,7 @@ export function TeacherCourses(props: TeacherCoursesProps) {
 
   useEffect(() => {
     fetchDataCourses();
-  }, [fetchDataCourses]);
+  }, []);
 
   const categories = [
     { value: 'all', text: t('teacherCourse.categories.all') },

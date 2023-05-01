@@ -49,10 +49,6 @@ export const TeacherRoutes = () => {
             path="live-meeting/:meetingId/:roomId"
             element={<VideoMeetingLive redirectUrl="/teacher/sessions" />}
           />
-          <Route
-            path="live-meeting/:meetingId/:roomId"
-            element={<VideoMeetingLive redirectUrl="/teacher/sessions" />}
-          />
           <Route path="courses" element={<ManageCourses />}>
             <Route
               path="/teacher/courses"

@@ -66,6 +66,7 @@ export const es = {
     draft: 'Borrador',
     published: 'Publicado',
     review: 'En revision',
+    rejected: 'Necesita cambios'
   },
   countries: {
     ec: 'Ecuador',

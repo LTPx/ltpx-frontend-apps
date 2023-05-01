@@ -41,12 +41,14 @@ export function TeacherCourseCard(props: TeacherCourseCardProps) {
     published: ColorsTag.green,
     review: ColorsTag.blue,
     draft: ColorsTag.gray,
+    rejected: ColorsTag.orange,
   };
 
   const statusIcons = {
     published: 'globe',
     review: 'eye',
     draft: 'edit',
+    rejected: 'edit',
   };
 
   return (

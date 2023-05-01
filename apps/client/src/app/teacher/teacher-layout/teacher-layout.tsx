@@ -16,6 +16,7 @@ import avatar from './../../../assets/images/avatars/avatar-3.svg';
 import { useTeacherLayout } from './useTeacherLayout';
 import { ChatNewPrivateRoom } from '../../components';
 import Notifications from '../../components/notifications/notifications';
+// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
 import { onMessageListener } from 'apps/client/src/firebase';
 import { useNotification } from '@ltpx-frontend-apps/store';
 

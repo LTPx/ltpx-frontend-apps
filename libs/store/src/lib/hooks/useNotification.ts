@@ -4,15 +4,16 @@ export const useNotification = (messageListener: any) => {
   const { user, addNotification, notifications } = useUser();
 
   messageListener().then((payload: any) => {
-    console.log('payload: ', payload);
     const { data }  = payload;
+    const metaNotification = JSON.parse(data.meta);
     const newNotification = {
       user_id: user.id,
       kind: data.type,
       text: data.text,
-      meta: data.meta,
+      meta: metaNotification.data,
       created_at: data.created_at,
     }
+    console.log('newNotification: ', newNotification);
     if (data.receiver_id == user.id) {
       addNotification(newNotification);
     }

@@ -11,6 +11,7 @@ interface ActionButton {
 export interface PanelAccordionProps {
   title: string;
   subTitle?: string;
+  lock?: boolean;
   text?: string;
   data?: any;
   children?: any;
@@ -21,10 +22,21 @@ export interface PanelAccordionProps {
 export function PanelAccordion(props: PanelAccordionProps) {
   const [isOpen, setIsOpen] = useState(false);
 
-  const {subTitle, classNameSubTitle, title, text, children, actions, data } = props;
+  const {
+    subTitle,
+    lock,
+    classNameSubTitle,
+    title,
+    text,
+    children,
+    actions,
+    data,
+  } = props;
 
   const handleClick = () => {
-    setIsOpen(!isOpen);
+    {
+      !lock && setIsOpen(!isOpen);
+    }
   };
 
   return (
@@ -32,26 +44,32 @@ export function PanelAccordion(props: PanelAccordionProps) {
       <div className={styles['accordion']} onClick={handleClick}>
         <div className={styles['title-content']}>
           <h4>{title}</h4>
-          <h4 className={`${classNameSubTitle} ${styles['subtitle']}`}>{subTitle}</h4>
+          <h4 className={`${classNameSubTitle} ${styles['subtitle']}`}>
+            {subTitle}
+          </h4>
         </div>
-        <div className={styles['actions']}>
-          {actions?.map((action, index) => (
-            <div
-              key={index}
-              className={styles['action']}
-              onClick={() => {
-                action.onClick(data);
-              }}
-            >
-              <Icon icon={action.icon} size={15} />
-            </div>
-          ))}
-          {isOpen === false ? (
-            <Icon icon={'caret-down'} size={20}></Icon>
-          ) : (
-            <Icon icon={'caret-up'} size={20}></Icon>
-          )}
-        </div>
+        {!lock ? (
+          <div className={styles['actions']}>
+            {actions?.map((action, index) => (
+              <div
+                key={index}
+                className={styles['action']}
+                onClick={() => {
+                  action.onClick(data);
+                }}
+              >
+                <Icon icon={action.icon} size={15} />
+              </div>
+            ))}
+            {isOpen === false ? (
+              <Icon icon={'caret-down'} size={20}></Icon>
+            ) : (
+              <Icon icon={'caret-up'} size={20}></Icon>
+            )}
+          </div>
+        ) : (
+          <Icon color='#64748b' icon={'locked'} size={20}></Icon>
+        )}
       </div>
       <div className={`${styles['panel']} ${isOpen ? styles['open'] : ''}`}>
         {children ? children : <pre>{text}</pre>}

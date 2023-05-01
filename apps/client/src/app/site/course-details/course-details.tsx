@@ -260,7 +260,7 @@ export function CourseDetails() {
                     />
                   )}
                   {selectedTab === 1 && (
-                    <CourseContents contents={course.contents || []} />
+                    <CourseContents lock={true} contents={course.contents || []} />
                   )}
                   {selectedTab === 2 && (
                     <div className={styles['achievements']}>

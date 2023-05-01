@@ -5,6 +5,7 @@ export enum StatusTeacherAccount {
   deleted = 'deleted',
   approved = 'approved',
   unapplied = 'unapplied',
+  rejected = 'rejected'
 }
 
 export interface BankAccount {
@@ -46,12 +47,19 @@ interface AttachFile {
   file_url: string;
   filename: string;
 }
+
+interface CommentReview {
+  comment: string;
+  user_id: number;
+}
+
 export interface ApplyTeachModel {
   id: number;
   user_id: number;
   reviewer_id: number;
   name: string;
   national_id: string;
+  comments?: CommentReview[];
   phone: string;
   country: string;
   city: string;

@@ -359,6 +359,7 @@ export const es = {
     false: 'Falso'
   },
   accountBankType: {
-    saving: 'Ahorros'
+    saving: 'Ahorros',
+    credit: 'Crédito'
   }
 }

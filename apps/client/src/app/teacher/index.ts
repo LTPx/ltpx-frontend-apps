@@ -17,6 +17,10 @@ export * from './teacher-account-bank/teacher-account-bank';
 export * from './bank-account-edit/bank-account-edit';
 export * from './teacher-profile-edit/teacher-profile-edit';
 export * from './password-edit/password-edit';
+export * from './teacher-user-profile/teacher-user-profile';
+export * from './user-profile-edit/user-profile-edit';
+
+
 
 
 

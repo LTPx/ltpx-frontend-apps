@@ -8,13 +8,15 @@ export const useEditCourse = () => {
   const statusColors = {
     published: ColorsTag.green,
     review: ColorsTag.blue,
-    draft: ColorsTag.gray
+    draft: ColorsTag.gray,
+    rejected: ColorsTag.orange
   }
 
   const statusIcons = {
     published: 'globe',
     review: 'eye',
-    draft: 'edit'
+    draft: 'edit',
+    rejected: 'pencil'
   }
 
   const [notification, setNotification] = useState({

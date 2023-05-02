@@ -17,6 +17,8 @@ import {
   TeacherLayout,
   TeacherMeetingsAgenda,
   TeacherProfileEdit,
+  TeacherUserProfile,
+  UserProfileEdit,
 } from '../teacher';
 import VideoMeetingLive from '../video/video-meeting-live/video-meeting-live';
 import { ProtectedRoutesTeacher } from './guards/protected-routes-teacher/protected-routes-teacher';
@@ -69,10 +71,12 @@ export const TeacherRoutes = () => {
             />
             <Route path="account-form" element={<TeacherAccount />} />
             <Route path="account-profile" element={<TeacherAccountProfile />} />
+            <Route path="account-user" element={<TeacherUserProfile />} />
             <Route path="account-bank" element={<TeacherAccountBank />} />
             <Route path="account-bank-edit" element={<BankAccountEdit />} />
             <Route path="profile-edit" element={<TeacherProfileEdit />} />
             <Route path="password-edit" element={<PasswordEdit />} />
+            <Route path="user-edit" element={<UserProfileEdit />} />
           </Route>
         </Route>
       </Routes>

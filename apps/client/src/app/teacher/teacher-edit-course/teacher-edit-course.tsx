@@ -1,5 +1,9 @@
 import styles from './teacher-edit-course.module.scss';
-import { CourseStatus, FormatResponse, TeacherCourse } from '@ltpx-frontend-apps/api';
+import {
+  CourseStatus,
+  FormatResponse,
+  TeacherCourse,
+} from '@ltpx-frontend-apps/api';
 import {
   Button,
   ColorsButton,
@@ -29,11 +33,7 @@ import { useTranslation } from 'react-i18next';
 import { useEditCourse } from './useEditCourse';
 
 export function TeacherEditCourse() {
-  const {
-    tabs,
-    statusColors,
-    statusIcons
-  } = useEditCourse();
+  const { tabs, statusColors, statusIcons } = useEditCourse();
   const [indexSelectedView, setIndexSelectedView] = useState(0);
   const [course, setCourse] = useState<TeacherCourse>();
   const { getCourse, cleanCourse } = useCourse();
@@ -82,43 +82,67 @@ export function TeacherEditCourse() {
 
   return (
     <div className={styles['container']}>
-      {course?.id &&
-        <div className={styles['header']}>
-          <div className={styles['title-content']}>
-            <div className={styles['details']}>
-              <h1 className={styles['course-title']}>{course.title}</h1>
-            </div>
-            <div className={styles['details']}>
-              <Tag
-                text={translateStatus(course.status)}
-                color={statusColors[course.status]}
-                icon={statusIcons[course.status]}
-              />
+      {course?.id && (
+        <>
+          <div className={styles['header']}>
+            <div className={styles['title-content']}>
               <div className={styles['details']}>
-                <Icon icon="calendar-days" size={18} />
-                <h5>Ultima Edición: {formatDate(course.updated_at)}</h5>
+                <h1 className={styles['course-title']}>{course.title}</h1>
+              </div>
+              <div className={styles['details']}>
+                <Tag
+                  text={translateStatus(course.status)}
+                  color={statusColors[course.status]}
+                  icon={statusIcons[course.status]}
+                />
+                <div className={styles['details']}>
+                  <Icon icon="calendar-days" size={18} />
+                  <h5>Ultima Edición: {formatDate(course.updated_at)}</h5>
+                </div>
               </div>
             </div>
+            <div className={styles['actions']}>
+              <Button
+                title={t('buttons.sendReview')}
+                color={ColorsButton.secondary}
+                type={TypeButton.submit}
+                outline={true}
+                icon="rocket"
+                onClick={handleSendToReview}
+                disabled={
+                  course.status === CourseStatus.publish ||
+                  course.status === CourseStatus.review
+                }
+              />
+              <Button
+                title={t('buttons.saveDraft')}
+                color={ColorsButton.primary}
+                link={'/teacher/courses/all'}
+                onClick={cleanCourse}
+              />
+            </div>
           </div>
-          <div className={styles['actions']}>
-            <Button
-              title={t('buttons.sendReview')}
-              color={ColorsButton.secondary}
-              type={TypeButton.submit}
-              outline={true}
-              icon="rocket"
-              onClick={handleSendToReview}
-              disabled={course.status !== CourseStatus.draft}
-            />
-            <Button
-              title={t('buttons.saveDraft')}
-              color={ColorsButton.primary}
-              link={'/teacher/courses/all'}
-              onClick={cleanCourse}
-            />
-          </div>
-        </div>
-      }
+          {course.status === CourseStatus.rejected && (
+            <div className={styles['comment-admin']}>
+              <h4 className={styles['changes-title']}>
+                Cambios sugeridos por Openmind:
+              </h4>
+              {course.admin_comments && (
+                <div>
+                  {course.admin_comments.map((element, index) => (
+                    <div className={styles['comment']} key={index}>
+                      <h4>{element.comment}</h4>
+                      <h5 className={styles['date-comment']}>
+                        Fecha de comentario: {formatDate(element.created_at)}
+                      </h5>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          )}
+        </>
+      )}
       {course?.id && (
         <div className={styles['content']}>
           <Tabs tabs={tabs} onClickTab={setIndexSelectedView} />

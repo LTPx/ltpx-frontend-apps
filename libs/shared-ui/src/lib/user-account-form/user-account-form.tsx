@@ -3,7 +3,7 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import Input from '../input/input';
 import Button, { ColorsButton, TypeButton } from '../button/button';
-import { IUserAccount } from '@ltpx-frontend-apps/api';
+import { IUserAccount, UserStore } from '@ltpx-frontend-apps/api';
 import InputTextStatus, {
   StatusInputText,
 } from '../input-text-status/input-text-status';
@@ -12,10 +12,10 @@ import { useTranslation } from 'react-i18next';
 
 export interface UserAccountFormProps {
   onSubmit: (user: IUserAccount) => void;
-  user?: IUserAccount;
+  user: IUserAccount;
   url?: string;
 }
- 
+
 export function UserAccountForm(props: UserAccountFormProps) {
   const { onSubmit, user, url } = props;
   const { t } = useTranslation();
@@ -66,16 +66,6 @@ export function UserAccountForm(props: UserAccountFormProps) {
                   />
                 ) : null}
               </div>
-              <Input
-                label={t('userAccountForm.userName') || ''}
-                name="username"
-                placeholder="Nombre de Usuario"
-                onChange={(e: any) => {
-                  formik.handleChange(e);
-                }}
-                value={formik.values.username}
-                onBlur={formik.handleBlur}
-              />
               <div>
                 <Input
                   label={t('userAccountForm.email') || ''}

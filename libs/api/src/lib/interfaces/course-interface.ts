@@ -17,6 +17,7 @@ export enum CourseStatus {
   publish = 'published',
   review = 'review',
   draft = 'draft',
+  rejected = 'rejected'
 }
 
 export enum CourseLanguage {
@@ -78,6 +79,13 @@ export interface CourseModel {
   tasks: TaskModel[];
   slug: string;
   teacher?: TeacherProfile;
+  admin_comments?: AdminComment[];
+}
+
+export interface AdminComment {
+  comment: string;
+  created_at: string;
+  user_id: number
 }
 
 export interface CourseSite {

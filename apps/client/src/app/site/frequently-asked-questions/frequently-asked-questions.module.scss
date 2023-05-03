@@ -45,6 +45,9 @@
 //smartphones-responsive
 @media screen and (max-width: 550px) {
   .container {
+    .subtitle {
+      padding-top: 1rem ;
+    }
     .content {
       width: 90%;
       padding: 3rem 0;

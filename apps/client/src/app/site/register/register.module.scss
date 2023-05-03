@@ -76,3 +76,16 @@
   }
 
 }
+
+//tablet-responsive-horizontal
+@media screen and (min-width: 860px) and (max-width: 1224px) {
+  .container {
+    width: 60% !important;
+  }
+}
+//tablet-responsive-vertical
+@media screen and (min-width: 560px) and (max-width: 850px) {
+  .container {
+    width: 80% !important;
+  }
+}

@@ -40,29 +40,35 @@ export function TeacherDashboard(props: TeacherDashboardProps) {
     <div className={`${styles['container']}`}>
       <div className={styles['layout']}>
         <div className={styles['content']}>
-          <div className={styles['dashboard-content']}>
-            <h1 className={styles['name-teacher']}>
-              Bienvenido {user.fullname}!
-            </h1>
-            <h4 className={styles['text-dashboard']}>
-              Al crear un curso, asegúrate de establecer objetivos claros y
-              específicos, esto ayudará a tus alumnos a entender lo que se
-              espera de ellos y a mantenerse enfocados y motivados a medida que
-              avanzan en el curso.
-            </h4>
-            <div className={styles['btn-content']}>
-              <Button
-                title="Crear Curso"
-                icon="plus"
-                color={ColorsButton.secondary}
-                onClick={() => {
-                  openNewCourse();
-                }}
-              />
+          {user.teacher_account !== StatusTeacherAccount.approved ? (
+            <div>
+              <h1 className={styles['name-teacher']}>
+                Bienvenido {user.fullname}!
+              </h1>
+              <WelcomeNewTeacher />
             </div>
-          </div>
-          {user.teacher_account !== StatusTeacherAccount.approved && (
-            <WelcomeNewTeacher />
+          ) : (
+            <div className={styles['dashboard-content']}>
+              <h1 className={styles['name-teacher']}>
+                Bienvenido {user.fullname}!
+              </h1>
+              <h4 className={styles['text-dashboard']}>
+                Al crear un curso, asegúrate de establecer objetivos claros y
+                específicos, esto ayudará a tus alumnos a entender lo que se
+                espera de ellos y a mantenerse enfocados y motivados a medida
+                que avanzan en el curso.
+              </h4>
+              <div className={styles['btn-content']}>
+                <Button
+                  title="Crear Curso"
+                  icon="plus"
+                  color={ColorsButton.secondary}
+                  onClick={() => {
+                    openNewCourse();
+                  }}
+                />
+              </div>
+            </div>
           )}
         </div>
         <div className={styles['help-ads']}>

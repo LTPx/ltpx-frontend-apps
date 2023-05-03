@@ -29,7 +29,7 @@ export function WelcomeNewTeacher(props: WelcomeNewTeacherProps) {
             </p>
             <Button
               title={
-                teacher_account === StatusTeacherAccount.review || StatusTeacherAccount.rejected
+                teacher_account === StatusTeacherAccount.review || teacher_account === StatusTeacherAccount.rejected
                   ? 'Revisar Solicitud'
                   : 'Aplicar Ahora'
               }

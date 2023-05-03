@@ -35,9 +35,23 @@
     color: $secondary-color-500;
   }
 }
+
 //smartphones-responsive
 @media screen and (max-width: 550px) {
   .description {
     width: 10rem;
+  }
+}
+
+//tablet-responsive-vertical
+@media screen and (min-width: 560px) and (max-width: 850px) {
+  .description {
+    width: 12rem;
+  }
+}
+//tablet-responsive-horizontal
+@media screen and (min-width: 860px) and (max-width: 1224px) {
+  .description {
+    width: 11rem;
   }
 }

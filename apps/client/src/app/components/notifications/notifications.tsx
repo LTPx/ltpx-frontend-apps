@@ -8,9 +8,10 @@ import {
 import styles from './notifications.module.scss';
 import { useCallback, useEffect, useState } from 'react';
 import { useUser } from '@ltpx-frontend-apps/store';
-import { NotificationModel } from '@ltpx-frontend-apps/api';
+import { NotificationMeta, NotificationModel } from '@ltpx-frontend-apps/api';
 import { messaging } from '../../../firebase';
 import { getToken } from 'firebase/messaging';
+import { NavLink } from 'react-router-dom';
 
 export function Notifications() {
   const {
@@ -39,7 +40,9 @@ export function Notifications() {
 
   async function fetchToken() {
     try {
-      const token = await getToken(messaging, {vapidKey: process.env.NX_FIREBASE_VAPID_KEY});
+      const token = await getToken(messaging, {
+        vapidKey: process.env.NX_FIREBASE_VAPID_KEY,
+      });
       if (token) {
         await _setTokenDevice(token);
       }
@@ -47,7 +50,6 @@ export function Notifications() {
       console.log('An error occurred while retrieving token. ', error);
     }
   }
-
 
   useEffect(() => {
     fetchNotifications();
@@ -66,11 +68,98 @@ export function Notifications() {
       const icon = icons[notification.kind];
       return {
         kind: notification.kind,
-        text: notification.text,
+        text: buildTextLink(notification.text, notification.meta),
         date: fromNow(notification.created_at),
         icon: icon,
       };
     });
+  }
+
+  function buildTextLink(text: string, meta: NotificationMeta) {
+    const links = {
+      fill_application: {
+        url: '/teacher/apply-teach',
+        params: ''
+      },
+      application_require_change: {
+        url: '/teacher/apply-teach',
+        params: ''
+      },
+      application_approved: {
+        url: '/teacher/dashboard',
+        params: ''
+      },
+      course_need_changes: {
+        url: '/teacher/courses/all',
+        params: ''
+      },
+      course_approved: {
+        url: '/teacher/courses/all',
+        params: ''
+      },
+      new_student: {
+        url: `/teacher/courses/${meta.entity_id}/students`,
+        params: ''
+      },
+      task_need_review: {
+        url: `/teacher/courses/${meta.entity_id}/students`,
+        params: '?tab=tasks'
+      },
+      quiz_need_review: {
+        url: `/teacher/courses/${meta.entity_id}/students`,
+        params: '?tab=quizzes'
+      },
+      add_credit: {
+        url: '/teacher/earnings',
+        params: ''
+      },
+      withdrawal_completed: {
+        url: '/teacher/earnings',
+        params: ''
+      },
+      student_enrolled: {
+        url: '/student/dashboard',
+        params: ''
+      },
+      class_started: {
+        url: '/student/classes',
+        params: ''
+      },
+      task_reviewed: {
+        url: `/student/course/${meta.entity_meta?.course_slug}`,
+        params: '?tab=tasks'
+      },
+      quiz_reviewed:  {
+        url: `/student/course/${meta.entity_meta?.course_slug}`,
+        params: '?tab=quizzes'
+      },
+      achievement_reached: {
+        url: `/student/course/${meta.entity_meta?.course_slug}`,
+        params: '?tab=achievements'
+      },
+      course_completed: {
+        url: `/student/course/${meta.entity_meta?.course_slug}`,
+        params: ''
+      },
+      chat_unread_messages: {
+        url: '/student/dashboard',
+        params: ''
+      },
+    };
+    const linkToDetails = links[meta.action];
+    return (
+      <div className="text">
+        {text}{' '}
+        <NavLink
+          to={{
+            pathname: linkToDetails.url,
+            search: linkToDetails.params,
+          }}
+        >
+          Da clic aquí para revisar
+        </NavLink>
+      </div>
+    );
   }
 
   async function clearNotifications() {
@@ -85,10 +174,7 @@ export function Notifications() {
   return (
     <Dropdown>
       <NotificationList notifications={notificationsItems} />
-      <div
-        className={styles['avatar']}
-        onClick={clearNotifications}
-      >
+      <div className={styles['avatar']} onClick={clearNotifications}>
         <Cart amount={totalUnreadNotifications} />
       </div>
     </Dropdown>

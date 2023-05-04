@@ -12,6 +12,7 @@ export function TeacherAccountLayout(props: TeacherAccountLayoutProps) {
   const [indexSelected, setIndexSelected] = useState(0);
   const optionsLinks = [
     { text: 'Perfil de Profesor', url: '/teacher/account', icon: 'person' },
+    { text: 'Perfil de Usuario', url: 'account-user', icon: 'user-circle' },
     { text: 'Cuenta Bancaria', url: 'account-bank', icon: 'bank' },
     { text: 'Cambiar Contraseña', url: 'password-edit', icon: 'key' },
   ];
@@ -38,6 +39,7 @@ export function TeacherAccountLayout(props: TeacherAccountLayoutProps) {
               <div className={styles['links-wrap']}>
                 {optionsLinks.map((option, index) => (
                   <NavLink
+                    key={index}
                     className={
                       indexSelected === index
                         ? `${styles['tab']} ${styles['selected']}`

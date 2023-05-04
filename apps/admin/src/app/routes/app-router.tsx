@@ -6,7 +6,6 @@ import CoursesPages from '../pages/courses-pages/courses-pages';
 import DashboardPage from '../pages/dashboard-page/dashboard-page';
 import LearningPathPage from '../pages/learning-path-page/learning-path-page';
 import Login from '../pages/login/login';
-import NewUserPage from '../pages/new-user-page/new-user-page';
 import PaymentsDetailsPage from '../pages/payments-details-page/payments-details-page';
 import PaymentsPage from '../pages/payments-page/payments-page';
 import SettingsAppPage from '../pages/settings-app-page/settings-app-page';
@@ -29,7 +28,6 @@ export const AppRouter = () => {
         <Route path="payments" element={<PaymentsPage />} />
       </Route>
       <Route path="login" element={<Login />} />
-      <Route path="new-user" element={<NewUserPage />} />
       <Route path="/" element={<Login />} />
     </Routes>
   );

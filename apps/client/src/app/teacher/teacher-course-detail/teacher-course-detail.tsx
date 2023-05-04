@@ -10,8 +10,8 @@ import {
   QuizzesList,
   Tabs,
 } from '@ltpx-frontend-apps/shared-ui';
-import { useCourseUtil } from '@ltpx-frontend-apps/store';
-import { useEffect, useState } from 'react';
+import { useCourseUtil, useTeacher } from '@ltpx-frontend-apps/store';
+import { useCallback, useEffect, useState } from 'react';
 import { NavLink, useParams } from 'react-router-dom';
 import styles from './teacher-course-detail.module.scss';
 
@@ -27,6 +27,7 @@ const tabs = [
 export function TeacherCourseDetail() {
   const [course, setCourse] = useState<TeacherCourse>();
   const [selectedTab, setSelectedTab] = useState(0);
+  const { _getTeacherCourse } = useTeacher();
   const {
     translateCategory,
     translateLanguage,
@@ -39,25 +40,21 @@ export function TeacherCourseDetail() {
   };
   const params = useParams();
 
-  useEffect(() => {
-    let mounted = true;
-    try {
-      const { courseId } = params;
-      if (courseId) {
-        const id = parseInt(courseId);
-        getTeacherCourse(id).then((course) => {
-          if (mounted) {
-            setCourse(course);
-            console.log('course: ', course);
-          }
-        });
+  const fetchDataCourse = useCallback(async () => {
+    const { courseId } = params;
+    if (courseId) {
+      const id = parseInt(courseId);
+      const { success, data, error } = await _getTeacherCourse(id);
+      if (success) {
+        setCourse(data);
+      } else {
+        console.log(error);
       }
-    } catch (error) {
-      console.log(error);
     }
-    return () => {
-      mounted = false;
-    };
+  }, []);
+
+  useEffect(() => {
+    fetchDataCourse();
   }, []);
 
   return (

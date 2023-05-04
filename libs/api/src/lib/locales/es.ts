@@ -66,6 +66,7 @@ export const es = {
     draft: 'Borrador',
     published: 'Publicado',
     review: 'En revision',
+    rejected: 'Necesita cambios'
   },
   countries: {
     ec: 'Ecuador',
@@ -358,6 +359,7 @@ export const es = {
     false: 'Falso'
   },
   accountBankType: {
-    saving: 'Ahorros'
+    saving: 'Ahorros',
+    credit: 'Crédito'
   }
 }

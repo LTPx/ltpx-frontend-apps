@@ -1,5 +1,9 @@
 import styles from './teacher-edit-course.module.scss';
-import { CourseStatus, FormatResponse } from '@ltpx-frontend-apps/api';
+import {
+  CourseStatus,
+  FormatResponse,
+  TeacherCourse,
+} from '@ltpx-frontend-apps/api';
 import {
   Button,
   ColorsButton,
@@ -29,13 +33,10 @@ import { useTranslation } from 'react-i18next';
 import { useEditCourse } from './useEditCourse';
 
 export function TeacherEditCourse() {
-  const {
-    tabs,
-    statusColors,
-    statusIcons
-  } = useEditCourse();
+  const { tabs, statusColors, statusIcons } = useEditCourse();
   const [indexSelectedView, setIndexSelectedView] = useState(0);
-  const { getCourse, course, cleanCourse } = useCourse();
+  const [course, setCourse] = useState<TeacherCourse>();
+  const { getCourse, cleanCourse } = useCourse();
   const { _sendCourseToReview } = useTeacher();
   const { translateStatus } = useCourseUtil();
   const { setMessageToast } = useUtil();
@@ -46,7 +47,12 @@ export function TeacherEditCourse() {
   const navigate = useNavigate();
 
   const fetchData = useCallback(async () => {
-    await getCourse(id);
+    const { success, data, error } = await getCourse(id);
+    if (success) {
+      setCourse(data);
+    } else {
+      console.log(error);
+    }
   }, []);
 
   useEffect(() => {
@@ -63,53 +69,81 @@ export function TeacherEditCourse() {
   };
 
   const handleSendToReview = async () => {
-    const { success, error } = await _sendCourseToReview(course.id);
-    if (success) {
-      setMessageToast('success', 'Tu curso ha sido enviado a revision');
-      navigate('/teacher/courses');
-    } else {
-      setMessageToast('error', error);
+    if (course?.id) {
+      const { success, error } = await _sendCourseToReview(course.id);
+      if (success) {
+        setMessageToast('success', 'Tu curso ha sido enviado a revision');
+        navigate('/teacher/courses');
+      } else {
+        setMessageToast('error', error);
+      }
     }
   };
 
   return (
     <div className={styles['container']}>
-      <div className={styles['header']}>
-        <div className={styles['title-content']}>
-          <div className={styles['details']}>
-            <h1 className={styles['course-title']}>{course.title}</h1>
-          </div>
-          <div className={styles['details']}>
-            <Tag
-              text={translateStatus(course.status)}
-              color={statusColors[course.status]}
-              icon={statusIcons[course.status]}
-            />
-            <div className={styles['details']}>
-              <Icon icon="calendar-days" size={18} />
-              <h5>Ultima Edición: {formatDate(course.updated_at)}</h5>
+      {course?.id && (
+        <>
+          <div className={styles['header']}>
+            <div className={styles['title-content']}>
+              <div className={styles['details']}>
+                <h1 className={styles['course-title']}>{course.title}</h1>
+              </div>
+              <div className={styles['details']}>
+                <Tag
+                  text={translateStatus(course.status)}
+                  color={statusColors[course.status]}
+                  icon={statusIcons[course.status]}
+                />
+                <div className={styles['details']}>
+                  <Icon icon="calendar-days" size={18} />
+                  <h5>Ultima Edición: {formatDate(course.updated_at)}</h5>
+                </div>
+              </div>
+            </div>
+            <div className={styles['actions']}>
+              <Button
+                title={t('buttons.sendReview')}
+                color={ColorsButton.secondary}
+                type={TypeButton.submit}
+                outline={true}
+                icon="rocket"
+                onClick={handleSendToReview}
+                disabled={
+                  course.status === CourseStatus.publish ||
+                  course.status === CourseStatus.review
+                }
+              />
+              <Button
+                title={t('buttons.saveDraft')}
+                color={ColorsButton.primary}
+                link={'/teacher/courses/all'}
+                onClick={cleanCourse}
+              />
             </div>
           </div>
-        </div>
-        <div className={styles['actions']}>
-          <Button
-            title={t('buttons.sendReview')}
-            color={ColorsButton.secondary}
-            type={TypeButton.submit}
-            outline={true}
-            icon="rocket"
-            onClick={handleSendToReview}
-            disabled={course.status !== CourseStatus.draft}
-          />
-          <Button
-            title={t('buttons.saveDraft')}
-            color={ColorsButton.primary}
-            link={'/teacher/courses/all'}
-            onClick={cleanCourse}
-          />
-        </div>
-      </div>
-      {course.id && (
+          {course.status === CourseStatus.rejected && (
+            <div className={styles['comment-admin']}>
+              <h4 className={styles['changes-title']}>
+                Cambios sugeridos por Openmind:
+              </h4>
+              {course.admin_comments && (
+                <div>
+                  {course.admin_comments.map((element, index) => (
+                    <div className={styles['comment']} key={index}>
+                      <h4>{element.comment}</h4>
+                      <h5 className={styles['date-comment']}>
+                        Fecha de comentario: {formatDate(element.created_at)}
+                      </h5>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          )}
+        </>
+      )}
+      {course?.id && (
         <div className={styles['content']}>
           <Tabs tabs={tabs} onClickTab={setIndexSelectedView} />
           <div className={styles['section-content']}>

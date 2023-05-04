@@ -75,6 +75,7 @@ export type TeacherSlice = {
   _getWallet: () => Promise<FormatResponse>;
   _getClassrooms: () => Promise<FormatResponse>;
   _getCourses: () => Promise<FormatResponse>;
+  _getTeacherCourse: (courseId: number) => Promise<FormatResponse>;
   _getMeetingRoomId: (id: number) => Promise<FormatResponse>;
   _validateMeetingRoomId: (id: number, roomId: string) => Promise<FormatResponse>;
   _makeWithdrawal: (params: WithdrawalParams) => Promise<FormatResponse>;
@@ -235,6 +236,14 @@ export const createTeacherSlice: StateCreator<
     } catch (error) {
       set({loadingTeacherApi: false})
       return {success: false, error}
+    }
+  },
+  _getTeacherCourse: async (courseId) => {
+    try {
+      const course = await getTeacherCourse(courseId);
+      return { success: true, data: course };
+    } catch (error) {
+      return { success: false, data: error };
     }
   },
   _getMeetingRoomId: async (id) => {

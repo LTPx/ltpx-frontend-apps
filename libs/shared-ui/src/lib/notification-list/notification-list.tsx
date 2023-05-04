@@ -3,7 +3,7 @@ import styles from './notification-list.module.scss';
 
 export interface NotificationItem {
   icon: string;
-  text: string;
+  text: any;
   date: string;
 }
 

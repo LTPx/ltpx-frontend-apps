@@ -1,0 +1,12 @@
+@import '../../../styles.scss';
+
+.title-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.5rem;
+  background-color: $white-color-100;
+  .title {
+    font-weight: 500;
+  }
+}

@@ -3,6 +3,23 @@
 .container {
   min-width: 80vw;
 
+  .dashboard-content {
+    // padding: 2rem 1.5rem;
+    border-radius: 8px;
+
+    .text-dashboard {
+      color: $text-gray-color;
+    }
+
+    .btn-content {
+      padding-top: 1rem;
+    }
+
+    .name-teacher {
+      font-weight: 500;
+    }
+  }
+
   h1 {
     margin-bottom: 1rem;
   }
@@ -18,7 +35,7 @@
     background-color: $white-color;
     border-radius: 15px;
     flex-grow: 1;
-    height:fit-content;
+    height: fit-content;
     padding: 2rem;
     box-shadow: $card-shadow-medium;
   }

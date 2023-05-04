@@ -14,16 +14,30 @@ import StudentCourseAchievements from './tabs/student-course-achievements/studen
 import StudentCourseQuizzes from './tabs/student-course-quizzes/student-course-quizzes';
 import StudentCourseTasks from './tabs/student-course-tasks/student-course-tasks';
 import { Avatar } from 'evergreen-ui';
-
+import { useSearchParams } from 'react-router-dom';
 /* eslint-disable-next-line */
 export interface StudentCourseProps {}
 
+
 export function StudentCourse(props: StudentCourseProps) {
   const { _getStudentCourse, enrolledCourse } = useStudent();
-  const [selectedTab, setSelectedTab] = useState(0);
+  const tabs = [
+    { text: 'Contenidos', value: 'contents' },
+    { text: 'Clases', value: 'classes' },
+    { text: 'Tareas', value: 'tasks' },
+    { text: 'Tests', value: 'quizzes' },
+    { text: 'Logros', value: 'achievements' },
+  ];
   const { slug } = useParams();
   const { _newChatRoom, setShowChat } = useChat();
-  const { customFormatDate, moment } = useMoment();
+  const { customFormatDate } = useMoment();
+  const [searchParams] = useSearchParams();
+  const tab = searchParams.get('tab');
+  const tabIndex = tabs.findIndex((item) => item.value === tab);
+  const initialTabSelectedIndex = tabIndex > 0 ? tabIndex : 0;
+  const [selectedTab, setSelectedTab] = useState(initialTabSelectedIndex);
+
+  console.log('selectedTab: ', selectedTab);
 
   const fetchCourse = useCallback(async () => {
     const { success, data, error } = await _getStudentCourse(slug || '');
@@ -37,14 +51,6 @@ export function StudentCourse(props: StudentCourseProps) {
   useEffect(() => {
     fetchCourse();
   }, []);
-
-  const tabs = [
-    { text: 'Contenidos' },
-    { text: 'Clases' },
-    { text: 'Tareas' },
-    { text: 'Tests' },
-    { text: 'Logros' },
-  ];
 
   const handleClick = (index: number) => {
     setSelectedTab(index);
@@ -107,46 +113,14 @@ export function StudentCourse(props: StudentCourseProps) {
                 tabs={tabs}
                 isNav={false}
                 onClickTab={(option) => handleClick(option)}
+                indexTabSelected={selectedTab}
               />
               <div className={styles['tabs-content']}>
                 {selectedTab === 0 && (
                   <div className={styles['contents-course']}>
-                    {/* <h2 className={styles['title-content']}>Sobre el Curso</h2>
-                    {enrolledCourse.description && (
-                      <div>
-                        {enrolledCourse.description.length > 800 ? (
-                          <>
-                            <p className={styles['about-course']}>
-                              {showMore
-                                ? enrolledCourse.description
-                                : `${enrolledCourse.description.substring(
-                                    0,
-                                    800
-                                  )}....`}
-                            </p>
-                            <div
-                              className={styles['show']}
-                              onClick={() => setShowMore(!showMore)}
-                            >
-                              <h4>
-                                {showMore ? 'Mostrar menos' : 'Mostrar mas'}
-                              </h4>
-                            </div>
-                          </>
-                        ) : (
-                          <p className={styles['about-course']}>
-                            {enrolledCourse.description}
-                          </p>
-                        )}
-                      </div>
-                    )}
-                    <h3 className={styles['subtitle-content']}>Contenidos</h3> */}
                     <CourseContents contents={enrolledCourse.contents || []} />
                   </div>
                 )}
-                {/* <p className={styles['about-course']}>
-                {enrolledCourse.description}
-              </p> */}
                 {selectedTab === 1 && (
                   <div className={styles['course-date']}>
                     {enrolledCourse.session.meetings.map((meeting, index) => (
@@ -184,13 +158,13 @@ export function StudentCourse(props: StudentCourseProps) {
                     ))}
                   </div>
                 )}
-                {selectedTab === 2 && (
+                {selectedTab === 2 && enrolledCourse.id && (
                   <StudentCourseTasks courseId={enrolledCourse.id} />
                 )}
-                {selectedTab === 3 && (
+                {selectedTab === 3 && enrolledCourse.id && (
                   <StudentCourseQuizzes courseId={enrolledCourse.id} />
                 )}
-                {selectedTab === 4 && (
+                {selectedTab === 4 && enrolledCourse.id && (
                   <StudentCourseAchievements courseId={enrolledCourse.id} />
                 )}
               </div>

@@ -2,13 +2,14 @@ import { TeacherCourse, CourseStatus } from '@ltpx-frontend-apps/api';
 import {
   Button,
   ColorsButton,
+  DialogConfirm,
   EmptyState,
   Loader,
   NewCourseForm,
   Select,
   TeacherCourseCard,
 } from '@ltpx-frontend-apps/shared-ui';
-import { useCourseUtil, useTeacher, useUtil } from '@ltpx-frontend-apps/store';
+import { useTeacher, useUtil } from '@ltpx-frontend-apps/store';
 import { Dialog } from 'evergreen-ui';
 import { useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -16,13 +17,20 @@ import { useNavigate } from 'react-router-dom';
 import styles from './teacher-courses.module.scss';
 
 const placeholderImage = '../../../../assets/images/placeholder-image.svg';
-/* eslint-disable-next-line */
-export interface TeacherCoursesProps {}
 
-export function TeacherCourses(props: TeacherCoursesProps) {
+export function TeacherCourses() {
   const [courses, setCourses] = useState<TeacherCourse[]>([]);
   const [openModal, setOpenModal] = useState(false);
-  const { myCourses, removeCourse, createCourse, _getCourses, loadingTeacherApi } = useTeacher();
+  const [openMessage, setOpenMessage] = useState(false);
+  const [saveId, setSaveId] = useState(0);
+
+  const {
+    myCourses,
+    removeCourse,
+    createCourse,
+    _getCourses,
+    loadingTeacherApi,
+  } = useTeacher();
   const navigate = useNavigate();
   const { t } = useTranslation();
   const { setMessageToast } = useUtil();
@@ -38,7 +46,7 @@ export function TeacherCourses(props: TeacherCoursesProps) {
 
   useEffect(() => {
     fetchDataCourses();
-  }, [fetchDataCourses]);
+  }, []);
 
   const categories = [
     { value: 'all', text: t('teacherCourse.categories.all') },
@@ -84,8 +92,11 @@ export function TeacherCourses(props: TeacherCoursesProps) {
               text: 'Eliminar Curso',
               icon: 'trash',
               disabled: course.status === CourseStatus.publish,
-              onClick: () => handleRemoveCourse(course.id),
-            }
+              onClick: () => {
+                setSaveId(course.id);
+                setOpenMessage(true);
+              },
+            },
           ]}
         />
       ))}
@@ -116,10 +127,10 @@ export function TeacherCourses(props: TeacherCoursesProps) {
   async function handleRemoveCourse(courseId: number) {
     const { success, error } = await removeCourse(courseId);
     if (success) {
-      setMessageToast('success', 'El curso ha sido eliminado')
+      setMessageToast('success', 'El curso ha sido eliminado');
     } else {
       console.log('error: ', error);
-      setMessageToast('error', 'No se pudo eliminar al curso')
+      setMessageToast('error', 'No se pudo eliminar al curso');
     }
   }
 
@@ -186,6 +197,16 @@ export function TeacherCourses(props: TeacherCoursesProps) {
           onCancel={() => setOpenModal(false)}
         />
       </Dialog>
+      <DialogConfirm
+        open={openMessage}
+        title={'Estas seguro que deseas eliminar este Curso?'}
+        subtitle="Recuerde que una ves eliminado no podrá volver a recuperar la información"
+        confirm={() => {
+          handleRemoveCourse(saveId);
+          setOpenMessage(false);
+        }}
+        onClose={() => setOpenMessage(false)}
+      />
     </div>
   );
 }

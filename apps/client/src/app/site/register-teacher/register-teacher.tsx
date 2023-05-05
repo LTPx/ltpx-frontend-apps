@@ -112,7 +112,7 @@ export function RegisterTeacher(props: RegisterTeacherProps) {
           {selectedTab === 0 && (
             <div className={styles['tab-container']}>
               <div className={styles['describe-content']}>
-                <h3>
+                <h4>
                   Cualquier persona apasionada por la educación y con
                   experiencia comprobada en los campos elegidos puede postularse
                   para enseñar en OpenMind. A continuación se detalla el proceso
@@ -132,7 +132,7 @@ export function RegisterTeacher(props: RegisterTeacherProps) {
                       antecedentes y verificación de identidad.
                     </li>
                   </ul>
-                </h3>
+                </h4>
               </div>
               <div className={styles['image-content']}>
                 <img
@@ -146,7 +146,7 @@ export function RegisterTeacher(props: RegisterTeacherProps) {
           {selectedTab === 1 && (
             <div className={styles['tab-container']}>
               <div className={styles['describe-content']}>
-                <h3>
+                <h4>
                   Al usar OpenMind como profesor podrás crear tus propios cursos
                   y dar clases fácilmente a alumnos de todo el mundo. Para crear
                   un curso utiliza las herramientas que ofrece OpenMind, en
@@ -157,7 +157,7 @@ export function RegisterTeacher(props: RegisterTeacherProps) {
                     ¿Como crear una gran clase en OpenMind?
                   </NavLink>{' '}
                   para poder empezar.
-                </h3>
+                </h4>
               </div>
               <div className={styles['image-content']}>
                 <img
@@ -171,7 +171,7 @@ export function RegisterTeacher(props: RegisterTeacherProps) {
           {selectedTab === 2 && (
             <div className={styles['tab-container']}>
               <div className={styles['describe-content']}>
-                <h3>
+                <h4>
                   OpenMind promociona tus clases en su marketplace y los
                   docentes con las mejores calificaciones y resultados serán
                   promocionados aún más. Si tus clases tienen alta demanda,
@@ -184,7 +184,7 @@ export function RegisterTeacher(props: RegisterTeacherProps) {
                     Tus resultados dependen de la calidad de tu trabajo y nada
                     más.
                   </strong>
-                </h3>
+                </h4>
               </div>
               <div className={styles['image-content']}>
                 <img

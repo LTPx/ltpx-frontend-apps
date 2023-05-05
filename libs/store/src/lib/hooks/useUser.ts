@@ -21,6 +21,7 @@ export const useUser = () => {
     _updateAccount,
     _setTokenDevice,
     _readNotifications,
+    isPendingValidationAccount,
   } = useAppStore();
 
   return {
@@ -44,5 +45,6 @@ export const useUser = () => {
     _updateAccount,
     _setTokenDevice,
     _readNotifications,
+    isPendingValidationAccount,
   }
 }

@@ -21,9 +21,8 @@ export function Register(props: RegisterProps) {
 
   const onSubmitForm = async (formData: IRegisterUser) => {
     const { success, error } = await register(formData);
-
     if (success) {
-      navigate('/home');
+      navigate('/login');
       window.location.reload();
     } else {
       setRegisterError(error);

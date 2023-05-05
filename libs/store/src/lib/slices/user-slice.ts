@@ -183,9 +183,9 @@ export const createUserSlice: StateCreator<StoreState, [], [], UserSlice> = (
   },
   _readNotifications:async () => {
     try {
-      const user = await readNotifications();
-      set({user})
-      return { success: true, data: user };
+      const resp = await readNotifications();
+      set({user: {...get().user, ...{total_unread_notifications: 0}}})
+      return { success: true, data: resp };
     } catch (error) {
       return { success: false, error: formatErrors(error) };
     }

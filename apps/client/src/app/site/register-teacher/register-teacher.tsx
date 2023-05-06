@@ -48,7 +48,7 @@ export function RegisterTeacher(props: RegisterTeacherProps) {
   const onSubmitForm = async (formData: IRegisterUser) => {
     const { isLogin, data } = await registerTeacher(formData);
     if (isLogin) {
-      navigate('/teacher/dashboard');
+      navigate('/login');
       window.location.reload();
     } else {
       // setError(true);

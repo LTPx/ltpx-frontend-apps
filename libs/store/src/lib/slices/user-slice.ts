@@ -29,6 +29,7 @@ export type UserSlice = {
   notifications: NotificationModel[];
   totalUnreadNotifications: number;
   newNotification: boolean;
+  isPendingValidationAccount: boolean;
   clearUnreadNotification: () => void;
   addNotification: (notification: NotificationModel) => void;
   getCurrentUser: () => Promise<FormatResponse>;
@@ -64,6 +65,7 @@ export const createUserSlice: StateCreator<StoreState, [], [], UserSlice> = (
   notifications: [],
   totalUnreadNotifications: 0,
   newNotification: false,
+  isPendingValidationAccount: !!localStorage.getItem('pending-validation') || false,
   clearUnreadNotification: () => {
     set({ totalUnreadNotifications: 0, newNotification: false });
   },
@@ -106,6 +108,7 @@ export const createUserSlice: StateCreator<StoreState, [], [], UserSlice> = (
         currentView: user.initial_view,
       });
       // localStorage.setItem('view_app', view);
+      localStorage.removeItem('pending-validation');
       return { success: true, data: user };
     } catch (error) {
       return { success: false, error: formatErrors(error) };
@@ -127,14 +130,9 @@ export const createUserSlice: StateCreator<StoreState, [], [], UserSlice> = (
   },
   register: async (params) => {
     try {
-      const user = await registerUser(params);
-      const view = user.initial_view;
-      set({
-        user: user,
-        isAuthenticated: true,
-        currentView: view,
-      });
-      return { success: true, data: user };
+      const response = await registerUser(params);
+      localStorage.setItem('pending-validation', params.email);
+      return { success: true, data: response };
     } catch (error) {
       return { success: false, error: formatErrors(error) };
     }
@@ -185,11 +183,11 @@ export const createUserSlice: StateCreator<StoreState, [], [], UserSlice> = (
   },
   _readNotifications:async () => {
     try {
-      const user = await readNotifications();
-      set({user})
-      return { success: true, data: user };
+      const resp = await readNotifications();
+      set({user: {...get().user, ...{total_unread_notifications: 0}}})
+      return { success: true, data: resp };
     } catch (error) {
       return { success: false, error: formatErrors(error) };
     }
-  }
+  },
 });

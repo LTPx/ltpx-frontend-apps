@@ -16,12 +16,20 @@ import {
 } from '../site/index';
 import TermsConditions from '../site/terms-conditions/terms-conditions';
 import { blogRoutes } from './blog-routes';
+import ScrollToTop from '../components/scroll-to-top/scroll-to-top';
 
 export const SiteRoutes = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route element={<SiteLayout />}>
+        <Route
+          element={
+            <>
+              <ScrollToTop />
+              <SiteLayout />{' '}
+            </>
+          }
+        >
           {blogRoutes}
           <Route path="/" element={<Home />} />
           <Route path="/home" element={<Home />} />

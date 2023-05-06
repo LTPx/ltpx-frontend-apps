@@ -137,6 +137,7 @@ export const createTeacherSlice: StateCreator<
         isAuthenticated: true,
         currentView: TypeViews.teacher,
       });
+      localStorage.setItem('pending-validation', params.email);
       return { isLogin: true, data: user };
     } catch (error) {
       return { isLogin: false, data: error };

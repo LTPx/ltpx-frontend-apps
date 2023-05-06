@@ -1,5 +1,6 @@
 import styles from './site-layout.module.scss';
 import {
+  BannerNotification,
   ChatFloat,
   Dropdown,
   Footer,
@@ -12,7 +13,8 @@ import { useTranslation } from 'react-i18next';
 import { Outlet, useNavigate } from 'react-router-dom';
 
 export function SiteLayout() {
-  const { user, logout, isAuthenticated } = useUser();
+  const { user, logout, isAuthenticated, isPendingValidationAccount } =
+    useUser();
   const { t } = useTranslation();
   const navigate = useNavigate();
 
@@ -67,6 +69,18 @@ export function SiteLayout() {
         </div>
       </Header>
       <div className={styles['content']}>
+        {isPendingValidationAccount && (
+          <BannerNotification
+            onClickClose={() => {
+              localStorage.removeItem('pending-validation');
+            }}
+          >
+            <h5 className={styles['email-text-banner']}>
+              Hemos enviado un correo de validación a tu correo electrónico:{' '}
+              {localStorage.getItem('pending-validation')}
+            </h5>
+          </BannerNotification>
+        )}
         <Outlet />
       </div>
       {isAuthenticated && <ChatFloat />}

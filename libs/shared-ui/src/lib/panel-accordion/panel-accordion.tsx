@@ -68,7 +68,7 @@ export function PanelAccordion(props: PanelAccordionProps) {
             )}
           </div>
         ) : (
-          <Icon color='#64748b' icon={'locked'} size={20}></Icon>
+          <Icon color="#64748b" icon={'locked'} size={20}></Icon>
         )}
       </div>
       <div className={`${styles['panel']} ${isOpen ? styles['open'] : ''}`}>

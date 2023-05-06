@@ -1,10 +1,9 @@
 import { ReactElement, useState } from 'react';
 import Button, { ColorsButton } from '../button/button';
-import Icon from '../icon/icon';
 import styles from './task-student-card.module.scss';
 import { Avatar, Dialog } from 'evergreen-ui';
 import TaskFormStudent from '../task-form-student/task-form-student';
-import { useStudent } from '@ltpx-frontend-apps/store';
+import { useStudent, useUtil } from '@ltpx-frontend-apps/store';
 import { TaskStudent, TaskStudentResult } from '@ltpx-frontend-apps/api';
 import Tag, { ColorsTag } from '../tag/tag';
 
@@ -26,17 +25,18 @@ export function TaskStudentCard(props: TaskStudentCardProps) {
   const { _sendTask } = useStudent();
   const { enrolledCourse } = useStudent();
   const [showMore, setShowMore] = useState(false);
+  const { setMessageToast } = useUtil();
 
   async function handleSendTask(params: TaskStudent) {
     const paramsData =
       editTask && studentTask
         ? { ...params, ...{ id: studentTask.id } }
         : params;
-    const { data, success, error } = await _sendTask(paramsData);
+    const { success, error } = await _sendTask(paramsData);
     if (success) {
-      console.log('data: ', data);
+      setMessageToast('success', 'Tu tarea ha sido enviada');
     } else {
-      console.log('error: ', error);
+      setMessageToast('error', error);
     }
   }
 
@@ -184,7 +184,7 @@ export function TaskStudentCard(props: TaskStudentCardProps) {
       >
         <div className={styles['modal-taskView']}>
           <div className={styles['task-wrap']}>
-            <div className={styles['task-information']}>
+            {/* <div className={styles['task-information']}>
               {description && (
                 <h4 className={styles['answer-task']}>
                   Descripción de la Tarea:
@@ -198,7 +198,7 @@ export function TaskStudentCard(props: TaskStudentCardProps) {
                   </a>
                 )}
               </div>
-            </div>
+            </div> */}
             <div className={styles['task-information']}>
               <h4 className={styles['answer-task']}>Tu Respuesta: </h4>
               <div>

@@ -1,3 +1,4 @@
+export * from './lib/permission-notifications/permission-notifications';
 export * from './lib/profile-user-view/profile-user-view';
 export * from './lib/chat-float/chat-float';
 export * from './lib/chat/chat';

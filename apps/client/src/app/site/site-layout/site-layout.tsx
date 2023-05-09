@@ -1,16 +1,19 @@
 import styles from './site-layout.module.scss';
 import {
   BannerNotification,
+  Button,
   ChatFloat,
   Dropdown,
   Footer,
   Header,
+  PermissionNotifications,
   UserMenu,
 } from '@ltpx-frontend-apps/shared-ui';
 import { useUser } from '@ltpx-frontend-apps/store';
 import { Avatar } from 'evergreen-ui';
 import { useTranslation } from 'react-i18next';
 import { Outlet, useNavigate } from 'react-router-dom';
+import Notifications from '../../components/notifications/notifications';
 
 export function SiteLayout() {
   const { user, logout, isAuthenticated, isPendingValidationAccount } =
@@ -81,6 +84,7 @@ export function SiteLayout() {
             </h5>
           </BannerNotification>
         )}
+        <PermissionNotifications />
         <Outlet />
       </div>
       {isAuthenticated && <ChatFloat />}

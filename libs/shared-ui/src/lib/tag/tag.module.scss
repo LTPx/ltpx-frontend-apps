@@ -1,6 +1,15 @@
 @import '../../styles/styles.module.scss';
 
 .container {
+  .tag-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1px 16px;
+    height: auto;
+    border-radius: 4px;
+    gap: 0.5rem;
+  }
   .tag {
     display: flex;
     align-items: center;

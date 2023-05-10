@@ -119,7 +119,7 @@ export function CourseDetails() {
             <img
               className={styles['image-responsive']}
               src={course.cover_url}
-              alt='cover-responsive'
+              alt="cover-responsive"
             />
             <div className={styles['content-responsive']}>
               <div className={styles['title-content-responsive']}>
@@ -314,6 +314,7 @@ export function CourseDetails() {
               price={course.price_format}
               totalAchievements={course.achievements?.length || 0}
               totalContents={course.contents.length}
+              availableSites={session.max_participants}
               totalEnrolled={session.enrollments_count}
               language={translateLanguage(course.language)}
               skillLevel={translateLevel(course.level)}
@@ -343,7 +344,16 @@ export function CourseDetails() {
       </section>
       <section className={styles['schedules-section']}>
         <div className={styles['content']}>
-          <h2 className={styles['title-date']}>Horarios de las clases</h2>
+          {session.meetings.length > 0 ? (
+            <h2 className={styles['title-date']}>Horarios de las clases</h2>
+          ) : (
+            <div>
+              <h2 className={styles['title-date']}>Horarios de las clases</h2>
+              <h3 className={styles['title-date']}>
+                Este curso no requiere de clases
+              </h3>
+            </div>
+          )}
           <div className={styles['course-date']}>
             {session.meetings &&
               session.meetings.map((meeting, index) => (

@@ -1,3 +1,4 @@
+import { NavLink } from 'react-router-dom';
 import Icon from '../icon/icon';
 import styles from './tag.module.scss';
 
@@ -16,10 +17,11 @@ export interface TagProps {
   color?: ColorsTag;
   icon?: string;
   className?: string;
+  link?: string;
 }
 
 export function Tag(props: TagProps) {
-  const { text, color, icon, className } = props;
+  const { text, color, icon, className, link } = props;
 
   const colorsTags = {
     green: `${styles['tag-green']}`,
@@ -32,11 +34,21 @@ export function Tag(props: TagProps) {
   const selectedColor = colorsTags[color || ColorsTag.gray];
 
   return (
-    <div className={styles['container']} >
-      <div className={`${selectedColor} ${className} ${styles['tag']}`}>
-        {icon && <Icon icon={icon} size={15}></Icon>}
-        <h5>{text}</h5>
-      </div>
+    <div className={styles['container']}>
+      {link ? (
+        <NavLink
+          className={`${selectedColor} ${className} ${styles['tag']}`}
+          to={link}
+        >
+          {icon && <Icon icon={icon} size={15}></Icon>}
+          <h5>{text}</h5>
+        </NavLink>
+      ) : (
+        <div className={`${selectedColor} ${className} ${styles['tag']}`}>
+          {icon && <Icon icon={icon} size={15}></Icon>}
+          <h5>{text}</h5>
+        </div>
+      )}
     </div>
   );
 }

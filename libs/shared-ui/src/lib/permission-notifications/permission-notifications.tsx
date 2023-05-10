@@ -1,14 +1,15 @@
 import { useEffect, useState } from 'react';
 import Button from '../button/button';
 import styles from './permission-notifications.module.scss';
-// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
-import { messaging } from 'apps/client/src/firebase';
-import { getToken } from 'firebase/messaging';
 
 /* eslint-disable-next-line */
-export interface PermissionNotificationsProps {}
+export interface PermissionNotificationsProps {
+  messaging: any;
+  getToken: any;
+}
 
 export function PermissionNotifications(props: PermissionNotificationsProps) {
+  const { messaging, getToken } = props;
   const [notificationPermission, setNotificationPermission] = useState(
     Notification.permission
   );
@@ -46,7 +47,7 @@ export function PermissionNotifications(props: PermissionNotificationsProps) {
   return (
     <div className={styles['container']}>
       {notificationPermission === 'default' && (
-        <div>
+        <div className={styles['content']}>
           <div>
             <h3>¿Desea recibir notificaciones?</h3>
             <p>

@@ -8,7 +8,6 @@ export interface TeacherAccountProfileProps {}
 
 export function TeacherAccountProfile(props: TeacherAccountProfileProps) {
   const { profile, getProfile } = useTeacher();
-  const { user } = useUser();
 
   const fetchProfile = useCallback(async () => {
     const { success, data, error } = await getProfile();
@@ -41,10 +40,6 @@ export function TeacherAccountProfile(props: TeacherAccountProfileProps) {
               <div className={styles['item']}>
                 <h4>Habilidades: </h4>
                 <h4 className={styles['text']}>{profile.skills}</h4>
-              </div>
-              <div className={styles['item']}>
-                <h4>Correo Electrónico: </h4>
-                <h4 className={styles['text']}>{user.email}</h4>
               </div>
             </div>
           </div>

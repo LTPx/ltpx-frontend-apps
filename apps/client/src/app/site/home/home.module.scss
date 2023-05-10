@@ -55,6 +55,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
 
   .text {
     text-align: center;
@@ -74,6 +75,8 @@
     gap: $size-lg-1;
     flex-wrap: wrap;
     width: 80%;
+    justify-content: space-between;
+
 
     .course {
       height: 20rem;
@@ -138,7 +141,6 @@
 .news-container {
   background-color: #f7f7f7;
   width: 100%;
-  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -152,7 +154,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 37rem;
+    gap: 45rem;
     padding-bottom: $size-md-3;
     .text-news {
       .title {

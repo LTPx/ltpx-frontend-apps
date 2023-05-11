@@ -3,11 +3,10 @@ import { NavLink } from 'react-router-dom';
 import styles from './forget-password.module.scss';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
+import { useUser } from '@ltpx-frontend-apps/store';
 
-/* eslint-disable-next-line */
-export interface ForgetPasswordProps {}
-
-export function ForgetPassword(props: ForgetPasswordProps) {
+export function ForgetPassword() {
+  const { _resetPassword } = useUser();
   const formik = useFormik({
     initialValues: {
       email: '',
@@ -17,8 +16,15 @@ export function ForgetPassword(props: ForgetPasswordProps) {
         .email('Debe ser un correo electrónico válido')
         .required('Correo electrónico es obligatorio'),
     }),
-    onSubmit: (data) => {
-      console.log(data);
+    onSubmit: async (form) => {
+      const { success, error, data } =  await _resetPassword(form.email);
+      if (success) {
+        //redirect to login
+        console.log(data);
+      } else {
+        //mostrar error
+        console.log(error);
+      }
     },
   });
   return (

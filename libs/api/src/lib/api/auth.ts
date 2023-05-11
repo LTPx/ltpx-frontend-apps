@@ -165,7 +165,7 @@ export const resetPassword = async (email: string) => {
 export const updateNewPassword = async (token: string, password: string, confirm_password: string) => {
   return new Promise<any>((resolve, reject) => {
     http
-      .put('reset_password', { token, password, confirm_password })
+      .put('update_new_password', { token, password, confirm_password })
       .then((response) => {
         resolve(response.data);
       })

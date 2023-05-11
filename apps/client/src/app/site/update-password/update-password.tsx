@@ -8,12 +8,12 @@ import styles from './update-password.module.scss';
 import * as Yup from 'yup';
 import { useFormik } from 'formik';
 import { useUser } from '@ltpx-frontend-apps/store';
-import { useSearchParams } from 'react-router-dom';
-
+import { useNavigate, useSearchParams } from 'react-router-dom';
 
 export function UpdatePassword() {
   const { _updateNewPassword } = useUser();
   const [searchParams] = useSearchParams();
+  const navigate = useNavigate();
 
   const formik = useFormik({
     initialValues: {
@@ -31,17 +31,21 @@ export function UpdatePassword() {
       ),
     }),
     onSubmit: async (form) => {
-      console.log(form);
       const token = searchParams.get('token');
       if (token) {
-        const { success, data, error} = await _updateNewPassword(token, form.newPassword, form.confirmPassword);
+        const { success, data, error } = await _updateNewPassword(
+          token,
+          form.newPassword,
+          form.confirmPassword
+        );
         if (success) {
-          //redirect to login, con mensaje "tu contaseña ha sido actualizado correctamente, ya puedes loguearte de nuevo"
+          localStorage.setItem('password-updated', 'true');
+          navigate('/login');
         } else {
-          //redirect to login, con mensaje que viene del backend
+          navigate('/login');
         }
       } else {
-        //mostrar mensaje de error
+        navigate('/login');
       }
     },
   });
@@ -88,5 +92,3 @@ export function UpdatePassword() {
     </div>
   );
 }
-
-export default UpdatePassword;

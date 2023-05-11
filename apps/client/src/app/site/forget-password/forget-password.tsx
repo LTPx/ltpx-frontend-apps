@@ -1,12 +1,21 @@
-import { Button, Input } from '@ltpx-frontend-apps/shared-ui';
-import { NavLink } from 'react-router-dom';
+import {
+  BannerNotification,
+  BannerType,
+  Button,
+  Input,
+} from '@ltpx-frontend-apps/shared-ui';
+import { NavLink, useNavigate } from 'react-router-dom';
 import styles from './forget-password.module.scss';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { useUser } from '@ltpx-frontend-apps/store';
+import { useState } from 'react';
 
 export function ForgetPassword() {
   const { _resetPassword } = useUser();
+  const [error, setError] = useState<string>();
+  const navigate = useNavigate();
+
   const formik = useFormik({
     initialValues: {
       email: '',
@@ -17,13 +26,12 @@ export function ForgetPassword() {
         .required('Correo electrónico es obligatorio'),
     }),
     onSubmit: async (form) => {
-      const { success, error, data } =  await _resetPassword(form.email);
+      const { success, error, data } = await _resetPassword(form.email);
       if (success) {
-        //redirect to login
-        console.log(data);
+        localStorage.setItem('reset_account', form.email);
+        navigate('/login');
       } else {
-        //mostrar error
-        console.log(error);
+        setError(error);
       }
     },
   });
@@ -35,6 +43,16 @@ export function ForgetPassword() {
           No te preocupes, te enviaremos las instrucciones a tu correo
           electrónico
         </h4>
+        {error && (
+          <BannerNotification
+            type={BannerType.error}
+            onClickClose={() => {
+              setError(undefined);
+            }}
+          >
+            {error}
+          </BannerNotification>
+        )}
         <div className={styles['email']}>
           <Input
             label="Email"
@@ -61,5 +79,3 @@ export function ForgetPassword() {
     </div>
   );
 }
-
-export default ForgetPassword;

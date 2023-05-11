@@ -22,6 +22,8 @@ export const useUser = () => {
     _setTokenDevice,
     _readNotifications,
     isPendingValidationAccount,
+    _resetPassword,
+    _updateNewPassword,
   } = useAppStore();
 
   return {
@@ -46,5 +48,7 @@ export const useUser = () => {
     _setTokenDevice,
     _readNotifications,
     isPendingValidationAccount,
+    _resetPassword,
+    _updateNewPassword,
   }
 }

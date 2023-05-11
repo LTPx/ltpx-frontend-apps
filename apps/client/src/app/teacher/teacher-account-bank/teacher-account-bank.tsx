@@ -1,4 +1,4 @@
-import { Button } from '@ltpx-frontend-apps/shared-ui';
+import { Button, EmptyState } from '@ltpx-frontend-apps/shared-ui';
 import styles from './teacher-account-bank.module.scss';
 import { ColorsButton } from '@ltpx-frontend-apps/shared-ui';
 import { useCourseUtil, useTeacher } from '@ltpx-frontend-apps/store';
@@ -12,20 +12,19 @@ export function TeacherAccountBank(props: TeacherAccountBankProps) {
 
   return (
     <div className={styles['container']}>
-      {/* <h1>Cuenta Bancaria</h1> */}
       <div className={styles['content']}>
-        <div className={styles['title-content']}>
-          <h4 className={styles['title']}>Cuenta Bancaria</h4>
-          <Button
-            className={styles['btn-edit']}
-            title="Editar"
-            color={ColorsButton.secondary}
-            link="/teacher/account/account-bank-edit"
-          />
-        </div>
         <div className={styles['bank']}>
-          {profile.bank_accounts && (
+          {profile.bank_accounts ? (
             <div>
+              <div className={styles['title-content']}>
+                <h4 className={styles['title']}>Cuenta Bancaria</h4>
+                <Button
+                  className={styles['btn-edit']}
+                  title="Editar"
+                  color={ColorsButton.secondary}
+                  link="/teacher/account/account-bank-edit"
+                />
+              </div>
               {profile.bank_accounts.length > 0 && (
                 <div className={styles['info-bank']}>
                   <div className={styles['item']}>
@@ -74,6 +73,23 @@ export function TeacherAccountBank(props: TeacherAccountBankProps) {
                   </div>
                 </div>
               )}
+            </div>
+          ) : (
+            <div className={styles['empty-content']}>
+              <EmptyState
+                img="../../../../assets/images/empty-states/set-bank-account.svg"
+                description="Para recibir pagos en Openmind, debes agregar una cuenta bancaria"
+              >
+                <div className={`${styles['button-empty-state']}`}>
+                  <Button
+                    title={'Agregar cuenta bancaria'}
+                    color={ColorsButton.secondary}
+                    icon="plus"
+                    link="/teacher/account/account-bank-edit"
+                    outline={true}
+                  />
+                </div>
+              </EmptyState>
             </div>
           )}
         </div>

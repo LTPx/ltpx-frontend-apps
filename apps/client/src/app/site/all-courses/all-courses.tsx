@@ -31,7 +31,6 @@ export function AllCourses(props: AllCoursesProps) {
     { value: 'finance', text: t('course_categories.finance') },
   ];
   const sortByOptions = [
-    { value: 'price', text: t('allCourses.filters.price') },
     { value: 'level', text: t('allCourses.filters.level') },
     { value: 'rating', text: t('allCourses.filters.rating') },
   ];

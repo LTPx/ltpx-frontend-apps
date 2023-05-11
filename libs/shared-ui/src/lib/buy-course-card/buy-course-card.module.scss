@@ -1,6 +1,12 @@
 @import '../../styles/styles.module.scss';
 
 .container {
+  .disable-btn {
+    cursor: not-allowed;
+    pointer-events: none;
+    opacity: 0.5;
+  }
+
   .buy-card {
     max-width: 20rem;
     padding: 10px;
@@ -86,7 +92,7 @@
   }
 }
 
-@media screen and (min-width: 560px) and (max-width: 850px){
+@media screen and (min-width: 560px) and (max-width: 850px) {
   .container {
     padding-bottom: 3rem;
     display: flex;

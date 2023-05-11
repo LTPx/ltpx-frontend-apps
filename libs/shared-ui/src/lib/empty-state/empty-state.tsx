@@ -20,7 +20,7 @@ export function EmptyState(props: EmptyStateProps) {
     <div className={styles['container']}>
       <div className={`${styles['content']} ${className}`}>
         {icon && (
-          <div className={styles['icon-content']} >
+          <div className={styles['icon-content']}>
             <Icon className={styles['icon']} icon={icon} size={60} />
             <img
               className={styles['image-icon']}

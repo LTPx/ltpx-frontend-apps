@@ -5,19 +5,21 @@ import {
   Dropdown,
   Footer,
   Header,
+  PermissionNotifications,
   UserMenu,
 } from '@ltpx-frontend-apps/shared-ui';
 import { useUser } from '@ltpx-frontend-apps/store';
 import { Avatar } from 'evergreen-ui';
 import { useTranslation } from 'react-i18next';
 import { Outlet, useNavigate } from 'react-router-dom';
+import { getToken } from 'firebase/messaging';
+import { messaging } from './../../../firebase';
 
 export function SiteLayout() {
   const { user, logout, isAuthenticated, isPendingValidationAccount } =
     useUser();
   const { t } = useTranslation();
   const navigate = useNavigate();
-
   const logoutSession = async () => {
     await logout();
     navigate('/');
@@ -81,6 +83,7 @@ export function SiteLayout() {
             </h5>
           </BannerNotification>
         )}
+        {/* <PermissionNotifications messaging={messaging} getToken={getToken} /> */}
         <Outlet />
       </div>
       {isAuthenticated && <ChatFloat />}

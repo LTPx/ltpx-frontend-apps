@@ -2,12 +2,14 @@ import { useTranslation } from 'react-i18next';
 import Button, { ColorsButton } from '../button/button';
 import Icon from '../icon/icon';
 import styles from './buy-course-card.module.scss';
+import Tag, { ColorsTag } from '../tag/tag';
 
 /* eslint-disable-next-line */
 export interface BuyCourseCardProps {
   image: string;
   price: string;
   discount?: number;
+  availableSites?: number;
   totalAchievements: number;
   totalContents: number;
   totalEnrolled: number;
@@ -22,6 +24,7 @@ export function BuyCourseCard(props: BuyCourseCardProps) {
   const {
     image,
     price,
+    availableSites,
     discount,
     totalAchievements,
     totalContents,
@@ -37,7 +40,12 @@ export function BuyCourseCard(props: BuyCourseCardProps) {
   return (
     <div className={styles['container']}>
       <div className={`${styles['buy-card']}`}>
-        <img className={styles['image-card']} loading="lazy" src={image} alt="" />
+        <img
+          className={styles['image-card']}
+          loading="lazy"
+          src={image}
+          alt=""
+        />
         <div className={`${styles['summary']}`}>
           <div className={styles['price-promo']}>
             <div className={styles['price']}>
@@ -55,6 +63,11 @@ export function BuyCourseCard(props: BuyCourseCardProps) {
               full={true}
             /> */}
             <Button
+              className={
+                totalEnrolled === availableSites
+                  ? `${styles['disable-btn']}`
+                  : ''
+              }
               title={t('coursesDetails.buyCourseCard.buttons.enroll')}
               color={ColorsButton.secondary}
               onClick={onClickEnroll}
@@ -81,7 +94,19 @@ export function BuyCourseCard(props: BuyCourseCardProps) {
                 <Icon icon={'person'} size={15} color="#10b981"></Icon>
                 <h4>{t('coursesDetails.buyCourseCard.details.enrolled')}</h4>
               </div>
-              <h4>{totalEnrolled}</h4>
+              {availableSites != undefined && availableSites > 0 ? (
+                <div>
+                  {totalEnrolled === availableSites ? (
+                    <Tag color={ColorsTag.green} text={'Cupos llenos'} />
+                  ) : (
+                    <h4>
+                      {totalEnrolled} / {availableSites}
+                    </h4>
+                  )}
+                </div>
+              ) : (
+                <h4>{totalEnrolled}</h4>
+              )}
             </div>
             <div className={styles['item']}>
               <div className={styles['item-text']}>

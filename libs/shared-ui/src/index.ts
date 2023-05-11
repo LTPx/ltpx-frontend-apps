@@ -1,3 +1,4 @@
+export * from './lib/permission-notifications/permission-notifications';
 export * from './lib/profile-user-view/profile-user-view';
 export * from './lib/chat-float/chat-float';
 export * from './lib/chat/chat';
@@ -121,5 +122,4 @@ export * from './lib/nav/nav';
 export * from './lib/input/input';
 export * from './lib/button/button';
 export * from './lib/header/header';
-
 export * from './hooks/useMoment';

@@ -41,6 +41,7 @@ export function CourseRowCard(props: CourseRowCardProps) {
             className={styles['tag']}
             text={translateCategory(category)}
             color={ColorsTag.green}
+            link={`/course/${category}/category`}
           />
           <div className={styles['item']}>
             <Icon icon={'trophy'} size={14} color={'#fbbf24'}></Icon>{' '}

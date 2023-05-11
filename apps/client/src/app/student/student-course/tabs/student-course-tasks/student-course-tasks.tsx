@@ -32,6 +32,7 @@ export function StudentCourseTasks(props: StudentCourseTasksProps) {
           id={task.id}
         />
       ))}
+      {allTasks.length === 0 && <h3>Este curso no tiene tareas</h3>}
     </div>
   );
 }

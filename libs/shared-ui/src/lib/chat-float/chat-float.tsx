@@ -12,6 +12,7 @@ export function ChatFloat(props: ChatFloatProps) {
   const ChatFloat = ({ onClick }: { onClick: () => void }) => (
     <div className={styles['chat-tab-button']} onClick={onClick}>
       <Icon icon="chat-dots" size={20} />
+      <h4>Chat</h4>
     </div>
   )
 

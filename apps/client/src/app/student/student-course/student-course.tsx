@@ -1,10 +1,8 @@
 import {
   Button,
   CourseContents,
-  CourseDateCard,
   ProgressBar,
   Tabs,
-  useMoment,
 } from '@ltpx-frontend-apps/shared-ui';
 import { useChat, useStudent } from '@ltpx-frontend-apps/store';
 import { useCallback, useEffect, useState } from 'react';
@@ -15,6 +13,7 @@ import StudentCourseQuizzes from './tabs/student-course-quizzes/student-course-q
 import StudentCourseTasks from './tabs/student-course-tasks/student-course-tasks';
 import { Avatar } from 'evergreen-ui';
 import { useSearchParams } from 'react-router-dom';
+import StudentCourseClasses from './tabs/student-course-classes/student-course-classes';
 /* eslint-disable-next-line */
 export interface StudentCourseProps {}
 
@@ -30,7 +29,6 @@ export function StudentCourse(props: StudentCourseProps) {
   ];
   const { slug } = useParams();
   const { _newChatRoom, setShowChat } = useChat();
-  const { customFormatDate } = useMoment();
   const [searchParams] = useSearchParams();
   const tab = searchParams.get('tab');
   const tabIndex = tabs.findIndex((item) => item.value === tab);
@@ -122,41 +120,7 @@ export function StudentCourse(props: StudentCourseProps) {
                   </div>
                 )}
                 {selectedTab === 1 && (
-                  <div className={styles['course-date']}>
-                    {enrolledCourse.session.meetings.map((meeting, index) => (
-                      <CourseDateCard
-                        className={styles['course-class']}
-                        key={index}
-                        size={true}
-                        title={`Clase ${index + 1}: ${customFormatDate(
-                          meeting.start_date,
-                          'MMM D YYYY'
-                        )}`}
-                        description={`La clase tendrán una duración de ${enrolledCourse.session.call_time_min} min`}
-                        time={`Hora de inicio: ${customFormatDate(
-                          meeting.start_date,
-                          'h:mm a'
-                        )}`}
-                      >
-                        {meeting.meeting_id ? (
-                          <Button
-                            className={styles['btn-class']}
-                            title={`Unirme a Clase`}
-                            full={true}
-                            link={`/student/live-meeting/${meeting.id}/${meeting.meeting_id}`}
-                          />
-                        ) : (
-                          <Button
-                            className={styles['btn-class']}
-                            title="No ha iniciado aun"
-                            full={true}
-                            outline={true}
-                            disabled={true}
-                          />
-                        )}
-                      </CourseDateCard>
-                    ))}
-                  </div>
+                  <StudentCourseClasses session={enrolledCourse.session} />
                 )}
                 {selectedTab === 2 && enrolledCourse.id && (
                   <StudentCourseTasks courseId={enrolledCourse.id} />

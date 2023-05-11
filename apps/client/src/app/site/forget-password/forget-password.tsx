@@ -1,11 +1,26 @@
-import { Button, ColorsButton, Input } from '@ltpx-frontend-apps/shared-ui';
+import { Button, Input } from '@ltpx-frontend-apps/shared-ui';
 import { NavLink } from 'react-router-dom';
 import styles from './forget-password.module.scss';
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
 
 /* eslint-disable-next-line */
 export interface ForgetPasswordProps {}
 
 export function ForgetPassword(props: ForgetPasswordProps) {
+  const formik = useFormik({
+    initialValues: {
+      email: '',
+    },
+    validationSchema: Yup.object({
+      email: Yup.string()
+        .email('Debe ser un correo electrónico válido')
+        .required('Correo electrónico es obligatorio'),
+    }),
+    onSubmit: (data) => {
+      console.log(data);
+    },
+  });
   return (
     <div className={styles['container']}>
       <div className={styles['content']}>
@@ -18,13 +33,20 @@ export function ForgetPassword(props: ForgetPasswordProps) {
           <Input
             label="Email"
             type="email"
+            name="email"
             placeholder="Ingresa tu correo electrónico"
-          ></Input>
+            value={formik.values.email}
+            onBlur={formik.handleBlur}
+            onChange={(e: any) => {
+              formik.handleChange(e);
+            }}
+            errorMessage={formik.errors.email}
+          />
         </div>
         <Button
           title={'Restablecer la contraseña'}
-          color={ColorsButton.primary}
           full={true}
+          onClick={formik.handleSubmit}
         />
         <NavLink to={'/login'} className={styles['link']}>
           Regresar a Iniciar Sesión

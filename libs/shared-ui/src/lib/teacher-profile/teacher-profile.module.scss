@@ -45,7 +45,7 @@
     .information-wrap {
       display: grid;
       grid-template-columns: 50% 50%;
-      width: 70%;
+      width: 80%;
       gap: 3rem;
       .information-content {
         padding-top: 2rem;
@@ -77,11 +77,9 @@
       }
       .video-content {
         padding-top: 2rem;
+        width: 100%;
         h2 {
           padding-bottom: 0.5rem;
-        }
-        video {
-          object-fit: cover;
         }
       }
     }
@@ -92,7 +90,7 @@
     justify-content: center;
 
     .courses-content {
-      width: 70%;
+      width: 80%;
       padding-top: 2rem;
     }
 
@@ -101,7 +99,7 @@
       display: flex;
       width: 100%;
       flex-wrap: wrap;
-      gap: $size-md-1;
+      gap: 1.5rem;
       .course {
         height: 20rem;
         width: 16rem;
@@ -120,5 +118,47 @@
     flex-direction: column;
     width: 90% !important;
     gap: 0 !important;
+  }
+  .courses-teacher {
+    justify-content: center;
+  }
+
+  .courses-content {
+    width: 90% !important;
+  }
+}
+
+//tablet-responsive-vertical
+@media screen and (min-width: 560px) and (max-width: 850px) {
+  .information-wrap {
+    display: flex !important;
+    flex-direction: column;
+    width: 90% !important;
+    gap: 0.5rem !important;
+  }
+  .courses-content {
+    width: 43rem !important;
+    // width: 10rem !important;
+    overflow-x: auto;
+  }
+
+  .courses-teacher {
+    width: 50rem !important;
+    flex-wrap: nowrap !important;
+    gap: 1.5rem !important;
+  }
+}
+
+//tablet-responsive-horizontal
+@media screen and (min-width: 860px) and (max-width: 1224px) {
+  .courses-content {
+    width: 80% !important;
+  }
+
+  video {
+    object-fit: cover !important;
+  }
+  .courses-teacher {
+    justify-content: space-between;
   }
 }

@@ -39,6 +39,7 @@ export function UpdatePassword() {
           form.confirmPassword
         );
         if (success) {
+          localStorage.removeItem('reset_account');
           localStorage.setItem('password-updated', 'true');
           navigate('/login');
         } else {

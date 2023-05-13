@@ -23,6 +23,10 @@ export const useAdmin = () => {
     _getApplicationsByStatus,
     _rejectCourse,
     _getCoursesByStatus,
+    _getCategories,
+    _addCategory,
+    _removeCategory,
+    _updateCategory
   } = useAppStore();
 
   return {
@@ -47,5 +51,9 @@ export const useAdmin = () => {
     _getApplicationsByStatus,
     _rejectCourse,
     _getCoursesByStatus,
+    _getCategories,
+    _addCategory,
+    _removeCategory,
+    _updateCategory
   }
 }

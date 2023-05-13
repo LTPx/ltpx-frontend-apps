@@ -80,6 +80,14 @@ export function AppLayout(props: AppLayoutProps) {
         size: 20,
       },
     },
+    {
+      title: 'Categorías',
+      url: '/admin/categories',
+      icon: {
+        icon: 'category',
+        size: 20,
+      },
+    }
   ];
 
   return (

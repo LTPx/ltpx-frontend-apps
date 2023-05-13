@@ -20,6 +20,11 @@ import {
   getApplicationsByStatus,
   adminRejectCourse,
   getCoursesByStatus,
+  getCategories,
+  createCategory,
+  Category,
+  removeCategory,
+  editCategory
 } from '@ltpx-frontend-apps/api';
 
 export type TResponse = {
@@ -50,6 +55,11 @@ export type AdminSlice = {
   _getApplicationsByStatus: (status: string) => Promise<TResponse>;
   _rejectCourse: (courseId: number, comment: string) => Promise<TResponse>;
   _getCoursesByStatus: (status: string) => Promise<TResponse>;
+  _getCategories: () => Promise<TResponse>;
+  _addCategory: (params: Category) => Promise<TResponse>;
+  _removeCategory: (categoryId: number) => Promise<TResponse>;
+  _updateCategory: ( category: Category) => Promise<TResponse>;
+
 };
 
 export const createAdminSlice: StateCreator<StoreState, [], [], AdminSlice> = (
@@ -198,5 +208,41 @@ export const createAdminSlice: StateCreator<StoreState, [], [], AdminSlice> = (
     } catch (error) {
       return { success: false, error };
     }
+  },
+  _getCategories: async () => {
+    try {
+      const categories = await getCategories();
+      return { success: true, data: categories };
+    } catch (error) {
+      return { success: false, error };
+    }
+  },
+  _addCategory: async (params) => {
+    try {
+      const category = await createCategory(params);
+      // const updatedCourse = { ...course, ...{ session } };
+      // set({ course: updatedCourse });
+      return { success: true, data: category };
+    } catch (error) {
+      return { success: false, error };
+    }
+  },
+  _removeCategory: async(categoryId) => {
+    try {
+      const category = await removeCategory(categoryId);
+      return {success: true};
+    } catch (error) {
+      return {success: false, error};
+    }
+  },
+  _updateCategory: async(params) => {
+    try {
+      const task = await editCategory(params);
+      return { success: true, data: task };
+    } catch (error) {
+      return {success: false, error: (error)}
+    }
   }
 });
+
+

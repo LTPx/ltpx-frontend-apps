@@ -147,7 +147,7 @@ export function CourseDetails() {
                 <Tag
                   color={ColorsTag.green}
                   text={translateCategory(course.category)}
-                  link={`/course/${course.category}/category`}
+                  link={`/courses/${course.category}`}
                 />
               </div>
               <div className={styles['tag-responsive']}>
@@ -233,7 +233,7 @@ export function CourseDetails() {
                     <label>
                       {t('coursesDetails.teacherInformation.categories')}
                     </label>
-                    <NavLink to={`/course/${course.category}/category`}>
+                    <NavLink to={`/courses/${course.category}`}>
                       <h5>{translateCategory(course.category)}</h5>
                     </NavLink>
                   </div>

@@ -1,7 +1,6 @@
 import { CourseSite } from '@ltpx-frontend-apps/api';
 import {
   Button,
-  CategoryCard,
   ColorsButton,
   ContentDescription,
   CourseCard,
@@ -13,70 +12,13 @@ import { useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { NavLink } from 'react-router-dom';
 import styles from './home.module.scss';
+import PopularCategories from './components/popular-categories/popular-categories';
 
 export function Home() {
   const [courses, setCourses] = useState<CourseSite[]>([]);
   const { _getPopularCourses } = useSite();
   const { isAuthenticated } = useUser();
   const { t } = useTranslation();
-  const categories = [
-    {
-      id: 1,
-      icon: 'desktop',
-      title: t('course_categories.design'),
-      description: 'Over 960 courses',
-      key: 'design',
-    },
-    {
-      id: 2,
-      icon: 'briefcase',
-      title: t('course_categories.business'),
-      description: 'Over 600 courses',
-      key: 'business',
-    },
-    {
-      id: 3,
-      icon: 'browser',
-      title: t('course_categories.software_development'),
-      description: 'Over 320 courses',
-      key: 'software_development',
-    },
-    {
-      id: 4,
-      icon: 'user',
-      title: t('course_categories.personal_development'),
-      description: 'Over 180 courses',
-      key: 'personal_development',
-    },
-    {
-      id: 5,
-      icon: 'picture',
-      title: t('course_categories.photography'),
-      description: 'Over 400 courses',
-      key: 'photography',
-    },
-    {
-      id: 6,
-      icon: 'guitar',
-      title: t('course_categories.audio'),
-      description: 'Over 250 courses',
-      key: 'audio',
-    },
-    {
-      id: 7,
-      icon: 'marketing',
-      title: t('course_categories.marketing'),
-      description: 'Over 380 courses',
-      key: 'marketing',
-    },
-    {
-      id: 8,
-      icon: 'wallet',
-      title: t('course_categories.finance'),
-      description: 'Over 100 courses',
-      key: 'finance',
-    },
-  ];
   const news = [
     {
       image:
@@ -103,7 +45,6 @@ export function Home() {
       link: '/blog/long-term-potentiation',
     },
   ];
-
   const fetchPopularCourse = useCallback(async () => {
     const { success, data, error } = await _getPopularCourses();
     if (success) {
@@ -181,26 +122,7 @@ export function Home() {
           <NavLink to="/courses">{t('links.toAllCourses')}</NavLink>
         </div>
       </div>
-      <div className={styles['categories-container']}>
-        <div className={styles['text-categories']}>
-          <h2 className={styles['title']}>{t('home.categories.title')}</h2>
-          <h4 className={styles['subtitle']}>
-            {' '}
-            {t('home.categories.subtitle')}
-          </h4>
-        </div>
-        <div className={styles['category-content']}>
-          {categories.map((category, index) => (
-            <CategoryCard
-              icon={category.icon}
-              key={index}
-              title={category.title}
-              // description={category.description}
-              link={`/course/${category.key}/category`}
-            />
-          ))}
-        </div>
-      </div>
+      <PopularCategories/>
       <div className={styles['news-container']}>
         <div className={styles['title-news']}>
           <div className={styles['text-news']}>

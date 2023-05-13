@@ -95,6 +95,7 @@ export interface CourseSite {
   title: string;
   description: string;
   category: string;
+  category_slug: string;
   price_currency: string;
   price_cents: number;
   price_format: string;

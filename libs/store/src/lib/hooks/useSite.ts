@@ -10,7 +10,8 @@ export const useSite = () => {
     _createPaymentOrder,
     _cancelUserPayment,
     _getTeacherProfile,
-    _getPopularCategories
+    _getPopularCategories,
+    _getCoursesByCategory,
   } = useAppStore();
 
   return {
@@ -23,5 +24,6 @@ export const useSite = () => {
     _cancelUserPayment,
     _getTeacherProfile,
     _getPopularCategories,
+    _getCoursesByCategory,
   }
 }

@@ -40,7 +40,7 @@ export function PopularCourses(props: PopularCoursesProps) {
         <div className={styles['course']} key={index}>
           <CourseCard
             image={course.cover_url}
-            category={course.category}
+            category={course.category_slug}
             title={course.title}
             price={course.price_format}
             duration={0}

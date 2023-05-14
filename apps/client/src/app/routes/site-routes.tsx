@@ -13,6 +13,7 @@ import {
   TeacherProfilePage,
   SiteLayout,
   FrequentlyAskedQuestions,
+  UpdatePassword,
 } from '../site/index';
 import TermsConditions from '../site/terms-conditions/terms-conditions';
 import { blogRoutes } from './blog-routes';
@@ -43,8 +44,9 @@ export const SiteRoutes = () => {
           <Route path="/about" element={<AboutUs />} />
           <Route path="/faq" element={<FrequentlyAskedQuestions />} />
           <Route path="/teacher/:slug" element={<TeacherProfilePage />} />
+          <Route path="/update-password" element={<UpdatePassword />} />
           <Route
-            path="/course/:categoryId/category"
+            path="/courses/:categoryId"
             element={<CoursesByCategory />}
           />
           <Route path="*" element={<Page404 />} />

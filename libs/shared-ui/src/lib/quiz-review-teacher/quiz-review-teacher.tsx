@@ -38,8 +38,11 @@ export function QuizReviewTeacher(props: QuizReviewTeacherProps) {
       feedback: Yup.mixed().required('Agrega feedback por favor'),
     }),
     onSubmit: (formData) => {
-      console.log('formData: ', formData);
-      onSubmit(formData);
+      const teacherAnswers = formData.answers.filter((answer)=> answer.text);
+      onSubmit({
+        answers: teacherAnswers,
+        feedback: formData.feedback
+      });
     },
   });
 

@@ -83,6 +83,30 @@ export function SiteLayout() {
             </h5>
           </BannerNotification>
         )}
+        {localStorage.getItem('reset_account') && (
+          <BannerNotification
+            onClickClose={() => {
+              localStorage.removeItem('reset_account');
+            }}
+          >
+            <h5 className={styles['email-text-banner']}>
+              Hemos enviado un correo electrónico con instrucciones a tu
+              dirección: {localStorage.getItem('reset_account')}
+            </h5>
+          </BannerNotification>
+        )}
+        {localStorage.getItem('password-updated') && (
+          <BannerNotification
+            onClickClose={() => {
+              localStorage.removeItem('password-updated');
+            }}
+          >
+            <h5 className={styles['email-text-banner']}>
+              Tu contraseña ha sido actualizado correctamente, ya puedes
+              loguearte de nuevo.
+            </h5>
+          </BannerNotification>
+        )}
         {/* <PermissionNotifications messaging={messaging} getToken={getToken} /> */}
         <Outlet />
       </div>

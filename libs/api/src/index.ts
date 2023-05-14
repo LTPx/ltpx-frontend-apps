@@ -51,6 +51,7 @@ export * from './lib/api/site/site-courses-api';
 export * from './lib/api/site/carts-api';
 export * from './lib/api/site/enrollments-api';
 export * from './lib/api/site/teacher-api';
+export * from './lib/api/site/site-api';
 
 export * from './lib/api/user/payments-api';
 export * from './lib/api/user/notifications-api';

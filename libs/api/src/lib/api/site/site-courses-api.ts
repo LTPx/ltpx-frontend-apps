@@ -6,7 +6,7 @@ const http = _http;
 export const getPopularCourses = async () => {
   return new Promise<CourseSite[]>((resolve, reject) => {
     http
-      .get('api/v1/site/courses/popular_courses')
+      .get('api/v1/site/popular_courses')
       .then((response) => {
         resolve(response.data);
       })
@@ -19,7 +19,7 @@ export const getPopularCourses = async () => {
 export const siteGetCourse = async (slug: string) => {
   return new Promise<FullCourse>((resolve, reject) => {
     http
-      .get(`api/v1/site/courses/${slug}`)
+      .get(`api/v1/site/course`, { params: { slug }})
       .then((response) => {
         resolve(response.data);
       })

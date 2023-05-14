@@ -136,7 +136,6 @@ export const getCurrentUser = async() => {
   });
 }
 
-
 export const changePassword = async(params: ChangePasswordParams) => {
   return new Promise<ICurrentUser>((resolve, reject) => {
     http
@@ -149,3 +148,29 @@ export const changePassword = async(params: ChangePasswordParams) => {
     });
   });
 }
+
+export const resetPassword = async (email: string) => {
+  return new Promise<any>((resolve, reject) => {
+    http
+      .put('reset_password', { email })
+      .then((response) => {
+        resolve(response.data);
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
+};
+
+export const updateNewPassword = async (token: string, password: string, confirm_password: string) => {
+  return new Promise<any>((resolve, reject) => {
+    http
+      .put('update_new_password', { token, password, confirm_password })
+      .then((response) => {
+        resolve(response.data);
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
+};

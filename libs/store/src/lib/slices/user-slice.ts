@@ -20,6 +20,8 @@ import {
   updateAccount,
   setTokenDevice,
   readNotifications,
+  resetPassword,
+  updateNewPassword,
 } from '@ltpx-frontend-apps/api';
 
 export type UserSlice = {
@@ -42,6 +44,8 @@ export type UserSlice = {
   _updateAccount: (params: IUserAccount) => Promise<FormatResponse>;
   _setTokenDevice: (token: string) => Promise<FormatResponse>;
   _readNotifications: () => Promise<FormatResponse>;
+  _resetPassword: (email: string) => Promise<FormatResponse>;
+  _updateNewPassword: (token: string, password: string, confirmPassword: string) => Promise<FormatResponse>;
 };
 
 // const views = {
@@ -185,6 +189,22 @@ export const createUserSlice: StateCreator<StoreState, [], [], UserSlice> = (
     try {
       const resp = await readNotifications();
       set({user: {...get().user, ...{total_unread_notifications: 0}}})
+      return { success: true, data: resp };
+    } catch (error) {
+      return { success: false, error: formatErrors(error) };
+    }
+  },
+  _resetPassword: async (email) => {
+    try {
+      const resp = await resetPassword(email);
+      return { success: true, data: resp };
+    } catch (error) {
+      return { success: false, error: formatErrors(error) };
+    }
+  },
+  _updateNewPassword: async (email, password, confirmPassword) => {
+    try {
+      const resp = await updateNewPassword(email, password, confirmPassword);
       return { success: true, data: resp };
     } catch (error) {
       return { success: false, error: formatErrors(error) };

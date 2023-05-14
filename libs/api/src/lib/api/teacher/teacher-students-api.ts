@@ -74,7 +74,7 @@ export const teacherGradeTask = async (studentTaskId: number, params: TaskStuden
 export const teacherGradeQuiz = async (quizResultId: number, answers: UserAnswer[], feedback:string) => {
   return new Promise<TaskStudent[]>((resolve, reject) => {
     http
-      .put(`/api/v1/teacher/quiz_results/${quizResultId}/grade`, {answers, feedback})
+      .put(`/api/v1/teacher/quiz_results/${quizResultId}/grade`, {teacher_answers: answers, feedback})
       .then((response) => {
         resolve(response.data);
       })
@@ -88,6 +88,19 @@ export const teacherFeedbackQuiz = async (quizResultId: number, feedback:string)
   return new Promise<TaskStudent[]>((resolve, reject) => {
     http
       .put(`/api/v1/teacher/quiz_results/${quizResultId}/feedback`, {feedback})
+      .then((response) => {
+        resolve(response.data);
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
+};
+
+export const getQuizReview = async (quizId: number) => {
+  return new Promise<any>((resolve, reject) => {
+    http
+      .get(`api/v1/teacher/quiz_results/${quizId}`)
       .then((response) => {
         resolve(response.data);
       })

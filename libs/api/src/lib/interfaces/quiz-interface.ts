@@ -104,7 +104,27 @@ export interface QuizResultSummary {
   feedback?: string;
   user_answers: {
     answer_id: number;
-    id: number
+    id: number;
+    correct: boolean;
+  }[]
+}
+
+export interface QuizStudentResult {
+  id: number;
+  name: string;
+  approve_score: number;
+  score: number;
+  submitted_at: string;
+  questions: {
+    question: string;
+    kind: TypeQuestionQuiz,
+    description: string;
+    answers: {
+      text: string;
+      user_select: boolean;
+      user_text_answer: string;
+      is_correct: boolean;
+    }[]
   }[]
 }
 

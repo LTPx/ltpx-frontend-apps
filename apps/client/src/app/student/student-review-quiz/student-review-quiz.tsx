@@ -1,5 +1,5 @@
 import styles from './student-review-quiz.module.scss';
-import { QuizResultSummary } from '@ltpx-frontend-apps/api';
+import { QuizResultSummary, QuizStudentResult } from '@ltpx-frontend-apps/api';
 import { Button, ColorsButton, QuizView } from '@ltpx-frontend-apps/shared-ui';
 import { useStudent } from '@ltpx-frontend-apps/store';
 import { useCallback, useEffect, useState } from 'react';
@@ -12,7 +12,7 @@ export interface StudentReviewQuizProps {
 
 export function StudentReviewQuiz(props: StudentReviewQuizProps) {
   const { quizId, onClose } = props;
-  const [quizResult, setQuizResult] = useState<QuizResultSummary>();
+  const [quizResult, setQuizResult] = useState<QuizStudentResult>();
   const { _getStudentQuizResult } = useStudent();
   // const id = parseInt(quizId);
 
@@ -34,8 +34,7 @@ export function StudentReviewQuiz(props: StudentReviewQuizProps) {
     <div className={styles['container']}>
       {quizResult && (
         <QuizView
-          quiz={quizResult.quiz}
-          userAnswers={quizResult.user_answers}
+          questions={quizResult.questions}
           score={quizResult.score}
           submittedAt={quizResult.submitted_at}
         >

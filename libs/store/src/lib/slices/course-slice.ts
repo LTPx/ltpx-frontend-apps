@@ -24,38 +24,47 @@ import {
   removeTask,
   editSession,
   EditSessionParams,
+  getAllCategories,
+  FormatResponse,
 } from '@ltpx-frontend-apps/api';
-
-export type TResponse = {
-  success: boolean;
-  data?: any;
-  error?: any;
-};
 
 export type CourseSlice = {
   loadedCourse: boolean;
   course: TeacherCourse;
+  allCategories: {
+    text: string;
+    value: string;
+  }[];
   cleanCourse: () => void;
-  getCourse: (id: number) => Promise<TResponse>;
-  addNewContent: (content: ContentCourse) => Promise<TResponse>;
-  removeContent: (index: number) => Promise<TResponse>;
-  addUpdateClassroom: (classroom: Classroom) => Promise<TResponse>;
-  updateContent: (content: ContentCourse, index: number) => Promise<TResponse>;
-  _addQuiz: (quiz: QuizParams) => Promise<TResponse>;
-  _addAchievement: (achievement: AchievementParams) => Promise<TResponse>;
-  _removeQuiz: (id: number) => Promise<TResponse>;
-  _removeAchievement: (id: number) => Promise<TResponse>;
-  _updateQuiz: (quiz: QuizParams) => Promise<TResponse>;
+  getCourse: (id: number) => Promise<FormatResponse>;
+  addNewContent: (content: ContentCourse) => Promise<FormatResponse>;
+  removeContent: (index: number) => Promise<FormatResponse>;
+  addUpdateClassroom: (classroom: Classroom) => Promise<FormatResponse>;
+  updateContent: (
+    content: ContentCourse,
+    index: number
+  ) => Promise<FormatResponse>;
+  _addQuiz: (quiz: QuizParams) => Promise<FormatResponse>;
+  _addAchievement: (achievement: AchievementParams) => Promise<FormatResponse>;
+  _removeQuiz: (id: number) => Promise<FormatResponse>;
+  _removeAchievement: (id: number) => Promise<FormatResponse>;
+  _updateQuiz: (quiz: QuizParams) => Promise<FormatResponse>;
   _updateAchievement: (
     achievement: AchievementParams,
     id: number
-  ) => Promise<TResponse>;
-  _updateCourse: (course: CourseApiParams) => Promise<TResponse>;
-  _addCourseSession: (params: NewCourseSessionParams) => Promise<TResponse>;
-  _editCourseSession: (params: EditSessionParams) => Promise<TResponse>;
-  _addTask: (courseId: number, task: NewTaskParams) => Promise<TResponse>;
-  _updateTask: (courseId: number, task: NewTaskParams) => Promise<TResponse>;
-  _removeTask: (id: number, taskId: number) => Promise<TResponse>;
+  ) => Promise<FormatResponse>;
+  _updateCourse: (course: CourseApiParams) => Promise<FormatResponse>;
+  _addCourseSession: (
+    params: NewCourseSessionParams
+  ) => Promise<FormatResponse>;
+  _editCourseSession: (params: EditSessionParams) => Promise<FormatResponse>;
+  _addTask: (courseId: number, task: NewTaskParams) => Promise<FormatResponse>;
+  _updateTask: (
+    courseId: number,
+    task: NewTaskParams
+  ) => Promise<FormatResponse>;
+  _removeTask: (id: number, taskId: number) => Promise<FormatResponse>;
+  _getAllCategories: () => Promise<FormatResponse>;
 };
 
 export const createCourseSlice: StateCreator<
@@ -66,7 +75,8 @@ export const createCourseSlice: StateCreator<
 > = (set, get) => ({
   loadedCourse: false,
   course: {} as TeacherCourse,
-  getCourse: async (id: number): Promise<TResponse> => {
+  allCategories: [],
+  getCourse: async (id: number) => {
     try {
       set({ loadedCourse: false });
       const course = await getTeacherCourse(id);
@@ -80,7 +90,7 @@ export const createCourseSlice: StateCreator<
       return { success: false, error };
     }
   },
-  addNewContent: async (content: ContentCourse): Promise<TResponse> => {
+  addNewContent: async (content: ContentCourse) => {
     try {
       const courseStore = get().course;
       const contents = courseStore.contents.concat([content]);
@@ -92,7 +102,7 @@ export const createCourseSlice: StateCreator<
       return { success: false, error };
     }
   },
-  removeContent: async (index: number): Promise<TResponse> => {
+  removeContent: async (index: number) => {
     try {
       const contents = get().course.contents;
       contents.splice(index, 1);
@@ -105,7 +115,7 @@ export const createCourseSlice: StateCreator<
       return { success: false, error };
     }
   },
-  _addQuiz: async (params: QuizParams): Promise<TResponse> => {
+  _addQuiz: async (params: QuizParams) => {
     try {
       const course = get().course;
       const paramsCourseId = { ...params, ...{ course_id: course.id } };
@@ -118,7 +128,7 @@ export const createCourseSlice: StateCreator<
       return { success: false, error: formatErrors(error) };
     }
   },
-  _removeQuiz: async (id: number): Promise<TResponse> => {
+  _removeQuiz: async (id: number) => {
     try {
       const courseStore = get().course;
       const quizzes = courseStore.quizzes?.filter((quiz) => quiz.id !== id);
@@ -130,7 +140,7 @@ export const createCourseSlice: StateCreator<
       return { success: false, error: formatErrors(error) };
     }
   },
-  _addAchievement: async (params): Promise<TResponse> => {
+  _addAchievement: async (params) => {
     try {
       const course = get().course;
       const paramsCourseId = { ...params, ...{ course_id: course.id } };
@@ -143,7 +153,7 @@ export const createCourseSlice: StateCreator<
       return { success: false, error };
     }
   },
-  _removeAchievement: async (id: number): Promise<TResponse> => {
+  _removeAchievement: async (id: number) => {
     try {
       const courseStore = get().course;
       const achievements = courseStore.achievements?.filter(
@@ -157,7 +167,7 @@ export const createCourseSlice: StateCreator<
       return { success: false, error };
     }
   },
-  addUpdateClassroom: async (classroom: Classroom): Promise<TResponse> => {
+  addUpdateClassroom: async (classroom: Classroom) => {
     try {
       const courseStore = get().course;
       const courseUpdated = { ...courseStore, ...{ classroom } };
@@ -183,10 +193,7 @@ export const createCourseSlice: StateCreator<
       return { success: false, error: formatErrors(error) };
     }
   },
-  updateContent: async (
-    content: ContentCourse,
-    index: number
-  ): Promise<TResponse> => {
+  updateContent: async (content: ContentCourse, index: number) => {
     try {
       const courseStore = get().course;
       const contents = courseStore.contents?.map((contentStore, i) => {
@@ -200,7 +207,7 @@ export const createCourseSlice: StateCreator<
       return { success: false, error };
     }
   },
-  _updateAchievement: async (params, id): Promise<TResponse> => {
+  _updateAchievement: async (params, id) => {
     try {
       const course = get().course;
       const paramsAchievementId = { ...params, ...{ course_id: course.id } };
@@ -217,7 +224,7 @@ export const createCourseSlice: StateCreator<
       return { success: false, error: formatErrors(error) };
     }
   },
-  _updateCourse: async (params: CourseApiParams): Promise<TResponse> => {
+  _updateCourse: async (params: CourseApiParams) => {
     try {
       const courseStore = get().course;
       const updatedCourse = { ...courseStore, ...params };
@@ -244,7 +251,13 @@ export const createCourseSlice: StateCreator<
     let meetings;
     try {
       const course = get().course;
-      const paramsData = { ...params, ...{ course_id: course.id, meetings_attributes: meetings ? meetings : params.meetings_attributes} };
+      const paramsData = {
+        ...params,
+        ...{
+          course_id: course.id,
+          meetings_attributes: meetings ? meetings : params.meetings_attributes,
+        },
+      };
       const session = await editSession(paramsData);
       const updatedCourse = { ...course, ...{ session } };
       set({ course: updatedCourse });
@@ -253,16 +266,19 @@ export const createCourseSlice: StateCreator<
       return { success: false, error };
     }
   },
-  _addTask: async(courseId, params) => {
+  _addTask: async (courseId, params) => {
     try {
       const task = await createTask(courseId, params);
       const tasks = get().course.tasks;
       const allTasks = tasks.concat([task]);
       const course = get().course;
-      const updatedCourse = {...course, ...{
-        tasks: allTasks
-      }};
-      set({course: updatedCourse})
+      const updatedCourse = {
+        ...course,
+        ...{
+          tasks: allTasks,
+        },
+      };
+      set({ course: updatedCourse });
       return { success: true, data: task };
     } catch (error) {
       return { success: false, error };
@@ -271,37 +287,54 @@ export const createCourseSlice: StateCreator<
   cleanCourse: () => {
     set({ course: {} as TeacherCourse });
   },
-  _updateTask: async(id, params) => {
+  _updateTask: async (id, params) => {
     try {
       const courseStore = get().course;
       const paramsTaskId = { ...params, ...{ course_id: courseStore.id } };
       const task = await editTask(id, paramsTaskId);
       const tasks = courseStore.tasks?.map((taskStore) => {
-        return taskStore.id === task.id
-          ? task : taskStore;
+        return taskStore.id === task.id ? task : taskStore;
       });
       const courseUpdated = { ...courseStore, ...{ tasks } };
       set({ course: courseUpdated });
       return { success: true, data: tasks };
     } catch (error) {
-      return {success: false, error: formatErrors(error)}
+      return { success: false, error: formatErrors(error) };
     }
   },
-  _removeTask: async(courseId, taskId) => {
+  _removeTask: async (courseId, taskId) => {
     try {
       await removeTask(courseId, taskId);
       const tasks = get().course.tasks;
-      const updatedTasks = tasks.filter((task)=>{
+      const updatedTasks = tasks.filter((task) => {
         return task.id !== taskId;
       });
       const course = get().course;
-      const updatedCourse = {...course, ...{
-        tasks: updatedTasks
-      }};
-      set({course: updatedCourse})
-      return {success: true};
+      const updatedCourse = {
+        ...course,
+        ...{
+          tasks: updatedTasks,
+        },
+      };
+      set({ course: updatedCourse });
+      return { success: true };
     } catch (error) {
-      return {success: false, error};
+      return { success: false, error };
     }
-  }
+  },
+  _getAllCategories: async () => {
+    try {
+      const categories = await getAllCategories();
+      const allCategories = categories.map((category) => {
+        return {
+          text: category.name,
+          value: category.id.toString(),
+        };
+      });
+      set({ allCategories });
+      return { success: true, data: categories };
+    } catch (error) {
+      return { success: false, error };
+    }
+  },
 });

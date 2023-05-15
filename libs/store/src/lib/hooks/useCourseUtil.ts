@@ -1,6 +1,5 @@
 import {
   ACCOUNT_BANK,
-  AchievementModel,
   CATEGORIES,
   LANGUAGES,
   LEVELS,

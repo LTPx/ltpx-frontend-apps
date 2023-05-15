@@ -19,7 +19,7 @@ export interface SelectProps {
 
 export function Select(props: SelectProps) {
   const { options, label, onChange, selected, className, errorMessage } = props;
-  const initialSelectedOption = selected || options[0].value;
+  const initialSelectedOption = selected || (options.length ? options[0].value : '');
   const [selectedOption, setSelectedOption] = useState(initialSelectedOption)
 
   const handleChange = (e:any) => {

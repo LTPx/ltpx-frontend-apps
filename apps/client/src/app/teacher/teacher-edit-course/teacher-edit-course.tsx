@@ -16,6 +16,7 @@ import {
 import {
   useCourse,
   useCourseUtil,
+  useSite,
   useTeacher,
   useUtil,
 } from '@ltpx-frontend-apps/store';

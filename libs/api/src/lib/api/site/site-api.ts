@@ -5,7 +5,7 @@ import { CourseSite } from '../../interfaces/course-interface';
 const http = _http;
 
 export const getPopularCategories = async () => {
-  return new Promise<any[]>((resolve, reject) => {
+  return new Promise<CategoryModel[]>((resolve, reject) => {
     http
       .get('api/v1/site/categories')
       .then((response) => {

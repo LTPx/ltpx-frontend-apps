@@ -12,24 +12,9 @@ export interface AllCoursesProps {}
 
 export function AllCourses(props: AllCoursesProps) {
   const [courses, setCourses] = useState<CourseSite[]>([]);
-  const { _getPopularCourses } = useSite();
+  const { _getPopularCourses, _getAllCategories, categoriesForSelect, _getCoursesByCategory } = useSite();
   const { t } = useTranslation();
-  const categories = [
-    { value: 'design', text: t('course_categories.design') },
-    { value: 'business', text: t('course_categories.business') },
-    {
-      value: 'software-development',
-      text: t('course_categories.software_development'),
-    },
-    {
-      value: 'personal-development',
-      text: t('course_categories.personal_development'),
-    },
-    { value: 'photography', text: t('course_categories.photography') },
-    { value: 'audio', text: t('course_categories.audio') },
-    { value: 'marketing', text: t('course_categories.marketing') },
-    { value: 'finance', text: t('course_categories.finance') },
-  ];
+
   const sortByOptions = [
     { value: 'level', text: t('allCourses.filters.level') },
     { value: 'rating', text: t('allCourses.filters.rating') },
@@ -42,11 +27,21 @@ export function AllCourses(props: AllCoursesProps) {
     } else {
       console.log('error: ', error);
     }
+    await _getAllCategories();
   }, []);
 
   useEffect(() => {
     fetchPopularCourse();
   }, []);
+
+  async function handleChangeCategory(slug:string) {
+    const { success, data, error } = await _getCoursesByCategory(slug);
+    if (success) {
+      setCourses(data);
+    } else {
+      console.log('error: ', error);
+    }
+  }
 
   return (
     <div className={styles['container']}>
@@ -72,8 +67,10 @@ export function AllCourses(props: AllCoursesProps) {
             Tenemos los siguientes cursos disponibles para ti
           </div>
           <div className={styles['filters']}>
-            <Select options={categories} />
-            <Select options={sortByOptions} />
+            <Select options={categoriesForSelect} onChange={(item)=>{
+              handleChangeCategory(item.value);
+            }}/>
+            {/* <Select options={sortByOptions} /> */}
           </div>
         </div>
         <div className={styles['course-row']}>

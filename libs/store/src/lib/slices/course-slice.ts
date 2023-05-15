@@ -331,7 +331,13 @@ export const createCourseSlice: StateCreator<
           value: category.id.toString(),
         };
       });
-      set({ allCategories });
+      const categoriesForSelect = categories.map((category)=>{
+        return {
+          text: category.name,
+          value: category.slug
+        }
+      });
+      set({ allCategories, categoriesForSelect });
       return { success: true, data: categories };
     } catch (error) {
       return { success: false, error };

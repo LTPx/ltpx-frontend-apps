@@ -16,11 +16,16 @@ import {
   FormatResponse,
   getPopularCategories,
   getCoursesByCategory,
+  CategoryModel,
 } from '@ltpx-frontend-apps/api';
 
 export type SiteSlice = {
   currentFullCourse: FullCourse;
-  categories: any[];
+  categories: CategoryModel[];
+  categoriesForSelect: {
+    text: string;
+    value: string;
+  }[];
   _getPopularCourses: () => Promise<FormatResponse>;
   _getSiteCourse: (slug: string) => Promise<FormatResponse>;
   _createPaymentOrder: (params: NewUserCoursePaymentParams) => Promise<FormatResponse>;
@@ -43,6 +48,7 @@ export const createSiteSlice: StateCreator<StoreState, [], [], SiteSlice> = (
     ratings: []
   } as FullCourse,
   categories: [],
+  categoriesForSelect: [],
   _getPopularCourses: async () => {
     try {
       const courses = await getPopularCourses();
@@ -95,7 +101,13 @@ export const createSiteSlice: StateCreator<StoreState, [], [], SiteSlice> = (
   _getPopularCategories: async () => {
     try {
       const categories = await getPopularCategories();
-      set({categories});
+      const categoriesForSelect = categories.map((category)=>{
+        return {
+          text: category.name,
+          value: category.slug
+        }
+      })
+      set({categories, categoriesForSelect });
       return { success: true, data: categories}
     } catch (error) {
       return { success: false, error}

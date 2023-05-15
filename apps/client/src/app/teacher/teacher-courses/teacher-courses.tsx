@@ -65,7 +65,7 @@ export function TeacherCourses() {
           title={course.title}
           description={course.description}
           learners={course.enrollments_count || 0}
-          category={course.category}
+          category={course.category_slug}
           percentageRate={0}
           percentageLearner={0}
           urlStudents={`/teacher/courses/${course.course_session_id}/students`}

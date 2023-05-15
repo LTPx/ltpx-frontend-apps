@@ -9,6 +9,7 @@ const createRandomCourse = ():PublicCourse => (
     title: `Learning how to: ${faker.commerce.product()}`,
     description: `Learning: ${faker.commerce.productDescription()}`,
     category: faker.commerce.department(),
+    category_slug: 'my-custom-slug',
     price_cents: faker.datatype.number({min: 1000, max: 5000}),
     contents_count: faker.datatype.number(8),
     average_rating: faker.datatype.number(5),

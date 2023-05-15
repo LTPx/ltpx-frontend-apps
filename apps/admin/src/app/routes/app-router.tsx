@@ -11,6 +11,7 @@ import PaymentsPage from '../pages/payments-page/payments-page';
 import SettingsAppPage from '../pages/settings-app-page/settings-app-page';
 import TeachersPage from '../pages/teachers-page/teachers-page';
 import UsersPage from '../pages/users-page/users-page';
+import CategoryPage from '../pages/category-page/category-page';
 
 export const AppRouter = () => {
   return (
@@ -26,6 +27,7 @@ export const AppRouter = () => {
         <Route path="dashboard" element={<DashboardPage />} />
         <Route path="learning-path" element={<LearningPathPage />} />
         <Route path="payments" element={<PaymentsPage />} />
+        <Route path="categories" element={<CategoryPage />} />
       </Route>
       <Route path="login" element={<Login />} />
       <Route path="/" element={<Login />} />

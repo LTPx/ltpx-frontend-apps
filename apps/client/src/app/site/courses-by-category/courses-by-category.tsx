@@ -1,6 +1,10 @@
 import styles from './courses-by-category.module.scss';
 import { CourseSite } from '@ltpx-frontend-apps/api';
-import { CourseCard, InputSearch } from '@ltpx-frontend-apps/shared-ui';
+import {
+  CourseCard,
+  CourseRowCard,
+  InputSearch,
+} from '@ltpx-frontend-apps/shared-ui';
 import { useTranslation } from 'react-i18next';
 import { NavLink, useParams } from 'react-router-dom';
 import { useCallback, useEffect, useState } from 'react';
@@ -23,7 +27,6 @@ export function CoursesByCategory(props: CoursesByCategoryProps) {
       } else {
         console.log('error: ', error);
       }
-
     }
   }, []);
 
@@ -40,29 +43,34 @@ export function CoursesByCategory(props: CoursesByCategoryProps) {
             <NavLink to="/courses">{t('links.toAllCourses')}</NavLink>
           </div>
         </div>
-        <div className={styles['search-course']}>
-          <h4>Se muestran 4 cursos disponibles para ti</h4>
-          <InputSearch
-            className={styles['search-responsive']}
-            placeholder="Buscar cursos"
-          />
-        </div>
-        <div className={styles['courses-by-category']}>
-          {courses.map((course, index) => (
-            <div className={styles['course']} key={index}>
-              <CourseCard
-                image={course.cover_url}
-                category={course.category_slug}
-                title={course.title}
-                price={course.price_format}
-                duration={0}
-                achievements={0}
-                stars={course.average_rating}
-                link={`/course/${course.slug}`}
-              />
+        {courses.length > 0 ? (
+          <>
+            <div className={styles['search-course']}>
+              <h4>Se muestran los siguientes cursos: </h4>
             </div>
-          ))}
-        </div>
+            <div className={styles['courses-by-category']}>
+              {courses.map((course, index) => (
+                <div className={styles['course']} key={index}>
+                  <CourseRowCard
+                    image={course.cover_url}
+                    achievements={course.total_achievements}
+                    description={course.description}
+                    language={course.language}
+                    category={course.category_slug}
+                    title={course.title}
+                    stars={course.average_rating}
+                    link={`/course/${course.slug}`}
+                    price={course.price_format}
+                  />
+                </div>
+              ))}
+            </div>
+          </>
+        ) : (
+          <div className={styles['courses-by-category']}>
+            <h2>No se encontraron Cursos</h2>
+          </div>
+        )}
       </div>
     </div>
   );

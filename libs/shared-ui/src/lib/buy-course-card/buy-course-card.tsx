@@ -64,7 +64,7 @@ export function BuyCourseCard(props: BuyCourseCardProps) {
             /> */}
             <Button
               className={
-                totalEnrolled === availableSites
+                totalEnrolled > 0 && totalEnrolled === availableSites
                   ? `${styles['disable-btn']}`
                   : ''
               }

@@ -24,7 +24,8 @@ import {
   createCategory,
   Category,
   removeCategory,
-  editCategory
+  editCategory,
+  CategoryModel
 } from '@ltpx-frontend-apps/api';
 
 export type TResponse = {
@@ -36,6 +37,7 @@ export type TResponse = {
 export type AdminSlice = {
   applications: ApplicationTeach[];
   courses: CourseModel[];
+  appCategories: CategoryModel[];
   viewCourse: CourseModel;
   viewApplication: ApplicationTeach;
   getApplicationStore: (id: number) => void;
@@ -68,6 +70,7 @@ export const createAdminSlice: StateCreator<StoreState, [], [], AdminSlice> = (
 ) => ({
   applications: [],
   courses: [],
+  appCategories: [],
   viewApplication: {} as ApplicationTeach,
   viewCourse: {} as CourseModel,
   getApplicationStore: (id: number) => {
@@ -212,6 +215,7 @@ export const createAdminSlice: StateCreator<StoreState, [], [], AdminSlice> = (
   _getCategories: async () => {
     try {
       const categories = await getCategories();
+      set({ appCategories: categories });
       return { success: true, data: categories };
     } catch (error) {
       return { success: false, error };
@@ -219,17 +223,22 @@ export const createAdminSlice: StateCreator<StoreState, [], [], AdminSlice> = (
   },
   _addCategory: async (params) => {
     try {
-      const category = await createCategory(params);
-      // const updatedCourse = { ...course, ...{ session } };
-      // set({ course: updatedCourse });
-      return { success: true, data: category };
+      const newCategory = await createCategory(params);
+      const allCategories = get().appCategories.concat([newCategory])
+      set({ appCategories: allCategories });
+      return { success: true, data: newCategory };
     } catch (error) {
       return { success: false, error };
     }
   },
   _removeCategory: async(categoryId) => {
     try {
-      const category = await removeCategory(categoryId);
+      await removeCategory(categoryId);
+      const allCategories = get().appCategories;
+      const updatedCategories = allCategories.filter((category)=>{
+        return category.id !== categoryId;
+      });
+      set({appCategories: updatedCategories})
       return {success: true};
     } catch (error) {
       return {success: false, error};
@@ -237,8 +246,14 @@ export const createAdminSlice: StateCreator<StoreState, [], [], AdminSlice> = (
   },
   _updateCategory: async(params) => {
     try {
-      const task = await editCategory(params);
-      return { success: true, data: task };
+      const category = await editCategory(params);
+      const allCategories = get().appCategories;
+      const updatedCategories = allCategories.map((categoryStore) => {
+        return categoryStore.id === category.id
+          ? category : categoryStore;
+      });
+      set({ appCategories: updatedCategories });
+      return { success: true, data: category };
     } catch (error) {
       return {success: false, error: (error)}
     }

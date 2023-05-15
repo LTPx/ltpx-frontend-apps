@@ -7,7 +7,7 @@ import {
 import styles from './category-page.module.scss';
 import { Dialog } from 'evergreen-ui';
 import { useCallback, useEffect, useState } from 'react';
-import { useAdmin } from '@ltpx-frontend-apps/store';
+import { useAdmin, useUtil } from '@ltpx-frontend-apps/store';
 import { CategoryModel, Category } from '@ltpx-frontend-apps/api';
 
 /* eslint-disable-next-line */
@@ -15,27 +15,32 @@ export interface CategoryPageProps {}
 
 export function CategoryPage(props: CategoryPageProps) {
   const [category, setCategory] = useState<CategoryModel>();
-  const [categories, setCategories] = useState<CategoryModel[]>([]);
   const [openModal, setOpenModal] = useState(false);
-  const { _getCategories, _addCategory, _removeCategory, _updateCategory } =
-    useAdmin();
+  const { setMessageToast } = useUtil();
+  const {
+    _getCategories,
+    _addCategory,
+    _removeCategory,
+    _updateCategory,
+    appCategories,
+  } = useAdmin();
 
   const addCategory = async (params: Category) => {
     const { success, data, error } = await _addCategory(params);
     if (success) {
+      setMessageToast('success', 'Nueva categoría agregada correctamente');
       setCategory(data);
-      console.log(data);
     } else {
-      console.log(error);
+      setMessageToast('error', error);
     }
   };
 
   async function removeCategory(categoryId: number) {
     const { success, error } = await _removeCategory(categoryId);
     if (success) {
-      console.log(success);
+      setMessageToast('success', 'Categoría eliminada correctamente');
     } else {
-      console.log(error);
+      setMessageToast('error', error);
     }
   }
 
@@ -43,16 +48,16 @@ export function CategoryPage(props: CategoryPageProps) {
     const paramsWithId = { ...params, ...{ id: category?.id } };
     const { success, error } = await _updateCategory(paramsWithId);
     if (success) {
-      console.log(success);
+      setMessageToast('success', 'Categoría actualizada correctamente');
     } else {
-      console.log(error);
+      setMessageToast('error', error);
     }
   }
 
   const fetchCategories = useCallback(async () => {
     const { success, data, error } = await _getCategories();
     if (success) {
-      setCategories(data);
+      console.log(success);
     } else {
       console.log('error: ', error);
     }
@@ -78,9 +83,9 @@ export function CategoryPage(props: CategoryPageProps) {
         />
       </div>
       <div className={styles['all-categories']}>
-        <h4 className={styles['title-form']}>Todas las categorías</h4>
+        <h4 className={styles['subTitle']}>Todas las categorías</h4>
         <div className={styles['categories-content']}>
-          {categories.map((category, index) => (
+          {appCategories.map((category, index) => (
             <div key={index}>
               <BasicRow
                 onClick={() => {

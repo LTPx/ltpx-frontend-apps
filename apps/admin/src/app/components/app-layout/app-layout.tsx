@@ -5,9 +5,16 @@ import {
   Icon,
   Nav,
   UserMenu,
-  ChatFloat
+  ChatFloat,
+  Snackbar,
+  SnackbarPosition,
+  SnackbarType,
 } from '@ltpx-frontend-apps/shared-ui';
-import { useUser } from '@ltpx-frontend-apps/store';
+import {
+  useAppStore,
+  useUser,
+  useUtil,
+} from '@ltpx-frontend-apps/store';
 import { useTranslation } from 'react-i18next';
 import { Outlet, useNavigate } from 'react-router-dom';
 import styles from './app-layout.module.scss';
@@ -20,8 +27,10 @@ export interface AppLayoutProps {}
 export function AppLayout(props: AppLayoutProps) {
   const [openChat, setOpenChat] = useState(false);
   const { t } = useTranslation();
-  const { user, logout } = useUser();
+  const { feedbackAction } = useAppStore();
+  const { user, logout, newNotification, notifications } = useUser();
   const navigate = useNavigate();
+  const { clearMessageToast } = useUtil();
 
   const links = [
     {
@@ -87,7 +96,7 @@ export function AppLayout(props: AppLayoutProps) {
         icon: 'category',
         size: 20,
       },
-    }
+    },
   ];
 
   return (
@@ -133,6 +142,32 @@ export function AppLayout(props: AppLayoutProps) {
           )}
         </div>
       </div>
+      {feedbackAction.text && (
+        <Snackbar
+          position={SnackbarPosition.centerBottom}
+          open={true}
+          title={feedbackAction.type === 'success' ? 'Actualizado' : 'Errores'}
+          text={feedbackAction.text}
+          kind={
+            feedbackAction.type === 'success'
+              ? SnackbarType.success
+              : SnackbarType.error
+          }
+          duration={2000}
+          onClose={clearMessageToast}
+        />
+      )}
+      {newNotification && notifications.length > 0 && (
+        <Snackbar
+          position={SnackbarPosition.bottomRight}
+          open={true}
+          title={'Nueva notificación'}
+          text={notifications[notifications.length - 1].text}
+          kind={SnackbarType.message}
+          duration={1000}
+          onClose={clearMessageToast}
+        />
+      )}
     </div>
   );
 }

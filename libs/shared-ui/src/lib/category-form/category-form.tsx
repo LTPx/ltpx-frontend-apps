@@ -13,7 +13,7 @@ export interface CategoryFormProps {
 }
 
 export function CategoryForm(props: CategoryFormProps) {
-  const {category, onSave, onClose } = props;
+  const { category, onSave, onClose } = props;
 
   const formik = useFormik({
     initialValues: {
@@ -22,7 +22,9 @@ export function CategoryForm(props: CategoryFormProps) {
     },
     validationSchema: Yup.object({
       name: Yup.string().required('Se debe asignar un nombre a la categoría'),
-      slug: Yup.string().required('Se debe asignar un slug a la categoría'),
+      slug: Yup.string()
+        .required('Se debe asignar un slug a la categoría')
+        .matches(/^\S*$/, 'No se permiten espacios en blanco'),
     }),
     onSubmit: (form) => {
       if (form.name && form.slug) {

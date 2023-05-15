@@ -2,13 +2,17 @@
   background-color: #fff;
   padding: 2rem 3rem;
 
+  .all-categories {
+    padding: 1rem 0;
+
+    .subTitle {
+      font-weight: 500;
+      padding-bottom: 1rem;
+    }
+  }
   .actions-btn {
     display: flex;
     justify-content: end;
-  }
-
-  .title-form {
-    font-weight: 500;
   }
 
   .categories-content {

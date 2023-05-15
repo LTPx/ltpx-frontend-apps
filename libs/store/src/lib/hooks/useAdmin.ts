@@ -4,6 +4,7 @@ export const useAdmin = () => {
   const {
     applications,
     courses,
+    appCategories,
     getApplicationStore,
     getCourseStore,
     viewApplication,
@@ -32,6 +33,7 @@ export const useAdmin = () => {
   return {
     applications,
     courses,
+    appCategories,
     getApplicationStore,
     getCourseStore,
     viewApplication,

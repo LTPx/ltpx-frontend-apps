@@ -13,22 +13,22 @@ import {
   getPublicTeacherProfile,
   CourseSite,
   CourseSessionSummary,
+  FormatResponse,
+  getPopularCategories,
+  getCoursesByCategory,
 } from '@ltpx-frontend-apps/api';
-
-export type TResponse = {
-  success: boolean;
-  data?: any;
-  error?: any;
-};
 
 export type SiteSlice = {
   currentFullCourse: FullCourse;
-  _getPopularCourses: () => Promise<TResponse>;
-  _getSiteCourse: (slug: string) => Promise<TResponse>;
-  _createPaymentOrder: (params: NewUserCoursePaymentParams) => Promise<TResponse>;
-  _confirmUserPayment: (params: ConfirmUserPayment) => Promise<TResponse>;
-  _cancelUserPayment: (orderId: number) => Promise<TResponse>;
-  _getTeacherProfile: (slug: string) => Promise<TResponse>;
+  categories: any[];
+  _getPopularCourses: () => Promise<FormatResponse>;
+  _getSiteCourse: (slug: string) => Promise<FormatResponse>;
+  _createPaymentOrder: (params: NewUserCoursePaymentParams) => Promise<FormatResponse>;
+  _confirmUserPayment: (params: ConfirmUserPayment) => Promise<FormatResponse>;
+  _cancelUserPayment: (orderId: number) => Promise<FormatResponse>;
+  _getTeacherProfile: (slug: string) => Promise<FormatResponse>;
+  _getPopularCategories: () => Promise<FormatResponse>;
+  _getCoursesByCategory: (categorySlug: string) => Promise<FormatResponse>;
 };
 
 export const createSiteSlice: StateCreator<StoreState, [], [], SiteSlice> = (
@@ -42,7 +42,8 @@ export const createSiteSlice: StateCreator<StoreState, [], [], SiteSlice> = (
     comments: [],
     ratings: []
   } as FullCourse,
-  _getPopularCourses: async (): Promise<TResponse> => {
+  categories: [],
+  _getPopularCourses: async () => {
     try {
       const courses = await getPopularCourses();
       return { success: true, data: courses };
@@ -50,7 +51,7 @@ export const createSiteSlice: StateCreator<StoreState, [], [], SiteSlice> = (
       return { success: false, error };
     }
   },
-  _getSiteCourse: async (slug): Promise<TResponse> => {
+  _getSiteCourse: async (slug) => {
     try {
       const course = await siteGetCourse(slug);
       set({ currentFullCourse: course })
@@ -59,7 +60,7 @@ export const createSiteSlice: StateCreator<StoreState, [], [], SiteSlice> = (
       return { success: false, error };
     }
   },
-  _createPaymentOrder: async (params): Promise<TResponse> => {
+  _createPaymentOrder: async (params) => {
     try {
       const payment = await createPaymentOrder(params);
       return { success: true, data: payment };
@@ -67,7 +68,7 @@ export const createSiteSlice: StateCreator<StoreState, [], [], SiteSlice> = (
       return { success: false, error };
     }
   },
-  _confirmUserPayment: async (params): Promise<TResponse> => {
+  _confirmUserPayment: async (params) => {
     try {
       const payment = await updatePaymentOrder(params);
       return { success: true, data: payment };
@@ -75,7 +76,7 @@ export const createSiteSlice: StateCreator<StoreState, [], [], SiteSlice> = (
       return { success: false, error };
     }
   },
-  _cancelUserPayment: async (id): Promise<TResponse> => {
+  _cancelUserPayment: async (id) => {
     try {
       const payment = await cancelPaymentOrder(id);
       return { success: true, data: payment };
@@ -83,10 +84,27 @@ export const createSiteSlice: StateCreator<StoreState, [], [], SiteSlice> = (
       return { success: false, error };
     }
   },
-  _getTeacherProfile: async (slug:string) => {
+  _getTeacherProfile: async (slug) => {
     try {
       const teacher = await getPublicTeacherProfile(slug);
       return { success: true, data: teacher}
+    } catch (error) {
+      return { success: false, error}
+    }
+  },
+  _getPopularCategories: async () => {
+    try {
+      const categories = await getPopularCategories();
+      set({categories});
+      return { success: true, data: categories}
+    } catch (error) {
+      return { success: false, error}
+    }
+  },
+  _getCoursesByCategory:async (categorySlug) => {
+    try {
+      const courses = await getCoursesByCategory(categorySlug);
+      return { success: true, data: courses}
     } catch (error) {
       return { success: false, error}
     }

@@ -37,14 +37,14 @@ export const es = {
   course_categories: {
     design: 'Diseño',
     business: 'Negocios',
-    software_development: 'Desarrollo de software',
-    personal_development: 'Desarrollo Personal',
+    'software-development': 'Desarrollo de software',
+    'personal-development': 'Desarrollo Personal',
     photography: 'Fotografía',
     audio: 'Audio + Música',
     marketing: 'Marketing',
     finance: 'Finanzas',
-    basic_education: 'Educación Básica',
-    secondary_education: 'Educación Secundaria',
+    'basic-education': 'Educación Básica',
+    'secondary-education': 'Educación Secundaria',
     others: 'Otros',
   },
   option_conditional_test: {

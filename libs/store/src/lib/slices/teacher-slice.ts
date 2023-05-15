@@ -34,6 +34,7 @@ import {
   deleteCourse,
   FormatResponse,
   updateApplication,
+  getQuizReview,
 } from '@ltpx-frontend-apps/api';
 import { StateCreator } from 'zustand';
 import { StoreState } from '../store';
@@ -82,6 +83,7 @@ export type TeacherSlice = {
   _updateProfile: (params: TeacherProfileParams) => Promise<FormatResponse>;
   _updateApplicationTeach: (applicationId:number, params: ApplyTeachApiParams) => Promise<FormatResponse>;
   getProfile: () => Promise<FormatResponse>;
+  _getQuizReview: (quizResultId: number) => Promise<FormatResponse>;
 };
 
 export const createTeacherSlice: StateCreator<
@@ -272,6 +274,14 @@ export const createTeacherSlice: StateCreator<
       const application = await updateApplication(id, params);
       set({ application });
       return { success: true, data: application };
+    } catch (error) {
+      return { success: false, error: error };
+    }
+  },
+  _getQuizReview: async (id) => {
+    try {
+      const quiz = await getQuizReview(id);
+      return { success: true, data: quiz };
     } catch (error) {
       return { success: false, error: error };
     }

@@ -1,5 +1,5 @@
 import { _http } from '../../http';
-import { QuizModel, QuizResult, QuizResultSummary, QuizStudent, UserAnswer } from '../../interfaces/quiz-interface';
+import { QuizModel, QuizResult, QuizResultSummary, QuizStudent, QuizStudentResult, UserAnswer } from '../../interfaces/quiz-interface';
 
 const http = _http;
 
@@ -30,7 +30,7 @@ export const getStudentQuiz = async (courseId: number, quizId: number) => {
 };
 
 export const getStudentQuizResult = async (quizId: number) => {
-  return new Promise<QuizResultSummary>((resolve, reject) => {
+  return new Promise<QuizStudentResult>((resolve, reject) => {
     http
       .get(`api/v1/student/quiz_results/${quizId}`)
       .then((response) => {

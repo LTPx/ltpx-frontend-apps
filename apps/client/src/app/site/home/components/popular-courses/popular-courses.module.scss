@@ -1,0 +1,76 @@
+@import '../../../../../styles.scss';
+
+.popular-courses-container {
+  background-color: $white-color-100;
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  .text {
+    text-align: center;
+    margin-top: 5rem;
+    padding-bottom: 1.5rem;
+    .title {
+      font-weight: 500;
+    }
+    .subtitle {
+      padding-top: 0.25rem;
+      color: $text-gray-color;
+    }
+  }
+
+  .popular-courses {
+    display: flex;
+    gap: $size-lg-1;
+    flex-wrap: wrap;
+    width: 80%;
+    justify-content: space-between;
+
+
+    .course {
+      height: 20rem;
+      width: 16rem;
+    }
+  }
+
+  .link-browser {
+    margin-top: $size-lg-1;
+    text-align: center;
+    margin-bottom: $size-lg-1;
+  }
+}
+
+//smartphones-responsive
+@media screen and (max-width: 550px) {
+  .popular-courses-container {
+    .text {
+      width: 12rem;
+    }
+    .popular-courses {
+      width: 100%;
+      justify-content: center;
+
+      .course {
+        height: 19rem;
+        width: 20rem;
+      }
+    }
+  }
+}
+
+//tablet-responsive-vertical
+@media screen and (min-width: 560px) and (max-width: 850px) {
+  .popular-courses {
+    width: 72% !important;
+    justify-content: inherit !important;
+  }
+}
+//tablet-responsive-horizontal
+@media screen and (min-width: 860px) and (max-width: 1224px) {
+  .popular-courses {
+    width: 75% !important;
+  }
+}

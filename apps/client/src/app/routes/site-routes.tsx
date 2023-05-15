@@ -46,7 +46,7 @@ export const SiteRoutes = () => {
           <Route path="/teacher/:slug" element={<TeacherProfilePage />} />
           <Route path="/update-password" element={<UpdatePassword />} />
           <Route
-            path="/course/:categoryId/category"
+            path="/courses/:categoryId"
             element={<CoursesByCategory />}
           />
           <Route path="*" element={<Page404 />} />

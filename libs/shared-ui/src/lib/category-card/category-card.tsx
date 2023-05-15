@@ -5,7 +5,7 @@ import styles from './category-card.module.scss';
 /* eslint-disable-next-line */
 export interface CategoryCardProps {
   id?: number;
-  icon: string;
+  icon?: string;
   title?: string;
   description?: string;
   link?: string;
@@ -18,7 +18,7 @@ export function CategoryCard(props: CategoryCardProps) {
     <div className={styles['container']}>
       <div className={styles['header']}>
         <img alt="cloud" src="../../../../assets/images/cloud.svg"></img>
-        <Icon className={styles['icon']} icon={icon} size={50} />
+        <Icon className={styles['icon']} icon={icon || ''} size={50} />
       </div>
       <h4 className={styles['title']}>{title}</h4>
       <h5 className={styles['description']}>{description}</h5>

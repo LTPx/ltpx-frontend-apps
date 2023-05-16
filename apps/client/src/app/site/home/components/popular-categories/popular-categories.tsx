@@ -10,16 +10,6 @@ export interface PopularCategoriesProps {}
 export function PopularCategories(props: PopularCategoriesProps) {
   const { categories, _getPopularCategories} = useSite();
   const { t } = useTranslation();
-  const categoriesIcons = {
-    design: 'desktop',
-    business: 'briefcase',
-    'software-development': 'browser',
-    'personal-development': 'user',
-    photography: 'picture',
-    audio: 'guitar',
-    marketing: 'marketing',
-    finance: 'wallet',
-  };
 
   const fetchData = useCallback(async () => {
     const { error } = await _getPopularCategories();
@@ -41,7 +31,7 @@ export function PopularCategories(props: PopularCategoriesProps) {
       <div className={styles['category-content']}>
         {categories.map((category, index) => (
           <CategoryCard
-            icon={categoriesIcons.audio} //TODO: get icon from array
+            icon={category.icon}
             key={index}
             title={category.name}
             link={`/courses/${category.slug}`}

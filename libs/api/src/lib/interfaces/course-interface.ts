@@ -59,6 +59,7 @@ export interface CourseModel {
   created_at: string;
   updated_at: string;
   category: string;
+  category_slug: string;
   price_currency: string;
   contents_count: number;
   enrollments_count: number;

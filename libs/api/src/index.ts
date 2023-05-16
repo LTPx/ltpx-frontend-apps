@@ -1,3 +1,5 @@
+import { editQuiz } from './lib/api/teacher/quiz-api';
+
 export * from './lib/api';
 
 // i18n
@@ -20,6 +22,8 @@ export * from './lib/interfaces/task-interface';
 export * from './lib/interfaces/withdrawals-interfaces';
 export * from './lib/interfaces/chat-interface';
 export * from './lib/interfaces/notification-interface';
+export * from './lib/interfaces/category-interface';
+
 
 //fake api
 export * from '../src/lib/fake/courses';
@@ -45,6 +49,7 @@ export * from './lib/api/admin/applications-api';
 export * from './lib/api/admin/users-api';
 export * from './lib/api/admin/admin-courses-api';
 export * from './lib/api/admin/admin-withdrawals-api';
+export * from './lib/api/admin/admin-categories-api';
 
 //teacher
 export * from './lib/api/site/site-courses-api';

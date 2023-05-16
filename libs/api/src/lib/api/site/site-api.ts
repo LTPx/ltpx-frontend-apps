@@ -1,10 +1,24 @@
 import { _http } from '../../http';
+import { CategoryModel } from '../../interfaces/category-interface';
 import { CourseSite } from '../../interfaces/course-interface';
 
 const http = _http;
 
 export const getPopularCategories = async () => {
-  return new Promise<any[]>((resolve, reject) => {
+  return new Promise<CategoryModel[]>((resolve, reject) => {
+    http
+      .get('api/v1/site/categories')
+      .then((response) => {
+        resolve(response.data);
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
+};
+
+export const getAllCategories = async () => {
+  return new Promise<CategoryModel[]>((resolve, reject) => {
     http
       .get('api/v1/site/categories')
       .then((response) => {

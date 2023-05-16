@@ -13,13 +13,14 @@ import { useFormik } from 'formik';
 import { useTranslation } from 'react-i18next';
 import * as Yup from 'yup';
 import styles from './course-general-information.module.scss';
+import { useCallback, useEffect } from 'react';
 
 /* eslint-disable-next-line */
 export interface CourseGeneralInformation {
   title: string;
   cover?: string;
   description?: string;
-  category?: string;
+  category_id?: string;
   language?: CourseLanguage;
   level?: CourseLevel;
   learn_goals?: string;
@@ -35,23 +36,31 @@ export function CourseGeneralInformation(props: CourseGeneralInformationProps) {
     cover,
     title,
     description,
-    category,
+    category_id,
     language,
     level,
     learn_goals,
     requirements,
     onSubmit,
   } = props;
-  const { categories, languages, levels } = useCourseUtil();
-  const { _updateCourse, cleanCourse } = useCourse();
+  const { languages, levels } = useCourseUtil();
+  const { _updateCourse, cleanCourse, _getAllCategories, allCategories } = useCourse();
   const { t } = useTranslation();
+
+  const fetchData = useCallback(async () => {
+    await _getAllCategories();
+  }, []);
+
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   const formik = useFormik({
     initialValues: {
       title: title,
       cover: cover,
       description: description || '',
-      category: category,
+      category_id: category_id,
       language: language,
       level: level,
       learn_goals: learn_goals || '',
@@ -138,9 +147,9 @@ export function CourseGeneralInformation(props: CourseGeneralInformationProps) {
       <div className={styles['selects-form']}>
         <Select
           label={t('courseInformation.category') || ''}
-          selected={category}
-          options={categories}
-          onChange={(option) => formik.setFieldValue('category', option.value)}
+          selected={category_id}
+          options={allCategories}
+          onChange={(option) => formik.setFieldValue('category_id', option.value)}
         />
         <Select
           label={t('courseInformation.level') || ''}

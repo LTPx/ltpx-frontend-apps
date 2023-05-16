@@ -24,13 +24,11 @@
   .courses-by-category {
     padding: 3rem 0;
     display: flex;
-    width: 100%;
     flex-wrap: wrap;
     gap: $size-md-1;
     justify-content: center;
     .course {
-      height: 20rem;
-      width: 16rem;
+      width: 100%;
     }
   }
 }
@@ -38,7 +36,7 @@
 @media screen and (max-width: 550px) {
   .container {
     .content {
-      width: 100%;
+      width: 90%;
       padding: 0 0;
     }
     .search-course {

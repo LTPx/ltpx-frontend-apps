@@ -22,6 +22,8 @@ export const useCourse = () => {
     _addTask,
     _updateTask,
     _removeTask,
+    _getAllCategories,
+    allCategories,
   } = useAppStore();
 
   return {
@@ -48,5 +50,7 @@ export const useCourse = () => {
     _addTask,
     _updateTask,
     _removeTask,
+    _getAllCategories,
+    allCategories,
   };
 };

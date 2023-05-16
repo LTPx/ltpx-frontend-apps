@@ -40,7 +40,7 @@ export const es = {
     'software-development': 'Desarrollo de software',
     'personal-development': 'Desarrollo Personal',
     photography: 'Fotografía',
-    audio: 'Audio + Música',
+    'audio-and-music': 'Audio + Música',
     marketing: 'Marketing',
     finance: 'Finanzas',
     'basic-education': 'Educación Básica',

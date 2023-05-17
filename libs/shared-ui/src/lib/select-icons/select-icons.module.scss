@@ -1,0 +1,23 @@
+@import '../../styles/styles.module.scss';
+
+.container {
+  padding: 1rem 0;
+  .content {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 2rem;
+
+    .icon-selected {
+      border: 1px solid $green-color;
+      background-color: $green-color-100;
+      border-radius: 5px;
+      padding: 5px;
+    }
+    .icon {
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+    }
+  }
+}

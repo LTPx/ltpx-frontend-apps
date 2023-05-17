@@ -1,6 +1,35 @@
+@import '../../styles/styles.module.scss';
+
 .footer {
   display: flex;
-  gap: 1rem;
   justify-content: flex-end;
-  padding: 1.5rem 0;
+  gap: 1rem;
+  padding: 1.5rem 2rem 1.5rem 0;
+  background: $white-color;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.section-error {
+  padding-bottom: 0.25rem;
+}
+.category {
+  display: flex;
+  flex-direction: column;
+
+  .category-inputs {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    gap: 1rem;
+  }
+}
+
+.select-icons {
+  padding: 1rem 0 7rem 0;
+
+  .title-icons {
+    font-weight: 500;
+  }
 }

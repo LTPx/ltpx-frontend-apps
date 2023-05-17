@@ -1,5 +1,5 @@
 import IcoMoon, { IconProps } from "react-icomoon";
-import iconSet from "../../assets/selection.json";
+import iconSet from "../../assets/icons.json";
 
 export function Icon(props: IconProps) {
   return (

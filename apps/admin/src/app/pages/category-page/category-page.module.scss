@@ -2,8 +2,14 @@
   background-color: #fff;
   padding: 2rem 3rem;
 
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
   .all-categories {
-    padding: 1rem 0;
+    padding: 1.5rem 0;
 
     .subTitle {
       font-weight: 500;
@@ -22,9 +28,3 @@
   }
 }
 
-.footer {
-  display: flex;
-  gap: 1rem;
-  justify-content: flex-end;
-  padding: 1.5rem 0;
-}

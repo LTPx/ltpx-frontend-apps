@@ -4,6 +4,7 @@ export interface CategoryModel {
   id: number;
   name: string;
   count: number;
+  icon: string;
   slug: string;
   created_at: string;
   updated_at: string;
@@ -18,4 +19,5 @@ export interface Category {
   id?: number;
   name: string;
   slug: string;
+  icon: string;
 }

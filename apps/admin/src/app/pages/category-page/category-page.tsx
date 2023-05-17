@@ -10,10 +10,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { useAdmin, useUtil } from '@ltpx-frontend-apps/store';
 import { CategoryModel, Category } from '@ltpx-frontend-apps/api';
 
-/* eslint-disable-next-line */
-export interface CategoryPageProps {}
-
-export function CategoryPage(props: CategoryPageProps) {
+export function CategoryPage() {
   const [category, setCategory] = useState<CategoryModel>();
   const [openModal, setOpenModal] = useState(false);
   const { setMessageToast } = useUtil();
@@ -70,24 +67,27 @@ export function CategoryPage(props: CategoryPageProps) {
 
   return (
     <div className={styles['container']}>
-      <h1>Categorías</h1>
-      <div className={styles['actions-btn']}>
-        <Button
-          title="Agregar Categoría"
-          color={ColorsButton.secondary}
-          icon="plus"
-          onClick={() => {
-            setCategory(undefined);
-            setOpenModal(true);
-          }}
-        />
+      <div className={styles['header']}>
+        <h1>Categorías</h1>
+        <div className={styles['actions-btn']}>
+          <Button
+            title="Agregar Categoría"
+            color={ColorsButton.secondary}
+            icon="plus"
+            onClick={() => {
+              setCategory(undefined);
+              setOpenModal(true);
+            }}
+          />
+        </div>
       </div>
       <div className={styles['all-categories']}>
-        <h4 className={styles['subTitle']}>Todas las categorías</h4>
+        {/* <h4 className={styles['subTitle']}>Todas las categorías</h4> */}
         <div className={styles['categories-content']}>
           {appCategories.map((category, index) => (
             <div key={index}>
               <BasicRow
+                icon={category.icon}
                 onClick={() => {
                   setCategory(category);
                   setOpenModal(true);
@@ -105,6 +105,7 @@ export function CategoryPage(props: CategoryPageProps) {
       <Dialog
         isShown={openModal}
         hasFooter={false}
+        width={'60vw'}
         title={category?.id ? 'Editar Categoría' : 'Nueva Categoría'}
         onCloseComplete={() => setOpenModal(false)}
       >

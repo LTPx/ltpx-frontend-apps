@@ -64,7 +64,6 @@
   width: 100%;
   display: flex;
   flex-direction: column;
-  align-items: center;
   padding: 5rem 0;
 
   .newsCard {
@@ -75,9 +74,11 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 45rem;
+    width: 100%;
+    // gap: 45rem;
     padding-bottom: $size-md-3;
     .text-news {
+      padding-left: 5rem;
       .title {
         font-weight: 500;
       }
@@ -86,9 +87,15 @@
         color: $text-gray-color;
       }
     }
+
+    .link {
+      padding-right: 5rem;
+    }
   }
   .news-content {
     display: flex;
+    justify-content: center;
+    align-items: center;
     gap: $size-lg-1;
   }
 }
@@ -138,7 +145,11 @@
       flex-direction: column;
       gap: 0;
       .text-news {
+        padding: 0 1rem !important;
         text-align: center;
+      }
+      .link {
+        padding: 0 1rem !important;
       }
     }
     .news-content {
@@ -166,13 +177,12 @@
   }
 
   .news-container {
-    .title-news {
-      gap: 15rem;
-    }
+    align-items: center;
     .news-content {
       display: flex;
       width: 42rem;
-      gap: $size-lg-4;
+      justify-content: inherit !important;
+      gap: 3rem !important;
       overflow-x: auto;
       box-sizing: border-box;
       padding-bottom: $size-lg-3;
@@ -190,6 +200,7 @@
     }
   }
   .news-container {
+    align-items: center;
     .title-news {
       gap: 20rem;
     }

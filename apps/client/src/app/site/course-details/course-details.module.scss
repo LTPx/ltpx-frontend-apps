@@ -140,10 +140,12 @@
 }
 
 .title-date {
+  font-weight: 500;
   padding-bottom: 1.5rem;
 }
 .course-date {
   display: flex;
+  flex-wrap: wrap;
   gap: 1.5rem;
 }
 .register-modal {
@@ -273,6 +275,7 @@
     width: 23rem;
     overflow-x: auto;
     display: flex;
+    flex-wrap: nowrap !important;
     padding-bottom: 1.5rem;
     padding-left: 0.5rem;
   }
@@ -380,6 +383,7 @@
     width: 40rem;
     overflow-x: auto;
     display: flex;
+    flex-wrap: nowrap !important;
   }
   ::-webkit-scrollbar {
     display: none;

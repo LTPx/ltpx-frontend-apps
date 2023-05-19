@@ -36,7 +36,6 @@ export function CategoryForm(props: CategoryFormProps) {
       if (form.name && form.slug && form.icon) {
         onSave && onSave(form);
       }
-      console.log(form);
       onClose && onClose();
     },
   });

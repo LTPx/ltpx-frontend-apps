@@ -11,6 +11,7 @@ import {
   SnackbarPosition,
   SnackbarType,
   Tabs,
+  useMoment,
 } from '@ltpx-frontend-apps/shared-ui';
 import { useAdmin, useCourseUtil } from '@ltpx-frontend-apps/store';
 import { useCallback, useEffect, useState } from 'react';
@@ -28,6 +29,7 @@ export function CourseDetailsPage() {
   const { classroom, quizzes, contents, achievements, session, tasks } =
     viewCourse;
   const params = useParams();
+  const { formatDate } = useMoment();
   const { id } = params;
   const courseId = parseInt(id || '');
   const navigate = useNavigate();
@@ -97,13 +99,32 @@ export function CourseDetailsPage() {
               </div>
             )}
           </div>
+          {viewCourse.status === CourseStatus.rejected && (
+            <div className={styles['comment-admin']}>
+              <h4 className={styles['changes-title']}>
+                Cambios sugeridos por Openmind:
+              </h4>
+              {viewCourse.admin_comments && (
+                <div className={styles['comment-wrap']}>
+                  {viewCourse.admin_comments.map((element, index) => (
+                    <div className={styles['comment']} key={index}>
+                      <h4>{element.comment}</h4>
+                      <h5 className={styles['date-comment']}>
+                        Fecha de comentario: {formatDate(element.created_at)}
+                      </h5>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          )}
           <div>
             <div className={styles['cover']}>
               <img src={viewCourse.cover_url}></img>
             </div>
             <div className={styles['basic-info']}>
               <span className={`${styles['noted']}`}>
-                {translateCategory(viewCourse.category)}
+                {translateCategory(viewCourse.category_slug)}
               </span>
               <span className={`${styles['noted']}`}>
                 {translateLevel(viewCourse.level)}

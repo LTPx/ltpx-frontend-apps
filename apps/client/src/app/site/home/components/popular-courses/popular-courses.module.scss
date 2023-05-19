@@ -27,9 +27,6 @@
     gap: $size-lg-1;
     flex-wrap: wrap;
     width: 80%;
-    justify-content: space-between;
-
-
     .course {
       height: 20rem;
       width: 16rem;
@@ -64,13 +61,14 @@
 //tablet-responsive-vertical
 @media screen and (min-width: 560px) and (max-width: 850px) {
   .popular-courses {
-    width: 72% !important;
+    width: 75% !important;
     justify-content: inherit !important;
   }
 }
 //tablet-responsive-horizontal
 @media screen and (min-width: 860px) and (max-width: 1224px) {
   .popular-courses {
+    gap: 3rem !important;
     width: 75% !important;
   }
 }

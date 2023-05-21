@@ -2,7 +2,6 @@ import { StateCreator } from 'zustand';
 import { StoreState } from '../store';
 import {
   Classroom,
-  CourseModel,
   formatErrors,
   getStudentAchievements,
   getStudentClasses,
@@ -12,6 +11,7 @@ import {
   getStudentQuiz,
   getStudentQuizResult,
   getStudentQuizzes,
+  getStudentStatists,
   getStudentTask,
   getStudentTasks,
   Purchase,
@@ -21,7 +21,6 @@ import {
   studentSendTask,
   TaskModel,
   TaskStudent,
-  TaskStudentResult,
   UserAnswer,
 } from '@ltpx-frontend-apps/api';
 
@@ -38,6 +37,12 @@ export type StudentSlice = {
   allTasks: TaskModel[];
   studentClasses: Classroom[];
   currentQuiz: QuizModel;
+  studentDashboard: {
+    approved_courses: number,
+    progress_courses: number,
+    completed_quizzes: number,
+    total_achievements: number,
+  },
   _getStudentPayments: () => Promise<TResponse>;
   _getStudentCourses: () => Promise<TResponse>;
   _getStudentCourse: (slug: string) => Promise<TResponse>;
@@ -50,6 +55,7 @@ export type StudentSlice = {
   _getStudentTasks: (courseId: number) => Promise<TResponse>;
   _getStudentTask: (courseId: number, taskId: number) => Promise<TResponse>;
   _sendTask: (params: TaskStudent) => Promise<TResponse>;
+  _getStudentStatists: ()  => Promise<TResponse>;
 };
 
 export const createStudentSlice: StateCreator<StoreState, [], [], StudentSlice> = (
@@ -62,7 +68,13 @@ export const createStudentSlice: StateCreator<StoreState, [], [], StudentSlice> 
   studentClasses: [],
   allTasks: [],
   currentQuiz: {} as QuizModel,
-  _getStudentPayments: async (): Promise<TResponse> => {
+  studentDashboard: {
+    approved_courses: 0,
+    progress_courses: 0,
+    completed_quizzes: 0,
+    total_achievements: 0,
+  },
+  _getStudentPayments: async () => {
     try {
       const purchases = await getStudentPayments();
       set({purchases});
@@ -71,7 +83,7 @@ export const createStudentSlice: StateCreator<StoreState, [], [], StudentSlice> 
       return { success: false, error: formatErrors(error) };
     }
   },
-  _getStudentCourses: async (): Promise<TResponse> => {
+  _getStudentCourses: async () => {
     try {
       const courses = await getStudentCourses();
       set({enrolledCourses: courses});
@@ -80,7 +92,7 @@ export const createStudentSlice: StateCreator<StoreState, [], [], StudentSlice> 
       return { success: false, error: formatErrors(error) };
     }
   },
-  _getStudentCourse: async (slug): Promise<TResponse> => {
+  _getStudentCourse: async (slug) => {
     try {
       const course = await getStudentCourse(slug);
       set({enrolledCourse: course});
@@ -89,7 +101,7 @@ export const createStudentSlice: StateCreator<StoreState, [], [], StudentSlice> 
       return { success: false, error: formatErrors(error) };
     }
   },
-  _getStudentClasses: async (): Promise<TResponse> => {
+  _getStudentClasses: async () => {
     try {
       const classes = await getStudentClasses();
       set({studentClasses: classes});
@@ -98,7 +110,7 @@ export const createStudentSlice: StateCreator<StoreState, [], [], StudentSlice> 
       return { success: false, error: formatErrors(error) };
     }
   },
-  _getStudentQuizzes: async (courseId): Promise<TResponse> => {
+  _getStudentQuizzes: async (courseId) => {
     try {
       const quizzes = await getStudentQuizzes(courseId);
       return { success: true, data: quizzes };
@@ -106,7 +118,7 @@ export const createStudentSlice: StateCreator<StoreState, [], [], StudentSlice> 
       return { success: false, error: formatErrors(error) };
     }
   },
-  _getStudentQuiz: async (courseId, quizId): Promise<TResponse> => {
+  _getStudentQuiz: async (courseId, quizId) => {
     try {
       const quiz = await getStudentQuiz(courseId, quizId);
       set({currentQuiz: quiz});
@@ -115,7 +127,7 @@ export const createStudentSlice: StateCreator<StoreState, [], [], StudentSlice> 
       return { success: false, error: formatErrors(error) };
     }
   },
-  _getStudentQuizResult: async (id): Promise<TResponse> => {
+  _getStudentQuizResult: async (id) => {
     try {
       const quiz = await getStudentQuizResult(id);
       return { success: true, data: quiz };
@@ -123,7 +135,7 @@ export const createStudentSlice: StateCreator<StoreState, [], [], StudentSlice> 
       return { success: false, error: formatErrors(error) };
     }
   },
-  _evaluateQuiz: async (id, answers, needReview): Promise<TResponse> => {
+  _evaluateQuiz: async (id, answers, needReview) => {
     try {
       const quiz = await studentEvaluateQuiz(id, answers, needReview);
       return { success: true, data: quiz };
@@ -131,7 +143,7 @@ export const createStudentSlice: StateCreator<StoreState, [], [], StudentSlice> 
       return { success: false, error: formatErrors(error) };
     }
   },
-  _getStudentAchievements: async (courseId): Promise<TResponse> => {
+  _getStudentAchievements: async (courseId) => {
     try {
       const achievements = await getStudentAchievements(courseId);
       return { success: true, data: achievements };
@@ -139,7 +151,7 @@ export const createStudentSlice: StateCreator<StoreState, [], [], StudentSlice> 
       return { success: false, error: formatErrors(error) };
     }
   },
-  _getStudentTasks: async (courseId): Promise<TResponse> => {
+  _getStudentTasks: async (courseId) => {
     try {
       const tasks = await getStudentTasks(courseId);
       set({allTasks: tasks})
@@ -148,7 +160,7 @@ export const createStudentSlice: StateCreator<StoreState, [], [], StudentSlice> 
       return { success: false, error: formatErrors(error) };
     }
   },
-  _getStudentTask: async (courseId, taskId): Promise<TResponse> => {
+  _getStudentTask: async (courseId, taskId) => {
     try {
       const task = await getStudentTask(courseId, taskId);
       return { success: true, data: task };
@@ -156,7 +168,7 @@ export const createStudentSlice: StateCreator<StoreState, [], [], StudentSlice> 
       return { success: false, error: formatErrors(error) };
     }
   },
-  _sendTask: async (params): Promise<TResponse> => {
+  _sendTask: async (params) => {
     try {
       const task = await studentSendTask(params);
       const tasks = get().allTasks;
@@ -169,6 +181,20 @@ export const createStudentSlice: StateCreator<StoreState, [], [], StudentSlice> 
       })
       set({ allTasks: tasksUpdated });
       return { success: true, data: task };
+    } catch (error) {
+      return { success: false, error: formatErrors(error) };
+    }
+  },
+  _getStudentStatists:  async () => {
+    try {
+      const data = await getStudentStatists();
+      set({ studentDashboard: {
+        approved_courses: data.approved_courses,
+        progress_courses: data.progress_courses,
+        completed_quizzes: data.completed_quizzes,
+        total_achievements: data.total_achievements,
+      } });
+      return { success: true, data: data };
     } catch (error) {
       return { success: false, error: formatErrors(error) };
     }

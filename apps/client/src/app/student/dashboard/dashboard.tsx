@@ -9,44 +9,56 @@ import { Avatar } from 'evergreen-ui';
 import { NavLink } from 'react-router-dom';
 import styles from './dashboard.module.scss';
 import { useStudent } from '@ltpx-frontend-apps/store';
-import { useCallback, useEffect } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { CourseStatus } from '@ltpx-frontend-apps/api';
 
 /* eslint-disable-next-line */
 export interface DashboardProps {}
+interface DashboardCard {
+  count: number,
+  text: string,
+  color: ColorsCounterCard,
+}
 
 export function Dashboard(props: DashboardProps) {
   const { user } = useUser();
-  const { _getStudentCourses, enrolledCourses } = useStudent();
+  const [ cards, setCards] = useState<DashboardCard[]>([]);
+  const { _getStudentCourses, enrolledCourses, _getStudentStatists, studentDashboard } = useStudent();
 
-  const cards = [
-    {
-      count: 2,
-      text: 'Cursos Completados',
-      color: ColorsCounterCard.green,
-    },
-    {
-      count: 1,
-      text: 'Cursos en Progreso',
-      color: ColorsCounterCard.orange,
-    },
-    {
-      count: 10,
-      text: 'Test Completados',
-      color: ColorsCounterCard.blue,
-    },
-    {
-      count: 4,
-      text: 'Logros Obtenidos',
-      color: ColorsCounterCard.red,
-    },
-  ];
+
+
   const fetchCourses = useCallback(async () => {
-    const { success, data, error } = await _getStudentCourses();
+    const { success, data } = await _getStudentStatists();
     if (success) {
-      console.log('data: ', data);
+      const allCards = [
+        {
+          count: data.approved_courses,
+          text: 'Cursos Completados',
+          color: ColorsCounterCard.green,
+        },
+        {
+          count: data.progress_courses,
+          text: 'Cursos en Progreso',
+          color: ColorsCounterCard.orange,
+        },
+        {
+          count: data.completed_quizzes,
+          text: 'Test Completados',
+          color: ColorsCounterCard.blue,
+        },
+        {
+          count: data.total_achievements,
+          text: 'Logros Obtenidos',
+          color: ColorsCounterCard.red,
+        },
+      ];
+      setCards(allCards);
+    }
+    const resp = await _getStudentCourses();
+    if (resp.success) {
+      console.log('data: ', resp.data);
     } else {
-      console.log('error: ', error);
+      console.log('error: ', resp.error);
     }
   }, []);
 

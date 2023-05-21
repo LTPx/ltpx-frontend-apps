@@ -35,8 +35,6 @@ export function StudentCourse(props: StudentCourseProps) {
   const initialTabSelectedIndex = tabIndex > 0 ? tabIndex : 0;
   const [selectedTab, setSelectedTab] = useState(initialTabSelectedIndex);
 
-  console.log('selectedTab: ', selectedTab);
-
   const fetchCourse = useCallback(async () => {
     const { success, data, error } = await _getStudentCourse(slug || '');
     if (success) {

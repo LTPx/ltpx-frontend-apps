@@ -83,6 +83,23 @@ export interface CourseModel {
   admin_comments?: AdminComment[];
 }
 
+export interface StudentCourse {
+  id: number;
+  cover_url: string;
+  title: string;
+  description: string;
+  learn_goals: string;
+  requirements: string;
+  created_at: string;
+  approved: boolean;
+  session: CourseSession;
+  contents: ContentCourse[];
+  course_session_id: number;
+  slug: string;
+  teacher?: TeacherProfile;
+  course_progress: number;
+}
+
 export interface AdminComment {
   comment: string;
   created_at: string;

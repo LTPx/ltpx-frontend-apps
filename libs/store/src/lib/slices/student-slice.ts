@@ -16,6 +16,7 @@ import {
   getStudentTasks,
   Purchase,
   QuizModel,
+  StudentCourse,
   studentEvaluateQuiz,
   studentSendTask,
   TaskModel,
@@ -32,8 +33,8 @@ export type TResponse = {
 
 export type StudentSlice = {
   purchases: Purchase[];
-  enrolledCourses: CourseModel[];
-  enrolledCourse: CourseModel;
+  enrolledCourses: StudentCourse[];
+  enrolledCourse: StudentCourse;
   allTasks: TaskModel[];
   studentClasses: Classroom[];
   currentQuiz: QuizModel;
@@ -57,7 +58,7 @@ export const createStudentSlice: StateCreator<StoreState, [], [], StudentSlice> 
 ) => ({
   purchases: [],
   enrolledCourses: [],
-  enrolledCourse: {} as CourseModel,
+  enrolledCourse: {} as StudentCourse,
   studentClasses: [],
   allTasks: [],
   currentQuiz: {} as QuizModel,

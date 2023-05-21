@@ -100,7 +100,7 @@ export function StudentCourse(props: StudentCourseProps) {
             <div className={`${styles['basic-card']}`}>
               <ProgressBar
                 text="Completado"
-                percentage={0}
+                percentage={enrolledCourse.course_progress}
                 className={styles['progress-card']}
               />
             </div>

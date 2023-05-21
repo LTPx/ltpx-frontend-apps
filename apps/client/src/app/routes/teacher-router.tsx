@@ -23,6 +23,7 @@ import {
 import VideoMeetingLive from '../video/video-meeting-live/video-meeting-live';
 import { ProtectedRoutesTeacher } from './guards/protected-routes-teacher/protected-routes-teacher';
 import { blogRoutes } from './blog-routes';
+import { TeacherProfilePage } from '../site';
 
 export const TeacherRoutes = () => {
   return (
@@ -64,6 +65,7 @@ export const TeacherRoutes = () => {
             <Route path="all" element={<TeacherCourses />} />
             <Route path="edit/:courseId" element={<TeacherEditCourse />} />
           </Route>
+          <Route path="web-profile/:slug" element={<TeacherProfilePage />} />
           <Route path="account" element={<TeacherAccountLayout />}>
             <Route
               path="/teacher/account"

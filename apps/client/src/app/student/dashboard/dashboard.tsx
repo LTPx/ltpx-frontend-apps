@@ -33,7 +33,7 @@ export function Dashboard(props: DashboardProps) {
       const allCards = [
         {
           count: data.approved_courses,
-          text: 'Cursos Completados',
+          text: 'Cursos Aprobados',
           color: ColorsCounterCard.green,
         },
         {

@@ -35,8 +35,6 @@ export function StudentCourse(props: StudentCourseProps) {
   const initialTabSelectedIndex = tabIndex > 0 ? tabIndex : 0;
   const [selectedTab, setSelectedTab] = useState(initialTabSelectedIndex);
 
-  console.log('selectedTab: ', selectedTab);
-
   const fetchCourse = useCallback(async () => {
     const { success, data, error } = await _getStudentCourse(slug || '');
     if (success) {
@@ -100,7 +98,7 @@ export function StudentCourse(props: StudentCourseProps) {
             <div className={`${styles['basic-card']}`}>
               <ProgressBar
                 text="Completado"
-                percentage={0}
+                percentage={enrolledCourse.course_progress}
                 className={styles['progress-card']}
               />
             </div>

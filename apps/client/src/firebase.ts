@@ -13,9 +13,9 @@ const firebaseConfig = {
 const firebaseApp = initializeApp(firebaseConfig);
 export const messaging = getMessaging(firebaseApp);
 
-export const onMessageListener = () =>
-  new Promise((resolve) => {
-    onMessage(messaging, (payload) => {
-      resolve(payload);
-    });
-  });
+// export const onMessageListener = () =>
+//   new Promise((resolve) => {
+//     onMessage(messaging, (payload) => {
+//       resolve(payload);
+//     });
+//   });

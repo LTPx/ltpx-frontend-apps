@@ -2,6 +2,7 @@ import { Button, ColorsButton } from '@ltpx-frontend-apps/shared-ui';
 import { useTeacher, useUser } from '@ltpx-frontend-apps/store';
 import { useCallback, useEffect } from 'react';
 import styles from './teacher-account-profile.module.scss';
+import { NavLink } from 'react-router-dom';
 
 /* eslint-disable-next-line */
 export interface TeacherAccountProfileProps {}
@@ -35,7 +36,11 @@ export function TeacherAccountProfile(props: TeacherAccountProfileProps) {
             <div className={styles['info']}>
               <div className={styles['item']}>
                 <h4>Nombre de profesor: </h4>
-                <h4 className={styles['text']}>{profile.teacher_name}</h4>
+                <div className={styles['text']}>
+                  <NavLink to={`/teacher/web-profile/${profile.slug}`} >
+                    {profile.teacher_name}
+                  </NavLink>
+                </div>
               </div>
               <div className={styles['item']}>
                 <h4>Habilidades: </h4>

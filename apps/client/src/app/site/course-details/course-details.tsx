@@ -418,10 +418,10 @@ export function CourseDetails() {
               kind: SnackbarType.success,
             });
           }}
-          onError={() => {
+          onError={(error) => {
             setOpenEnrollModal(false);
             setMessage({
-              text: `Ha ocurrido un error intenta mas tarde`,
+              text: error,
               kind: SnackbarType.error,
             });
           }}

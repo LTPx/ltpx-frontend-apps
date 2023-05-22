@@ -1,10 +1,10 @@
 import { _http } from '../../http';
-import { CourseModel } from '../../interfaces/course-interface';
+import { StudentCourse } from '../../interfaces/course-interface';
 
 const http = _http;
 
 export const getStudentCourses = async () => {
-  return new Promise<CourseModel[]>((resolve, reject) => {
+  return new Promise<StudentCourse[]>((resolve, reject) => {
     http
       .get('api/v1/student/courses')
       .then((response) => {
@@ -17,7 +17,7 @@ export const getStudentCourses = async () => {
 };
 
 export const getStudentCourse = async (slug: string) => {
-  return new Promise<CourseModel>((resolve, reject) => {
+  return new Promise<StudentCourse>((resolve, reject) => {
     http
       .get(`api/v1/student/courses/${slug}`)
       .then((response) => {

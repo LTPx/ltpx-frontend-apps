@@ -15,6 +15,7 @@ import {
 import {
   useAppStore,
   useNotification,
+  useNotificationWebSocket,
   useUser,
   useUtil,
 } from '@ltpx-frontend-apps/store';
@@ -34,7 +35,9 @@ export function StudentLayout() {
   const { clearMessageToast } = useUtil();
   const navigate = useNavigate();
 
-  useNotification(onMessageListener);
+  // useNotification(onMessageListener);
+  const wsUrl = process.env.NX_WS_URL || '';
+  useNotificationWebSocket(wsUrl)
 
   const links = [
     {

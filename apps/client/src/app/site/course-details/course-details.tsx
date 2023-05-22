@@ -37,6 +37,7 @@ type MessageCheckout = {
 export function CourseDetails() {
   const [openModal, setOpenModal] = useState(false);
   const [openEnrollModal, setOpenEnrollModal] = useState(false);
+  const [openModalSubscription, setOpenModalSubscription] = useState(false);
   const [selectedTab, setSelectedTab] = useState(0);
   const { slug } = useParams();
   const { isAuthenticated, register } = useUser();
@@ -77,7 +78,11 @@ export function CourseDetails() {
 
   const enrolled = () => {
     if (currentFullCourse && isAuthenticated) {
-      setOpenEnrollModal(true);
+      if (parseFloat(course.price) > 0) {
+        setOpenEnrollModal(true);
+      } else {
+        setOpenModalSubscription(true);
+      }
     } else {
       setOpenModal(true);
     }
@@ -161,11 +166,13 @@ export function CourseDetails() {
                   text={'Contenidos: ' + course.contents.length}
                   icon={'copy'}
                 />
-                <Tag
-                  color={ColorsTag.white}
-                  text={'Inscritos: ' + session.enrollments_count}
-                  icon={'person'}
-                />
+                {session && (
+                  <Tag
+                    color={ColorsTag.white}
+                    text={'Inscritos: ' + session.enrollments_count}
+                    icon={'person'}
+                  />
+                )}
                 <Tag
                   color={ColorsTag.white}
                   text={'Idioma: ' + translateLanguage(course.language)}
@@ -317,8 +324,8 @@ export function CourseDetails() {
               price={course.price_format}
               totalAchievements={course.achievements?.length || 0}
               totalContents={course.contents.length}
-              availableSites={session.max_participants}
-              totalEnrolled={session.enrollments_count}
+              availableSites={session && session.max_participants}
+              totalEnrolled={session && session.enrollments_count}
               language={translateLanguage(course.language)}
               skillLevel={translateLevel(course.level)}
               image={course.cover_url}
@@ -347,7 +354,7 @@ export function CourseDetails() {
       </section>
       <section className={styles['schedules-section']}>
         <div className={styles['content']}>
-          {session.meetings.length > 0 ? (
+          {session && session.meetings.length > 0 ? (
             <h2 className={styles['title-date']}>Horarios de las clases</h2>
           ) : (
             <div>
@@ -358,7 +365,8 @@ export function CourseDetails() {
             </div>
           )}
           <div className={styles['course-date']}>
-            {session.meetings &&
+            {session &&
+              session.meetings &&
               session.meetings.map((meeting, index) => (
                 <CourseDateCard
                   key={index}
@@ -408,7 +416,7 @@ export function CourseDetails() {
           product={{
             description: course.title,
             price: parseFloat(course.price),
-            id: session.id,
+            id: session && session.id,
             image: course.cover_url,
           }}
           onSuccess={() => {
@@ -426,6 +434,70 @@ export function CourseDetails() {
             });
           }}
         />
+      )}
+
+      {openModalSubscription && (
+        <Dialog
+          isShown={openModalSubscription}
+          hasFooter={false}
+          title="Suscribirme a este curso"
+          onCloseComplete={() => setOpenModalSubscription(false)}
+        >
+          <div className={styles['summary-total-order']}>
+            <h3>Resumen</h3>
+            <div className={styles['products']}>
+              <div className={styles['product']}>
+                <img src={course.cover_url} alt="course" />
+                <div className="s">
+                  <h4>{course.title}</h4>
+                </div>
+              </div>
+            </div>
+            <div className={styles['details']}>
+              <div className={styles['item']}>
+                <div className={styles['item-text']}>
+                  <h4>Precio:</h4>
+                </div>
+                <h4>${course.price}</h4>
+              </div>
+              <div className={styles['item']}>
+                <div className={styles['item-text']}>
+                  <h4>Descuentos</h4>
+                </div>
+                <h4>- $0.0</h4>
+              </div>
+              <hr className="solid" />
+              <div className={styles['item']}>
+                <div className={styles['item-text']}>
+                  <h4>Subtotal</h4>
+                </div>
+                <h4>${course.price}</h4>
+              </div>
+              <div className={styles['item']}>
+                <div className={styles['item-text']}>
+                  <h4>Impuestos:</h4>
+                </div>
+                <h4>+ $0.0</h4>
+              </div>
+              <hr className="solid" />
+              <div className={styles['item']}>
+                <div className={styles['item-text']}>
+                  <h3>Total</h3>
+                </div>
+                <h3>${course.price}</h3>
+              </div>
+            </div>
+            <div className={styles['terms-conditions']}>
+              <NavLink to="/terms-and-conditions" target={'blank'}>
+                <p>
+                  Al suscribirte en este curso aceptas nuestros términos y
+                  condiciones.
+                </p>
+              </NavLink>
+            </div>
+            <Button title="Quiero suscribirme" />
+          </div>
+        </Dialog>
       )}
       {message && (
         <Snackbar

@@ -30,7 +30,7 @@ export const StudentRoutes = () => {
           <Route path="/courses" element={<AllCourses />} />
           <Route path="/course/:slug" element={<CourseDetails />} />
           <Route
-            path="/course/:categoryId/category"
+            path="/courses/:categoryId"
             element={<CoursesByCategory />}
           />
         </Route>

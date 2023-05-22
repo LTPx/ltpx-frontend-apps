@@ -16,7 +16,7 @@ import avatar from './../../../assets/images/avatars/avatar-3.svg';
 import { useTeacherLayout } from './useTeacherLayout';
 import { ChatNewPrivateRoom } from '../../components';
 import Notifications from '../../components/notifications/notifications';
-import { onMessageListener } from 'apps/client/src/firebase';
+// import { onMessageListener } from 'apps/client/src/firebase';
 import { useNotification, useNotificationWebSocket } from '@ltpx-frontend-apps/store';
 
 export function TeacherLayout() {

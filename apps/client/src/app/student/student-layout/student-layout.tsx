@@ -24,8 +24,7 @@ import { Outlet, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import avatar from './../../../assets/images/avatars/avatar-1.svg';
 import Notifications from '../../components/notifications/notifications';
-// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
-import { onMessageListener } from 'apps/client/src/firebase';
+// import { onMessageListener } from 'apps/client/src/firebase';
 
 export function StudentLayout() {
   const [openChat, setOpenChat] = useState(false);

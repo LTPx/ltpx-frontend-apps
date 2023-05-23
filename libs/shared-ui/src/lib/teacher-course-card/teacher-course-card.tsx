@@ -108,9 +108,13 @@ export function TeacherCourseCard(props: TeacherCourseCardProps) {
           )}
         </div>
         <div className={styles['information-course']}>
-          <NavLink to={url}>
+          {url ? (
+            <NavLink to={url}>
+              <h3 className={styles['title']}>{title}</h3>
+            </NavLink>
+          ) : (
             <h3 className={styles['title']}>{title}</h3>
-          </NavLink>
+          )}
           {description && (
             <div>
               {description.length > 200 ? (

@@ -8,6 +8,10 @@
   border-radius: 8px;
   gap: 1rem;
 
+  .title {
+    font-weight: 400;
+  }
+
   .students-icon {
     display: flex;
     gap: 0.35rem;
@@ -79,7 +83,6 @@
     font-weight: 500;
   }
 }
-
 
 .icon-button {
   padding: 0.2rem;

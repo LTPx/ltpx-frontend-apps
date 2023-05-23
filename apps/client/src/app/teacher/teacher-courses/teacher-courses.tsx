@@ -69,13 +69,18 @@ export function TeacherCourses() {
           percentageRate={0}
           percentageLearner={0}
           urlStudents={`/teacher/courses/${course.course_session_id}/students`}
-          url={`/teacher/courses/edit/${course.id}`}
+          url={
+            course.status === CourseStatus.review
+              ? ''
+              : `/teacher/courses/edit/${course.id}`
+          }
           price={course.price}
           dropdownActions={[
             {
               text: 'Editar Curso',
               icon: 'pencil',
               url: `/teacher/courses/edit/${course.id}`,
+              disabled: course.status === CourseStatus.review,
             },
             {
               text: 'Ver Curso',

@@ -81,7 +81,7 @@ export function TeacherCourseDetail() {
               {translateStatus(course.status)}
             </span>
             <span className={`${styles['noted']}`}>
-              {translateCategory(course.category)}
+              {translateCategory(course.category_slug)}
             </span>
             <span className={`${styles['noted']}`}>
               {translateLevel(course.level)}

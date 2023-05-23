@@ -6,18 +6,23 @@
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    gap: 2rem;
+    gap: 1.75rem;
 
     .icon-selected {
       border: 1px solid $green-color;
       background-color: $green-color-100;
       border-radius: 5px;
-      padding: 5px;
     }
     .icon {
+      padding: 5px;
       display: flex;
       align-items: center;
       cursor: pointer;
+
+      &:hover {
+        border-radius: 5px;
+        background-color: $gray-color-300;
+      }
     }
   }
 }

@@ -53,7 +53,7 @@ export function CoursesPages() {
           {courses.map((course, index) => (
             <tr key={index}>
               <td className={styles['user-name']}>{course.title}</td>
-              <td>{translateCategory(course.category)}</td>
+              <td>{translateCategory(course.category_slug)}</td>
               <td>{formatDate(course.created_at)}</td>
               <td>
                 <NavLink to={`/admin/courses/${course.id}`}>

@@ -53,7 +53,7 @@ export function Notifications() {
 
   useEffect(() => {
     fetchNotifications();
-    fetchToken();
+    // fetchToken();
   }, []);
 
   useEffect(() => {

@@ -40,6 +40,7 @@ export function Home() {
       title: '¿Qué es la Potenciación de Larga Duración?',
       link: '/blog/long-term-potentiation',
     },
+    
   ];
 
   return (

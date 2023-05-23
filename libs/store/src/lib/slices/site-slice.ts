@@ -17,6 +17,7 @@ import {
   getPopularCategories,
   getCoursesByCategory,
   CategoryModel,
+  formatErrors,
 } from '@ltpx-frontend-apps/api';
 
 export type SiteSlice = {
@@ -71,7 +72,7 @@ export const createSiteSlice: StateCreator<StoreState, [], [], SiteSlice> = (
       const payment = await createPaymentOrder(params);
       return { success: true, data: payment };
     } catch (error) {
-      return { success: false, error };
+      return { success: false, error: formatErrors(error) };
     }
   },
   _confirmUserPayment: async (params) => {
@@ -79,7 +80,7 @@ export const createSiteSlice: StateCreator<StoreState, [], [], SiteSlice> = (
       const payment = await updatePaymentOrder(params);
       return { success: true, data: payment };
     } catch (error) {
-      return { success: false, error };
+      return { success: false, error: formatErrors(error) };
     }
   },
   _cancelUserPayment: async (id) => {
@@ -113,7 +114,7 @@ export const createSiteSlice: StateCreator<StoreState, [], [], SiteSlice> = (
       return { success: false, error}
     }
   },
-  _getCoursesByCategory:async (categorySlug) => {
+  _getCoursesByCategory: async (categorySlug) => {
     try {
       const courses = await getCoursesByCategory(categorySlug);
       return { success: true, data: courses}

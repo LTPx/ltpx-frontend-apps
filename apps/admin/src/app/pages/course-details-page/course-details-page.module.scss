@@ -3,6 +3,29 @@
   background-color: $white-color;
   padding: $size-lg-3 5rem;
 
+  .comment-admin {
+    padding: 2rem;
+
+    background-color: $orange-color-100;
+
+    .comment-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .comment {
+      color: $text-gray-color;
+      .date-comment {
+        padding-top: 0.25rem;
+      }
+    }
+
+    .changes-title {
+      font-weight: 500;
+      padding-bottom: 0.25rem;
+    }
+  }
+
   .header {
     display: flex;
     justify-content: space-between;

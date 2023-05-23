@@ -43,7 +43,7 @@ export function TaskFormStudent(props: TaskFormStudentProps) {
         label={'Agregar texto'}
         type="text"
         name="answer"
-        rows={8}
+        rows={6}
         placeholder="Responde a la tarea"
         onChange={(e: any) => {
           formik.handleChange(e);
@@ -63,7 +63,7 @@ export function TaskFormStudent(props: TaskFormStudentProps) {
           errorMessage={formik.errors.file}
         />
       </div>
-      <div className={styles['btn']}>
+      <div className={styles['footer']}>
         <Button
           className={styles['btn-submit']}
           color={ColorsButton.white}

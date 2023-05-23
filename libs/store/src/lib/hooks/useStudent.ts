@@ -8,6 +8,7 @@ export const useStudent = () => {
     currentCourse,
     currentQuiz,
     allTasks,
+    studentDashboard,
     _getStudentCourses,
     _getStudentPayments,
     _getStudentClasses,
@@ -20,6 +21,7 @@ export const useStudent = () => {
     _getStudentTasks,
     _getStudentTask,
     _sendTask,
+    _getStudentStatists,
   } = useAppStore();
 
   return {
@@ -29,6 +31,7 @@ export const useStudent = () => {
     currentCourse,
     currentQuiz,
     allTasks,
+    studentDashboard,
     _getStudentCourses,
     _getStudentPayments,
     _getStudentClasses,
@@ -41,5 +44,6 @@ export const useStudent = () => {
     _getStudentTasks,
     _getStudentTask,
     _sendTask,
+    _getStudentStatists,
   }
 }

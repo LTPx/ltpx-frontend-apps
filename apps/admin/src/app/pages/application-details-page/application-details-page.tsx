@@ -95,6 +95,14 @@ export function ApplicationDetailsPage(props: ApplicationDetailsPageProps) {
               </div>
             )}
           </div>
+          {viewApplication.comments?.map((element, index) => (
+            <div className={styles['comments-applyTeach']} key={index}>
+              <p>
+                <strong>Comentarios de Revision: </strong>
+                <h4>{element.comment}</h4>
+              </p>
+            </div>
+          ))}
           <ApplicationView application={viewApplication} />
         </>
       )}

@@ -71,7 +71,7 @@ export function SiteLayout() {
         </div>
       </Header>
       <div className={styles['content']}>
-        {isPendingValidationAccount && (
+        {localStorage.getItem('pending-validation')  && (
           <BannerNotification
             onClickClose={() => {
               localStorage.removeItem('pending-validation');

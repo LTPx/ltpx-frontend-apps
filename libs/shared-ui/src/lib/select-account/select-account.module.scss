@@ -1,0 +1,37 @@
+@import '../../styles/styles.module.scss';
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: 0.5rem 0 3rem 0;
+  .accounts-content {
+    display: flex;
+    flex-direction: column;
+  }
+  .account {
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    cursor: pointer;
+  }
+  .account:hover {
+    background-color: $gray-color-100;
+  }
+  .icon {
+    background-color: $gray-color-200;
+    border-radius: 50%;
+    padding: 0.5rem;
+  }
+  .icon {
+    background-color: $gray-color-200;
+    border-radius: 50%;
+    padding: 0.5rem;
+  }
+  .user-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+}

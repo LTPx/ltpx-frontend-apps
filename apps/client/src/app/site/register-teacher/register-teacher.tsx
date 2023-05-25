@@ -1,5 +1,7 @@
 import styles from './register-teacher.module.scss';
 import {
+  BannerNotification,
+  BannerType,
   Button,
   ColorsButton,
   ContentItems,
@@ -20,7 +22,8 @@ export interface RegisterTeacherProps {}
 
 export function RegisterTeacher(props: RegisterTeacherProps) {
   const { registerTeacher } = useTeacher();
-  const { isAuthenticated, user } = useUser();
+  const [registerError, setRegisterError] = useState<string>();
+  const { isAuthenticated, user, _registerAsTeacher } = useUser();
   const { t } = useTranslation();
   const [selectedTab, setSelectedTab] = useState(0);
   const [openModal, setOpenModal] = useState(false);
@@ -55,6 +58,25 @@ export function RegisterTeacher(props: RegisterTeacherProps) {
       window.location.reload();
     } else {
       // setError(true);
+    }
+  };
+
+  // const changeAccount = async (type: TypeAccounts) => {
+  //   const { success, error } = await _changeAccount(type);
+  //   if (success) {
+  //     console.log(success);
+  //   } else {
+  //     console.log(error);
+  //   }
+  // };
+
+  const registerAsTeacher = async () => {
+    const { success, error } = await _registerAsTeacher();
+    if (success) {
+      navigate('/teacher/dashboard');
+      window.location.reload();
+    } else {
+      setRegisterError(error);
     }
   };
 
@@ -123,7 +145,19 @@ export function RegisterTeacher(props: RegisterTeacherProps) {
             setOpenModal(true);
             setOpenModalAccount(false);
           }}
-        />
+          onClickCurrentAccount={() => registerAsTeacher()}
+        >
+          <div>
+            {registerError !== undefined && (
+              <BannerNotification
+                type={BannerType.error}
+                onClickClose={() => setRegisterError(undefined)}
+              >
+                {registerError}
+              </BannerNotification>
+            )}
+          </div>
+        </SelectAccount>
       </Dialog>
 
       <ContentItems title="Hay muchas razones para empezar" items={items} />
@@ -234,10 +268,7 @@ export function RegisterTeacher(props: RegisterTeacherProps) {
         }
       >
         <div className={styles['btn']}>
-          <Button
-            title={'Registrarme Ahora'}
-            onClick={openModalRegister}
-          />
+          <Button title={'Registrarme Ahora'} onClick={openModalRegister} />
         </div>
       </SectionInformation>
     </div>

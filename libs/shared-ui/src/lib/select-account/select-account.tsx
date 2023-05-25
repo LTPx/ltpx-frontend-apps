@@ -1,6 +1,6 @@
-import { Avatar } from 'evergreen-ui';
 import styles from './select-account.module.scss';
 import Icon from '../icon/icon';
+import { ReactElement } from 'react';
 
 /* eslint-disable-next-line */
 export interface SelectAccountProps {
@@ -8,10 +8,17 @@ export interface SelectAccountProps {
   email: string;
   onClickNewAccount?: () => void;
   onClickCurrentAccount?: () => void;
+  children?: ReactElement;
 }
 
 export function SelectAccount(props: SelectAccountProps) {
-  const { nameAccount, email, onClickNewAccount, onClickCurrentAccount } = props;
+  const {
+    nameAccount,
+    email,
+    onClickNewAccount,
+    onClickCurrentAccount,
+    children,
+  } = props;
 
   return (
     <div className={styles['container']}>
@@ -26,6 +33,7 @@ export function SelectAccount(props: SelectAccountProps) {
             <h5>{nameAccount}</h5>
           </div>
         </div>
+        {children}
         <div className={styles['account']} onClick={onClickNewAccount}>
           <Icon className={styles['icon']} size={30} icon={'plus'} />
           <h4>Usar otra cuenta</h4>

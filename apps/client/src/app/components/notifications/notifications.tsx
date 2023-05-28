@@ -9,8 +9,6 @@ import styles from './notifications.module.scss';
 import { useCallback, useEffect, useState } from 'react';
 import { useUser } from '@ltpx-frontend-apps/store';
 import { NotificationMeta, NotificationModel } from '@ltpx-frontend-apps/api';
-import { messaging } from '../../../firebase';
-import { getToken } from 'firebase/messaging';
 import { NavLink } from 'react-router-dom';
 
 export function Notifications() {
@@ -37,19 +35,6 @@ export function Notifications() {
   const fetchNotifications = useCallback(async () => {
     await _getNotifications();
   }, []);
-
-  async function fetchToken() {
-    try {
-      const token = await getToken(messaging, {
-        vapidKey: process.env.NX_FIREBASE_VAPID_KEY,
-      });
-      if (token) {
-        await _setTokenDevice(token);
-      }
-    } catch (error) {
-      console.log('An error occurred while retrieving token. ', error);
-    }
-  }
 
   useEffect(() => {
     fetchNotifications();

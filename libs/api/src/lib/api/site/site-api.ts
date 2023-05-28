@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { _http } from '../../http';
 import { CategoryModel } from '../../interfaces/category-interface';
 import { CourseSite } from '../../interfaces/course-interface';
@@ -6,7 +7,7 @@ const http = _http;
 
 export const getPopularCategories = async () => {
   return new Promise<CategoryModel[]>((resolve, reject) => {
-    http
+    axios
       .get('api/v1/site/popular_categories')
       .then((response) => {
         resolve(response.data);

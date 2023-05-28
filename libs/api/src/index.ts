@@ -1,6 +1,5 @@
-import { editQuiz } from './lib/api/teacher/quiz-api';
 
-export * from './lib/api';
+export * from './lib/http';
 
 // i18n
 export * from '../src/lib/locales/es';

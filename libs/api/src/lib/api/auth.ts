@@ -1,10 +1,7 @@
-import { getApiUrl } from "@ltpx-frontend-apps/api";
-import { setTokenAxios, createInstance } from "../http";
+import { setTokenAxios, _http } from "../http";
 import { ICurrentUser, IRegisterUser } from "../interfaces/user-interface";
 
-const localKey = "token_opm"
-const API = getApiUrl();
-const http = createInstance(API, localKey);
+const http = _http;
 
 export interface Credentials {
   email: string;
@@ -29,7 +26,7 @@ export const loginUser = (credentials: Credentials) => {
     http
     .post('login', payload)
     .then((response) => {
-      setTokenAxios(response.headers, 'auth_token');
+      setTokenAxios(response.headers);
       resolve(response.data);
     })
     .catch((error) => {
@@ -52,7 +49,7 @@ export const loginAdmin = (credentials: Credentials) => {
     .then((response) => {
       const { initial_register } = response.data;
       if(initial_register === 'admin') {
-        setTokenAxios(response.headers, localKey);
+        setTokenAxios(response.headers);
       } else {
         reject('No cuentas con los permisos necesarios');
       }
@@ -77,7 +74,7 @@ export const registerUser = async(params: IRegisterUser):Promise<ICurrentUser> =
     http
     .post('register', payload)
     .then((response) => {
-      setTokenAxios(response.headers, 'auth_token');
+      setTokenAxios(response.headers);
       resolve(response.data);
     })
     .catch((error) => {
@@ -100,7 +97,7 @@ export const registerTeacher = async (account: IRegisterUser) => {
     http
     .post('register', payload)
     .then((response) => {
-      setTokenAxios(response.headers, 'auth_token');
+      setTokenAxios(response.headers);
       resolve(response.data);
     })
     .catch((error) => {

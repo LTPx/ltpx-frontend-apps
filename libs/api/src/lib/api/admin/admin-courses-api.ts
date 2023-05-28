@@ -1,11 +1,8 @@
-import { getApiUrl } from '../../api';
-import { createInstance } from '../../http';
+import { _http } from '../../http';
 import { CourseApiParams, CourseModel } from '../../interfaces/course-interface';
 import { moveToFormData } from '../../utils';
 
-const localKey = "token_opm"
-const API = getApiUrl();
-const http = createInstance(API, localKey);
+const http = _http;
 
 export const getCoursesByStatus = async (status: string) => {
   return new Promise<CourseModel[]>((resolve, reject) => {

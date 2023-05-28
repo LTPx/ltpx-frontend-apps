@@ -14,7 +14,7 @@ export function TeacherAccountBank(props: TeacherAccountBankProps) {
     <div className={styles['container']}>
       <div className={styles['content']}>
         <div className={styles['bank']}>
-          {profile.bank_accounts ? (
+          {profile.bank_accounts && profile.bank_accounts.length > 0 ? (
             <div>
               <div className={styles['title-content']}>
                 <h4 className={styles['title']}>Cuenta Bancaria</h4>

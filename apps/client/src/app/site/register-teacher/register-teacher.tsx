@@ -1,15 +1,18 @@
 import styles from './register-teacher.module.scss';
 import {
+  BannerNotification,
+  BannerType,
   Button,
   ColorsButton,
   ContentItems,
   RegisterForm,
   SectionInformation,
+  SelectAccount,
   Tabs,
 } from '@ltpx-frontend-apps/shared-ui';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { IRegisterUser } from '@ltpx-frontend-apps/api';
-import { useTeacher } from '@ltpx-frontend-apps/store';
+import { useTeacher, useUser } from '@ltpx-frontend-apps/store';
 import { useTranslation } from 'react-i18next';
 import { useState } from 'react';
 import { Dialog } from 'evergreen-ui';
@@ -19,9 +22,12 @@ export interface RegisterTeacherProps {}
 
 export function RegisterTeacher(props: RegisterTeacherProps) {
   const { registerTeacher } = useTeacher();
+  const [registerError, setRegisterError] = useState<string>();
+  const { isAuthenticated, user, _registerAsTeacher } = useUser();
   const { t } = useTranslation();
   const [selectedTab, setSelectedTab] = useState(0);
   const [openModal, setOpenModal] = useState(false);
+  const [openModalAccount, setOpenModalAccount] = useState(false);
   const navigate = useNavigate();
   const tabs = [
     { text: 'Proceso de solicitud' },
@@ -55,6 +61,33 @@ export function RegisterTeacher(props: RegisterTeacherProps) {
     }
   };
 
+  // const changeAccount = async (type: TypeAccounts) => {
+  //   const { success, error } = await _changeAccount(type);
+  //   if (success) {
+  //     console.log(success);
+  //   } else {
+  //     console.log(error);
+  //   }
+  // };
+
+  const registerAsTeacher = async () => {
+    const { success, error } = await _registerAsTeacher();
+    if (success) {
+      navigate('/teacher/dashboard');
+      window.location.reload();
+    } else {
+      setRegisterError(error);
+    }
+  };
+
+  const openModalRegister = () => {
+    if (isAuthenticated) {
+      setOpenModalAccount(true);
+    } else {
+      setOpenModal(true);
+    }
+  };
+
   return (
     <div className={styles['container']}>
       <div className={styles['coll-to-action']}>
@@ -70,7 +103,7 @@ export function RegisterTeacher(props: RegisterTeacherProps) {
             </div>
             <div className={styles['btn']}>
               <Button
-                onClick={() => setOpenModal(true)}
+                onClick={openModalRegister}
                 title={'Regístrate para enseñar'}
                 color={ColorsButton.secondary}
               />
@@ -99,6 +132,34 @@ export function RegisterTeacher(props: RegisterTeacherProps) {
           />
         </div>
       </Dialog>
+      <Dialog
+        isShown={openModalAccount}
+        hasFooter={false}
+        title={'Selección de Cuenta'}
+        onCloseComplete={() => setOpenModalAccount(false)}
+      >
+        <SelectAccount
+          nameAccount={user.fullname}
+          email={user.email}
+          onClickNewAccount={() => {
+            setOpenModal(true);
+            setOpenModalAccount(false);
+          }}
+          onClickCurrentAccount={() => registerAsTeacher()}
+        >
+          <div>
+            {registerError !== undefined && (
+              <BannerNotification
+                type={BannerType.error}
+                onClickClose={() => setRegisterError(undefined)}
+              >
+                {registerError}
+              </BannerNotification>
+            )}
+          </div>
+        </SelectAccount>
+      </Dialog>
+
       <ContentItems title="Hay muchas razones para empezar" items={items} />
       <div className={styles['begin-teacher']}>
         <div className={styles['content']}>
@@ -153,7 +214,8 @@ export function RegisterTeacher(props: RegisterTeacherProps) {
                   donde los temas que se impartirán quedaran a tu libre elección
                   con tu propio sello para la enseñanza, procura que los temas
                   impartidos en tu curso sean interesantes y llamativos para los
-                  alumnos. Te recomendamos leer la siguiente sección <NavLink to={'/blog/how-create-a-class'}>
+                  alumnos. Te recomendamos leer la siguiente sección{' '}
+                  <NavLink to={'/blog/how-create-a-class'}>
                     ¿Como crear una gran clase en OpenMind?
                   </NavLink>{' '}
                   para poder empezar.
@@ -206,10 +268,7 @@ export function RegisterTeacher(props: RegisterTeacherProps) {
         }
       >
         <div className={styles['btn']}>
-          <Button
-            title={'Registrarme Ahora'}
-            onClick={() => setOpenModal(true)}
-          />
+          <Button title={'Registrarme Ahora'} onClick={openModalRegister} />
         </div>
       </SectionInformation>
     </div>

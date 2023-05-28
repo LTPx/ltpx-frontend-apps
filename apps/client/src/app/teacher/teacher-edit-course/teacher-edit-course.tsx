@@ -111,7 +111,6 @@ export function TeacherEditCourse() {
                 icon="rocket"
                 onClick={handleSendToReview}
                 disabled={
-                  course.status === CourseStatus.publish ||
                   course.status === CourseStatus.review
                 }
               />

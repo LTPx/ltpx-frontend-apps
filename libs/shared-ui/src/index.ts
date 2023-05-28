@@ -1,3 +1,4 @@
+export * from './lib/select-account/select-account';
 export * from './lib/select-icons/select-icons';
 export * from './lib/category-form/category-form';
 export * from './lib/permission-notifications/permission-notifications';

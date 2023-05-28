@@ -22,6 +22,9 @@ import {
   readNotifications,
   resetPassword,
   updateNewPassword,
+  TypeAccounts,
+  changeAccount,
+  registerAsTeacher,
 } from '@ltpx-frontend-apps/api';
 
 export type UserSlice = {
@@ -42,6 +45,8 @@ export type UserSlice = {
   changePassword: (params: ChangePasswordParams) => Promise<FormatResponse>;
   _getNotifications: () => Promise<FormatResponse>;
   _updateAccount: (params: IUserAccount) => Promise<FormatResponse>;
+  _changeAccount: (type: TypeAccounts) => Promise<FormatResponse>;
+  _registerAsTeacher: () => Promise<FormatResponse>;
   _setTokenDevice: (token: string) => Promise<FormatResponse>;
   _readNotifications: () => Promise<FormatResponse>;
   _resetPassword: (email: string) => Promise<FormatResponse>;
@@ -206,6 +211,22 @@ export const createUserSlice: StateCreator<StoreState, [], [], UserSlice> = (
     try {
       const resp = await updateNewPassword(email, password, confirmPassword);
       return { success: true, data: resp };
+    } catch (error) {
+      return { success: false, error: formatErrors(error) };
+    }
+  },
+  _changeAccount: async (type) => {
+    try {
+      await changeAccount(type);
+      return { success: true };
+    } catch (error) {
+      return { success: false, error: formatErrors(error) };
+    }
+  },
+  _registerAsTeacher: async () => {
+    try {
+      await registerAsTeacher();
+      return { success: true };
     } catch (error) {
       return { success: false, error: formatErrors(error) };
     }

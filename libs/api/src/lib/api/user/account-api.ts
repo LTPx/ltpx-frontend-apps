@@ -1,5 +1,5 @@
 import { _http } from '../../http';
-import { IUserAccount } from '../../interfaces/user-interface';
+import { IUserAccount, TypeAccounts } from '../../interfaces/user-interface';
 
 const http = _http;
 
@@ -7,6 +7,32 @@ export const updateAccount = async (userParams: IUserAccount) => {
   return new Promise<IUserAccount>((resolve, reject) => {
     http
       .put('/api/v1/user/accounts', userParams)
+      .then((response) => {
+        resolve(response.data);
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
+};
+
+export const changeAccount = async (type: TypeAccounts) => {
+  return new Promise<IUserAccount>((resolve, reject) => {
+    http
+      .post('/api/v1/user/accounts/change_to_account', type)
+      .then((response) => {
+        resolve(response.data);
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
+};
+
+export const registerAsTeacher = async () => {
+  return new Promise<IUserAccount>((resolve, reject) => {
+    http
+      .post('/api/v1/user/accounts/register_as_teacher')
       .then((response) => {
         resolve(response.data);
       })
@@ -28,6 +54,7 @@ export const setTokenDevice = async (token: string) => {
       });
   });
 };
+
 
 
 

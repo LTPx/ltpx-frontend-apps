@@ -1,4 +1,4 @@
-import { Loader } from '@ltpx-frontend-apps/shared-ui';
+import { Button, Loader } from '@ltpx-frontend-apps/shared-ui';
 import { useSite } from '@ltpx-frontend-apps/store';
 import { Dialog } from 'evergreen-ui';
 import { useCallback, useEffect, useState } from 'react';
@@ -17,10 +17,11 @@ interface CheckoutFormProps {
   onClose: () => void;
   onSuccess: () => void;
   onError: (error: any) => void;
+  isFree?: boolean;
 }
 
 export function CheckoutForm(props: CheckoutFormProps) {
-  const { product, onClose, onSuccess, onError, open } = props;
+  const { product, onClose, onSuccess, onError, open, isFree } = props;
   const [orderCreated, setOrderCreated] = useState(false);
   const [orderId, setOrderId] = useState<number>();
   const [error, setError] = useState(false);
@@ -32,6 +33,22 @@ export function CheckoutForm(props: CheckoutFormProps) {
         order_id: orderId,
         payment_gateway: 'paypal',
         receipt_id: payment_id,
+      });
+      if (success) {
+        navigate('/');
+        window.location.reload();
+      } else {
+        console.log(error);
+      }
+    }
+  };
+
+  const confirmFreePayment = async () => {
+    if (orderId) {
+      const { success, error } = await _confirmUserPayment({
+        order_id: orderId,
+        payment_gateway: 'none',
+        receipt_id: 'free',
       });
       if (success) {
         navigate('/');
@@ -69,25 +86,27 @@ export function CheckoutForm(props: CheckoutFormProps) {
         <Dialog
           isShown={open}
           hasFooter={false}
-          title="Checkout"
+          title={isFree ? 'Inscribirme a este curso' : 'Checkout'}
           onCloseComplete={onClose}
-          width={'55vw'}
+          width={isFree ? '' : '55vw'}
         >
           <div className={styles['container']}>
             {orderCreated ? (
               <>
-                <div className={styles['payment-methods']}>
-                  <h3>Métodos de Pago</h3>
-                  <PaypalCheckoutButton
-                    product={product}
-                    onSuccessPayment={(order) => {
-                      confirmPayment(order.id);
-                    }}
-                    onErrorPayment={(error) => {
-                      onError(error);
-                    }}
-                  />
-                </div>
+                {!isFree && (
+                  <div className={styles['payment-methods']}>
+                    <h3>Métodos de Pago</h3>
+                    <PaypalCheckoutButton
+                      product={product}
+                      onSuccessPayment={(order) => {
+                        confirmPayment(order.id);
+                      }}
+                      onErrorPayment={(error) => {
+                        onError(error);
+                      }}
+                    />
+                  </div>
+                )}
                 <div className={styles['summary-total-order']}>
                   <h3>Resumen</h3>
                   <div className={styles['products']}>
@@ -140,6 +159,12 @@ export function CheckoutForm(props: CheckoutFormProps) {
                       </p>
                     </NavLink>
                   </div>
+                  {isFree && (
+                    <Button
+                      title="Quiero Inscribirme"
+                      onClick={() => confirmFreePayment()}
+                    />
+                  )}
                 </div>
               </>
             ) : (

@@ -37,7 +37,7 @@ type MessageCheckout = {
 export function CourseDetails() {
   const [openModal, setOpenModal] = useState(false);
   const [openEnrollModal, setOpenEnrollModal] = useState(false);
-  const [openModalSubscription, setOpenModalSubscription] = useState(false);
+  const [isFreeValue, setFreeValue] = useState(false);
   const [selectedTab, setSelectedTab] = useState(0);
   const { slug } = useParams();
   const { isAuthenticated, register } = useUser();
@@ -81,7 +81,8 @@ export function CourseDetails() {
       if (parseFloat(course.price) > 0) {
         setOpenEnrollModal(true);
       } else {
-        setOpenModalSubscription(true);
+        setFreeValue(true);
+        setOpenEnrollModal(true);
       }
     } else {
       setOpenModal(true);
@@ -433,71 +434,8 @@ export function CourseDetails() {
               kind: SnackbarType.error,
             });
           }}
+          isFree={isFreeValue}
         />
-      )}
-
-      {openModalSubscription && (
-        <Dialog
-          isShown={openModalSubscription}
-          hasFooter={false}
-          title="Suscribirme a este curso"
-          onCloseComplete={() => setOpenModalSubscription(false)}
-        >
-          <div className={styles['summary-total-order']}>
-            <h3>Resumen</h3>
-            <div className={styles['products']}>
-              <div className={styles['product']}>
-                <img src={course.cover_url} alt="course" />
-                <div className="s">
-                  <h4>{course.title}</h4>
-                </div>
-              </div>
-            </div>
-            <div className={styles['details']}>
-              <div className={styles['item']}>
-                <div className={styles['item-text']}>
-                  <h4>Precio:</h4>
-                </div>
-                <h4>${course.price}</h4>
-              </div>
-              <div className={styles['item']}>
-                <div className={styles['item-text']}>
-                  <h4>Descuentos</h4>
-                </div>
-                <h4>- $0.0</h4>
-              </div>
-              <hr className="solid" />
-              <div className={styles['item']}>
-                <div className={styles['item-text']}>
-                  <h4>Subtotal</h4>
-                </div>
-                <h4>${course.price}</h4>
-              </div>
-              <div className={styles['item']}>
-                <div className={styles['item-text']}>
-                  <h4>Impuestos:</h4>
-                </div>
-                <h4>+ $0.0</h4>
-              </div>
-              <hr className="solid" />
-              <div className={styles['item']}>
-                <div className={styles['item-text']}>
-                  <h3>Total</h3>
-                </div>
-                <h3>${course.price}</h3>
-              </div>
-            </div>
-            <div className={styles['terms-conditions']}>
-              <NavLink to="/terms-and-conditions" target={'blank'}>
-                <p>
-                  Al suscribirte en este curso aceptas nuestros términos y
-                  condiciones.
-                </p>
-              </NavLink>
-            </div>
-            <Button title="Quiero suscribirme" />
-          </div>
-        </Dialog>
       )}
       {message && (
         <Snackbar

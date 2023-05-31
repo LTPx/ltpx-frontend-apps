@@ -25,8 +25,18 @@ export function TeacherMeetingsAgenda() {
   const fetchClasses = useCallback(async () => {
     const { success, data, error } = await _getClassrooms();
     if (success) {
-      console.log('data: ', data);
-      setClassroomClasses(data);
+      const sortedClasses = data.map((item: { meetings: any[]; }) => ({
+        ...item,
+        meetings: item.meetings.sort((a, b) => {
+          if (a.month !== b.month) {
+            return a.month - b.month;
+          }
+          return a.day_number - b.day_number;
+        }),
+      }));
+      console.log('data: ', sortedClasses);
+      // console.log('data: ', data);
+      setClassroomClasses(sortedClasses);
     } else {
       console.log('error: ', error);
     }

@@ -17,7 +17,6 @@ import StudentCourseClasses from './tabs/student-course-classes/student-course-c
 /* eslint-disable-next-line */
 export interface StudentCourseProps {}
 
-
 export function StudentCourse(props: StudentCourseProps) {
   const { _getStudentCourse, enrolledCourse } = useStudent();
   const tabs = [

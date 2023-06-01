@@ -137,3 +137,14 @@
   height: 8px;
   background-color: $green-color;
 }
+
+//tablet-responsive-horizontal
+@media screen and (min-width: 860px) and (max-width: 1224px) {
+  .container {
+    width: 80vw !important;
+  }
+  
+  .columns-container {
+    gap: 2rem !important;
+  }
+}

@@ -1,4 +1,4 @@
-@import "../../../styles.scss";
+@import '../../../styles.scss';
 
 .container {
   display: flex;
@@ -29,7 +29,7 @@
         padding-top: $size-md-3;
         display: flex;
         flex-wrap: wrap;
-        gap:1rem;
+        gap: 1rem;
       }
     }
 
@@ -58,5 +58,12 @@
         }
       }
     }
+  }
+}
+
+//tablet-responsive-horizontal
+@media screen and (min-width: 860px) and (max-width: 1224px) {
+  .courses {
+    gap: 2rem !important;
   }
 }

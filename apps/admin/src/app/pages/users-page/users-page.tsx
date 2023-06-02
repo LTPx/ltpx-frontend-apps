@@ -40,7 +40,6 @@ export function UsersPage(props: UsersPageProps) {
     } else {
       console.log('error: ', error);
     }
-    console.log('resp....: ', data);
   }, []);
 
   useEffect(() => {

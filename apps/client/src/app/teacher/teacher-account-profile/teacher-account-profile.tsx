@@ -12,8 +12,7 @@ export function TeacherAccountProfile(props: TeacherAccountProfileProps) {
   const [showMore, setShowMore] = useState(false);
 
   const fetchProfile = useCallback(async () => {
-    const { success, data, error } = await getProfile();
-    console.log('data: ', data);
+    await getProfile();
   }, []);
 
   useEffect(() => {

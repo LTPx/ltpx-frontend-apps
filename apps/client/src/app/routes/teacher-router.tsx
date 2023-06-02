@@ -33,6 +33,14 @@ export const TeacherRoutes = () => {
           path="/home"
           element={<Navigate replace to="/teacher/dashboard" />}
         />
+        <Route
+          path="/login"
+          element={<Navigate replace to="/home" />}
+        />
+        <Route
+          path="/register"
+          element={<Navigate replace to="/home" />}
+        />
         <Route path="/" element={<TeacherLayout />}>
           {blogRoutes}
         </Route>

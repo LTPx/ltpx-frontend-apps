@@ -13,7 +13,6 @@ import {
   StudentAccountLayout,
   StudentAccountProfile,
   StudentQuiz,
-  StudentReviewQuiz,
   StudentPasswordEdit,
 } from '../student/index';
 import VideoMeetingLive from '../video/video-meeting-live/video-meeting-live';

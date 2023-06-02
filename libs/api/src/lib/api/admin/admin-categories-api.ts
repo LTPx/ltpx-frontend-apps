@@ -1,10 +1,6 @@
-import { getApiUrl } from '../../api';
-import { createInstance } from '../../http';
 import { CategoryModel, Category } from '../../interfaces/category-interface';
-
-const localKey = 'token_opm';
-const API = getApiUrl();
-const http = createInstance(API, localKey);
+import { _http } from '../../http';
+const http = _http;
 
 export const getCategories = async () => {
   return new Promise<CategoryModel[]>((resolve, reject) => {

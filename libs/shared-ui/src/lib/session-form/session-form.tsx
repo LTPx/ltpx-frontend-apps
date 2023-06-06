@@ -71,6 +71,7 @@ export function SessionForm(props: SessionFormProps) {
       onClose={() => {
         onClose && onClose();
       }}
+      disableClose={false}
     >
       <Formik
         initialValues={initialValues}

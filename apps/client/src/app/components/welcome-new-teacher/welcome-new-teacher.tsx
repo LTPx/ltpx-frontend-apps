@@ -8,7 +8,7 @@ import { StatusTeacherAccount } from '@ltpx-frontend-apps/api';
 export interface WelcomeNewTeacherProps {}
 
 export function WelcomeNewTeacher(props: WelcomeNewTeacherProps) {
-  const { teacher_account } = useTeacher();
+  const { teacher_account, profile, myCourses } = useTeacher();
   const { user } = useUser();
 
   return (
@@ -16,7 +16,13 @@ export function WelcomeNewTeacher(props: WelcomeNewTeacherProps) {
       <h4 className={styles['title']}>
         Realiza estos pasos para empezar a enseñar
       </h4>
-      <div className={`${styles['step']} ${styles['with-tag']}`}>
+      <div
+        className={
+          teacher_account !== StatusTeacherAccount.approved
+            ? `${styles['step']} ${styles['with-tag']}`
+            : ` ${styles['step']} ${styles['with-tag']} ${styles['approved-step']}`
+        }
+      >
         <div className={styles['step-content-wrapper']}>
           <div className={styles['step-icon']}>
             <Icon icon="file-alt" size={30} />
@@ -27,24 +33,36 @@ export function WelcomeNewTeacher(props: WelcomeNewTeacherProps) {
               Por favor envíanos tu información y experiencia laboral para
               trabajar con nosotros
             </p>
-            <Button
-              title={
-                teacher_account === StatusTeacherAccount.review || teacher_account === StatusTeacherAccount.rejected
-                  ? 'Revisar Solicitud'
-                  : 'Aplicar Ahora'
-              }
-              link="/teacher/apply-teach"
-            />
+            {teacher_account !== StatusTeacherAccount.approved && (
+              <Button
+                title={
+                  teacher_account === StatusTeacherAccount.review ||
+                  teacher_account === StatusTeacherAccount.rejected
+                    ? 'Revisar Solicitud'
+                    : 'Aplicar Ahora'
+                }
+                link="/teacher/apply-teach"
+              />
+            )}
           </div>
         </div>
         {teacher_account === StatusTeacherAccount.review && (
-          <Tag text={'En revision'} color={ColorsTag.green} />
+          <Tag text={'En revision'} color={ColorsTag.orange} />
         )}
         {teacher_account === StatusTeacherAccount.rejected && (
           <Tag text={'Requiere cambios'} color={ColorsTag.blue} />
         )}
+        {teacher_account === StatusTeacherAccount.approved && (
+          <Tag text={'Solicitud aceptada'} color={ColorsTag.green} />
+        )}
       </div>
-      <div className={styles['step']}>
+      <div
+        className={
+          profile.biography
+            ? `${styles['step']} ${styles['with-tag']} ${styles['approved-step']}`
+            : `${styles['step']}`
+        }
+      >
         <div className={styles['step-icon']}>
           <Icon icon="user-circle" size={30} />
         </div>
@@ -64,12 +82,23 @@ export function WelcomeNewTeacher(props: WelcomeNewTeacherProps) {
               inscribirse en tus clases.
             </li>
           </ul>
-          <NavLink to="/teacher/account/account-form">
-            Click aquí para actualizar tu perfil
-          </NavLink>
+          {!profile.biography && (
+            <NavLink to="/teacher/account/profile-edit">
+              Click aquí para actualizar tu perfil
+            </NavLink>
+          )}
         </div>
+        {profile.biography && (
+          <Tag text={'Completado'} color={ColorsTag.green} />
+        )}
       </div>
-      <div className={styles['step']}>
+      <div
+        className={
+          myCourses.length > 0
+            ? `${styles['step']} ${styles['with-tag']} ${styles['approved-step']}`
+            : `${styles['step']}`
+        }
+      >
         <div className={styles['step-icon']}>
           <Icon icon="tools" size={30} />
         </div>
@@ -80,8 +109,13 @@ export function WelcomeNewTeacher(props: WelcomeNewTeacherProps) {
             intento nosotros te guiaremos en el proceso, una vez lo tengas lo
             debes enviar a revision para que nosotros lo validemos
           </p>
-          <NavLink to="/teacher/courses/all">Crear mi primer curso</NavLink>
+          {myCourses.length === 0 && (
+            <NavLink to="/teacher/courses/all">Crear mi primer curso</NavLink>
+          )}
         </div>
+        {myCourses.length > 0 && (
+            <Tag text={'Completado'} color={ColorsTag.green} />
+          )}
       </div>
     </div>
   );

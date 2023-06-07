@@ -1,4 +1,4 @@
-import { ReactElement, useState } from 'react';
+import { ReactElement, useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import styles from './tabs.module.scss';
 import { useUtil } from '@ltpx-frontend-apps/store';
@@ -19,6 +19,7 @@ export interface TabsProps {
   isDisabled?: boolean;
   onClickTab?: (indexTab: number) => void;
   indexTabSelected?: number;
+  onConfirm?: () => void;
 }
 
 export function Tabs(props: TabsProps) {
@@ -31,19 +32,26 @@ export function Tabs(props: TabsProps) {
     classNameText,
     indexTabSelected,
     isDisabled,
+    onConfirm,
   } = props;
   const [indexSelected, setIndexSelected] = useState(indexTabSelected || 0);
   const selectTab = (index: number) => {
     setIndexSelected(index);
     onClickTab && onClickTab(index);
   };
-  const { setMessageToast } = useUtil();
+  // const [isAccept, setIsAccept] = useState(false);
 
-  const dontSave = () => {
-    setMessageToast('error', 'Tienes cambios sin guardar');
-    // navigate('/teacher/courses');
-  };
-
+  // const handleConfirmation = () => {
+  //   const result = window.confirm(
+  //     '¿Estás seguro de que deseas cambiar de pestaña, tienes cambios sin guardar?'
+  //   );
+  //   if (result) {
+  //     setIsAccept(true);
+  //   } else {
+  //     // Seleccionó "Cancelar" o cerró la ventana
+  //     // No realizar ninguna acción
+  //   }
+  // };
   const classPosition = vertical
     ? `${styles['container']} ${styles['vertical']}`
     : styles['container'];
@@ -75,7 +83,7 @@ export function Tabs(props: TabsProps) {
             }
             onClick={
               isDisabled
-                ? dontSave
+                ? onConfirm
                 : () => {
                     selectTab(index);
                   }

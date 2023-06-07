@@ -47,7 +47,20 @@ export function TeacherEditCourse() {
   const id = parseInt(courseId || '');
   const navigate = useNavigate();
   const [touch, setIsTouch] = useState(false);
-  const [fieldsSaved, setFieldsSaved] = useState(false);
+
+  const handleConfirmation = () => {
+    const result = window.confirm(
+      '¿Estás seguro de que deseas realizar esta acción, tienes cambios sin guardar?'
+    );
+    if (result) {
+      navigate('/teacher/courses');
+      // Seleccionó "Aceptar"
+      // Realizar la acción deseada
+    } else {
+      // Seleccionó "Cancelar" o cerró la ventana
+      // No realizar ninguna acción
+    }
+  };
 
   const fetchData = useCallback(async () => {
     const { success, data, error } = await getCourse(id);
@@ -66,16 +79,16 @@ export function TeacherEditCourse() {
     const { success, error } = response;
     if (success) {
       setMessageToast('success', 'Tus cambios han sido guardados');
-      setIsTouch(false)
+      window.location.reload();
     } else {
       setMessageToast('error', `${error || 'Ha ocurrido un error'}`);
     }
   };
 
-  const dontSave = () => {
-    setMessageToast('error', 'Tienes cambios sin guardar');
-    setFieldsSaved(false)
-    // navigate('/teacher/courses');
+  const unsavedChanges = () => {
+    if (touch) {
+      handleConfirmation();
+    }
   };
 
   const handleSendToReview = async () => {
@@ -93,8 +106,6 @@ export function TeacherEditCourse() {
   const handleDataFromChild = (data: boolean) => {
     // Realiza acciones con los datos recibidos del componente hijo
     setIsTouch(data);
-    console.log('Datos recibidos:', data);
-    console.log('aqui1',touch)
   };
 
   return (
@@ -133,8 +144,8 @@ export function TeacherEditCourse() {
                 className={styles['btn-actions']}
                 title={t('buttons.saveDraft')}
                 color={ColorsButton.primary}
-                link={fieldsSaved ? '/teacher/courses/all' : ''}
-                onClick={fieldsSaved ? cleanCourse : dontSave}
+                link={!touch ? '/teacher/courses/all' : ''}
+                onClick={!touch ? cleanCourse : unsavedChanges}
               />
             </div>
           </div>
@@ -161,7 +172,12 @@ export function TeacherEditCourse() {
       )}
       {course?.id && (
         <div className={styles['content']}>
-          <Tabs tabs={tabs} onClickTab={setIndexSelectedView} isDisabled={touch} />
+          <Tabs
+            tabs={tabs}
+            onClickTab={setIndexSelectedView}
+            isDisabled={touch}
+            onConfirm={handleConfirmation}
+          />
           <div className={styles['section-content']}>
             {indexSelectedView === 0 && (
               <CourseGeneralInformation
@@ -169,9 +185,7 @@ export function TeacherEditCourse() {
                 cover={course.cover_url}
                 onSubmit={(data) => {
                   showAndConfigNotification(data);
-                  setFieldsSaved(true);
                   setIsTouch(false);
-                  console.log('aqui',touch)
                 }}
                 sendDataToParent={handleDataFromChild}
               />

@@ -117,7 +117,6 @@ export function CourseGeneralInformation(props: CourseGeneralInformationProps) {
   }, [formik.dirty, isFormDirty, sendDataToParent]);
 
   useEffect(() => {
-    const data = 'Hola, soy un dato desde el componente hijo';
     setIsFormDirty(true);
     fetchData();
   }, [fetchData]);

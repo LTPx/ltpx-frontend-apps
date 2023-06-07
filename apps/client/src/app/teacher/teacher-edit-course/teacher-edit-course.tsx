@@ -46,6 +46,8 @@ export function TeacherEditCourse() {
   const { courseId } = useParams();
   const id = parseInt(courseId || '');
   const navigate = useNavigate();
+  const [touch, setIsTouch] = useState(false);
+  const [fieldsSaved, setFieldsSaved] = useState(false);
 
   const fetchData = useCallback(async () => {
     const { success, data, error } = await getCourse(id);
@@ -64,9 +66,16 @@ export function TeacherEditCourse() {
     const { success, error } = response;
     if (success) {
       setMessageToast('success', 'Tus cambios han sido guardados');
+      setIsTouch(false)
     } else {
       setMessageToast('error', `${error || 'Ha ocurrido un error'}`);
     }
+  };
+
+  const dontSave = () => {
+    setMessageToast('error', 'Tienes cambios sin guardar');
+    setFieldsSaved(false)
+    // navigate('/teacher/courses');
   };
 
   const handleSendToReview = async () => {
@@ -79,6 +88,13 @@ export function TeacherEditCourse() {
         setMessageToast('error', error);
       }
     }
+  };
+
+  const handleDataFromChild = (data: boolean) => {
+    // Realiza acciones con los datos recibidos del componente hijo
+    setIsTouch(data);
+    console.log('Datos recibidos:', data);
+    console.log('aqui1',touch)
   };
 
   return (
@@ -117,8 +133,8 @@ export function TeacherEditCourse() {
                 className={styles['btn-actions']}
                 title={t('buttons.saveDraft')}
                 color={ColorsButton.primary}
-                link={'/teacher/courses/all'}
-                onClick={cleanCourse}
+                link={fieldsSaved ? '/teacher/courses/all' : ''}
+                onClick={fieldsSaved ? cleanCourse : dontSave}
               />
             </div>
           </div>
@@ -145,7 +161,7 @@ export function TeacherEditCourse() {
       )}
       {course?.id && (
         <div className={styles['content']}>
-          <Tabs tabs={tabs} onClickTab={setIndexSelectedView} />
+          <Tabs tabs={tabs} onClickTab={setIndexSelectedView} isDisabled={touch} />
           <div className={styles['section-content']}>
             {indexSelectedView === 0 && (
               <CourseGeneralInformation
@@ -153,7 +169,11 @@ export function TeacherEditCourse() {
                 cover={course.cover_url}
                 onSubmit={(data) => {
                   showAndConfigNotification(data);
+                  setFieldsSaved(true);
+                  setIsTouch(false);
+                  console.log('aqui',touch)
                 }}
+                sendDataToParent={handleDataFromChild}
               />
             )}
             {indexSelectedView === 1 && (

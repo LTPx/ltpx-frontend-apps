@@ -1,6 +1,7 @@
 import { ReactElement, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import styles from './tabs.module.scss';
+import { useUtil } from '@ltpx-frontend-apps/store';
 
 /* eslint-disable-next-line */
 export interface Tab {
@@ -15,6 +16,7 @@ export interface TabsProps {
   vertical?: boolean;
   className?: string;
   classNameText?: string;
+  isDisabled?: boolean;
   onClickTab?: (indexTab: number) => void;
   indexTabSelected?: number;
 }
@@ -28,11 +30,18 @@ export function Tabs(props: TabsProps) {
     className,
     classNameText,
     indexTabSelected,
+    isDisabled,
   } = props;
   const [indexSelected, setIndexSelected] = useState(indexTabSelected || 0);
   const selectTab = (index: number) => {
     setIndexSelected(index);
     onClickTab && onClickTab(index);
+  };
+  const { setMessageToast } = useUtil();
+
+  const dontSave = () => {
+    setMessageToast('error', 'Tienes cambios sin guardar');
+    // navigate('/teacher/courses');
   };
 
   const classPosition = vertical
@@ -64,9 +73,13 @@ export function Tabs(props: TabsProps) {
                 ? `${styles['tab']} ${styles['selected']}`
                 : `${styles['tab']}`
             }
-            onClick={() => {
-              selectTab(index);
-            }}
+            onClick={
+              isDisabled
+                ? dontSave
+                : () => {
+                    selectTab(index);
+                  }
+            }
           >
             {tab.children ? (
               tab.children

@@ -1,4 +1,8 @@
-import { CourseLanguage, CourseLevel, FormatResponse } from '@ltpx-frontend-apps/api';
+import {
+  CourseLanguage,
+  CourseLevel,
+  FormatResponse,
+} from '@ltpx-frontend-apps/api';
 import {
   Button,
   ColorsButton,
@@ -13,7 +17,7 @@ import { useFormik } from 'formik';
 import { useTranslation } from 'react-i18next';
 import * as Yup from 'yup';
 import styles from './course-general-information.module.scss';
-import { useCallback, useEffect } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 /* eslint-disable-next-line */
 export interface CourseGeneralInformation {
@@ -25,6 +29,7 @@ export interface CourseGeneralInformation {
   level?: CourseLevel;
   learn_goals?: string;
   requirements?: string;
+  sendDataToParent?: (isDirty: boolean) => void;
 }
 export interface CourseGeneralInformationProps
   extends CourseGeneralInformation {
@@ -42,17 +47,17 @@ export function CourseGeneralInformation(props: CourseGeneralInformationProps) {
     learn_goals,
     requirements,
     onSubmit,
+    sendDataToParent
   } = props;
   const { languages, levels } = useCourseUtil();
-  const { _updateCourse, cleanCourse, _getAllCategories, allCategories } = useCourse();
+  const { _updateCourse, cleanCourse, _getAllCategories, allCategories } =
+    useCourse();
   const { t } = useTranslation();
+  const [isFormDirty, setIsFormDirty] = useState(false);
+
 
   const fetchData = useCallback(async () => {
     await _getAllCategories();
-  }, []);
-
-  useEffect(() => {
-    fetchData();
   }, []);
 
   const formik = useFormik({
@@ -105,6 +110,18 @@ export function CourseGeneralInformation(props: CourseGeneralInformationProps) {
     },
   });
 
+  useEffect(() => {
+    if (sendDataToParent && isFormDirty) {
+      sendDataToParent(formik.dirty);
+    }
+  }, [formik.dirty, isFormDirty, sendDataToParent]);
+
+  useEffect(() => {
+    const data = 'Hola, soy un dato desde el componente hijo';
+    setIsFormDirty(true);
+    fetchData();
+  }, [fetchData]);
+
   return (
     <form className={styles['container']} onSubmit={formik.handleSubmit}>
       <section className={styles['text']}>
@@ -149,7 +166,9 @@ export function CourseGeneralInformation(props: CourseGeneralInformationProps) {
           label={t('courseInformation.category') || ''}
           selected={category_id}
           options={allCategories}
-          onChange={(option) => formik.setFieldValue('category_id', option.value)}
+          onChange={(option) =>
+            formik.setFieldValue('category_id', option.value)
+          }
         />
         <Select
           label={t('courseInformation.level') || ''}

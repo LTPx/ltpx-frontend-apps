@@ -41,7 +41,12 @@ export function PanelAccordion(props: PanelAccordionProps) {
 
   return (
     <div className={styles['container']}>
-      <div className={styles['accordion']} onClick={handleClick}>
+      <div
+        className={
+          lock ? `${styles['no-accordion']}` : `${styles['accordion']}`
+        }
+        onClick={handleClick}
+      >
         <div className={styles['title-content']}>
           <h4>{title}</h4>
           <h4 className={`${classNameSubTitle} ${styles['subtitle']}`}>

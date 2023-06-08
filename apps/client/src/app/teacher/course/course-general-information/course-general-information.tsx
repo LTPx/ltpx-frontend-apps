@@ -47,14 +47,13 @@ export function CourseGeneralInformation(props: CourseGeneralInformationProps) {
     learn_goals,
     requirements,
     onSubmit,
-    sendDataToParent
+    sendDataToParent,
   } = props;
   const { languages, levels } = useCourseUtil();
   const { _updateCourse, cleanCourse, _getAllCategories, allCategories } =
     useCourse();
   const { t } = useTranslation();
   const [isFormDirty, setIsFormDirty] = useState(false);
-
 
   const fetchData = useCallback(async () => {
     await _getAllCategories();
@@ -110,14 +109,14 @@ export function CourseGeneralInformation(props: CourseGeneralInformationProps) {
     },
   });
 
-  useEffect(() => {
-    if (sendDataToParent && isFormDirty) {
-      sendDataToParent(formik.dirty);
-    }
-  }, [formik.dirty, isFormDirty, sendDataToParent]);
+  // useEffect(() => {
+  //   if (sendDataToParent && isFormDirty) {
+  //     sendDataToParent(formik.dirty);
+  //   }
+  // }, [formik.dirty, isFormDirty, sendDataToParent]);
 
   useEffect(() => {
-    setIsFormDirty(true);
+    // setIsFormDirty(true);
     fetchData();
   }, [fetchData]);
 

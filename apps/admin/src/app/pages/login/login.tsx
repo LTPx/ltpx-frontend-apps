@@ -23,7 +23,6 @@ export function Login() {
     const { success, error } = await loginAdmin(userAccount);
     if (success) {
       navigate('/admin/dashboard');
-      window.location.reload();
     } else {
       if (error === "Signature has expired") {
         setError('Tu sesión ha caducado por favor vuelve a intentar');

@@ -8,7 +8,7 @@ import { StatusTeacherAccount } from '@ltpx-frontend-apps/api';
 export interface WelcomeNewTeacherProps {}
 
 export function WelcomeNewTeacher(props: WelcomeNewTeacherProps) {
-  const { teacher_account, profile, myCourses } = useTeacher();
+  const { teacher_account, myCourses } = useTeacher();
   const { user } = useUser();
 
   return (
@@ -58,7 +58,7 @@ export function WelcomeNewTeacher(props: WelcomeNewTeacherProps) {
       </div>
       <div
         className={
-          profile.biography
+          user.teacher?.biography
             ? `${styles['step']} ${styles['with-tag']} ${styles['approved-step']}`
             : `${styles['step']}`
         }
@@ -82,13 +82,13 @@ export function WelcomeNewTeacher(props: WelcomeNewTeacherProps) {
               inscribirse en tus clases.
             </li>
           </ul>
-          {!profile.biography && (
+          {!user.teacher?.biography && (
             <NavLink to="/teacher/account/profile-edit">
               Click aquí para actualizar tu perfil
             </NavLink>
           )}
         </div>
-        {profile.biography && (
+        {user.teacher?.biography && (
           <Tag text={'Completado'} color={ColorsTag.green} />
         )}
       </div>
@@ -113,7 +113,8 @@ export function WelcomeNewTeacher(props: WelcomeNewTeacherProps) {
             <NavLink to="/teacher/courses/all">Crear mi primer curso</NavLink>
           )}
         </div>
-        {myCourses.length > 0 && (
+        {user.teacher?.total_courses !== undefined &&
+          user.teacher.total_courses > 0 && (
             <Tag text={'Completado'} color={ColorsTag.green} />
           )}
       </div>

@@ -63,30 +63,32 @@ export function WelcomeNewTeacher(props: WelcomeNewTeacherProps) {
             : `${styles['step']}`
         }
       >
-        <div className={styles['step-icon']}>
-          <Icon icon="user-circle" size={30} />
-        </div>
-        <div className={styles['step-content']}>
-          <h4>Completa tu perfil de docente </h4>
-          <ul>
-            <li>
-              Tu perfil de profesor te presenta a padres y alumnos debe utilizar
-              un tono profesional.
-            </li>
-            <li>
-              Tu perfil aparecerá en tus clases y servirá como tu página de
-              maestro personal.
-            </li>
-            <li>
-              Tener un gran perfil les dará a los padres más confianza para
-              inscribirse en tus clases.
-            </li>
-          </ul>
-          {!user.teacher?.biography && (
-            <NavLink to="/teacher/account/profile-edit">
-              Click aquí para actualizar tu perfil
-            </NavLink>
-          )}
+        <div className={styles['step-content-wrapper']}>
+          <div className={styles['step-icon']}>
+            <Icon icon="user-circle" size={30} />
+          </div>
+          <div className={styles['step-content']}>
+            <h4>Completa tu perfil de docente </h4>
+            <ul>
+              <li>
+                Tu perfil de profesor te presenta a padres y alumnos debe utilizar
+                un tono profesional.
+              </li>
+              <li>
+                Tu perfil aparecerá en tus clases y servirá como tu página de
+                maestro personal.
+              </li>
+              <li>
+                Tener un gran perfil les dará a los padres más confianza para
+                inscribirse en tus clases.
+              </li>
+            </ul>
+            {!user.teacher?.biography && (
+              <NavLink to="/teacher/account/profile-edit">
+                Click aquí para actualizar tu perfil
+              </NavLink>
+            )}
+          </div>
         </div>
         {user.teacher?.biography && (
           <Tag text={'Completado'} color={ColorsTag.green} />

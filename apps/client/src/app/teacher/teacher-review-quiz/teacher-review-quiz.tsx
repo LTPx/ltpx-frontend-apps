@@ -20,7 +20,6 @@ export function TeacherReviewQuiz(props: TeacherReviewQuizProps) {
   const fetchQuiz = useCallback(async () => {
     const { success, data, error } = await _getQuizReview(quizId);
     if (success) {
-      console.log('data: ', data);
       setQuiz(data);
     } else {
       console.log('error: ', error);
@@ -35,7 +34,6 @@ export function TeacherReviewQuiz(props: TeacherReviewQuizProps) {
     if (quiz && quiz.in_review) {
       const { success, data, error} = await _teacherGradeQuiz(quiz.id, dataForm.answers, dataForm.feedback);
       if (success) {
-        console.log('data: ', data);
         onSubmit();
       } else {
         console.log('error: ', error);
@@ -44,7 +42,6 @@ export function TeacherReviewQuiz(props: TeacherReviewQuizProps) {
     if (quiz && !quiz.in_review) {
       const { success, data, error} = await _teacherFeedbackQuiz(quiz.id, dataForm.feedback);
       if (success) {
-        console.log('data: ', data);
         onSubmit();
       } else {
         console.log('error: ', error);

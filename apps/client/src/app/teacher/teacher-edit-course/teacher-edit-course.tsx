@@ -104,17 +104,17 @@ export function TeacherEditCourse() {
             </div>
             <div className={styles['actions']}>
               <Button
+                className={styles['btn-actions']}
                 title={t('buttons.sendReview')}
                 color={ColorsButton.secondary}
                 type={TypeButton.submit}
                 outline={true}
                 icon="rocket"
                 onClick={handleSendToReview}
-                disabled={
-                  course.status === CourseStatus.review
-                }
+                disabled={course.status === CourseStatus.review}
               />
               <Button
+                className={styles['btn-actions']}
                 title={t('buttons.saveDraft')}
                 color={ColorsButton.primary}
                 link={'/teacher/courses/all'}

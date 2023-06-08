@@ -46,6 +46,8 @@ export interface UserStore {
     teacher_name: string;
     bank_accounts: BankAccount[];
     profile_image: string;
+    biography: string;
+    total_courses: number;
   },
   id: number;
 }

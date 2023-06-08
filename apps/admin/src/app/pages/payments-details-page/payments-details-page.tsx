@@ -30,7 +30,6 @@ export function PaymentsDetailsPage(props: PaymentsDetailsPageProps) {
   const fetchWithdrawal = useCallback(async () => {
     const { success, data, error } = await _getWithdrawal(withdrawalId);
     if (success) {
-      console.log('data: ', data);
       setWithdrawal(data);
     } else {
       console.log('error: ', error);
@@ -64,13 +63,11 @@ export function PaymentsDetailsPage(props: PaymentsDetailsPageProps) {
         ),
     }),
     onSubmit: async (formData) => {
-      const { success, data, error } = await _approveWithdrawal(
+      const { success, error } = await _approveWithdrawal(
         withdrawalId,
         formData
       );
-      if (success) {
-        console.log('data: ', data);
-      } else {
+      if (!success) {
         console.log('error: ', error);
       }
     },

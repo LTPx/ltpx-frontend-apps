@@ -1,10 +1,6 @@
 import { ApplicationTeach } from '../../interfaces/teacher-interface';
-import { getApiUrl } from '../../api';
-import { createInstance } from '../../http';
-
-const localKey = "token_opm"
-const API = getApiUrl();
-const http = createInstance(API, localKey);
+import { _http } from '../../http';
+const http = _http;
 
 export const getApplicationsByStatus = async (status: string) => {
   return new Promise<ApplicationTeach[]>((resolve, reject) => {

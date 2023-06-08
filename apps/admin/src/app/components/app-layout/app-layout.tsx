@@ -1,5 +1,4 @@
 import {
-  Chat,
   Dropdown,
   Header,
   Icon,
@@ -19,18 +18,24 @@ import { useTranslation } from 'react-i18next';
 import { Outlet, useNavigate } from 'react-router-dom';
 import styles from './app-layout.module.scss';
 import { Avatar } from 'evergreen-ui';
-import { useState } from 'react';
+import { useCallback, useEffect } from 'react';
 
-/* eslint-disable-next-line */
-export interface AppLayoutProps {}
-
-export function AppLayout(props: AppLayoutProps) {
-  const [openChat, setOpenChat] = useState(false);
+export function AppLayout() {
   const { t } = useTranslation();
   const { feedbackAction } = useAppStore();
-  const { user, logout, newNotification, notifications } = useUser();
+  const { user, logout, getCurrentUser } = useUser();
   const navigate = useNavigate();
   const { clearMessageToast } = useUtil();
+
+  const fetchCurrentUser = useCallback(async () => {
+    await getCurrentUser();
+  }, []);
+
+  useEffect(() => {
+    if (user.email === undefined) {
+      fetchCurrentUser();
+    }
+  }, [])
 
   const links = [
     {
@@ -133,13 +138,7 @@ export function AppLayout(props: AppLayoutProps) {
           <Outlet />
         </div>
         <div className={styles['chat-float-container']}>
-          {openChat ? (
-            <div className={styles['chat-container']}>
-              <Chat onCancel={() => setOpenChat(false)} />
-            </div>
-          ) : (
-            <ChatFloat />
-          )}
+          <ChatFloat />
         </div>
       </div>
       {feedbackAction.text && (
@@ -154,17 +153,6 @@ export function AppLayout(props: AppLayoutProps) {
               : SnackbarType.error
           }
           duration={2000}
-          onClose={clearMessageToast}
-        />
-      )}
-      {newNotification && notifications.length > 0 && (
-        <Snackbar
-          position={SnackbarPosition.bottomRight}
-          open={true}
-          title={'Nueva notificación'}
-          text={notifications[notifications.length - 1].text}
-          kind={SnackbarType.message}
-          duration={1000}
           onClose={clearMessageToast}
         />
       )}

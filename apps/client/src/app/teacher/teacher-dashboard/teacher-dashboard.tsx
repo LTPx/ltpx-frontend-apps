@@ -19,7 +19,7 @@ export interface TeacherDashboardProps {}
 export function TeacherDashboard(props: TeacherDashboardProps) {
   const { user } = useUser();
   const [openModal, setOpenModal] = useState(false);
-  const { createCourse } = useTeacher();
+  const { createCourse, profile, myCourses } = useTeacher();
   const navigate = useNavigate();
 
   const openNewCourse = () => {
@@ -40,14 +40,9 @@ export function TeacherDashboard(props: TeacherDashboardProps) {
     <div className={`${styles['container']}`}>
       <div className={styles['layout']}>
         <div className={styles['content']}>
-          {user.teacher_account !== StatusTeacherAccount.approved ? (
-            <div>
-              <h1 className={styles['name-teacher']}>
-                Bienvenido {user.fullname}!
-              </h1>
-              <WelcomeNewTeacher />
-            </div>
-          ) : (
+          {user.teacher_account === StatusTeacherAccount.approved &&
+          !profile.biography &&
+          myCourses.length > 0 ? (
             <div className={styles['dashboard-content']}>
               <h1 className={styles['name-teacher']}>
                 Bienvenido {user.fullname}!
@@ -68,6 +63,13 @@ export function TeacherDashboard(props: TeacherDashboardProps) {
                   }}
                 />
               </div>
+            </div>
+          ) : (
+            <div>
+              <h1 className={styles['name-teacher']}>
+                Bienvenido {user.fullname}!
+              </h1>
+              <WelcomeNewTeacher />
             </div>
           )}
         </div>

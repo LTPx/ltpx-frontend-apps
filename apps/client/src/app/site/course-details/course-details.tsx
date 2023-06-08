@@ -47,14 +47,12 @@ export function CourseDetails() {
   const { _getSiteCourse, currentFullCourse } = useSite();
   const { course, teacher, session } = currentFullCourse;
   const [message, setMessage] = useState<MessageCheckout>();
-  const { customFormatDate, moment } = useMoment();
+  const { customFormatDate } = useMoment();
   const { _newChatRoom, setShowChat } = useChat();
 
   const fetchCourse = useCallback(async () => {
-    const { success, data, error } = await _getSiteCourse(slug || '');
-    if (success) {
-      console.log('data: ', data);
-    } else {
+    const { error } = await _getSiteCourse(slug || '');
+    if (error) {
       console.log('error: ', error);
     }
   }, []);

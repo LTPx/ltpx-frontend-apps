@@ -64,8 +64,11 @@ export function CourseDetailsPage() {
     }
   };
 
-  async function handleRequireChanges(comment: {comment: string}) {
-    const { success, error } = await _rejectCourse( viewCourse.id, comment.comment);
+  async function handleRequireChanges(comment: { comment: string }) {
+    const { success, error } = await _rejectCourse(
+      viewCourse.id,
+      comment.comment
+    );
     if (success) {
       navigate('/admin/courses');
     } else {
@@ -219,7 +222,7 @@ export function CourseDetailsPage() {
       <Dialog
         isShown={openModal}
         hasFooter={false}
-        title='Solicitar Cambios'
+        title="Solicitar Cambios"
         onCloseComplete={() => setOpenModal(false)}
         width={'45vw'}
       >

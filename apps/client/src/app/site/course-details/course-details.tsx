@@ -20,6 +20,7 @@ import {
   useMoment,
   AchievementBadge,
   SectionInformation,
+  PanelAccordion,
 } from '@ltpx-frontend-apps/shared-ui';
 import { Dialog } from 'evergreen-ui';
 import { useChat, useSite, useUser } from '@ltpx-frontend-apps/store';
@@ -38,6 +39,7 @@ export function CourseDetails() {
   const [openModal, setOpenModal] = useState(false);
   const [openEnrollModal, setOpenEnrollModal] = useState(false);
   const [isFreeValue, setFreeValue] = useState(false);
+  const [messageRegister, setMessageRegister] = useState(false);
   const [selectedTab, setSelectedTab] = useState(0);
   const { slug } = useParams();
   const { isAuthenticated, register } = useUser();
@@ -106,6 +108,12 @@ export function CourseDetails() {
     {
       text: 'Logros',
     },
+    // {
+    //   text: 'Tareas',
+    // },
+    // {
+    //   text: 'Test',
+    // },
     // {
     //   text: 'Reseñas',
     // },
@@ -199,7 +207,10 @@ export function CourseDetails() {
                 </div>
                 <div>
                   <Button
-                    onClick={chatWithTeacher}
+                    onClick={() => {
+                      chatWithTeacher();
+                      setMessageRegister(true);
+                    }}
                     icon="chat"
                     title="Tengo una pregunta"
                   />
@@ -292,6 +303,13 @@ export function CourseDetails() {
                       ))}
                     </div>
                   )}
+                  {selectedTab === 3 && (
+                    <PanelAccordion lock={true} title={'Tarea'} />
+                  )}
+                  {selectedTab === 4 && (
+                    <PanelAccordion lock={true} title={'Test'} />
+                  )}
+
                   {/* {selectedTab === 3 && (
                     <div className={styles['reviews-wrap']}>
                       <RatingCourse
@@ -333,7 +351,10 @@ export function CourseDetails() {
             />
             <div className={styles['contact-teacher']}>
               <Button
-                onClick={chatWithTeacher}
+                onClick={() => {
+                  chatWithTeacher();
+                  setMessageRegister(true);
+                }}
                 icon="chat"
                 full={true}
                 title="Tengo una pregunta"
@@ -395,8 +416,15 @@ export function CourseDetails() {
       <Dialog
         isShown={openModal}
         hasFooter={false}
-        title="Regístrate y aprende hoy mismo"
-        onCloseComplete={() => setOpenModal(false)}
+        title={
+          messageRegister
+            ? 'Regístrate en menos de un minuto para hacer consultas a este profesor'
+            : 'Regístrate y aprende hoy mismo'
+        }
+        onCloseComplete={() => {
+          setOpenModal(false);
+          setMessageRegister(false);
+        }}
       >
         <div className={styles['register-modal']}>
           <RegisterForm

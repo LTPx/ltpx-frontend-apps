@@ -16,13 +16,7 @@ export function WelcomeNewTeacher(props: WelcomeNewTeacherProps) {
       <h4 className={styles['title']}>
         Realiza estos pasos para empezar a enseñar
       </h4>
-      <div
-        className={
-          teacher_account !== StatusTeacherAccount.approved
-            ? `${styles['step']} ${styles['with-tag']}`
-            : ` ${styles['step']} ${styles['with-tag']} ${styles['approved-step']}`
-        }
-      >
+      <div className={` ${styles['step']} ${styles['with-tag']}`}>
         <div className={styles['step-content-wrapper']}>
           <div className={styles['step-icon']}>
             <Icon icon="file-alt" size={30} />
@@ -56,13 +50,7 @@ export function WelcomeNewTeacher(props: WelcomeNewTeacherProps) {
           <Tag text={'Solicitud aceptada'} color={ColorsTag.green} />
         )}
       </div>
-      <div
-        className={
-          user.teacher?.biography
-            ? `${styles['step']} ${styles['with-tag']} ${styles['approved-step']}`
-            : `${styles['step']}`
-        }
-      >
+      <div className={`${styles['step']} ${styles['with-tag']}`}>
         <div className={styles['step-content-wrapper']}>
           <div className={styles['step-icon']}>
             <Icon icon="user-circle" size={30} />
@@ -71,8 +59,8 @@ export function WelcomeNewTeacher(props: WelcomeNewTeacherProps) {
             <h4>Completa tu perfil de docente </h4>
             <ul>
               <li>
-                Tu perfil de profesor te presenta a padres y alumnos debe utilizar
-                un tono profesional.
+                Tu perfil de profesor te presenta a padres y alumnos debe
+                utilizar un tono profesional.
               </li>
               <li>
                 Tu perfil aparecerá en tus clases y servirá como tu página de
@@ -94,13 +82,7 @@ export function WelcomeNewTeacher(props: WelcomeNewTeacherProps) {
           <Tag text={'Completado'} color={ColorsTag.green} />
         )}
       </div>
-      <div
-        className={
-          myCourses.length > 0
-            ? `${styles['step']} ${styles['with-tag']} ${styles['approved-step']}`
-            : `${styles['step']}`
-        }
-      >
+      <div className={`${styles['step']} ${styles['with-tag']}`}>
         <div className={styles['step-icon']}>
           <Icon icon="tools" size={30} />
         </div>
@@ -111,9 +93,10 @@ export function WelcomeNewTeacher(props: WelcomeNewTeacherProps) {
             intento nosotros te guiaremos en el proceso, una vez lo tengas lo
             debes enviar a revision para que nosotros lo validemos
           </p>
-          {myCourses.length === 0 && (
-            <NavLink to="/teacher/courses/all">Crear mi primer curso</NavLink>
-          )}
+          {user.teacher?.total_courses !== undefined &&
+            user.teacher.total_courses === 0 && (
+              <NavLink to="/teacher/courses/all">Crear mi primer curso</NavLink>
+            )}
         </div>
         {user.teacher?.total_courses !== undefined &&
           user.teacher.total_courses > 0 && (

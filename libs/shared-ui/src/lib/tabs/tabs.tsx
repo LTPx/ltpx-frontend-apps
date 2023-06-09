@@ -1,6 +1,7 @@
-import { ReactElement, useState } from 'react';
+import { ReactElement, useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import styles from './tabs.module.scss';
+import { useUtil } from '@ltpx-frontend-apps/store';
 
 /* eslint-disable-next-line */
 export interface Tab {
@@ -15,8 +16,10 @@ export interface TabsProps {
   vertical?: boolean;
   className?: string;
   classNameText?: string;
+  isDisabled?: boolean;
   onClickTab?: (indexTab: number) => void;
   indexTabSelected?: number;
+  onConfirm?: () => void;
 }
 
 export function Tabs(props: TabsProps) {
@@ -28,13 +31,27 @@ export function Tabs(props: TabsProps) {
     className,
     classNameText,
     indexTabSelected,
+    isDisabled,
+    onConfirm,
   } = props;
   const [indexSelected, setIndexSelected] = useState(indexTabSelected || 0);
   const selectTab = (index: number) => {
     setIndexSelected(index);
     onClickTab && onClickTab(index);
   };
+  // const [isAccept, setIsAccept] = useState(false);
 
+  // const handleConfirmation = () => {
+  //   const result = window.confirm(
+  //     '¿Estás seguro de que deseas cambiar de pestaña, tienes cambios sin guardar?'
+  //   );
+  //   if (result) {
+  //     setIsAccept(true);
+  //   } else {
+  //     // Seleccionó "Cancelar" o cerró la ventana
+  //     // No realizar ninguna acción
+  //   }
+  // };
   const classPosition = vertical
     ? `${styles['container']} ${styles['vertical']}`
     : styles['container'];
@@ -64,9 +81,13 @@ export function Tabs(props: TabsProps) {
                 ? `${styles['tab']} ${styles['selected']}`
                 : `${styles['tab']}`
             }
-            onClick={() => {
-              selectTab(index);
-            }}
+            onClick={
+              isDisabled
+                ? onConfirm
+                : () => {
+                    selectTab(index);
+                  }
+            }
           >
             {tab.children ? (
               tab.children

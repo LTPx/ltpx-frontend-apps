@@ -41,8 +41,9 @@ export function TeacherDashboard(props: TeacherDashboardProps) {
       <div className={styles['layout']}>
         <div className={styles['content']}>
           {user.teacher_account === StatusTeacherAccount.approved &&
-          !profile.biography &&
-          myCourses.length > 0 ? (
+          user.teacher?.biography &&
+          user.teacher?.total_courses !== undefined &&
+          user.teacher.total_courses > 0 ? (
             <div className={styles['dashboard-content']}>
               <h1 className={styles['name-teacher']}>
                 Bienvenido {user.fullname}!

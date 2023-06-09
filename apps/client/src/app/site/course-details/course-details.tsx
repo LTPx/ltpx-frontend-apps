@@ -108,12 +108,12 @@ export function CourseDetails() {
     {
       text: 'Logros',
     },
-    {
-      text: 'Tareas',
-    },
-    {
-      text: 'Test',
-    },
+    // {
+    //   text: 'Tareas',
+    // },
+    // {
+    //   text: 'Test',
+    // },
     // {
     //   text: 'Reseñas',
     // },

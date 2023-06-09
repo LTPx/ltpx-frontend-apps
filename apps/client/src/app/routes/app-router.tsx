@@ -8,7 +8,8 @@ import { useUser } from "@ltpx-frontend-apps/store";
 export const AppRouter = () => {
   const [ isLoading, setIsLoading ] = useState(false);
   const { currentView, isAuthenticated, getCurrentUser } = useUser();
-  const token = localStorage.getItem('auth_token');
+  const tokenLocalStorage = `token_${window.location.host}`;
+  const token = localStorage.getItem(tokenLocalStorage);
 
   const routers = {
     default: <SiteRoutes/>,

@@ -10,10 +10,8 @@ export function StudentCourses(props: StudentCoursesProps) {
   const { _getStudentCourses, enrolledCourses } = useStudent();
 
   const fetchCourses = useCallback(async () => {
-    const { success, data, error } = await _getStudentCourses();
-    if (success) {
-      console.log('data: ', data);
-    } else {
+    const { success, error } = await _getStudentCourses();
+    if (!success) {
       console.log('error: ', error);
     }
   }, []);

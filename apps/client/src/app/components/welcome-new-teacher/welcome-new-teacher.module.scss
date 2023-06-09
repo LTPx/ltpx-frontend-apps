@@ -10,6 +10,11 @@
     border-bottom: 1px solid $gray-color-300;
   }
 
+  .approved-step {
+    // background-color: $green-color-100;
+    // border-bottom: 1px solid $green-color;
+  }
+
   .step {
     display: flex;
     gap: 1.5rem;
@@ -43,7 +48,8 @@
         font-weight: 500;
       }
 
-      p, li {
+      p,
+      li {
         color: $gray-color;
         line-height: 1.5rem;
         font-size: 14px;
@@ -62,7 +68,7 @@
       }
 
       ul li::before {
-        content: "\2022";
+        content: '\2022';
         color: $primary-color;
         font-size: 3rem;
       }

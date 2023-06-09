@@ -1,6 +1,6 @@
 import { Routes, Route, BrowserRouter, Navigate } from 'react-router-dom';
 import { PaymentsLayout } from '../layouts/index';
-import { AllCourses, CourseDetails, CoursesByCategory, Home } from '../site';
+import { AllCourses, CourseDetails, CoursesByCategory, Home, TeacherProfilePage } from '../site';
 import {
   Account,
   Dashboard,
@@ -13,7 +13,6 @@ import {
   StudentAccountLayout,
   StudentAccountProfile,
   StudentQuiz,
-  StudentReviewQuiz,
   StudentPasswordEdit,
 } from '../student/index';
 import VideoMeetingLive from '../video/video-meeting-live/video-meeting-live';
@@ -26,6 +25,7 @@ export const StudentRoutes = () => {
         <Route path="/" element={<Navigate replace to="student/dashboard" />} />
         <Route path="/" element={<StudentLayout />}>
           {blogRoutes}
+          <Route path="/teacher/:slug" element={<TeacherProfilePage />} />
           <Route path="/home" element={<Home />} />
           <Route path="/courses" element={<AllCourses />} />
           <Route path="/course/:slug" element={<CourseDetails />} />

@@ -7,6 +7,13 @@
   .video-content {
     padding: 1rem 1.5rem;
   }
+
+  .show {
+    display: flex;
+    justify-content: end;
+    color: $primary-color;
+    text-decoration: underline;
+  }
   
   .text-video {
     color: $text-gray-color-medium;

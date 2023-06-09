@@ -1,7 +1,4 @@
-import {
-  getTeacherCourse,
-  TeacherCourse,
-} from '@ltpx-frontend-apps/api';
+import { getTeacherCourse, TeacherCourse } from '@ltpx-frontend-apps/api';
 import {
   AchievementsList,
   CourseContents,

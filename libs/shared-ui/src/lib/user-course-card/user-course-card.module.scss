@@ -14,7 +14,6 @@
     padding: $size-sm-2;
     gap: $size-sm-2;
     align-items: center;
-
   }
   img {
     width: 100%;
@@ -32,7 +31,7 @@
 
   .date {
     font-size: 14px;
-    color: $text-gray-color
+    color: $text-gray-color;
   }
 
   .title {
@@ -41,4 +40,29 @@
   }
 }
 
+//tablet-responsive-horizontal
+@media screen and (min-width: 860px) and (max-width: 1224px) {
+  .warp-content {
+    display: flex !important;
+    flex-direction: column;
+    padding: 0 !important;
+  }
 
+  .container {
+    background-color: #fff;
+    width: 265px;
+  }
+
+  .content {
+    width: 90%;
+  }
+
+  .head {
+    width: 100%;
+  }
+
+  img {
+    border-bottom-left-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+  }
+}

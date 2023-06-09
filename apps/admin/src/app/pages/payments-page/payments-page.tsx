@@ -20,7 +20,6 @@ export function PaymentsPage(props: PaymentsPageProps) {
     const status = index === 0 ? 'review' : 'approved';
     const { success, data, error } = await _getWithdrawalsByStatus(status);
     if (success) {
-      console.log('data: ', data);
       setWithdrawals(data);
     } else {
       console.log('error: ', error);

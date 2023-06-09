@@ -7,6 +7,7 @@ import {
 import {
   Button,
   ColorsButton,
+  DialogConfirm,
   Icon,
   Tabs,
   Tag,
@@ -46,6 +47,22 @@ export function TeacherEditCourse() {
   const { courseId } = useParams();
   const id = parseInt(courseId || '');
   const navigate = useNavigate();
+  const [touch, setIsTouch] = useState(false);
+  const [openMessage, setOpenMessage] = useState(false);
+
+  // const handleConfirmation = () => {
+  //   const result = window.confirm(
+  //     '¿Estás seguro de que deseas realizar esta acción, tienes cambios sin guardar?'
+  //   );
+  //   if (result) {
+  //     navigate('/teacher/courses');
+  //     // Seleccionó "Aceptar"
+  //     // Realizar la acción deseada
+  //   } else {
+  //     // Seleccionó "Cancelar" o cerró la ventana
+  //     // No realizar ninguna acción
+  //   }
+  // };
 
   const fetchData = useCallback(async () => {
     const { success, data, error } = await getCourse(id);
@@ -64,10 +81,17 @@ export function TeacherEditCourse() {
     const { success, error } = response;
     if (success) {
       setMessageToast('success', 'Tus cambios han sido guardados');
+      // window.location.reload();
     } else {
       setMessageToast('error', `${error || 'Ha ocurrido un error'}`);
     }
   };
+
+  // const unsavedChanges = () => {
+  //   if (touch) {
+  //     handleConfirmation();
+  //   }
+  // };
 
   const handleSendToReview = async () => {
     if (course?.id) {
@@ -80,6 +104,11 @@ export function TeacherEditCourse() {
       }
     }
   };
+
+  // const handleDataFromChild = (data: boolean) => {
+  //   // Realiza acciones con los datos recibidos del componente hijo
+  //   setIsTouch(data);
+  // };
 
   return (
     <div className={styles['container']}>
@@ -104,20 +133,22 @@ export function TeacherEditCourse() {
             </div>
             <div className={styles['actions']}>
               <Button
+                className={styles['btn-actions']}
                 title={t('buttons.sendReview')}
                 color={ColorsButton.secondary}
                 type={TypeButton.submit}
                 outline={true}
                 icon="rocket"
-                onClick={handleSendToReview}
-                disabled={
-                  course.status === CourseStatus.review
-                }
+                onClick={() => setOpenMessage(true)}
+                disabled={course.status === CourseStatus.review}
               />
               <Button
+                className={styles['btn-actions']}
                 title={t('buttons.saveDraft')}
                 color={ColorsButton.primary}
-                link={'/teacher/courses/all'}
+                // link={!touch ? '/teacher/courses/all' : ''}
+                // onClick={!touch ? cleanCourse : unsavedChanges}
+                link="/teacher/courses/all"
                 onClick={cleanCourse}
               />
             </div>
@@ -145,7 +176,12 @@ export function TeacherEditCourse() {
       )}
       {course?.id && (
         <div className={styles['content']}>
-          <Tabs tabs={tabs} onClickTab={setIndexSelectedView} />
+          <Tabs
+            tabs={tabs}
+            onClickTab={setIndexSelectedView}
+            // isDisabled={touch}
+            // onConfirm={handleConfirmation}
+          />
           <div className={styles['section-content']}>
             {indexSelectedView === 0 && (
               <CourseGeneralInformation
@@ -153,7 +189,9 @@ export function TeacherEditCourse() {
                 cover={course.cover_url}
                 onSubmit={(data) => {
                   showAndConfigNotification(data);
+                  // setIsTouch(false);
                 }}
+                // sendDataToParent={handleDataFromChild}
               />
             )}
             {indexSelectedView === 1 && (
@@ -194,6 +232,15 @@ export function TeacherEditCourse() {
           </div>
         </div>
       )}
+      <DialogConfirm
+        open={openMessage}
+        title={'¿Estas seguro que quieres enviar tu curso a revisión?'}
+        confirm={() => {
+          handleSendToReview();
+          setOpenMessage(false);
+        }}
+        onClose={() => setOpenMessage(false)}
+      />
     </div>
   );
 }

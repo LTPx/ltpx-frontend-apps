@@ -25,6 +25,7 @@
 
   .header {
     display: flex;
+    gap: 1rem;
     justify-content: space-between;
     align-items: baseline;
     background-color: $white-color;
@@ -56,6 +57,11 @@
       align-items: center;
       gap: 1rem;
     }
+
+    .btn-actions {
+      padding: 0.75rem 0.5rem;
+      width: 9rem;
+    }
   }
 
   .content {
@@ -71,5 +77,13 @@
         background-color: #f9fafb;
       }
     }
+  }
+}
+
+//tablet-responsive-horizontal
+@media screen and (min-width: 860px) and (max-width: 1224px) {
+  .header {
+    flex-direction: column;
+    gap: 1rem;
   }
 }

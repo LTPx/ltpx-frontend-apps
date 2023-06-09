@@ -27,6 +27,7 @@ export function Login() {
       if (error === "Signature has expired") {
         setError('Tu sesión ha caducado por favor vuelve a intentar');
         localStorage.clear();
+        window.location.reload();
       } else {
         setError(error);
       }

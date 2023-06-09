@@ -10,10 +10,8 @@ export function Purchases(props: PurchasesProps) {
   const { _getStudentPayments, purchases } = useStudent();
 
   const fetchPayments = useCallback(async () => {
-    const { success, data, error } = await _getStudentPayments();
-    if (success) {
-      console.log('data: ', data);
-    } else {
+    const { success, error } = await _getStudentPayments();
+    if (!success) {
       console.log('error: ', error);
     }
   }, []);

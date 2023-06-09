@@ -65,7 +65,7 @@ export function TeacherCourses() {
           title={course.title}
           description={course.description}
           learners={course.enrollments_count || 0}
-          category={course.category_slug}
+          category={course.category}
           percentageRate={0}
           percentageLearner={0}
           urlStudents={`/teacher/courses/${course.course_session_id}/students`}
@@ -105,12 +105,6 @@ export function TeacherCourses() {
           ]}
         />
       ))}
-    </div>
-  );
-
-  const MyCourses = () => (
-    <div className={styles['courses']}>
-      <CoursesList />
     </div>
   );
 
@@ -170,7 +164,6 @@ export function TeacherCourses() {
               <div className={`${styles['filters-container']} `}>
                 <h3>Mis Cursos: {courses.length} </h3>
                 <div className={styles['filters']}>
-                  {/* <InputSearch placeholder="Buscar Curso" /> */}
                   <Select options={categories} />
                   <Button
                     title={t('buttons.newCourse')}
@@ -182,7 +175,7 @@ export function TeacherCourses() {
                 </div>
               </div>
               <div className={`${styles['courses-container']}`}>
-                <MyCourses />
+                <CoursesList />
               </div>
             </div>
           )}
@@ -204,7 +197,7 @@ export function TeacherCourses() {
       </Dialog>
       <DialogConfirm
         open={openMessage}
-        title={'Estas seguro que deseas eliminar este Curso?'}
+        title={'Estas seguro que deseas eliminar este curso?'}
         subtitle="Recuerde que una ves eliminado no podrá volver a recuperar la información"
         confirm={() => {
           handleRemoveCourse(saveId);

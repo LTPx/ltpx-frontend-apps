@@ -17,16 +17,27 @@ export interface DrawerProps {
   title?: string;
   position?: DrawerPosition;
   onClose?: () => void;
+  disableClose?: boolean;
 }
 
 export function Drawer(props: DrawerProps) {
-  const { open, title, children, className, onClose, width, position } = props;
+  const {
+    open,
+    title,
+    children,
+    className,
+    onClose,
+    width,
+    position,
+    disableClose,
+  } = props;
   return (
     <SideSheet
       position={position}
       width={width}
       isShown={open}
       onCloseComplete={() => onClose && onClose()}
+      shouldCloseOnOverlayClick={disableClose}
     >
       <div className={styles['container']}>
         {title && <h2 className={styles['title']}>{title}</h2>}

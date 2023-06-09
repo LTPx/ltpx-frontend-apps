@@ -82,7 +82,7 @@ export function TeacherProfile(props: TeacherProfileProps) {
           <div className={styles['information-content']}>
             <h2>Sobre {name}</h2>
             {biography && (
-              <div>
+              <>
                 {biography.length > 500 ? (
                   <>
                     <p className={styles['text-description']}>
@@ -100,7 +100,7 @@ export function TeacherProfile(props: TeacherProfileProps) {
                 ) : (
                   <p className={styles['text-description']}>{biography}</p>
                 )}
-              </div>
+              </>
             )}
             <div className={styles['social-networks']}>
               {socialNetworks.map((network, index) => (

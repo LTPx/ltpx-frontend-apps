@@ -62,6 +62,7 @@ export function CourseClasses(props: CourseClassesProps) {
     <div className={styles['container']}>
       <Drawer
         open={open}
+        disableClose={false}
         onClose={() => {
           onClose && onClose();
         }}

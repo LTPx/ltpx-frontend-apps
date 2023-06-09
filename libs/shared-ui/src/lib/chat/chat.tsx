@@ -1,8 +1,8 @@
+import styles from './chat.module.scss';
 import { ChatMessages, EmptyState, Icon } from '@ltpx-frontend-apps/shared-ui';
 import { useChat, useUser } from '@ltpx-frontend-apps/store';
 import { Avatar } from 'evergreen-ui';
 import { ReactElement } from 'react';
-import styles from './chat.module.scss';
 import { useChatData } from './useChatData';
 
 /* eslint-disable-next-line */
@@ -13,9 +13,9 @@ export interface ChatProps {
 
 export function Chat(props: ChatProps) {
   const { children, onCancel } = props;
-  useChatData();
   const { rooms, room, _getRoom, _sendMessageRoom } = useChat();
   const { user } = useUser();
+  useChatData();
 
   return (
     <div className={styles['container']}>

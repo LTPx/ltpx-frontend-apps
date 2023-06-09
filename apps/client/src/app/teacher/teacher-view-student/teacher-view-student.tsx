@@ -58,7 +58,6 @@ export function TeacherViewStudent(props: TeacherViewStudentProps) {
       id
     );
     if (success) {
-      console.log('data: ', data);
       setAchievements(data);
     } else {
       console.log('error: ', error);
@@ -72,7 +71,6 @@ export function TeacherViewStudent(props: TeacherViewStudentProps) {
       id
     );
     if (success) {
-      console.log('data: ', data);
       setStudentTasks(data);
     } else {
       console.log('error: ', error);

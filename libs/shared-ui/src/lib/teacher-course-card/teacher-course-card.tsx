@@ -65,7 +65,7 @@ export function TeacherCourseCard(props: TeacherCourseCardProps) {
               icon={statusIcons[status]}
             />
             <Tag
-              text={t(`course_categories.${category}`)}
+              text={category ? category : 'N/A'}
               color={ColorsTag.gray}
             />
             <h5>

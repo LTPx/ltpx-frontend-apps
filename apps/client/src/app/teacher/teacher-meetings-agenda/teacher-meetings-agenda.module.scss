@@ -77,3 +77,11 @@
     }
   }
 }
+
+//tablet-responsive-horizontal
+@media screen and (min-width: 860px) and (max-width: 1224px) {
+  .main-container {
+    width: 80vw;
+  }
+  
+}

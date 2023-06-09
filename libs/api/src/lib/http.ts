@@ -3,8 +3,9 @@ import { getApiUrl } from "./api";
 
 const API = getApiUrl();
 
-export const createInstance = ( apiUrl: string, key: string) => {
-  const auth_token = localStorage.getItem(key);
+const createInstance = ( apiUrl: string) => {
+  const token = `token_${window.location.host}`;
+  const auth_token = localStorage.getItem(token);
   if (auth_token) {
     axios.defaults.headers.common["Authorization"] = auth_token;
   }
@@ -19,4 +20,4 @@ export const setTokenAxios = (headers: any, key: string) => {
   }
 }
 
-export const _http = createInstance(API, 'auth_token');
+export const _http = createInstance(API);

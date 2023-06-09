@@ -216,6 +216,7 @@ export function QuizBuilder(props: QuizBuilderProps) {
       {currentQuestion && (
         <Drawer
           open={true}
+          disableClose={false}
           onClose={() => {
             setCurrentQuestion(undefined);
             setSelectedIndex(undefined);

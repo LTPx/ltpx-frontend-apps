@@ -1,6 +1,6 @@
 import { Button, ColorsButton } from '@ltpx-frontend-apps/shared-ui';
 import { useTeacher, useUser } from '@ltpx-frontend-apps/store';
-import { useCallback, useEffect } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import styles from './teacher-account-profile.module.scss';
 import { NavLink } from 'react-router-dom';
 
@@ -9,10 +9,10 @@ export interface TeacherAccountProfileProps {}
 
 export function TeacherAccountProfile(props: TeacherAccountProfileProps) {
   const { profile, getProfile } = useTeacher();
+  const [showMore, setShowMore] = useState(false);
 
   const fetchProfile = useCallback(async () => {
-    const { success, data, error } = await getProfile();
-    console.log('data: ', data);
+    await getProfile();
   }, []);
 
   useEffect(() => {
@@ -37,7 +37,7 @@ export function TeacherAccountProfile(props: TeacherAccountProfileProps) {
               <div className={styles['item']}>
                 <h4>Nombre de profesor: </h4>
                 <div className={styles['text']}>
-                  <NavLink to={`/teacher/web-profile/${profile.slug}`} >
+                  <NavLink to={`/teacher/web-profile/${profile.slug}`}>
                     {profile.teacher_name}
                   </NavLink>
                 </div>
@@ -51,7 +51,28 @@ export function TeacherAccountProfile(props: TeacherAccountProfileProps) {
           <div className={styles['title-content']}>
             <h4 className={styles['title']}>Sobre mi</h4>
           </div>
-          <p className={styles['biography']}>{profile.biography} </p>
+
+          {profile.biography && (
+            <>
+              {profile.biography.length > 800 ? (
+                <>
+                  <p className={styles['biography']}>
+                    {showMore
+                      ? profile.biography
+                      : `${profile.biography.substring(0, 800)}....`}
+                    <span
+                      className={styles['show']}
+                      onClick={() => setShowMore(!showMore)}
+                    >
+                      {showMore ? 'Mostrar menos' : 'Mostrar mas'}
+                    </span>
+                  </p>
+                </>
+              ) : (
+                <p className={styles['biography']}>{profile.biography}</p>
+              )}
+            </>
+          )}
           <div className={styles['title-content']}>
             <h4 className={styles['title']}>Video de Presentación</h4>
           </div>
@@ -65,7 +86,9 @@ export function TeacherAccountProfile(props: TeacherAccountProfileProps) {
               ></video>
             ) : (
               <div className={styles['no-video']}>
-                <h4 className={styles['text-video']}>Aun no agregaste un video de Presentación</h4>
+                <h4 className={styles['text-video']}>
+                  Aun no agregaste un video de Presentación
+                </h4>
               </div>
             )}
           </div>

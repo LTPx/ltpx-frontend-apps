@@ -41,27 +41,16 @@ export function StudentLayout() {
     {
       title: t('dashboards.student.dashboard'),
       url: '/student/dashboard',
-      icon: {
-        icon: 'store',
-        size: 20,
-      },
     },
     {
       title: t('header.courses'),
       url: '/courses',
-      icon: {
-        icon: 'store',
-        size: 20,
-      },
     },
     {
       title: t('dashboards.student.classes'),
       url: '/student/classes',
-      icon: {
-        icon: 'desktop',
-        size: 20,
-      },
     },
+    { title: t('header.beTeacher'), url: '/register-teacher' },
   ];
 
   const logoutSession = async () => {

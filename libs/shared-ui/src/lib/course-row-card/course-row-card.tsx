@@ -53,14 +53,14 @@ export function CourseRowCard(props: CourseRowCardProps) {
           </div>
         </div>
         <h3 className={styles['title']}>{title}</h3>
-        <div className="stars">
+        {/* <div className="stars">
           {Array.from(Array(stars).keys()).map((number, index) => (
             <Icon key={index} icon={'star'} size={15} color="#eab308" />
           ))}
           {Array.from(Array(5 - (stars || 0)).keys()).map((number, index) => (
             <Icon key={index} icon={'star'} size={15} color="#888888" />
           ))}
-        </div>
+        </div> */}
         {description && (
           <div>
             {description.length > 200 ? (

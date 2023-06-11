@@ -21,14 +21,15 @@ export enum CourseStatus {
 }
 
 export enum CourseLanguage {
-  es = 'Spanish',
-  en = 'English',
+  es = 'es',
+  en = 'en',
 }
 
 export enum CourseLevel {
   begging = 'begging',
   intermediate = 'intermediate',
   advanced = 'advanced',
+  all = 'all'
 }
 
 export interface ContentCourse {

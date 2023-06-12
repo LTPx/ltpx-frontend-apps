@@ -1,6 +1,7 @@
 import styles from './quiz-form-multiple-options.module.scss';
 import Icon from '../icon/icon';
 import Input from '../input/input';
+// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
 import { generateAlphabet } from 'libs/api/src/lib/utils';
 import Button, { ColorsButton, TypeButton } from '../button/button';
 import { FieldArray, Form, Formik } from 'formik';
@@ -34,13 +35,13 @@ export function QuizFormMultipleOptions(props: QuizFormMultipleOptionsProps) {
         text: '',
         correct: false,
         question_id: null,
-        id: null
+        id: null,
       },
       {
         text: '',
         correct: false,
         question_id: null,
-        id: null
+        id: null,
       },
     ],
   };
@@ -68,9 +69,9 @@ export function QuizFormMultipleOptions(props: QuizFormMultipleOptionsProps) {
           submitForm,
           errors,
         }) => (
-          <Form 
-          className={styles['form-quiz-options']}
-          // className={className || 'form-quiz-options}
+          <Form
+            className={styles['form-quiz-options']}
+            // className={className || 'form-quiz-options}
           >
             <div className={styles['fields']}>
               <Input
@@ -93,7 +94,7 @@ export function QuizFormMultipleOptions(props: QuizFormMultipleOptionsProps) {
               />
               <Input
                 label={t('quizFormMultipleOptions.points') || ''}
-                type='number'
+                type="number"
                 name="points"
                 placeholder="Alguna observación antes de responder esta pregunta"
                 value={values.points}
@@ -134,19 +135,21 @@ export function QuizFormMultipleOptions(props: QuizFormMultipleOptionsProps) {
                             }`}
                             onClick={() => {
                               if (singleSelection) {
-                                values.answers_attributes.forEach((answer, i) => {
-                                  if (index === i) {
-                                    setFieldValue(
-                                      `answers_attributes[${index}].correct`,
-                                      !answer.correct
-                                    );
-                                  } else {
-                                    setFieldValue(
-                                      `answers_attributes[${i}].correct`,
-                                      false
-                                    );
+                                values.answers_attributes.forEach(
+                                  (answer, i) => {
+                                    if (index === i) {
+                                      setFieldValue(
+                                        `answers_attributes[${index}].correct`,
+                                        !answer.correct
+                                      );
+                                    } else {
+                                      setFieldValue(
+                                        `answers_attributes[${i}].correct`,
+                                        false
+                                      );
+                                    }
                                   }
-                                });
+                                );
                               }
                               setFieldValue(
                                 `answers_attributes[${index}].correct`,

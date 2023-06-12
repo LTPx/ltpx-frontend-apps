@@ -9,6 +9,11 @@
     color: $text-gray-color;
   }
 
+  .icon-content {
+    display: flex;
+    justify-content: center;
+  }
+
   .answers {
     display: flex;
     flex-direction: column;
@@ -16,9 +21,9 @@
     margin-top: 1rem;
 
     .answer {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
+      display: grid;
+      grid-template-columns: 5% 95%;
+      align-items: flex-start;
       padding: 0.5rem;
       border: 1px solid $text-gray-color;
       border-radius: 5px;
@@ -31,7 +36,7 @@
       &.check {
         border-color: $green-color;
         background-color: $green-color-100;
-        svg{
+        svg {
           color: $green-color;
         }
       }

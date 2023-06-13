@@ -251,7 +251,7 @@ export function CourseDetails() {
                       {t('coursesDetails.teacherInformation.categories')}
                     </label>
                     <NavLink to={`/courses/${course.category_slug}`}>
-                      <h5>{translateCategory(course.category_slug)}</h5>
+                      <h5>{course.category}</h5>
                     </NavLink>
                   </div>
                   <div className={styles['item']}>

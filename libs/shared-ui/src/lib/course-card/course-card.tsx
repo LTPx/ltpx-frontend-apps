@@ -1,4 +1,4 @@
-import { useCourseUtil } from '@ltpx-frontend-apps/store';
+// import { useCourseUtil } from '@ltpx-frontend-apps/store';
 import { NavLink } from 'react-router-dom';
 import Icon from '../icon/icon';
 import styles from './course-card.module.scss';
@@ -18,14 +18,15 @@ export interface CourseCardProps {
 export function CourseCard(props: CourseCardProps) {
   const { image, category, title, price, duration, achievements, stars, link } =
     props;
-  const { translateCategory } = useCourseUtil();
+  // const { translateCategory } = useCourseUtil();
 
   const Card = () => (
     <div className={styles['container']}>
       <img loading="lazy" src={image} alt="" />
       <div className={styles['content']}>
         <span className={styles['category']}>
-          {translateCategory(category)}
+          {/* {translateCategory(category)} */}
+          {category}
         </span>
         <h4 className={styles['title']}>{title}</h4>
         {/* <div className="stars">

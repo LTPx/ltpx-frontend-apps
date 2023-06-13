@@ -251,17 +251,17 @@ export function CourseDetails() {
                       {t('coursesDetails.teacherInformation.categories')}
                     </label>
                     <NavLink to={`/courses/${course.category_slug}`}>
-                      <h5>{translateCategory(course.category_slug)}</h5>
+                      <h5>{course.category}</h5>
                     </NavLink>
                   </div>
-                  <div className={styles['item']}>
+                  {/* <div className={styles['item']}>
                     <label>
                       {t('coursesDetails.teacherInformation.review')}
                     </label>
                     <div className={styles['rating']}>
                       <Rating stars={course.average_rating || 0} />
                     </div>
-                  </div>
+                  </div> */}
                 </div>
               </div>
               <div className={styles['summary-course']}>

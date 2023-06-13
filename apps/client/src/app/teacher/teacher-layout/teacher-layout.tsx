@@ -16,7 +16,8 @@ import avatar from './../../../assets/images/avatars/avatar-3.svg';
 import { useTeacherLayout } from './useTeacherLayout';
 import { ChatNewPrivateRoom } from '../../components';
 import Notifications from '../../components/notifications/notifications';
-import { useNotificationWebSocket } from '@ltpx-frontend-apps/store';
+import { useNotificationWebSocket, useUser } from '@ltpx-frontend-apps/store';
+import { TypeAccounts } from '@ltpx-frontend-apps/api';
 
 export function TeacherLayout() {
   // useNotification(onMessageListener);
@@ -38,6 +39,8 @@ export function TeacherLayout() {
     newNotification,
     notifications
   } = useTeacherLayout();
+
+  const { _changeAccount } = useUser();
 
   const ChatFloat = ({ onClick }: { onClick: () => void }) => (
     <div className={styles['chat-tab-button']} onClick={onClick}>
@@ -65,6 +68,20 @@ export function TeacherLayout() {
                   icon: 'telephone',
                   text: 'Contactar Soporte',
                   href: 'https://wa.me/message/Y5P6BHULTPA2B1',
+                },
+                {
+                  icon: 'switch',
+                  text: 'Cambiar a alumno',
+                  onClick: async () => {
+                    const { success, error } = await _changeAccount(TypeAccounts.user);
+                    if (success) {
+                      // navigate('/login');
+                      window.location.reload();
+                      console.log(success);
+                    } else {
+                      console.log(error);
+                    }
+                  },
                 },
                 {
                   icon: 'log-out',

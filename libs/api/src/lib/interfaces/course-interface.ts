@@ -21,14 +21,15 @@ export enum CourseStatus {
 }
 
 export enum CourseLanguage {
-  es = 'Spanish',
-  en = 'English',
+  es = 'es',
+  en = 'en',
 }
 
 export enum CourseLevel {
   begging = 'begging',
   intermediate = 'intermediate',
   advanced = 'advanced',
+  all = 'all'
 }
 
 export interface ContentCourse {
@@ -122,11 +123,13 @@ export interface CourseSite {
   language: CourseLanguage;
   total_achievements: number;
   slug: string;
-  learn_goals: string;
-  requirements: string;
-  contents: ContentCourse[];
+  learn_goals: string[];
+  requirements: string[];
+  contents: string[];
   level: CourseLevel;
   achievements?: AchievementModel[];
+  quizzes?: string[];
+  tasks?: string[];
 }
 
 export interface Comment {

@@ -19,7 +19,7 @@ export interface SelectProps {
 
 export function Select(props: SelectProps) {
   const { options, label, onChange, selected, className, errorMessage } = props;
-  const initialSelectedOption = selected || (options.length ? options[0].value : '');
+  const initialSelectedOption = selected || "";
   const [selectedOption, setSelectedOption] = useState(initialSelectedOption)
 
   const handleChange = (e:any) => {
@@ -37,6 +37,7 @@ export function Select(props: SelectProps) {
         onChange={ (e: any) => { handleChange(e) }}
         value={selectedOption}
       >
+        <option value="">-- Selecciona un valor --</option>
         { options.map((option, index) => (
           <option key={index} value={option.value} >
             {option.text}

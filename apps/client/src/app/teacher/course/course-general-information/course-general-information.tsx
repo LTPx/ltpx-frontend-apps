@@ -72,6 +72,39 @@ export function CourseGeneralInformation(props: CourseGeneralInformationProps) {
     },
     validationSchema: Yup.object({
       title: Yup.string().required('es obligatorio'),
+      language: Yup.mixed().test(
+        'language',
+        'Debes seleccionar un idioma',
+        (value) => {
+          if (value === null){
+            return false;
+          } else {
+            return true;
+          }
+        }
+      ),
+      level: Yup.mixed().test(
+        'level',
+        'Debes seleccionar un nivel',
+        (value) => {
+          if (value === null){
+            return false;
+          } else {
+            return true;
+          }
+        }
+      ),
+      category_id: Yup.mixed().test(
+        'category_id',
+        'Debes seleccionar una categoría',
+        (value) => {
+          if (value === null){
+            return false;
+          } else {
+            return true;
+          }
+        }
+      ),
       cover: Yup.mixed().test(
         'cover',
         'El archivo debe ser menor o igual a 2mb',
@@ -167,18 +200,21 @@ export function CourseGeneralInformation(props: CourseGeneralInformationProps) {
           onChange={(option) =>
             formik.setFieldValue('category_id', option.value)
           }
+          errorMessage={formik.errors.category_id}
         />
         <Select
           label={t('courseInformation.level') || ''}
           selected={level}
           options={levels}
           onChange={(option) => formik.setFieldValue('level', option.value)}
+          errorMessage={formik.errors.level}
         />
         <Select
           label={t('courseInformation.language') || ''}
           selected={language}
           options={languages}
           onChange={(option) => formik.setFieldValue('language', option.value)}
+          errorMessage={formik.errors.language}
         />
       </div>
       <div className={styles['text']}>

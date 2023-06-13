@@ -19,7 +19,7 @@ export const updateAccount = async (userParams: IUserAccount) => {
 export const changeAccount = async (type: TypeAccounts) => {
   return new Promise<IUserAccount>((resolve, reject) => {
     http
-      .post('/api/v1/user/accounts/change_to_account', type)
+      .post('/api/v1/user/accounts/change_to_account', {type})
       .then((response) => {
         resolve(response.data);
       })

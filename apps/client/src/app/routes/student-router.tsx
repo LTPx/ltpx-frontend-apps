@@ -1,6 +1,6 @@
 import { Routes, Route, BrowserRouter, Navigate } from 'react-router-dom';
 import { PaymentsLayout } from '../layouts/index';
-import { AllCourses, CourseDetails, CoursesByCategory, Home, TeacherProfilePage } from '../site';
+import { AllCourses, CourseDetails, CoursesByCategory, Home, RegisterTeacher, TeacherProfilePage } from '../site';
 import {
   Account,
   Dashboard,
@@ -24,6 +24,7 @@ export const StudentRoutes = () => {
       <Routes>
         <Route path="/" element={<Navigate replace to="student/dashboard" />} />
         <Route path="/" element={<StudentLayout />}>
+          <Route path="/register-teacher" element={<RegisterTeacher />} />
           {blogRoutes}
           <Route path="/teacher/:slug" element={<TeacherProfilePage />} />
           <Route path="/home" element={<Home />} />

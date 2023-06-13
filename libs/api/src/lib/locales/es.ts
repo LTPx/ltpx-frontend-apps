@@ -2,8 +2,8 @@ export const es = {
   dashboards: {
     student: {
       dashboard: 'Dashboard',
-      courses: 'Mis Cursos',
-      classes: 'Mis Clases',
+      courses: 'Mis cursos',
+      classes: 'Mis clases',
       payments: 'Pagos',
       settings: 'Configuraciones',
       account: 'Mi Cuenta',

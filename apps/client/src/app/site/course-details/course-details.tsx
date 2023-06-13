@@ -254,14 +254,14 @@ export function CourseDetails() {
                       <h5>{course.category}</h5>
                     </NavLink>
                   </div>
-                  <div className={styles['item']}>
+                  {/* <div className={styles['item']}>
                     <label>
                       {t('coursesDetails.teacherInformation.review')}
                     </label>
                     <div className={styles['rating']}>
                       <Rating stars={course.average_rating || 0} />
                     </div>
-                  </div>
+                  </div> */}
                 </div>
               </div>
               <div className={styles['summary-course']}>

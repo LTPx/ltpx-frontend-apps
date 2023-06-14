@@ -1,4 +1,10 @@
-import { FormatResponse, QuizModel, QuizParams } from '@ltpx-frontend-apps/api';
+import {
+  FormatResponse,
+  QuizModel,
+  QuizParams,
+  QuizStudent,
+  TypeQuestionQuiz,
+} from '@ltpx-frontend-apps/api';
 import {
   BasicRow,
   Button,
@@ -6,10 +12,12 @@ import {
   QuizBuilder,
   SetupCard,
 } from '@ltpx-frontend-apps/shared-ui';
-import { useCourse } from '@ltpx-frontend-apps/store';
+import { useCourse, useCourseUtil } from '@ltpx-frontend-apps/store';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import styles from './course-quizzes.module.scss';
+import { Dialog } from 'evergreen-ui';
+import { StudentReviewQuiz } from '../../../student';
 
 /* eslint-disable-next-line */
 export interface CourseQuizzesProps {
@@ -19,10 +27,13 @@ export interface CourseQuizzesProps {
 export function CourseQuizzes(props: CourseQuizzesProps) {
   const { onSubmit } = props;
   const [quizEdit, setQuizEdit] = useState<QuizModel>();
+  const [quizSelected, setQuizSelected] = useState<QuizModel>();
   const [showForm, setShowForm] = useState(false);
   const { course, _removeQuiz, _addQuiz, _updateQuiz } = useCourse();
   const { quizzes } = course;
+  const [openTest, setOpenTest] = useState(false);
   const { t } = useTranslation();
+  const { translateOption } = useCourseUtil();
 
   const handleSaveQuiz = async (quiz: QuizParams) => {
     const response = quiz.id
@@ -76,6 +87,10 @@ export function CourseQuizzes(props: CourseQuizzesProps) {
               }}
               remove={() => {
                 handleRemoveQuiz(quiz.id);
+              }}
+              onClickReview={() => {
+                setOpenTest(true);
+                setQuizSelected(quiz);
               }}
             />
           ))}
@@ -131,6 +146,54 @@ export function CourseQuizzes(props: CourseQuizzesProps) {
           )}
         </>
       )}
+      <Dialog
+        isShown={openTest}
+        hasClose={true}
+        hasFooter={false}
+        title={quizSelected?.name}
+        onCloseComplete={() => setOpenTest(false)}
+        shouldCloseOnOverlayClick={false}
+        width={'55vw'}
+      >
+        <div className={styles['test-wrap']}>
+          {quizSelected &&
+            quizSelected.questions_attributes.map((question, index) => (
+              <div className={styles['test']} key={index}>
+                <div className={styles['title-content']}>
+                  <h4 className={styles['title-test']}>
+                    {index + 1}. {question.question}
+                  </h4>
+                  <h4 className={styles['points-test']}>
+                    Puntos: ({question.points})
+                  </h4>
+                </div>
+                <h4 className={styles['description-test']}>
+                  {question.description}
+                </h4>
+                {question.answers_attributes.map((answer, index) => (
+                  <div key={index}>
+                    {question.kind === TypeQuestionQuiz.conditional ? (
+                      <h4 className={styles['options-test']}>
+                        {translateOption(answer.text)}
+                      </h4>
+                    ) : (
+                      <div className={styles['options-test']}>
+                        <h4>{answer.text}</h4>
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+            ))}
+          <div className={styles['footer']}>
+            <Button
+              color={ColorsButton.primary}
+              onClick={() => setOpenTest(false)}
+              title={'Cerrar'}
+            />
+          </div>
+        </div>
+      </Dialog>
     </div>
   );
 }

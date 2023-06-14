@@ -1,5 +1,5 @@
 @import '../../styles/styles.module.scss';
-.remove-message{
+.remove-message {
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -17,15 +17,21 @@
   gap: 1rem;
 
   .content {
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: 82% 18%;
     border: 1px solid $gray-color-200;
     padding: 1rem;
     border-radius: 5px;
 
-    .summary {
+    .icon-img {
       display: flex;
-      gap: 1rem;
+      justify-content: baseline;
+      align-items: center;
+    }
+
+    .summary {
+      display: grid;
+      grid-template-columns: 6% 94%;
       align-items: center;
       img {
         width: 40px;
@@ -34,11 +40,14 @@
 
     .actions {
       display: flex;
+      justify-content: end;
+      align-items: center;
       gap: 0.5rem;
 
       .action {
         display: flex;
         align-items: center;
+        height: 3rem;
         padding: 0 1rem;
         background-color: $gray-color-100;
         border-radius: 5px;
@@ -57,6 +66,5 @@
     h5 {
       color: $text-gray-color;
     }
-
   }
 }

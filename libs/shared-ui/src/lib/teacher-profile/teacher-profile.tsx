@@ -46,7 +46,7 @@ export function TeacherProfile(props: TeacherProfileProps) {
           <h1>{name}</h1>
           <h3>{skills}</h3>
           <div className={styles['teacher-review-information']}>
-            <div className={styles['review-information']}>
+            {/* <div className={styles['review-information']}>
               <Icon className={styles['icon']} icon={'star'} size={18}></Icon>
               <h4>{rating}</h4>
               <h4>{t('coursesDetails.teacherOverview.teacherRating')}</h4>
@@ -59,7 +59,7 @@ export function TeacherProfile(props: TeacherProfileProps) {
               ></Icon>
               <h4>{totalReviews}</h4>
               <h4>{t('coursesDetails.teacherOverview.reviews')}</h4>
-            </div>
+            </div> */}
             <div className={styles['review-information']}>
               <Icon
                 className={styles['icon']}
@@ -71,7 +71,7 @@ export function TeacherProfile(props: TeacherProfileProps) {
             </div>
             <div className={styles['review-information']}>
               <Icon className={styles['icon']} icon={'book'} size={18}></Icon>
-              <h4>{totalCourses}</h4>
+              <h4>{courses.length}</h4>
               <h4>{t('coursesDetails.teacherOverview.courses')}</h4>
             </div>
           </div>
@@ -102,21 +102,24 @@ export function TeacherProfile(props: TeacherProfileProps) {
                 )}
               </>
             )}
-            <div className={styles['social-networks']}>
-              {socialNetworks.map((network, index) => (
-                <a
-                  className={styles['social-network']}
-                  href={network.url}
-                  key={index}
-                >
-                  <Icon
-                    className={styles['icon']}
-                    icon={network.name}
-                    size={22}
-                  />
-                </a>
-              ))}
-            </div>
+            {socialNetworks && (
+              <div className={styles['social-networks']}>
+                {socialNetworks.map((network, index) => (
+                  <a
+                    className={styles['social-network']}
+                    href={network.url}
+                    target="blank_"
+                    key={index}
+                  >
+                    <Icon
+                      className={styles['icon']}
+                      icon={network.name}
+                      size={22}
+                    />
+                  </a>
+                ))}
+              </div>
+            )}
           </div>
           <div className={styles['video-content']}>
             <h2>Video de Presentación</h2>

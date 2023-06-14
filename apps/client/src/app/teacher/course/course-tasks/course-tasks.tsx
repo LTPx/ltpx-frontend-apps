@@ -121,6 +121,7 @@ export function CourseTasks(props: CourseTasksProps) {
         title={task?.id ? 'Editar Tarea' : 'Nueva Tarea'}
         onCloseComplete={() => setOpenModal(false)}
         width={'40vw'}
+        shouldCloseOnOverlayClick={false}
       >
         <TaskForm
           onClose={() => setOpenModal(false)}

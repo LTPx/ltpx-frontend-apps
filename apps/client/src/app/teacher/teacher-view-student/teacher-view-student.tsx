@@ -112,7 +112,7 @@ export function TeacherViewStudent(props: TeacherViewStudentProps) {
   ) {
     const { success, data, error } = await _teacherGradeTask(studentTaskId, {
       id: studentId,
-      comments: [comment],
+      comments: comment ? [comment] : undefined,
       status,
     });
     if (success) {

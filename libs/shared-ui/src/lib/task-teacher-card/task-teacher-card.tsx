@@ -6,6 +6,9 @@ import TextArea from '../text-area/text-area';
 import styles from './task-teacher-card.module.scss';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
+import InputTextStatus, {
+  StatusInputText,
+} from '../input-text-status/input-text-status';
 
 /* eslint-disable-next-line */
 export interface TaskTeacherCardProps {
@@ -38,9 +41,12 @@ export function TaskTeacherCard(props: TaskTeacherCardProps) {
       approved: false,
     },
     validationSchema: Yup.object({
-      comment: Yup.string().required(
-        'Por favor deja un comentario para el alumno'
-      ),
+      comment: Yup.string().when('approved', {
+        is: false,
+        then: Yup.string().required(
+          'Por favor deja un comentario para el alumno'
+        ),
+      }),
     }),
     onSubmit: (formData) => {
       const status = formData.approved ? 'approved' : 'rejected';
@@ -146,9 +152,14 @@ export function TaskTeacherCard(props: TaskTeacherCardProps) {
               value={formik.values.comment}
               onBlur={formik.handleBlur}
               onChange={formik.handleChange}
-              errorMessage={formik.errors.comment}
               rows={3}
             />
+            {!formik.values.approved && formik.errors.comment && (
+              <InputTextStatus
+                status={StatusInputText.error}
+                text={'Por favor deja un comentario para el alumno'}
+              />
+            )}
           </div>
           <div className={styles['footer']}>
             <Button

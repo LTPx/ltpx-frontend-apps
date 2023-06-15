@@ -86,6 +86,7 @@ export function TaskTeacherCard(props: TaskTeacherCardProps) {
         onCloseComplete={() => setOpenModal(false)}
         width={'45vw'}
         topOffset={40}
+        shouldCloseOnOverlayClick={false}
       >
         <div className={styles['task']}>
           <div className={styles['task-content']}>

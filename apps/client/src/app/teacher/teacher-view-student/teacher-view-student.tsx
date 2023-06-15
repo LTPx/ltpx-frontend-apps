@@ -201,6 +201,7 @@ export function TeacherViewStudent(props: TeacherViewStudentProps) {
                   title={quizSelected?.name}
                   onCloseComplete={() => setOpenTest(false)}
                   width={'55vw'}
+                  shouldCloseOnOverlayClick={false}
                 >
                   {quizSelected && (
                     <TeacherReviewQuiz

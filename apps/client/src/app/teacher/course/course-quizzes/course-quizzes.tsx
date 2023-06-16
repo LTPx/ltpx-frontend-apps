@@ -2,7 +2,6 @@ import {
   FormatResponse,
   QuizModel,
   QuizParams,
-  QuizStudent,
   TypeQuestionQuiz,
 } from '@ltpx-frontend-apps/api';
 import {
@@ -17,7 +16,6 @@ import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import styles from './course-quizzes.module.scss';
 import { Dialog } from 'evergreen-ui';
-import { StudentReviewQuiz } from '../../../student';
 
 /* eslint-disable-next-line */
 export interface CourseQuizzesProps {

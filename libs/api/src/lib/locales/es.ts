@@ -115,7 +115,7 @@ export const es = {
       rating: 'Calificación'
     },
     cover: {
-      title: 'Buscar un curso',
+      title: 'Buscas un Curso',
       subtitle: 'Explorar y aprender cosas nuevas',
       search: 'Buscar cursos'
     }

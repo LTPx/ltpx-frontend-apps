@@ -50,6 +50,8 @@ export interface UserStore {
     total_courses: number;
   },
   id: number;
+  is_teacher: boolean;
+  is_student: boolean;
 }
 
 export interface IRegisterUser {
@@ -79,6 +81,8 @@ export interface ICurrentUser {
   birth: string;
   cart?: CartModel;
   total_unread_notifications: number;
+  is_teacher: boolean;
+  is_student: boolean;
 }
 
 export interface IUserAccount {

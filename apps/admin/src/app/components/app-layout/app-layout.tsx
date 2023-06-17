@@ -19,11 +19,12 @@ import { Outlet, useNavigate } from 'react-router-dom';
 import styles from './app-layout.module.scss';
 import { Avatar } from 'evergreen-ui';
 import { useCallback, useEffect } from 'react';
+import { TypeAccounts } from '@ltpx-frontend-apps/api';
 
 export function AppLayout() {
   const { t } = useTranslation();
   const { feedbackAction } = useAppStore();
-  const { user, logout, getCurrentUser } = useUser();
+  const { user, logout, getCurrentUser, _changeAccount } = useUser();
   const navigate = useNavigate();
   const { clearMessageToast } = useUtil();
 
@@ -113,6 +114,19 @@ export function AppLayout() {
               name={user.fullname}
               email={user.email}
               links={[
+                {
+                  icon: 'switch',
+                  text: 'Cambiar a profesor',
+                  onClick: async () => {
+                    const { success, error } = await _changeAccount(TypeAccounts.user);
+                    if (success) {
+                      window.location.reload();
+                      console.log(success);
+                    } else {
+                      console.log(error);
+                    }
+                  },
+                },
                 {
                   icon: 'log-out',
                   text: 'Cerrar Sesión',

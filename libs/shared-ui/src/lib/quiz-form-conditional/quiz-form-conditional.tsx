@@ -6,6 +6,9 @@ import * as Yup from 'yup';
 import Button, { ColorsButton, TypeButton } from '../button/button';
 import { QuestionQuiz, TypeQuestionQuiz } from '@ltpx-frontend-apps/api';
 import { useTranslation } from 'react-i18next';
+import InputTextStatus, {
+  StatusInputText,
+} from '../input-text-status/input-text-status';
 
 /* eslint-disable-next-line */
 export interface QuizFormConditionalProps {
@@ -39,7 +42,28 @@ export function QuizFormConditional(props: QuizFormConditionalProps) {
     initialValues: initialValues,
     validationSchema: Yup.object({
       question: Yup.string().required('Pregunta es obligatorio'),
-      points: Yup.number().required('Necesitas agregar puntos'),
+      points: Yup.number()
+        .required('Necesitas agregar puntos')
+        .min(1, 'El valor debe ser mayor a 0')
+        .max(100, 'El valor debe ser menor o igual a 100'),
+      answers_attributes: Yup.array()
+        .of(
+          Yup.object().shape({
+            text: Yup.string().required(
+              'Debes ingresar el texto de la respuesta'
+            ),
+            correct: Yup.boolean(),
+          })
+        )
+        .min(2, 'Debes ingresar al menos dos respuestas')
+        .test(
+          'at-least-one-correct',
+          'Debes marcar al menos una respuesta como correcta',
+          (value) => {
+            if (!value) return false;
+            return value.some((answer) => answer.correct);
+          }
+        ),
     }),
     onSubmit: (data) => {
       onSubmit && onSubmit(data);
@@ -48,14 +72,22 @@ export function QuizFormConditional(props: QuizFormConditionalProps) {
 
   const markAsCorrect = (conditional: any) => {
     const { text, correct } = conditional;
-    formik.setFieldValue(
-      `answers_attributes[0].correct`,
-      text === 'true' ? !correct : correct
+    const updatedAnswers = formik.values.answers_attributes.map(
+      (answer: any) => {
+        if (answer.text === text) {
+          return {
+            ...answer,
+            correct: true,
+          };
+        } else {
+          return {
+            ...answer,
+            correct: false,
+          };
+        }
+      }
     );
-    formik.setFieldValue(
-      `answers_attributes[1].correct`,
-      text === 'true' ? correct : !correct
-    );
+    formik.setFieldValue('answers_attributes', updatedAnswers);
   };
 
   return (
@@ -113,6 +145,14 @@ export function QuizFormConditional(props: QuizFormConditionalProps) {
               </div>
             ))}
           </div>
+          <InputTextStatus
+            status={StatusInputText.error}
+            text={
+              typeof formik.errors.answers_attributes === 'string'
+                ? formik.errors.answers_attributes
+                : ''
+            }
+          />
         </div>
         <div className={styles['footer']}>
           <Button

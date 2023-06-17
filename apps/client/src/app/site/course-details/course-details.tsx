@@ -295,16 +295,36 @@ export function CourseDetails() {
                   )}
                   {selectedTab === 2 && (
                     <div className={styles['tasks']}>
-                      {course.tasks?.map((task, index) => (
-                        <PanelAccordion key={index} lock={true} title={task} />
-                      ))}
+                      {course.tasks ? (
+                        <>
+                          {course.tasks.map((task, index) => (
+                            <PanelAccordion
+                              key={index}
+                              lock={true}
+                              title={task}
+                            />
+                          ))}
+                        </>
+                      ) : (
+                        <h3>Este curso no incluye tareas</h3>
+                      )}
                     </div>
                   )}
                   {selectedTab === 3 && (
                     <div className={styles['quizzes']}>
-                      {course.quizzes?.map((quiz, index) => (
-                        <PanelAccordion key={index} lock={true} title={quiz} />
-                      ))}
+                      {course.quizzes ? (
+                        <>
+                          {course.quizzes?.map((quiz, index) => (
+                            <PanelAccordion
+                              key={index}
+                              lock={true}
+                              title={quiz}
+                            />
+                          ))}
+                        </>
+                      ) : (
+                        <h3>Este curso no incluye tests</h3>
+                      )}
                     </div>
                   )}
                   {selectedTab === 4 && (
@@ -438,6 +458,10 @@ export function CourseDetails() {
           <RegisterForm
             onSubmit={(data) => {
               onSubmitForm(data);
+            }}
+            termsAndConditions={{
+              text: 'Acepto recibir correos informativos y/o promocionales de Open Mind',
+              link: '/terms-and-conditions',
             }}
           />
         </div>

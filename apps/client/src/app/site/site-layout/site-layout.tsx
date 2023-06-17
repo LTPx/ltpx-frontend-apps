@@ -1,3 +1,4 @@
+import { TypeAccounts } from '@ltpx-frontend-apps/api';
 import styles from './site-layout.module.scss';
 import {
   BannerNotification,
@@ -13,7 +14,7 @@ import { useTranslation } from 'react-i18next';
 import { Outlet, useNavigate } from 'react-router-dom';
 
 export function SiteLayout() {
-  const { user, logout, isAuthenticated } =
+  const { user, logout, isAuthenticated, _changeAccount } =
     useUser();
   const { t } = useTranslation();
   const navigate = useNavigate();
@@ -43,6 +44,31 @@ export function SiteLayout() {
     { text: 'Preguntas Frecuentes', url: '/faq' },
   ];
 
+  const logoutAction = {
+    icon: 'log-out',
+    text: 'Cerrar Sesión',
+    onClick: () => {
+      logoutSession();
+    },
+  };
+
+  const teacherAccount = {
+    icon: 'switch-account',
+    text: 'Cambiar a profesor',
+    onClick: async () => {
+      const { success, error } = await _changeAccount(TypeAccounts.teacher);
+      if (success) {
+        window.location.reload();
+        console.log(success);
+      } else {
+        console.log(error);
+      }
+    },
+  };
+
+  const dropdownActions = user.is_teacher ? [teacherAccount, logoutAction ] : [logoutAction];
+
+
   return (
     <div className={styles['container']}>
       <Header links={headerLinks} className={styles['header']}>
@@ -52,15 +78,7 @@ export function SiteLayout() {
               <UserMenu
                 name={user.fullname}
                 email={user.email}
-                links={[
-                  {
-                    icon: 'log-out',
-                    text: 'Cerrar Sesión',
-                    onClick: () => {
-                      logoutSession();
-                    },
-                  },
-                ]}
+                links={dropdownActions}
               />
               <Avatar name={user.fullname} size={35} />
             </Dropdown>

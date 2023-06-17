@@ -44,14 +44,22 @@ export function QuizStudentCard(props: QuizStudentCardProps) {
           <div className={styles['title-content']}>
             <div className={styles['wrap-title']}>
               {!!score && (
-                <Icon
-                  icon={approved ? 'checkmark-filled' : 'close-circle'}
-                  size={16}
-                  color={approved ? '#10b981' : '#ef4444'}
-                />
+                <>
+                  {!statusTest && (
+                    <Icon
+                      icon={approved ? 'checkmark-filled' : 'close-circle'}
+                      size={16}
+                      color={approved ? '#10b981' : '#ef4444'}
+                    />
+                  )}
+                </>
               )}
               {score !== undefined && score === 0 && (
-                <Icon icon={'close-circle'} size={16} color={'#ef4444'} />
+                <>
+                  {!statusTest && (
+                    <Icon icon={'close-circle'} size={16} color={'#ef4444'} />
+                  )}
+                </>
               )}
               <h4 className={styles['title']}>{title}</h4>
             </div>
@@ -82,9 +90,17 @@ export function QuizStudentCard(props: QuizStudentCardProps) {
               {!!score && (
                 <div>
                   {approved ? (
-                    <h5 className={styles['approved']}>{score} / 100 Pts</h5>
+                    <>
+                      {!statusTest ? (
+                        <h5 className={styles['approved']}>
+                          {score} / 100 Pts
+                        </h5>
+                      ) : (
+                        <h5>En revisión</h5>
+                      )}
+                    </>
                   ) : (
-                    <div>
+                    <>
                       {!statusTest ? (
                         <h5 className={styles['no-approved']}>
                           {score} / 100 Pts
@@ -92,7 +108,7 @@ export function QuizStudentCard(props: QuizStudentCardProps) {
                       ) : (
                         <h5>En revisión</h5>
                       )}
-                    </div>
+                    </>
                   )}
                 </div>
               )}
@@ -108,11 +124,19 @@ export function QuizStudentCard(props: QuizStudentCardProps) {
               {!!score && (
                 <div>
                   {approved ? (
-                    <h5 className={styles['approved']}> Aprobado</h5>
+                    <>
+                      {!statusTest ? (
+                        <h5 className={styles['approved']}> Aprobado</h5>
+                      ) : (
+                        <h5>En revisión</h5>
+                      )}
+                    </>
                   ) : (
                     <>
-                      {!statusTest && (
+                      {!statusTest ? (
                         <h5 className={styles['no-approved']}>Reprobado</h5>
+                      ) : (
+                        <h5>En revisión</h5>
                       )}
                     </>
                   )}
@@ -124,7 +148,7 @@ export function QuizStudentCard(props: QuizStudentCardProps) {
               {!score && score !== 0 && !statusTest && (
                 <h5 className={styles['empty-test']}>Aun no dada</h5>
               )}
-              {statusTest && <h5>En revisión</h5>}
+              {/* {statusTest && <h5>En revisión</h5>} */}
             </div>
           </div>
         )}

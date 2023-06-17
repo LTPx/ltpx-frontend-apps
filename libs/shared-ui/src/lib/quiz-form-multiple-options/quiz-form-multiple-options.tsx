@@ -1,12 +1,16 @@
 import styles from './quiz-form-multiple-options.module.scss';
 import Icon from '../icon/icon';
 import Input from '../input/input';
+// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
 import { generateAlphabet } from 'libs/api/src/lib/utils';
 import Button, { ColorsButton, TypeButton } from '../button/button';
 import { FieldArray, Form, Formik } from 'formik';
 import * as Yup from 'yup';
 import { QuestionQuiz, TypeQuestionQuiz } from '@ltpx-frontend-apps/api';
 import { useTranslation } from 'react-i18next';
+import InputTextStatus, {
+  StatusInputText,
+} from '../input-text-status/input-text-status';
 
 /* eslint-disable-next-line */
 export interface QuizFormMultipleOptionsProps {
@@ -34,13 +38,13 @@ export function QuizFormMultipleOptions(props: QuizFormMultipleOptionsProps) {
         text: '',
         correct: false,
         question_id: null,
-        id: null
+        id: null,
       },
       {
         text: '',
         correct: false,
         question_id: null,
-        id: null
+        id: null,
       },
     ],
   };
@@ -53,7 +57,36 @@ export function QuizFormMultipleOptions(props: QuizFormMultipleOptionsProps) {
           question: Yup.string().required(
             'La pregunta no puede estar en blanco'
           ),
-          points: Yup.number().required('Necesitas agregar puntos'),
+          points: Yup.number()
+            .required('Necesitas agregar puntos')
+            .min(1, 'El valor debe ser mayor a 0')
+            .max(100, 'El valor debe ser menor o igual a 100'),
+          answers_attributes: Yup.array()
+            .of(
+              Yup.object().shape({
+                text: Yup.string().required(
+                  'Debes ingresar el texto de la respuesta'
+                ),
+                correct: Yup.boolean(),
+              })
+            )
+            .min(2, 'Debes ingresar al menos dos respuestas')
+            .test(
+              'at-least-one-correct',
+              'Debes marcar al menos una respuesta como correcta',
+              (value) => {
+                if (!value) return false;
+                return value.some((answer) => answer.correct);
+              }
+            )
+            .test(
+              'no-empty-answers',
+              'Las respuestas no pueden estar vacías',
+              (value) => {
+                if (!value) return false;
+                return value.every((answer) => answer?.text?.trim() !== '');
+              }
+            ),
         })}
         onSubmit={(values) => {
           console.log('values: ', values);
@@ -68,9 +101,9 @@ export function QuizFormMultipleOptions(props: QuizFormMultipleOptionsProps) {
           submitForm,
           errors,
         }) => (
-          <Form 
-          className={styles['form-quiz-options']}
-          // className={className || 'form-quiz-options}
+          <Form
+            className={styles['form-quiz-options']}
+            // className={className || 'form-quiz-options}
           >
             <div className={styles['fields']}>
               <Input
@@ -93,7 +126,7 @@ export function QuizFormMultipleOptions(props: QuizFormMultipleOptionsProps) {
               />
               <Input
                 label={t('quizFormMultipleOptions.points') || ''}
-                type='number'
+                type="number"
                 name="points"
                 placeholder="Alguna observación antes de responder esta pregunta"
                 value={values.points}
@@ -105,7 +138,7 @@ export function QuizFormMultipleOptions(props: QuizFormMultipleOptionsProps) {
               <label>{t('quizFormMultipleOptions.answer')}</label>
               <FieldArray
                 name="answers_attributes"
-                render={(arrayHelpers) => (
+                render={({ form, push, remove }) => (
                   <div>
                     {values.answers_attributes.map((answer, index) => (
                       <div
@@ -126,6 +159,11 @@ export function QuizFormMultipleOptions(props: QuizFormMultipleOptionsProps) {
                           onBlur={handleBlur}
                           name={`answers_attributes[${index}].text`}
                           onChange={handleChange}
+                          errorMessage={
+                            values.answers_attributes[index].text === ''
+                              ? 'Debes ingresar el texto de la respuesta'
+                              : undefined
+                          }
                         />
                         <div className={styles['actions']}>
                           <div
@@ -134,19 +172,21 @@ export function QuizFormMultipleOptions(props: QuizFormMultipleOptionsProps) {
                             }`}
                             onClick={() => {
                               if (singleSelection) {
-                                values.answers_attributes.forEach((answer, i) => {
-                                  if (index === i) {
-                                    setFieldValue(
-                                      `answers_attributes[${index}].correct`,
-                                      !answer.correct
-                                    );
-                                  } else {
-                                    setFieldValue(
-                                      `answers_attributes[${i}].correct`,
-                                      false
-                                    );
+                                values.answers_attributes.forEach(
+                                  (answer, i) => {
+                                    if (index === i) {
+                                      setFieldValue(
+                                        `answers_attributes[${index}].correct`,
+                                        !answer.correct
+                                      );
+                                    } else {
+                                      setFieldValue(
+                                        `answers_attributes[${i}].correct`,
+                                        false
+                                      );
+                                    }
                                   }
-                                });
+                                );
                               }
                               setFieldValue(
                                 `answers_attributes[${index}].correct`,
@@ -158,7 +198,7 @@ export function QuizFormMultipleOptions(props: QuizFormMultipleOptionsProps) {
                           </div>
                           <div
                             className={styles['remove']}
-                            onClick={() => arrayHelpers.remove(index)}
+                            onClick={() => remove(index)}
                           >
                             <Icon icon="trash" size={15} />
                           </div>
@@ -168,9 +208,11 @@ export function QuizFormMultipleOptions(props: QuizFormMultipleOptionsProps) {
                     <div
                       className={styles['add-new']}
                       onClick={() =>
-                        arrayHelpers.push({
+                        push({
                           text: '',
                           correct: false,
+                          question_id: null,
+                          id: null,
                         })
                       }
                     >
@@ -178,6 +220,14 @@ export function QuizFormMultipleOptions(props: QuizFormMultipleOptionsProps) {
                     </div>
                   </div>
                 )}
+              />
+              <InputTextStatus
+                status={StatusInputText.error}
+                text={
+                  typeof errors.answers_attributes === 'string'
+                    ? errors.answers_attributes
+                    : ''
+                }
               />
             </div>
             <div className={styles['footer']}>

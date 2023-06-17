@@ -33,7 +33,10 @@ export function QuizFormAnswer(props: QuizFormAnswerProps) {
     initialValues: initialValues,
     validationSchema: Yup.object({
       question: Yup.string().required('Pregunta es obligatorio'),
-      points: Yup.number().required('Necesitas agregar puntos'),
+      points: Yup.number()
+      .required('Necesitas agregar puntos')
+      .min(1, 'El valor debe ser mayor a 0')
+      .max(100, 'El valor debe ser menor o igual a 100'),
     }),
     onSubmit: (data) => {
       onSubmit && onSubmit(data);

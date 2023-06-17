@@ -40,7 +40,9 @@ export function QuizMultiselectQuestion(props: QuizMultiselectQuestionProps) {
 
   return (
     <div className={styles['container']}>
-      <h3>{number}. {title}</h3>
+      <h3>
+        {number}. {title}
+      </h3>
       <p>{description}</p>
       <div className={styles['answers']}>
         {multiple &&
@@ -66,10 +68,12 @@ export function QuizMultiselectQuestion(props: QuizMultiselectQuestionProps) {
                 onChange && onChange(filterAnswers(answers));
               }}
             >
-              <Icon
-                icon={answer.selected ? 'checkbox' : 'un-checkbox'}
-                size={20}
-              />
+              <div className={styles['icon-content']}>
+                <Icon
+                  icon={answer.selected ? 'checkbox' : 'un-checkbox'}
+                  size={20}
+                />
+              </div>
               <h4>{answer.text}</h4>
             </div>
           ))}

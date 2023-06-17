@@ -58,7 +58,7 @@
       gap: 1.5rem;
       .test {
         display: flex;
-        gap:1rem;
+        gap: 1rem;
       }
     }
   }
@@ -125,11 +125,21 @@
   padding: 1rem;
 }
 
-.goals {
+.wrap-goals {
   display: flex;
+  flex-direction: column;
+  max-height: 8rem;
+  width: 100%;
+  overflow-y: scroll;
+}
+
+.goals {
+  display: grid;
+  grid-template-columns: 5% 95%;
   gap: 0.5rem;
-  align-items: center;
+  align-items: baseline;
   margin-top: 0.25rem;
+  padding: 0 2rem;
 }
 
 .square {
@@ -143,7 +153,7 @@
   .container {
     width: 80vw !important;
   }
-  
+
   .columns-container {
     gap: 2rem !important;
   }

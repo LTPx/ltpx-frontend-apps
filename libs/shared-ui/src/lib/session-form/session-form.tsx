@@ -13,6 +13,7 @@ import Icon from '../icon/icon';
 import InputTextStatus, {
   StatusInputText,
 } from '../input-text-status/input-text-status';
+import { useState } from 'react';
 
 export interface SessionFormProps {
   open?: boolean;
@@ -24,6 +25,8 @@ export interface SessionFormProps {
 export function SessionForm(props: SessionFormProps) {
   const { open, onClose, onSubmit, session } = props;
   const { user } = useUser();
+  const [hourA, setHourA] = useState(0);
+  const [minutesA, setMinutesA] = useState(0);
 
   const { t } = useTranslation();
   const currentDate = new Date();
@@ -45,8 +48,8 @@ export function SessionForm(props: SessionFormProps) {
 
   const initialValues = {
     max_participants: session?.max_participants || 1,
-    hour: 0,
-    minutes: session?.call_time_min || 30,
+    hour: hourA || 60,
+    minutes: minutesA || 30,
     dates: getFormatDates(),
   };
 
@@ -94,10 +97,14 @@ export function SessionForm(props: SessionFormProps) {
           ),
         })}
         onSubmit={(values) => {
+          const minutes = values.minutes.toString();
+          const hour = values.hour.toString();
+          setHourA(values.hour);
+          setMinutesA(values.minutes);
           const formData = {
             private_sessions: false,
             max_participants: values.max_participants,
-            call_time_min: values.minutes + values.hour,
+            call_time_min: parseInt(minutes) + parseInt(hour),
             meetings_attributes: values.dates.map((item) => {
               if (item.id) {
                 return {
@@ -148,6 +155,8 @@ export function SessionForm(props: SessionFormProps) {
                     Cada clase durara{' '}
                     <Select
                       options={hours}
+                      selected={values.hour.toString()}
+                      disablePlaceholder={true}
                       onChange={(e) => {
                         setFieldValue('hour', e.value);
                       }}
@@ -156,6 +165,8 @@ export function SessionForm(props: SessionFormProps) {
                     hora(s), con
                     <Select
                       options={minutes}
+                      selected={values.minutes.toString()}
+                      disablePlaceholder={true}
                       onChange={(e) => {
                         setFieldValue('minutes', e.value);
                       }}

@@ -38,9 +38,8 @@ export function FileUpload(props: FileUploadProps) {
             file ? styles['file-selected'] : ''
           }`}
         >
-          <Icon icon={'cloud-upload-outline'} size={80}></Icon>
-          <h3>Subir Archivo</h3>
-          <h4>Se debe seleccionar archivos de tipo imagen o video</h4>
+          <Icon icon={'cloud-upload-outline'} size={50}></Icon>
+          {/* <h3>Subir Archivo</h3> */}
           {file ? (
             <h4 className={styles['upload-files']} onClick={handleClick}>
               Cambiar Portada
@@ -50,6 +49,7 @@ export function FileUpload(props: FileUploadProps) {
               Seleccionar Portada
             </h4>
           )}
+          {/* <h4>Se debe seleccionar archivos de tipo imagen o video</h4> */}
         </div>
         <input
           type="file"
@@ -61,8 +61,12 @@ export function FileUpload(props: FileUploadProps) {
       </div>
       {errorMessage && (
         <div className={styles['message-content']}>
-          <InputTextStatus className={styles['message-error']}  status={StatusInputText.error} text={errorMessage} />
-        </div>      
+          <InputTextStatus
+            className={styles['message-error']}
+            status={StatusInputText.error}
+            text={errorMessage}
+          />
+        </div>
       )}
     </>
   );

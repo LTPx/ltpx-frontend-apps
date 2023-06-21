@@ -25,15 +25,17 @@ export const useNotificationWebSocket = (wsUrl: string) => {
       if(data.type === "confirm_subscription") return;
 
       const { message } = data;
-      const notification: NotificationWebHook = message;
-      const newNotification = {
-        user_id: user.id,
-        kind: notification.type,
-        text: notification.text,
-        meta: notification.meta.data,
-        created_at: notification.created_at
+      if (message) {
+        const notification: NotificationWebHook = message;
+        const newNotification = {
+          user_id: user.id,
+          kind: notification.type,
+          text: notification.text,
+          meta: notification.meta.data,
+          created_at: notification.created_at
+        }
+        addNotification(newNotification);
       }
-      addNotification(newNotification);
     }
     return () => {
     };

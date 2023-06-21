@@ -40,7 +40,6 @@ export function Home() {
       title: '¿Qué es la Potenciación de Larga Duración?',
       link: '/blog/long-term-potentiation',
     },
-    
   ];
 
   return (
@@ -80,8 +79,8 @@ export function Home() {
         />
       </div>
       <ContentDescription />
-      <PopularCourses/>
-      <PopularCategories/>
+      <PopularCourses />
+      <PopularCategories />
       <div className={styles['news-container']}>
         <div className={styles['title-news']}>
           <div className={styles['text-news']}>

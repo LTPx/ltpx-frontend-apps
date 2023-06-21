@@ -76,7 +76,7 @@ export function CourseGeneralInformation(props: CourseGeneralInformationProps) {
         'language',
         'Debes seleccionar un idioma',
         (value) => {
-          if (value === null){
+          if (value === null) {
             return false;
           } else {
             return true;
@@ -87,7 +87,7 @@ export function CourseGeneralInformation(props: CourseGeneralInformationProps) {
         'level',
         'Debes seleccionar un nivel',
         (value) => {
-          if (value === null){
+          if (value === null) {
             return false;
           } else {
             return true;
@@ -98,7 +98,7 @@ export function CourseGeneralInformation(props: CourseGeneralInformationProps) {
         'category_id',
         'Debes seleccionar una categoría',
         (value) => {
-          if (value === null){
+          if (value === null) {
             return false;
           } else {
             return true;
@@ -171,6 +171,12 @@ export function CourseGeneralInformation(props: CourseGeneralInformationProps) {
             }
           />
         </div>
+        <h4 className={styles['text-cover']}>
+          Elija una imagen atractiva, apropiada para la edad, con una proporción
+          de 16:9 y al menos 600 píxeles de ancho (tamaño límite de 2 MB).
+          Confirme que el Contenido que utiliza no infringirá los derechos de
+          terceros.
+        </h4>
       </section>
       <div className={styles['text']}>
         <Input

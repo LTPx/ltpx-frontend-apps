@@ -46,9 +46,7 @@ export function CourseCard(props: CourseCardProps) {
             <Icon icon={'clock'} size={15} />
             {duration} min
           </div> */}
-          <div className={styles['price']}>
-            {price}
-          </div>
+          <div className={styles['price']}>{price}</div>
         </div>
       </div>
     </div>

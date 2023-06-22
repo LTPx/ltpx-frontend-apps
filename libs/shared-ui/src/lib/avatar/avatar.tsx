@@ -27,7 +27,7 @@ export function Avatar(props: AvatarProps) {
         loading="lazy"
         src={image}
         alt="user"
-        className={`${styles[sizeAvatar]} ${outlineClass}`}
+        className={`${styles['img-avatar']} ${styles[sizeAvatar]} ${outlineClass}`}
       />
     </div>
   );

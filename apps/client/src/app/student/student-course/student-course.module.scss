@@ -27,6 +27,13 @@
   }
 }
 
+.show {
+  color: $primary-color;
+  text-decoration: underline;
+  cursor: pointer;
+  width: 7rem;
+}
+
 .tabs-content {
   padding-top: $size-lg-1;
 

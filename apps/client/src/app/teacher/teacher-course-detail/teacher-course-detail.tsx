@@ -126,7 +126,7 @@ export function TeacherCourseDetail() {
             {selectedTab === 4 && (
               <AchievementsList achievements={course.achievements || []} />
             )}
-            {selectedTab === 5 && course.classroom && (
+            {selectedTab === 5 && (
               <div className={styles['sessions']}>
                 {course.session.meetings.map((meeting, index) => (
                   <CourseDateCard

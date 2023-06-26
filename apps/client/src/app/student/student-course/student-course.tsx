@@ -33,6 +33,7 @@ export function StudentCourse(props: StudentCourseProps) {
   const tabIndex = tabs.findIndex((item) => item.value === tab);
   const initialTabSelectedIndex = tabIndex > 0 ? tabIndex : 0;
   const [selectedTab, setSelectedTab] = useState(initialTabSelectedIndex);
+  const [showMore, setShowMore] = useState(false);
 
   const fetchCourse = useCallback(async () => {
     const { success, data, error } = await _getStudentCourse(slug || '');
@@ -63,9 +64,27 @@ export function StudentCourse(props: StudentCourseProps) {
       <div className={styles['container']}>
         <h1>Curso: {enrolledCourse.title}</h1>
         {enrolledCourse.description && (
-          <p className={styles['about-course']}>
-            {enrolledCourse.description.substring(0, 200)}
-          </p>
+          <>
+            {enrolledCourse.description.length > 280 ? (
+              <>
+                <p className={styles['about-course']}>
+                  {showMore
+                    ? enrolledCourse.description
+                    : `${enrolledCourse.description.substring(0, 280)}....`}
+                </p>
+                <p
+                  className={styles['show']}
+                  onClick={() => setShowMore(!showMore)}
+                >
+                  {showMore ? 'Mostrar menos' : 'Mostrar mas'}
+                </p>
+              </>
+            ) : (
+              <p className={styles['about-course']}>
+                {enrolledCourse.description}
+              </p>
+            )}
+          </>
         )}
         <div className={styles['columns-container']}>
           <div className={styles['column-left']}>

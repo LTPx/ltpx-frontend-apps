@@ -7,7 +7,6 @@ import {
   Tabs,
   BuyCourseCard,
   OverviewCourse,
-  CourseContents,
   RegisterForm,
   SnackbarType,
   Snackbar,
@@ -228,15 +227,16 @@ export function CourseDetails() {
                 </div>
               </div>
               <div className={styles['description-course']}>
-                <div className={styles['avatar']}>
-                  <NavLink to={`/teacher/${teacher.slug}`}>
-                    <Avatar
-                      image={teacher.profile_image || ''}
-                      size={AvatarSize.medium}
-                      outline={true}
-                    />
-                  </NavLink>
-                </div>
+                <NavLink
+                  className={styles['avatar']}
+                  to={`/teacher/${teacher.slug}`}
+                >
+                  <Avatar
+                    image={teacher.profile_image || ''}
+                    size={AvatarSize.medium}
+                    outline={true}
+                  />
+                </NavLink>
                 <div className={styles['items']}>
                   <div className={styles['item']}>
                     <label>

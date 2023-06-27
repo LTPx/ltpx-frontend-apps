@@ -1,7 +1,6 @@
 import {
   ColorsCounterCard,
   CourseCounterCard,
-  QuizProgressCard,
   UserCourseCard,
 } from '@ltpx-frontend-apps/shared-ui';
 import { useUser } from '@ltpx-frontend-apps/store';
@@ -15,17 +14,20 @@ import { CourseStatus } from '@ltpx-frontend-apps/api';
 /* eslint-disable-next-line */
 export interface DashboardProps {}
 interface DashboardCard {
-  count: number,
-  text: string,
-  color: ColorsCounterCard,
+  count: number;
+  text: string;
+  color: ColorsCounterCard;
 }
 
 export function Dashboard(props: DashboardProps) {
   const { user } = useUser();
-  const [ cards, setCards] = useState<DashboardCard[]>([]);
-  const { _getStudentCourses, enrolledCourses, _getStudentStatists, studentDashboard } = useStudent();
-
-
+  const [cards, setCards] = useState<DashboardCard[]>([]);
+  const {
+    _getStudentCourses,
+    enrolledCourses,
+    _getStudentStatists,
+    studentDashboard,
+  } = useStudent();
 
   const fetchCourses = useCallback(async () => {
     const { success, data } = await _getStudentStatists();

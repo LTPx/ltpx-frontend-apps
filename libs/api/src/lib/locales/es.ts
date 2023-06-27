@@ -222,7 +222,7 @@ export const es = {
       quiz: 'Tests',
       task: 'Tareas',
       achievement: 'Logros',
-      sessions: 'Sesiones'
+      sessions: 'Clases'
     },
   },
   courseInformation: {
@@ -306,7 +306,7 @@ export const es = {
     price: 'Precio'
   },
   courseClassroom: {
-    title:'Sesiones',
+    title:'Clases',
     subtitle: 'Establece horarios y fechas para reunirte con tus estudiantes',
     text:'Elige la opción que mejor se acople para este curso'
   },

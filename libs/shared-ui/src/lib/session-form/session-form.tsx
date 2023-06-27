@@ -135,7 +135,7 @@ export function SessionForm(props: SessionFormProps) {
           <Form className={styles['form-quiz-options']}>
             <div className={styles['fields']}>
               <section className={styles['section']}>
-                <h2>Configurar Sesiones</h2>
+                <h2>Configurar Clases</h2>
                 <div className={styles['field-form']}>
                   <Input
                     label="Numero de estudiantes"

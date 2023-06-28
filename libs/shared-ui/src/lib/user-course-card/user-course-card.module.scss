@@ -5,15 +5,25 @@
   width: 400px;
   border: 1px solid $gray-color-300;
   border-radius: 8px;
+  position: relative;
   &:hover {
     box-shadow: $card-shadow-medium;
   }
+  &.approve-container {
+    border: 1px solid $green-color;
+  }
+
   .warp-content {
     display: grid;
     grid-template-columns: 35% 65%;
     padding: $size-sm-2;
     gap: $size-sm-2;
     align-items: center;
+    border-radius: 8px;
+  }
+  .wrap-date {
+    display: flex;
+    justify-content: space-between;
   }
   img {
     width: 100%;
@@ -23,6 +33,10 @@
   }
 }
 
+.text-approve {
+  font-weight: 500;
+  color: $green-color;
+}
 .content {
   display: flex;
   flex-direction: column;

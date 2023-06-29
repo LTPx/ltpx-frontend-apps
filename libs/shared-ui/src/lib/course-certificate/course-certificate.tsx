@@ -1,0 +1,89 @@
+import { Position, Tooltip } from 'evergreen-ui';
+import Tag, { ColorsTag } from '../tag/tag';
+import styles from './course-certificate.module.scss';
+import { AchievementModel, QuizModel } from '@ltpx-frontend-apps/api';
+
+/* eslint-disable-next-line */
+export interface CourseCertificateProps {
+  studentName: string;
+  titleCourse: string;
+  achievements: AchievementModel[];
+  totalTask: number;
+  totalQuizzes: number;
+  date: string;
+  imageStudent: string;
+}
+
+export function CourseCertificate(props: CourseCertificateProps) {
+  const {
+    imageStudent,
+    studentName,
+    titleCourse,
+    achievements,
+    totalTask,
+    totalQuizzes,
+    date,
+  } = props;
+  return (
+    <div className={styles['container']}>
+      <div className={styles['content']}>
+        <div className={styles['certificate-content']}>
+          <div className={styles['header']}>
+            <h2 className={styles['title']}>Certificado</h2>
+            <Tag
+              className={styles['tag-certificate']}
+              text="certificación"
+              color={ColorsTag.green}
+            />
+          </div>
+          <div className={styles['body']}>
+            <div className={styles['row']}>
+              <img className={styles['img-student']} src={imageStudent} />
+            </div>
+            <div className={styles['information']}>
+              <div className={styles['item-1']}>
+                <h4>Titulo del Curso: </h4>
+                <h4 className={styles['text']}>{titleCourse}</h4>
+              </div>
+              <div className={styles['item']}>
+                <h4>Estudiante: </h4>
+                <h4 className={styles['text']}>{studentName}</h4>
+              </div>
+              <div className={styles['item']}>
+                <h4>Tareas: </h4>
+                <h4 className={styles['text']}>{totalTask}</h4>
+              </div>
+              <div className={styles['item']}>
+                <h4>Tests: </h4>
+                <h4 className={styles['text']}>{totalQuizzes}</h4>
+              </div>
+              <div className={styles['item']}>
+                <h4>Logros: </h4>
+                <div className={styles['achievement-wrap']}>
+                  {achievements.map((achievement, index) => (
+                    <Tooltip
+                      content={achievement.title}
+                      position={Position.TOP}
+                      key={index}
+                    >
+                      <img
+                        className={styles['achievement']}
+                        src={achievement.image}
+                      />
+                    </Tooltip>
+                  ))}
+                </div>
+              </div>
+              <div className={styles['item']}>
+                <h4>Fecha de Aprobación: </h4>
+                <h4 className={styles['text']}>{date}</h4>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default CourseCertificate;

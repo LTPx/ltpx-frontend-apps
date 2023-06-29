@@ -28,7 +28,13 @@ export function CourseCard(props: CourseCardProps) {
           {/* {translateCategory(category)} */}
           {category}
         </span>
-        <h4 className={styles['title']}>{title}</h4>
+        {title.length > 55 ? (
+          <h4 className={styles['title']}>
+            {title ? `${title.substring(0, 55)}...` : ''}
+          </h4>
+        ) : (
+          <h4 className={styles['title']}>{title}</h4>
+        )}
         {/* <div className="stars">
           {Array.from(Array(stars).keys()).map((number, index) => (
             <Icon key={index} icon={'star'} size={15} color="#eab308" />

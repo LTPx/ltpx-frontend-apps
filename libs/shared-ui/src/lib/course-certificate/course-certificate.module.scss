@@ -3,10 +3,15 @@
 .container {
   .content {
     background-color: $white-color;
-    border-radius: 15px;
-    width: 100%;
-    padding: 2rem;
+    border-radius: 16px;
+    width: 35rem;
+    padding: 24px;
     box-shadow: $card-shadow-medium;
+    border: 1px solid $gray-color-200;
+  }
+  h4 {
+    font-size: 14px;
+    color: #64748b;
   }
 
   .achievement-wrap {
@@ -20,26 +25,26 @@
   }
 
   .img-student {
-    height: 15rem;
-    border-radius: 10px;
+    height: 150px;
+    border-radius: 12px;
   }
   .item-1 {
     display: grid;
-    padding-bottom: 1rem;
-    grid-template-columns: 30% 70%;
+    padding-bottom: 10px;
+    grid-template-columns: 35% 65%;
     align-items: center;
-    border-bottom: 1px solid $gray-color-200;
+    // border-bottom: 1px solid $gray-color-200;
   }
 
   .tag-certificate {
-    padding: 0.5rem 1rem;
+    padding: 0.25rem 1rem;
   }
   .item {
     display: grid;
-    padding: 1rem 0;
-    grid-template-columns: 30% 70%;
+    padding-bottom: 10px;
+    grid-template-columns: 35% 65%;
     align-items: center;
-    border-bottom: 1px solid $gray-color-200;
+    // border-bottom: 1px solid $gray-color-200;
   }
 
   .text {
@@ -55,14 +60,16 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
+      // padding: 1rem 0;
 
       .title {
-        font-weight: 400;
+        font-weight: 500;
+        font-size: 20px;
       }
     }
     .body {
       display: flex;
-      gap: 2rem;
+      gap: 1.25rem;
 
       .information {
         width: 100%;

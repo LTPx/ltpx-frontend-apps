@@ -20,7 +20,6 @@ import {
   AchievementBadge,
   SectionInformation,
   PanelAccordion,
-  CourseCertificate,
 } from '@ltpx-frontend-apps/shared-ui';
 import { Dialog } from 'evergreen-ui';
 import { useChat, useSite, useUser } from '@ltpx-frontend-apps/store';

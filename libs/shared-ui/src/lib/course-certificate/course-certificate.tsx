@@ -2,37 +2,43 @@ import { Position, Tooltip } from 'evergreen-ui';
 import Tag, { ColorsTag } from '../tag/tag';
 import styles from './course-certificate.module.scss';
 import { AchievementModel, QuizModel } from '@ltpx-frontend-apps/api';
+import { useMoment } from '../../hooks/useMoment';
+import { NavLink } from 'react-router-dom';
 
 /* eslint-disable-next-line */
 export interface CourseCertificateProps {
-  studentName: string;
+  teacherName: string;
   titleCourse: string;
-  achievements: AchievementModel[];
+  achievements?: AchievementModel[];
   totalTask: number;
   totalQuizzes: number;
   date: string;
+  link?: string;
   imageStudent: string;
 }
 
 export function CourseCertificate(props: CourseCertificateProps) {
   const {
     imageStudent,
-    studentName,
+    teacherName,
     titleCourse,
     achievements,
     totalTask,
     totalQuizzes,
     date,
+    link,
   } = props;
+  const { customFormatDate } = useMoment();
+
   return (
     <div className={styles['container']}>
       <div className={styles['content']}>
         <div className={styles['certificate-content']}>
           <div className={styles['header']}>
-            <h2 className={styles['title']}>Certificado</h2>
+            <h2 className={styles['title']}>Resumen</h2>
             <Tag
               className={styles['tag-certificate']}
-              text="certificación"
+              text="certificado"
               color={ColorsTag.green}
             />
           </div>
@@ -46,8 +52,8 @@ export function CourseCertificate(props: CourseCertificateProps) {
                 <h4 className={styles['text']}>{titleCourse}</h4>
               </div>
               <div className={styles['item']}>
-                <h4>Estudiante: </h4>
-                <h4 className={styles['text']}>{studentName}</h4>
+                <h4>Profesor: </h4>
+                <h4 className={styles['text']}>{teacherName}</h4>
               </div>
               <div className={styles['item']}>
                 <h4>Tareas: </h4>
@@ -60,23 +66,29 @@ export function CourseCertificate(props: CourseCertificateProps) {
               <div className={styles['item']}>
                 <h4>Logros: </h4>
                 <div className={styles['achievement-wrap']}>
-                  {achievements.map((achievement, index) => (
-                    <Tooltip
-                      content={achievement.title}
-                      position={Position.TOP}
-                      key={index}
-                    >
-                      <img
-                        className={styles['achievement']}
-                        src={achievement.image}
-                      />
-                    </Tooltip>
-                  ))}
+                  {achievements &&
+                    achievements.map((achievement, index) => (
+                      <Tooltip
+                        content={achievement.title}
+                        position={Position.TOP}
+                        key={index}
+                      >
+                        <NavLink to={link || ''}>
+                          <img
+                            className={styles['achievement']}
+                            src={achievement.image}
+                          />
+                        </NavLink>
+                      </Tooltip>
+                    ))}
                 </div>
               </div>
               <div className={styles['item']}>
-                <h4>Fecha de Aprobación: </h4>
-                <h4 className={styles['text']}>{date}</h4>
+                <h4>Fecha: </h4>
+                <h4 className={styles['text']}>
+                  {customFormatDate(date, 'MMM D YYYY')} -{' '}
+                  {customFormatDate(date, 'MMM D YYYY')}
+                </h4>
               </div>
             </div>
           </div>

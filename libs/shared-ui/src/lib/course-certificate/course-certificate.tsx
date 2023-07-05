@@ -15,6 +15,7 @@ export interface CourseCertificateProps {
   date: string;
   link?: string;
   imageStudent: string;
+  className?: string;
 }
 
 export function CourseCertificate(props: CourseCertificateProps) {
@@ -27,12 +28,13 @@ export function CourseCertificate(props: CourseCertificateProps) {
     totalQuizzes,
     date,
     link,
+    className,
   } = props;
   const { customFormatDate } = useMoment();
 
   return (
     <div className={styles['container']}>
-      <div className={styles['content']}>
+      <div className={`${styles['content']} ${className}`}>
         <div className={styles['certificate-content']}>
           <div className={styles['header']}>
             <h2 className={styles['title']}>Resumen</h2>

@@ -14,6 +14,7 @@ import {
   SiteLayout,
   FrequentlyAskedQuestions,
   UpdatePassword,
+  StudentProfilePage
 } from '../site/index';
 import TermsConditions from '../site/terms-conditions/terms-conditions';
 import { blogRoutes } from './blog-routes';
@@ -42,6 +43,7 @@ export const SiteRoutes = () => {
           <Route path="/terms-and-conditions" element={<TermsConditions />} />
           <Route path="/forget-password" element={<ForgetPassword />} />
           <Route path="/about" element={<AboutUs />} />
+          <Route path="/student" element={<StudentProfilePage />} />
           <Route path="/faq" element={<FrequentlyAskedQuestions />} />
           <Route path="/teacher/:slug" element={<TeacherProfilePage />} />
           <Route path="/update-password" element={<UpdatePassword />} />

@@ -12,4 +12,6 @@ export * from './courses-by-category/courses-by-category';
 export * from './teacher-profile-page/teacher-profile-page';
 export * from './frequently-asked-questions/frequently-asked-questions';
 export * from './update-password/update-password';
+export * from './student-profile-page/student-profile-page';
+
 

@@ -1,0 +1,43 @@
+@import '../../styles/styles.module.scss';
+
+.content {
+  background-color: $white-color;
+  border-radius: 16px;
+  width: 35rem;
+  padding: 24px;
+  box-shadow: $card-shadow-medium;
+  border: 1px solid $gray-color-200;
+
+  .title {
+    font-weight: 500;
+    font-size: 20px;
+  }
+  
+  .item {
+    display: grid;
+    padding-bottom: 10px;
+    grid-template-columns: 35% 65%;
+    align-items: center;
+    // border-bottom: 1px solid $gray-color-200;
+  }
+  h4 {
+    font-size: 14px;
+    color: #64748b;
+  }
+  .item-1 {
+    display: grid;
+    padding: 1rem 0 10px 0;
+    grid-template-columns: 35% 65%;
+    align-items: center;
+    // border-bottom: 1px solid $gray-color-200;
+  }
+
+  .text {
+    color: $text-gray-color;
+  }
+}
+
+//smartphones-responsive
+@media screen and (max-width: 550px) {
+  
+}

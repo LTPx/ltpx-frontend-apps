@@ -1,5 +1,6 @@
 import {
   ColorsCounterCard,
+  CourseCertificate,
   CourseCounterCard,
   UserCourseCard,
 } from '@ltpx-frontend-apps/shared-ui';
@@ -95,6 +96,30 @@ export function Dashboard(props: DashboardProps) {
                   url={`/student/course/${course.slug}`}
                 />
               ))}
+            </div>
+            <div className={styles['certificates']}>
+              {/* <h2>Certificados</h2> */}
+              <div className={styles['approve-certificates']}>
+                {enrolledCourses.map((course, index) => (
+                  <>
+                    {course.course_progress >= 100 && (
+                      <CourseCertificate
+                        key={index}
+                        imageStudent={
+                          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTPf84rgOXXF7qUrqIFpde-ntEleF8R1FeQyw&usqp=CAU'
+                        }
+                        teacherName={course.teacher?.teacher_name || ''}
+                        titleCourse={course.title}
+                        // achievements={course}
+                        totalTask={10}
+                        totalQuizzes={20}
+                        date={course.created_at}
+                        link={`/student/course/${course.slug}`}
+                      />
+                    )}
+                  </>
+                ))}
+              </div>
             </div>
           </div>
           <div className={styles['help-ads']}>

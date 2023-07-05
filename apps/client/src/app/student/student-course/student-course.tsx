@@ -86,6 +86,17 @@ export function StudentCourse(props: StudentCourseProps) {
             )}
           </>
         )}
+        {/* <CourseCertificate
+          imageStudent={
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTPf84rgOXXF7qUrqIFpde-ntEleF8R1FeQyw&usqp=CAU'
+          }
+          teacherName={enrolledCourse.teacher?.teacher_name || ''}
+          titleCourse={enrolledCourse.title}
+          achievements={enrolledCourse.}
+          totalTask={10}
+          totalQuizzes={20}
+          date={'23 de Junio, 2023'}
+        /> */}
         <div className={styles['columns-container']}>
           <div className={styles['column-left']}>
             <div

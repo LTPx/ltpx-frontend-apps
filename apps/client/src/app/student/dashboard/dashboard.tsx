@@ -105,7 +105,7 @@ export function Dashboard(props: DashboardProps) {
                     {course.course_progress >= 100 && (
                       <CourseCertificate
                         key={index}
-                        imageStudent={
+                        image={
                           'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTPf84rgOXXF7qUrqIFpde-ntEleF8R1FeQyw&usqp=CAU'
                         }
                         teacherName={course.teacher?.teacher_name || ''}

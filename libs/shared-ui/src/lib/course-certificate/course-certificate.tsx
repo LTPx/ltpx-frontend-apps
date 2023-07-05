@@ -14,13 +14,13 @@ export interface CourseCertificateProps {
   totalQuizzes: number;
   date: string;
   link?: string;
-  imageStudent: string;
+  image: string;
   className?: string;
 }
 
 export function CourseCertificate(props: CourseCertificateProps) {
   const {
-    imageStudent,
+    image,
     teacherName,
     titleCourse,
     achievements,
@@ -46,7 +46,7 @@ export function CourseCertificate(props: CourseCertificateProps) {
           </div>
           <div className={styles['body']}>
             <div className={styles['row']}>
-              <img className={styles['img-student']} src={imageStudent} />
+              <img className={styles['img-card']} src={image} />
             </div>
             <div className={styles['information']}>
               <div className={styles['item-1']}>

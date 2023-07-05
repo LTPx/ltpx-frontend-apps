@@ -1,0 +1,45 @@
+@import '../../styles/styles.module.scss';
+
+.rows {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr;
+  padding: $size-md-1;
+  border-bottom: 1px solid $gray-color-200;
+
+  .img-achievement {
+    height: 2.5rem;
+    width: 2.5rem;
+  }
+
+  .icon {
+    padding: $size-sm-3;
+    border-radius: 8px;
+    min-width: 1.5rem;
+    color: $text-gray-color;
+  }
+
+  &:hover {
+    background-color: #f7f7f7;
+  }
+
+  .content-achievement {
+    display: flex;
+    align-items: center;
+    gap: $size-md-3;
+  }
+
+  .item {
+    display: flex;
+    flex-direction: column;
+    padding-right: 1rem;
+
+    .title {
+      font-weight: 500;
+    }
+
+    .text {
+      padding-top: 0.12rem;
+      color: $text-gray-color;
+    }
+  }
+}

@@ -1,3 +1,4 @@
+export * from './lib/row-item-card/row-item-card';
 export * from './lib/student-profile-card/student-profile-card';
 export * from './lib/course-certificate/course-certificate';
 export * from './lib/select-account/select-account';

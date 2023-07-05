@@ -43,13 +43,13 @@ export function StudentProfilePage(props: StudentProfilePageProps) {
         <div className={styles['wrap-content']}>
           <CourseCertificate
             className={styles['certificate']}
-            teacherName={'Carla Osten'}
-            titleCourse={'El Universo y las Estrellas'}
-            totalTask={20}
+            teacherName={'Carlos Huerta'}
+            titleCourse={'Empieza tu propio negocio de aprendizaje en linea con OpenMind'}
+            totalTask={8}
             totalQuizzes={10}
             date={''}
             imageStudent={
-              'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTPf84rgOXXF7qUrqIFpde-ntEleF8R1FeQyw&usqp=CAU'
+              'https://res-5.cloudinary.com/dfstnuesp/image/upload/aradq4hu2giqysufv4h2ec6ykwpy.png'
             }
           />
           <StudentProfileCard

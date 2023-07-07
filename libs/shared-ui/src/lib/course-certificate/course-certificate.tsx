@@ -1,7 +1,7 @@
 import { Position, Tooltip } from 'evergreen-ui';
 import Tag, { ColorsTag } from '../tag/tag';
 import styles from './course-certificate.module.scss';
-import { AchievementModel, QuizModel } from '@ltpx-frontend-apps/api';
+import { AchievementModel } from '@ltpx-frontend-apps/api';
 import { useMoment } from '../../hooks/useMoment';
 import { NavLink } from 'react-router-dom';
 

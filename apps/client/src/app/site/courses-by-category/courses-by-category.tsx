@@ -39,6 +39,7 @@ export function CoursesByCategory(props: CoursesByCategoryProps) {
       <div className={styles['content']}>
         <div className={styles['cover']}>
           <h1 className={styles['title']}>{t(`course_categories.${categoryId}`)}</h1>
+          {/* <h1 className={styles['title']}>{categoryId}</h1> */}
           <div className={styles['link-browser']}>
             <NavLink to="/courses">{t('links.toAllCourses')}</NavLink>
           </div>

@@ -1,4 +1,5 @@
 import { _http } from '../../http';
+import { Certificate } from '../../interfaces/certificate-interface';
 
 const http = _http;
 
@@ -16,7 +17,7 @@ export const getStudentStatists = async () => {
 };
 
 export const getStudentCertificates = async () => {
-  return new Promise<any>((resolve, reject) => {
+  return new Promise<Certificate[]>((resolve, reject) => {
     http
       .get('api/v1/student/certificates')
       .then((response) => {

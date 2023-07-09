@@ -45,6 +45,7 @@ export function StudentProfilePage(props: StudentProfilePageProps) {
             }
             totalTask={8}
             totalQuizzes={10}
+            totalAchievements={39}
             date={''}
             image={
               'https://res-5.cloudinary.com/dfstnuesp/image/upload/aradq4hu2giqysufv4h2ec6ykwpy.png'

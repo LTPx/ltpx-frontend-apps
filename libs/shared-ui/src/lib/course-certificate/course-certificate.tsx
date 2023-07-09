@@ -12,6 +12,7 @@ export interface CourseCertificateProps {
   achievements?: AchievementModel[];
   totalTask: number;
   totalQuizzes: number;
+  totalAchievements: number;
   date: string;
   link?: string;
   image: string;
@@ -29,6 +30,7 @@ export function CourseCertificate(props: CourseCertificateProps) {
     date,
     link,
     className,
+    totalAchievements,
   } = props;
   const { customFormatDate } = useMoment();
 
@@ -50,7 +52,7 @@ export function CourseCertificate(props: CourseCertificateProps) {
             </div>
             <div className={styles['information']}>
               <div className={styles['item-1']}>
-                <h4>Titulo del Curso: </h4>
+                <h4>Curso: </h4>
                 <h4 className={styles['text']}>{titleCourse}</h4>
               </div>
               <div className={styles['item']}>
@@ -67,7 +69,8 @@ export function CourseCertificate(props: CourseCertificateProps) {
               </div>
               <div className={styles['item']}>
                 <h4>Logros: </h4>
-                <div className={styles['achievement-wrap']}>
+                <h4 className={styles['text']}>{totalAchievements}</h4>
+                {/* <div className={styles['achievement-wrap']}>
                   {achievements &&
                     achievements.map((achievement, index) => (
                       <Tooltip
@@ -83,7 +86,7 @@ export function CourseCertificate(props: CourseCertificateProps) {
                         </NavLink>
                       </Tooltip>
                     ))}
-                </div>
+                </div> */}
               </div>
               <div className={styles['item']}>
                 <h4>Fecha: </h4>

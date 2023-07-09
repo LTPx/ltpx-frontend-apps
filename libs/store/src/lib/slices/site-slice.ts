@@ -129,7 +129,7 @@ export const createSiteSlice: StateCreator<StoreState, [], [], SiteSlice> = (
       const certificate = await getCertificate(slug, number);
       return { success: true, data: certificate}
     } catch (error) {
-      return { success: false, error}
+      return { success: false, error: formatErrors(error)}
     }
   },
 });

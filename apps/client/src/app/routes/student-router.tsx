@@ -1,6 +1,14 @@
 import { Routes, Route, BrowserRouter, Navigate } from 'react-router-dom';
 import { PaymentsLayout } from '../layouts/index';
-import { AllCourses, CourseDetails, CoursesByCategory, Home, RegisterTeacher, StudentProfilePage, TeacherProfilePage } from '../site';
+import {
+  AllCourses,
+  CourseDetails,
+  CoursesByCategory,
+  Home,
+  RegisterTeacher,
+  StudentProfilePage,
+  TeacherProfilePage,
+} from '../site';
 import {
   Account,
   Dashboard,
@@ -30,12 +38,12 @@ export const StudentRoutes = () => {
           <Route path="/home" element={<Home />} />
           <Route path="/courses" element={<AllCourses />} />
           <Route path="/course/:slug" element={<CourseDetails />} />
+          <Route path="/courses/:categoryId" element={<CoursesByCategory />} />
           <Route
-            path="/courses/:categoryId"
-            element={<CoursesByCategory />}
+            path="/:slug/certificate/:id"
+            element={<StudentProfilePage />}
           />
         </Route>
-        <Route path="/:slug/certificate/:id" element={<StudentProfilePage />} />
         <Route path="student" element={<StudentLayout />}>
           <Route path="dashboard" element={<Dashboard />} />
           <Route path="courses" element={<StudentCourses />} />

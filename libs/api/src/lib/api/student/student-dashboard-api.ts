@@ -14,3 +14,16 @@ export const getStudentStatists = async () => {
       });
   });
 };
+
+export const getStudentCertificates = async () => {
+  return new Promise<any>((resolve, reject) => {
+    http
+      .get('api/v1/student/certificates')
+      .then((response) => {
+        resolve(response.data);
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
+};

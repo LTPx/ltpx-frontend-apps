@@ -22,6 +22,7 @@ export const useStudent = () => {
     _getStudentTask,
     _sendTask,
     _getStudentStatists,
+    _getStudentCertificates,
   } = useAppStore();
 
   return {
@@ -45,5 +46,6 @@ export const useStudent = () => {
     _getStudentTask,
     _sendTask,
     _getStudentStatists,
+    _getStudentCertificates,
   }
 }

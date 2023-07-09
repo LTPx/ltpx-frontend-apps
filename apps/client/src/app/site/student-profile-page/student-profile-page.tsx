@@ -5,6 +5,7 @@ import {
   RowItemCard,
   StudentProfileCard,
   Tabs,
+  useMoment,
 } from '@ltpx-frontend-apps/shared-ui';
 import styles from './student-profile-page.module.scss';
 import { useCallback, useEffect, useState } from 'react';
@@ -17,6 +18,7 @@ export function StudentProfilePage() {
   const [certificate, setCertificate] = useState<Certificate>();
   const { slug, id } = useParams();
   const { _getCertificate } = useSite();
+  const { formatDate } = useMoment();
 
   const fetchCertificate = useCallback(async () => {
     const slugUrl = slug || '';
@@ -77,7 +79,7 @@ export function StudentProfilePage() {
                 date={certificate.student.join_at}
               />
             </div>
-            <div className={styles['tabs-content']}>
+            <div className={`${styles['tabs-content']} card`}>
               <Tabs
                 className={styles['tabs']}
                 classNameText={styles['tabs-edit']}
@@ -86,22 +88,13 @@ export function StudentProfilePage() {
                 onClickTab={(option) => handleClick(option)}
               />
               <div className={styles['tabs-wrap']}>
-                {/* {selectedTab === 0 && <></>}
-            {selectedTab === 1 && (
-              <div className={styles['contents']}>
-                <PanelAccordion lock={true} title={'Que es el Universo'} />
-                <PanelAccordion lock={true} title={'Ciclo de una Estrella'} />
-              </div>
-            )} */}
                 {selectedTab === 0 && (
                   <div className={styles['tasks']}>
                     {certificate.tasks.map((task, index)=>(
                       <RowItemCard
                         key={index}
-                        icon="task-outline"
                         title={task.title}
-                        date={task.created_at}
-                        time='1 mes'
+                        date={formatDate(task.created_at, true)}
                       />
                     ))}
                   </div>
@@ -111,10 +104,12 @@ export function StudentProfilePage() {
                     {certificate.quizzes.map((quiz, index)=>(
                       <RowItemCard
                         key={index}
-                        icon="task-outline"
                         title={quiz.title}
-                        date={quiz.created_at}
-                        time='1 mes'
+                        date={formatDate(quiz.created_at, true)}
+                        column={{
+                          title: 'Resultado',
+                          value: `${quiz.score} pts`
+                        }}
                       />
                     ))}
                   </div>
@@ -125,9 +120,12 @@ export function StudentProfilePage() {
                       <RowItemCard
                         key={index}
                         title={achievement.title}
-                        date={achievement.created_at}
-                        time='1 mes'
+                        date={formatDate(achievement.created_at, true)}
                         image={achievement.image}
+                        column={{
+                          title: 'Puntos',
+                          value: achievement.points
+                        }}
                       />
                     ))}
                   </div>

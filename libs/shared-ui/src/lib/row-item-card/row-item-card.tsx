@@ -6,12 +6,16 @@ export interface RowItemCardProps {
   image?: string;
   title: string;
   date: string;
-  time: string;
+  score?: number;
   icon?: string;
+  column?: {
+    title: string;
+    value: string | number;
+  }
 }
 
 export function RowItemCard(props: RowItemCardProps) {
-  const { image, title, date, time, icon } = props;
+  const { image, title, date, score, icon, column } = props;
   return (
     <div className={styles['rows']}>
       <div className={styles['content-achievement']}>
@@ -28,10 +32,18 @@ export function RowItemCard(props: RowItemCardProps) {
         <h4 className={styles['title']}>Fecha</h4>
         <h4 className={styles['text']}>{date}</h4>
       </div>
-      <div className={styles['item']}>
-        <h4 className={styles['title']}>Tiempo</h4>
-        <h4 className={styles['text']}>{time}</h4>
-      </div>
+      { column &&
+        <div className={styles['item']}>
+          <h4 className={styles['title']}>{column.title}</h4>
+          <h4 className={styles['text']}>{column.value}</h4>
+        </div>
+      }
+      { score &&
+        <div className={styles['item']}>
+          <h4 className={styles['title']}>Puntaje</h4>
+          <h4 className={styles['text']}>{score}</h4>
+        </div>
+      }
     </div>
   );
 }

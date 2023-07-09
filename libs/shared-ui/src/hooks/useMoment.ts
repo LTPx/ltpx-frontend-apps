@@ -4,8 +4,9 @@ moment.locale('es');
 
 export const useMoment = () => {
 
-  const formatDate = (date: string) => {
-    const result = moment(date).format('MMM D YYYY, h:mm a');
+  const formatDate = (date: string, onlyData?: boolean) => {
+    const format = onlyData ? 'MMM D YYYY' : 'MMM D YYYY, h:mm a';
+    const result = moment(date).format(format);
     return result.charAt(0).toUpperCase() + result.slice(1);
   };
 

@@ -95,50 +95,41 @@ export function StudentProfilePage() {
             )} */}
                 {selectedTab === 0 && (
                   <div className={styles['tasks']}>
-                    <RowItemCard
-                      icon="task-outline"
-                      title={'Pregunta sobre el Universo'}
-                      date={'13 de Abril'}
-                      time="1 mes"
-                    />
-                    <RowItemCard
-                      icon="task-outline"
-                      title={'Galaxias y Estrellas'}
-                      date={'18 de Abril'}
-                      time="1 mes"
-                    />
+                    {certificate.tasks.map((task, index)=>(
+                      <RowItemCard
+                        key={index}
+                        icon="task-outline"
+                        title={task.title}
+                        date={task.created_at}
+                        time='1 mes'
+                      />
+                    ))}
                   </div>
                 )}
                 {selectedTab === 1 && (
                   <div className={styles['quizzes']}>
-                    <RowItemCard
-                      icon="list"
-                      title={'El Universo desde mi perspectiva'}
-                      date={'13 de Abril'}
-                      time="1 mes"
-                    />
-                    <RowItemCard
-                      icon="list"
-                      title={'Examen de Conocimiento'}
-                      date={'16 de Abril'}
-                      time="1 mes"
-                    />
+                    {certificate.quizzes.map((quiz, index)=>(
+                      <RowItemCard
+                        key={index}
+                        icon="task-outline"
+                        title={quiz.title}
+                        date={quiz.created_at}
+                        time='1 mes'
+                      />
+                    ))}
                   </div>
                 )}
                 {selectedTab === 2 && (
                   <div className={styles['achievements']}>
-                    <RowItemCard
-                      image="https://res.cloudinary.com/dslqbzdfy/image/upload/v1674690062/achievements/star-medal_zmhtru.png"
-                      title={'Genio completa 3 Exámenes'}
-                      date={'15 de Junio 2023'}
-                      time="1 mes"
-                    />
-                    <RowItemCard
-                      image="https://res.cloudinary.com/dslqbzdfy/image/upload/v1674690062/achievements/awards-icons_vixivi.png"
-                      title={'Master cumple 3 tareas'}
-                      date={'25 de Junio 2023'}
-                      time="3 semanas"
-                    />
+                    {certificate.achievements.map((achievement, index)=>(
+                      <RowItemCard
+                        key={index}
+                        title={achievement.title}
+                        date={achievement.created_at}
+                        time='1 mes'
+                        image={achievement.image}
+                      />
+                    ))}
                   </div>
                 )}
               </div>

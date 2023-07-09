@@ -21,4 +21,20 @@ export interface Certificate {
     city: string;
     join_at: string;
   }
+  achievements: {
+    title: string;
+    created_at: string;
+    points: number;
+    image: string;
+  }[]
+  quizzes: {
+    title: string;
+    created_at: string;
+    score: number;
+  }[]
+  tasks: {
+    title: string;
+    created_at: string;
+    score: number;
+  }[]
 }

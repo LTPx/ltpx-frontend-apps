@@ -127,4 +127,5 @@ export * from './lib/nav/nav';
 export * from './lib/input/input';
 export * from './lib/button/button';
 export * from './lib/header/header';
+export * from './lib/certificate/certificate';
 export * from './hooks/useMoment';

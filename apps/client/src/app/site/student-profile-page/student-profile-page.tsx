@@ -11,11 +11,11 @@ import styles from './student-profile-page.module.scss';
 import { useCallback, useEffect, useState } from 'react';
 import { useSite } from '@ltpx-frontend-apps/store';
 import { useParams } from 'react-router-dom';
-import { Certificate } from '@ltpx-frontend-apps/api';
+import { CertificateModel } from '@ltpx-frontend-apps/api';
 
 export function StudentProfilePage() {
   const [selectedTab, setSelectedTab] = useState(0);
-  const [certificate, setCertificate] = useState<Certificate>();
+  const [certificate, setCertificate] = useState<CertificateModel>();
   const { slug, id } = useParams();
   const { _getCertificate } = useSite();
   const { formatDate } = useMoment();
@@ -39,13 +39,13 @@ export function StudentProfilePage() {
 
   const tabs = [
     {
-      text: 'Tareas',
+      text: 'Tareas realizadas',
     },
     {
-      text: 'Test',
+      text: 'Test realizados',
     },
     {
-      text: 'Logros',
+      text: 'Logros alcanzados',
     },
   ];
 

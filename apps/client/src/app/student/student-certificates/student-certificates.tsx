@@ -1,8 +1,8 @@
 import { useCallback, useEffect, useState } from 'react';
 import styles from './student-certificates.module.scss';
 import { useStudent, useUser } from '@ltpx-frontend-apps/store';
-import { CourseCertificate } from '@ltpx-frontend-apps/shared-ui';
-import { Certificate } from '@ltpx-frontend-apps/api';
+import { Certificate, CourseCertificate } from '@ltpx-frontend-apps/shared-ui';
+import { CertificateModel } from '@ltpx-frontend-apps/api';
 
 /* eslint-disable-next-line */
 export interface StudentCertificatesProps {}
@@ -10,7 +10,7 @@ export interface StudentCertificatesProps {}
 export function StudentCertificates(props: StudentCertificatesProps) {
   const { _getStudentCertificates } = useStudent();
   const { user } = useUser();
-  const [certificates, setCertificates] = useState<Certificate[]>([]);
+  const [certificates, setCertificates] = useState<CertificateModel[]>([]);
 
   const fetchClasses = useCallback(async () => {
     const { success, data, error } = await _getStudentCertificates();
@@ -28,9 +28,8 @@ export function StudentCertificates(props: StudentCertificatesProps) {
   return (
     <div className={styles['certificates']}>
       {certificates.map((certificate, index) => (
-        <CourseCertificate
+        <Certificate
           key={index}
-          image={certificate.course.cover_url}
           teacherName={certificate.teacher.name}
           titleCourse={certificate.course.name}
           totalTask={certificate.course.total_tasks}

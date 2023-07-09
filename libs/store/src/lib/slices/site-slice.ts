@@ -18,6 +18,7 @@ import {
   getCoursesByCategory,
   CategoryModel,
   formatErrors,
+  getCertificate,
 } from '@ltpx-frontend-apps/api';
 
 export type SiteSlice = {
@@ -35,6 +36,7 @@ export type SiteSlice = {
   _getTeacherProfile: (slug: string) => Promise<FormatResponse>;
   _getPopularCategories: () => Promise<FormatResponse>;
   _getCoursesByCategory: (categorySlug: string) => Promise<FormatResponse>;
+  _getCertificate: (slug: string, id: number) => Promise<FormatResponse>;
 };
 
 export const createSiteSlice: StateCreator<StoreState, [], [], SiteSlice> = (
@@ -121,5 +123,13 @@ export const createSiteSlice: StateCreator<StoreState, [], [], SiteSlice> = (
     } catch (error) {
       return { success: false, error}
     }
-  }
+  },
+  _getCertificate: async (slug, number) => {
+    try {
+      const certificate = await getCertificate(slug, number);
+      return { success: true, data: certificate}
+    } catch (error) {
+      return { success: false, error}
+    }
+  },
 });

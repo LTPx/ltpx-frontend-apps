@@ -14,7 +14,7 @@ export interface CourseCertificateProps {
   totalQuizzes: number;
   totalAchievements: number;
   date: string;
-  link?: string;
+  link: string;
   image: string;
   className?: string;
 }
@@ -40,11 +40,13 @@ export function CourseCertificate(props: CourseCertificateProps) {
         <div className={styles['certificate-content']}>
           <div className={styles['header']}>
             <h2 className={styles['title']}>Resumen</h2>
-            <Tag
-              className={styles['tag-certificate']}
-              text="certificado"
-              color={ColorsTag.green}
-            />
+            <NavLink to={link}>
+              <Tag
+                className={styles['tag-certificate']}
+                text="certificado"
+                color={ColorsTag.green}
+              />
+            </NavLink>
           </div>
           <div className={styles['body']}>
             <div className={styles['row']}>
@@ -89,9 +91,8 @@ export function CourseCertificate(props: CourseCertificateProps) {
                 </div> */}
               </div>
               <div className={styles['item']}>
-                <h4>Fecha: </h4>
+                <h4>Fecha de culminación: </h4>
                 <h4 className={styles['text']}>
-                  {customFormatDate(date, 'MMM D YYYY')} -{' '}
                   {customFormatDate(date, 'MMM D YYYY')}
                 </h4>
               </div>

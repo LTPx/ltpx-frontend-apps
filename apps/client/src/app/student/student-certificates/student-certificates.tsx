@@ -37,7 +37,7 @@ export function StudentCertificates(props: StudentCertificatesProps) {
           totalQuizzes={certificate.course.total_quizzes}
           totalAchievements={certificate.course.total_achievements}
           date={certificate.updated_at}
-          link={`/${user.fullname}/${certificate.id}`}
+          link={`/${user.slug}/certificate/${certificate.id}`}
         />
       ))}
     </div>

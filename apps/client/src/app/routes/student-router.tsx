@@ -1,6 +1,6 @@
 import { Routes, Route, BrowserRouter, Navigate } from 'react-router-dom';
 import { PaymentsLayout } from '../layouts/index';
-import { AllCourses, CourseDetails, CoursesByCategory, Home, RegisterTeacher, TeacherProfilePage } from '../site';
+import { AllCourses, CourseDetails, CoursesByCategory, Home, RegisterTeacher, StudentProfilePage, TeacherProfilePage } from '../site';
 import {
   Account,
   Dashboard,
@@ -35,6 +35,7 @@ export const StudentRoutes = () => {
             element={<CoursesByCategory />}
           />
         </Route>
+        <Route path="/:slug/certificate/:id" element={<StudentProfilePage />} />
         <Route path="student" element={<StudentLayout />}>
           <Route path="dashboard" element={<Dashboard />} />
           <Route path="courses" element={<StudentCourses />} />

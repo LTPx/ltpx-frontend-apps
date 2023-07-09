@@ -14,4 +14,11 @@ export interface Certificate {
     total_tasks: number;
     total_achievements: number;
   }
+  student: {
+    name: string;
+    email: string;
+    country: string;
+    city: string;
+    join_at: string;
+  }
 }

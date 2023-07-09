@@ -44,7 +44,7 @@ export const SiteRoutes = () => {
           <Route path="/terms-and-conditions" element={<TermsConditions />} />
           <Route path="/forget-password" element={<ForgetPassword />} />
           <Route path="/about" element={<AboutUs />} />
-          <Route path="/student" element={<StudentProfilePage />} />
+          <Route path="/:slug/certificate/:id" element={<StudentProfilePage />} />
           <Route path="/wallet" element={<Wallet />} />
           <Route path="/faq" element={<FrequentlyAskedQuestions />} />
           <Route path="/teacher/:slug" element={<TeacherProfilePage />} />

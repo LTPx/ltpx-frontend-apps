@@ -33,6 +33,7 @@ export function StudentCourse(props: StudentCourseProps) {
   const tabIndex = tabs.findIndex((item) => item.value === tab);
   const initialTabSelectedIndex = tabIndex > 0 ? tabIndex : 0;
   const [selectedTab, setSelectedTab] = useState(initialTabSelectedIndex);
+  const [showMore, setShowMore] = useState(false);
 
   const fetchCourse = useCallback(async () => {
     const { success, data, error } = await _getStudentCourse(slug || '');
@@ -63,10 +64,39 @@ export function StudentCourse(props: StudentCourseProps) {
       <div className={styles['container']}>
         <h1>Curso: {enrolledCourse.title}</h1>
         {enrolledCourse.description && (
-          <p className={styles['about-course']}>
-            {enrolledCourse.description.substring(0, 200)}
-          </p>
+          <>
+            {enrolledCourse.description.length > 280 ? (
+              <>
+                <p className={styles['about-course']}>
+                  {showMore
+                    ? enrolledCourse.description
+                    : `${enrolledCourse.description.substring(0, 280)}....`}
+                </p>
+                <p
+                  className={styles['show']}
+                  onClick={() => setShowMore(!showMore)}
+                >
+                  {showMore ? 'Mostrar menos' : 'Mostrar mas'}
+                </p>
+              </>
+            ) : (
+              <p className={styles['about-course']}>
+                {enrolledCourse.description}
+              </p>
+            )}
+          </>
         )}
+        {/* <CourseCertificate
+          imageStudent={
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTPf84rgOXXF7qUrqIFpde-ntEleF8R1FeQyw&usqp=CAU'
+          }
+          teacherName={enrolledCourse.teacher?.teacher_name || ''}
+          titleCourse={enrolledCourse.title}
+          achievements={enrolledCourse.}
+          totalTask={10}
+          totalQuizzes={20}
+          date={'23 de Junio, 2023'}
+        /> */}
         <div className={styles['columns-container']}>
           <div className={styles['column-left']}>
             <div
@@ -84,14 +114,14 @@ export function StudentCourse(props: StudentCourseProps) {
             <div className={`${styles['basic-card']} ${styles.center}`}>
               <h3>Que Aprenderás</h3>
               {enrolledCourse.learn_goals && (
-                <h4>
+                <div className={styles['wrap-goals']}>
                   {enrolledCourse.learn_goals.split('\n').map((goal, key) => (
                     <div className={styles['goals']} key={key}>
                       <div className={styles['square']}></div>
                       <h5>{goal}</h5>
                     </div>
                   ))}
-                </h4>
+                </div>
               )}
             </div>
             <div className={`${styles['basic-card']}`}>

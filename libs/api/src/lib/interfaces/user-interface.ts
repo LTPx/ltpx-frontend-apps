@@ -30,6 +30,7 @@ export interface UserResponse {
 }
 
 export interface UserStore {
+  slug: string;
   fullname: string;
   email: string;
   username: string;
@@ -50,6 +51,8 @@ export interface UserStore {
     total_courses: number;
   },
   id: number;
+  is_teacher: boolean;
+  is_student: boolean;
 }
 
 export interface IRegisterUser {
@@ -64,6 +67,7 @@ export interface ICredentials {
 }
 
 export interface ICurrentUser {
+  slug: string;
   id: number;
   fullname: string;
   email: string;
@@ -79,8 +83,9 @@ export interface ICurrentUser {
   birth: string;
   cart?: CartModel;
   total_unread_notifications: number;
+  is_teacher: boolean;
+  is_student: boolean;
 }
-
 export interface IUserAccount {
   id?: number;
   fullname: string;

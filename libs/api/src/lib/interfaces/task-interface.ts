@@ -19,7 +19,7 @@ export interface TaskStudentResult {
 export interface TaskStudentGrade {
   id: number;
   status: string;
-  comments: string[];
+  comments?: string[];
 }
 
 export interface TaskModel {

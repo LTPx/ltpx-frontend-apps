@@ -77,7 +77,12 @@ export function CourseClassroom(props: CourseClassroomProps) {
                 key={index}
                 title={'Reunion ' + (index + 1)}
                 description={
-                  'Fecha: ' + meeting.month + ' - ' + meeting.day_number
+                  'Fecha: ' +
+                  meeting.month +
+                  ' - ' +
+                  meeting.day_number +
+                  `\n\n` +
+                  `Duración: ${session.call_time_min} min`
                 }
                 time={'Hora: ' + meeting.end_time}
               />

@@ -2,8 +2,8 @@ export const es = {
   dashboards: {
     student: {
       dashboard: 'Dashboard',
-      courses: 'Mis Cursos',
-      classes: 'Mis Clases',
+      courses: 'Mis cursos',
+      classes: 'Mis clases',
       payments: 'Pagos',
       settings: 'Configuraciones',
       account: 'Mi Cuenta',
@@ -115,7 +115,7 @@ export const es = {
       rating: 'Calificación'
     },
     cover: {
-      title: 'Buscar un curso',
+      title: 'Buscas un Curso',
       subtitle: 'Explorar y aprender cosas nuevas',
       search: 'Buscar cursos'
     }
@@ -222,7 +222,7 @@ export const es = {
       quiz: 'Tests',
       task: 'Tareas',
       achievement: 'Logros',
-      sessions: 'Sesiones'
+      sessions: 'Clases'
     },
   },
   courseInformation: {
@@ -306,7 +306,7 @@ export const es = {
     price: 'Precio'
   },
   courseClassroom: {
-    title:'Sesiones',
+    title:'Clases',
     subtitle: 'Establece horarios y fechas para reunirte con tus estudiantes',
     text:'Elige la opción que mejor se acople para este curso'
   },

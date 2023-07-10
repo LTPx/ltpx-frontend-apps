@@ -16,12 +16,13 @@ import avatar from './../../../assets/images/avatars/avatar-3.svg';
 import { useTeacherLayout } from './useTeacherLayout';
 import { ChatNewPrivateRoom } from '../../components';
 import Notifications from '../../components/notifications/notifications';
-import { useNotificationWebSocket } from '@ltpx-frontend-apps/store';
+import { useNotificationWebSocket, useUser } from '@ltpx-frontend-apps/store';
+import { TypeAccounts } from '@ltpx-frontend-apps/api';
 
 export function TeacherLayout() {
   // useNotification(onMessageListener);
   const wsUrl = process.env.NX_WS_URL || '';
-  useNotificationWebSocket(wsUrl)
+  useNotificationWebSocket(wsUrl);
 
   const {
     headerLinks,
@@ -36,8 +37,10 @@ export function TeacherLayout() {
     feedbackAction,
     clearMessageToast,
     newNotification,
-    notifications
+    notifications,
   } = useTeacherLayout();
+
+  const { _changeAccount, user } = useUser();
 
   const ChatFloat = ({ onClick }: { onClick: () => void }) => (
     <div className={styles['chat-tab-button']} onClick={onClick}>
@@ -45,6 +48,63 @@ export function TeacherLayout() {
       <h4>Chat</h4>
     </div>
   );
+
+  const teacherProfileAction = {
+    icon: 'user',
+    text: 'Perfil de profesor',
+    url: '/teacher/account',
+  };
+
+  const contactSupportAction = {
+    icon: 'telephone',
+    text: 'Contactar Soporte',
+    href: 'https://wa.me/message/Y5P6BHULTPA2B1',
+  };
+
+  const changeStudentAccountAction = {
+    icon: 'switch-account',
+    text: 'Cambiar a estudiante',
+    onClick: async () => {
+      const { success, error } = await _changeAccount(TypeAccounts.user);
+      if (success) {
+        window.location.reload();
+        console.log(success);
+      } else {
+        console.log(error);
+      }
+    },
+  };
+
+  const changeAccountToUserAction = {
+    icon: 'switch-account',
+    text: 'Cambiar a sitio',
+    onClick: async () => {
+      const { success, error } = await _changeAccount(TypeAccounts.user);
+      if (success) {
+        window.location.reload();
+        console.log(success);
+      } else {
+        console.log(error);
+      }
+    },
+  };
+
+  const logoutAction = {
+    icon: 'log-out',
+    text: 'Cerrar Sesión',
+    onClick: () => {
+      logoutSession();
+    },
+  };
+
+  const dropdownActions = user.is_student
+    ? [teacherProfileAction, changeStudentAccountAction, logoutAction]
+    : [
+        teacherProfileAction,
+        changeAccountToUserAction,
+        contactSupportAction,
+        logoutAction,
+      ];
 
   return (
     <div className={styles['container']}>
@@ -55,25 +115,7 @@ export function TeacherLayout() {
             <UserMenu
               name={currentUser.fullname}
               email={currentUser.email}
-              links={[
-                {
-                  icon: 'user',
-                  text: 'Perfil de profesor',
-                  url: '/teacher/account',
-                },
-                {
-                  icon: 'telephone',
-                  text: 'Contactar Soporte',
-                  href: 'https://wa.me/message/Y5P6BHULTPA2B1',
-                },
-                {
-                  icon: 'log-out',
-                  text: 'Cerrar Sesión',
-                  onClick: () => {
-                    logoutSession();
-                  },
-                },
-              ]}
+              links={dropdownActions}
             />
             <div className={styles['avatar']}>
               <Avatar outline={true} size={AvatarSize.small} image={avatar} />
@@ -104,7 +146,7 @@ export function TeacherLayout() {
           )}
         </div>
       </div>
-      {feedbackAction.text &&
+      {feedbackAction.text && (
         <Snackbar
           position={SnackbarPosition.centerBottom}
           open={true}
@@ -118,8 +160,8 @@ export function TeacherLayout() {
           duration={2000}
           onClose={clearMessageToast}
         />
-      }
-      {newNotification && notifications.length > 0 &&
+      )}
+      {newNotification && notifications.length > 0 && (
         <Snackbar
           position={SnackbarPosition.bottomRight}
           open={true}
@@ -129,7 +171,7 @@ export function TeacherLayout() {
           duration={2000}
           onClose={clearMessageToast}
         />
-      }
+      )}
     </div>
   );
 }

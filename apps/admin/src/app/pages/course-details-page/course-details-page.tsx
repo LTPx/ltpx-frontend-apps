@@ -26,8 +26,7 @@ export function CourseDetailsPage() {
   const { viewCourse, _getCourse, _approveCourse, _rejectCourse } = useAdmin();
   const { translateCategory, translateLanguage, translateLevel } =
     useCourseUtil();
-  const { classroom, quizzes, contents, achievements, session, tasks } =
-    viewCourse;
+  const { quizzes, contents, achievements, session, tasks } = viewCourse;
   const params = useParams();
   const { formatDate } = useMoment();
   const { id } = params;
@@ -181,7 +180,7 @@ export function CourseDetailsPage() {
               {selectedTab === 4 && (
                 <AchievementsList achievements={achievements || []} />
               )}
-              {selectedTab === 5 && classroom && (
+              {selectedTab === 5 && (
                 <div>
                   {session?.meetings && session?.meetings.length > 0 && (
                     <div className={styles['classes-container']}>

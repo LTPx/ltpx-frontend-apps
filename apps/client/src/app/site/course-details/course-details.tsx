@@ -7,7 +7,6 @@ import {
   Tabs,
   BuyCourseCard,
   OverviewCourse,
-  CourseContents,
   RegisterForm,
   SnackbarType,
   Snackbar,
@@ -106,14 +105,14 @@ export function CourseDetails() {
       text: 'Contenidos',
     },
     {
+      text: 'Tareas',
+    },
+    {
+      text: 'Test',
+    },
+    {
       text: 'Logros',
     },
-    // {
-    //   text: 'Tareas',
-    // },
-    // {
-    //   text: 'Test',
-    // },
     // {
     //   text: 'Reseñas',
     // },
@@ -228,15 +227,16 @@ export function CourseDetails() {
                 </div>
               </div>
               <div className={styles['description-course']}>
-                <div className={styles['avatar']}>
-                  <NavLink to={`/teacher/${teacher.slug}`}>
-                    <Avatar
-                      image={teacher.profile_image || ''}
-                      size={AvatarSize.medium}
-                      outline={true}
-                    />
-                  </NavLink>
-                </div>
+                <NavLink
+                  className={styles['avatar']}
+                  to={`/teacher/${teacher.slug}`}
+                >
+                  <Avatar
+                    image={teacher.profile_image || ''}
+                    size={AvatarSize.medium}
+                    outline={true}
+                  />
+                </NavLink>
                 <div className={styles['items']}>
                   <div className={styles['item']}>
                     <label>
@@ -251,17 +251,17 @@ export function CourseDetails() {
                       {t('coursesDetails.teacherInformation.categories')}
                     </label>
                     <NavLink to={`/courses/${course.category_slug}`}>
-                      <h5>{translateCategory(course.category_slug)}</h5>
+                      <h5>{course.category}</h5>
                     </NavLink>
                   </div>
-                  <div className={styles['item']}>
+                  {/* <div className={styles['item']}>
                     <label>
                       {t('coursesDetails.teacherInformation.review')}
                     </label>
                     <div className={styles['rating']}>
                       <Rating stars={course.average_rating || 0} />
                     </div>
-                  </div>
+                  </div> */}
                 </div>
               </div>
               <div className={styles['summary-course']}>
@@ -276,23 +276,58 @@ export function CourseDetails() {
                   {selectedTab === 0 && (
                     <OverviewCourse
                       description={course.description}
-                      goals={
-                        course.learn_goals ? course.learn_goals.split('\n') : []
-                      }
+                      goals={course.learn_goals ? course.learn_goals : []}
                       requirements={
-                        course.requirements
-                          ? course.requirements.split('\n')
-                          : []
+                        course.requirements ? course.requirements : []
                       }
                     />
                   )}
                   {selectedTab === 1 && (
-                    <CourseContents
-                      lock={true}
-                      contents={course.contents || []}
-                    />
+                    <div className={styles['contents']}>
+                      {course.contents?.map((content, index) => (
+                        <PanelAccordion
+                          key={index}
+                          lock={true}
+                          title={content}
+                        />
+                      ))}
+                    </div>
                   )}
                   {selectedTab === 2 && (
+                    <div className={styles['tasks']}>
+                      {course.tasks ? (
+                        <>
+                          {course.tasks.map((task, index) => (
+                            <PanelAccordion
+                              key={index}
+                              lock={true}
+                              title={task}
+                            />
+                          ))}
+                        </>
+                      ) : (
+                        <h3>Este curso no incluye tareas</h3>
+                      )}
+                    </div>
+                  )}
+                  {selectedTab === 3 && (
+                    <div className={styles['quizzes']}>
+                      {course.quizzes ? (
+                        <>
+                          {course.quizzes?.map((quiz, index) => (
+                            <PanelAccordion
+                              key={index}
+                              lock={true}
+                              title={quiz}
+                            />
+                          ))}
+                        </>
+                      ) : (
+                        <h3>Este curso no incluye tests</h3>
+                      )}
+                    </div>
+                  )}
+                  {selectedTab === 4 && (
                     <div className={styles['achievements']}>
                       {course.achievements?.map((achievement, index) => (
                         <AchievementBadge
@@ -303,13 +338,6 @@ export function CourseDetails() {
                       ))}
                     </div>
                   )}
-                  {selectedTab === 3 && (
-                    <PanelAccordion lock={true} title={'Tarea'} />
-                  )}
-                  {selectedTab === 4 && (
-                    <PanelAccordion lock={true} title={'Test'} />
-                  )}
-
                   {/* {selectedTab === 3 && (
                     <div className={styles['reviews-wrap']}>
                       <RatingCourse
@@ -430,6 +458,10 @@ export function CourseDetails() {
           <RegisterForm
             onSubmit={(data) => {
               onSubmitForm(data);
+            }}
+            termsAndConditions={{
+              text: 'Acepto recibir correos informativos y/o promocionales de Open Mind',
+              link: '/terms-and-conditions',
             }}
           />
         </div>

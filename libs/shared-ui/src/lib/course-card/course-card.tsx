@@ -1,4 +1,4 @@
-import { useCourseUtil } from '@ltpx-frontend-apps/store';
+// import { useCourseUtil } from '@ltpx-frontend-apps/store';
 import { NavLink } from 'react-router-dom';
 import Icon from '../icon/icon';
 import styles from './course-card.module.scss';
@@ -18,24 +18,31 @@ export interface CourseCardProps {
 export function CourseCard(props: CourseCardProps) {
   const { image, category, title, price, duration, achievements, stars, link } =
     props;
-  const { translateCategory } = useCourseUtil();
+  // const { translateCategory } = useCourseUtil();
 
   const Card = () => (
     <div className={styles['container']}>
       <img loading="lazy" src={image} alt="" />
       <div className={styles['content']}>
         <span className={styles['category']}>
-          {translateCategory(category)}
+          {/* {translateCategory(category)} */}
+          {category}
         </span>
-        <h4 className={styles['title']}>{title}</h4>
-        <div className="stars">
+        {title.length > 55 ? (
+          <h4 className={styles['title']}>
+            {title ? `${title.substring(0, 55)}...` : ''}
+          </h4>
+        ) : (
+          <h4 className={styles['title']}>{title}</h4>
+        )}
+        {/* <div className="stars">
           {Array.from(Array(stars).keys()).map((number, index) => (
             <Icon key={index} icon={'star'} size={15} color="#eab308" />
           ))}
           {Array.from(Array(5 - (stars || 0)).keys()).map((number, index) => (
             <Icon key={index} icon={'star'} size={15} color="#888888" />
           ))}
-        </div>
+        </div> */}
         <div className={styles['info']}>
           <div className={styles['info-item']}>
             <Icon icon={'trophy'} size={15} />
@@ -45,9 +52,7 @@ export function CourseCard(props: CourseCardProps) {
             <Icon icon={'clock'} size={15} />
             {duration} min
           </div> */}
-          <div className={styles['price']}>
-            {price}
-          </div>
+          <div className={styles['price']}>{price}</div>
         </div>
       </div>
     </div>

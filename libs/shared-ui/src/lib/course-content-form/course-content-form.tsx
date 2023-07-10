@@ -45,6 +45,7 @@ export function CourseContentForm(props: CourseContentFormProps) {
         }}
         hasFooter={false}
         width={'50vw'}
+        shouldCloseOnOverlayClick={false}
       >
         <div className={styles['content']}>
           <div className={styles['form-content']}>

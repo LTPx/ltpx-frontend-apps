@@ -29,32 +29,32 @@ export function PopularCourses(props: PopularCoursesProps) {
 
   return (
     <div className={styles['popular-courses-container']}>
-    <div className={styles['text']}>
-      <h2 className={styles['title']}>{t('home.popularCourse.title')}</h2>
-      <h4 className={styles['subtitle']}>
-        {t('home.popularCourse.subtitle')}
-      </h4>
+      <div className={styles['text']}>
+        <h2 className={styles['title']}>{t('home.popularCourse.title')}</h2>
+        <h4 className={styles['subtitle']}>
+          {t('home.popularCourse.subtitle')}
+        </h4>
+      </div>
+      <div className={styles['popular-courses']}>
+        {courses.map((course, index) => (
+          <div className={styles['course']} key={index}>
+            <CourseCard
+              image={course.cover_url}
+              category={course.category}
+              title={course.title}
+              price={course.price_format}
+              duration={0}
+              achievements={course.total_achievements}
+              stars={course.average_rating}
+              link={`/course/${course.slug}`}
+            />
+          </div>
+        ))}
+      </div>
+      <div className={styles['link-browser']}>
+        <NavLink to="/courses">{t('links.toAllCourses')}</NavLink>
+      </div>
     </div>
-    <div className={styles['popular-courses']}>
-      {courses.map((course, index) => (
-        <div className={styles['course']} key={index}>
-          <CourseCard
-            image={course.cover_url}
-            category={course.category_slug}
-            title={course.title}
-            price={course.price_format}
-            duration={0}
-            achievements={course.total_achievements}
-            stars={course.average_rating}
-            link={`/course/${course.slug}`}
-          />
-        </div>
-      ))}
-    </div>
-    <div className={styles['link-browser']}>
-      <NavLink to="/courses">{t('links.toAllCourses')}</NavLink>
-    </div>
-  </div>
   );
 }
 

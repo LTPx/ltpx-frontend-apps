@@ -1,7 +1,7 @@
 import {
   ColorsCounterCard,
   CourseCounterCard,
-  QuizProgressCard,
+  Tabs,
   UserCourseCard,
 } from '@ltpx-frontend-apps/shared-ui';
 import { useUser } from '@ltpx-frontend-apps/store';
@@ -10,22 +10,23 @@ import { NavLink } from 'react-router-dom';
 import styles from './dashboard.module.scss';
 import { useStudent } from '@ltpx-frontend-apps/store';
 import { useCallback, useEffect, useState } from 'react';
-import { CourseStatus } from '@ltpx-frontend-apps/api';
+import StudentCertificates from '../student-certificates/student-certificates';
 
 /* eslint-disable-next-line */
 export interface DashboardProps {}
 interface DashboardCard {
-  count: number,
-  text: string,
-  color: ColorsCounterCard,
+  count: number;
+  text: string;
+  color: ColorsCounterCard;
 }
 
 export function Dashboard(props: DashboardProps) {
   const { user } = useUser();
-  const [ cards, setCards] = useState<DashboardCard[]>([]);
-  const { _getStudentCourses, enrolledCourses, _getStudentStatists, studentDashboard } = useStudent();
+  const [cards, setCards] = useState<DashboardCard[]>([]);
+  const [selectedTab, setSelectedTab] = useState(0);
 
-
+  const { _getStudentCourses, enrolledCourses, _getStudentStatists } =
+    useStudent();
 
   const fetchCourses = useCallback(async () => {
     const { success, data } = await _getStudentStatists();
@@ -62,9 +63,12 @@ export function Dashboard(props: DashboardProps) {
     }
   }, []);
 
+  const tabs = [{ text: 'Mis cursos' }, { text: 'Mis certificados' }];
+
   useEffect(() => {
     fetchCourses();
   }, []);
+
   return (
     <div className={styles['container']}>
       <div className={styles['wrap']}>
@@ -81,19 +85,28 @@ export function Dashboard(props: DashboardProps) {
         </div>
         <div className={styles['layout']}>
           <div className={styles['content']}>
-            <h2>Mis Cursos</h2>
-            <div className={styles['courses']}>
-              {enrolledCourses.map((course, index) => (
-                <UserCourseCard
-                  key={index}
-                  image={course.cover_url}
-                  startDate={course.created_at}
-                  title={course.title}
-                  progress={course.course_progress}
-                  url={`/student/course/${course.slug}`}
-                />
-              ))}
-            </div>
+            <Tabs
+              tabs={tabs}
+              isNav={false}
+              onClickTab={(index) => setSelectedTab(index)}
+            />
+            {selectedTab === 0 && (
+              <div className={styles['courses']}>
+                {enrolledCourses.map((course, index) => (
+                  <UserCourseCard
+                    key={index}
+                    image={course.cover_url}
+                    startDate={course.created_at}
+                    title={course.title}
+                    progress={course.course_progress}
+                    url={`/student/course/${course.slug}`}
+                  />
+                ))}
+              </div>
+            )}
+            {selectedTab === 1 && (
+              <StudentCertificates/>
+            )}
           </div>
           <div className={styles['help-ads']}>
             <div className={styles['profile']}>

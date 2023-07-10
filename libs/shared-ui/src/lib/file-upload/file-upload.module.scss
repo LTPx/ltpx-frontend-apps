@@ -7,8 +7,8 @@
   display: flex;
   position: relative;
   border: 2px dashed $gray-color-300;
-  height: 20rem;
-  width: 100%;
+  width: 16rem;
+  height: 140px;
   &:hover {
     .file-selected {
       visibility: visible !important;
@@ -22,7 +22,8 @@
         visibility: visible;
         color: $white-color;
         background-color: $secondary-color;
-        padding: 1rem;
+        padding: 0 1rem;
+        text-decoration: none;
       }
     }
 
@@ -66,8 +67,8 @@
   }
 
   img {
-    object-fit: cover;
     width: 100%;
+    object-fit: cover;
     z-index: 0;
   }
 }

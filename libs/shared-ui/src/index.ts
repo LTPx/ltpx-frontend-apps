@@ -1,3 +1,6 @@
+export * from './lib/row-item-card/row-item-card';
+export * from './lib/student-profile-card/student-profile-card';
+export * from './lib/course-certificate/course-certificate';
 export * from './lib/select-account/select-account';
 export * from './lib/select-icons/select-icons';
 export * from './lib/category-form/category-form';
@@ -124,4 +127,5 @@ export * from './lib/nav/nav';
 export * from './lib/input/input';
 export * from './lib/button/button';
 export * from './lib/header/header';
+export * from './lib/certificate/certificate';
 export * from './hooks/useMoment';

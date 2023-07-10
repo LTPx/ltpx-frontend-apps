@@ -153,7 +153,6 @@ export function TaskStudentCard(props: TaskStudentCardProps) {
           </div>
         )}
       </div>
-
       <Dialog
         isShown={openModal}
         hasFooter={false}
@@ -162,6 +161,7 @@ export function TaskStudentCard(props: TaskStudentCardProps) {
           setOpenModal(false);
         }}
         width={'50vw'}
+        shouldCloseOnOverlayClick={false}
       >
         <TaskFormStudent
           description={description}

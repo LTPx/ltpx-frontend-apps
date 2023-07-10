@@ -30,6 +30,7 @@ export interface UserResponse {
 }
 
 export interface UserStore {
+  slug: string;
   fullname: string;
   email: string;
   username: string;
@@ -66,6 +67,7 @@ export interface ICredentials {
 }
 
 export interface ICurrentUser {
+  slug: string;
   id: number;
   fullname: string;
   email: string;
@@ -84,7 +86,6 @@ export interface ICurrentUser {
   is_teacher: boolean;
   is_student: boolean;
 }
-
 export interface IUserAccount {
   id?: number;
   fullname: string;

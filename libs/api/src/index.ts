@@ -23,6 +23,7 @@ export * from './lib/interfaces/withdrawals-interfaces';
 export * from './lib/interfaces/chat-interface';
 export * from './lib/interfaces/notification-interface';
 export * from './lib/interfaces/category-interface';
+export * from './lib/interfaces/certificate-interface';
 
 
 //fake api

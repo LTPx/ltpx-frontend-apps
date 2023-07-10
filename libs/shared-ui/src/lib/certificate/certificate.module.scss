@@ -4,11 +4,12 @@
   .content {
     background-color: $white-color;
     border-radius: 16px;
-    width: 35rem;
-    padding: 2rem;
-    box-shadow: $card-shadow-medium;
+    min-width: 22rem;
+    padding: 1rem;
+    // box-shadow: $card-shadow-medium;
     border: 1px solid $gray-color-200;
   }
+
   h4 {
     font-size: 14px;
     color: #64748b;
@@ -83,6 +84,10 @@
         width: 100%;
       }
     }
+  }
+
+  .link-details {
+    font-size: 14px;
   }
 }
 

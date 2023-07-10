@@ -1,12 +1,12 @@
 import { Position, Tooltip } from 'evergreen-ui';
 import Tag, { ColorsTag } from '../tag/tag';
-import styles from './course-certificate.module.scss';
+import styles from './certificate.module.scss';
 import { AchievementModel } from '@ltpx-frontend-apps/api';
 import { useMoment } from '../../hooks/useMoment';
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 
 /* eslint-disable-next-line */
-export interface CourseCertificateProps {
+export interface CertificateProps {
   teacherName: string;
   titleCourse: string;
   achievements?: AchievementModel[];
@@ -15,13 +15,11 @@ export interface CourseCertificateProps {
   totalAchievements: number;
   date: string;
   link: string;
-  image: string;
   className?: string;
 }
 
-export function CourseCertificate(props: CourseCertificateProps) {
+export function Certificate(props: CertificateProps) {
   const {
-    image,
     teacherName,
     titleCourse,
     achievements,
@@ -39,24 +37,10 @@ export function CourseCertificate(props: CourseCertificateProps) {
       <div className={`${styles['content']} ${className}`}>
         <div className={styles['certificate-content']}>
           <div className={styles['header']}>
-            <h2 className={styles['title']}>Resumen</h2>
-            <NavLink to={link}>
-              <Tag
-                className={styles['tag-certificate']}
-                text="certificado"
-                color={ColorsTag.green}
-              />
-            </NavLink>
+            <h2 className={styles['title']}>{titleCourse}</h2>
           </div>
           <div className={styles['body']}>
-            <div className={styles['row']}>
-              <img className={styles['img-card']} src={image} />
-            </div>
             <div className={styles['information']}>
-              <div className={styles['item-1']}>
-                <h4>Curso: </h4>
-                <h4 className={styles['text']}>{titleCourse}</h4>
-              </div>
               <div className={styles['item']}>
                 <h4>Profesor: </h4>
                 <h4 className={styles['text']}>{teacherName}</h4>
@@ -72,29 +56,15 @@ export function CourseCertificate(props: CourseCertificateProps) {
               <div className={styles['item']}>
                 <h4>Logros: </h4>
                 <h4 className={styles['text']}>{totalAchievements}</h4>
-                {/* <div className={styles['achievement-wrap']}>
-                  {achievements &&
-                    achievements.map((achievement, index) => (
-                      <Tooltip
-                        content={achievement.title}
-                        position={Position.TOP}
-                        key={index}
-                      >
-                        <NavLink to={link || ''}>
-                          <img
-                            className={styles['achievement']}
-                            src={achievement.image}
-                          />
-                        </NavLink>
-                      </Tooltip>
-                    ))}
-                </div> */}
               </div>
               <div className={styles['item']}>
                 <h4>Fecha de culminación: </h4>
                 <h4 className={styles['text']}>
                   {customFormatDate(date, 'MMM D YYYY')}
                 </h4>
+              </div>
+              <div  className={styles['link-details']}>
+                <Link to={link} target='_blank'>Ver mas detalles en red openmind</Link>
               </div>
             </div>
           </div>
@@ -104,4 +74,4 @@ export function CourseCertificate(props: CourseCertificateProps) {
   );
 }
 
-export default CourseCertificate;
+export default Certificate;

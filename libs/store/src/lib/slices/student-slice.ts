@@ -4,6 +4,7 @@ import {
   Classroom,
   formatErrors,
   getStudentAchievements,
+  getStudentCertificates,
   getStudentClasses,
   getStudentCourse,
   getStudentCourses,
@@ -56,6 +57,7 @@ export type StudentSlice = {
   _getStudentTask: (courseId: number, taskId: number) => Promise<TResponse>;
   _sendTask: (params: TaskStudent) => Promise<TResponse>;
   _getStudentStatists: ()  => Promise<TResponse>;
+  _getStudentCertificates: ()  => Promise<TResponse>;
 };
 
 export const createStudentSlice: StateCreator<StoreState, [], [], StudentSlice> = (
@@ -194,6 +196,14 @@ export const createStudentSlice: StateCreator<StoreState, [], [], StudentSlice> 
         completed_quizzes: data.completed_quizzes,
         total_achievements: data.total_achievements,
       } });
+      return { success: true, data: data };
+    } catch (error) {
+      return { success: false, error: formatErrors(error) };
+    }
+  },
+  _getStudentCertificates:  async () => {
+    try {
+      const data = await getStudentCertificates();
       return { success: true, data: data };
     } catch (error) {
       return { success: false, error: formatErrors(error) };

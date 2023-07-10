@@ -1,5 +1,6 @@
 import { _http } from '../../http';
 import { CategoryModel } from '../../interfaces/category-interface';
+import { CertificateModel } from '../../interfaces/certificate-interface';
 import { CourseSite } from '../../interfaces/course-interface';
 
 const http = _http;
@@ -34,6 +35,19 @@ export const getCoursesByCategory = async (slug: string) => {
   return new Promise<CourseSite[]>((resolve, reject) => {
     http
       .get('api/v1/site/courses', { params: { category: slug } })
+      .then((response) => {
+        resolve(response.data);
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
+};
+
+export const getCertificate = async (slug: string, id: number) => {
+  return new Promise<CertificateModel>((resolve, reject) => {
+    http
+      .get('api/v1/site/certificate', { params: { slug, id } })
       .then((response) => {
         resolve(response.data);
       })

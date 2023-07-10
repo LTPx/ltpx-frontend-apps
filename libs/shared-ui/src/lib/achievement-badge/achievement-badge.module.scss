@@ -11,8 +11,27 @@
   padding: 1rem;
   width: 10rem;
   border-radius: 10px;
+  text-align: center;
 
-  img {
+}
+
+.header {
+  width: 6rem;
+  height: 6rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .img-background {
+    z-index: 0;
+    position: absolute;
+    width: 6rem;
+    height: 6rem;
+  }
+  .img-achievement {
+    position: absolute;
+    z-index: 1;
     width: 5rem;
+    height: 5rem;
   }
 }

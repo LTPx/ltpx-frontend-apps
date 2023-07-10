@@ -1,36 +1,52 @@
 import {
   CourseCertificate,
+  EmptyState,
+  PanelAccordion,
+  RowItemCard,
   StudentProfileCard,
   Tabs,
+  useMoment,
 } from '@ltpx-frontend-apps/shared-ui';
 import styles from './student-profile-page.module.scss';
-import { useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
+import { useSite } from '@ltpx-frontend-apps/store';
+import { useParams } from 'react-router-dom';
+import { CertificateModel } from '@ltpx-frontend-apps/api';
 
-/* eslint-disable-next-line */
-export interface StudentProfilePageProps {}
-
-export function StudentProfilePage(props: StudentProfilePageProps) {
+export function StudentProfilePage() {
   const [selectedTab, setSelectedTab] = useState(0);
+  const [certificate, setCertificate] = useState<CertificateModel>();
+  const { slug, id } = useParams();
+  const { _getCertificate } = useSite();
+  const { formatDate } = useMoment();
+
+  const fetchCertificate = useCallback(async () => {
+    const slugUrl = slug || '';
+    const idUrl = parseInt(id || '');
+    if (slugUrl && idUrl) {
+      const { success, data, error } = await _getCertificate(slugUrl, idUrl);
+      if (success) {
+        setCertificate(data);
+      } else {
+        console.log('error: ', error);
+      }
+    }
+  }, []);
+
+  useEffect(() => {
+    fetchCertificate();
+  }, []);
 
   const tabs = [
     {
-      text: 'Información',
+      text: 'Tareas realizadas',
     },
     {
-      text: 'Contenidos',
+      text: 'Test realizados',
     },
     {
-      text: 'Tareas',
+      text: 'Logros alcanzados',
     },
-    {
-      text: 'Test',
-    },
-    {
-      text: 'Logros',
-    },
-    // {
-    //   text: 'Reseñas',
-    // },
   ];
 
   const handleClick = (index: number) => {
@@ -39,46 +55,90 @@ export function StudentProfilePage(props: StudentProfilePageProps) {
   return (
     <div className={styles['container']}>
       <div className={styles['content']}>
-        <h1 className={styles['title']}>Información</h1>
-        <div className={styles['wrap-content']}>
-          <CourseCertificate
-            className={styles['certificate']}
-            teacherName={'Carlos Huerta'}
-            titleCourse={'Empieza tu propio negocio de aprendizaje en linea con OpenMind'}
-            totalTask={8}
-            totalQuizzes={10}
-            date={''}
-            imageStudent={
-              'https://res-5.cloudinary.com/dfstnuesp/image/upload/aradq4hu2giqysufv4h2ec6ykwpy.png'
-            }
+        <h2 className={styles['title']}>Red OpenMind</h2>
+        <h5 className={styles['subtitle']}>Registro público de certificados</h5>
+        {certificate ? (
+          <>
+            <div className={styles['wrap-content']}>
+              <CourseCertificate
+                image={certificate.course.cover_url}
+                teacherName={certificate.teacher.name}
+                titleCourse={certificate.course.name}
+                totalTask={certificate.course.total_tasks}
+                totalQuizzes={certificate.course.total_quizzes}
+                totalAchievements={certificate.course.total_achievements}
+                date={certificate.updated_at}
+                link={''}
+              />
+              <StudentProfileCard
+                className={styles['profile-card']}
+                studentName={certificate.student.name}
+                email={certificate.student.email}
+                country={certificate.student.country || 'n/a'}
+                city={certificate.student.city || 'n/a'}
+                date={certificate.student.join_at}
+              />
+            </div>
+            <div className={`${styles['tabs-content']} card`}>
+              <Tabs
+                className={styles['tabs']}
+                classNameText={styles['tabs-edit']}
+                tabs={tabs}
+                isNav={false}
+                onClickTab={(option) => handleClick(option)}
+              />
+              <div className={styles['tabs-wrap']}>
+                {selectedTab === 0 && (
+                  <div className={styles['tasks']}>
+                    {certificate.tasks.map((task, index)=>(
+                      <RowItemCard
+                        key={index}
+                        title={task.title}
+                        date={formatDate(task.created_at, true)}
+                      />
+                    ))}
+                  </div>
+                )}
+                {selectedTab === 1 && (
+                  <div className={styles['quizzes']}>
+                    {certificate.quizzes.map((quiz, index)=>(
+                      <RowItemCard
+                        key={index}
+                        title={quiz.title}
+                        date={formatDate(quiz.created_at, true)}
+                        column={{
+                          title: 'Resultado',
+                          value: `${quiz.score} pts`
+                        }}
+                      />
+                    ))}
+                  </div>
+                )}
+                {selectedTab === 2 && (
+                  <div className={styles['achievements']}>
+                    {certificate.achievements.map((achievement, index)=>(
+                      <RowItemCard
+                        key={index}
+                        title={achievement.title}
+                        date={formatDate(achievement.created_at, true)}
+                        image={achievement.image}
+                        column={{
+                          title: 'Puntos',
+                          value: achievement.points
+                        }}
+                      />
+                    ))}
+                  </div>
+                )}
+              </div>
+            </div>
+          </>
+        ) : (
+          <EmptyState
+            title="No encontrado"
+            description="No hemos encontrado este certificado en nuestros registros"
           />
-          <StudentProfileCard
-            className={styles['profile-card']}
-            studentName={'Angel Capa'}
-            email={'ricardocmndn@gmail.com'}
-            country={'Ecuador'}
-            city={'Loja'}
-            date="Mayo 14 del 2013"
-          />
-        </div>
-        <div className={styles['tabs-content']}>
-          <Tabs
-            className={styles['tabs']}
-            classNameText={styles['tabs-edit']}
-            tabs={tabs}
-            isNav={false}
-            onClickTab={(option) => handleClick(option)}
-          />
-          <div className={styles['tabs-content']}>
-            {selectedTab === 0 && <></>}
-            {selectedTab === 1 && <div className={styles['contents']}></div>}
-            {selectedTab === 2 && <div className={styles['tasks']}></div>}
-            {selectedTab === 3 && <div className={styles['quizzes']}></div>}
-            {selectedTab === 4 && (
-              <div className={styles['achievements']}></div>
-            )}
-          </div>
-        </div>
+        )}
       </div>
     </div>
   );

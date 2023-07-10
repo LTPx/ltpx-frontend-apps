@@ -5,6 +5,7 @@ export const useSite = () => {
     currentFullCourse,
     categories,
     allCategories,
+    categoriesForSelect,
     _getPopularCourses,
     _getSiteCourse,
     _confirmUserPayment,
@@ -14,13 +15,14 @@ export const useSite = () => {
     _getPopularCategories,
     _getCoursesByCategory,
     _getAllCategories,
-    categoriesForSelect,
+    _getCertificate,
   } = useAppStore();
 
   return {
     currentFullCourse,
     categories,
     allCategories,
+    categoriesForSelect,
     _getPopularCourses,
     _getSiteCourse,
     _confirmUserPayment,
@@ -30,6 +32,6 @@ export const useSite = () => {
     _getPopularCategories,
     _getCoursesByCategory,
     _getAllCategories,
-    categoriesForSelect,
+    _getCertificate
   }
 }

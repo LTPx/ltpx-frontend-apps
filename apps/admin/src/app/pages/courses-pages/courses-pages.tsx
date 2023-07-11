@@ -1,14 +1,16 @@
-import { Tabs, useMoment } from '@ltpx-frontend-apps/shared-ui';
+import { Icon, Menu, Tabs, useMoment } from '@ltpx-frontend-apps/shared-ui';
 import { useAdmin, useCourseUtil } from '@ltpx-frontend-apps/store';
-import { useCallback, useEffect } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import styles from './courses-pages.module.scss';
 
 export function CoursesPages() {
-  const { _getCoursesByStatus, courses } =
-    useAdmin();
+  const { _getCoursesByStatus, courses } = useAdmin();
   const { translateCategory } = useCourseUtil();
-  const tabs = [{ text: 'Pendientes' }, { text: 'Necesita cambios' }, { text: 'Aprobados' }];
+  const [selectedTab, setSelectedTab] = useState(0);
+
+  const tabs = [{ text: 'Pendientes' }, { text: 'Necesita cambios' }];
+  const options = [{ text: 'Cursos' }, { text: 'Solicitudes' }];
   const { formatDate } = useMoment();
 
   const fetchCourses = useCallback(async (status: string) => {
@@ -16,54 +18,128 @@ export function CoursesPages() {
     console.log('resp....: ', resp);
   }, []);
 
+  const fetchAllCourses = useCallback(async (status: string) => {
+    const resp = await _getCoursesByStatus(status);
+    console.log('resp....: ', resp);
+  }, []);
+
   useEffect(() => {
     fetchCourses('review');
+    fetchAllCourses('published');
   }, []);
 
   const handleChangeTab = async (tabIndex: number) => {
     if (tabIndex === 0) {
       await fetchCourses('review');
-    } else if (tabIndex === 1){
+    } else if (tabIndex === 1) {
       await fetchCourses('rejected');
-    } else if (tabIndex === 2){
-      await fetchCourses('published');
     }
   };
 
+  const handleClick = async (tabIndex: number) => {
+    if (tabIndex === 0) {
+      await fetchAllCourses('published');
+    } else if (tabIndex === 1) {
+      await fetchCourses('review');
+    }
+    setSelectedTab(tabIndex);
+  };
+
   return (
-    <div className={styles['container']}>
-      <h1>Solicitudes de aprobación de cursos</h1>
-      <p>Estas son las ultimas solicitudes que se han recibido</p>
+    <div className={styles['wrap-content']}>
       <Tabs
-        tabs={tabs}
-        onClickTab={(index) => {
-          handleChangeTab(index);
-        }}
+        tabs={options}
+        isNav={false}
+        onClickTab={(index) => handleClick(index)}
       />
-      <table>
-        <thead>
-          <tr>
-            <th>Nombre</th>
-            <th>Categoría</th>
-            <th>Fecha de creación</th>
-            <th>Acciones</th>
-          </tr>
-        </thead>
-        <tbody>
-          {courses.map((course, index) => (
-            <tr key={index}>
-              <td className={styles['user-name']}>{course.title}</td>
-              <td>{translateCategory(course.category_slug)}</td>
-              <td>{formatDate(course.created_at)}</td>
-              <td>
-                <NavLink to={`/admin/courses/${course.id}`}>
-                  Ver curso
-                </NavLink>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      <div>
+        {selectedTab === 0 && (
+          <div className={styles['container']}>
+            <table>
+              <thead>
+                <tr>
+                  <th>Nombre</th>
+                  <th>Profesor</th>
+                  <th className={styles['th-class']}>Acciones</th>
+                </tr>
+              </thead>
+              <tbody>
+                {courses.map((course, index) => (
+                  <tr key={index}>
+                    <td>{course.title}</td>
+                    <td>{course.teacher?.teacher_name}</td>
+                    <td>
+                      <Menu
+                        items={[
+                          {
+                            text: 'Ver Curso',
+                            icon: 'eye',
+                            url: `/admin/courses/${course.id}`,
+                          },
+                          {
+                            text: 'Eliminar Curso',
+                            icon: 'trash',
+                            // url: `/teacher/courses/edit/${course.id}`,
+                          },
+                          {
+                            text: 'Despublicar Curso',
+                            icon: 'pencil',
+                            // url: `/teacher/courses/edit/${course.id}`,
+                          },
+                        ]}
+                      >
+                        <div className={styles['actions']}>
+                          <Icon
+                            icon={'ellipsis-horizontal-outline'}
+                            size={15}
+                            className={styles['icon-button']}
+                          />
+                        </div>
+                      </Menu>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
+        {selectedTab === 1 && (
+          <div className={styles['container']}>
+            <h1>Solicitudes de aprobación de cursos</h1>
+            <p>Estas son las ultimas solicitudes que se han recibido</p>
+            <Tabs
+              tabs={tabs}
+              onClickTab={(index) => {
+                handleChangeTab(index);
+              }}
+            />
+            <table>
+              <thead>
+                <tr>
+                  <th>Nombre</th>
+                  <th>Categoría</th>
+                  <th>Fecha de creación</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody>
+                {courses.map((course, index) => (
+                  <tr key={index}>
+                    <td className={styles['user-name']}>{course.title}</td>
+                    <td>{translateCategory(course.category_slug)}</td>
+                    <td>{formatDate(course.created_at)}</td>
+                    <td>
+                      <NavLink to={`/admin/courses/${course.id}`}>
+                        Ver curso
+                      </NavLink>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
+      </div>
     </div>
   );
 }

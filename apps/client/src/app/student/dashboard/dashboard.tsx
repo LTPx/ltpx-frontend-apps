@@ -104,9 +104,7 @@ export function Dashboard(props: DashboardProps) {
                 ))}
               </div>
             )}
-            {selectedTab === 1 && (
-              <StudentCertificates/>
-            )}
+            {selectedTab === 1 && <StudentCertificates />}
           </div>
           <div className={styles['help-ads']}>
             <div className={styles['profile']}>

@@ -1,14 +1,22 @@
-import { Icon, Menu, Tabs, useMoment } from '@ltpx-frontend-apps/shared-ui';
+import {
+  DialogConfirm,
+  Icon,
+  Menu,
+  Tabs,
+  useMoment,
+} from '@ltpx-frontend-apps/shared-ui';
 import { useAdmin, useCourseUtil } from '@ltpx-frontend-apps/store';
 import { useCallback, useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import styles from './courses-pages.module.scss';
 
 export function CoursesPages() {
-  const { _getCoursesByStatus, courses } = useAdmin();
+  const { _getCoursesByStatus, courses, _removeCourse, _unpublishedCourse } =
+    useAdmin();
   const { translateCategory } = useCourseUtil();
   const [selectedTab, setSelectedTab] = useState(0);
-
+  const [openMessage, setOpenMessage] = useState(false);
+  const [saveId, setSaveId] = useState(0);
   const tabs = [{ text: 'Pendientes' }, { text: 'Necesita cambios' }];
   const options = [{ text: 'Cursos' }, { text: 'Solicitudes' }];
   const { formatDate } = useMoment();
@@ -18,14 +26,8 @@ export function CoursesPages() {
     console.log('resp....: ', resp);
   }, []);
 
-  const fetchAllCourses = useCallback(async (status: string) => {
-    const resp = await _getCoursesByStatus(status);
-    console.log('resp....: ', resp);
-  }, []);
-
   useEffect(() => {
-    fetchCourses('review');
-    fetchAllCourses('published');
+    fetchCourses('published');
   }, []);
 
   const handleChangeTab = async (tabIndex: number) => {
@@ -38,13 +40,30 @@ export function CoursesPages() {
 
   const handleClick = async (tabIndex: number) => {
     if (tabIndex === 0) {
-      await fetchAllCourses('published');
+      await fetchCourses('published');
     } else if (tabIndex === 1) {
       await fetchCourses('review');
     }
     setSelectedTab(tabIndex);
   };
 
+  async function handleRemoveCourse(courseId: number) {
+    const { success, error } = await _removeCourse(courseId);
+    if (success) {
+      console.log('Eliminado');
+    } else {
+      console.log('error: ', error);
+    }
+  }
+
+  async function handleUnpublishedCourse(courseId: number) {
+    const { success, error } = await _unpublishedCourse(courseId);
+    if (success) {
+      console.log('No publicado');
+    } else {
+      console.log(error);
+    }
+  }
   return (
     <div className={styles['wrap-content']}>
       <Tabs
@@ -79,11 +98,15 @@ export function CoursesPages() {
                           {
                             text: 'Eliminar Curso',
                             icon: 'trash',
-                            // url: `/teacher/courses/edit/${course.id}`,
+                            onClick: () => {
+                              setSaveId(course.id);
+                              setOpenMessage(true);
+                            },
                           },
                           {
                             text: 'Despublicar Curso',
                             icon: 'pencil',
+                            onClick: () => handleUnpublishedCourse(course.id),
                             // url: `/teacher/courses/edit/${course.id}`,
                           },
                         ]}
@@ -140,6 +163,16 @@ export function CoursesPages() {
           </div>
         )}
       </div>
+      <DialogConfirm
+        open={openMessage}
+        title={'Estas seguro que deseas eliminar este curso?'}
+        subtitle="Recuerde que una ves eliminado no podrá volver a recuperar la información"
+        confirm={() => {
+          handleRemoveCourse(saveId);
+          setOpenMessage(false);
+        }}
+        onClose={() => setOpenMessage(false)}
+      />
     </div>
   );
 }

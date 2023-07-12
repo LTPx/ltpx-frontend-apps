@@ -25,7 +25,9 @@ import {
   Category,
   removeCategory,
   editCategory,
-  CategoryModel
+  CategoryModel,
+  adminDeleteCourse,
+  adminUnpublishCourse
 } from '@ltpx-frontend-apps/api';
 
 export type TResponse = {
@@ -42,6 +44,8 @@ export type AdminSlice = {
   viewApplication: ApplicationTeach;
   getApplicationStore: (id: number) => void;
   getCourseStore: (id: number) => void;
+  _removeCourse: (id: number) => Promise<TResponse>;
+  _unpublishedCourse: (id: number) => Promise<TResponse>;
   _pendingApplications: () => Promise<TResponse>;
   _approvedApplications: () => Promise<TResponse>;
   _rejectApplication: (id: number, comment: string) => Promise<TResponse>;
@@ -208,6 +212,27 @@ export const createAdminSlice: StateCreator<StoreState, [], [], AdminSlice> = (
       const courses = await getCoursesByStatus(status);
       set({courses})
       return { success: true, data: courses };
+    } catch (error) {
+      return { success: false, error };
+    }
+  },
+  _removeCourse: async (courseId) => {
+    try {
+      await adminDeleteCourse(courseId);
+      const allCourses = get().courses;
+      const updateCourses = allCourses.filter((course)=>{
+        return course.id !== courseId;
+      });
+      set({ courses: updateCourses });
+      return { success: true };
+    } catch (error) {
+      return { success: false, data: error };
+    }
+  },
+  _unpublishedCourse: async (courseId) => {
+    try {
+      const course = await adminUnpublishCourse(courseId);
+      return { success: true, data: course };
     } catch (error) {
       return { success: false, error };
     }

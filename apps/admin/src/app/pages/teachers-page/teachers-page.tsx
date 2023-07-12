@@ -18,21 +18,15 @@ export function TeachersPage() {
     console.log('resp....: ', resp);
   }, []);
 
-  const fetchAllTeachers = useCallback(async (status: string) => {
-    const resp = await _getApplicationsByStatus(status);
-    console.log('resp....: ', resp);
-  }, []);
-
   useEffect(() => {
-    fetchAllTeachers('approved');
-    fetchApplications('review');
+    fetchApplications('approved');
   }, []);
 
   const handleClick = async (tabIndex: number) => {
     if (tabIndex === 0) {
-      await fetchAllTeachers('approved');
+      await fetchApplications('approved');
     } else if (tabIndex === 1) {
-      await fetchAllTeachers('review');
+      await fetchApplications('review');
     }
     setSelectedTab(tabIndex);
   };
@@ -76,7 +70,7 @@ export function TeachersPage() {
                           {
                             text: 'Ver Perfil',
                             icon: 'eye',
-                            url: `/admin/courses/${application.id}`,
+                            url: `/admin/teacher/${application.id}`,
                           },
                           {
                             text: 'Banear',

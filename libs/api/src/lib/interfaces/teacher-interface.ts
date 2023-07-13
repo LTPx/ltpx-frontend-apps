@@ -32,6 +32,8 @@ export interface TeacherProfile {
   profile_video: string;
   slug: string;
   user_id: number;
+  country: string;
+  created_at: string;
 }
 
 export interface ITeacher {

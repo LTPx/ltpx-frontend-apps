@@ -4,14 +4,25 @@ import { Avatar } from 'evergreen-ui';
 import { useCallback, useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import styles from './teachers-page.module.scss';
+import { TeacherProfile } from '@ltpx-frontend-apps/api';
 
 /* eslint-disable-next-line */
 export function TeachersPage() {
-  const { _getApplicationsByStatus, applications } = useAdmin();
   const { formatDate } = useMoment();
   const [selectedTab, setSelectedTab] = useState(0);
   const tabs = [{ text: 'Pendientes' }, { text: 'Necesita cambios' }];
   const options = [{ text: 'Profesores' }, { text: 'Solicitudes' }];
+  const [teachers, setTeachers] = useState<TeacherProfile[]>([]);
+  const { _getTeachers, applications, _getApplicationsByStatus } = useAdmin();
+
+  const fetchTeachers = useCallback(async () => {
+    const { success, data, error } = await _getTeachers();
+    if (success) {
+      setTeachers(data);
+    } else {
+      console.log('error: ', error);
+    }
+  }, []);
 
   const fetchApplications = useCallback(async (status: string) => {
     const resp = await _getApplicationsByStatus(status);
@@ -19,12 +30,12 @@ export function TeachersPage() {
   }, []);
 
   useEffect(() => {
-    fetchApplications('approved');
-  }, []);
+    fetchTeachers();
+  }, [fetchTeachers]);
 
   const handleClick = async (tabIndex: number) => {
     if (tabIndex === 0) {
-      await fetchApplications('approved');
+      await fetchTeachers();
     } else if (tabIndex === 1) {
       await fetchApplications('review');
     }
@@ -59,18 +70,18 @@ export function TeachersPage() {
                 </tr>
               </thead>
               <tbody>
-                {applications.map((application, index) => (
+                {teachers.map((teacher, index) => (
                   <tr key={index}>
-                    <td>{application.name}</td>
-                    <td>{application.country}</td>
-                    <td>{formatDate(application.created_at)}</td>
+                    <td>{teacher.teacher_name}</td>
+                    <td>{teacher.country}</td>
+                    <td>{formatDate(teacher.created_at)}</td>
                     <td>
                       <Menu
                         items={[
                           {
                             text: 'Ver Perfil',
                             icon: 'eye',
-                            url: `/admin/teacher/${application.id}`,
+                            url: `/admin/teacher/${teacher.user_id}`,
                           },
                           {
                             text: 'Banear',

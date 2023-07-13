@@ -48,6 +48,7 @@ export * from './lib/api/teacher/withdrawals-api';
 
 export * from './lib/api/admin/applications-api';
 export * from './lib/api/admin/users-api';
+export * from './lib/api/admin/teachers-api';
 export * from './lib/api/admin/admin-courses-api';
 export * from './lib/api/admin/admin-withdrawals-api';
 export * from './lib/api/admin/admin-categories-api';

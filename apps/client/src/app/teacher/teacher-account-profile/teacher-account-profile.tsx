@@ -1,5 +1,5 @@
 import { Button, ColorsButton } from '@ltpx-frontend-apps/shared-ui';
-import { useTeacher, useUser } from '@ltpx-frontend-apps/store';
+import { useTeacher } from '@ltpx-frontend-apps/store';
 import { useCallback, useEffect, useState } from 'react';
 import styles from './teacher-account-profile.module.scss';
 import { NavLink } from 'react-router-dom';

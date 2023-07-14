@@ -5,6 +5,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { useAdmin } from '@ltpx-frontend-apps/store';
 import { Avatar } from 'evergreen-ui';
 import moment from 'moment';
+import { NavLink } from 'react-router-dom';
 
 /* eslint-disable-next-line */
 export interface ProfileUserViewProps {
@@ -72,6 +73,9 @@ export function ProfileUserView(props: ProfileUserViewProps) {
             <h4 className={styles['text']}>{users?.phone}</h4>
           </div>
         </div>
+        <NavLink to={`/admin/teacher/${userId}`}>
+          <h4>Ir a perfil de Profesor</h4>
+        </NavLink>
       </div>
     </div>
   );

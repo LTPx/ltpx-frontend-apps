@@ -12,6 +12,7 @@ import SettingsAppPage from '../pages/settings-app-page/settings-app-page';
 import TeachersPage from '../pages/teachers-page/teachers-page';
 import UsersPage from '../pages/users-page/users-page';
 import CategoryPage from '../pages/category-page/category-page';
+import TeacherProfilePage from '../pages/teacher-profile-page/teacher-profile-page';
 
 export const AppRouter = () => {
   return (
@@ -21,6 +22,7 @@ export const AppRouter = () => {
         <Route path="teachers" element={<TeachersPage />} />
         <Route path="courses" element={<CoursesPages />} />
         <Route path="courses/:id" element={<CourseDetailsPage />} />
+        <Route path="teacher/:id" element={<TeacherProfilePage />} />
         <Route path="application/:id" element={<ApplicationDetailsPage />} />
         <Route path="payments-details/:id" element={<PaymentsDetailsPage />} />
         <Route path="settings" element={<SettingsAppPage />} />

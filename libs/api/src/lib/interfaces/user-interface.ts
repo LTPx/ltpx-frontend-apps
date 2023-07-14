@@ -107,6 +107,8 @@ export interface INewPassword {
 export interface UserModel {
   id                     :number;
   email                  :string;
+  email_confirmed?       :boolean;
+  accounts?              :string[];
   created_at             :string;
   updated_at             :string;
   fullname               :string;

@@ -18,7 +18,7 @@ export const getTeachers = async () => {
 export const getTeacher = async (teacherId: number) => {
   return new Promise<TeacherProfile>((resolve, reject) => {
     http
-      .get(`api/v1/admin/teacher/${teacherId}`)
+      .get(`api/v1/admin/teachers/${teacherId}`)
       .then((response) => {
         resolve(response.data);
       })

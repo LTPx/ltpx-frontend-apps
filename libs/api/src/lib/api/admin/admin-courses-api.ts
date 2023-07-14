@@ -42,6 +42,32 @@ export const getApprovedCourses = async () => {
   });
 };
 
+export const adminDeleteCourse = async (courseId: number) => {
+  return new Promise<CourseModel>((resolve, reject) => {
+    http
+      .delete(`api/v1/admin/courses/${courseId}`)
+      .then((response) => {
+        resolve(response.data);
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
+};
+
+export const adminUnpublishCourse = async (courseId: number) => {
+  return new Promise<CourseModel>((resolve, reject) => {
+    http
+      .post(`api/v1/admin/courses/${courseId}/unpublish`)
+      .then((response) => {
+        resolve(response.data);
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
+};
+
 export const adminCreateCourse = async (course: CourseApiParams) => {
   return new Promise<CourseModel>((resolve, reject) => {
     const data = moveToFormData(course);

@@ -59,6 +59,7 @@ export function UsersPage(props: UsersPageProps) {
           <tr>
             <th>Nombre</th>
             <th>Email</th>
+            <th>Cuenta activa</th>
             <th>Tipo de Cuenta</th>
             <th>Acciones</th>
           </tr>
@@ -71,7 +72,8 @@ export function UsersPage(props: UsersPageProps) {
                 {user.fullname}
               </td>
               <td>{user.email}</td>
-              <td>{user.initial_register}</td>
+              <td>{user.email_confirmed ? 'Si' : 'No'}</td>
+              <td>{user.accounts?.join(', ')}</td>
               <td className={styles['actions']}>
                 <Button
                   icon="eye"

@@ -27,7 +27,7 @@ export function CoursesPages() {
   }, []);
 
   useEffect(() => {
-    fetchCourses('published');
+    fetchCourses('all');
   }, []);
 
   const handleChangeTab = async (tabIndex: number) => {
@@ -40,7 +40,7 @@ export function CoursesPages() {
 
   const handleClick = async (tabIndex: number) => {
     if (tabIndex === 0) {
-      await fetchCourses('published');
+      await fetchCourses('all');
     } else if (tabIndex === 1) {
       await fetchCourses('review');
     }
@@ -78,6 +78,7 @@ export function CoursesPages() {
               <thead>
                 <tr>
                   <th>Nombre</th>
+                  <th>Estado</th>
                   <th>Profesor</th>
                   <th className={styles['th-class']}>Acciones</th>
                 </tr>
@@ -86,6 +87,7 @@ export function CoursesPages() {
                 {courses.map((course, index) => (
                   <tr key={index}>
                     <td>{course.title}</td>
+                    <td>{course.status}</td>
                     <td>{course.teacher?.teacher_name}</td>
                     <td>
                       <Menu

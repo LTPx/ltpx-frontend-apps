@@ -1,4 +1,11 @@
-import { Icon, Menu, Tabs, useMoment } from '@ltpx-frontend-apps/shared-ui';
+import {
+  CommissionForm,
+  Icon,
+  Menu,
+  Select,
+  Tabs,
+  useMoment,
+} from '@ltpx-frontend-apps/shared-ui';
 import { useAdmin } from '@ltpx-frontend-apps/store';
 import { Avatar } from 'evergreen-ui';
 import { useCallback, useEffect, useState } from 'react';
@@ -10,10 +17,14 @@ import { TeacherProfile } from '@ltpx-frontend-apps/api';
 export function TeachersPage() {
   const { formatDate } = useMoment();
   const [selectedTab, setSelectedTab] = useState(0);
-  const tabs = [{ text: 'Pendientes' }, { text: 'Necesita cambios' }];
+  const tabs = [
+    { text: 'Pendientes', value: 'review' },
+    { text: 'Necesita cambios', value: 'rejected' },
+  ];
   const options = [{ text: 'Profesores' }, { text: 'Solicitudes' }];
   const [teachers, setTeachers] = useState<TeacherProfile[]>([]);
   const { _getTeachers, applications, _getApplicationsByStatus } = useAdmin();
+  const [openModal, setOpenModal] = useState(false);
 
   const fetchTeachers = useCallback(async () => {
     const { success, data, error } = await _getTeachers();
@@ -42,16 +53,17 @@ export function TeachersPage() {
     setSelectedTab(tabIndex);
   };
 
-  const handleChangeTab = async (tabIndex: number) => {
-    if (tabIndex === 0) {
+  const handleChangeTab = async (value: string) => {
+    if (value === 'review') {
       await fetchApplications('review');
-    } else if (tabIndex === 1) {
+    } else if (value === 'rejected') {
       await fetchApplications('rejected');
     }
   };
 
   return (
-    <div className={styles['wrap-content']}>
+    <div className={styles['container']}>
+      <h1 className={styles['title']}>Administración de Profesores</h1>
       <Tabs
         tabs={options}
         isNav={false}
@@ -59,7 +71,7 @@ export function TeachersPage() {
       />
       <div>
         {selectedTab === 0 && (
-          <div className={styles['container']}>
+          <div className={styles['content']}>
             <table>
               <thead>
                 <tr>
@@ -91,6 +103,7 @@ export function TeachersPage() {
                           {
                             text: 'Configuraciones',
                             icon: 'pencil',
+                            onClick: () => setOpenModal(true),
                             // url: `/teacher/courses/edit/${course.id}`,
                           },
                         ]}
@@ -111,15 +124,24 @@ export function TeachersPage() {
           </div>
         )}
         {selectedTab === 1 && (
-          <div className={styles['container']}>
-            <h1>Solicitudes de Profesores</h1>
-            <p>Estas son las ultimas solicitudes que se han recibido</p>
-            <Tabs
+          <div className={styles['content']}>
+            <div className={styles['head']}>
+              <p>Estas son las ultimas solicitudes que se han recibido</p>
+              <Select
+                options={tabs}
+                selected={'review'}
+                disablePlaceholder={true}
+                onChange={(item) => {
+                  handleChangeTab(item.value);
+                }}
+              />
+            </div>
+            {/* <Tabs
               tabs={tabs}
               onClickTab={(index) => {
                 handleChangeTab(index);
               }}
-            />
+            /> */}
             <table>
               <thead>
                 <tr>
@@ -150,6 +172,11 @@ export function TeachersPage() {
           </div>
         )}
       </div>
+      <CommissionForm
+        open={openModal}
+        onSubmit={() => console.log('click')}
+        onClose={() => setOpenModal(false)}
+      />
     </div>
   );
 }

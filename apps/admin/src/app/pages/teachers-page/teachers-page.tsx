@@ -6,7 +6,7 @@ import {
   Tabs,
   useMoment,
 } from '@ltpx-frontend-apps/shared-ui';
-import { useAdmin } from '@ltpx-frontend-apps/store';
+import { useAdmin, useUtil } from '@ltpx-frontend-apps/store';
 import { Avatar } from 'evergreen-ui';
 import { useCallback, useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
@@ -16,6 +16,7 @@ import { TeacherProfile } from '@ltpx-frontend-apps/api';
 /* eslint-disable-next-line */
 export function TeachersPage() {
   const { formatDate } = useMoment();
+  const { capitalizeSentence } = useUtil();
   const [selectedTab, setSelectedTab] = useState(0);
   const tabs = [
     { text: 'Pendientes', value: 'review' },
@@ -78,15 +79,17 @@ export function TeachersPage() {
                   <th>Nombre</th>
                   <th>País</th>
                   <th>Registrado</th>
+                  <th>Comision</th>
                   <th className={styles['th-class']}>Acciones</th>
                 </tr>
               </thead>
               <tbody>
                 {teachers.map((teacher, index) => (
                   <tr key={index}>
-                    <td>{teacher.teacher_name}</td>
+                    <td>{capitalizeSentence(teacher.teacher_name)}</td>
                     <td>{teacher.country}</td>
                     <td>{formatDate(teacher.created_at)}</td>
+                    <td>{teacher.commission} %</td>
                     <td>
                       <Menu
                         items={[
@@ -96,16 +99,15 @@ export function TeachersPage() {
                             url: `/admin/teacher/${teacher.user_id}`,
                           },
                           {
-                            text: 'Banear',
-                            icon: 'trash',
-                            // url: `/teacher/courses/edit/${course.id}`,
-                          },
-                          {
-                            text: 'Configuraciones',
+                            text: 'Actualizar comision',
                             icon: 'pencil',
                             onClick: () => setOpenModal(true),
-                            // url: `/teacher/courses/edit/${course.id}`,
                           },
+                          // {
+                          //   text: 'Banear',
+                          //   icon: 'trash',
+                          //   // url: `/teacher/courses/edit/${course.id}`,
+                          // },
                         ]}
                       >
                         <div className={styles['actions']}>
@@ -136,12 +138,6 @@ export function TeachersPage() {
                 }}
               />
             </div>
-            {/* <Tabs
-              tabs={tabs}
-              onClickTab={(index) => {
-                handleChangeTab(index);
-              }}
-            /> */}
             <table>
               <thead>
                 <tr>
@@ -174,7 +170,7 @@ export function TeachersPage() {
       </div>
       <CommissionForm
         open={openModal}
-        onSubmit={() => console.log('click')}
+        onSubmit={(data) => console.log('data:', data)}
         onClose={() => setOpenModal(false)}
       />
     </div>

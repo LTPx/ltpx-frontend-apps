@@ -41,7 +41,8 @@ export function CommissionForm(props: CommissionFormProps) {
     >
       <div className={styles['commission-modal']}>
         <Input
-          label={'Valor de comisión'}
+          label="Comisión"
+          description='Es el porcentaje el cual se le restara por cada pago al profesor'
           type="number"
           name="commission"
           onChange={(e: any) => {
@@ -51,10 +52,9 @@ export function CommissionForm(props: CommissionFormProps) {
           onBlur={formik.handleBlur}
           errorMessage={formik.errors.commission}
         />
-        <TextArea
-          label="Comentario"
-          rows={8}
-          placeholder="Envía una observación de ser necesario"
+        <Input
+          label="Comentario (opcional)"
+          placeholder="Ejm: comision debido a referidos"
           name="comment"
           value={formik.values.comment}
           onChange={(e: any) => {

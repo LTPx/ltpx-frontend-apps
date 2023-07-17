@@ -6,7 +6,7 @@ import {
   Tabs,
   useMoment,
 } from '@ltpx-frontend-apps/shared-ui';
-import { useAdmin, useUtil } from '@ltpx-frontend-apps/store';
+import { useAdmin, useTeacher, useUtil } from '@ltpx-frontend-apps/store';
 import { Avatar } from 'evergreen-ui';
 import { useCallback, useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
@@ -17,15 +17,17 @@ import { TeacherProfile } from '@ltpx-frontend-apps/api';
 export function TeachersPage() {
   const { formatDate } = useMoment();
   const { capitalizeSentence } = useUtil();
+  const { _changeTeacherCommission } = useTeacher();
   const [selectedTab, setSelectedTab] = useState(0);
+  const [idTeacher, setIdTeacher] = useState(0);
+  const [teachers, setTeachers] = useState<TeacherProfile[]>([]);
+  const { _getTeachers, applications, _getApplicationsByStatus } = useAdmin();
+  const [openModal, setOpenModal] = useState(false);
   const tabs = [
     { text: 'Pendientes', value: 'review' },
     { text: 'Necesita cambios', value: 'rejected' },
   ];
   const options = [{ text: 'Profesores' }, { text: 'Solicitudes' }];
-  const [teachers, setTeachers] = useState<TeacherProfile[]>([]);
-  const { _getTeachers, applications, _getApplicationsByStatus } = useAdmin();
-  const [openModal, setOpenModal] = useState(false);
 
   const fetchTeachers = useCallback(async () => {
     const { success, data, error } = await _getTeachers();
@@ -61,6 +63,15 @@ export function TeachersPage() {
       await fetchApplications('rejected');
     }
   };
+
+  async function handleChangeCommission(params: any) {
+    const {success, error} = await _changeTeacherCommission(idTeacher, params.commission);
+    if (success) {
+      window.location.reload();
+    } else {
+      console.log(error);
+    }
+  }
 
   return (
     <div className={styles['container']}>
@@ -101,7 +112,10 @@ export function TeachersPage() {
                           {
                             text: 'Actualizar comision',
                             icon: 'pencil',
-                            onClick: () => setOpenModal(true),
+                            onClick: () => {
+                              setOpenModal(true);
+                              setIdTeacher(teacher.id);
+                            },
                           },
                           // {
                           //   text: 'Banear',
@@ -170,7 +184,9 @@ export function TeachersPage() {
       </div>
       <CommissionForm
         open={openModal}
-        onSubmit={(data) => console.log('data:', data)}
+        onSubmit={(data) => {
+          handleChangeCommission(data);
+        }}
         onClose={() => setOpenModal(false)}
       />
     </div>

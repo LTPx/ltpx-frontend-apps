@@ -35,6 +35,7 @@ export interface TeacherProfile {
   country: string;
   created_at: string;
   commission?: number;
+  id: number;
 }
 
 export interface ITeacher {

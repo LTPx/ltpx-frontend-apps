@@ -26,7 +26,7 @@ export function CourseCard(props: CourseCardProps) {
       <div className={styles['content']}>
         <span className={styles['category']}>
           {/* {translateCategory(category)} */}
-          {category}
+          {category ? category : 'N/A'}
         </span>
         {title.length > 55 ? (
           <h4 className={styles['title']}>

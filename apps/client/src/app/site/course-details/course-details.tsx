@@ -157,7 +157,7 @@ export function CourseDetails() {
                 />
                 <Tag
                   color={ColorsTag.green}
-                  text={translateCategory(course.category_slug)}
+                  text={course.category}
                   link={`/courses/${course.category}`}
                 />
               </div>

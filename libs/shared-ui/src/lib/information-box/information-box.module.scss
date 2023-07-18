@@ -1,0 +1,31 @@
+@import '../../styles/styles.module.scss';
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 2rem;
+
+  .head {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .title {
+    font-weight: 500;
+  }
+
+  .img {
+    width: 10rem;
+    height: 8rem;
+  }
+
+  .content {
+    display: flex;
+    gap: 0.35rem;
+  }
+}

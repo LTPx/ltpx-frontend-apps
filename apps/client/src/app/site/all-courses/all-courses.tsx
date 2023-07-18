@@ -81,7 +81,7 @@ export function AllCourses(props: AllCoursesProps) {
                 achievements={course.total_achievements}
                 description={course.description}
                 language={course.language}
-                category={course.category_slug}
+                category={course.category}
                 title={course.title}
                 stars={course.average_rating}
                 link={`/course/${course.slug}`}

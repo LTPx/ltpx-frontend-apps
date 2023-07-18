@@ -39,7 +39,7 @@ export function CourseRowCard(props: CourseRowCardProps) {
         <div className={styles['header']}>
           <Tag
             className={styles['tag']}
-            text={translateCategory(category)}
+            text={category ? category : 'N/A'}
             color={ColorsTag.green}
           />
           <div className={styles['item']}>
@@ -49,7 +49,7 @@ export function CourseRowCard(props: CourseRowCardProps) {
           </div>
           <div className={styles['item']}>
             <Icon icon={'text-size'} size={14}></Icon>
-            <h5>{translateLanguage(language || '')}</h5>
+            <h5>{language || ''}</h5>
           </div>
         </div>
         <h3 className={styles['title']}>{title}</h3>

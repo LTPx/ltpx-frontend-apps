@@ -1,6 +1,8 @@
 import {
   Button,
+  ColorsButton,
   CourseContents,
+  InformationBox,
   ProgressBar,
   Tabs,
 } from '@ltpx-frontend-apps/shared-ui';
@@ -34,6 +36,7 @@ export function StudentCourse(props: StudentCourseProps) {
   const initialTabSelectedIndex = tabIndex > 0 ? tabIndex : 0;
   const [selectedTab, setSelectedTab] = useState(initialTabSelectedIndex);
   const [showMore, setShowMore] = useState(false);
+  const [completeCourse, setCompleteCourse] = useState(false);
 
   const fetchCourse = useCallback(async () => {
     const { success, data, error } = await _getStudentCourse(slug || '');
@@ -50,6 +53,7 @@ export function StudentCourse(props: StudentCourseProps) {
 
   const handleClick = (index: number) => {
     setSelectedTab(index);
+    // setCompleteCourse(true);
   };
 
   const chatWithTeacher = async () => {
@@ -163,6 +167,23 @@ export function StudentCourse(props: StudentCourseProps) {
           </div>
         </div>
       </div>
+      {/* <InformationBox
+        title={'Haz alcanzado el 100% del curso'}
+        description={'Puedes revisar tu certificado en este'}
+        onClose={() => setCompleteCourse(false)}
+        open={completeCourse}
+        link={'/student/dashboard'}
+        img="https://formacionespecializada.puce.edu.ec/wp-content/uploads/2022/06/grafico-educacion-continua.png"
+      >
+        <div className={styles['btn-action']}>
+          <Button
+            title={'Ir al dashboard'}
+            color={ColorsButton.secondary}
+            outline={true}
+            link={'/student/dashboard'}
+          />
+        </div>
+      </InformationBox> */}
     </div>
   );
 }

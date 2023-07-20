@@ -1,5 +1,5 @@
 import styles from './course-tasks.module.scss';
-import { TaskModel, NewTaskParams } from '@ltpx-frontend-apps/api';
+import { TaskModel, NewTaskParams, CourseStatus } from '@ltpx-frontend-apps/api';
 import {
   BasicRow,
   Button,
@@ -87,7 +87,9 @@ export function CourseTasks(props: CourseTasksProps) {
                   }}
                   title={element.title}
                   subtitle={element.description}
-                  remove={() => {
+                  // disable={CourseStatus.publish ? true : false}
+                  remove={
+                    () => {
                     handleRemoveTask(element.id);
                   }}
                 />

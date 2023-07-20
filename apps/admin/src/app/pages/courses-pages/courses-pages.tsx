@@ -2,6 +2,7 @@ import {
   DialogConfirm,
   Icon,
   Menu,
+  Select,
   Tabs,
   useMoment,
 } from '@ltpx-frontend-apps/shared-ui';
@@ -17,7 +18,10 @@ export function CoursesPages() {
   const [selectedTab, setSelectedTab] = useState(0);
   const [openMessage, setOpenMessage] = useState(false);
   const [saveId, setSaveId] = useState(0);
-  const tabs = [{ text: 'Pendientes' }, { text: 'Necesita cambios' }];
+  const tabs = [
+    { text: 'Pendientes', value: 'review' },
+    { text: 'Necesita cambios', value: 'rejected' },
+  ];
   const options = [{ text: 'Cursos' }, { text: 'Solicitudes' }];
   const { formatDate } = useMoment();
 
@@ -30,10 +34,10 @@ export function CoursesPages() {
     fetchCourses('all');
   }, []);
 
-  const handleChangeTab = async (tabIndex: number) => {
-    if (tabIndex === 0) {
+  const handleChangeTab = async (value: string) => {
+    if (value === 'review') {
       await fetchCourses('review');
-    } else if (tabIndex === 1) {
+    } else if (value === 'rejected') {
       await fetchCourses('rejected');
     }
   };
@@ -65,7 +69,8 @@ export function CoursesPages() {
     }
   }
   return (
-    <div className={styles['wrap-content']}>
+    <div className={styles['container']}>
+      <h1 className={styles['title']}>Administración de Cursos</h1>
       <Tabs
         tabs={options}
         isNav={false}
@@ -73,7 +78,7 @@ export function CoursesPages() {
       />
       <div>
         {selectedTab === 0 && (
-          <div className={styles['container']}>
+          <div className={styles['content']}>
             <table>
               <thead>
                 <tr>
@@ -129,15 +134,24 @@ export function CoursesPages() {
           </div>
         )}
         {selectedTab === 1 && (
-          <div className={styles['container']}>
-            <h1>Solicitudes de aprobación de cursos</h1>
-            <p>Estas son las ultimas solicitudes que se han recibido</p>
-            <Tabs
+          <div className={styles['content']}>
+            <div className={styles['head']}>
+              <p>Estas son las ultimas solicitudes que se han recibido</p>
+              <Select
+                options={tabs}
+                selected={'review'}
+                disablePlaceholder={true}
+                onChange={(item) => {
+                  handleChangeTab(item.value);
+                }}
+              />
+            </div>
+            {/* <Tabs
               tabs={tabs}
               onClickTab={(index) => {
                 handleChangeTab(index);
               }}
-            />
+            /> */}
             <table>
               <thead>
                 <tr>

@@ -5,6 +5,7 @@ import { useCallback, useEffect, useState } from 'react';
 import {
   AchievementsStudentResponse,
   Condition,
+  EntityAchievement,
 } from '@ltpx-frontend-apps/api';
 
 /* eslint-disable-next-line */
@@ -49,14 +50,32 @@ export function StudentCourseAchievements(
       achievementsView?.conditions_completed.map(
         (condition) => condition.condition_id
       ) || [];
-    return conditions.map((condition) => {
-      return {
-        url: `/student/course/${courseId}/quiz/${condition.entity_id}`,
-        name: condition.description || '',
-        points: condition.must_reach_value,
-        completed: ids.includes(condition.id),
-      };
-    });
+
+    return conditions
+      .map((condition) => {
+        if (condition.entity === EntityAchievement.quiz) {
+          return {
+            url: `/student/course/${courseId}/quiz/${condition.entity_id}`,
+            name: condition.description || '',
+            points: condition.must_reach_value,
+            completed: ids.includes(condition.id),
+          };
+        } else if (condition.entity === EntityAchievement.task) {
+          return {
+            url: '',
+            name: condition.description || '',
+            points: condition.must_reach_value,
+            completed: ids.includes(condition.id),
+          };
+        }
+        return null;
+      })
+      .filter(Boolean) as {
+      name: string;
+      url: string;
+      completed: boolean;
+      points?: number;
+    }[];
   }
 
   return (
@@ -74,7 +93,9 @@ export function StudentCourseAchievements(
                   achievement.conditions_attributes
                 )}
                 totalPoints={achievement.points_needed}
-                quizzes={buildQuizzesLink(achievement.conditions_attributes)}
+                achievement={buildQuizzesLink(
+                  achievement.conditions_attributes
+                )}
               />
             ))}
           </div>

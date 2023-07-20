@@ -50,14 +50,25 @@ export function TeacherCourses() {
 
   const categories = [
     { value: 'all', text: t('teacherCourse.categories.all') },
-    { value: 'draff', text: t('teacherCourse.categories.draff') },
-    { value: 'publish', text: t('teacherCourse.categories.publish') },
+    { value: 'draft', text: t('teacherCourse.categories.draff') },
+    { value: 'published', text: t('teacherCourse.categories.publish') },
     { value: 'review', text: t('teacherCourse.categories.review') },
   ];
 
+  const coursesByStatus = async (value: string) => {
+    if (value === 'all') {
+      setCourses(myCourses);
+    } else {
+      const filteredCourses = myCourses.filter(
+        (course) => course.status === value
+      );
+      setCourses(filteredCourses);
+    }
+  };
+
   const CoursesList = () => (
     <div className={styles['courses']}>
-      {myCourses.map((course, index) => (
+      {courses.map((course, index) => (
         <TeacherCourseCard
           key={index}
           status={course.status || CourseStatus.draft}
@@ -164,7 +175,14 @@ export function TeacherCourses() {
               <div className={`${styles['filters-container']} `}>
                 <h3>Mis Cursos: {courses.length} </h3>
                 <div className={styles['filters']}>
-                  <Select options={categories} />
+                  <Select
+                    options={categories}
+                    selected={'all'}
+                    disablePlaceholder={true}
+                    onChange={(item) => {
+                      coursesByStatus(item.value);
+                    }}
+                  />
                   <Button
                     title={t('buttons.newCourse')}
                     color={ColorsButton.primary}

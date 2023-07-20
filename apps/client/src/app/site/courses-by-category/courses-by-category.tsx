@@ -1,9 +1,7 @@
 import styles from './courses-by-category.module.scss';
 import { CourseSite } from '@ltpx-frontend-apps/api';
 import {
-  CourseCard,
   CourseRowCard,
-  InputSearch,
 } from '@ltpx-frontend-apps/shared-ui';
 import { useTranslation } from 'react-i18next';
 import { NavLink, useParams } from 'react-router-dom';
@@ -38,8 +36,10 @@ export function CoursesByCategory(props: CoursesByCategoryProps) {
     <div className={styles['container']}>
       <div className={styles['content']}>
         <div className={styles['cover']}>
-          <h1 className={styles['title']}>{t(`course_categories.${categoryId}`)}</h1>
-          {/* <h1 className={styles['title']}>{categoryId}</h1> */}
+          {/* <h1 className={styles['title']}>{t(`course_categories.${categoryId}`)}</h1> */}
+          {courses[0] && (
+            <h1 className={styles['title']}>{courses[0].category}</h1>
+          )}
           <div className={styles['link-browser']}>
             <NavLink to="/courses">{t('links.toAllCourses')}</NavLink>
           </div>
@@ -57,7 +57,7 @@ export function CoursesByCategory(props: CoursesByCategoryProps) {
                     achievements={course.total_achievements}
                     description={course.description}
                     language={course.language}
-                    category={course.category_slug}
+                    category={course.category}
                     title={course.title}
                     stars={course.average_rating}
                     link={`/course/${course.slug}`}

@@ -1,3 +1,5 @@
+export * from './lib/information-box/information-box';
+export * from './lib/commission-form/commission-form';
 export * from './lib/row-item-card/row-item-card';
 export * from './lib/student-profile-card/student-profile-card';
 export * from './lib/course-certificate/course-certificate';

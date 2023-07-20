@@ -11,6 +11,13 @@
     align-items: center;
   }
 }
+
+.no-action {
+  background-color: lightgray;
+  pointer-events: none;
+  opacity: 0.4;
+  cursor: not-allowed;
+}
 .container {
   display: flex;
   flex-direction: column;

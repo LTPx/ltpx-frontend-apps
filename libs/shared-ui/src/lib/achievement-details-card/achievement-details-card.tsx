@@ -11,7 +11,7 @@ export interface AchievementDetailsCardProps {
   rule: TypeAchievement;
   currentPoints: number;
   totalPoints: number;
-  quizzes: {
+  achievement: {
     name: string;
     url: string;
     completed: boolean;
@@ -20,7 +20,7 @@ export interface AchievementDetailsCardProps {
 }
 
 export function AchievementDetailsCard(props: AchievementDetailsCardProps) {
-  const { title, imageUrl, currentPoints, totalPoints, quizzes, rule } = props;
+  const { title, imageUrl, currentPoints, totalPoints, achievement, rule } = props;
   const { translateAchievementType } = useCourseUtil();
 
   return (
@@ -36,7 +36,7 @@ export function AchievementDetailsCard(props: AchievementDetailsCardProps) {
           <h4 className={styles['title-achievement']}>{title}</h4>
           <h4 className={styles['text']}>{translateAchievementType(rule)}</h4>
           <div className={styles['test']}>
-            {quizzes.map((quiz, index) => (
+            {achievement.map((quiz, index) => (
               <div key={index}>
                 {quiz.completed ? (
                   <div className={styles['link-quiz']}>

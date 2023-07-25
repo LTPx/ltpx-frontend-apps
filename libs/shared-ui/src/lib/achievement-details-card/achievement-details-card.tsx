@@ -16,11 +16,13 @@ export interface AchievementDetailsCardProps {
     url: string;
     completed: boolean;
     points?: number;
+    onClick?: () => void;
   }[];
 }
 
 export function AchievementDetailsCard(props: AchievementDetailsCardProps) {
-  const { title, imageUrl, currentPoints, totalPoints, achievement, rule } = props;
+  const { title, imageUrl, currentPoints, totalPoints, achievement, rule } =
+    props;
   const { translateAchievementType } = useCourseUtil();
 
   return (
@@ -50,7 +52,9 @@ export function AchievementDetailsCard(props: AchievementDetailsCardProps) {
                     className={styles['link-quiz']}
                     to={quiz.url}
                   >
-                    <h5 className={styles['quiz']}>{quiz.name}</h5>
+                    <h5 className={styles['quiz']} onClick={quiz.onClick}>
+                      {quiz.name}
+                    </h5>
                     <h5 className={styles['quiz-points']}>
                       {rule === TypeAchievement.score && `${quiz.points} pts`}
                     </h5>

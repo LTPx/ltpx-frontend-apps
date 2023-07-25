@@ -1,12 +1,18 @@
 import styles from './student-course-achievements.module.scss';
-import { useStudent } from '@ltpx-frontend-apps/store';
-import { AchievementDetailsCard } from '@ltpx-frontend-apps/shared-ui';
+import { useStudent, useUtil } from '@ltpx-frontend-apps/store';
+import {
+  AchievementDetailsCard,
+  TaskFormStudent,
+} from '@ltpx-frontend-apps/shared-ui';
 import { useCallback, useEffect, useState } from 'react';
 import {
   AchievementsStudentResponse,
   Condition,
   EntityAchievement,
+  TaskModel,
+  TaskStudent,
 } from '@ltpx-frontend-apps/api';
+import { Dialog } from 'evergreen-ui';
 
 /* eslint-disable-next-line */
 export interface StudentCourseAchievementsProps {
@@ -19,7 +25,11 @@ export function StudentCourseAchievements(
   const { courseId } = props;
   const [achievementsView, setAchievementsView] =
     useState<AchievementsStudentResponse>();
-  const { _getStudentAchievements } = useStudent();
+  const { _getStudentAchievements, _getStudentTask, _sendTask } = useStudent();
+  const [studentTask, setStudentTask] = useState<TaskModel>();
+  const [openModal, setOpenModal] = useState(false);
+  const { setMessageToast } = useUtil();
+
   const fetchQuizzes = useCallback(async () => {
     const { success, data, error } = await _getStudentAchievements(courseId);
     if (success) {
@@ -28,6 +38,30 @@ export function StudentCourseAchievements(
       console.log('error: ', error);
     }
   }, []);
+
+  async function getTask(taskId: number) {
+    const { success, data, error } = await _getStudentTask(courseId, taskId);
+    if (success) {
+      setStudentTask(data);
+      setOpenModal(true);
+      console.log(studentTask);
+      console.log('aqui', taskId);
+    } else {
+      console.log('error: ', error);
+    }
+  }
+
+  async function handleSendTask(params: TaskStudent) {
+    const paramsData = studentTask
+      ? { ...params, ...{ id: studentTask.id } }
+      : params;
+    const { success, error } = await _sendTask(paramsData);
+    if (success) {
+      setMessageToast('success', 'Tu tarea ha sido enviada');
+    } else {
+      setMessageToast('error', error);
+    }
+  }
 
   useEffect(() => {
     fetchQuizzes();
@@ -66,6 +100,9 @@ export function StudentCourseAchievements(
             name: condition.description || '',
             points: condition.must_reach_value,
             completed: ids.includes(condition.id),
+            onClick: () => {
+              getTask(condition.entity_id);
+            },
           };
         }
         return null;
@@ -75,6 +112,7 @@ export function StudentCourseAchievements(
       url: string;
       completed: boolean;
       points?: number;
+      onClick?: () => void;
     }[];
   }
 
@@ -101,6 +139,29 @@ export function StudentCourseAchievements(
           </div>
         )}
       </div>
+      {studentTask !== undefined && (
+        <>
+          <Dialog
+            isShown={openModal}
+            hasFooter={false}
+            title={studentTask.title}
+            onCloseComplete={() => {
+              setOpenModal(false);
+            }}
+            width={'50vw'}
+            shouldCloseOnOverlayClick={false}
+          >
+            <TaskFormStudent
+              description={studentTask.description}
+              fileTask={studentTask.file_url}
+              onClose={() => setOpenModal(false)}
+              onSubmit={(data) => {
+                handleSendTask({ ...data, ...{ task_id: studentTask.id } });
+              }}
+            />
+          </Dialog>
+        </>
+      )}
     </div>
   );
 }

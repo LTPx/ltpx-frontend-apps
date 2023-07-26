@@ -2,6 +2,11 @@
   background-color: #fff;
   padding: 2rem 3rem;
 
+  .head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
   .actions {
     display: flex;
     align-items: center;
@@ -10,5 +15,19 @@
 
   .th-class {
     text-align: center;
+  }
+
+  .content {
+    padding: 1.5rem 0;
+  }
+
+  table {
+    margin-top: 1rem !important;
+
+    .user-name {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
   }
 }

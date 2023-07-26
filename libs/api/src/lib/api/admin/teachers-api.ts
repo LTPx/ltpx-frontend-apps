@@ -27,3 +27,21 @@ export const getTeacher = async (teacherId: number) => {
       });
   });
 };
+
+export const changeTeacherCommission = async (
+  teacherId: number,
+  commission: number
+) => {
+  return new Promise<TeacherProfile>((resolve, reject) => {
+    http
+      .post(`api/v1/admin/teachers/${teacherId}/change_commission`, {
+        commission,
+      })
+      .then((response) => {
+        resolve(response.data);
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
+};

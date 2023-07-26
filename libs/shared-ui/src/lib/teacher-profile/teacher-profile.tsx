@@ -135,7 +135,7 @@ export function TeacherProfile(props: TeacherProfileProps) {
               <div className={styles['course']} key={index}>
                 <CourseCard
                   image={course.cover_url}
-                  category={course.category_slug}
+                  category={course.category}
                   title={course.title}
                   price={course.price_format}
                   duration={0}

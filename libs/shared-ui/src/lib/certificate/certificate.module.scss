@@ -4,7 +4,7 @@
   .content {
     background-color: $white-color;
     border-radius: 16px;
-    min-width: 22rem;
+    min-width: 23rem;
     padding: 1rem;
     // box-shadow: $card-shadow-medium;
     border: 1px solid $gray-color-200;
@@ -52,7 +52,7 @@
   .item {
     display: grid;
     padding-bottom: 10px;
-    grid-template-columns: 35% 65%;
+    grid-template-columns: 45% 55%;
     align-items: baseline;
   }
 

@@ -14,11 +14,20 @@ export interface BasicRowProps {
   onClick?: () => void;
   onClickReview?: () => void;
   remove?: () => void;
+  disable?: boolean;
 }
 
 export function BasicRow(props: BasicRowProps) {
-  const { title, icon, subtitle, onClick, remove, image, onClickReview } =
-    props;
+  const {
+    title,
+    icon,
+    subtitle,
+    onClick,
+    remove,
+    image,
+    onClickReview,
+    disable,
+  } = props;
   const [openMessage, setOpenMessage] = useState(false);
 
   return (
@@ -54,7 +63,11 @@ export function BasicRow(props: BasicRowProps) {
             <Icon icon="pencil" size={15} />
           </div>
           <div
-            className={styles['action']}
+            className={
+              disable
+                ? `${styles['action']} ${styles['no-action']}`
+                : styles['action']
+            }
             onClick={() => setOpenMessage(true)}
           >
             <Icon icon="trash" size={15} />

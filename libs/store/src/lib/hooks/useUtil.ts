@@ -17,22 +17,36 @@ export const useUtil = () => {
     return t(`application_teacher_status.${status}`);
   };
 
-  const setMessageToast = (type: 'success' | 'error' | 'information', text: string) => {
+  const setMessageToast = (
+    type: 'success' | 'error' | 'information',
+    text: string
+  ) => {
     setFeedbackAction({
       type,
-      text
-    })
-  }
+      text,
+    });
+  };
 
   const clearMessageToast = () => {
     setFeedbackAction({} as FeedbackAction);
     cleanNewNotification();
-  }
+  };
+
+  const capitalizeSentence = (sentence: string) => {
+    const words = sentence.split(' ');
+
+    return words
+      .map((word) => {
+        return word[0].toUpperCase() + word.substring(1).toLowerCase();
+      })
+      .join(' ');
+  };
 
   return {
     countries,
     translateStatusApply,
     setMessageToast,
-    clearMessageToast
+    clearMessageToast,
+    capitalizeSentence
   };
 };

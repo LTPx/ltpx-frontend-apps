@@ -31,7 +31,7 @@ export function StudentCertificates(props: StudentCertificatesProps) {
   return (
     <div className={styles['certificates']}>
       {certificates.length > 0 ? (
-        <div>
+        <div className={styles['certificates-content']}>
           {certificates.map((certificate, index) => (
             <Certificate
               key={index}

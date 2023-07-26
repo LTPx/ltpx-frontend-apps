@@ -67,16 +67,16 @@ export function CategoryForm(props: CategoryFormProps) {
             errorMessage={formik.errors.slug}
           />
         </div>
+        <h4 className={styles['title-icons']}>Seleccionar Icono</h4>
+        <div className={styles['section-error']}>
+          {formik.errors.icon && (
+            <InputTextStatus
+              status={StatusInputText.error}
+              text={formik.errors.icon}
+            />
+          )}
+        </div>
         <div className={styles['select-icons']}>
-          <h4 className={styles['title-icons']}>Seleccionar Icono</h4>
-          <div className={styles['section-error']}>
-            {formik.errors.icon && (
-              <InputTextStatus
-                status={StatusInputText.error}
-                text={formik.errors.icon}
-              />
-            )}
-          </div>
           <SelectIcons
             selected={formik.values.icon}
             onChange={(icon) => {

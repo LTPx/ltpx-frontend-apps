@@ -1,6 +1,24 @@
 .container {
   background-color: #fff;
   padding: 2rem 3rem;
+
+  table {
+    margin-top: 1rem !important;
+
+    .user-name {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+  }
+}
+
+.title {
+  padding-bottom: 0.5rem;
+}
+
+.content {
+  padding: 1.5rem 0;
 }
 
 .actions {
@@ -13,12 +31,8 @@
   text-align: center;
 }
 
-table {
-  margin-top: 2rem;
-
-  .user-name {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-  }
+.head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }

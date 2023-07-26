@@ -29,6 +29,7 @@ export const useTeacher = () => {
     _makeWithdrawal,
     _updateApplicationTeach,
     _getQuizReview,
+    _changeTeacherCommission
   } = useAppStore();
 
   return {
@@ -59,5 +60,6 @@ export const useTeacher = () => {
     _makeWithdrawal,
     _updateApplicationTeach,
     _getQuizReview,
+    _changeTeacherCommission,
   }
 }

@@ -30,6 +30,7 @@ import {
   adminUnpublishCourse,
   getTeachers,
   getTeacher,
+  changeTeacherCommission,
 } from '@ltpx-frontend-apps/api';
 
 export type TResponse = {
@@ -69,7 +70,7 @@ export type AdminSlice = {
   _addCategory: (params: Category) => Promise<TResponse>;
   _removeCategory: (categoryId: number) => Promise<TResponse>;
   _updateCategory: ( category: Category) => Promise<TResponse>;
-
+  _changeTeacherCommission: ( teacherId: number, commission: number) => Promise<TResponse>;
 };
 
 export const createAdminSlice: StateCreator<StoreState, [], [], AdminSlice> = (
@@ -302,7 +303,15 @@ export const createAdminSlice: StateCreator<StoreState, [], [], AdminSlice> = (
     } catch (error) {
       return {success: false, error: (error)}
     }
-  }
+  },
+  _changeTeacherCommission: async(teacherId, commission) => {
+    try {
+      const data = await changeTeacherCommission(teacherId, commission);
+      return { success: true, data };
+    } catch (error) {
+      return {success: false, error: (error)}
+    }
+  },
 });
 
 

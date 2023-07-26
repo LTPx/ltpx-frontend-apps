@@ -9,6 +9,26 @@
   width: 100%;
 }
 
+.quizzes {
+  width: 100%;
+}
+
+.contents {
+  width: 100%;
+}
+
+.tasks {
+  width: 100%;
+}
+
+.achievements {
+  width: 100%;
+}
+
+.tabs-content {
+  width: 100%;
+}
+
 .teacher-avatar {
   display: flex;
   align-items: center;
@@ -290,6 +310,21 @@
   .course-section {
     width: 100%;
     padding: 0;
+  }
+  .quizzes {
+    width: 90%;
+  }
+  
+  .contents {
+    width: 90%;
+  }
+  
+  .tasks {
+    width: 90%;
+  }
+  
+  .achievements {
+    width: 90%;
   }
   .contact-teacher {
     padding: 0.5rem 0 1rem 0;

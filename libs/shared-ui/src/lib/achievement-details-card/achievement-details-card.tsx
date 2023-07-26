@@ -4,6 +4,29 @@ import { NavLink } from 'react-router-dom';
 import Icon from '../icon/icon';
 import styles from './achievement-details-card.module.scss';
 
+export enum AchievementType {
+  Quiz = 'quiz',
+  Task = 'task',
+}
+
+interface Quiz {
+  type: AchievementType.Quiz;
+  name: string;
+  url: string;
+  completed: boolean;
+  points?: number;
+}
+
+interface Task {
+  type: AchievementType.Task;
+  name: string;
+  completed: boolean;
+  points?: number;
+  onClick?: () => void;
+}
+
+export type Achievement = Quiz | Task;
+
 /* eslint-disable-next-line */
 export interface AchievementDetailsCardProps {
   title: string;
@@ -11,16 +34,15 @@ export interface AchievementDetailsCardProps {
   rule: TypeAchievement;
   currentPoints: number;
   totalPoints: number;
-  quizzes: {
-    name: string;
-    url: string;
-    completed: boolean;
-    points?: number;
+  achievement: {
+    type: AchievementType;
+    data: Achievement[];
   }[];
 }
 
 export function AchievementDetailsCard(props: AchievementDetailsCardProps) {
-  const { title, imageUrl, currentPoints, totalPoints, quizzes, rule } = props;
+  const { title, imageUrl, currentPoints, totalPoints, achievement, rule } =
+    props;
   const { translateAchievementType } = useCourseUtil();
 
   return (
@@ -36,26 +58,45 @@ export function AchievementDetailsCard(props: AchievementDetailsCardProps) {
           <h4 className={styles['title-achievement']}>{title}</h4>
           <h4 className={styles['text']}>{translateAchievementType(rule)}</h4>
           <div className={styles['test']}>
-            {quizzes.map((quiz, index) => (
-              <div key={index}>
-                {quiz.completed ? (
-                  <div className={styles['link-quiz']}>
-                    <h5 className={styles['quiz-completed']}>
-                      <Icon icon="check" color="#fff" size={14} /> {quiz.name}
-                    </h5>
+            {achievement.map((category, categoryIndex) => (
+              <div key={categoryIndex}>
+                {category.data.map((item, index) => (
+                  <div key={index}>
+                    {item.type === AchievementType.Quiz ? (
+                      item.completed ? (
+                        <div className={styles['link-quiz']}>
+                          <h5 className={styles['quiz-completed']}>
+                            <Icon icon="check" color="#fff" size={14} />{' '}
+                            {item.name}
+                          </h5>
+                        </div>
+                      ) : (
+                        <NavLink
+                          key={index}
+                          className={styles['link-quiz']}
+                          to={item.url}
+                        >
+                          <h5 className={styles['quiz']}>{item.name}</h5>
+                          <h5 className={styles['quiz-points']}>
+                            {rule === TypeAchievement.score &&
+                              `${item.points} pts`}
+                          </h5>
+                        </NavLink>
+                      )
+                    ) : item.completed ? (
+                      <div className={styles['link-quiz']}>
+                        <h5 className={styles['quiz-completed']}>
+                          <Icon icon="check" color="#fff" size={14} />{' '}
+                          {item.name}
+                        </h5>
+                      </div>
+                    ) : (
+                      <h5 className={styles['quiz']} onClick={item.onClick}>
+                        {item.name}
+                      </h5>
+                    )}
                   </div>
-                ) : (
-                  <NavLink
-                    key={index}
-                    className={styles['link-quiz']}
-                    to={quiz.url}
-                  >
-                    <h5 className={styles['quiz']}>{quiz.name}</h5>
-                    <h5 className={styles['quiz-points']}>
-                      {rule === TypeAchievement.score && `${quiz.points} pts`}
-                    </h5>
-                  </NavLink>
-                )}
+                ))}
               </div>
             ))}
           </div>
